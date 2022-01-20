@@ -165,6 +165,7 @@ public class PodComms: CustomDebugStringConvertible {
                 bleFirmwareVersion: "",
                 lotNo: 0,
                 lotSeq: 0,
+                productId: dashProductId,
                 bleIdentifier: manager.peripheral.identifier.uuidString
             )
         }
@@ -213,10 +214,11 @@ public class PodComms: CustomDebugStringConvertible {
         self.podState = PodState(
             address: response.address,
             ltk: ltk,
-            firmwareVersion: String(describing: versionResponse.pmVersion),
-            bleFirmwareVersion: String(describing: versionResponse.piVersion),
-            lotNo: UInt64(versionResponse.lot), // or self.lotNo?
-            lotSeq: versionResponse.tid, // or self.lotSeq?
+            firmwareVersion: String(describing: versionResponse.firmwareVersion),
+            bleFirmwareVersion: String(describing: versionResponse.iFirmwareVersion),
+            lotNo: UInt64(versionResponse.lot), // XXX get 5-byte lotNo from attributes or use this 4-byte lotNo in versionResponse?
+            lotSeq: versionResponse.tid, // XXX get from attributes?
+            productId: versionResponse.productId,
             messageTransportState: podState!.messageTransportState,
             bleIdentifier: manager.peripheral.identifier.uuidString
         )
