@@ -65,6 +65,7 @@ public struct PodState: RawRepresentable, Equatable, CustomDebugStringConvertibl
     public let bleFirmwareVersion: String
     public let lotNo: UInt64
     public let lotSeq: UInt32
+    public let productId: UInt8
     var activeAlertSlots: AlertSet
     public var lastInsulinMeasurements: PodInsulinMeasurements?
 
@@ -104,13 +105,14 @@ public struct PodState: RawRepresentable, Equatable, CustomDebugStringConvertibl
         return active
     }
     
-    public init(address: UInt32, ltk: Data, firmwareVersion: String, bleFirmwareVersion: String, lotNo: UInt64, lotSeq: UInt32, messageTransportState: MessageTransportState? = nil, bleIdentifier: String) {
+    public init(address: UInt32, ltk: Data, firmwareVersion: String, bleFirmwareVersion: String, lotNo: UInt64, lotSeq: UInt32, productId: UInt8, messageTransportState: MessageTransportState? = nil, bleIdentifier: String) {
         self.address = address
         self.ltk = ltk
         self.firmwareVersion = firmwareVersion
         self.bleFirmwareVersion = bleFirmwareVersion
         self.lotNo = lotNo
         self.lotSeq = lotSeq
+        self.productId = productId
         self.lastInsulinMeasurements = nil
         self.finalizedDoses = []
         self.suspendState = .resumed(Date())
@@ -290,6 +292,11 @@ public struct PodState: RawRepresentable, Equatable, CustomDebugStringConvertibl
         self.bleFirmwareVersion = bleFirmwareVersion
         self.lotNo = lotNo
         self.lotSeq = lotSeq
+        if let productId = rawValue["productId"] as? UInt8 {
+            self.productId = productId
+        } else {
+            self.productId = dashProductId
+        }
         self.bleIdentifier = bleIdentifier
 
 

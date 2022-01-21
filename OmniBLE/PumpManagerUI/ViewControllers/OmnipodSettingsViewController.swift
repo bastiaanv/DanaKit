@@ -613,10 +613,9 @@ class OmnipodSettingsViewController: UITableViewController {
         case .podDetails:
             switch PodDetailsRow(rawValue: indexPath.row)! {
             case .displayState:
-//                let omnipod = self.pumpManager.omnipod
-//                let vc = CommandResponseViewController.displayState(pumpManager: pumpManager, omnipod: omnipod)
-//                vc.title = sender?.textLabel?.text
-//                show(vc, sender: indexPath)
+                let vc = CommandResponseViewController.displayState(pumpManager: pumpManager)
+                vc.title = sender?.textLabel?.text
+                show(vc, sender: indexPath)
                 break
             default:
                 break

@@ -135,6 +135,7 @@
 		C187C1A3279087A4006E3557 /* OSLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C187C1A2279087A4006E3557 /* OSLog.swift */; };
 		C1D27A1527908DC600C41EBA /* OmniBLE.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84752E8226ED0FFE009FD801 /* OmniBLE.framework */; };
 		C1D27A1727908DE500C41EBA /* OmniBLE.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84752E8226ED0FFE009FD801 /* OmniBLE.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D8896C6227890E6B00E09A96 /* DetailedStatus+OmniBLE.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8896C6127890E6B00E09A96 /* DetailedStatus+OmniBLE.swift */; };
 		C1D27A1B27911E9900C41EBA /* PodAdvertisement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D27A1A27911E9900C41EBA /* PodAdvertisement.swift */; };
 		D895BF5B275DE64000D51FC7 /* StringLengthPrefixEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D895BF5A275DE64000D51FC7 /* StringLengthPrefixEncoding.swift */; };
 /* End PBXBuildFile section */
@@ -301,6 +302,7 @@
 		C187C199279086A8006E3557 /* OmniBLEPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OmniBLEPlugin.h; sourceTree = "<group>"; };
 		C187C1A2279087A4006E3557 /* OSLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSLog.swift; sourceTree = "<group>"; };
 		C187C1A427908B1C006E3557 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D8896C6127890E6B00E09A96 /* DetailedStatus+OmniBLE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DetailedStatus+OmniBLE.swift"; sourceTree = "<group>"; };
 		C1D27A1A27911E9900C41EBA /* PodAdvertisement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodAdvertisement.swift; sourceTree = "<group>"; };
 		D895BF5A275DE64000D51FC7 /* StringLengthPrefixEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringLengthPrefixEncoding.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -389,6 +391,7 @@
 				10389A0626FF7841002115E9 /* PodInfoActivationTime.swift */,
 				10389A0726FF7841002115E9 /* TempBasalExtraCommand.swift */,
 				10389A0826FF7841002115E9 /* DeactivatePodCommand.swift */,
+				10389A1926FF7841002115E9 /* DetailedStatus.swift */,
 				10389A0926FF7841002115E9 /* AcknowledgeAlertCommand.swift */,
 				10389A0A26FF7841002115E9 /* PodInfoConfiguredAlerts.swift */,
 				10389A0B26FF7841002115E9 /* MessageBlock.swift */,
@@ -405,7 +408,6 @@
 				10389A1626FF7841002115E9 /* BeepConfigCommand.swift */,
 				10389A1726FF7841002115E9 /* ErrorResponse.swift */,
 				10389A1826FF7841002115E9 /* SetupPodCommand.swift */,
-				10389A1926FF7841002115E9 /* DetailedStatus.swift */,
 				10389A1A26FF7841002115E9 /* PodInfoResponse.swift */,
 				10389A1B26FF7841002115E9 /* SetInsulinScheduleCommand.swift */,
 				10389A1C26FF7841002115E9 /* ConfigureAlertsCommand.swift */,
@@ -477,6 +479,7 @@
 		84752EAD26ED11A4009FD801 /* PumpManager */ = {
 			isa = PBXGroup;
 			children = (
+				D8896C6127890E6B00E09A96 /* DetailedStatus+OmniBLE.swift */,
 				10389A2226FF7841002115E9 /* MessageTransport.swift */,
 				1016324E2715354C007A3BC2 /* Omnipod.swift */,
 				1029AE4627094D0E00B7F5B6 /* OmnipodPumpManager.swift */,
@@ -966,6 +969,7 @@
 				10389A3326FF7841002115E9 /* CancelDeliveryCommand.swift in Sources */,
 				10389A2426FF7841002115E9 /* VersionResponse.swift in Sources */,
 				10389A3B26FF7841002115E9 /* ConfigureAlertsCommand.swift in Sources */,
+				D8896C6227890E6B00E09A96 /* DetailedStatus+OmniBLE.swift in Sources */,
 				10389A3926FF7841002115E9 /* PodInfoResponse.swift in Sources */,
 				84752EE226ED13F5009FD801 /* PayloadJoiner.swift in Sources */,
 				1029AE4827094D0E00B7F5B6 /* OmnipodPumpManager.swift in Sources */,
