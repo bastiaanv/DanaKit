@@ -1,14 +1,14 @@
 //
 //  ReplacePodViewController.swift
-//  OmnipodKit
+//  OmniBLE
 //
+//  Based on OmniKitUI/ViewControllers/ReplacePodViewController.swift
 //  Created by Pete Schwamb on 11/28/18.
-//  Copyright © 2018 Pete Schwamb. All rights reserved.
+//  Copyright © 2021 LoopKit Authors. All rights reserved.
 //
 
 import UIKit
 import LoopKitUI
-import OmniKit
 
 
 class ReplacePodViewController: SetupTableViewController {
@@ -48,7 +48,7 @@ class ReplacePodViewController: SetupTableViewController {
         }
     }
     
-    var pumpManager: OmnipodPumpManager! {
+    var pumpManager: OmniBLEPumpManager! {
         didSet {
             let podState = pumpManager.state.podState
 
