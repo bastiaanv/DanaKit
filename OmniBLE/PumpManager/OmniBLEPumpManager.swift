@@ -632,7 +632,9 @@ extension OmniBLEPumpManager {
 
     // Does not support concurrent callers. Not thread-safe.
     public func forgetPod(completion: @escaping () -> Void) {
-        //omnipod.permanentDisconnect()
+        
+        self.podComms.forgetCurrentPod()
+
         let resetPodState = { (_ state: inout OmniBLEPumpManagerState) in
             self.podComms = PodComms(podState: nil, lotNo: nil, lotSeq: nil)
             self.podComms.delegate = self
