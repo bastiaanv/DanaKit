@@ -106,8 +106,8 @@ class OmniBLESettingsViewModel: ObservableObject {
         return pumpManager.status.timeZone
     }
     
-    var podVersion: PodVersion? {
-        return pumpManager.podVersion
+    var podDetails: PodDetails? {
+        return pumpManager.podDetails
     }
         
     var viewTitle: String {
@@ -153,7 +153,6 @@ class OmniBLESettingsViewModel: ObservableObject {
     }()
 
     let basalRateFormatter: NumberFormatter = {
-        let unit = HKUnit.internationalUnit()
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.minimumFractionDigits = 1

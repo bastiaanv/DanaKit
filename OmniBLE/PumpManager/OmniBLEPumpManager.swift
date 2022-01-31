@@ -462,15 +462,17 @@ extension OmniBLEPumpManager {
         return state.podState?.expiresAt
     }
     
-    public var podVersion: PodVersion? {
+    public var podDetails: PodDetails? {
         guard let podState = state.podState else {
             return nil
         }
-        return PodVersion(
+        return PodDetails(
             lotNumber: podState.lotNo,
             sequenceNumber: podState.lotSeq,
             firmwareVersion: podState.firmwareVersion,
-            bleFirmwareVersion: podState.bleFirmwareVersion
+            bleFirmwareVersion: podState.bleFirmwareVersion,
+            totalDelivery: podState.lastInsulinMeasurements?.delivered,
+            lastStatus: podState.lastInsulinMeasurements?.validTime
         )
     }
     

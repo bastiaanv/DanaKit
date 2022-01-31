@@ -284,7 +284,7 @@ struct OmniBLESettingsView: View  {
             
             Section() {
                 HStack {
-                    FrameworkLocalText("Pod Insertion", comment: "Label for pod insertion row")
+                    FrameworkLocalText("Pod Activated", comment: "Label for pod insertion row")
                     Spacer()
                     Text(self.viewModel.activatedAtString)
                         .foregroundColor(Color.secondary)
@@ -297,8 +297,8 @@ struct OmniBLESettingsView: View  {
                         .foregroundColor(Color.secondary)
                 }
                 
-                if let podVersion = self.viewModel.podVersion {
-                    NavigationLink(destination: PodDetailsView(podVersion: podVersion)) {
+                if let podDetails = self.viewModel.podDetails {
+                    NavigationLink(destination: PodDetailsView(podDetails: podDetails)) {
                         FrameworkLocalText("Device Details", comment: "Text for device details disclosure row").foregroundColor(Color.primary)
                     }
                 } else {
