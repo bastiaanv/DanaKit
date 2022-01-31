@@ -364,11 +364,11 @@ public struct PodState: RawRepresentable, Equatable, CustomDebugStringConvertibl
             self.fault = nil
         }
         
-        if let alarmsRawValue = rawValue["alerts"] as? UInt8 {
-            self.activeAlertSlots = AlertSet(rawValue: alarmsRawValue)
-        } else {
+//        if let alarmsRawValue = rawValue["alerts"] as? UInt8 {
+//            self.activeAlertSlots = AlertSet(rawValue: alarmsRawValue)
+//        } else {
             self.activeAlertSlots = .none
-        }
+//        }
         
         if let setupProgressRaw = rawValue["setupProgress"] as? Int,
             let setupProgress = SetupProgress(rawValue: setupProgressRaw)

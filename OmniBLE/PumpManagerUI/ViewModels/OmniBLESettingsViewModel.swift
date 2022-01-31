@@ -182,6 +182,9 @@ class OmniBLESettingsViewModel: ObservableObject {
         expirationReminderDefault = Int(self.pumpManager.defaultExpirationReminderOffset.hours)
         lowReservoirAlertValue = Int(self.pumpManager.state.lowReservoirReminderValue)
         pumpManager.addPodStateObserver(self, queue: DispatchQueue.main)
+        
+        // Trigger refresh
+        pumpManager.getPodStatus(storeDosesOnSuccess: false, emitConfirmationBeep: false) { _ in }
     }
     
     func changeTimeZoneTapped() {

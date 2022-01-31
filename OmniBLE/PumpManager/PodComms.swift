@@ -15,6 +15,7 @@ import CoreBluetooth
 
 protocol PodCommsDelegate: AnyObject {
     func podComms(_ podComms: PodComms, didChange podState: PodState)
+    func podCommsDidEstablishSession(_ podComms: PodComms)
 }
 
 public class PodComms: CustomDebugStringConvertible {
@@ -389,7 +390,6 @@ public class PodComms: CustomDebugStringConvertible {
                 return
             }
 
-            // self.configureDevice(device, with: commandSession) no RL to configure
             let transport = PodMessageTransport(manager: manager, myId: self.myId, podId: self.podId, state: self.podState!.messageTransportState)
             transport.messageLogger = self.messageLogger
             let podSession = PodCommsSession(podState: self.podState!, transport: transport, delegate: self)
@@ -438,7 +438,7 @@ extension PodComms: OmniBLEConnectionDelegate {
 // MARK: - PeripheralManagerDelegate
 
 extension PodComms: PeripheralManagerDelegate {
-
+    
     func completeConfiguration(for manager: PeripheralManager) throws {
         log.default("PodComms completeConfiguration")
 
@@ -448,7 +448,11 @@ extension PodComms: PeripheralManagerDelegate {
                 do {
                     try manager.sendHello(myId: myId)
                     try manager.enableNotifications() // Seemingly this cannot be done before the hello command, or the pod disconnects
-                    try self?.establishNewSession()
+                    if let self = self {
+                        try self.establishNewSession()
+                        self.delegate?.podCommsDidEstablishSession(self)
+                    }
+                    // We can "runSession" from within session, as we're just adding to the operation queue; it will run after this block finishes
                 } catch {
                     self?.log.error("Pod session sync error: %{public}@", String(describing: error))
                 }

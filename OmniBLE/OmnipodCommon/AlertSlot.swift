@@ -101,8 +101,8 @@ public enum PodAlert: CustomStringConvertible, RawRepresentable, Equatable {
             alertName = LocalizedString("Expiration advisory", comment: "Description for expiration advisory")
         case .shutdownImminentAlarm:
             alertName = LocalizedString("Shutdown imminent", comment: "Description for shutdown imminent")
-        case .lowReservoirAlarm:
-            alertName = LocalizedString("Low reservoir advisory", comment: "Description for low reservoir advisory")
+        case .lowReservoirAlarm(let units):
+            alertName = String(format: LocalizedString("Low reservoir advisory (%1$gU)", comment: "Format string for description for low reservoir advisory (1: reminder units)"), units)
         case .autoOffAlarm:
             alertName = LocalizedString("Auto-off", comment: "Description for auto-off")
         case .podSuspendedReminder:
@@ -363,5 +363,11 @@ public struct AlertSet: RawRepresentable, Collection, CustomStringConvertible, E
             let alarmDescriptions = elements.map { String(describing: $0) }
             return alarmDescriptions.joined(separator: ", ")
         }
+    }
+    
+    public func compare(to other: AlertSet) -> (added: AlertSet, removed: AlertSet) {
+        let added = Set(other.elements).subtracting(Set(elements))
+        let removed = Set(elements).subtracting(Set(other.elements))
+        return (added: AlertSet(slots: Array(added)), removed: AlertSet(slots: Array(removed)))
     }
 }

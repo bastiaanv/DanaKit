@@ -81,7 +81,14 @@ enum PodLifeState {
         case .podDeactivating:
             return LocalizedString("Unfinished deactivation", comment: "Label for pod life state when pod not fully deactivated")
         case .podAlarm(let status):
-            return String(format: LocalizedString("Pod alarm: %1$@", comment: "Format string for label for pod life state when pod is in alarm state (1: The fault description)"), status.faultEventCode.description)
+            switch status.faultEventCode.faultType {
+            case .reservoirEmpty:
+                return LocalizedString("No Insulin", comment: "Format string for label for pod life state when pod is in alarm state of reservoirEmpty")
+            case .exceededMaximumPodLife80Hrs:
+                return LocalizedString("Pod Expired", comment: "Format string for label for pod life state when pod is in alarm state of exceededMaximumPodLife80Hrs")
+            default:
+                return String(format: LocalizedString("Pod alarm: %1$@", comment: "Format string for label for pod life state when pod is in alarm state (1: The fault description)"), status.faultEventCode.description)
+            }
         case .noPod:
             return LocalizedString("No Pod", comment: "Label for pod life state when no pod paired")
         }

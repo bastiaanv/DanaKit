@@ -76,6 +76,8 @@ public class OmniBLEPumpManager: DeviceManager {
     public let managerIdentifier: String = "Omnipod-Dash" // use a single token to make parsing log files easier
 
     public let localizedTitle = LocalizedString("Omnipod Dash", comment: "Generic title of the OmniBLE pump manager")
+    
+    static let podAlarmNotificationIdentifier = "OmniBLE:\(LoopNotificationCategory.pumpFault.rawValue)"
 
     let podExpirationNotificationIdentifier: Alert.Identifier
 
@@ -283,7 +285,7 @@ extension OmniBLEPumpManager {
 
     private func basalDeliveryState(for state: OmniBLEPumpManagerState) -> PumpManagerStatus.BasalDeliveryState {
         guard let podState = state.podState else {
-            return .suspended(state.lastPumpDataReportDate ?? .distantPast)
+            return .active(.distantPast)
         }
 
         switch state.suspendEngageState {
@@ -518,17 +520,6 @@ extension OmniBLEPumpManager {
                 localizedMessage: message,
                 imageName: "exclamationmark.circle.fill",
                 state: .critical)
-//            } else {
-//                return PumpManagerStatus.PumpStatusHighlight(
-//                    localizedMessage: NSLocalizedString("Pod Alarm", comment: "Status highlight for alarm without details."),
-//                    imageName: "exclamationmark.circle.fill",
-//                    state: .critical)
-//            }
-//        case .systemError:
-//            return PumpManagerStatus.PumpStatusHighlight(
-//                localizedMessage: NSLocalizedString("System Error", comment: "Status highlight that when pod has a system error."),
-//                imageName: "exclamationmark.circle.fill",
-//                state: .critical)
         case .active:
             if let reservoirPercent = state.reservoirLevel?.percentage, reservoirPercent == 0 {
                 return PumpManagerStatus.PumpStatusHighlight(
@@ -690,22 +681,6 @@ extension OmniBLEPumpManager {
 
     // Called on the main thread
     public func pairAndPrime(completion: @escaping (PumpManagerResult<TimeInterval>) -> Void) {
-        // TODO: set expiration and low reservoir alerts
-        //        guard let podExpirationAlert = try? PodExpirationAlert(intervalBeforeExpiration: state.defaultExpirationReminderOffset) else {
-        //            eventListener(.error(.invalidAlertSetting))
-        //            return
-        //        }
-        //
-        //        guard let lowReservoirAlert = try? LowReservoirAlert(reservoirVolumeBelow: Int(Double(state.lowReservoirReminderValue) * Pod.podSDKInsulinMultiplier)) else {
-        //            eventListener(.error(.invalidAlertSetting))
-        //            return
-        //        }
-        //
-        //        startPodActivation(
-        //            lowReservoirAlert: lowReservoirAlert,
-        //            podExpirationAlert: podExpirationAlert,
-        //            eventListener: eventListener)
-
         let primeSession = { (result: PodComms.SessionRunResult) in
             switch result {
             case .success(let session):
@@ -865,11 +840,6 @@ extension OmniBLEPumpManager {
     }
 
     public func getPodStatus(storeDosesOnSuccess: Bool, emitConfirmationBeep: Bool, completion: ((_ result: PumpManagerResult<StatusResponse>) -> Void)? = nil) {
-        guard state.podState?.unfinalizedBolus?.scheduledCertainty == .uncertain || state.podState?.unfinalizedBolus?.isFinished != false else {
-            self.log.info("Skipping status request due to unfinalized bolus in progress.")
-            completion?(.failure(.deviceState(PodCommsError.unfinalizedBolus)))
-            return
-        }
 
         podComms.runSession(withName: "Get pod status") { (result) in
             do {
@@ -877,7 +847,6 @@ extension OmniBLEPumpManager {
                 case .success(let session):
                     let beepType: BeepConfigType? = self.confirmationBeeps && emitConfirmationBeep ? .bipBip : nil
                     let status = try session.getStatus(confirmationBeepType: beepType)
-
                     if storeDosesOnSuccess {
                         session.dosesForStorage({ (doses) -> Bool in
                             self.store(doses: doses, in: session)
@@ -1622,23 +1591,37 @@ extension OmniBLEPumpManager: PumpManager {
     }
     
     public func updateExpirationReminder(_ intervalBeforeExpiration: TimeInterval, completion: @escaping (OmniBLEPumpManagerError?) -> Void) {
-        completion(nil)
-//        guard let newAlert = try? PodExpirationAlert(intervalBeforeExpiration: intervalBeforeExpiration) else {
-//            completion(PodCommError.invalidAlertSetting)
-//            return
-//        }
-//        podCommManager.updateAlertSetting(alertSetting: newAlert) { (result) in
-//            switch result {
-//            case .failure(let error):
-//                completion(error)
-//            case .success(let status):
-//                self.mutateState({ (state) in
-//                    state.scheduledExpirationReminderOffset = intervalBeforeExpiration
-//                    state.updateFromPodStatus(status: status)
-//                })
-//                completion(nil)
-//            }
-//        }
+        
+        guard self.hasActivePod, let podState = state.podState, let expiresAt = podState.expiresAt else {
+            completion(OmniBLEPumpManagerError.noPodPaired)
+            return
+        }
+
+        self.podComms.runSession(withName: "Program Low Reservoir Reminder") { (result) in
+            
+            let session: PodCommsSession
+            switch result {
+            case .success(let s):
+                session = s
+            case .failure(let error):
+                completion(.communication(error))
+                return
+            }
+            
+            let timeUntilReminder = expiresAt.addingTimeInterval(-intervalBeforeExpiration).timeIntervalSince(self.dateGenerator())
+
+            let expirationReminder = PodAlert.expirationAlert(timeUntilReminder)
+            do {
+                try session.configureAlerts([expirationReminder], confirmationBeepType: self.confirmationBeeps ? .beep : .noBeep)
+                self.mutateState({ (state) in
+                    state.scheduledExpirationReminderOffset = intervalBeforeExpiration
+                })
+                completion(nil)
+            } catch {
+                completion(.communication(error))
+                return
+            }
+        }
     }
     
     public var allowedExpirationReminderDates: [Date]? {
@@ -1667,32 +1650,35 @@ extension OmniBLEPumpManager: PumpManager {
         return expiration.addingTimeInterval(-.hours(round(offset.hours)))
     }
     
-    public func updateLowReservoirReminder(_ value: Int, completion: @escaping (Error?) -> Void) {
-//        guard let newAlert = try? LowReservoirAlert(reservoirVolumeBelow: Int(Double(value) * Pod.podSDKInsulinMultiplier)) else {
-//            completion(PodCommError.invalidAlertSetting)
-//            return
-//        }
-//
-//        if podCommManager.podCommState == .noPod {
-//            self.mutateState({ (state) in
-//                state.lowReservoirReminderValue = Double(value)
-//            })
-//            completion(nil)
-//            return
-//        }
-//
-//        podCommManager.updateAlertSetting(alertSetting: newAlert) { (result) in
-//            switch result {
-//            case .failure(let error):
-//                completion(error)
-//            case .success(let status):
-//                self.mutateState({ (state) in
-//                    state.lowReservoirReminderValue = Double(value)
-//                    state.updateFromPodStatus(status: status)
-//                })
-//                completion(nil)
-//            }
-//        }
+    public func updateLowReservoirReminder(_ value: Int, completion: @escaping (OmniBLEPumpManagerError?) -> Void) {
+        guard self.hasActivePod else {
+            completion(OmniBLEPumpManagerError.noPodPaired)
+            return
+        }
+
+        self.podComms.runSession(withName: "Program Low Reservoir Reminder") { (result) in
+            
+            let session: PodCommsSession
+            switch result {
+            case .success(let s):
+                session = s
+            case .failure(let error):
+                completion(.communication(error))
+                return
+            }
+
+            let lowReservoirReminder = PodAlert.lowReservoirAlarm(Double(value))
+            do {
+                try session.configureAlerts([lowReservoirReminder], confirmationBeepType: self.confirmationBeeps ? .beep : .noBeep)
+                self.mutateState({ (state) in
+                    state.lowReservoirReminderValue = Double(value)
+                })
+                completion(nil)
+            } catch {
+                completion(.communication(error))
+                return
+            }
+        }
     }
 
 
@@ -1981,7 +1967,93 @@ extension OmniBLEPumpManager: PumpManager {
             state.activeAlerts.remove(alert)
         }
     }
+    
+    private func alertsChanged(oldAlerts: AlertSet, newAlerts: AlertSet) {
+        guard let podState = state.podState else {
+            preconditionFailure("trying to manage alerts without podState")
+        }
 
+        let (added, removed) = oldAlerts.compare(to: newAlerts)
+        for slot in added {
+            if let podAlert = podState.configuredAlerts[slot] {
+                log.default("*** Alert slot triggered: %{public}@", String(describing: slot))
+                if let pumpManagerAlert = getPumpManagerAlert(for: podAlert, slot: slot) {
+                    issueAlert(alert: pumpManagerAlert)
+                } else {
+                    log.default("Ignoring alert: %{public}@", String(describing: podAlert))
+                }
+            } else {
+                log.error("Unconfigured alert slot triggered: %{public}@", String(describing: slot))
+            }
+        }
+        for alert in removed {
+            log.default("*** Alert slot cleared: %{public}@", String(describing: alert))
+        }
+    }
+    
+    private func getPumpManagerAlert(for podAlert: PodAlert, slot: AlertSlot) -> PumpManagerAlert? {
+        guard let podState = state.podState, let expiresAt = podState.expiresAt else {
+            preconditionFailure("trying to lookup alert info without podState")
+        }
+        
+        guard !podAlert.isIgnored else {
+            return nil
+        }
+
+        switch podAlert {
+        case .podSuspendedReminder:
+            return PumpManagerAlert.suspendInProgress(triggeringSlot: slot)
+        case .expirationAlert:
+            let timeToExpiry = TimeInterval(hours: expiresAt.timeIntervalSince(dateGenerator()).hours.rounded())
+            return PumpManagerAlert.userPodExpiration(triggeringSlot: slot, scheduledExpirationReminderOffset: timeToExpiry)
+        case .expirationAdvisoryAlarm:
+            return PumpManagerAlert.podExpiring(triggeringSlot: slot)
+        case .shutdownImminentAlarm:
+            return PumpManagerAlert.podExpireImminent(triggeringSlot: slot)
+        case .lowReservoirAlarm(let units):
+            return PumpManagerAlert.lowReservoir(triggeringSlot: slot, lowReservoirReminderValue: units)
+        case .finishSetupReminder, .waitingForPairingReminder:
+            return PumpManagerAlert.finishSetupReminder(triggeringSlot: slot)
+        case .suspendTimeExpired:
+            return PumpManagerAlert.suspendEnded(triggeringSlot: slot)
+        default:
+            return nil
+        }
+    }
+    
+    private func silenceAcknowledgedAlerts() {
+        for alert in state.alertsWithPendingAcknowledgment {
+            if let slot = alert.triggeringSlot {
+                self.podComms.runSession(withName: "Silence already acknowledged alert") { (result) in
+                    switch result {
+                    case .success(let session):
+                        do {
+                            let _ = try session.acknowledgePodAlerts(alerts: AlertSet(slots: [slot]), confirmationBeepType: self.confirmationBeeps ? .beep : .noBeep)
+                        } catch {
+                            return
+                        }
+                        self.mutateState { state in
+                            state.activeAlerts.remove(alert)
+                        }
+                    case .failure:
+                        return
+                    }
+                }
+            }
+        }
+    }
+    
+    private func notifyPodFault(fault: DetailedStatus) {
+        pumpDelegate.notify { delegate in
+            let content = Alert.Content(title: fault.faultEventCode.notificationTitle,
+                                        body: fault.faultEventCode.notificationBody,
+                                        acknowledgeActionButtonLabel: LocalizedString("OK", comment: "Alert acknowledgment OK button"))
+            delegate?.issueAlert(Alert(identifier: Alert.Identifier(managerIdentifier: OmniBLEPumpManager.podAlarmNotificationIdentifier,
+                                                                    alertIdentifier: fault.faultEventCode.description),
+                                       foregroundContent: content, backgroundContent: content,
+                                       trigger: .immediate))
+        }
+    }
 
     // This cannot be called from within the lockedState lock!
     func store(doses: [UnfinalizedDose], in session: PodCommsSession) -> Bool {
@@ -2041,8 +2113,22 @@ extension OmniBLEPumpManager: MessageLogger {
 }
 
 extension OmniBLEPumpManager: PodCommsDelegate {
+    func podCommsDidEstablishSession(_ podComms: PodComms) {
+        
+        podComms.runSession(withName: "Post-connect status fetch") { result in
+            switch result {
+            case .success(let session):
+                let _ = try? session.getStatus(confirmationBeepType: .none)
+                self.silenceAcknowledgedAlerts()
+            case .failure:
+                // Errors can be ignored here.
+                break
+            }
+        }
+    }
+    
     func podComms(_ podComms: PodComms, didChange podState: PodState) {
-        setState { (state) in
+        let (newFault, oldAlerts, newAlerts) = setStateWithResult { (state) -> (DetailedStatus?,AlertSet,AlertSet) in
             // Check for any updates to bolus certainty, and log them
             if let bolus = state.podState?.unfinalizedBolus, bolus.scheduledCertainty == .uncertain, !bolus.isFinished {
                 if podState.unfinalizedBolus?.scheduledCertainty == .some(.certain) {
@@ -2056,7 +2142,30 @@ extension OmniBLEPumpManager: PodCommsDelegate {
             {
                 state.suspendEngageState = .stable
             }
+            
+            let newFault: DetailedStatus?
+            
+            // Check for new fault state
+            if state.podState?.fault == nil, let fault = podState.fault {
+                newFault = fault
+            } else {
+                newFault = nil
+            }
+            
+            let oldAlerts: AlertSet = state.podState?.activeAlertSlots ?? AlertSet.none
+            let newAlerts: AlertSet = podState.activeAlertSlots
+            
             state.podState = podState
+            
+            return (newFault, oldAlerts, newAlerts)
+        }
+        
+        if let newFault = newFault {
+            notifyPodFault(fault: newFault)
+        }
+        
+        if oldAlerts != newAlerts {
+            self.alertsChanged(oldAlerts: oldAlerts, newAlerts: newAlerts)
         }
     }
 }
@@ -2071,11 +2180,72 @@ extension OmniBLEPumpManager: AlertSoundVendor {
     }
 }
 
-extension OmniBLEPumpManager: AlertResponder {
+// MARK: - AlertResponder implementation
+extension OmniBLEPumpManager {
     public func acknowledgeAlert(alertIdentifier: Alert.AlertIdentifier, completion: @escaping (Error?) -> Void) {
-        if alertIdentifier == podExpirationNotificationIdentifier.alertIdentifier {
-            // TODO
-            //acknowledgePodAlerts(<#T##alertsToAcknowledge: AlertSet##AlertSet#>, completion: <#T##([AlertSlot : PodAlert]?) -> Void##([AlertSlot : PodAlert]?) -> Void##(_ alerts: [AlertSlot : PodAlert]?) -> Void#>)
+        guard self.hasActivePod else {
+            completion(OmniBLEPumpManagerError.noPodPaired)
+            return
         }
+
+        for alert in state.activeAlerts {
+            if alert.alertIdentifier == alertIdentifier {
+                // If this alert was triggered by the pod find the slot to clear it.
+                if let slot = alert.triggeringSlot {
+                    self.podComms.runSession(withName: "Acknowledge Alert") { (result) in
+                        switch result {
+                        case .success(let session):
+                            do {
+                                let _ = try session.acknowledgePodAlerts(alerts: AlertSet(slots: [slot]), confirmationBeepType: self.confirmationBeeps ? .beep : .noBeep)
+                            } catch {
+                                self.mutateState { state in
+                                    state.alertsWithPendingAcknowledgment.insert(alert)
+                                }
+                                completion(error)
+                                return
+                            }
+                            self.mutateState { state in
+                                state.activeAlerts.remove(alert)
+                            }
+                            completion(nil)
+                        case .failure(let error):
+                            self.mutateState { state in
+                                state.alertsWithPendingAcknowledgment.insert(alert)
+                            }
+                            completion(error)
+                            return
+                        }
+                    }
+                } else {
+                    // Non-pod alert
+                    self.mutateState { state in
+                        state.activeAlerts.remove(alert)
+                        if alert == .timeOffsetChangeDetected {
+                            state.acknowledgedTimeOffsetAlert = true
+                        }
+                    }
+                    completion(nil)
+                }
+            }
+        }
+    }
+}
+
+extension FaultEventCode {
+    public var notificationTitle: String {
+        switch self.faultType {
+        case .reservoirEmpty:
+            return LocalizedString("Empty Reservoir", comment: "The title for Empty Reservoir alarm notification")
+        case .occluded, .occlusionCheckStartup1, .occlusionCheckStartup2, .occlusionCheckTimeouts1, .occlusionCheckTimeouts2, .occlusionCheckTimeouts3, .occlusionCheckPulseIssue, .occlusionCheckBolusProblem:
+            return LocalizedString("Occlusion Detected", comment: "The title for Occlusion alarm notification")
+        case .exceededMaximumPodLife80Hrs:
+            return LocalizedString("Pod Expired", comment: "The title for Pod Expired alarm notification")
+        default:
+            return LocalizedString("Critical Pod Error", comment: "The title for AlarmCode.other notification")
+        }
+    }
+    
+    public var notificationBody: String {
+        return LocalizedString("Insulin delivery stopped. Change Pod now.", comment: "The default notification body for AlarmCodes")
     }
 }
