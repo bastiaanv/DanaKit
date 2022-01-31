@@ -283,6 +283,8 @@ public struct PodState: RawRepresentable, Equatable, CustomDebugStringConvertibl
                 return nil
             }
         
+        let formatVersion: Int = rawValue["version"] as? Int ?? 1
+        
         self.address = address
         self.ltk = Data(hex: ltkString)
         self.firmwareVersion = firmwareVersion
@@ -364,11 +366,11 @@ public struct PodState: RawRepresentable, Equatable, CustomDebugStringConvertibl
             self.fault = nil
         }
         
-//        if let alarmsRawValue = rawValue["alerts"] as? UInt8 {
-//            self.activeAlertSlots = AlertSet(rawValue: alarmsRawValue)
-//        } else {
+        if let alarmsRawValue = rawValue["alerts"] as? UInt8 {
+            self.activeAlertSlots = AlertSet(rawValue: alarmsRawValue)
+        } else {
             self.activeAlertSlots = .none
-//        }
+        }
         
         if let setupProgressRaw = rawValue["setupProgress"] as? Int,
             let setupProgress = SetupProgress(rawValue: setupProgressRaw)
@@ -386,8 +388,8 @@ public struct PodState: RawRepresentable, Equatable, CustomDebugStringConvertibl
         } else {
             self.messageTransportState = MessageTransportState(ck: nil, noncePrefix: nil)
         }
-
-        if let rawConfiguredAlerts = rawValue["configuredAlerts"] as? [String: PodAlert.RawValue] {
+        
+        if let rawConfiguredAlerts = rawValue["configuredAlerts"] as? [String: PodAlert.RawValue], formatVersion >= 2 {
             var configuredAlerts = [AlertSlot: PodAlert]()
             for (rawSlot, rawAlert) in rawConfiguredAlerts {
                 if let slotNum = UInt8(rawSlot), let slot = AlertSlot(rawValue: slotNum), let alert = PodAlert(rawValue: rawAlert) {
@@ -398,12 +400,12 @@ public struct PodState: RawRepresentable, Equatable, CustomDebugStringConvertibl
         } else {
             // Assume migration, and set up with alerts that are normally configured
             self.configuredAlerts = [
-                .slot2: .shutdownImminentAlarm(0),
-                .slot3: .expirationAlert(0),
-                .slot4: .lowReservoirAlarm(0),
+                .slot2: .shutdownImminent(0),
+                .slot3: .expirationReminder(0),
+                .slot4: .lowReservoir(0),
                 .slot5: .podSuspendedReminder(active: false, suspendTime: 0),
                 .slot6: .suspendTimeExpired(suspendTime: 0),
-                .slot7: .expirationAdvisoryAlarm(alarmTime: 0, duration: 0)
+                .slot7: .expired(alertTime: 0, duration: 0)
             ]
         }
         
@@ -412,6 +414,7 @@ public struct PodState: RawRepresentable, Equatable, CustomDebugStringConvertibl
     
     public var rawValue: RawValue {
         var rawValue: RawValue = [
+            "version": 2, // Version of encoding format. 1 = old alert names
             "address": address,
             "ltk": ltk.hexadecimalString,
             "eapAkaSequenceNumber": 1, // keep for back migration, was always 1

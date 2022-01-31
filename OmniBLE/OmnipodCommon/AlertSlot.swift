@@ -68,19 +68,19 @@ public enum PodAlert: CustomStringConvertible, RawRepresentable, Equatable {
     case finishSetupReminder
 
     // User configurable with PDM (1-24 hours before 72 hour expiration) "Change Pod Soon"
-    case expirationAlert(TimeInterval)
+    case expirationReminder(TimeInterval)
 
     // 72 hour alarm
-    case expirationAdvisoryAlarm(alarmTime: TimeInterval, duration: TimeInterval)
+    case expired(alertTime: TimeInterval, duration: TimeInterval)
 
     // 79 hour alarm (1 hour before shutdown)
-    case shutdownImminentAlarm(TimeInterval)
+    case shutdownImminent(TimeInterval)
 
-    // reservoir below configured value alarm
-    case lowReservoirAlarm(Double)
+    // reservoir below configured value alert
+    case lowReservoir(Double)
 
     // auto-off timer; requires user input every x minutes
-    case autoOffAlarm(active: Bool, countdownDuration: TimeInterval)
+    case autoOff(active: Bool, countdownDuration: TimeInterval)
 
     // pod suspended reminder, before suspendTime; short beep every 15 minutes if > 30 min, else every 5 minutes
     case podSuspendedReminder(active: Bool, suspendTime: TimeInterval)
@@ -95,15 +95,15 @@ public enum PodAlert: CustomStringConvertible, RawRepresentable, Equatable {
             return LocalizedString("Waiting for pairing reminder", comment: "Description waiting for pairing reminder")
         case .finishSetupReminder:
             return LocalizedString("Finish setup reminder", comment: "Description for finish setup reminder")
-        case .expirationAlert:
+        case .expirationReminder:
             alertName = LocalizedString("Expiration alert", comment: "Description for expiration alert")
-        case .expirationAdvisoryAlarm:
+        case .expired:
             alertName = LocalizedString("Expiration advisory", comment: "Description for expiration advisory")
-        case .shutdownImminentAlarm:
+        case .shutdownImminent:
             alertName = LocalizedString("Shutdown imminent", comment: "Description for shutdown imminent")
-        case .lowReservoirAlarm(let units):
+        case .lowReservoir(let units):
             alertName = String(format: LocalizedString("Low reservoir advisory (%1$gU)", comment: "Format string for description for low reservoir advisory (1: reminder units)"), units)
-        case .autoOffAlarm:
+        case .autoOff:
             alertName = LocalizedString("Auto-off", comment: "Description for auto-off")
         case .podSuspendedReminder:
             alertName = LocalizedString("Pod suspended reminder", comment: "Description for pod suspended reminder")
@@ -122,19 +122,19 @@ public enum PodAlert: CustomStringConvertible, RawRepresentable, Equatable {
             return AlertConfiguration(alertType: .slot7, duration: .minutes(110), trigger: .timeUntilAlert(.minutes(10)), beepRepeat: .every5Minutes, beepType: .bipBeepBipBeepBipBeepBipBeep)
         case .finishSetupReminder:
             return AlertConfiguration(alertType: .slot7, duration: .minutes(55), trigger: .timeUntilAlert(.minutes(5)), beepRepeat: .every5Minutes, beepType: .bipBeepBipBeepBipBeepBipBeep)
-        case .expirationAlert(let alertTime):
+        case .expirationReminder(let alertTime):
             let active = alertTime != 0 // disable if alertTime is 0
             return AlertConfiguration(alertType: .slot3, active: active, duration: 0, trigger: .timeUntilAlert(alertTime), beepRepeat: .every1MinuteFor3MinutesAndRepeatEvery15Minutes, beepType: .bipBeepBipBeepBipBeepBipBeep)
-        case .expirationAdvisoryAlarm(let alarmTime, let duration):
+        case .expired(let alarmTime, let duration):
             let active = alarmTime != 0 // disable if alarmTime is 0
             return AlertConfiguration(alertType: .slot7, active: active, duration: duration, trigger: .timeUntilAlert(alarmTime), beepRepeat: .every60Minutes, beepType: .bipBeepBipBeepBipBeepBipBeep)
-        case .shutdownImminentAlarm(let alarmTime):
+        case .shutdownImminent(let alarmTime):
             let active = alarmTime != 0 // disable if alarmTime is 0
             return AlertConfiguration(alertType: .slot2, active: active, duration: 0, trigger: .timeUntilAlert(alarmTime), beepRepeat: .every15Minutes, beepType: .bipBeepBipBeepBipBeepBipBeep)
-        case .lowReservoirAlarm(let units):
+        case .lowReservoir(let units):
             let active = units != 0 // disable if units is 0
             return AlertConfiguration(alertType: .slot4, active: active, duration: 0, trigger: .unitsRemaining(units), beepRepeat: .every1MinuteFor3MinutesAndRepeatEvery60Minutes, beepType: .bipBeepBipBeepBipBeepBipBeep)
-        case .autoOffAlarm(let active, let countdownDuration):
+        case .autoOff(let active, let countdownDuration):
             return AlertConfiguration(alertType: .slot0, active: active, autoOffModifier: true, duration: .minutes(15), trigger: .timeUntilAlert(countdownDuration), beepRepeat: .every1MinuteFor15Minutes, beepType: .bipBeepBipBeepBipBeepBipBeep)
         case .podSuspendedReminder(let active, let suspendTime):
             // A suspendTime of 0 is an untimed suspend
@@ -199,35 +199,35 @@ public enum PodAlert: CustomStringConvertible, RawRepresentable, Equatable {
             self = .waitingForPairingReminder
         case "finishSetupReminder":
             self = .finishSetupReminder
-        case "expirationAlert":
+        case "expirationReminder":
             guard let alertTime = rawValue["alertTime"] as? Double else {
                 return nil
             }
-            self = .expirationAlert(TimeInterval(alertTime))
-        case "expirationAdvisoryAlarm":
+            self = .expirationReminder(TimeInterval(alertTime))
+        case "expired":
             guard let alarmTime = rawValue["alarmTime"] as? Double,
                 let duration = rawValue["duration"] as? Double else
             {
                 return nil
             }
-            self = .expirationAdvisoryAlarm(alarmTime: TimeInterval(alarmTime), duration: TimeInterval(duration))
-        case "shutdownImminentAlarm":
+            self = .expired(alertTime: TimeInterval(alarmTime), duration: TimeInterval(duration))
+        case "shutdownImminent":
             guard let alarmTime = rawValue["alarmTime"] as? Double else {
                 return nil
             }
-            self = .shutdownImminentAlarm(alarmTime)
-        case "lowReservoirAlarm":
+            self = .shutdownImminent(alarmTime)
+        case "lowReservoir":
             guard let units = rawValue["units"] as? Double else {
                 return nil
             }
-            self = .lowReservoirAlarm(units)
-        case "autoOffAlarm":
+            self = .lowReservoir(units)
+        case "autoOff":
             guard let active = rawValue["active"] as? Bool,
                 let countdownDuration = rawValue["countdownDuration"] as? Double else
             {
                 return nil
             }
-            self = .autoOffAlarm(active: active, countdownDuration: TimeInterval(countdownDuration))
+            self = .autoOff(active: active, countdownDuration: TimeInterval(countdownDuration))
         case "podSuspendedReminder":
             guard let active = rawValue["active"] as? Bool,
                 let suspendTime = rawValue["suspendTime"] as? Double else
@@ -253,16 +253,16 @@ public enum PodAlert: CustomStringConvertible, RawRepresentable, Equatable {
                 return "waitingForPairingReminder"
             case .finishSetupReminder:
                 return "finishSetupReminder"
-            case .expirationAlert:
-                return "expirationAlert"
-            case .expirationAdvisoryAlarm:
-                return "expirationAdvisoryAlarm"
-            case .shutdownImminentAlarm:
-                return "shutdownImminentAlarm"
-            case .lowReservoirAlarm:
-                return "lowReservoirAlarm"
-            case .autoOffAlarm:
-                return "autoOffAlarm"
+            case .expirationReminder:
+                return "expirationReminder"
+            case .expired:
+                return "expired"
+            case .shutdownImminent:
+                return "shutdownImminent"
+            case .lowReservoir:
+                return "lowReservoir"
+            case .autoOff:
+                return "autoOff"
             case .podSuspendedReminder:
                 return "podSuspendedReminder"
             case .suspendTimeExpired:
@@ -276,16 +276,16 @@ public enum PodAlert: CustomStringConvertible, RawRepresentable, Equatable {
         ]
 
         switch self {
-        case .expirationAlert(let alertTime):
+        case .expirationReminder(let alertTime):
             rawValue["alertTime"] = alertTime
-        case .expirationAdvisoryAlarm(let alarmTime, let duration):
+        case .expired(let alarmTime, let duration):
             rawValue["alarmTime"] = alarmTime
             rawValue["duration"] = duration
-        case .shutdownImminentAlarm(let alarmTime):
+        case .shutdownImminent(let alarmTime):
             rawValue["alarmTime"] = alarmTime
-        case .lowReservoirAlarm(let units):
+        case .lowReservoir(let units):
             rawValue["units"] = units
-        case .autoOffAlarm(let active, let countdownDuration):
+        case .autoOff(let active, let countdownDuration):
             rawValue["active"] = active
             rawValue["countdownDuration"] = countdownDuration
         case .podSuspendedReminder(let active, let suspendTime):

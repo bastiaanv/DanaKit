@@ -52,7 +52,7 @@ public struct StatusResponse : MessageBlock {
         self.lastProgrammingMessageSeqNum = (encodedData[4] >> 3) & 0xf
         
         self.bolusNotDelivered = Double((Int(encodedData[4] & 0x3) << 8) | Int(encodedData[5])) / Pod.pulsesPerUnit
-
+        
         self.alerts = AlertSet(rawValue: ((encodedData[6] & 0x7f) << 1) | (encodedData[7] >> 7))
         
         self.reservoirLevel = Double((Int(encodedData[8] & 0x3) << 8) + Int(encodedData[9])) / Pod.pulsesPerUnit
