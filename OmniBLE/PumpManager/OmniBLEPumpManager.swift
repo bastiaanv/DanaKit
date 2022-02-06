@@ -206,6 +206,13 @@ public class OmniBLEPumpManager: DeviceManager {
             delegate?.deviceManager(self, logEventForDeviceIdentifier: podAddress, type: type, message: message, completion: nil)
         }
     }
+    
+    // Not persisted
+    var provideHeartbeat: Bool = false
+    
+    public func setMustProvideBLEHeartbeat(_ mustProvideBLEHeartbeat: Bool) {
+        provideHeartbeat = mustProvideBLEHeartbeat
+    }
 
     private let pumpDelegate = WeakSynchronizedDelegate<PumpManagerDelegate>()
 
@@ -1554,12 +1561,7 @@ extension OmniBLEPumpManager: PumpManager {
     public func removeStatusObserver(_ observer: PumpManagerStatusObserver) {
         statusObservers.removeElement(observer)
     }
-
-    public func setMustProvideBLEHeartbeat(_ mustProvideBLEHeartbeat: Bool) {
-        // We can't implement this service for Dash (unless we can find some Dash hook for this).
-        // XXX PumpManager protocol probably should be updated to not to assume that this service is always available.
-    }
-
+    
     public func ensureCurrentPumpData(completion: ((Date?) -> Void)?) {
         let shouldFetchStatus = setStateWithResult { (state) -> Bool? in
             guard state.hasActivePod else {
@@ -2138,11 +2140,20 @@ extension OmniBLEPumpManager: PodCommsDelegate {
             case .success(let session):
                 let _ = try? session.getStatus(confirmationBeepType: .none)
                 self.silenceAcknowledgedAlerts()
+                session.dosesForStorage() { (doses) -> Bool in
+                    return self.store(doses: doses, in: session)
+                }
+                if self.provideHeartbeat {
+                    self.pumpDelegate.notify { (delegate) in
+                        delegate?.pumpManagerBLEHeartbeatDidFire(self)
+                    }
+                }
             case .failure:
                 // Errors can be ignored here.
                 break
             }
         }
+        
     }
 
     func podComms(_ podComms: PodComms, didChange podState: PodState) {

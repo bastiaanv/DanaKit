@@ -379,11 +379,11 @@ public class PodComms: CustomDebugStringConvertible {
     // Use to serialize a set of Pod Commands for a given session
     func runSession(withName name: String, _ block: @escaping (_ result: SessionRunResult) -> Void) {
 
-        guard let manager = manager else {
+        guard let manager = manager, manager.peripheral.state == .connected else {
             block(.failure(PodCommsError.podNotConnected))
             return
         }
-
+        
         manager.runSession(withName: name) { () in
             guard self.podState != nil else {
                 block(.failure(PodCommsError.noPodPaired))

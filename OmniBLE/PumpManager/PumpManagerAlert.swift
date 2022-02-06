@@ -233,7 +233,7 @@ extension PumpManagerAlert: RawRepresentable {
 extension PodAlert {
     var isIgnored: Bool {
         switch self {
-        case .podSuspendedReminder:
+        case .podSuspendedReminder, .finishSetupReminder:
             return true
         default:
             return false
