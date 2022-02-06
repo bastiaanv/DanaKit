@@ -71,8 +71,6 @@ extension MessageTransportState: CustomDebugStringConvertible {
     public var debugDescription: String {
         return [
             "## MessageTransportState",
-            "ck: " + (ck != nil ? ck!.hexadecimalString : "nil"),
-            "noncePrefix: " + (noncePrefix != nil ? noncePrefix!.hexadecimalString : "nil"),
             "eapSeq: \(eapSeq)",
             "msgSeq: \(msgSeq)",
             "nonceSeq: \(nonceSeq)",
@@ -331,8 +329,6 @@ extension PodMessageTransport: CustomDebugStringConvertible {
     public var debugDescription: String {
         return [
             "## PodMessageTransport",
-            "ck: " + (ck != nil ? ck!.hexadecimalString : "nil"),
-            "noncePrefix: " + (noncePrefix != nil ? noncePrefix!.hexadecimalString : "nil"),
             "eapSeq: \(eapSeq)",
             "msgSeq: \(msgSeq)",
             "nonceSeq: \(nonceSeq)",

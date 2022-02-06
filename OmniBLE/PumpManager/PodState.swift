@@ -485,7 +485,6 @@ public struct PodState: RawRepresentable, Equatable, CustomDebugStringConvertibl
         return [
             "### PodState",
             "* address: \(String(format: "%08X", address))",
-            "* ltk: \(ltk.hexadecimalString)",
             "* bleIdentifier: \(bleIdentifier)",
             "* activatedAt: \(String(reflecting: activatedAt))",
             "* expiresAt: \(String(reflecting: expiresAt))",
