@@ -95,6 +95,7 @@
 		8475315B26EDA193009FD801 /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8475314E26EDA193009FD801 /* NibLoadable.swift */; };
 		8475315C26EDA193009FD801 /* TimeZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8475314F26EDA193009FD801 /* TimeZone.swift */; };
 		8475315D26EDA193009FD801 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8475315026EDA193009FD801 /* Data.swift */; };
+		A91B2DEC276E1E5E001B0E95 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A91B2DEB276E1E5E001B0E95 /* README.md */; };
 		A9A5BCEF276C1E2D00B02C86 /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D054D427651D2400FAFEFB /* TestUtilities.swift */; };
 		A9A5BCF0276C1E2D00B02C86 /* HexConversionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D054CA2764FC8200FAFEFB /* HexConversionTests.swift */; };
 		A9A5BCF1276C1E5F00B02C86 /* EnDecryptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D3492F2764F5780037F77C /* EnDecryptTests.swift */; };
@@ -114,6 +115,7 @@
 		C1C001C427A2351D00533D35 /* OmniBLEReservoirView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1C001C227A2351D00533D35 /* OmniBLEReservoirView.xib */; };
 		C1C001C527A2351D00533D35 /* OmniBLEReservoirView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C001C327A2351D00533D35 /* OmniBLEReservoirView.swift */; };
 		C1D27A1527908DC600C41EBA /* OmniBLE.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84752E8226ED0FFE009FD801 /* OmniBLE.framework */; };
+		C1D27A1727908DE500C41EBA /* OmniBLE.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84752E8226ED0FFE009FD801 /* OmniBLE.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C1D27A1B27911E9900C41EBA /* PodAdvertisement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D27A1A27911E9900C41EBA /* PodAdvertisement.swift */; };
 		C1F67E8B27975B830017487F /* AttachPodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67E7327975B830017487F /* AttachPodView.swift */; };
 		C1F67E8C27975B830017487F /* ScheduledExpirationReminderEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67E7427975B830017487F /* ScheduledExpirationReminderEditView.swift */; };
@@ -171,6 +173,19 @@
 			remoteInfo = OmniBLE;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C1D27A1627908DCF00C41EBA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C1D27A1727908DE500C41EBA /* OmniBLE.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1016324C27137B1E007A3BC2 /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
@@ -790,6 +805,7 @@
 				C187C193279086A8006E3557 /* Sources */,
 				C187C194279086A8006E3557 /* Frameworks */,
 				C187C195279086A8006E3557 /* Resources */,
+				C1D27A1627908DCF00C41EBA /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -869,6 +885,7 @@
 				C1F67E9527975B830017487F /* HUDAssets.xcassets in Resources */,
 				1029AE4F27094E1900B7F5B6 /* OmniBLEUI.xcassets in Resources */,
 				8475313726ED838B009FD801 /* PodLifeHUDView.xib in Resources */,
+				A91B2DEC276E1E5E001B0E95 /* README.md in Resources */,
 				C1C001C427A2351D00533D35 /* OmniBLEReservoirView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
