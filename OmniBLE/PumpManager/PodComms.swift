@@ -76,6 +76,12 @@ public class PodComms: CustomDebugStringConvertible {
         }
     }
 
+    public func prepForNewPod(myId: UInt32 = 0, podId: UInt32 = 0) {
+        self.myId = myId
+        self.podId = podId
+        self.podState = nil
+    }
+
     public func connectToNewPod(_ completion: @escaping (Result<OmniBLE, Error>) -> Void) {
         let discoveryStartTime = Date()
 

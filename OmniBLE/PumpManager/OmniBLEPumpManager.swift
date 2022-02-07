@@ -608,9 +608,7 @@ extension OmniBLEPumpManager {
                 state.podId = nextPodId(lastPodId: lastPodId)
                 self.log.info("Advanced podId from %x to %x", lastPodId, state.podId)
             }
-            self.podComms = PodComms(podState: nil, myId: state.controllerId, podId: state.podId)
-            self.podComms.delegate = self
-            self.podComms.messageLogger = self
+            self.podComms.prepForNewPod(myId: state.controllerId, podId: state.podId)
 
             state.podState = nil
         }
