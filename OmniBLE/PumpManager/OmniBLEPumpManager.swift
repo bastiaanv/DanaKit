@@ -226,6 +226,7 @@ public class OmniBLEPumpManager: DeviceManager {
         let lines = [
             "## OmniBLEPumpManager",
             "podComms: \(String(reflecting: podComms))",
+            "provideHeartbeat: \(provideHeartbeat)",
             "state: \(String(reflecting: state))",
             "status: \(String(describing: status))",
             "podStateObservers.count: \(podStateObservers.cleanupDeallocatedElements().count)",
