@@ -1544,6 +1544,7 @@ extension OmniBLEPumpManager: PumpManager {
                 let scheduleOffset = self.state.timeZone.scheduleOffset(forDate: Date())
                 let beep = self.confirmationBeeps
                 let _ = try session.resumeBasal(schedule: self.state.basalSchedule, scheduleOffset: scheduleOffset, acknowledgementBeep: beep, completionBeep: beep)
+                self.clearSuspendReminder()
                 try session.cancelSuspendAlerts()
                 session.dosesForStorage() { (doses) -> Bool in
                     return self.store(doses: doses, in: session)
@@ -1552,6 +1553,13 @@ extension OmniBLEPumpManager: PumpManager {
             } catch (let error) {
                 completion(error)
             }
+        }
+    }
+
+    fileprivate func clearSuspendReminder() {
+        self.pumpDelegate.notify { (delegate) in
+            delegate?.retractAlert(identifier: Alert.Identifier(managerIdentifier: self.managerIdentifier, alertIdentifier: PumpManagerAlert.suspendEnded(triggeringSlot: nil).alertIdentifier))
+            delegate?.retractAlert(identifier: Alert.Identifier(managerIdentifier: self.managerIdentifier, alertIdentifier: PumpManagerAlert.suspendEnded(triggeringSlot: nil).repeatingAlertIdentifier))
         }
     }
 
@@ -2255,13 +2263,6 @@ extension OmniBLEPumpManager {
                         }
                     }
                     completion(nil)
-                }
-                if alert.isRepeating {
-                    // Also cancel repeating portion
-                    let repeatingIdentifier = Alert.Identifier(managerIdentifier: self.managerIdentifier, alertIdentifier: alert.repeatingAlertIdentifier)
-                    pumpDelegate.notify { (delegate) in
-                        delegate?.retractAlert(identifier: repeatingIdentifier)
-                    }
                 }
             }
         }
