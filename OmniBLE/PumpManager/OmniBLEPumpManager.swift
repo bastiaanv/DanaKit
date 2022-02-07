@@ -2256,6 +2256,13 @@ extension OmniBLEPumpManager {
                     }
                     completion(nil)
                 }
+                if alert.isRepeating {
+                    // Also cancel repeating portion
+                    let repeatingIdentifier = Alert.Identifier(managerIdentifier: self.managerIdentifier, alertIdentifier: alert.repeatingAlertIdentifier)
+                    pumpDelegate.notify { (delegate) in
+                        delegate?.retractAlert(identifier: repeatingIdentifier)
+                    }
+                }
             }
         }
     }
