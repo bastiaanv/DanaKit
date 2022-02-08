@@ -818,7 +818,12 @@ extension OmniBLEPumpManager {
                         }
                     }
 
-                    let finishWait = try session.insertCannula()
+                    let alerts: [PodAlert] = [
+                        .expirationReminder(self.state.defaultExpirationReminderOffset),
+                        .lowReservoir(self.state.lowReservoirReminderValue)
+                    ]
+
+                    let finishWait = try session.insertCannula(optionalAlerts: alerts)
                     completion(.success(finishWait))
                 } catch let error {
                     completion(.failure(.communication(error)))
