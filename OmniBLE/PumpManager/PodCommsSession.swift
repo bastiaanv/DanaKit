@@ -613,9 +613,9 @@ public class PodCommsSession {
         }
     }
 
-    // Cancels any suspend related alerts, should be called when resuming after using suspendDelivery()
+    // Cancels any suspend related alerts, called when setting a basal schedule with active suspend alerts
     @discardableResult
-    public func cancelSuspendAlerts() throws -> StatusResponse {
+    private func cancelSuspendAlerts() throws -> StatusResponse {
         do {
             let podSuspendedReminder = PodAlert.podSuspendedReminder(active: false, suspendTime: 0)
             let suspendTimeExpired = PodAlert.suspendTimeExpired(suspendTime: 0) // A suspendTime of 0 deactivates this alert
@@ -673,10 +673,15 @@ public class PodCommsSession {
         let basalExtraCommand = BasalScheduleExtraCommand.init(schedule: schedule, scheduleOffset: scheduleOffset, acknowledgementBeep: acknowledgementBeep, completionBeep: completionBeep, programReminderInterval: programReminderInterval)
 
         do {
-            let status: StatusResponse = try send([basalScheduleCommand, basalExtraCommand])
+            var status: StatusResponse = try send([basalScheduleCommand, basalExtraCommand])
             let now = Date()
             podState.suspendState = .resumed(now)
             podState.unfinalizedResume = UnfinalizedDose(resumeStartTime: now, scheduledCertainty: .certain)
+            if hasActiveSuspendAlert(configuredAlerts: podState.configuredAlerts),
+                let cancelStatus = try? cancelSuspendAlerts()
+            {
+                status = cancelStatus // update using the latest status
+            }
             podState.updateFromStatusResponse(status)
             return status
         } catch PodCommsError.nonceResyncFailed {

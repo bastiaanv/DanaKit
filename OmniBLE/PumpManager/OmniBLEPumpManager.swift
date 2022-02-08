@@ -928,6 +928,7 @@ extension OmniBLEPumpManager {
                 do {
                     let beep = self.confirmationBeeps
                     let _ = try session.setTime(timeZone: timeZone, basalSchedule: self.state.basalSchedule, date: Date(), acknowledgementBeep: beep, completionBeep: beep)
+                    self.clearSuspendReminder()
                     self.setState { (state) in
                         state.timeZone = timeZone
                     }
@@ -985,6 +986,7 @@ extension OmniBLEPumpManager {
                     }
                     let beep = self.confirmationBeeps
                     let _ = try session.setBasalSchedule(schedule: schedule, scheduleOffset: scheduleOffset, acknowledgementBeep: beep, completionBeep: beep)
+                    self.clearSuspendReminder()
 
                     self.setState { (state) in
                         state.basalSchedule = schedule
@@ -1543,7 +1545,6 @@ extension OmniBLEPumpManager: PumpManager {
                 let beep = self.confirmationBeeps
                 let _ = try session.resumeBasal(schedule: self.state.basalSchedule, scheduleOffset: scheduleOffset, acknowledgementBeep: beep, completionBeep: beep)
                 self.clearSuspendReminder()
-                try session.cancelSuspendAlerts()
                 session.dosesForStorage() { (doses) -> Bool in
                     return self.store(doses: doses, in: session)
                 }
@@ -1638,7 +1639,11 @@ extension OmniBLEPumpManager: PumpManager {
                 do {
                     let scheduleOffset = self.state.timeZone.scheduleOffset(forDate: Date())
                     let beep = self.confirmationBeeps
-                    podStatus = try session.resumeBasal(schedule: self.state.basalSchedule, scheduleOffset: scheduleOffset, acknowledgementBeep: beep, completionBeep: beep)
+                    let podStatus = try session.resumeBasal(schedule: self.state.basalSchedule, scheduleOffset: scheduleOffset, acknowledgementBeep: beep, completionBeep: beep)
+                    self.clearSuspendReminder()
+                    guard podStatus.deliveryStatus.bolusing == false else {
+                        throw PodCommsError.unfinalizedBolus
+                    }
                 } catch let error {
                     completion(.deviceState(error as? LocalizedError))
                     return

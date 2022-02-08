@@ -368,5 +368,15 @@ extension PumpManagerStatus.BasalDeliveryState {
         default:
             return false
         }
-    }    
+    }
+
+    var isSuspendedOrResuming: Bool {
+        switch self {
+        case .suspended, .resuming:
+            return true
+        default:
+            return false
+        }
+    }
 }
+

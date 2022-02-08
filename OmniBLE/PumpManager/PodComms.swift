@@ -410,7 +410,6 @@ public class PodComms: CustomDebugStringConvertible {
             "## PodComms",
             "* myId: \(String(format: "%08X", myId))",
             "* podId: \(String(format: "%08X", podId))",
-            "podState: \(String(reflecting: podState))",
             "delegate: \(String(describing: delegate != nil))",
             ""
         ].joined(separator: "\n")

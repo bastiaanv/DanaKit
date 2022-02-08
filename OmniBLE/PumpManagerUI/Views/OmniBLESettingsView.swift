@@ -96,7 +96,7 @@ struct OmniBLESettingsView: View  {
         VStack(alignment: .leading, spacing: 5) {
             Text(deliverySectionTitle)
                 .foregroundColor(Color(UIColor.secondaryLabel))
-            if self.viewModel.podOk, let basalState = self.viewModel.basalDeliveryState, case .suspended = basalState {
+            if self.viewModel.podOk, let basalState = self.viewModel.basalDeliveryState, basalState.isSuspendedOrResuming {
                 HStack(alignment: .center) {
                     Image(systemName: "pause.circle.fill")
                         .font(.system(size: 34))
