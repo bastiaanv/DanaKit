@@ -16,6 +16,7 @@ public struct PodDetails {
     var bleFirmwareVersion: String
     var totalDelivery: Double?
     var lastStatus: Date?
+    var fault: FaultEventCode?
 }
 
 struct PodDetailsView: View {
@@ -63,6 +64,10 @@ struct PodDetailsView: View {
             row(LocalizedString("Firmware Version", comment: "description label for firmware version pod details row"), value: podDetails.firmwareVersion)
             row(LocalizedString("Total Delivery", comment: "description label for total delivery pod details row"), value: totalDeliveryText)
             row(LocalizedString("Last Status", comment: "description label for last status date pod details row"), value: lastStatusText)
+            if let fault = podDetails.fault {
+                row(LocalizedString("Fault", comment: "description label for last status date pod details row"), value: fault.localizedDescription)
+                row(LocalizedString("Fault Code", comment: "description label for last status date pod details row"), value: String(format: "0x%02x", fault.rawValue))
+            }
         }
         .navigationBarTitle(Text(LocalizedString("Device Details", comment: "title for device details page")), displayMode: .automatic)
     }

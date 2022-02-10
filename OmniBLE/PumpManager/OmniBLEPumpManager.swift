@@ -289,6 +289,13 @@ extension OmniBLEPumpManager {
             return .active(.distantPast)
         }
 
+        switch podCommState {
+        case .fault:
+            return .active(.distantPast)
+        default:
+            break
+        }
+
         switch state.suspendEngageState {
         case .engaging:
             return .suspending
@@ -480,7 +487,8 @@ extension OmniBLEPumpManager {
             firmwareVersion: podState.firmwareVersion,
             bleFirmwareVersion: podState.bleFirmwareVersion,
             totalDelivery: podState.lastInsulinMeasurements?.delivered,
-            lastStatus: podState.lastInsulinMeasurements?.validTime
+            lastStatus: podState.lastInsulinMeasurements?.validTime,
+            fault: podState.fault?.faultEventCode
         )
     }
 

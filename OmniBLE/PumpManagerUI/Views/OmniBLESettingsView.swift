@@ -48,6 +48,7 @@ struct OmniBLESettingsView: View  {
     func timeComponent(value: Int, units: String) -> some View {
         Group {
             Text(String(value)).font(.system(size: 28)).fontWeight(.heavy)
+                .foregroundColor(viewModel.podOk ? .primary : .secondary)
             Text(units).foregroundColor(.secondary)
         }
     }
@@ -92,16 +93,15 @@ struct OmniBLESettingsView: View  {
     }
     
     var deliveryStatus: some View {
-        // podOK is true at this point. Thus there will be a basalDeliveryState
         VStack(alignment: .leading, spacing: 5) {
             Text(deliverySectionTitle)
                 .foregroundColor(Color(UIColor.secondaryLabel))
-            if self.viewModel.podOk, let basalState = self.viewModel.basalDeliveryState, basalState.isSuspendedOrResuming {
+            if viewModel.podOk, viewModel.isSuspendedOrResuming {
                 HStack(alignment: .center) {
                     Image(systemName: "pause.circle.fill")
                         .font(.system(size: 34))
                         .fixedSize()
-                        .foregroundColor(suspendResumeButtonColor(for: basalState))
+                        .foregroundColor(viewModel.suspendResumeButtonColor(guidanceColors: guidanceColors))
                     FrameworkLocalText("Insulin\nSuspended", comment: "Text shown in insulin delivery space when insulin suspended")
                         .fontWeight(.bold)
                         .fixedSize()
@@ -160,7 +160,14 @@ struct OmniBLESettingsView: View  {
             Text(LocalizedString("Insulin Remaining", comment: "Header for insulin remaining on pod settings screen"))
                 .foregroundColor(Color(UIColor.secondaryLabel))
             HStack {
-                if let reservoirLevel = viewModel.reservoirLevel, let reservoirLevelHighlightState = viewModel.reservoirLevelHighlightState {
+                if let podError = viewModel.podError {
+                    Image(systemName: "exclamationmark.circle.fill")
+                        .font(.system(size: 34))
+                        .fixedSize()
+                        .foregroundColor(guidanceColors.critical)
+
+                    Text(podError).fontWeight(.bold)
+                } else if let reservoirLevel = viewModel.reservoirLevel, let reservoirLevelHighlightState = viewModel.reservoirLevelHighlightState {
                     reservoir(filledPercent: CGFloat(reservoirLevel.percentage), fillColor: reservoirColor(for: reservoirLevelHighlightState))
                     Text(viewModel.reservoirText(for: reservoirLevel))
                         .font(.system(size: 28))
@@ -178,35 +185,8 @@ struct OmniBLESettingsView: View  {
             }
         }
     }
-    
-    func suspendResumeButtonColor(for basalDeliveryState: PumpManagerStatus.BasalDeliveryState) -> Color {
-        guard viewModel.podOk else {
-            return Color.secondary
-        }
-        switch basalDeliveryState {
-        case .active, .tempBasal, .cancelingTempBasal, .initiatingTempBasal:
-            return .accentColor
-        case .suspending, .resuming:
-            return Color.secondary
-        case .suspended:
-            return guidanceColors.warning
-        }
-    }
-    
-    func suspendResumeActionColor(for basalDeliveryState: PumpManagerStatus.BasalDeliveryState) -> Color {
-        guard viewModel.podOk else {
-            return Color.secondary
-        }
-        switch basalDeliveryState {
-        case .suspending, .resuming:
-            return Color.secondary
-        default:
-            return Color.accentColor
-        }
-    }
 
-    
-    func suspendResumeRow(for basalState: PumpManagerStatus.BasalDeliveryState) -> some View {
+    func suspendResumeRow() -> some View {
         HStack {
             Button(action: {
                 self.suspendResumeTapped()
@@ -214,16 +194,16 @@ struct OmniBLESettingsView: View  {
                 HStack {
                     Image(systemName: "pause.circle.fill")
                         .font(.system(size: 22))
-                        .foregroundColor(suspendResumeButtonColor(for: basalState))
-                    Text(basalState.suspendResumeActionText)
-                        .foregroundColor(suspendResumeActionColor(for: basalState))
+                        .foregroundColor(viewModel.suspendResumeButtonColor(guidanceColors: guidanceColors))
+                    Text(viewModel.suspendResumeActionText)
+                        .foregroundColor(viewModel.suspendResumeActionColor())
                 }
             }
             .actionSheet(isPresented: $showSuspendOptions) {
                 suspendOptionsActionSheet
             }
             Spacer()
-            if basalState.transitioning {
+            if viewModel.basalTransitioning {
                 ActivityIndicator(isAnimating: .constant(true), style: .medium)
             }
         }
@@ -248,7 +228,7 @@ struct OmniBLESettingsView: View  {
     var body: some View {
         List {
             Section() {
-                VStack {
+                VStack(alignment: .leading) {
                     headerImage
                     
                     lifecycleProgress
@@ -257,6 +237,11 @@ struct OmniBLESettingsView: View  {
                         deliveryStatus
                         Spacer()
                         reservoirStatus
+                    }
+                    if let faultAction = viewModel.faultAction {
+                        Divider()
+                        Text(faultAction)
+                            .font(Font.footnote.weight(.semibold))
                     }
                 }
                 if let notice = viewModel.notice {
@@ -270,7 +255,7 @@ struct OmniBLESettingsView: View  {
             }
             
             Section(header: SectionHeader(label: LocalizedString("Activity", comment: "Section header for activity section"))) {
-                suspendResumeRow(for: self.viewModel.basalDeliveryState ?? .active(Date()))
+                suspendResumeRow()
                     .disabled(!self.viewModel.podOk)
                 if self.viewModel.podOk, case .suspended(let suspendDate) = self.viewModel.basalDeliveryState {
                     HStack {

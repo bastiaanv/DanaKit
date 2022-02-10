@@ -18,7 +18,6 @@ enum PodLifeState {
     // Time since expiry
     case expired
     case podDeactivating
-    case podAlarm(DetailedStatus)
     case noPod
     
     var progress: Double {
@@ -27,13 +26,6 @@ enum PodLifeState {
             return max(0, min(1, (1 - (timeRemaining / Pod.nominalPodLife))))
         case .expired:
             return 1
-        case .podAlarm(let status):
-            switch status.faultEventCode.faultType {
-            case .exceededMaximumPodLife80Hrs:
-                return 1
-            default:
-                return max(0, min(1, (status.faultEventTimeSinceActivation ?? Pod.nominalPodLife) / Pod.nominalPodLife))
-            }
         case .podDeactivating:
             return 1
         case .noPod, .podActivating:
@@ -45,14 +37,6 @@ enum PodLifeState {
         switch self {
         case .expired:
             return guidanceColors.critical
-        case .podAlarm/*(let alarm, _)*/:
-            return guidanceColors.critical
-//            switch alarm?.alarmCode {
-//            case .podExpired:
-//                return guidanceColors.critical
-//            default:
-//                return Color.secondary
-//            }
         case .timeRemaining(let timeRemaining):
             return timeRemaining <= Pod.timeRemainingWarningThreshold ? guidanceColors.warning : insulinTintColor
         default:
@@ -62,7 +46,7 @@ enum PodLifeState {
     
     func labelColor(using guidanceColors: GuidanceColors) -> Color  {
         switch self {
-        case .podAlarm, .expired:
+        case .expired:
             return guidanceColors.critical
         default:
             return .secondary
@@ -80,15 +64,6 @@ enum PodLifeState {
             return LocalizedString("Pod expired", comment: "Label for pod life state when within pod expiration window")
         case .podDeactivating:
             return LocalizedString("Unfinished deactivation", comment: "Label for pod life state when pod not fully deactivated")
-        case .podAlarm(let status):
-            switch status.faultEventCode.faultType {
-            case .reservoirEmpty:
-                return LocalizedString("No Insulin", comment: "Format string for label for pod life state when pod is in alarm state of reservoirEmpty")
-            case .exceededMaximumPodLife80Hrs:
-                return LocalizedString("Pod Expired", comment: "Format string for label for pod life state when pod is in alarm state of exceededMaximumPodLife80Hrs")
-            default:
-                return String(format: LocalizedString("Pod alarm: %1$@", comment: "Format string for label for pod life state when pod is in alarm state (1: The fault description)"), status.faultEventCode.description)
-            }
         case .noPod:
             return LocalizedString("No Pod", comment: "Label for pod life state when no pod paired")
         }

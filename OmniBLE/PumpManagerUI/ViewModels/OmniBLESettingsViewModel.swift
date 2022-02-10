@@ -8,6 +8,7 @@
 
 import SwiftUI
 import LoopKit
+import LoopKitUI
 import HealthKit
 
 
@@ -101,6 +102,9 @@ class OmniBLESettingsViewModel: ObservableObject {
     @Published var reservoirLevelHighlightState: ReservoirLevelHighlightState?
     
     @Published var synchronizingTime: Bool = false
+
+    @Published var podCommState: PodCommState
+
     
     var timeZone: TimeZone {
         return pumpManager.status.timeZone
@@ -116,6 +120,16 @@ class OmniBLESettingsViewModel: ObservableObject {
     
     var isClockOffset: Bool {
         return pumpManager.isClockOffset
+    }
+
+    var faultAction: String? {
+        if case .fault = podCommState {
+            return LocalizedString("Insulin delivery stopped. Change Pod now.", comment: "The action string on pod status page when pod faulted")
+        } else if let podTimeRemaining = pumpManager.podTimeRemaining, podTimeRemaining < 0 {
+            return LocalizedString("Change Pod now. Insulin delivery will stop 8 hours after the Pod has expired or when no more insulin remains.", comment: "The action string on pod status page when pod expired")
+        } else {
+            return nil
+        }
     }
     
     var notice: DashSettingsNotice? {
@@ -180,6 +194,7 @@ class OmniBLESettingsViewModel: ObservableObject {
         expirationReminderDate = self.pumpManager.scheduledExpirationReminder
         expirationReminderDefault = Int(self.pumpManager.defaultExpirationReminderOffset.hours)
         lowReservoirAlertValue = Int(self.pumpManager.state.lowReservoirReminderValue)
+        podCommState = self.pumpManager.podCommState
         pumpManager.addPodStateObserver(self, queue: DispatchQueue.main)
         
         // Trigger refresh
@@ -212,8 +227,7 @@ class OmniBLESettingsViewModel: ObservableObject {
     }
     
     func suspendDelivery(duration: TimeInterval) {
-        // TODO: add reminder setting
-        pumpManager.suspendDelivery() { (error) in
+        pumpManager.suspendDelivery(withSuspendReminders: duration) { (error) in
             DispatchQueue.main.async {
                 if let error = error {
                     self.activeAlert = .suspendError(error)
@@ -271,13 +285,32 @@ class OmniBLESettingsViewModel: ObservableObject {
     
     var podOk: Bool {
         guard basalDeliveryState != nil else { return false }
-        
-        switch lifeState {
-        case .noPod, .podAlarm, .podActivating, .podDeactivating:
+
+        switch podCommState {
+        case .noPod, .activating, .deactivating, .fault:
             return false
         default:
             return true
         }
+    }
+
+    var podError: String? {
+        switch podCommState {
+        case .fault(let status):
+            switch status.faultEventCode.faultType {
+            case .reservoirEmpty:
+                return LocalizedString("No Insulin", comment: "Error message for reservoir view when reservoir empty")
+            case .exceededMaximumPodLife80Hrs:
+                return LocalizedString("Pod Expired", comment: "Error message for reservoir view when pod expired")
+            case .occluded, .occlusionCheckStartup1, .occlusionCheckStartup2, .occlusionCheckTimeouts1, .occlusionCheckTimeouts2, .occlusionCheckTimeouts3, .occlusionCheckPulseIssue, .occlusionCheckBolusProblem, .occlusionCheckAboveThreshold, .occlusionCheckValueTooHigh:
+                return LocalizedString("Pod Occlusion", comment: "Error message for reservoir view when pod occlusion checks failed")
+            default:
+                return LocalizedString("Pod Error", comment: "Error message for reservoir view during general pod fault")
+            }
+        default:
+            return nil
+        }
+
     }
     
     func reservoirText(for level: ReservoirLevel) -> String {
@@ -293,6 +326,70 @@ class OmniBLESettingsViewModel: ObservableObject {
             return reservoirVolumeFormatter.string(from: quantity, for: .internationalUnit()) ?? ""
         }
     }
+
+    var suspendResumeActionText: String {
+        let defaultText = LocalizedString("Suspend Insulin Delivery", comment: "Text for suspend resume button when insulin delivery active")
+
+        guard podOk else {
+            return defaultText
+        }
+
+        switch basalDeliveryState {
+        case .suspending:
+            return LocalizedString("Suspending insulin delivery...", comment: "Text for suspend resume button when insulin delivery is suspending")
+        case .suspended:
+            return LocalizedString("Tap to Resume Insulin Delivery", comment: "Text for suspend resume button when insulin delivery is suspended")
+        case .resuming:
+            return LocalizedString("Resuming insulin delivery...", comment: "Text for suspend resume button when insulin delivery is resuming")
+        default:
+            return defaultText
+        }
+    }
+
+    var basalTransitioning: Bool {
+        switch basalDeliveryState {
+        case .suspending, .resuming:
+            return true
+        default:
+            return false
+        }
+    }
+
+    func suspendResumeButtonColor(guidanceColors: GuidanceColors) -> Color {
+        guard podOk else {
+            return Color.secondary
+        }
+        switch basalDeliveryState {
+        case .suspending, .resuming:
+            return Color.secondary
+        case .suspended:
+            return guidanceColors.warning
+        default:
+            return .accentColor
+        }
+    }
+
+    func suspendResumeActionColor() -> Color {
+        guard podOk else {
+            return Color.secondary
+        }
+        switch basalDeliveryState {
+        case .suspending, .resuming:
+            return Color.secondary
+        default:
+            return Color.accentColor
+        }
+    }
+
+    var isSuspendedOrResuming: Bool {
+        switch basalDeliveryState {
+        case .suspended, .resuming:
+            return true
+        default:
+            return false
+        }
+    }
+
 }
 
 extension OmniBLESettingsViewModel: PodStateObserver {
@@ -304,6 +401,7 @@ extension OmniBLESettingsViewModel: PodStateObserver {
         activatedAt = state?.activatedAt
         reservoirLevelHighlightState = self.pumpManager.reservoirLevelHighlightState
         expirationReminderDate = self.pumpManager.scheduledExpirationReminder
+        podCommState = self.pumpManager.podCommState
     }
 }
 
@@ -311,7 +409,13 @@ extension OmniBLEPumpManager {
     var lifeState: PodLifeState {
         switch podCommState {
         case .fault(let status):
-            return .podAlarm(status)
+            switch status.faultEventCode.faultType {
+            case .exceededMaximumPodLife80Hrs:
+                return .expired
+            default:
+                return .timeRemaining(Pod.nominalPodLife - (status.faultEventTimeSinceActivation ?? Pod.nominalPodLife))
+            }
+
         case .noPod:
             return .noPod
         case .activating:
@@ -343,39 +447,6 @@ extension OmniBLEPumpManager {
             case .suspended, .none:
                 return nil
             }
-        }
-    }
-}
-
-extension PumpManagerStatus.BasalDeliveryState {
-    var suspendResumeActionText: String {
-        switch self {
-        case .active, .tempBasal, .cancelingTempBasal, .initiatingTempBasal:
-            return LocalizedString("Suspend Insulin Delivery", comment: "Text for suspend resume button when insulin delivery active")
-        case .suspending:
-            return LocalizedString("Suspending insulin delivery...", comment: "Text for suspend resume button when insulin delivery is suspending")
-        case .suspended:
-            return LocalizedString("Tap to Resume Insulin Delivery", comment: "Text for suspend resume button when insulin delivery is suspended")
-        case .resuming:
-            return LocalizedString("Resuming insulin delivery...", comment: "Text for suspend resume button when insulin delivery is resuming")
-        }
-    }
-    
-    var transitioning: Bool {
-        switch self {
-        case .suspending, .resuming:
-            return true
-        default:
-            return false
-        }
-    }
-
-    var isSuspendedOrResuming: Bool {
-        switch self {
-        case .suspended, .resuming:
-            return true
-        default:
-            return false
         }
     }
 }
