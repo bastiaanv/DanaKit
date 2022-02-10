@@ -825,8 +825,11 @@ extension OmniBLEPumpManager {
                         }
                     }
 
+                    let expiration = self.podExpiresAt ?? Date().addingTimeInterval(Pod.nominalPodLife)
+                    let timeUntilExpirationReminder = expiration.addingTimeInterval(-self.state.defaultExpirationReminderOffset).timeIntervalSince(self.dateGenerator())
+
                     let alerts: [PodAlert] = [
-                        .expirationReminder(self.state.defaultExpirationReminderOffset),
+                        .expirationReminder(timeUntilExpirationReminder),
                         .lowReservoir(self.state.lowReservoirReminderValue)
                     ]
 
