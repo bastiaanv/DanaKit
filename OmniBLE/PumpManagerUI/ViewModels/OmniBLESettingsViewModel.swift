@@ -35,7 +35,9 @@ class OmniBLESettingsViewModel: ObservableObject {
     @Published var lifeState: PodLifeState
     
     @Published var activatedAt: Date?
-    
+
+    @Published var expiresAt: Date?
+
     @Published var changingConfirmationBeeps: Bool = false
 
     var confirmationBeeps: Bool {
@@ -53,8 +55,8 @@ class OmniBLESettingsViewModel: ObservableObject {
     }
     
     var expiresAtString: String {
-        if let activatedAt = activatedAt {
-            return dateFormatter.string(from: activatedAt + Pod.nominalPodLife)
+        if let expiresAt = expiresAt {
+            return dateFormatter.string(from: expiresAt)
         } else {
             return "—"
         }
@@ -187,6 +189,7 @@ class OmniBLESettingsViewModel: ObservableObject {
         
         lifeState = pumpManager.lifeState
         activatedAt = pumpManager.podActivatedAt
+        expiresAt = pumpManager.expiresAt
         basalDeliveryState = pumpManager.status.basalDeliveryState
         basalDeliveryRate = self.pumpManager.basalDeliveryRate
         reservoirLevel = self.pumpManager.reservoirLevel
@@ -399,6 +402,7 @@ extension OmniBLESettingsViewModel: PodStateObserver {
         basalDeliveryRate = self.pumpManager.basalDeliveryRate
         reservoirLevel = self.pumpManager.reservoirLevel
         activatedAt = state?.activatedAt
+        expiresAt = state?.expiresAt
         reservoirLevelHighlightState = self.pumpManager.reservoirLevelHighlightState
         expirationReminderDate = self.pumpManager.scheduledExpirationReminder
         podCommState = self.pumpManager.podCommState

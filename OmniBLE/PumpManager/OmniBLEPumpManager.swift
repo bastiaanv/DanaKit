@@ -379,9 +379,8 @@ extension OmniBLEPumpManager {
 
     // If time remaining is negative, the pod has been expired for that amount of time.
     public var podTimeRemaining: TimeInterval? {
-        guard let activationTime = podActivatedAt else { return nil }
-        let timeActive = dateGenerator().timeIntervalSince(activationTime)
-        return Pod.nominalPodLife - timeActive
+        guard let expiresAt = state.podState?.expiresAt else { return nil }
+        return expiresAt.timeIntervalSince(dateGenerator())
     }
 
     private var shouldWarnPodEOL: Bool {

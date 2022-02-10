@@ -180,6 +180,7 @@ public struct PodState: RawRepresentable, Equatable, CustomDebugStringConvertibl
             // The computed expiresAt time is earlier than or more than a minute later than the current expiresAt time,
             // so use the computed expiresAt time instead to handle Pod clock drift and/or system time changes issues.
             // The more than a minute later test prevents oscillation of expiresAt based on the timing of the responses.
+            // TODO: A significant deviation expiresAt from activatedAt + nominalPodLife should generate a critical alert
             self.expiresAt = expiresAtComputed
         }
         return now

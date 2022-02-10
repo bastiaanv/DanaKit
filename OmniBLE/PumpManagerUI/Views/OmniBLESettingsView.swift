@@ -75,7 +75,7 @@ struct OmniBLESettingsView: View  {
                                     LocalizedString("minutes", comment: "Unit for plural minutes in pod life remaining"))
                 }
             }
-            ProgressView(progress: CGFloat(self.viewModel.lifeState.progress)).accentColor(self.viewModel.lifeState.progressColor(insulinTintColor: insulinTintColor, guidanceColors: guidanceColors))
+            ProgressView(progress: CGFloat(self.viewModel.lifeState.progress)).accentColor(self.viewModel.lifeState.progressColor(guidanceColors: guidanceColors))
         }
     }
     

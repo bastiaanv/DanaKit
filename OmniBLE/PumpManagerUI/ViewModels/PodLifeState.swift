@@ -33,12 +33,12 @@ enum PodLifeState {
         }
     }
     
-    func progressColor(insulinTintColor: Color, guidanceColors: GuidanceColors) -> Color {
+    func progressColor(guidanceColors: GuidanceColors) -> Color {
         switch self {
         case .expired:
             return guidanceColors.critical
         case .timeRemaining(let timeRemaining):
-            return timeRemaining <= Pod.timeRemainingWarningThreshold ? guidanceColors.warning : insulinTintColor
+            return timeRemaining <= Pod.timeRemainingWarningThreshold ? guidanceColors.warning : .accentColor
         default:
             return Color.secondary
         }
