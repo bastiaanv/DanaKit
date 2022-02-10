@@ -276,7 +276,11 @@ struct OmniBLESettingsView: View  {
                 }
                 
                 HStack {
-                    FrameworkLocalText("Pod Expires", comment: "Label for pod expiration row")
+                    if let expiresAt = viewModel.expiresAt, expiresAt < Date() {
+                        FrameworkLocalText("Pod Expired", comment: "Label for pod expiration row, past tense")
+                    } else {
+                        FrameworkLocalText("Pod Expires", comment: "Label for pod expiration row")
+                    }
                     Spacer()
                     Text(self.viewModel.expiresAtString)
                         .foregroundColor(Color.secondary)
