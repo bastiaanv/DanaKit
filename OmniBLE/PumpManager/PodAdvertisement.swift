@@ -16,11 +16,19 @@ struct PodAdvertisement {
     var sequenceNo: UInt32
     var lotNo: UInt64
     var podId: UInt32
+
+    var serviceUUIDs: [CBUUID]
+
+    var pairable: Bool {
+        return serviceUUIDs.count >= 5 && serviceUUIDs[3].uuidString == "FFFF" && serviceUUIDs[4].uuidString == "FFFE"
+    }
     
     init?(_ advertisementData: [String: Any]) {
         guard var serviceUUIDs = advertisementData["kCBAdvDataServiceUUIDs"] as? [CBUUID] else {
             return nil
         }
+
+        self.serviceUUIDs = serviceUUIDs
         
         // For some reason the pod simulator doesn't have two values.
         if serviceUUIDs.count == 7 {

@@ -25,12 +25,6 @@ public class OmniBLE {
 
 extension OmniBLE: CustomDebugStringConvertible {
     public var debugDescription: String {
-        return [
-            "## OmniBLE",
-//            "* sequenceNo: \(String(describing: sequenceNo))",
-//            "* lotNo: \(String(describing: lotNo))",
-//            "* podId: \(String(describing: podId))",
-//            "* state: \(String(reflecting: state))",
-        ].joined(separator: "\n")
+        return "OmniBLE - advertisement: \(String(describing: advertisement))"
     }
 }
