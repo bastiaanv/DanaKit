@@ -891,10 +891,10 @@ extension OmniBLEPumpManager {
             return
         }
 
-        self.getPodStatus(storeDosesOnSuccess: false, emitConfirmationBeep: emitConfirmationBeep, completion: completion)
+        self.getPodStatus(emitConfirmationBeep: emitConfirmationBeep, completion: completion)
     }
 
-    public func getPodStatus(storeDosesOnSuccess: Bool, emitConfirmationBeep: Bool, completion: ((_ result: PumpManagerResult<StatusResponse>) -> Void)? = nil) {
+    public func getPodStatus(emitConfirmationBeep: Bool, completion: ((_ result: PumpManagerResult<StatusResponse>) -> Void)? = nil) {
 
         podComms.runSession(withName: "Get pod status") { (result) in
             do {
@@ -902,11 +902,9 @@ extension OmniBLEPumpManager {
                 case .success(let session):
                     let beepType: BeepConfigType? = self.confirmationBeeps && emitConfirmationBeep ? .bipBip : nil
                     let status = try session.getStatus(confirmationBeepType: beepType)
-                    if storeDosesOnSuccess {
-                        session.dosesForStorage({ (doses) -> Bool in
-                            self.store(doses: doses, in: session)
-                        })
-                    }
+                    session.dosesForStorage({ (doses) -> Bool in
+                        self.store(doses: doses, in: session)
+                    })
                     completion?(.success(status))
                 case .failure(let error):
                     self.evaluateStatus() 
@@ -1625,7 +1623,7 @@ extension OmniBLEPumpManager: PumpManager {
             return // No active pod
         case true?:
             log.default("Fetching status because pumpData is too old")
-            getPodStatus(storeDosesOnSuccess: true, emitConfirmationBeep: false) { (response) in
+            getPodStatus(emitConfirmationBeep: false) { (response) in
                 completion?(self.lastSync)
             }
         case false?:

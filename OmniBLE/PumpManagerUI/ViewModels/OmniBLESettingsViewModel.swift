@@ -207,7 +207,7 @@ class OmniBLESettingsViewModel: ObservableObject {
         pumpManager.addPodStateObserver(self, queue: DispatchQueue.main)
         
         // Trigger refresh
-        pumpManager.getPodStatus(storeDosesOnSuccess: false, emitConfirmationBeep: false) { _ in }
+        pumpManager.getPodStatus(emitConfirmationBeep: false) { _ in }
     }
     
     func changeTimeZoneTapped() {
