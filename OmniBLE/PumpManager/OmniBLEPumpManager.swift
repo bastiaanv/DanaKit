@@ -224,9 +224,20 @@ public class OmniBLEPumpManager: DeviceManager {
     
     // Not persisted
     var provideHeartbeat: Bool = false
+
+    private var lastHeartbeat: Date = .distantPast
     
     public func setMustProvideBLEHeartbeat(_ mustProvideBLEHeartbeat: Bool) {
         provideHeartbeat = mustProvideBLEHeartbeat
+    }
+
+    private func issueHeartbeatIfNeeded() {
+        if self.provideHeartbeat, dateGenerator().timeIntervalSince(lastHeartbeat) > .minutes(2) {
+            self.pumpDelegate.notify { (delegate) in
+                delegate?.pumpManagerBLEHeartbeatDidFire(self)
+            }
+            self.lastHeartbeat = Date()
+        }
     }
 
     private let pumpDelegate = WeakSynchronizedDelegate<PumpManagerDelegate>()
@@ -910,6 +921,7 @@ extension OmniBLEPumpManager {
                     self.evaluateStatus() 
                     throw error
                 }
+                self.issueHeartbeatIfNeeded()
             } catch let error {
                 completion?(.failure(.communication(error as? LocalizedError)))
                 self.log.error("Failed to fetch pod status: %{public}@", String(describing: error))
@@ -2183,6 +2195,7 @@ extension OmniBLEPumpManager: MessageLogger {
 }
 
 extension OmniBLEPumpManager: PodCommsDelegate {
+
     func podCommsDidEstablishSession(_ podComms: PodComms) {
 
         podComms.runSession(withName: "Post-connect status fetch") { result in
@@ -2193,11 +2206,7 @@ extension OmniBLEPumpManager: PodCommsDelegate {
                 session.dosesForStorage() { (doses) -> Bool in
                     return self.store(doses: doses, in: session)
                 }
-                if self.provideHeartbeat {
-                    self.pumpDelegate.notify { (delegate) in
-                        delegate?.pumpManagerBLEHeartbeatDidFire(self)
-                    }
-                }
+                self.issueHeartbeatIfNeeded()
             case .failure:
                 // Errors can be ignored here.
                 break
