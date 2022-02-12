@@ -124,9 +124,15 @@ class OmniBLESettingsViewModel: ObservableObject {
         return pumpManager.isClockOffset
     }
 
-    var faultAction: String? {
+    var isPodDataStale: Bool {
+        return Date().timeIntervalSince(pumpManager.lastSync ?? .distantPast) > .minutes(12)
+    }
+
+    var recoveryText: String? {
         if case .fault = podCommState {
             return LocalizedString("Insulin delivery stopped. Change Pod now.", comment: "The action string on pod status page when pod faulted")
+        } else if isPodDataStale {
+            return LocalizedString("Make sure your phone and pod are close to each other. If communication issues persist, move to a new area.", comment: "The action string on pod status page when pod data is stale")
         } else if let podTimeRemaining = pumpManager.podTimeRemaining, podTimeRemaining < 0 {
             return LocalizedString("Change Pod now. Insulin delivery will stop 8 hours after the Pod has expired or when no more insulin remains.", comment: "The action string on pod status page when pod expired")
         } else {
@@ -309,6 +315,12 @@ class OmniBLESettingsViewModel: ObservableObject {
                 return LocalizedString("Pod Occlusion", comment: "Error message for reservoir view when pod occlusion checks failed")
             default:
                 return LocalizedString("Pod Error", comment: "Error message for reservoir view during general pod fault")
+            }
+        case .active:
+            if isPodDataStale {
+                return LocalizedString("No Data", comment: "Error message for reservoir view during general pod fault")
+            } else {
+                return nil
             }
         default:
             return nil

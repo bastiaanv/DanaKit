@@ -238,7 +238,7 @@ struct OmniBLESettingsView: View  {
                         Spacer()
                         reservoirStatus
                     }
-                    if let faultAction = viewModel.faultAction {
+                    if let faultAction = viewModel.recoveryText {
                         Divider()
                         Text(faultAction)
                             .font(Font.footnote.weight(.semibold))

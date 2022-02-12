@@ -137,16 +137,37 @@ public class OmniBLEPumpManager: DeviceManager {
         })
     }
 
+    // Status can change even when state does not, because some status changes
+    // purely based on time. This provides a mechanism to evaluate status changes
+    // as time progresses and trigger status updates to clients.
+    private func evaluateStatus() {
+        setState { state in
+            // status is evaluated in the setState call
+        }
+    }
+
     private func setStateWithResult<ReturnType>(_ changes: (_ state: inout OmniBLEPumpManagerState) -> ReturnType) -> ReturnType {
         var oldValue: OmniBLEPumpManagerState!
         var returnType: ReturnType!
+        var shouldNotifyStatusUpdate = false
+        var oldStatus: PumpManagerStatus?
+
         let newValue = lockedState.mutate { (state) in
             oldValue = state
-            returnType = changes(&state)
-        }
+            let oldStatusEvaluationDate = state.lastStatusChange
+            let oldHighlight = buildPumpStatusHighlight(for: oldValue, andDate: oldStatusEvaluationDate)
+            oldStatus = status(for: oldValue)
 
-        guard oldValue != newValue else {
-            return returnType
+            returnType = changes(&state)
+
+            let newStatusEvaluationDate = Date()
+            let newStatus = status(for: state)
+            let newHighlight = buildPumpStatusHighlight(for: state, andDate: newStatusEvaluationDate)
+
+            if oldStatus != newStatus || oldHighlight != newHighlight {
+                shouldNotifyStatusUpdate = true
+                state.lastStatusChange = newStatusEvaluationDate
+            }
         }
 
         if oldValue.podState != newValue.podState {
@@ -164,19 +185,13 @@ public class OmniBLEPumpManager: DeviceManager {
             }
         }
 
-        let oldHighlight = buildPumpStatusHighlight(for: oldValue)
-        let newHiglight = buildPumpStatusHighlight(for: newValue)
-
         // Ideally we ensure that oldValue.rawValue != newValue.rawValue, but the types aren't
         // defined as equatable
         pumpDelegate.notify { (delegate) in
             delegate?.pumpManagerDidUpdateState(self)
         }
 
-        let oldStatus = status(for: oldValue)
-        let newStatus = status(for: newValue)
-
-        if oldStatus != newStatus || oldHighlight != newHiglight {
+        if let oldStatus = oldStatus, shouldNotifyStatusUpdate {
             notifyStatusObservers(oldStatus: oldStatus)
         }
 
@@ -289,7 +304,7 @@ extension OmniBLEPumpManager {
             return .active(.distantPast)
         }
 
-        switch podCommState {
+        switch podCommState(for: state) {
         case .fault:
             return .active(.distantPast)
         default:
@@ -334,6 +349,8 @@ extension OmniBLEPumpManager {
         case .disengaging:
             return .canceling
         case .stable:
+            // TODO: need to evaluate isFinished at a particular date, instead of now()
+            // as this function is called for old states, to compare to current state
             if let bolus = podState.unfinalizedBolus, !bolus.isFinished {
                 return .inProgress(DoseEntry(bolus))
             }
@@ -491,7 +508,7 @@ extension OmniBLEPumpManager {
         )
     }
 
-    public func buildPumpStatusHighlight(for state: OmniBLEPumpManagerState) -> PumpManagerStatus.PumpStatusHighlight? {
+    public func buildPumpStatusHighlight(for state: OmniBLEPumpManagerState, andDate date: Date = Date()) -> PumpManagerStatus.PumpStatusHighlight? {
         if state.pendingCommand != nil {
             return PumpManagerStatus.PumpStatusHighlight(localizedMessage: NSLocalizedString("Comms Issue", comment: "Status highlight that delivery is uncertain."),
                                                          imageName: "exclamationmark.circle.fill",
@@ -541,6 +558,11 @@ extension OmniBLEPumpManager {
                     localizedMessage: NSLocalizedString("Insulin Suspended", comment: "Status highlight that insulin delivery was suspended."),
                     imageName: "pause.circle.fill",
                     state: .warning)
+            } else if date.timeIntervalSince(state.lastPumpDataReportDate ?? .distantPast) > .minutes(12) {
+                return PumpManagerStatus.PumpStatusHighlight(
+                    localizedMessage: NSLocalizedString("No Data", comment: "Status highlight when communications with the pod haven't happened recently."),
+                    imageName: "exclamationmark.circle.fill",
+                    state: .critical)
             }
             return nil
         }
@@ -887,6 +909,7 @@ extension OmniBLEPumpManager {
                     }
                     completion?(.success(status))
                 case .failure(let error):
+                    self.evaluateStatus() 
                     throw error
                 }
             } catch let error {

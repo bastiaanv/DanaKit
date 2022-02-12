@@ -46,7 +46,12 @@ public struct OmniBLEPumpManagerState: RawRepresentable, Equatable {
     public var alertsWithPendingAcknowledgment: Set<PumpManagerAlert>
 
     public var acknowledgedTimeOffsetAlert: Bool
-    
+
+    internal var lastPumpDataReportDate: Date?
+
+    internal var insulinType: InsulinType?
+
+
     // Indicates that the user has completed initial configuration
     // which means they have configured any parameters, but may not have paired a pod yet.
     public var initialConfigurationCompleted: Bool = false
@@ -74,10 +79,8 @@ public struct OmniBLEPumpManagerState: RawRepresentable, Equatable {
 
     internal var tempBasalEngageState: EngageablePumpState = .stable
 
-    internal var lastPumpDataReportDate: Date?
-    
-    internal var insulinType: InsulinType?
-    
+    internal var lastStatusChange: Date = .distantPast
+
     // MARK: -
 
     public init(podState: PodState?, timeZone: TimeZone, basalSchedule: BasalSchedule, controllerId: UInt32? = nil, podId: UInt32? = nil, insulinType: InsulinType?) {
@@ -187,6 +190,10 @@ public struct OmniBLEPumpManagerState: RawRepresentable, Equatable {
         self.initialConfigurationCompleted = rawValue["initialConfigurationCompleted"] as? Bool ?? true
         
         self.acknowledgedTimeOffsetAlert = rawValue["acknowledgedTimeOffsetAlert"] as? Bool ?? false
+
+        if let lastPumpDataReportDate = rawValue["lastPumpDataReportDate"] as? Date {
+            self.lastPumpDataReportDate = lastPumpDataReportDate
+        }
         
         if let rawPendingCommand = rawValue["pendingCommand"] as? PendingCommand.RawValue {
             self.pendingCommand = PendingCommand(rawValue: rawPendingCommand)
@@ -236,6 +243,7 @@ public struct OmniBLEPumpManagerState: RawRepresentable, Equatable {
         value["defaultExpirationReminderOffset"] = defaultExpirationReminderOffset
         value["lowReservoirReminderValue"] = lowReservoirReminderValue
         value["pendingCommand"] = pendingCommand?.rawValue
+        value["lastPumpDataReportDate"] = lastPumpDataReportDate
         return value
     }
 }
