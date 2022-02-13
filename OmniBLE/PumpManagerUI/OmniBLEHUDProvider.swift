@@ -68,6 +68,7 @@ internal class OmniBLEHUDProvider: NSObject, HUDProvider {
 
     func hudDidAppear() {
         updateReservoirView()
+        refresh()
         updateRefreshTimer()
     }
     
