@@ -429,7 +429,12 @@ extension OmniBLEPumpManager {
             case .exceededMaximumPodLife80Hrs:
                 return .expired
             default:
-                return .timeRemaining(Pod.nominalPodLife - (status.faultEventTimeSinceActivation ?? Pod.nominalPodLife))
+                let remaining = Pod.nominalPodLife - (status.faultEventTimeSinceActivation ?? Pod.nominalPodLife)
+                if remaining > 0 {
+                    return .timeRemaining(remaining)
+                } else {
+                    return .expired
+                }
             }
 
         case .noPod:
@@ -452,7 +457,7 @@ extension OmniBLEPumpManager {
     }
     
     var basalDeliveryRate: Double? {
-        if let tempBasal = state.podState?.unfinalizedTempBasal, !tempBasal.isFinished {
+        if let tempBasal = state.podState?.unfinalizedTempBasal, !tempBasal.isFinished() {
             return tempBasal.rate
         } else {
             switch state.podState?.suspendState {

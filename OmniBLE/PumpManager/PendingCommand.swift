@@ -15,7 +15,7 @@ public enum StartProgram: RawRepresentable {
 
     case bolus(volume: Double, automatic: Bool)
     case basalProgram(schedule: BasalSchedule)
-    case tempBasal(unitsPerHour: Double, duration: TimeInterval)
+    case tempBasal(unitsPerHour: Double, duration: TimeInterval, isHighTemp: Bool)
     
     private enum StartProgramType: Int {
         case bolus, basalProgram, tempBasal
@@ -25,20 +25,21 @@ public enum StartProgram: RawRepresentable {
         switch self {
         case .bolus(let volume, let automatic):
             return [
-                "programType": StartProgramType.bolus,
+                "programType": StartProgramType.bolus.rawValue,
                 "volume": volume,
                 "automatic": automatic
             ]
         case .basalProgram(let schedule):
             return [
-                "programType": StartProgramType.basalProgram,
+                "programType": StartProgramType.basalProgram.rawValue,
                 "schedule": schedule.rawValue
             ]
-        case .tempBasal(let unitsPerHour, let duration):
+        case .tempBasal(let unitsPerHour, let duration, let isHighTemp):
             return [
-                "programType": StartProgramType.tempBasal,
+                "programType": StartProgramType.tempBasal.rawValue,
                 "unitsPerHour": unitsPerHour,
-                "duration": duration
+                "duration": duration,
+                "isHighTemp": isHighTemp
             ]
         }
     }
@@ -66,11 +67,12 @@ public enum StartProgram: RawRepresentable {
             self = .basalProgram(schedule: schedule)
         case .tempBasal:
             guard let unitsPerHour = rawValue["unitsPerHour"] as? Double,
-                  let duration = rawValue["duration"] as? TimeInterval else
+                  let duration = rawValue["duration"] as? TimeInterval,
+                  let isHighTemp = rawValue["isHighTemp"] as? Bool else
             {
                 return nil
             }
-            self = .tempBasal(unitsPerHour: unitsPerHour, duration: duration)
+            self = .tempBasal(unitsPerHour: unitsPerHour, duration: duration, isHighTemp: isHighTemp)
         }
     }
     
@@ -80,27 +82,19 @@ public enum StartProgram: RawRepresentable {
             return lhsVolume == rhsVolume && lhsAutomatic == rhsAutomatic
         case (.basalProgram(let lhsSchedule), .basalProgram(let rhsSchedule)):
             return lhsSchedule == rhsSchedule
-        case (.tempBasal(let lhsUnitsPerHour, let lhsDuration), .tempBasal(let rhsUnitsPerHour, let rhsDuration)):
-            return lhsUnitsPerHour == rhsUnitsPerHour && lhsDuration == rhsDuration
+        case (.tempBasal(let lhsUnitsPerHour, let lhsDuration, let lhsIsHighTemp), .tempBasal(let rhsUnitsPerHour, let rhsDuration, let rhsIsHighTemp)):
+            return lhsUnitsPerHour == rhsUnitsPerHour && lhsDuration == rhsDuration && lhsIsHighTemp == rhsIsHighTemp
         default:
             return false
         }
     }
 }
 
-public enum StopProgram: Int {
-    case bolus
-    case tempBasal
-    case stopAll
-}
-
-
-
 public enum PendingCommand: RawRepresentable, Equatable {
     public typealias RawValue = [String: Any]
 
-    case program(StartProgram, Date)
-    case stopProgram(StopProgram, Date)
+    case program(StartProgram, Int, Date)
+    case stopProgram(CancelDeliveryCommand.DeliveryType, Int, Date)
     
     private enum PendingCommandType: Int {
         case startProgram, stopProgram
@@ -108,10 +102,19 @@ public enum PendingCommand: RawRepresentable, Equatable {
     
     public var commandDate: Date {
         switch self {
-        case .program(_, let date):
+        case .program(_, _, let date):
             return date
-        case .stopProgram(_, let date):
+        case .stopProgram(_, _, let date):
             return date
+        }
+    }
+
+    public var sequence: Int {
+        switch self {
+        case .program(_, let sequence, _):
+            return sequence
+        case .stopProgram(_, let sequence, _):
+            return sequence
         }
     }
 
@@ -124,25 +127,27 @@ public enum PendingCommand: RawRepresentable, Equatable {
             return nil
         }
 
+        guard let sequence = rawValue["sequence"] as? Int else {
+            return nil
+        }
+
+
         switch PendingCommandType(rawValue: rawPendingCommandType) {
         case .startProgram?:
             guard let rawUnacknowledgedProgram = rawValue["unacknowledgedProgram"] as? StartProgram.RawValue else {
                 return nil
             }
             if let program = StartProgram(rawValue: rawUnacknowledgedProgram) {
-                self = .program(program, commandDate)
+                self = .program(program, sequence, commandDate)
             } else {
                 return nil
             }
         case .stopProgram?:
-            guard let rawUnacknowledgedStopProgram = rawValue["unacknowledgedStopProgram"] as? StopProgram.RawValue else {
+            guard let rawDeliveryType = rawValue["unacknowledgedStopProgram"] as? CancelDeliveryCommand.DeliveryType.RawValue else {
                 return nil
             }
-            if let stopProgram = StopProgram(rawValue: rawUnacknowledgedStopProgram) {
-                self = .stopProgram(stopProgram, commandDate)
-            } else {
-                return nil
-            }
+            let stopProgram = CancelDeliveryCommand.DeliveryType(rawValue: rawDeliveryType)
+            self = .stopProgram(stopProgram, sequence, commandDate)
         default:
             return nil
         }
@@ -152,13 +157,15 @@ public enum PendingCommand: RawRepresentable, Equatable {
         var rawValue: RawValue = [:]
         
         switch self {
-        case .program(let program, let date):
+        case .program(let program, let sequence, let date):
             rawValue["type"] = PendingCommandType.startProgram.rawValue
             rawValue["date"] = date
+            rawValue["sequence"] = sequence
             rawValue["unacknowledgedProgram"] = program.rawValue
-        case .stopProgram(let stopProgram, let date):
+        case .stopProgram(let stopProgram, let sequence, let date):
             rawValue["type"] = PendingCommandType.stopProgram.rawValue
             rawValue["date"] = date
+            rawValue["sequence"] = sequence
             rawValue["unacknowledgedStopProgram"] = stopProgram.rawValue
         }
         return rawValue
@@ -166,10 +173,10 @@ public enum PendingCommand: RawRepresentable, Equatable {
     
     public static func == (lhs: PendingCommand, rhs: PendingCommand) -> Bool {
         switch(lhs, rhs) {
-        case (.program(let lhsProgram, let lhsDate), .program(let rhsProgram, let rhsDate)):
-            return lhsProgram == rhsProgram && lhsDate == rhsDate
-        case (.stopProgram(let lhsStopProgram, let lhsDate), .stopProgram(let rhsStopProgram, let rhsDate)):
-            return lhsStopProgram == rhsStopProgram && lhsDate == rhsDate
+        case (.program(let lhsProgram, let lhsSequence, let lhsDate), .program(let rhsProgram, let rhsSequence, let rhsDate)):
+            return lhsProgram == rhsProgram && lhsSequence == rhsSequence && lhsDate == rhsDate
+        case (.stopProgram(let lhsStopProgram, let lhsSequence, let lhsDate), .stopProgram(let rhsStopProgram, let rhsSequence, let rhsDate)):
+            return lhsStopProgram == rhsStopProgram && lhsSequence == rhsSequence && lhsDate == rhsDate
         default:
             return false
         }

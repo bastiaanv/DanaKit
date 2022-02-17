@@ -70,6 +70,7 @@ public class PodComms: CustomDebugStringConvertible {
     }
     
     public func forgetCurrentPod() {
+
         if let manager = manager {
             self.log.default("Removing %{public}@ from auto-connect ids", manager.peripheral)
             bluetoothManager.disconnectFromDevice(uuidString: manager.peripheral.identifier.uuidString)

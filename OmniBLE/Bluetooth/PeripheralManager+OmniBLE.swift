@@ -7,16 +7,10 @@
 //
 
 
-protocol MessageResult {
-    
-}
-
-struct MessageSendFailure: MessageResult {
-    var error: Error
-}
-
-struct MessageSendSuccess: MessageResult {
-    
+enum SendMessageResult {
+    case sentWithAcknowledgment
+    case sentWithError(Error)
+    case unsentWithError(Error)
 }
 
 extension PeripheralManager {
@@ -46,12 +40,11 @@ extension PeripheralManager {
         try setNotifyValue(true, for: dataChar, timeout: .seconds(2))
     }
         
-    /// - Throws: PeripheralManagerError
-    func sendMessage(_ message: MessagePacket, _ forEncryption: Bool = false) throws -> MessageResult {
+    func sendMessage(_ message: MessagePacket, _ forEncryption: Bool = false) -> SendMessageResult {
         dispatchPrecondition(condition: .onQueue(queue))
         
-        var result: MessageResult = MessageSendSuccess()
-        
+        var didSend = false
+
         do {
             try sendCommandType(PodCommand.RTS, timeout: 5)
             try readCommandType(PodCommand.CTS, timeout: 5)
@@ -59,7 +52,12 @@ extension PeripheralManager {
             let splitter = PayloadSplitter(payload: message.asData(forEncryption: forEncryption))
             let packets = splitter.splitInPackets()
 
-            for packet in packets {
+            for (index, packet) in packets.enumerated() {
+                // Consider starting the last packet send as the point at which the message may be received by the pod.
+                // A failure after data is actually sent, but before the sendData() returns can still be received.
+                if index == packets.count - 1 {
+                    didSend = true
+                }
                 try sendData(packet.toData(), timeout: 5)
                 try self.peekForNack()
             }
@@ -67,10 +65,13 @@ extension PeripheralManager {
             try readCommandType(PodCommand.SUCCESS, timeout: 5)
         }
         catch {
-            result = MessageSendFailure(error: error)
+            if didSend {
+                return .sentWithError(error)
+            } else {
+                return .unsentWithError(error)
+            }
         }
-
-        return result
+        return .sentWithAcknowledgment
     }
     
     /// - Throws: PeripheralManagerError

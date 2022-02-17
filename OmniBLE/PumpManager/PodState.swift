@@ -74,6 +74,8 @@ public struct PodState: RawRepresentable, Equatable, CustomDebugStringConvertibl
     public var unfinalizedSuspend: UnfinalizedDose?
     public var unfinalizedResume: UnfinalizedDose?
 
+    public var pendingCommand: PendingCommand?
+
     var finalizedDoses: [UnfinalizedDose]
 
     public var dosesToStore: [UnfinalizedDose] {
@@ -205,16 +207,65 @@ public struct PodState: RawRepresentable, Equatable, CustomDebugStringConvertibl
     }
 
     public mutating func finalizeFinishedDoses() {
-        if let bolus = unfinalizedBolus, bolus.isFinished {
+        if let bolus = unfinalizedBolus, bolus.isFinished() {
             finalizedDoses.append(bolus)
             unfinalizedBolus = nil
         }
 
-        if let tempBasal = unfinalizedTempBasal, tempBasal.isFinished {
+        if let tempBasal = unfinalizedTempBasal, tempBasal.isFinished() {
             finalizedDoses.append(tempBasal)
             unfinalizedTempBasal = nil
         }
     }
+
+    // Giving up on pod; we will assume commands failed/succeeded in the direction of positive net delivery
+    mutating func resolveAnyPendingCommandWithUncertainty() {
+        guard let pendingCommand = pendingCommand else {
+            return
+        }
+
+        switch pendingCommand {
+        case .program(let program, _, let commandDate):
+
+            if let dose = program.unfinalizedDose(at: commandDate, withCertainty: .uncertain) {
+                switch dose.doseType {
+                case .bolus:
+                    if dose.isFinished() {
+                        finalizedDoses.append(dose)
+                    } else {
+                        unfinalizedBolus = dose
+                    }
+                case .tempBasal:
+                    // Assume a high temp succeeded, but low temp failed
+                    if case .tempBasal(_, _, let isHighTemp) = program, isHighTemp {
+                        if dose.isFinished() {
+                            finalizedDoses.append(dose)
+                        } else {
+                            unfinalizedTempBasal = dose
+                        }
+                    }
+                case .resume:
+                    finalizedDoses.append(dose)
+                case .suspend:
+                    break // start program is never a suspend
+                }
+            }
+        case .stopProgram(let stopProgram, _, let commandDate):
+            // All stop programs result in reduced delivery, except for stopping a low temp, so we assume all stop
+            // commands failed, except for low temp
+            
+
+            if stopProgram.contains(.tempBasal),
+                let tempBasal = unfinalizedTempBasal,
+                tempBasal.isHighTemp,
+                !tempBasal.isFinished(at: commandDate)
+            {
+                unfinalizedTempBasal?.cancel(at: commandDate)
+            }
+        }
+        self.pendingCommand = nil
+    }
+
     
     private mutating func updateDeliveryStatus(deliveryStatus: DeliveryStatus) {
         finalizeFinishedDoses()
@@ -357,6 +408,12 @@ public struct PodState: RawRepresentable, Equatable, CustomDebugStringConvertibl
         } else {
             self.finalizedDoses = []
         }
+
+        if let rawPendingCommand = rawValue["pendingCommand"] as? PendingCommand.RawValue {
+            self.pendingCommand = PendingCommand(rawValue: rawPendingCommand)
+        } else {
+            self.pendingCommand = nil
+        }
         
         if let rawFault = rawValue["fault"] as? DetailedStatus.RawValue,
            let fault = DetailedStatus(rawValue: rawFault),
@@ -431,45 +488,18 @@ public struct PodState: RawRepresentable, Equatable, CustomDebugStringConvertibl
             "bleIdentifier": bleIdentifier
             ]
         
-        if let unfinalizedBolus = self.unfinalizedBolus {
-            rawValue["unfinalizedBolus"] = unfinalizedBolus.rawValue
-        }
-        
-        if let unfinalizedTempBasal = self.unfinalizedTempBasal {
-            rawValue["unfinalizedTempBasal"] = unfinalizedTempBasal.rawValue
-        }
 
-        if let unfinalizedSuspend = self.unfinalizedSuspend {
-            rawValue["unfinalizedSuspend"] = unfinalizedSuspend.rawValue
-        }
-
-        if let unfinalizedResume = self.unfinalizedResume {
-            rawValue["unfinalizedResume"] = unfinalizedResume.rawValue
-        }
-
-        if let lastInsulinMeasurements = self.lastInsulinMeasurements {
-            rawValue["lastInsulinMeasurements"] = lastInsulinMeasurements.rawValue
-        }
-        
-        if let fault = self.fault {
-            rawValue["fault"] = fault.rawValue
-        }
-
-        if let primeFinishTime = primeFinishTime {
-            rawValue["primeFinishTime"] = primeFinishTime
-        }
-
-        if let activatedAt = activatedAt {
-            rawValue["activatedAt"] = activatedAt
-        }
-
-        if let expiresAt = expiresAt {
-            rawValue["expiresAt"] = expiresAt
-        }
-
-        if let setupUnitsDelivered = setupUnitsDelivered {
-            rawValue["setupUnitsDelivered"] = setupUnitsDelivered
-        }
+        rawValue["unfinalizedBolus"] = unfinalizedBolus?.rawValue
+        rawValue["unfinalizedTempBasal"] = unfinalizedTempBasal?.rawValue
+        rawValue["unfinalizedSuspend"] = unfinalizedSuspend?.rawValue
+        rawValue["unfinalizedResume"] = unfinalizedResume?.rawValue
+        rawValue["pendingCommand"] = pendingCommand?.rawValue
+        rawValue["lastInsulinMeasurements"] = lastInsulinMeasurements?.rawValue
+        rawValue["fault"] = fault?.rawValue
+        rawValue["primeFinishTime"] = primeFinishTime
+        rawValue["activatedAt"] = activatedAt
+        rawValue["expiresAt"] = expiresAt
+        rawValue["setupUnitsDelivered"] = setupUnitsDelivered
 
         if configuredAlerts.count > 0 {
             let rawConfiguredAlerts = Dictionary(uniqueKeysWithValues:
@@ -500,6 +530,7 @@ public struct PodState: RawRepresentable, Equatable, CustomDebugStringConvertibl
             "* unfinalizedSuspend: \(String(describing: unfinalizedSuspend))",
             "* unfinalizedResume: \(String(describing: unfinalizedResume))",
             "* finalizedDoses: \(String(describing: finalizedDoses))",
+            "* pendingCommand: \(String(describing: pendingCommand))",
             "* activeAlerts: \(String(describing: activeAlerts))",
             "* messageTransportState: \(String(describing: messageTransportState))",
             "* setupProgress: \(setupProgress)",

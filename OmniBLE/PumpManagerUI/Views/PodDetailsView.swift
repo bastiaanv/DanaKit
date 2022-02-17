@@ -14,6 +14,7 @@ public struct PodDetails {
     var sequenceNumber: UInt32
     var firmwareVersion: String
     var bleFirmwareVersion: String
+    var deviceName: String
     var totalDelivery: Double?
     var lastStatus: Date?
     var fault: FaultEventCode?
@@ -59,6 +60,7 @@ struct PodDetailsView: View {
     
     var body: some View {
         List {
+            row(LocalizedString("Device Name", comment: "description label for device name pod details row"), value: String(describing: podDetails.deviceName))
             row(LocalizedString("Lot Number", comment: "description label for lot number pod details row"), value: String(describing: podDetails.lotNumber))
             row(LocalizedString("Sequence Number", comment: "description label for sequence number pod details row"), value: String(describing: podDetails.sequenceNumber))
             row(LocalizedString("Firmware Version", comment: "description label for firmware version pod details row"), value: podDetails.firmwareVersion)
@@ -75,6 +77,6 @@ struct PodDetailsView: View {
 
 struct PodDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        PodDetailsView(podDetails: PodDetails(lotNumber: 0x1234, sequenceNumber: 0x1234, firmwareVersion: "1.1.1", bleFirmwareVersion: "2.2.2", totalDelivery: 10, lastStatus: Date()))
+        PodDetailsView(podDetails: PodDetails(lotNumber: 0x1234, sequenceNumber: 0x1234, firmwareVersion: "1.1.1", bleFirmwareVersion: "2.2.2", deviceName: "PreviewPod", totalDelivery: 10, lastStatus: Date()))
     }
 }

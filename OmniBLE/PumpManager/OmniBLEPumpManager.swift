@@ -337,7 +337,7 @@ extension OmniBLEPumpManager {
         case .disengaging:
             return .cancelingTempBasal
         case .stable:
-            if let tempBasal = podState.unfinalizedTempBasal, !tempBasal.isFinished {
+            if let tempBasal = podState.unfinalizedTempBasal, !tempBasal.isFinished() {
                 return .tempBasal(DoseEntry(tempBasal))
             }
             switch podState.suspendState {
@@ -362,7 +362,7 @@ extension OmniBLEPumpManager {
         case .stable:
             // TODO: need to evaluate isFinished at a particular date, instead of now()
             // as this function is called for old states, to compare to current state
-            if let bolus = podState.unfinalizedBolus, !bolus.isFinished {
+            if let bolus = podState.unfinalizedBolus, !bolus.isFinished() {
                 return .inProgress(DoseEntry(bolus))
             }
         }
@@ -513,6 +513,7 @@ extension OmniBLEPumpManager {
             sequenceNumber: podState.lotSeq,
             firmwareVersion: podState.firmwareVersion,
             bleFirmwareVersion: podState.bleFirmwareVersion,
+            deviceName: podComms.manager?.peripheral.name ?? "NA",
             totalDelivery: podState.lastInsulinMeasurements?.delivered,
             lastStatus: podState.lastInsulinMeasurements?.validTime,
             fault: podState.fault?.faultEventCode
@@ -520,7 +521,7 @@ extension OmniBLEPumpManager {
     }
 
     public func buildPumpStatusHighlight(for state: OmniBLEPumpManagerState, andDate date: Date = Date()) -> PumpManagerStatus.PumpStatusHighlight? {
-        if state.pendingCommand != nil {
+        if state.podState?.pendingCommand != nil {
             return PumpManagerStatus.PumpStatusHighlight(localizedMessage: NSLocalizedString("Comms Issue", comment: "Status highlight that delivery is uncertain."),
                                                          imageName: "exclamationmark.circle.fill",
                                                          state: .critical)
@@ -657,6 +658,7 @@ extension OmniBLEPumpManager {
         // TODO: Consider serializing the entire forget-pod path instead of relying on the UI to do it
 
         let state = mutateState { (state) in
+            state.podState?.resolveAnyPendingCommandWithUncertainty()
             state.podState?.finalizeFinishedDoses()
         }
 
@@ -964,7 +966,7 @@ extension OmniBLEPumpManager {
             return
         }
 
-        guard state.podState?.unfinalizedBolus?.isFinished != false else {
+        guard state.podState?.unfinalizedBolus?.isFinished() != false else {
             completion(.state(PodCommsError.unfinalizedBolus))
             return
         }
@@ -998,7 +1000,7 @@ extension OmniBLEPumpManager {
                 return .success(false)
             }
 
-            guard state.podState?.unfinalizedBolus?.isFinished != false else {
+            guard state.podState?.unfinalizedBolus?.isFinished() != false else {
                 return .failure(.deviceState(PodCommsError.unfinalizedBolus))
             }
 
@@ -1027,7 +1029,7 @@ extension OmniBLEPumpManager {
                     switch result {
                     case .certainFailure(let error):
                         throw error
-                    case .uncertainFailure(let error):
+                    case .unacknowledged(let error):
                         throw error
                     case .success:
                         break
@@ -1112,35 +1114,12 @@ extension OmniBLEPumpManager {
         }
     }
 
-    public func testingCommands(completion: @escaping (Error?) -> Void) {
-        // use hasSetupPod so the user can see any fault info and post fault commands can be attempted
-        guard self.hasSetupPod else {
-            completion(OmniBLEPumpManagerError.noPodPaired)
-            return
-        }
-
-        self.podComms.runSession(withName: "Testing Commands") { (result) in
-            switch result {
-            case .success(let session):
-                do {
-                    let beepType: BeepConfigType? = self.confirmationBeeps ? .beepBeepBeep : nil
-                    try session.testingCommands(confirmationBeepType: beepType)
-                    completion(nil)
-                } catch let error {
-                    completion(error)
-                }
-            case .failure(let error):
-                completion(error)
-            }
-        }
-    }
-
     public func playTestBeeps(completion: @escaping (Error?) -> Void) {
         guard self.hasActivePod else {
             completion(OmniBLEPumpManagerError.noPodPaired)
             return
         }
-        guard state.podState?.unfinalizedBolus?.scheduledCertainty == .uncertain || state.podState?.unfinalizedBolus?.isFinished != false else {
+        guard state.podState?.unfinalizedBolus?.scheduledCertainty == .uncertain || state.podState?.unfinalizedBolus?.isFinished() != false else {
             self.log.info("Skipping Play Test Beeps due to bolus still in progress.")
             completion(PodCommsError.unfinalizedBolus)
             return
@@ -1172,7 +1151,7 @@ extension OmniBLEPumpManager {
             completion(.failure(OmniBLEPumpManagerError.noPodPaired))
             return
         }
-        guard state.podState?.isFaulted == true || state.podState?.unfinalizedBolus?.scheduledCertainty == .uncertain || state.podState?.unfinalizedBolus?.isFinished != false else
+        guard state.podState?.isFaulted == true || state.podState?.unfinalizedBolus?.scheduledCertainty == .uncertain || state.podState?.unfinalizedBolus?.isFinished() != false else
         {
             self.log.info("Skipping Read Pulse Log due to bolus still in progress.")
             completion(.failure(PodCommsError.unfinalizedBolus))
@@ -1239,156 +1218,6 @@ extension OmniBLEPumpManager {
             }
         }
     }
-
-    // Reconnected to the pod, and we know program was successful
-    private func pendingCommandSucceeded(pendingCommand: PendingCommand, podStatus: StatusResponse) {
-//        self.mutateState { (state) in
-//            switch pendingCommand {
-//            case .program(let program, let commandDate):
-//                if let dose = program.unfinalizedDose(at: commandDate, withCertainty: .certain) {
-//                    if dose.isFinished {
-//                        state.podState?.finalizedDoses.append(dose)
-//                        if case .resume = dose.doseType {
-//                            state.suspendState = .resumed(commandDate)
-//                        }
-//                    } else {
-//                        switch dose.doseType {
-//                        case .bolus:
-//                            state.unfinalizedBolus = dose
-//                        case .tempBasal:
-//                            state.unfinalizedTempBasal = dose
-//                        default:
-//                            break
-//                        }
-//                    }
-//                    state.updateFromPodStatus(status: podStatus)
-//                }
-//            case .stopProgram(let stopProgram, let commandDate):
-//                var bolusCancel = false
-//                var tempBasalCancel = false
-//                var didSuspend = false
-//                switch stopProgram {
-//                case .bolus:
-//                    bolusCancel = true
-//                case .tempBasal:
-//                    tempBasalCancel = true
-//                case .stopAll:
-//                    bolusCancel = true
-//                    tempBasalCancel = true
-//                    didSuspend = true
-//                }
-//
-//                if bolusCancel, let bolus = state.unfinalizedBolus, !bolus.isFinished(at: commandDate) {
-//                    state.unfinalizedBolus?.cancel(at: commandDate, withRemaining: podStatus.bolusUnitsRemaining)
-//                }
-//                if tempBasalCancel, let tempBasal = state.unfinalizedTempBasal, !tempBasal.isFinished(at: commandDate) {
-//                    state.unfinalizedTempBasal?.cancel(at: commandDate)
-//                }
-//                if didSuspend {
-//                    state.finishedDoses.append(UnfinalizedDose(suspendStartTime: commandDate, scheduledCertainty: .certain))
-//                    state.suspendState = .suspended(commandDate)
-//                }
-//                state.updateFromPodStatus(status: podStatus)
-//            }
-//        }
-//        self.finalizeAndStoreDoses()
-    }
-
-    // Reconnected to the pod, and we know program was not received
-    private func pendingCommandFailed(pendingCommand: PendingCommand, podStatus: StatusResponse) {
-//        // Nothing to do besides update using the pod status, because we already responded to Loop as if the commands failed.
-//        self.mutateState({ (state) in
-//            state.updateFromPodStatus(status: podStatus)
-//        })
-//        self.finalizeAndStoreDoses()
-    }
-
-    // Giving up on pod; we will assume commands failed/succeeded in the direction of positive net delivery
-    private func resolveAnyPendingCommandWithUncertainty() {
-//        guard let pendingCommand = state.pendingCommand else {
-//            return
-//        }
-//
-//        var calendar = Calendar(identifier: .gregorian)
-//        calendar.timeZone = state.timeZone
-//
-//        self.mutateState { (state) in
-//            switch pendingCommand {
-//            case .program(let program, let commandDate):
-//                let scheduledSegmentAtCommandTime = state.basalProgram.currentRate(using: calendar, at: commandDate)
-//
-//                if let dose = program.unfinalizedDose(at: commandDate, withCertainty: .uncertain) {
-//                    switch dose.doseType {
-//                    case .bolus:
-//                        if dose.isFinished(at: dateGenerator()) {
-//                            state.finishedDoses.append(dose)
-//                        } else {
-//                            state.unfinalizedBolus = dose
-//                        }
-//                    case .tempBasal:
-//                        // Assume a high temp succeeded, but low temp failed
-//                        let rate = dose.programmedRate ?? dose.rate
-//                        if rate > scheduledSegmentAtCommandTime.basalRateUnitsPerHour {
-//                            if dose.isFinished(at: dateGenerator()) {
-//                                state.finishedDoses.append(dose)
-//                            } else {
-//                                state.unfinalizedTempBasal = dose
-//                            }
-//                        }
-//                    case .resume:
-//                        state.finishedDoses.append(dose)
-//                    case .suspend:
-//                        break // start program is never a suspend
-//                    }
-//                }
-//            case .stopProgram(let stopProgram, let commandDate):
-//                let scheduledSegmentAtCommandTime = state.basalProgram.currentRate(using: calendar, at: commandDate)
-//
-//                // All stop programs result in reduced delivery, except for stopping a low temp, so we assume all stop
-//                // commands failed, except for low temp
-//                var tempBasalCancel = false
-//
-//                switch stopProgram {
-//                case .tempBasal:
-//                    tempBasalCancel = true
-//                case .stopAll:
-//                    tempBasalCancel = true
-//                default:
-//                    break
-//                }
-//
-//                if tempBasalCancel,
-//                    let tempBasal = state.unfinalizedTempBasal,
-//                    !tempBasal.isFinished(at: commandDate),
-//                    (tempBasal.programmedRate ?? tempBasal.rate) < scheduledSegmentAtCommandTime.basalRateUnitsPerHour
-//                {
-//                    state.unfinalizedTempBasal?.cancel(at: commandDate)
-//                }
-//            }
-//            state.pendingCommand = nil
-//        }
-    }
-
-    public func attemptUnacknowledgedCommandRecovery() {
-//        if let pendingCommand = self.state.pendingCommand {
-//            podCommManager.queryAndClearUnacknowledgedCommand { (result) in
-//                switch result {
-//                case .success(let retryResult):
-//                    if retryResult.hasPendingCommandProgrammed {
-//                        self.pendingCommandSucceeded(pendingCommand: pendingCommand, podStatus: retryResult.status)
-//                    } else {
-//                        self.pendingCommandFailed(pendingCommand: pendingCommand, podStatus: retryResult.status)
-//                    }
-//                    self.mutateState { (state) in
-//                        state.pendingCommand = nil
-//                    }
-//                case .failure:
-//                    break
-//                }
-//            }
-//        }
-    }
-
 }
 
 // MARK: - PumpManager
@@ -1552,7 +1381,7 @@ extension OmniBLEPumpManager: PumpManager {
             switch result {
             case .certainFailure(let error):
                 completion(error)
-            case .uncertainFailure(let error):
+            case .unacknowledged(let error):
                 completion(error)
             case .success:
                 session.dosesForStorage() { (doses) -> Bool in
@@ -1706,7 +1535,7 @@ extension OmniBLEPumpManager: PumpManager {
             }
 
             let beep = self.confirmationBeeps
-            let result = session.bolus(units: enactUnits, acknowledgementBeep: beep, completionBeep: beep)
+            let result = session.bolus(units: enactUnits, automatic: automatic, acknowledgementBeep: beep, completionBeep: beep)
             session.dosesForStorage() { (doses) -> Bool in
                 return self.store(doses: doses, in: session)
             }
@@ -1716,9 +1545,8 @@ extension OmniBLEPumpManager: PumpManager {
                 completion(nil)
             case .certainFailure(let error):
                 completion(.communication(error))
-            case .uncertainFailure(let error):
-                // TODO: Return PumpManagerError.uncertainDelivery and implement recovery
-                completion(.communication(error))
+            case .unacknowledged:
+                completion(.uncertainDelivery)
             }
         }
     }
@@ -1750,7 +1578,7 @@ extension OmniBLEPumpManager: PumpManager {
                     state.bolusEngageState = .disengaging
                 })
 
-                if let bolus = self.state.podState?.unfinalizedBolus, !bolus.isFinished, bolus.scheduledCertainty == .uncertain {
+                if let bolus = self.state.podState?.unfinalizedBolus, !bolus.isFinished(), bolus.scheduledCertainty == .uncertain {
                     let status = try session.getStatus()
 
                     if !status.deliveryStatus.bolusing {
@@ -1765,7 +1593,7 @@ extension OmniBLEPumpManager: PumpManager {
                 switch result {
                 case .certainFailure(let error):
                     throw error
-                case .uncertainFailure(let error):
+                case .unacknowledged(let error):
                     throw error
                 case .success(_, let canceledBolus):
                     session.dosesForStorage() { (doses) -> Bool in
@@ -1807,7 +1635,7 @@ extension OmniBLEPumpManager: PumpManager {
                     throw PodCommsError.podSuspended
                 }
 
-                guard self.state.podState?.unfinalizedBolus?.isFinished != false else {
+                guard self.state.podState?.unfinalizedBolus?.isFinished() != false else {
                     self.log.info("Not enacting temp basal because podState indicates unfinalized bolus in progress.")
                     throw PodCommsError.unfinalizedBolus
                 }
@@ -1820,7 +1648,7 @@ extension OmniBLEPumpManager: PumpManager {
                 switch result {
                 case .certainFailure(let error):
                     throw error
-                case .uncertainFailure(let error):
+                case .unacknowledged(let error):
                     throw error
                 case .success(let cancelTempStatus, _):
                     status = cancelTempStatus
@@ -1855,14 +1683,19 @@ extension OmniBLEPumpManager: PumpManager {
                         state.tempBasalEngageState = .engaging
                     })
 
-                    let result = session.setTempBasal(rate: rate, duration: duration, acknowledgementBeep: false, completionBeep: false)
+                    var calendar = Calendar(identifier: .gregorian)
+                    calendar.timeZone = self.state.timeZone
+                    let scheduledRate = self.state.basalSchedule.currentRate(using: calendar, at: self.dateGenerator())
+                    let isHighTemp = rate > scheduledRate
+
+                    let result = session.setTempBasal(rate: rate, duration: duration, isHighTemp: isHighTemp, acknowledgementBeep: false, completionBeep: false)
                     session.dosesForStorage() { (doses) -> Bool in
                         return self.store(doses: doses, in: session)
                     }
                     switch result {
                     case .success:
                         completion(nil)
-                    case .uncertainFailure(let error):
+                    case .unacknowledged(let error):
                         self.log.error("Temp basal uncertain error: %@", String(describing: error))
                         completion(nil)
                     case .certainFailure(let error):
@@ -2056,7 +1889,7 @@ extension OmniBLEPumpManager: PumpManager {
         let (added, removed) = oldAlerts.compare(to: newAlerts)
         for slot in added {
             if let podAlert = podState.configuredAlerts[slot] {
-                log.default("*** Alert slot triggered: %{public}@", String(describing: slot))
+                log.default("Alert slot triggered: %{public}@", String(describing: slot))
                 if let pumpManagerAlert = getPumpManagerAlert(for: podAlert, slot: slot) {
                     issueAlert(alert: pumpManagerAlert)
                 } else {
@@ -2067,7 +1900,7 @@ extension OmniBLEPumpManager: PumpManager {
             }
         }
         for alert in removed {
-            log.default("*** Alert slot cleared: %{public}@", String(describing: alert))
+            log.default("Alert slot cleared: %{public}@", String(describing: alert))
         }
     }
 
@@ -2218,7 +2051,7 @@ extension OmniBLEPumpManager: PodCommsDelegate {
     func podComms(_ podComms: PodComms, didChange podState: PodState) {
         let (newFault, oldAlerts, newAlerts) = setStateWithResult { (state) -> (DetailedStatus?,AlertSet,AlertSet) in
             // Check for any updates to bolus certainty, and log them
-            if let bolus = state.podState?.unfinalizedBolus, bolus.scheduledCertainty == .uncertain, !bolus.isFinished {
+            if let bolus = state.podState?.unfinalizedBolus, bolus.scheduledCertainty == .uncertain, !bolus.isFinished() {
                 if podState.unfinalizedBolus?.scheduledCertainty == .some(.certain) {
                     self.log.default("Resolved bolus uncertainty: did bolus")
                 } else if podState.unfinalizedBolus == nil {

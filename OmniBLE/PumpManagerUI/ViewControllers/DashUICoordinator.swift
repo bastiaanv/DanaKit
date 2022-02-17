@@ -257,7 +257,7 @@ class DashUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
             hostedView.navigationItem.title = LocalizedString("Setup Complete", comment: "Title for setup complete screen")
             return hostedView
         case .pendingCommandRecovery:
-            if let pendingCommand = pumpManager.state.pendingCommand {
+            if let pendingCommand = pumpManager.state.podState?.pendingCommand {
 
                 let model = DeliveryUncertaintyRecoveryViewModel(appName: appName, uncertaintyStartedAt: pendingCommand.commandDate)
                 model.didRecover = { [weak self] in
@@ -272,7 +272,7 @@ class DashUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
                     }
                 }
                 pumpManager.addStatusObserver(model, queue: DispatchQueue.main)
-                pumpManager.attemptUnacknowledgedCommandRecovery()
+                pumpManager.getPodStatus(emitConfirmationBeep: false) { _ in }
                 
                 let view = DeliveryUncertaintyRecoveryView(model: model)
                 
@@ -339,7 +339,7 @@ class DashUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
     }
     
     private func determineInitialStep() -> DashUIScreen {
-        if pumpManager.state.pendingCommand != nil {
+        if pumpManager.state.podState?.pendingCommand != nil {
             return .pendingCommandRecovery
         } else if pumpManager.podCommState == .activating {
             if pumpManager.podAttachmentConfirmed {
