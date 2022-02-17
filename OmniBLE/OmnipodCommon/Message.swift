@@ -45,19 +45,21 @@ struct Message {
         
         self.expectFollowOnMessage = (b9 & 0b10000000) != 0
         self.sequenceNum = Int((b9 >> 2) & 0b1111)
-        let crc = (UInt16(encodedData[encodedData.count-2]) << 8) + UInt16(encodedData[encodedData.count-1])
-        let msgWithoutCrc = encodedData.prefix(encodedData.count - 2)
-        let computedCrc = UInt16(msgWithoutCrc.crc16())
 
-        let acceptZeroCRC16 = true // needed for pod simulator which doesn't compute a CRC16
-        let ignoreDecodeCRCErrors = true // temp hack to continue running
-        if computedCrc != crc && !(acceptZeroCRC16 && crc == 0) {
-            if (ignoreDecodeCRCErrors) {
-                self.messageBlocks = try Message.decodeBlocks(data: Data(msgWithoutCrc.suffix(from: 6)))
-                return // set breakpoint on this line to catch a CRC mismatch
-            }
-            throw MessageError.invalidCrc
-        }
+        let msgWithoutCrc = encodedData.prefix(encodedData.count - 2)
+
+        // Dash pods generates a crc16 for Omnipod Messages, but the actual algorithm is not yet understood.
+        // The Dash PDM explicitly ignores these two CRC bytes for incoming messages, so we ignore them as well
+        // since there is higher level BLE & dash message data checking to provide data corruption protection.
+        // The pod simulator currently returns a 0 for crc, but presumably if/when the algorithm is understood,
+        // that will be updated as well.
+
+//        let crc = (UInt16(encodedData[encodedData.count-2]) << 8) + UInt16(encodedData[encodedData.count-1])
+//        let computedCrc = UInt16(msgWithoutCrc.crc16())
+//        if computedCrc != crc {
+//            throw MessageError.invalidCrc
+//        }
+
         self.messageBlocks = try Message.decodeBlocks(data: Data(msgWithoutCrc.suffix(from: 6)))
     }
     

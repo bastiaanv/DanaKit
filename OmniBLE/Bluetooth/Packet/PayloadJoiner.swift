@@ -52,9 +52,9 @@ class PayloadJoiner {
     func finalize() throws -> Data {
         let payloads = fragments.map { x in x.payload }
         let bb = payloads.reduce(Data(), { acc, elem in acc + elem })
-        if (bb.crc32() != crc) {
-            print("uh oh")
-//            throw CrcMismatchException(bb.crc32(), crc, bb)
+        let computedCrc32 = bb.crc32()
+        if let crc32 = crc, crc32 != computedCrc32 {
+            throw PodProtocolError.invalidCrc(payloadCrc: crc32, computedCrc: computedCrc32)
         }
         return bb
     }
