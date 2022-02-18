@@ -56,7 +56,7 @@ class LTKExchanger {
         try throwOnSendError(sps1.message, LTKExchanger.SPS1)
 
         log.debug("Reading sps1")
-        let podSps1 = try manager.readMessage(true)
+        let podSps1 = try manager.readMessage()
         guard let _ = podSps1 else {
             throw PodProtocolError.pairingException("Could not read SPS1")
         }

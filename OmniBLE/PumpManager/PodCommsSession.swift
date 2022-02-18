@@ -267,7 +267,7 @@ public class PodCommsSession {
             //let response = Message(address: podState.address, messageBlocks: [podInfoResponse], sequenceNum: message.sequenceNum)
 
             if let responseMessageBlock = response.messageBlocks[0] as? T {
-                log.info("POD Response: %@", String(describing: responseMessageBlock))
+                log.info("POD Response: %{public}@", String(describing: responseMessageBlock))
                 return responseMessageBlock
             }
 

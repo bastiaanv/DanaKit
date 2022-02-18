@@ -454,11 +454,15 @@ extension PeripheralManager: CBCentralManagerDelegate {
         sessionQueue.cancelAllOperations()
     }
     
-    private func clearCommandQueue() {
+    func clearCommsQueues() {
         queueLock.lock()
         if cmdQueue.count > 0 {
             self.log.default("Removing %{public}d leftover elements from command queue", cmdQueue.count)
             cmdQueue.removeAll()
+        }
+        if dataQueue.count > 0 {
+            self.log.default("Removing %{public}d leftover elements from data queue", dataQueue.count)
+            dataQueue.removeAll()
         }
         queueLock.unlock()
     }
@@ -467,7 +471,7 @@ extension PeripheralManager: CBCentralManagerDelegate {
         self.log.debug("PeripheralManager - didConnect: %@", peripheral)
         switch peripheral.state {
         case .connected:
-            clearCommandQueue()
+            clearCommsQueues()
             self.log.debug("PeripheralManager - didConnect - running assertConfiguration")
             assertConfiguration()
         default:
