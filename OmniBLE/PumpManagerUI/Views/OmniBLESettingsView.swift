@@ -323,6 +323,17 @@ struct OmniBLESettingsView: View  {
                 {
                     FrameworkLocalText("Notification Settings", comment: "Text for pod details disclosure row").foregroundColor(Color.primary)
                 }
+                VStack {
+                    NavigationLink(destination: BeepPreferenceSelectionView(initialValue: viewModel.beepPreference, onSave: viewModel.setConfirmationBeeps)) {
+                        HStack {
+                            FrameworkLocalText("Confidence Reminders", comment: "Text for confidence reminders navigation link").foregroundColor(Color.primary)
+                            Spacer()
+                            Text(viewModel.beepPreference.title)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+
+                }
             }
             
             Section() {
@@ -355,9 +366,7 @@ struct OmniBLESettingsView: View  {
                 }
             }
             
-            
-            confidenceRemindersSection
-            
+
             if self.viewModel.lifeState.allowsPumpManagerRemoval {
                 Section() {
                     Button(action: {
@@ -378,15 +387,6 @@ struct OmniBLESettingsView: View  {
         .navigationBarTitle(self.viewModel.viewTitle)
     }
 
-    private var confidenceRemindersSection: some View {
-        Section()
-        {
-            NavigationLink(destination: BeepPreferenceSelectionView(initialValue: .extended, onSave: viewModel.setConfirmationBeeps)) {
-                FrameworkLocalText("Confidence Reminders", comment: "Text for confidence reminders navigation link").foregroundColor(Color.primary)
-            }
-        }
-    }
-    
     var syncPumpTimeActionSheet: ActionSheet {
         ActionSheet(title: FrameworkLocalText("Time Change Detected", comment: "Title for pod sync time action sheet."), message: FrameworkLocalText("The time on your pump is different from the current time. Do you want to update the time on your pump to the current time?", comment: "Message for pod sync time action sheet"), buttons: [
             .default(FrameworkLocalText("Yes, Sync to Current Time", comment: "Button text to confirm pump time sync")) {
