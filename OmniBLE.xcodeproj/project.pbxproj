@@ -117,6 +117,8 @@
 		C1D27A1527908DC600C41EBA /* OmniBLE.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84752E8226ED0FFE009FD801 /* OmniBLE.framework */; };
 		C1D27A1727908DE500C41EBA /* OmniBLE.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84752E8226ED0FFE009FD801 /* OmniBLE.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C1D27A1B27911E9900C41EBA /* PodAdvertisement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D27A1A27911E9900C41EBA /* PodAdvertisement.swift */; };
+		C1ED1E7027BAE1A600FED71C /* BeepPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ED1E6F27BAE1A600FED71C /* BeepPreference.swift */; };
+		C1ED1E7227BAE44E00FED71C /* BeepPreferenceSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ED1E7127BAE44E00FED71C /* BeepPreferenceSelectionView.swift */; };
 		C1F67E8B27975B830017487F /* AttachPodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67E7327975B830017487F /* AttachPodView.swift */; };
 		C1F67E8C27975B830017487F /* ScheduledExpirationReminderEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67E7427975B830017487F /* ScheduledExpirationReminderEditView.swift */; };
 		C1F67E8E27975B830017487F /* TimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67E7627975B830017487F /* TimeView.swift */; };
@@ -301,6 +303,8 @@
 		C1C001C227A2351D00533D35 /* OmniBLEReservoirView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OmniBLEReservoirView.xib; sourceTree = "<group>"; };
 		C1C001C327A2351D00533D35 /* OmniBLEReservoirView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmniBLEReservoirView.swift; sourceTree = "<group>"; };
 		C1D27A1A27911E9900C41EBA /* PodAdvertisement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodAdvertisement.swift; sourceTree = "<group>"; };
+		C1ED1E6F27BAE1A600FED71C /* BeepPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeepPreference.swift; sourceTree = "<group>"; };
+		C1ED1E7127BAE44E00FED71C /* BeepPreferenceSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeepPreferenceSelectionView.swift; sourceTree = "<group>"; };
 		C1F67E7327975B830017487F /* AttachPodView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachPodView.swift; sourceTree = "<group>"; };
 		C1F67E7427975B830017487F /* ScheduledExpirationReminderEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduledExpirationReminderEditView.swift; sourceTree = "<group>"; };
 		C1F67E7627975B830017487F /* TimeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeView.swift; sourceTree = "<group>"; };
@@ -517,6 +521,7 @@
 				C1F67ED927979E400017487F /* PumpManagerAlert.swift */,
 				C1F67EDB2797A03A0017487F /* PendingCommand.swift */,
 				C1F67EE127985F580017487F /* ReservoirLevel.swift */,
+				C1ED1E6F27BAE1A600FED71C /* BeepPreference.swift */,
 			);
 			path = PumpManager;
 			sourceTree = "<group>";
@@ -635,6 +640,7 @@
 				8475311F26ED838A009FD801 /* PodLifeHUDView.swift */,
 				8475312426ED838A009FD801 /* PodLifeHUDView.xib */,
 				C187C190278FCEC9006E3557 /* InsulinTypeConfirmation.swift */,
+				C1ED1E7127BAE44E00FED71C /* BeepPreferenceSelectionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1012,6 +1018,7 @@
 				102111492709462300784F13 /* PodCommsSession.swift in Sources */,
 				10289E832739F917000339E6 /* SessionEstablisher.swift in Sources */,
 				84752EE126ED13F5009FD801 /* PayloadSplitter.swift in Sources */,
+				C1ED1E7227BAE44E00FED71C /* BeepPreferenceSelectionView.swift in Sources */,
 				84752EDE26ED13F5009FD801 /* PeripheralManagerError.swift in Sources */,
 				10389A2526FF7841002115E9 /* PodInfoActivationTime.swift in Sources */,
 				C1F67E9A27975B830017487F /* DeliveryUncertaintyRecoveryView.swift in Sources */,
@@ -1043,6 +1050,7 @@
 				10389A3326FF7841002115E9 /* CancelDeliveryCommand.swift in Sources */,
 				10389A2426FF7841002115E9 /* VersionResponse.swift in Sources */,
 				C1F67EA027975B830017487F /* PodSetupView.swift in Sources */,
+				C1ED1E7027BAE1A600FED71C /* BeepPreference.swift in Sources */,
 				10389A3B26FF7841002115E9 /* ConfigureAlertsCommand.swift in Sources */,
 				D8896C6227890E6B00E09A96 /* DetailedStatus+OmniBLE.swift in Sources */,
 				10389A3926FF7841002115E9 /* PodInfoResponse.swift in Sources */,

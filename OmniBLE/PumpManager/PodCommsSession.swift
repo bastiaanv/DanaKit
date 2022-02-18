@@ -671,14 +671,6 @@ public class PodCommsSession {
         }
     }
 
-    public func testingCommands(confirmationBeepType: BeepConfigType? = nil) throws {
-        guard podState.pendingCommand == nil else {
-            throw PodCommsError.unacknowledgedCommandPending
-        }
-
-        try cancelNone(confirmationBeepType: confirmationBeepType) // reads status & verifies nonce by doing a cancel none
-    }
-    
     public func setTime(timeZone: TimeZone, basalSchedule: BasalSchedule, date: Date, acknowledgementBeep: Bool = false, completionBeep: Bool = false) throws -> StatusResponse {
         guard podState.pendingCommand == nil else {
             throw PodCommsError.unacknowledgedCommandPending

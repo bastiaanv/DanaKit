@@ -25,7 +25,7 @@ public struct OmniBLEPumpManagerState: RawRepresentable, Equatable {
 
     public var unstoredDoses: [UnfinalizedDose]
 
-    public var confirmationBeeps: Bool
+    public var confirmationBeeps: BeepPreference
     
     public var controllerId: UInt32 = 0
 
@@ -86,7 +86,7 @@ public struct OmniBLEPumpManagerState: RawRepresentable, Equatable {
         self.timeZone = timeZone
         self.basalSchedule = basalSchedule
         self.unstoredDoses = []
-        self.confirmationBeeps = false
+        self.confirmationBeeps = .manualCommands
         if controllerId != nil && podId != nil {
             self.controllerId = controllerId!
             self.podId = podId!
@@ -175,7 +175,11 @@ public struct OmniBLEPumpManagerState: RawRepresentable, Equatable {
             self.unstoredDoses = []
         }
 
-        self.confirmationBeeps = rawValue["confirmationBeeps"] as? Bool ?? rawValue["bolusBeeps"] as? Bool ?? false
+        if let rawBeeps = rawValue["confirmationBeeps"] as? BeepPreference.RawValue, let confirmationBeeps = BeepPreference(rawValue: rawBeeps) {
+            self.confirmationBeeps = confirmationBeeps
+        } else {
+            self.confirmationBeeps = .manualCommands
+        }
 
         self.scheduledExpirationReminderOffset = rawValue["scheduledExpirationReminderOffset"] as? TimeInterval
         
@@ -219,7 +223,7 @@ public struct OmniBLEPumpManagerState: RawRepresentable, Equatable {
             "timeZone": timeZone.secondsFromGMT(),
             "basalSchedule": basalSchedule.rawValue,
             "unstoredDoses": unstoredDoses.map { $0.rawValue },
-            "confirmationBeeps": confirmationBeeps,
+            "confirmationBeeps": confirmationBeeps.rawValue,
             "activeAlerts": activeAlerts.map { $0.rawValue },
             "podAttachmentConfirmed": podAttachmentConfirmed,
             "acknowledgedTimeOffsetAlert": acknowledgedTimeOffsetAlert,

@@ -377,30 +377,12 @@ struct OmniBLESettingsView: View  {
         .navigationBarItems(trailing: doneButton)
         .navigationBarTitle(self.viewModel.viewTitle)
     }
-    
-    private var confirmationBeeps: Binding<Bool> {
-        Binding(
-            get: { self.viewModel.confirmationBeeps },
-            set: { newValue in
-                self.viewModel.setConfirmationBeeps(enabled: newValue)
-            }
-        )
-    }
-    
+
     private var confidenceRemindersSection: some View {
-        Section(footer: FrameworkLocalText("When enabled, your pod will audibly beep when you start a bolus, complete a bolus, and when you resume after suspending insulin delivery.", comment: "Descriptive text for confidence reminders section"))
+        Section()
         {
-            if self.viewModel.changingConfirmationBeeps {
-                HStack {
-                    Text("Confidence Reminders")
-                    Spacer()
-                    ActivityIndicator(isAnimating: .constant(true), style: .medium)
-                }
-            } else {
-                Toggle(isOn: confirmationBeeps) {
-                    Text("Confidence Reminders")
-                }
-                .toggleStyle(SwitchToggleStyle(tint: insulinTintColor))
+            NavigationLink(destination: BeepPreferenceSelectionView(initialValue: .extended, onSave: viewModel.setConfirmationBeeps)) {
+                FrameworkLocalText("Confidence Reminders", comment: "Text for confidence reminders navigation link").foregroundColor(Color.primary)
             }
         }
     }
@@ -472,11 +454,6 @@ struct OmniBLESettingsView: View  {
         case .syncTimeError(let error):
             return SwiftUI.Alert(
                 title: Text("Failed to Set Pump Time", comment: "Alert title for time sync error"),
-                message: Text(errorText(error))
-            )
-        case .changeConfirmationBeepsError(let error):
-            return SwiftUI.Alert(
-                title: Text("Failed to change confirmation beeps", comment: "Alert title for set confirmation beeps error"),
                 message: Text(errorText(error))
             )
         }

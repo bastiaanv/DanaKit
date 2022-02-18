@@ -272,7 +272,7 @@ class DashUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
                     }
                 }
                 pumpManager.addStatusObserver(model, queue: DispatchQueue.main)
-                pumpManager.getPodStatus(emitConfirmationBeep: false) { _ in }
+                pumpManager.getPodStatus() { _ in }
                 
                 let view = DeliveryUncertaintyRecoveryView(model: model)
                 

@@ -16,7 +16,6 @@ enum DashSettingsViewAlert {
     case suspendError(Error)
     case resumeError(Error)
     case syncTimeError(OmniBLEPumpManagerError)
-    case changeConfirmationBeepsError(OmniBLEPumpManagerError)
 }
 
 public enum ReservoirLevelHighlightState: String, Equatable {
@@ -38,11 +37,9 @@ class OmniBLESettingsViewModel: ObservableObject {
 
     @Published var expiresAt: Date?
 
-    @Published var changingConfirmationBeeps: Bool = false
-
-    var confirmationBeeps: Bool {
+    var beepPreference: BeepPreference {
         get {
-            pumpManager.confirmationBeeps
+            pumpManager.beepPreference
         }
     }
     
@@ -207,7 +204,7 @@ class OmniBLESettingsViewModel: ObservableObject {
         pumpManager.addPodStateObserver(self, queue: DispatchQueue.main)
         
         // Trigger refresh
-        pumpManager.getPodStatus(emitConfirmationBeep: false) { _ in }
+        pumpManager.getPodStatus() { _ in }
     }
     
     func changeTimeZoneTapped() {
@@ -279,15 +276,11 @@ class OmniBLESettingsViewModel: ObservableObject {
             }
         }
     }
- 
-    func setConfirmationBeeps(enabled: Bool) {
-        self.changingConfirmationBeeps = true
-        pumpManager.setConfirmationBeeps(enabled: enabled) { error in
+
+    func setConfirmationBeeps(_ preference: BeepPreference, _ completion: @escaping (_ error: LocalizedError?) -> Void) {
+        pumpManager.setConfirmationBeeps(newPreference: preference) { error in
             DispatchQueue.main.async {
-                self.changingConfirmationBeeps = false
-                if let error = error {
-                    self.activeAlert = .changeConfirmationBeepsError(error)
-                }
+                completion(error)
             }
         }
     }

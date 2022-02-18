@@ -111,7 +111,7 @@ internal class OmniBLEHUDProvider: NSObject, HUDProvider {
     }
     
     private func refresh() {
-        pumpManager.getPodStatus(emitConfirmationBeep: false) { _ in
+        pumpManager.getPodStatus() { _ in
             DispatchQueue.main.async {
                 self.updateReservoirView()
             }
