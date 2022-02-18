@@ -21,6 +21,7 @@ public struct PodDetails {
 }
 
 struct PodDetailsView: View {
+    @Environment(\.guidanceColors) var guidanceColors
     
     var podDetails: PodDetails
     
@@ -39,6 +40,7 @@ struct PodDetailsView: View {
             Text(label)
             Spacer()
             Text(value)
+                .foregroundColor(.secondary)
         }
     }
     
@@ -67,8 +69,19 @@ struct PodDetailsView: View {
             row(LocalizedString("Total Delivery", comment: "description label for total delivery pod details row"), value: totalDeliveryText)
             row(LocalizedString("Last Status", comment: "description label for last status date pod details row"), value: lastStatusText)
             if let fault = podDetails.fault {
-                row(LocalizedString("Fault", comment: "description label for last status date pod details row"), value: fault.localizedDescription)
-                row(LocalizedString("Fault Code", comment: "description label for last status date pod details row"), value: String(format: "0x%02x", fault.rawValue))
+                Section {
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .foregroundColor(guidanceColors.critical)
+                            Text(LocalizedString("Pod Fault Details", comment: "description label for pod fault details"))
+                                .fontWeight(.semibold)
+                        }.padding(.vertical, 4)
+                        Text(String(describing: fault))
+                            .fixedSize(horizontal: false, vertical: true)
+                            .foregroundColor(.secondary)
+                    }
+                }
             }
         }
         .navigationBarTitle(Text(LocalizedString("Device Details", comment: "title for device details page")), displayMode: .automatic)
@@ -77,6 +90,6 @@ struct PodDetailsView: View {
 
 struct PodDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        PodDetailsView(podDetails: PodDetails(lotNumber: 0x1234, sequenceNumber: 0x1234, firmwareVersion: "1.1.1", bleFirmwareVersion: "2.2.2", deviceName: "PreviewPod", totalDelivery: 10, lastStatus: Date()))
+        PodDetailsView(podDetails: PodDetails(lotNumber: 0x1234, sequenceNumber: 0x1234, firmwareVersion: "1.1.1", bleFirmwareVersion: "2.2.2", deviceName: "PreviewPod", totalDelivery: 10, lastStatus: Date(), fault: FaultEventCode(rawValue: 0x67)))
     }
 }
