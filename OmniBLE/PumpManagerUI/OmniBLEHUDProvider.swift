@@ -153,6 +153,10 @@ internal class OmniBLEHUDProvider: NSObject, HUDProvider {
 }
 
 extension OmniBLEHUDProvider: PodStateObserver {
+    func podConnectionStateDidChange(isConnected: Bool) {
+        // ignore for now
+    }
+
     func podStateDidUpdate(_ state: PodState?) {
         updateRefreshTimer()
         updateReservoirView()

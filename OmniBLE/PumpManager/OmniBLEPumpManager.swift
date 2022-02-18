@@ -15,6 +15,7 @@ import os.log
 
 public protocol PodStateObserver: AnyObject {
     func podStateDidUpdate(_ state: PodState?)
+    func podConnectionStateDidChange(isConnected: Bool)
 }
 
 public enum OmniBLEPumpManagerError: Error {
@@ -237,6 +238,16 @@ public class OmniBLEPumpManager: DeviceManager {
                 delegate?.pumpManagerBLEHeartbeatDidFire(self)
             }
             self.lastHeartbeat = Date()
+        }
+    }
+
+    var isConnected: Bool {
+        podComms.manager?.peripheral.state == .connected
+    }
+
+    func podConnectionStateDidChange(isConnected: Bool) {
+        podStateObservers.forEach { (observer) in
+            observer.podConnectionStateDidChange(isConnected: isConnected)
         }
     }
 
@@ -724,7 +735,7 @@ extension OmniBLEPumpManager {
         let mockCommsErrorDuringPairing = false
         DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + .seconds(2)) {
             self.jumpStartPod(lotNo: 135601809, lotSeq: 0800525, mockFault: mockFaultDuringPairing)
-            let fault: DetailedStatus? = self.setStateWithResult({ (state) in
+            let _: DetailedStatus? = self.setStateWithResult({ (state) in
                 state.podState?.setupProgress = .priming
                 return state.podState?.fault
             })

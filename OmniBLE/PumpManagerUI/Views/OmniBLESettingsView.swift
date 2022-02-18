@@ -221,16 +221,26 @@ struct OmniBLESettingsView: View  {
                 .resizable()
                 .aspectRatio(contentMode: ContentMode.fit)
                 .frame(height: 100)
-                .padding([.top,.horizontal])
+                .padding(.horizontal)
         }.frame(maxWidth: .infinity)
     }
     
     var body: some View {
         List {
             Section() {
-                VStack(alignment: .leading) {
+                VStack(alignment: .trailing) {
+                    Button(action: {
+                        viewModel.playTestBeeps()
+                    }) {
+                        Image(systemName: "speaker.wave.2.circle")
+                            .foregroundColor(viewModel.podConnected ? .accentColor : .secondary)
+                            .padding(.top,5)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .disabled(!viewModel.podConnected)
+
                     headerImage
-                    
+
                     lifecycleProgress
                     
                     HStack(alignment: .top) {

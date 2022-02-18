@@ -39,6 +39,8 @@ class OmniBLESettingsViewModel: ObservableObject {
 
     @Published var beepPreference: BeepPreference
 
+    @Published var podConnected: Bool
+
     var activatedAtString: String {
         if let activatedAt = activatedAt {
             return dateFormatter.string(from: activatedAt)
@@ -198,6 +200,7 @@ class OmniBLESettingsViewModel: ObservableObject {
         lowReservoirAlertValue = Int(self.pumpManager.state.lowReservoirReminderValue)
         podCommState = self.pumpManager.podCommState
         beepPreference = self.pumpManager.beepPreference
+        podConnected = self.pumpManager.isConnected
         pumpManager.addPodStateObserver(self, queue: DispatchQueue.main)
         
         // Trigger refresh
@@ -272,6 +275,10 @@ class OmniBLESettingsViewModel: ObservableObject {
                 completion(error)
             }
         }
+    }
+
+    func playTestBeeps() {
+        pumpManager.playTestBeeps { _ in }
     }
 
     func setConfirmationBeeps(_ preference: BeepPreference, _ completion: @escaping (_ error: LocalizedError?) -> Void) {
@@ -412,6 +419,10 @@ extension OmniBLESettingsViewModel: PodStateObserver {
         expirationReminderDate = self.pumpManager.scheduledExpirationReminder
         podCommState = self.pumpManager.podCommState
         beepPreference = self.pumpManager.beepPreference
+    }
+
+    func podConnectionStateDidChange(isConnected: Bool) {
+        self.podConnected = isConnected
     }
 }
 
