@@ -16,6 +16,7 @@ import CoreBluetooth
 protocol PodCommsDelegate: AnyObject {
     func podComms(_ podComms: PodComms, didChange podState: PodState)
     func podCommsDidEstablishSession(_ podComms: PodComms)
+    func podConnectionStateDidChange(isConnected: Bool)
 }
 
 public class PodComms: CustomDebugStringConvertible {
@@ -431,12 +432,14 @@ extension PodComms: OmniBLEConnectionDelegate {
         if let podState = podState, manager.peripheral.identifier.uuidString == podState.bleIdentifier {
             needsSessionEstablishment = true
             self.manager = manager
+            self.delegate?.podConnectionStateDidChange(isConnected: true)
         }
     }
 
     func omnipodPeripheralDidDisconnect(peripheral: CBPeripheral) {
         if let podState = podState, peripheral.identifier.uuidString == podState.bleIdentifier {
-            log.default("omnipodPeripheralDidDisconnect... should auto-reconnect")
+            self.delegate?.podConnectionStateDidChange(isConnected: false)
+            log.default("omnipodPeripheralDidDisconnect... will auto-reconnect")
         }
     }
 }
