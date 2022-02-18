@@ -233,6 +233,7 @@ struct OmniBLESettingsView: View  {
                         viewModel.playTestBeeps()
                     }) {
                         Image(systemName: "speaker.wave.2.circle")
+                            .imageScale(.large)
                             .foregroundColor(viewModel.podConnected ? .accentColor : .secondary)
                             .padding(.top,5)
                     }
