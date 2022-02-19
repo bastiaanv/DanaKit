@@ -1459,6 +1459,8 @@ extension OmniBLEPumpManager: PumpManager {
         // Round to nearest supported volume
         let enactUnits = roundToSupportedBolusVolume(units: units)
 
+        let beep = automatic ? beepPreference.shouldBeepForAutomaticBolus : beepPreference.shouldBeepForManualCommand
+
         self.podComms.runSession(withName: "Bolus") { (result) in
             let session: PodCommsSession
             switch result {
@@ -1491,7 +1493,6 @@ extension OmniBLEPumpManager: PumpManager {
             if podStatus.deliveryStatus == .suspended {
                 do {
                     let scheduleOffset = self.state.timeZone.scheduleOffset(forDate: Date())
-                    let beep = self.beepPreference.shouldBeepForManualCommand
                     let podStatus = try session.resumeBasal(schedule: self.state.basalSchedule, scheduleOffset: scheduleOffset, acknowledgementBeep: beep, completionBeep: beep)
                     self.clearSuspendReminder()
                     guard podStatus.deliveryStatus.bolusing == false else {
@@ -1508,7 +1509,6 @@ extension OmniBLEPumpManager: PumpManager {
                 return
             }
 
-            let beep = self.beepPreference.shouldBeepForManualCommand
 
             // Use bits for the program reminder interval (not used by app)
             //   This trick enables determination, from just the hex messages
