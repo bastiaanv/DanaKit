@@ -89,8 +89,6 @@ class DashUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
     
     private var allowedInsulinTypes: [InsulinType]
     
-    private var selectedInsulinType: InsulinType?
-    
     private var allowDebugFeatures: Bool
     
     private func viewControllerForScreen(_ screen: DashUIScreen) -> UIViewController {
@@ -136,7 +134,7 @@ class DashUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
             return hostedView
         case .insulinTypeSelection:
             let insulinSelectionView = InsulinTypeConfirmation(initialValue: .novolog, supportedInsulinTypes: allowedInsulinTypes) { [weak self] (confirmedType) in
-                self?.selectedInsulinType = confirmedType
+                self?.pumpManager.insulinType = confirmedType
                 self?.stepFinished()
             }
             let hostedView = hostingController(rootView: insulinSelectionView)

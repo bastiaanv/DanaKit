@@ -134,8 +134,8 @@ internal class OmniBLEHUDProvider: NSObject, HUDProvider {
             return
         }
         
-        refreshTimer = Timer(timeInterval: .seconds(30) , repeats: true) { _ in
-            self.refresh()
+        refreshTimer = Timer(timeInterval: .seconds(30) , repeats: true) { [weak self] _ in
+            self?.refresh()
         }
         RunLoop.main.add(refreshTimer!, forMode: .default)
     }
