@@ -20,6 +20,8 @@ struct OmniBLESettingsView: View  {
     @State private var showSuspendOptions = false;
     
     @State private var showSyncTimeOptions = false;
+
+    @State private var sendingTestBeepsCommand = false;
     
     @Environment(\.guidanceColors) var guidanceColors
     @Environment(\.insulinTintColor) var insulinTintColor
@@ -230,7 +232,10 @@ struct OmniBLESettingsView: View  {
             Section() {
                 VStack(alignment: .trailing) {
                     Button(action: {
-                        viewModel.playTestBeeps()
+                        sendingTestBeepsCommand = true
+                        viewModel.playTestBeeps { _ in
+                            sendingTestBeepsCommand = false
+                        }
                     }) {
                         Image(systemName: "speaker.wave.2.circle")
                             .imageScale(.large)
@@ -238,7 +243,7 @@ struct OmniBLESettingsView: View  {
                             .padding(.top,5)
                     }
                     .buttonStyle(PlainButtonStyle())
-                    .disabled(!viewModel.podConnected)
+                    .disabled(!viewModel.podConnected || sendingTestBeepsCommand)
 
                     headerImage
 

@@ -282,8 +282,8 @@ class OmniBLESettingsViewModel: ObservableObject {
         }
     }
 
-    func playTestBeeps() {
-        pumpManager.playTestBeeps { _ in }
+    func playTestBeeps(_ completion: @escaping (Error?) -> Void) {
+        pumpManager.playTestBeeps(completion: completion)
     }
 
     func setConfirmationBeeps(_ preference: BeepPreference, _ completion: @escaping (_ error: LocalizedError?) -> Void) {
