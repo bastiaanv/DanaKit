@@ -1062,6 +1062,7 @@ extension OmniBLEPumpManager {
             case .success(let session):
                 do {
                     try session.deactivatePod()
+                    completion(nil)
                 } catch let error {
                     completion(OmniBLEPumpManagerError.communication(error))
                 }
