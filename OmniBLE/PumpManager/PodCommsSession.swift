@@ -197,8 +197,14 @@ public class PodCommsSession {
 
     // Handles updating PodState on first pod fault seen
     private func handlePodFault(fault: DetailedStatus) {
-        if self.podState.fault == nil {
-            self.podState.fault = fault // save the first fault returned
+        if podState.fault == nil {
+            podState.fault = fault // save the first fault returned
+            podState.pdmRef = fault.pdmRef // as well as the ref code
+            if let activatedAt = podState.activatedAt {
+                podState.activeTime = Date().timeIntervalSince(activatedAt)
+            } else {
+                podState.activeTime = fault.faultEventTimeSinceActivation
+            }
             handleCancelDosing(deliveryType: .all, bolusNotDelivered: fault.bolusNotDelivered)
             podState.updateFromDetailedStatusResponse(fault)
         }
@@ -874,6 +880,9 @@ public class PodCommsSession {
         do {
             let deactivatePod = DeactivatePodCommand(nonce: podState.currentNonce)
             let _: StatusResponse = try send([deactivatePod])
+            if podState.activeTime == nil, let activatedAt = podState.activatedAt {
+                podState.activeTime = Date().timeIntervalSince(activatedAt)
+            }
         } catch let error as PodCommsError {
             switch error {
             case .podFault, .activationTimeExceeded, .unexpectedResponse:

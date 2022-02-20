@@ -58,6 +58,7 @@ public struct PodState: RawRepresentable, Equatable, CustomDebugStringConvertibl
     
     public var activatedAt: Date?
     public var expiresAt: Date?  // set based on StatusResponse timeActive and can change with Pod clock drift and/or system time change
+    public var activeTime: TimeInterval?
 
     public var setupUnitsDelivered: Double?
 
@@ -92,6 +93,7 @@ public struct PodState: RawRepresentable, Equatable, CustomDebugStringConvertibl
     }
 
     public var fault: DetailedStatus?
+    public var pdmRef: String?
     public var messageTransportState: MessageTransportState
     public var primeFinishTime: Date?
     public var setupProgress: SetupProgress
@@ -343,6 +345,7 @@ public struct PodState: RawRepresentable, Equatable, CustomDebugStringConvertibl
         self.bleFirmwareVersion = bleFirmwareVersion
         self.lotNo = lotNo
         self.lotSeq = lotSeq
+        self.pdmRef = rawValue["pdmRef"] as? String
         if let productId = rawValue["productId"] as? UInt8 {
             self.productId = productId
         } else {
@@ -350,6 +353,7 @@ public struct PodState: RawRepresentable, Equatable, CustomDebugStringConvertibl
         }
         self.bleIdentifier = bleIdentifier
 
+        self.activeTime = rawValue["activeTime"] as? TimeInterval
 
         if let activatedAt = rawValue["activatedAt"] as? Date {
             self.activatedAt = activatedAt
@@ -500,6 +504,8 @@ public struct PodState: RawRepresentable, Equatable, CustomDebugStringConvertibl
         rawValue["activatedAt"] = activatedAt
         rawValue["expiresAt"] = expiresAt
         rawValue["setupUnitsDelivered"] = setupUnitsDelivered
+        rawValue["pdmRef"] = pdmRef
+        rawValue["activeTime"] = activeTime
 
         if configuredAlerts.count > 0 {
             let rawConfiguredAlerts = Dictionary(uniqueKeysWithValues:
@@ -536,6 +542,7 @@ public struct PodState: RawRepresentable, Equatable, CustomDebugStringConvertibl
             "* setupProgress: \(setupProgress)",
             "* primeFinishTime: \(String(describing: primeFinishTime))",
             "* configuredAlerts: \(String(describing: configuredAlerts))",
+            "* pdmRef: \(String(describing: pdmRef))",
             "",
             fault != nil ? String(reflecting: fault!) : "fault: nil",
             "",

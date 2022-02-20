@@ -298,7 +298,7 @@ struct OmniBLESettingsView: View  {
                 }
                 
                 if let podDetails = self.viewModel.podDetails {
-                    NavigationLink(destination: PodDetailsView(podDetails: podDetails)) {
+                    NavigationLink(destination: PodDetailsView(podDetails: podDetails, title: LocalizedString("Device Details", comment: "title for device details page"))) {
                         FrameworkLocalText("Device Details", comment: "Text for device details disclosure row").foregroundColor(Color.primary)
                     }
                 } else {
@@ -373,6 +373,14 @@ struct OmniBLESettingsView: View  {
                     }
                     .actionSheet(isPresented: $showSyncTimeOptions) {
                         syncPumpTimeActionSheet
+                    }
+                }
+            }
+
+            if let previousPodDetails = viewModel.previousPodDetails {
+                Section() {
+                    NavigationLink(destination: PodDetailsView(podDetails: previousPodDetails, title: LocalizedString("Previous Pod", comment: "title for previous pod page"))) {
+                        FrameworkLocalText("Previous Pod Information", comment: "Text for previous pod information row").foregroundColor(Color.primary)
                     }
                 }
             }

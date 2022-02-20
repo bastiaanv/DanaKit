@@ -12,7 +12,6 @@ import Foundation
 extension DetailedStatus {
     // For most types, Ref: TT-VVVHH-IIIRR-FFF computed as {20|19|18|17|16|15|14|07|01}-{VV}{SSSS/60}-{NNNN/20}{RRRR/20}-PP
     public var pdmRef: String? {
-        let refStr = LocalizedString("Ref", comment: "Dash PDM style 'Ref' string")
         let TT: UInt8
         var VVV: UInt8 = data[17] // default value, can be changed
         let HH: UInt8 = UInt8(timeActive.hours)
@@ -33,7 +32,7 @@ extension DetailedStatus {
         case .insulinDeliveryCommandError:
             // Ref: 11-144-0018-0049, this fault is treated as a PDM fault with an alternate Ref format
             // XXX need to verify these values are still correct with the Dash PDM
-            return String(format: "%@:\u{00a0}11-144-0018-00049", refStr) // all fixed values for this fault
+            return "11-144-0018-00049" // all fixed values for this fault
         case .reservoirEmpty:
             // Ref: 14-VVVHH-IIIRR-FFF
             TT = 14         // PumpVolume Ref type
@@ -56,6 +55,6 @@ extension DetailedStatus {
             TT = 19         // PumpError Ref type
         }
 
-        return String(format: "%@:\u{00a0}%02d-%03d%02d-%03d%02d-%03d", refStr, TT, VVV, HH, III, RR, FFF)
+        return String(format: "%02d-%03d%02d-%03d%02d-%03d", TT, VVV, HH, III, RR, FFF)
     }
 }

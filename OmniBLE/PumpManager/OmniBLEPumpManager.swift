@@ -107,6 +107,10 @@ public class OmniBLEPumpManager: DeviceManager {
         self.init(state: state)
     }
 
+    public var deviceBLEName: String? {
+        return self.podComms.manager?.peripheral.name
+    }
+
     private var podComms: PodComms {
         get {
             return lockedPodComms.value
@@ -264,6 +268,7 @@ public class OmniBLEPumpManager: DeviceManager {
             "## OmniBLEPumpManager",
             "podComms: \(String(reflecting: podComms))",
             "provideHeartbeat: \(provideHeartbeat)",
+            "connected: \(isConnected)",
             "state: \(String(reflecting: state))",
             "status: \(String(describing: status))",
             "podStateObservers.count: \(podStateObservers.cleanupDeallocatedElements().count)",
@@ -515,22 +520,6 @@ extension OmniBLEPumpManager {
         return state.podState?.expiresAt
     }
 
-    public var podDetails: PodDetails? {
-        guard let podState = state.podState else {
-            return nil
-        }
-        return PodDetails(
-            lotNumber: podState.lotNo,
-            sequenceNumber: podState.lotSeq,
-            firmwareVersion: podState.firmwareVersion,
-            bleFirmwareVersion: podState.bleFirmwareVersion,
-            deviceName: podComms.manager?.peripheral.name ?? "NA",
-            totalDelivery: podState.lastInsulinMeasurements?.delivered,
-            lastStatus: podState.lastInsulinMeasurements?.validTime,
-            fault: podState.fault?.faultEventCode
-        )
-    }
-
     public func buildPumpStatusHighlight(for state: OmniBLEPumpManagerState, andDate date: Date = Date()) -> PumpManagerStatus.PumpStatusHighlight? {
         if state.podState?.pendingCommand != nil {
             return PumpManagerStatus.PumpStatusHighlight(localizedMessage: NSLocalizedString("Comms Issue", comment: "Status highlight that delivery is uncertain."),
@@ -649,6 +638,8 @@ extension OmniBLEPumpManager {
         self.podComms.forgetCurrentPod()
 
         let resetPodState = { (_ state: inout OmniBLEPumpManagerState) in
+            state.previousPodState = state.podState
+
             if state.controllerId == CONTROLLER_ID {
                 // Switch from using the common fixed controllerId to a created semi-unique one
                 state.controllerId = createControllerId()

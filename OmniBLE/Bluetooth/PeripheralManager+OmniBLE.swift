@@ -108,8 +108,9 @@ extension PeripheralManager {
             if let error = error as? PeripheralManagerError, error.isSymptomaticOfUnresponsivePod {
                 log.error("Disconnecting due to error while reading pod response")
                 central?.cancelPeripheralConnection(self.peripheral)
+            } else {
+                try? sendCommandType(PodCommand.NACK)
             }
-            try? sendCommandType(PodCommand.NACK)
             throw PeripheralManagerError.incorrectResponse
         }
 
