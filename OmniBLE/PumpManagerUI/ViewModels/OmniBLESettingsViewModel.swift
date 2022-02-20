@@ -102,6 +102,8 @@ class OmniBLESettingsViewModel: ObservableObject {
 
     @Published var podCommState: PodCommState
 
+    @Published var insulinType: InsulinType?
+
     @Published var podDetails: PodDetails?
 
     @Published var previousPodDetails: PodDetails?
@@ -126,7 +128,7 @@ class OmniBLESettingsViewModel: ObservableObject {
     var recoveryText: String? {
         if case .fault = podCommState {
             return LocalizedString("Insulin delivery stopped. Change Pod now.", comment: "The action string on pod status page when pod faulted")
-        } else if isPodDataStale {
+        } else if podOk && isPodDataStale {
             return LocalizedString("Make sure your phone and pod are close to each other. If communication issues persist, move to a new area.", comment: "The action string on pod status page when pod data is stale")
         } else if let podTimeRemaining = pumpManager.podTimeRemaining, podTimeRemaining < 0 {
             return LocalizedString("Change Pod now. Insulin delivery will stop 8 hours after the Pod has expired or when no more insulin remains.", comment: "The action string on pod status page when pod expired")
@@ -201,6 +203,7 @@ class OmniBLESettingsViewModel: ObservableObject {
         podCommState = self.pumpManager.podCommState
         beepPreference = self.pumpManager.beepPreference
         podConnected = self.pumpManager.isConnected
+        insulinType = self.pumpManager.insulinType
         podDetails = self.pumpManager.podDetails
         previousPodDetails = self.pumpManager.previousPodDetails
         pumpManager.addPodStateObserver(self, queue: DispatchQueue.main)
@@ -292,6 +295,10 @@ class OmniBLESettingsViewModel: ObservableObject {
                 completion(error)
             }
         }
+    }
+
+    func didChangeInsulinType(_ newType: InsulinType?) {
+        self.pumpManager.insulinType = newType
     }
     
     var podOk: Bool {
@@ -421,6 +428,7 @@ extension OmniBLESettingsViewModel: PodStateObserver {
         expirationReminderDate = self.pumpManager.scheduledExpirationReminder
         podCommState = self.pumpManager.podCommState
         beepPreference = self.pumpManager.beepPreference
+        insulinType = self.pumpManager.insulinType
         podDetails = self.pumpManager.podDetails
         previousPodDetails = self.pumpManager.previousPodDetails
     }

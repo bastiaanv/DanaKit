@@ -334,16 +334,23 @@ struct OmniBLESettingsView: View  {
                 {
                     FrameworkLocalText("Notification Settings", comment: "Text for pod details disclosure row").foregroundColor(Color.primary)
                 }
-                VStack {
-                    NavigationLink(destination: BeepPreferenceSelectionView(initialValue: viewModel.beepPreference, onSave: viewModel.setConfirmationBeeps)) {
-                        HStack {
-                            FrameworkLocalText("Confidence Reminders", comment: "Text for confidence reminders navigation link").foregroundColor(Color.primary)
+                NavigationLink(destination: BeepPreferenceSelectionView(initialValue: viewModel.beepPreference, onSave: viewModel.setConfirmationBeeps)) {
+                    HStack {
+                        FrameworkLocalText("Confidence Reminders", comment: "Text for confidence reminders navigation link").foregroundColor(Color.primary)
+                        Spacer()
+                        Text(viewModel.beepPreference.title)
+                            .foregroundColor(.secondary)
+                    }
+                }
+                NavigationLink(destination: InsulinTypeSetting(initialValue: viewModel.insulinType, supportedInsulinTypes: InsulinType.allCases, allowUnsetInsulinType: false, didChange: viewModel.didChangeInsulinType)) {
+                    HStack {
+                        FrameworkLocalText("Insulin Type", comment: "Text for confidence reminders navigation link").foregroundColor(Color.primary)
+                        if let currentTitle = viewModel.insulinType?.brandName {
                             Spacer()
-                            Text(viewModel.beepPreference.title)
+                            Text(currentTitle)
                                 .foregroundColor(.secondary)
                         }
                     }
-
                 }
             }
             

@@ -21,6 +21,7 @@ public protocol PodStateObserver: AnyObject {
 public enum OmniBLEPumpManagerError: Error {
     case noPodPaired
     case podAlreadyPaired
+    case insulinTypeNotConfigured
     case notReadyForCannulaInsertion
     case communication(Error)
     case state(Error)
@@ -41,6 +42,8 @@ extension OmniBLEPumpManagerError: LocalizedError {
             return LocalizedString("No pod paired", comment: "Error message shown when no pod is paired")
         case .podAlreadyPaired:
             return LocalizedString("Pod already paired", comment: "Error message shown when user cannot pair because pod is already paired")
+        case .insulinTypeNotConfigured:
+            return LocalizedString("Insulin type not configured", comment: "Error description for OmniBLEPumpManagerError.insulinTypeNotConfigured")
         case .notReadyForCannulaInsertion:
             return LocalizedString("Pod is not in a state ready for cannula insertion.", comment: "Error message when cannula insertion fails because the pod is in an unexpected state")
         case .communication(let error):
@@ -632,12 +635,9 @@ extension OmniBLEPumpManager {
 
     // MARK: - Pod comms
 
-    // Does not support concurrent callers. Not thread-safe.
-    public func forgetPod(completion: @escaping () -> Void) {
+    private func prepForNewPod() {
 
-        self.podComms.forgetCurrentPod()
-
-        let resetPodState = { (_ state: inout OmniBLEPumpManagerState) in
+        setState { state in
             state.previousPodState = state.podState
 
             if state.controllerId == CONTROLLER_ID {
@@ -651,18 +651,13 @@ extension OmniBLEPumpManager {
                 state.podId = nextPodId(lastPodId: lastPodId)
                 self.log.info("Advanced podId from %x to %x", lastPodId, state.podId)
             }
-            self.podComms.prepForNewPod(myId: state.controllerId, podId: state.podId)
-
-            state.podState = nil
         }
+        self.podComms.prepForNewPod(myId: self.state.controllerId, podId: self.state.podId)
+    }
 
-        // TODO: PodState shouldn't be mutated outside of the session queue
-        // TODO: Consider serializing the entire forget-pod path instead of relying on the UI to do it
+    public func forgetPod(completion: @escaping () -> Void) {
 
-        let state = mutateState { (state) in
-            state.podState?.resolveAnyPendingCommandWithUncertainty()
-            state.podState?.finalizeFinishedDoses()
-        }
+        self.podComms.disconnectPodAndFinalizeDelivery()
 
         if let dosesToStore = state.podState?.dosesToStore {
             store(doses: dosesToStore, completion: { error in
@@ -670,16 +665,12 @@ extension OmniBLEPumpManager {
                     if error != nil {
                         state.unstoredDoses.append(contentsOf: dosesToStore)
                     }
-
-                    resetPodState(&state)
                 })
+                self.prepForNewPod()
                 completion()
             })
         } else {
-            setState { (state) in
-                resetPodState(&state)
-            }
-
+            prepForNewPod()
             completion()
         }
     }
@@ -780,12 +771,17 @@ extension OmniBLEPumpManager {
 
             self.log.default("Pairing pod before priming")
 
+            guard let insulinType = insulinType else {
+                completion(.failure(.configuration(OmniBLEPumpManagerError.insulinTypeNotConfigured)))
+                return
+            }
+
             connectToNewPod(completion: { result in
                 switch result {
                 case .failure(let error):
                     completion(.failure(.communication(error as? LocalizedError)))
                 case .success:
-                    self.podComms.pairAndSetupPod(timeZone: .currentFixed, messageLogger: self)
+                    self.podComms.pairAndSetupPod(timeZone: .currentFixed, insulinType: insulinType, messageLogger: self)
                     { (result) in
 
                         // Calls completion
@@ -1066,10 +1062,6 @@ extension OmniBLEPumpManager {
             case .success(let session):
                 do {
                     try session.deactivatePod()
-
-                    self.forgetPod(completion: {
-                        completion(nil)
-                    })
                 } catch let error {
                     completion(OmniBLEPumpManagerError.communication(error))
                 }
@@ -1261,7 +1253,7 @@ extension OmniBLEPumpManager: PumpManager {
                 self.setState { (state) in
                     state.insulinType = insulinType
                 }
-                //self.podComms.insulinType = insulinType
+                self.podComms.updateInsulinType(insulinType)
             }
         }
     }
@@ -2022,45 +2014,52 @@ extension OmniBLEPumpManager: PodCommsDelegate {
         
     }
 
-    func podComms(_ podComms: PodComms, didChange podState: PodState) {
-        let (newFault, oldAlerts, newAlerts) = setStateWithResult { (state) -> (DetailedStatus?,AlertSet,AlertSet) in
-            // Check for any updates to bolus certainty, and log them
-            if let bolus = state.podState?.unfinalizedBolus, bolus.scheduledCertainty == .uncertain, !bolus.isFinished() {
-                if podState.unfinalizedBolus?.scheduledCertainty == .some(.certain) {
-                    self.log.default("Resolved bolus uncertainty: did bolus")
-                } else if podState.unfinalizedBolus == nil {
-                    self.log.default("Resolved bolus uncertainty: did not bolus")
+    func podComms(_ podComms: PodComms, didChange podState: PodState?) {
+        if let podState = podState {
+            let (newFault, oldAlerts, newAlerts) = setStateWithResult { (state) -> (DetailedStatus?,AlertSet,AlertSet) in
+                // Check for any updates to bolus certainty, and log them
+                if let bolus = state.podState?.unfinalizedBolus, bolus.scheduledCertainty == .uncertain, !bolus.isFinished() {
+                    if podState.unfinalizedBolus?.scheduledCertainty == .some(.certain) {
+                        self.log.default("Resolved bolus uncertainty: did bolus")
+                    } else if podState.unfinalizedBolus == nil {
+                        self.log.default("Resolved bolus uncertainty: did not bolus")
+                    }
                 }
+                if (state.suspendEngageState == .engaging && podState.isSuspended) ||
+                   (state.suspendEngageState == .disengaging && !podState.isSuspended)
+                {
+                    state.suspendEngageState = .stable
+                }
+
+                let newFault: DetailedStatus?
+
+                // Check for new fault state
+                if state.podState?.fault == nil, let fault = podState.fault {
+                    newFault = fault
+                } else {
+                    newFault = nil
+                }
+
+                let oldAlerts: AlertSet = state.podState?.activeAlertSlots ?? AlertSet.none
+                let newAlerts: AlertSet = podState.activeAlertSlots
+
+                state.updatePodStateFromPodComms(podState)
+
+                return (newFault, oldAlerts, newAlerts)
             }
-            if (state.suspendEngageState == .engaging && podState.isSuspended) ||
-               (state.suspendEngageState == .disengaging && !podState.isSuspended)
-            {
-                state.suspendEngageState = .stable
+
+            if let newFault = newFault {
+                notifyPodFault(fault: newFault)
             }
 
-            let newFault: DetailedStatus?
-
-            // Check for new fault state
-            if state.podState?.fault == nil, let fault = podState.fault {
-                newFault = fault
-            } else {
-                newFault = nil
+            if oldAlerts != newAlerts {
+                self.alertsChanged(oldAlerts: oldAlerts, newAlerts: newAlerts)
             }
-
-            let oldAlerts: AlertSet = state.podState?.activeAlertSlots ?? AlertSet.none
-            let newAlerts: AlertSet = podState.activeAlertSlots
-
-            state.podState = podState
-
-            return (newFault, oldAlerts, newAlerts)
-        }
-
-        if let newFault = newFault {
-            notifyPodFault(fault: newFault)
-        }
-
-        if oldAlerts != newAlerts {
-            self.alertsChanged(oldAlerts: oldAlerts, newAlerts: newAlerts)
+        } else {
+            // Resetting podState
+            mutateState { state in
+                state.updatePodStateFromPodComms(podState)
+            }
         }
     }
 }
