@@ -49,6 +49,14 @@ struct PodDetailsView: View {
         return formatter
     }()
 
+    let dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .short
+        dateFormatter.dateStyle = .medium
+        dateFormatter.doesRelativeDateFormatting = true
+        return dateFormatter
+    }()
+
     private func row(_ label: String, value: String) -> some View {
         HStack {
             Text(label)
@@ -88,7 +96,8 @@ struct PodDetailsView: View {
             row(LocalizedString("Firmware Version", comment: "description label for firmware version pod details row"), value: podDetails.firmwareVersion)
             row(LocalizedString("BLE Firmware Version", comment: "description label for ble firmware version pod details row"), value: podDetails.bleFirmwareVersion)
             row(LocalizedString("Total Delivery", comment: "description label for total delivery pod details row"), value: totalDeliveryText)
-            if let activeTime = podDetails.activeTime {
+            if let activeTime = podDetails.activeTime, let activatedAt = podDetails.activatedAt {
+                row(LocalizedString("Pod Activated", comment: "description label for activated at timne pod details row"), value: dateFormatter.string(from: activatedAt))
                 row(LocalizedString("Active Time", comment: "description label for active time pod details row"), value: activeTimeText(activeTime))
             } else {
                 row(LocalizedString("Last Status", comment: "description label for last status date pod details row"), value: lastStatusText)
