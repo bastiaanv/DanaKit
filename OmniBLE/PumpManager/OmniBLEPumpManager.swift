@@ -685,7 +685,7 @@ extension OmniBLEPumpManager {
         var podState = PodState(address: state.podId, ltk: fakeLtk,
             firmwareVersion: "jumpstarted", bleFirmwareVersion: "jumpstarted",
             lotNo: lotNo, lotSeq: lotSeq, productId: dashProductId,
-            bleIdentifier: "0000-0000")
+                                bleIdentifier: "0000-0000", insulinType: insulinType ?? .novolog)
 
         podState.setupProgress = .podPaired
         podState.activatedAt = start
@@ -697,7 +697,7 @@ extension OmniBLEPumpManager {
         self.podComms = PodComms(podState: podState, myId: state.controllerId, podId: state.podId)
 
         setState({ (state) in
-            state.podState = podState
+            state.updatePodStateFromPodComms(podState)
             state.scheduledExpirationReminderOffset = state.defaultExpirationReminderOffset
         })
     }
@@ -718,7 +718,9 @@ extension OmniBLEPumpManager {
         DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + .seconds(2)) {
             self.jumpStartPod(lotNo: 135601809, lotSeq: 0800525, mockFault: mockFaultDuringPairing)
             let _: DetailedStatus? = self.setStateWithResult({ (state) in
-                state.podState?.setupProgress = .priming
+                var podState = state.podState
+                podState?.setupProgress = .priming
+                state.updatePodStateFromPodComms(podState)
                 return state.podState?.fault
             })
             if mockFaultDuringPairing {
@@ -811,12 +813,16 @@ extension OmniBLEPumpManager {
             let result = self.setStateWithResult({ (state) -> Result<TimeInterval,OmniBLEPumpManagerError> in
                 if mockFaultDuringInsertCannula {
                     let fault = try! DetailedStatus(encodedData: Data(hexadecimalString: "020d0000000e00c36a020703ff020900002899080082")!)
-                    state.podState?.fault = fault
+                    var podState = state.podState
+                    podState?.fault = fault
+                    state.updatePodStateFromPodComms(podState)
                     // return .failure(PodCommsError.podFault(fault: fault))
                 }
 
                 // Mock success
-                state.podState?.setupProgress = .completed
+                var podState = state.podState
+                podState?.setupProgress = .completed
+                state.updatePodStateFromPodComms(podState)
                 return .success(mockDelay)
             })
 
