@@ -498,7 +498,7 @@ public class PodCommsSession {
         let bolusExtraCommand = BolusExtraCommand(units: units, timeBetweenPulses: timeBetweenPulses, acknowledgementBeep: acknowledgementBeep, completionBeep: completionBeep, programReminderInterval: programReminderInterval)
         do {
             let statusResponse: StatusResponse = try send([bolusScheduleCommand, bolusExtraCommand])
-            podState.unfinalizedBolus = UnfinalizedDose(bolusAmount: units, startTime: startTime, scheduledCertainty: .certain, insulinType: podState.insulinType)
+            podState.unfinalizedBolus = UnfinalizedDose(bolusAmount: units, startTime: startTime, scheduledCertainty: .certain, insulinType: podState.insulinType, automatic: automatic)
             podState.updateFromStatusResponse(statusResponse)
             return DeliveryCommandResult.success(statusResponse: statusResponse)
         } catch PodCommsError.unacknowledgedMessage(let seq, let error) {
