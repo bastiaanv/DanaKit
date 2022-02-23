@@ -771,7 +771,6 @@
 				84752E7E26ED0FFE009FD801 /* Sources */,
 				84752E7F26ED0FFE009FD801 /* Frameworks */,
 				84752E8026ED0FFE009FD801 /* Resources */,
-				A92B429F276AC90A00A70B1F /* Copy Frameworks with Carthage */,
 			);
 			buildRules = (
 			);
@@ -911,41 +910,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		A92B429F276AC90A00A70B1F /* Copy Frameworks with Carthage */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/LoopKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/OmniKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/LoopKitUI.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/MKRingProgressView.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RileyLinkBLEKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/OmniKitUI.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RileyLinkKit.framework",
-			);
-			name = "Copy Frameworks with Carthage";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/LoopKit.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/LoopKitUI.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/OmniKit.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/MKRingProgressView.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RileyLinkBLEKit.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/OmniKitUI.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RileyLinkKit.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#From root of project, run\n#`./carthage.sh update --platform iOS` from root\n\n#Then uncomment this to run OmniBLE tests without a Loop Workspace.\n#./carthage.sh copy-frameworks\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		84752E7E26ED0FFE009FD801 /* Sources */ = {
