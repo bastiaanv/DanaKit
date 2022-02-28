@@ -709,7 +709,14 @@ extension OmniBLEPumpManager {
     // MARK: - Pairing
 
     func connectToNewPod(completion: @escaping (Result<OmniBLE, Error>) -> Void) {
-        podComms.connectToNewPod(completion)
+        podComms.connectToNewPod { result in
+            if case .success = result {
+                self.pumpDelegate.notify { (delegate) in
+                    delegate?.pumpManagerPumpWasReplaced(self)
+                }
+            }
+            completion(result)
+        }
     }
 
     // Called on the main thread
