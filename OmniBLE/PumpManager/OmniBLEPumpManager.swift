@@ -79,7 +79,7 @@ public class OmniBLEPumpManager: DeviceManager {
 
     public let managerIdentifier: String = "Omnipod-Dash" // use a single token to make parsing log files easier
 
-    public let localizedTitle = LocalizedString("Omnipod Dash", comment: "Generic title of the OmniBLE pump manager")
+    public let localizedTitle = LocalizedString("Omnipod DASH", comment: "Generic title of the OmniBLE pump manager")
 
     static let podAlarmNotificationIdentifier = "OmniBLE:\(LoopNotificationCategory.pumpFault.rawValue)"
 
@@ -184,7 +184,10 @@ public class OmniBLEPumpManager: DeviceManager {
             }
 
             if oldValue.podState?.lastInsulinMeasurements?.reservoirLevel != newValue.podState?.lastInsulinMeasurements?.reservoirLevel {
-                if let lastInsulinMeasurements = newValue.podState?.lastInsulinMeasurements, let reservoirLevel = lastInsulinMeasurements.reservoirLevel {
+                if let lastInsulinMeasurements = newValue.podState?.lastInsulinMeasurements,
+                   let reservoirLevel = lastInsulinMeasurements.reservoirLevel,
+                   reservoirLevel != Pod.reservoirLevelAboveThresholdMagicNumber
+                {
                     self.pumpDelegate.notify({ (delegate) in
                         self.log.info("DU: updating reservoir level %{public}@", String(describing: reservoirLevel))
                         delegate?.pumpManager(self, didReadReservoirValue: reservoirLevel, at: lastInsulinMeasurements.validTime) { _ in }

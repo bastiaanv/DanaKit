@@ -21,7 +21,7 @@
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2022 LoopKit Authors. All rights reserved.</string>
 	<key>com.loopkit.Loop.PumpManagerDisplayName</key>
-	<string>Omnipod Dash</string>
+	<string>Omnipod DASH</string>
 	<key>com.loopkit.Loop.PumpManagerIdentifier</key>
 	<string>Omnipod-Dash</string>
 	<key>NSPrincipalClass</key>
