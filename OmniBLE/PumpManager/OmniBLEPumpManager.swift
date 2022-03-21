@@ -526,26 +526,26 @@ extension OmniBLEPumpManager {
         return state.podState?.expiresAt
     }
 
-    public func buildPumpStatusHighlight(for state: OmniBLEPumpManagerState, andDate date: Date = Date()) -> PumpManagerStatus.PumpStatusHighlight? {
+    public func buildPumpStatusHighlight(for state: OmniBLEPumpManagerState, andDate date: Date = Date()) -> PumpStatusHighlight? {
         if state.podState?.pendingCommand != nil {
-            return PumpManagerStatus.PumpStatusHighlight(localizedMessage: NSLocalizedString("Comms Issue", comment: "Status highlight that delivery is uncertain."),
+            return PumpStatusHighlight(localizedMessage: NSLocalizedString("Comms Issue", comment: "Status highlight that delivery is uncertain."),
                                                          imageName: "exclamationmark.circle.fill",
                                                          state: .critical)
         }
 
         switch podCommState(for: state) {
         case .activating:
-            return PumpManagerStatus.PumpStatusHighlight(
+            return PumpStatusHighlight(
                 localizedMessage: NSLocalizedString("Finish Pairing", comment: "Status highlight that when pod is activating."),
                 imageName: "exclamationmark.circle.fill",
                 state: .warning)
         case .deactivating:
-            return PumpManagerStatus.PumpStatusHighlight(
+            return PumpStatusHighlight(
                 localizedMessage: NSLocalizedString("Finish Deactivation", comment: "Status highlight that when pod is deactivating."),
                 imageName: "exclamationmark.circle.fill",
                 state: .warning)
         case .noPod:
-            return PumpManagerStatus.PumpStatusHighlight(
+            return PumpStatusHighlight(
                 localizedMessage: NSLocalizedString("No Pod", comment: "Status highlight that when no pod is paired."),
                 imageName: "exclamationmark.circle.fill",
                 state: .warning)
@@ -561,23 +561,23 @@ extension OmniBLEPumpManager {
             default:
                 message = LocalizedString("Pod Error", comment: "Status highlight message for other alarm.")
             }
-            return PumpManagerStatus.PumpStatusHighlight(
+            return PumpStatusHighlight(
                 localizedMessage: message,
                 imageName: "exclamationmark.circle.fill",
                 state: .critical)
         case .active:
             if let reservoirPercent = state.reservoirLevel?.percentage, reservoirPercent == 0 {
-                return PumpManagerStatus.PumpStatusHighlight(
+                return PumpStatusHighlight(
                     localizedMessage: NSLocalizedString("No Insulin", comment: "Status highlight that a pump is out of insulin."),
                     imageName: "exclamationmark.circle.fill",
                     state: .critical)
             } else if state.podState?.isSuspended == true {
-                return PumpManagerStatus.PumpStatusHighlight(
+                return PumpStatusHighlight(
                     localizedMessage: NSLocalizedString("Insulin Suspended", comment: "Status highlight that insulin delivery was suspended."),
                     imageName: "pause.circle.fill",
                     state: .warning)
             } else if date.timeIntervalSince(state.lastPumpDataReportDate ?? .distantPast) > .minutes(12) {
-                return PumpManagerStatus.PumpStatusHighlight(
+                return PumpStatusHighlight(
                     localizedMessage: NSLocalizedString("No Data", comment: "Status highlight when communications with the pod haven't happened recently."),
                     imageName: "exclamationmark.circle.fill",
                     state: .critical)
@@ -605,28 +605,28 @@ extension OmniBLEPumpManager {
         }
     }
 
-    public func buildPumpLifecycleProgress(for state: OmniBLEPumpManagerState) -> PumpManagerStatus.PumpLifecycleProgress? {
+    public func buildPumpLifecycleProgress(for state: OmniBLEPumpManagerState) -> PumpLifecycleProgress? {
         switch podCommState {
         case .active:
             if shouldWarnPodEOL,
                let podTimeRemaining = podTimeRemaining
             {
                 let percentCompleted = max(0, min(1, (1 - (podTimeRemaining / Pod.nominalPodLife))))
-                return PumpManagerStatus.PumpLifecycleProgress(percentComplete: percentCompleted, progressState: .warning)
+                return PumpLifecycleProgress(percentComplete: percentCompleted, progressState: .warning)
             } else if let podTimeRemaining = podTimeRemaining, podTimeRemaining <= 0 {
                 // Pod is expired
-                return PumpManagerStatus.PumpLifecycleProgress(percentComplete: 1, progressState: .critical)
+                return PumpLifecycleProgress(percentComplete: 1, progressState: .critical)
             }
             return nil
         case .fault(let detail):
             if detail.faultEventCode.faultType == .exceededMaximumPodLife80Hrs {
-                return PumpManagerStatus.PumpLifecycleProgress(percentComplete: 100, progressState: .critical)
+                return PumpLifecycleProgress(percentComplete: 100, progressState: .critical)
             } else {
                 if shouldWarnPodEOL,
                    let durationBetweenLastPodCommAndActivation = durationBetweenLastPodCommAndActivation
                 {
                     let percentCompleted = max(0, min(1, durationBetweenLastPodCommAndActivation / Pod.nominalPodLife))
-                    return PumpManagerStatus.PumpLifecycleProgress(percentComplete: percentCompleted, progressState: .dimmed)
+                    return PumpLifecycleProgress(percentComplete: percentCompleted, progressState: .dimmed)
                 }
             }
             return nil
