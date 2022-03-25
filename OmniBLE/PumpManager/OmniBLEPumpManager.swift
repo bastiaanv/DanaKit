@@ -878,7 +878,7 @@ extension OmniBLEPumpManager {
                     let timeUntilExpirationReminder = expiration.addingTimeInterval(-self.state.defaultExpirationReminderOffset).timeIntervalSince(self.dateGenerator())
 
                     let alerts: [PodAlert] = [
-                        .expirationReminder(timeUntilExpirationReminder),
+                        .expirationReminder(self.state.defaultExpirationReminderOffset > 0 ? timeUntilExpirationReminder : 0),
                         .lowReservoir(self.state.lowReservoirReminderValue)
                     ]
 
@@ -1734,7 +1734,7 @@ extension OmniBLEPumpManager: PumpManager {
         }
     }
 
-    public func updateExpirationReminder(_ intervalBeforeExpiration: TimeInterval, completion: @escaping (OmniBLEPumpManagerError?) -> Void) {
+    public func updateExpirationReminder(_ intervalBeforeExpiration: TimeInterval?, completion: @escaping (OmniBLEPumpManagerError?) -> Void) {
 
         guard self.hasActivePod, let podState = state.podState, let expiresAt = podState.expiresAt else {
             completion(OmniBLEPumpManagerError.noPodPaired)
@@ -1752,7 +1752,10 @@ extension OmniBLEPumpManager: PumpManager {
                 return
             }
 
-            let timeUntilReminder = expiresAt.addingTimeInterval(-intervalBeforeExpiration).timeIntervalSince(self.dateGenerator())
+            var timeUntilReminder : TimeInterval = 0
+            if let intervalBeforeExpiration = intervalBeforeExpiration, intervalBeforeExpiration > 0 {
+                timeUntilReminder = expiresAt.addingTimeInterval(-intervalBeforeExpiration).timeIntervalSince(self.dateGenerator())
+            }
 
             let expirationReminder = PodAlert.expirationReminder(timeUntilReminder)
             do {
@@ -1785,7 +1788,7 @@ extension OmniBLEPumpManager: PumpManager {
     }
 
     public var scheduledExpirationReminder: Date? {
-        guard let expiration = state.podState?.expiresAt, let offset = state.scheduledExpirationReminderOffset else {
+        guard let expiration = state.podState?.expiresAt, let offset = state.scheduledExpirationReminderOffset, offset > 0 else {
             return nil
         }
 
@@ -1824,8 +1827,6 @@ extension OmniBLEPumpManager: PumpManager {
             }
         }
     }
-
-
 
     func issueAlert(alert: PumpManagerAlert) {
         let identifier = Alert.Identifier(managerIdentifier: self.managerIdentifier, alertIdentifier: alert.alertIdentifier)
@@ -1900,6 +1901,9 @@ extension OmniBLEPumpManager: PumpManager {
         case .podSuspendedReminder:
             return PumpManagerAlert.suspendInProgress(triggeringSlot: slot)
         case .expirationReminder:
+            guard let offset = state.scheduledExpirationReminderOffset, offset > 0 else {
+                return nil
+            }
             let timeToExpiry = TimeInterval(hours: expiresAt.timeIntervalSince(dateGenerator()).hours.rounded())
             return PumpManagerAlert.userPodExpiration(triggeringSlot: slot, scheduledExpirationReminderOffset: timeToExpiry)
         case .expired:

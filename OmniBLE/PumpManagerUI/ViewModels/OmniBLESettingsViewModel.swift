@@ -257,10 +257,13 @@ class OmniBLESettingsViewModel: ObservableObject {
         }
     }
     
-    func saveScheduledExpirationReminder(_ selectedDate: Date, _ completion: @escaping (Error?) -> Void) {
+    func saveScheduledExpirationReminder(_ selectedDate: Date?, _ completion: @escaping (Error?) -> Void) {
         if let podExpiresAt = pumpManager.podExpiresAt {
-            let intervalBeforeExpiration = podExpiresAt.timeIntervalSince(selectedDate)
-            pumpManager.updateExpirationReminder(.hours(round(intervalBeforeExpiration.hours))) { (error) in
+            var intervalBeforeExpiration : TimeInterval?
+            if let selectedDate = selectedDate {
+                intervalBeforeExpiration = .hours(round(podExpiresAt.timeIntervalSince(selectedDate).hours))
+            }
+            pumpManager.updateExpirationReminder(intervalBeforeExpiration) { (error) in
                 DispatchQueue.main.async {
                     if error == nil {
                         self.expirationReminderDate = selectedDate
