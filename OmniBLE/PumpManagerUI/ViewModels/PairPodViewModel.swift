@@ -236,11 +236,11 @@ enum DashPairingError : LocalizedError {
     }
     
     var recoverable: Bool {
-        switch self {
-        case .pumpManagerError(let error):
+//        switch self {
+//        case .pumpManagerError(let error):
             // TODO: check which errors are recoverable
             return true
-        }
+//        }
     }
 }
 
