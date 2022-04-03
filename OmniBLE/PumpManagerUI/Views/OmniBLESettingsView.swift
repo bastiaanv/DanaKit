@@ -258,6 +258,8 @@ struct OmniBLESettingsView: View  {
                         Divider()
                         Text(faultAction)
                             .font(Font.footnote.weight(.semibold))
+                            .fixedSize(horizontal: false, vertical: true)
+                            .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
                 if let notice = viewModel.notice {

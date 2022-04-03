@@ -57,6 +57,14 @@ class OmniBLESettingsViewModel: ObservableObject {
         }
     }
 
+    var serviceTimeRemainingString: String? {
+        if let serviceTimeRemaining = pumpManager.podServiceTimeRemaining, let serviceTimeRemainingString = timeRemainingFormatter.string(from: serviceTimeRemaining) {
+            return serviceTimeRemainingString
+        } else {
+            return nil
+        }
+    }
+
     // Expiration reminder date for current pod
     @Published var expirationReminderDate: Date?
     
@@ -130,8 +138,12 @@ class OmniBLESettingsViewModel: ObservableObject {
             return LocalizedString("Insulin delivery stopped. Change Pod now.", comment: "The action string on pod status page when pod faulted")
         } else if podOk && isPodDataStale {
             return LocalizedString("Make sure your phone and pod are close to each other. If communication issues persist, move to a new area.", comment: "The action string on pod status page when pod data is stale")
-        } else if let podTimeRemaining = pumpManager.podTimeRemaining, podTimeRemaining < 0 {
-            return LocalizedString("Change Pod now. Insulin delivery will stop 8 hours after the Pod has expired or when no more insulin remains.", comment: "The action string on pod status page when pod expired")
+        } else if let serviceTimeRemaining = pumpManager.podServiceTimeRemaining, serviceTimeRemaining <= Pod.serviceDuration - Pod.nominalPodLife {
+            if let serviceTimeRemainingString = serviceTimeRemainingString {
+                return String(format: LocalizedString("Change Pod now. Insulin delivery will stop in %1$@ or when no more insulin remains.", comment: "Format string for the action string on pod status page when pod expired. (1: service time remaining)"), serviceTimeRemainingString)
+            } else {
+                return LocalizedString("Change Pod now. Insulin delivery will stop 8 hours after the Pod has expired or when no more insulin remains.", comment: "The action string on pod status page when pod expired")
+            }
         } else {
             return nil
         }
@@ -170,7 +182,15 @@ class OmniBLESettingsViewModel: ObservableObject {
         dateFormatter.dateStyle = .none
         return dateFormatter
     }()
-
+    
+    let timeRemainingFormatter: DateComponentsFormatter = {
+        let dateComponentsFormatter = DateComponentsFormatter()
+        dateComponentsFormatter.allowedUnits = [.hour, .minute]
+        dateComponentsFormatter.unitsStyle = .full
+        dateComponentsFormatter.zeroFormattingBehavior = .dropAll
+        return dateComponentsFormatter
+    }()
+    
     let basalRateFormatter: NumberFormatter = {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
@@ -491,6 +511,13 @@ extension OmniBLEPumpManager {
         }
     }
 
+    fileprivate var podServiceTimeRemaining : TimeInterval? {
+        guard let podTimeRemaining = podTimeRemaining else {
+            return nil;
+        }
+        return max(0, Pod.serviceDuration - Pod.nominalPodLife + podTimeRemaining);
+    }
+    
     private func podDetails(fromPodState podState: PodState, andDeviceName deviceName: String?) -> PodDetails {
         return PodDetails(
             lotNumber: podState.lotNo,
