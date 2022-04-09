@@ -13,10 +13,9 @@ import os.log
 import UIKit
 import CoreBluetooth
 
-protocol PodCommsDelegate: AnyObject {
+protocol PodCommsDelegate: OmniBLEConnectionDelegate {
     func podComms(_ podComms: PodComms, didChange podState: PodState?)
     func podCommsDidEstablishSession(_ podComms: PodComms)
-    func podConnectionStateDidChange(isConnected: Bool)
 }
 
 public class PodComms: CustomDebugStringConvertible {
@@ -468,6 +467,7 @@ extension PodComms: OmniBLEConnectionDelegate {
     func omnipodPeripheralWasRestored(manager: PeripheralManager) {
         if let podState = podState, manager.peripheral.identifier.uuidString == podState.bleIdentifier {
             self.manager = manager
+            self.delegate?.omnipodPeripheralWasRestored(manager: manager)
         }
     }
 
@@ -475,16 +475,24 @@ extension PodComms: OmniBLEConnectionDelegate {
         if let podState = podState, manager.peripheral.identifier.uuidString == podState.bleIdentifier {
             needsSessionEstablishment = true
             self.manager = manager
-            self.delegate?.podConnectionStateDidChange(isConnected: true)
+            self.delegate?.omnipodPeripheralDidConnect(manager: manager)
         }
     }
 
-    func omnipodPeripheralDidDisconnect(peripheral: CBPeripheral) {
+    func omnipodPeripheralDidDisconnect(peripheral: CBPeripheral, error: Error?) {
         if let podState = podState, peripheral.identifier.uuidString == podState.bleIdentifier {
-            self.delegate?.podConnectionStateDidChange(isConnected: false)
-            log.default("omnipodPeripheralDidDisconnect... will auto-reconnect")
+            self.delegate?.omnipodPeripheralDidDisconnect(peripheral: peripheral, error: error)
+            log.debug("omnipodPeripheralDidDisconnect... will auto-reconnect")
         }
     }
+
+    func omnipodPeripheralDidFailToConnect(peripheral: CBPeripheral, error: Error?) {
+        if let podState = podState, peripheral.identifier.uuidString == podState.bleIdentifier {
+            self.delegate?.omnipodPeripheralDidFailToConnect(peripheral: peripheral, error: error)
+            log.debug("omnipodPeripheralDidDisconnect... will auto-reconnect")
+        }
+    }
+
 }
 
 // MARK: - PeripheralManagerDelegate

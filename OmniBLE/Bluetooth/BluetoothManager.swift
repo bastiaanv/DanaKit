@@ -77,7 +77,15 @@ protocol OmniBLEConnectionDelegate: AnyObject {
 
      - parameter peripheral: The peripheral that was disconnected
      */
-    func omnipodPeripheralDidDisconnect(peripheral: CBPeripheral)
+    func omnipodPeripheralDidDisconnect(peripheral: CBPeripheral, error: Error?)
+
+    /**
+     Tells the delegate that a peripheral failed to connect
+
+     - parameter peripheral: The peripheral that failed to connect
+     */
+    func omnipodPeripheralDidFailToConnect(peripheral: CBPeripheral, error: Error?)
+
 }
 
 
@@ -183,7 +191,7 @@ class BluetoothManager: NSObject {
     
     private func updateConnections() {
         guard manager.state == .poweredOn else {
-            log.default("Skipping updateConnections until state is poweredOn")
+            log.debug("Skipping updateConnections until state is poweredOn")
             return
         }
         
@@ -269,7 +277,7 @@ extension BluetoothManager: CBCentralManagerDelegate {
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         dispatchPrecondition(condition: .onQueue(managerQueue))
 
-        log.default("%{public}@: %{public}@", #function, String(describing: central.state.rawValue))
+        log.debug("%{public}@: %{public}@", #function, String(describing: central.state.rawValue))
 
         if case .poweredOn = central.state {
             updateConnections()
@@ -316,7 +324,7 @@ extension BluetoothManager: CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         dispatchPrecondition(condition: .onQueue(managerQueue))
 
-        log.info("%{public}@: %{public}@, %{public}@", #function, peripheral, advertisementData)
+        log.debug("%{public}@: %{public}@, %{public}@", #function, peripheral, advertisementData)
         
         if let podAdvertisement = PodAdvertisement(advertisementData) {
             addPeripheral(peripheral, podAdvertisement: podAdvertisement)
@@ -326,7 +334,7 @@ extension BluetoothManager: CBCentralManagerDelegate {
                 log.default("Connecting to pairable device %{public} in discovery mode", peripheral)
                 manager.connect(peripheral, options: nil)
             } else if autoConnectIDs.contains(peripheral.identifier.uuidString) && peripheral.state == .disconnected {
-                log.default("Reonnecting to autoconnect device")
+                log.debug("Reonnecting to autoconnect device")
                 manager.connect(peripheral, options: nil)
             } else {
                 log.info("Ignoring paired or unconnectable peripheral: %{public}@", peripheral)
@@ -336,7 +344,7 @@ extension BluetoothManager: CBCentralManagerDelegate {
         }
         
         if !discoveryModeEnabled && central.isScanning && hasDiscoveredAllAutoConnectDevices {
-            log.default("All peripherals discovered")
+            log.debug("All peripherals discovered")
             stopScanning()
         }
     }
@@ -344,7 +352,7 @@ extension BluetoothManager: CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         dispatchPrecondition(condition: .onQueue(managerQueue))
 
-        log.default("%{public}@: %{public}@", #function, peripheral)
+        log.debug("%{public}@: %{public}@", #function, peripheral)
         
         // Proxy connection events to peripheral manager
         for device in devices where device.manager.peripheral.identifier == peripheral.identifier {
@@ -355,12 +363,12 @@ extension BluetoothManager: CBCentralManagerDelegate {
 
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         dispatchPrecondition(condition: .onQueue(managerQueue))
-        log.default("%{public}@: error=%{public}@ %{public}@", #function, error?.localizedDescription ?? "None", peripheral)
+        log.debug("%{public}@: error=%{public}@ %{public}@", #function, error?.localizedDescription ?? "None", peripheral)
         
-        connectionDelegate?.omnipodPeripheralDidDisconnect(peripheral: peripheral)
+        connectionDelegate?.omnipodPeripheralDidDisconnect(peripheral: peripheral, error: error)
         
         if autoConnectIDs.contains(peripheral.identifier.uuidString) {
-            log.default("Reconnecting disconnected autoconnect peripheral")
+            log.debug("Reconnecting disconnected autoconnect peripheral")
             central.connect(peripheral, options: nil)
         }
     }
@@ -369,7 +377,9 @@ extension BluetoothManager: CBCentralManagerDelegate {
         dispatchPrecondition(condition: .onQueue(managerQueue))
 
         log.error("%{public}@: %{public}@", #function, String(describing: error))
-        
+
+        connectionDelegate?.omnipodPeripheralDidFailToConnect(peripheral: peripheral, error: error)
+
         if autoConnectIDs.contains(peripheral.identifier.uuidString) {
             central.connect(peripheral, options: nil)
         }

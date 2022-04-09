@@ -11,7 +11,7 @@ import HealthKit
 import LoopKit
 import UserNotifications
 import os.log
-
+import CoreBluetooth
 
 public protocol PodStateObserver: AnyObject {
     func podStateDidUpdate(_ state: PodState?)
@@ -252,7 +252,26 @@ public class OmniBLEPumpManager: DeviceManager {
         podComms.manager?.peripheral.state == .connected
     }
 
-    func podConnectionStateDidChange(isConnected: Bool) {
+    func omnipodPeripheralDidConnect(manager: PeripheralManager) {
+        logDeviceCommunication("Pod connected \(manager.peripheral.identifier.uuidString)", type: .connection)
+        notifyPodConnectionStateDidChange(isConnected: true)
+    }
+
+    func omnipodPeripheralDidDisconnect(peripheral: CBPeripheral, error: Error?) {
+        logDeviceCommunication("Pod disconnected \(peripheral.identifier.uuidString) \(String(describing: error))", type: .connection)
+        notifyPodConnectionStateDidChange(isConnected: false)
+    }
+
+    func omnipodPeripheralDidFailToConnect(peripheral: CBPeripheral, error: Error?) {
+        logDeviceCommunication("Pod failed to connect \(peripheral.identifier.uuidString), \(String(describing: error))", type: .connection)
+    }
+
+    func omnipodPeripheralWasRestored(manager: PeripheralManager) {
+        logDeviceCommunication("Pod peripheral was restored \(manager.peripheral.identifier.uuidString))", type: .connection)
+        notifyPodConnectionStateDidChange(isConnected: manager.peripheral.state == .connected)
+    }
+
+    func notifyPodConnectionStateDidChange(isConnected: Bool) {
         podStateObservers.forEach { (observer) in
             observer.podConnectionStateDidChange(isConnected: isConnected)
         }
