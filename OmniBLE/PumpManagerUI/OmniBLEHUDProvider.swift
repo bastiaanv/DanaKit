@@ -54,7 +54,7 @@ internal class OmniBLEHUDProvider: NSObject, HUDProvider {
         self.pumpManager.addPodStateObserver(self, queue: .main)
     }
 
-    public func createHUDView() -> LevelHUDView? {
+    public func createHUDView() -> BaseHUDView? {
         reservoirView = OmniBLEReservoirView.instantiate()
         updateReservoirView()
 
@@ -88,7 +88,7 @@ internal class OmniBLEHUDProvider: NSObject, HUDProvider {
         return rawValue
     }
 
-    public static func createHUDView(rawValue: HUDProvider.HUDViewRawState) -> LevelHUDView? {
+    public static func createHUDView(rawValue: HUDProvider.HUDViewRawState) -> BaseHUDView? {
         guard let rawReservoirLevel = rawValue["reservoirLevel"] as? ReservoirLevel.RawValue,
               let rawReservoirLevelHighlightState = rawValue["reservoirLevelHighlightState"] as? ReservoirLevelHighlightState.RawValue,
               let reservoirLevelHighlightState = ReservoirLevelHighlightState(rawValue: rawReservoirLevelHighlightState)

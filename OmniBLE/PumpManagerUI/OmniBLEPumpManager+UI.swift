@@ -40,7 +40,7 @@ extension OmniBLEPumpManager: PumpManagerUI {
         return OmniBLEHUDProvider(pumpManager: self, bluetoothProvider: bluetoothProvider, colorPalette: colorPalette, allowedInsulinTypes: allowedInsulinTypes)
     }
 
-    public static func createHUDView(rawValue: HUDProvider.HUDViewRawState) -> LevelHUDView? {
+    public static func createHUDView(rawValue: HUDProvider.HUDViewRawState) -> BaseHUDView? {
         return OmniBLEHUDProvider.createHUDView(rawValue: rawValue)
     }
 }
