@@ -277,7 +277,7 @@ extension BluetoothManager: CBCentralManagerDelegate {
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         dispatchPrecondition(condition: .onQueue(managerQueue))
 
-        log.debug("%{public}@: %{public}@", #function, String(describing: central.state.rawValue))
+        log.default("%{public}@: %{public}@", #function, String(describing: central.state.rawValue))
 
         if case .poweredOn = central.state {
             updateConnections()
