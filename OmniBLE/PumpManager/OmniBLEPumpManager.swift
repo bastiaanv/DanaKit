@@ -1704,7 +1704,7 @@ extension OmniBLEPumpManager: PumpManager {
                     }
                 }
             } catch let error {
-                self.log.error("Error during temp basal: %@", String(describing: error))
+                self.log.error("Error during temp basal: %{public}@", String(describing: error))
                 completion(.communication(error as? LocalizedError))
             }
         }
