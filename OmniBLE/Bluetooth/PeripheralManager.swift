@@ -39,6 +39,15 @@ class PeripheralManager: NSObject {
     var cmdQueue: [Data] = []
     let queueLock = NSCondition()
 
+    var idleStart: Date? = nil
+
+    var needsReconnection: Bool {
+        guard let start = idleStart else { return false }
+
+        return Date().timeIntervalSince(start) > .minutes(2.9)
+    }
+
+
     /// The dispatch queue used to serialize operations on the peripheral
     let queue = DispatchQueue(label: "com.loopkit.PeripheralManager.queue", qos: .unspecified)
 
@@ -96,18 +105,31 @@ extension PeripheralManager {
         case write(characteristic: CBCharacteristic)
         case discoverServices
         case discoverCharacteristicsForService(serviceUUID: CBUUID)
+        case connect
     }
 }
 
 protocol PeripheralManagerDelegate: AnyObject {
+    // Called from the PeripheralManager's queue
     func completeConfiguration(for manager: PeripheralManager) throws
 }
 
 
 // MARK: - Operation sequence management
 extension PeripheralManager {
+
+
     func configureAndRun(_ block: @escaping (_ manager: PeripheralManager) -> Void) -> (() -> Void) {
         return {
+            if self.needsReconnection {
+                self.log.default("Triggering forceful reconnect")
+                do {
+                    try self.reconnect(timeout: 5)
+                } catch let error {
+                    self.log.error("Error while forcing reconnection: %{public}@", String(describing: error))
+                }
+            }
+
             if !self.needsConfiguration && self.peripheral.services == nil {
                 self.log.error("Configured peripheral has no services. Reconfiguring %{public}@", self.peripheral)
             }
@@ -219,7 +241,7 @@ extension PeripheralManager {
 
         guard signaled else {
             self.log.info("runCommand lock timeout reached - not signalled")
-            throw PeripheralManagerError.notReady
+            throw PeripheralManagerError.timeout(commandConditions)
         }
 
         if let error = commandError {
@@ -263,6 +285,13 @@ extension PeripheralManager {
         }
     }
 
+    func reconnect(timeout: TimeInterval) throws {
+        try runCommand(timeout: timeout) {
+            addCondition(.connect)
+            central?.cancelPeripheralConnection(peripheral)
+        }
+    }
+
     /// - Throws: PeripheralManagerError
     func setNotifyValue(_ enabled: Bool, for characteristic: CBCharacteristic, timeout: TimeInterval) throws {
         try runCommand(timeout: timeout) {
@@ -282,19 +311,6 @@ extension PeripheralManager {
 
         return characteristic.value
     }
-
-    /// - Throws: PeripheralManagerError
-//    func wait(for characteristic: CBCharacteristic, timeout: TimeInterval) throws -> Data {
-//        try runCommand(timeout: timeout) {
-//            addCondition(.valueUpdate(characteristic: characteristic, matching: nil))
-//        }
-//
-//        guard let value = characteristic.value else {
-//            throw PeripheralManagerError.timeout
-//        }
-//
-//        return value
-//    }
 
     /// - Throws: PeripheralManagerError
     func writeValue(_ value: Data, for characteristic: CBCharacteristic, type: CBCharacteristicWriteType, timeout: TimeInterval) throws {
@@ -467,6 +483,12 @@ extension PeripheralManager: CBCentralManagerDelegate {
         queueLock.unlock()
     }
 
+    func centralManager(_ central: CBCentralManager, didDisconnect peripheral: CBPeripheral, error: Error?) {
+        self.queue.async {
+            self.idleStart = nil
+        }
+    }
+
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         self.log.debug("PeripheralManager - didConnect: %@", peripheral)
         switch peripheral.state {
@@ -474,6 +496,23 @@ extension PeripheralManager: CBCentralManagerDelegate {
             clearCommsQueues()
             self.log.debug("PeripheralManager - didConnect - running assertConfiguration")
             assertConfiguration()
+
+            commandLock.lock()
+            if let index = commandConditions.firstIndex(where: { (condition) -> Bool in
+                if case .connect = condition {
+                    return true
+                } else {
+                    return false
+                }
+            }) {
+                commandConditions.remove(at: index)
+
+                if commandConditions.isEmpty {
+                    commandLock.broadcast()
+                }
+            }
+            commandLock.unlock()
+
         default:
             break
         }
@@ -508,6 +547,8 @@ extension PeripheralManager {
                 manager.log.default("======================== %{public}@ ===========================", name)
                 block()
                 manager.log.default("------------------------ %{public}@ ---------------------------", name)
+                self?.idleStart = Date()
+                self?.log.default("Start of idle at %{public}@", String(describing: self?.idleStart))
             }
         })
     }

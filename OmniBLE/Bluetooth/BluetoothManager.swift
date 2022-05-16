@@ -364,9 +364,14 @@ extension BluetoothManager: CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         dispatchPrecondition(condition: .onQueue(managerQueue))
         log.debug("%{public}@: error=%{public}@ %{public}@", #function, error?.localizedDescription ?? "None", peripheral)
-        
+
+        // Proxy disconnection events to peripheral manager
+        for device in devices where device.manager.peripheral.identifier == peripheral.identifier {
+            device.manager.centralManager(central, didDisconnect: peripheral, error: error)
+        }
+
         connectionDelegate?.omnipodPeripheralDidDisconnect(peripheral: peripheral, error: error)
-        
+
         if autoConnectIDs.contains(peripheral.identifier.uuidString) {
             log.debug("Reconnecting disconnected autoconnect peripheral")
             central.connect(peripheral, options: nil)
@@ -383,29 +388,5 @@ extension BluetoothManager: CBCentralManagerDelegate {
         if autoConnectIDs.contains(peripheral.identifier.uuidString) {
             central.connect(peripheral, options: nil)
         }
-    }
-}
-
-
-extension BluetoothManager: PeripheralManagerDelegate {
-
-    func peripheralManager(_ manager: PeripheralManager, didReadRSSI RSSI: NSNumber, error: Error?) {
-
-    }
-
-    func peripheralManagerDidUpdateName(_ manager: PeripheralManager) {
-
-    }
-
-    func completeConfiguration(for manager: PeripheralManager) throws {
-        //self.delegate?.bluetoothManager(self, didCompleteConfiguration: manager)
-    }
-
-    func peripheralManager(_ manager: PeripheralManager, didUpdateNotificationStateFor characteristic: CBCharacteristic) {
-
-    }
-
-    func peripheralManager(_ manager: PeripheralManager, didUpdateValueFor characteristic: CBCharacteristic) {
-
     }
 }
