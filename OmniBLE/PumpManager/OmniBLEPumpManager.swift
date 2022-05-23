@@ -1636,16 +1636,18 @@ extension OmniBLEPumpManager: PumpManager {
                     throw PodCommsError.podSuspended
                 }
 
-                guard self.state.podState?.unfinalizedBolus?.isFinished() != false else {
+                // A resume scheduled basal delivery request is denoted by a 0 duration that cancels any existing temp basal.
+                let resumingScheduledBasal = duration < .ulpOfOne
+
+                // If a bolus is not finished, fail if not resuming the scheduled basal
+                guard self.state.podState?.unfinalizedBolus?.isFinished() != false || resumingScheduledBasal else {
                     self.log.info("Not enacting temp basal because podState indicates unfinalized bolus in progress.")
                     throw PodCommsError.unfinalizedBolus
                 }
 
                 let status: StatusResponse
 
-                // if resuming a normal basal as denoted by a 0 duration temp basal, use a confirmation beep if appropriate
-                //let beep: BeepType = duration < .ulpOfOne && self.confirmationBeeps && tempBasalConfirmationBeeps ? .beep : .noBeep
-                let result = session.cancelDelivery(deliveryType: .tempBasal, beepType: .noBeep)
+                let result = session.cancelDelivery(deliveryType: .tempBasal)
                 switch result {
                 case .certainFailure(let error):
                     throw error
@@ -1655,7 +1657,8 @@ extension OmniBLEPumpManager: PumpManager {
                     status = cancelTempStatus
                 }
 
-                guard !status.deliveryStatus.bolusing else {
+                // If pod is bolusing, fail if not resuming the scheduled basal
+                guard !status.deliveryStatus.bolusing || resumingScheduledBasal else {
                     throw PodCommsError.unfinalizedBolus
                 }
 
@@ -1670,8 +1673,7 @@ extension OmniBLEPumpManager: PumpManager {
                     })
                 }
 
-                if duration < .ulpOfOne {
-                    // 0 duration temp basals are used to cancel any existing temp basal
+                if resumingScheduledBasal {
                     self.setState({ (state) in
                         state.tempBasalEngageState = .disengaging
                     })
