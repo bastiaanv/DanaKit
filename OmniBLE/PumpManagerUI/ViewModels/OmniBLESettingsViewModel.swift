@@ -15,6 +15,7 @@ import HealthKit
 enum DashSettingsViewAlert {
     case suspendError(Error)
     case resumeError(Error)
+    case cancelManualBasalError(Error)
     case syncTimeError(OmniBLEPumpManagerError)
 }
 
@@ -30,7 +31,7 @@ struct DashSettingsNotice {
 }
 
 class OmniBLESettingsViewModel: ObservableObject {
-    
+
     @Published var lifeState: PodLifeState
     
     @Published var activatedAt: Date?
@@ -198,6 +199,16 @@ class OmniBLESettingsViewModel: ObservableObject {
         numberFormatter.minimumIntegerDigits = 1
         return numberFormatter
     }()
+
+    var manualBasalTimeRemaining: TimeInterval? {
+        if case .tempBasal(let dose) = basalDeliveryState, !(dose.automatic ?? true) {
+            let remaining = dose.endDate.timeIntervalSinceNow
+            if remaining > 0 {
+                return remaining
+            }
+        }
+        return nil
+    }
     
     let reservoirVolumeFormatter = QuantityFormatter(for: .internationalUnit())
     
@@ -227,6 +238,7 @@ class OmniBLESettingsViewModel: ObservableObject {
         podDetails = self.pumpManager.podDetails
         previousPodDetails = self.pumpManager.previousPodDetails
         pumpManager.addPodStateObserver(self, queue: DispatchQueue.main)
+        pumpManager.addStatusObserver(self, queue: DispatchQueue.main)
         
         // Trigger refresh
         pumpManager.getPodStatus() { _ in }
@@ -275,6 +287,10 @@ class OmniBLESettingsViewModel: ObservableObject {
                 }
             }
         }
+    }
+
+    func runTemporaryBasalProgram(unitsPerHour: Double, for duration: TimeInterval, completion: @escaping (PumpManagerError?) -> Void) {
+        pumpManager.runTemporaryBasalProgram(unitsPerHour: unitsPerHour, for: duration, automatic: false, completion: completion)
     }
     
     func saveScheduledExpirationReminder(_ selectedDate: Date?, _ completion: @escaping (Error?) -> Void) {
@@ -385,7 +401,7 @@ class OmniBLESettingsViewModel: ObservableObject {
         case .suspending:
             return LocalizedString("Suspending insulin delivery...", comment: "Text for suspend resume button when insulin delivery is suspending")
         case .suspended:
-            return LocalizedString("Tap to Resume Insulin Delivery", comment: "Text for suspend resume button when insulin delivery is suspended")
+            return LocalizedString("Resume Insulin Delivery", comment: "Text for suspend resume button when insulin delivery is suspended")
         case .resuming:
             return LocalizedString("Resuming insulin delivery...", comment: "Text for suspend resume button when insulin delivery is resuming")
         default:
@@ -437,12 +453,14 @@ class OmniBLESettingsViewModel: ObservableObject {
         }
     }
 
+    public var allowedTempBasalRates: [Double] {
+        return Pod.supportedBasalRates.filter { $0 <= pumpManager.state.maximumTempBasalRate }
+    }
 }
 
 extension OmniBLESettingsViewModel: PodStateObserver {
     func podStateDidUpdate(_ state: PodState?) {
         lifeState = self.pumpManager.lifeState
-        basalDeliveryState = self.pumpManager.status.basalDeliveryState
         basalDeliveryRate = self.pumpManager.basalDeliveryRate
         reservoirLevel = self.pumpManager.reservoirLevel
         activatedAt = state?.activatedAt
@@ -460,6 +478,15 @@ extension OmniBLESettingsViewModel: PodStateObserver {
         self.podConnected = isConnected
     }
 }
+
+extension OmniBLESettingsViewModel: PumpManagerStatusObserver {
+    func pumpManager(_ pumpManager: PumpManager, didUpdate status: PumpManagerStatus, oldStatus: PumpManagerStatus) {
+        basalDeliveryState = self.pumpManager.status.basalDeliveryState
+    }
+}
+
+
+
 
 extension OmniBLEPumpManager {
     var lifeState: PodLifeState {
@@ -547,5 +574,6 @@ extension OmniBLEPumpManager {
         }
         return podDetails(fromPodState: podState, andDeviceName: nil)
     }
+
 }
 

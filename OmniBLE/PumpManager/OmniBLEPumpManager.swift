@@ -23,6 +23,7 @@ public enum OmniBLEPumpManagerError: Error {
     case podAlreadyPaired
     case insulinTypeNotConfigured
     case notReadyForCannulaInsertion
+    case invalidSetting
     case communication(Error)
     case state(Error)
 }
@@ -58,6 +59,8 @@ extension OmniBLEPumpManagerError: LocalizedError {
             } else {
                 return String(describing: error)
             }
+        case .invalidSetting:
+            return LocalizedString("Invalid Setting", comment: "Error description for OmniBLEPumpManagerError.invalidSetting")
         }
     }
 
@@ -375,7 +378,7 @@ extension OmniBLEPumpManager {
         case .disengaging:
             return .cancelingTempBasal
         case .stable:
-            if let tempBasal = podState.unfinalizedTempBasal, !tempBasal.isFinished() {
+            if let tempBasal = podState.unfinalizedTempBasal {
                 return .tempBasal(DoseEntry(tempBasal))
             }
             switch podState.suspendState {
@@ -398,9 +401,7 @@ extension OmniBLEPumpManager {
         case .disengaging:
             return .canceling
         case .stable:
-            // TODO: need to evaluate isFinished at a particular date, instead of now()
-            // as this function is called for old states, to compare to current state
-            if let bolus = podState.unfinalizedBolus, !bolus.isFinished() {
+            if let bolus = podState.unfinalizedBolus {
                 return .inProgress(DoseEntry(bolus))
             }
         }
@@ -597,9 +598,21 @@ extension OmniBLEPumpManager {
                     localizedMessage: NSLocalizedString("No Data", comment: "Status highlight when communications with the pod haven't happened recently."),
                     imageName: "exclamationmark.circle.fill",
                     state: .critical)
+            } else if isRunningManualTempBasal(for: state) {
+                return PumpStatusHighlight(
+                    localizedMessage: NSLocalizedString("Manual Basal", comment: "Status highlight when manual temp basal is running."),
+                    imageName: "exclamationmark.circle.fill",
+                    state: .warning)
             }
             return nil
         }
+    }
+
+    public func isRunningManualTempBasal(for state: OmniBLEPumpManagerState) -> Bool {
+        if let tempBasal = state.podState?.unfinalizedTempBasal, !tempBasal.isFinished(), !tempBasal.automatic {
+            return true
+        }
+        return false
     }
 
     public var reservoirLevelHighlightState: ReservoirLevelHighlightState? {
@@ -1611,6 +1624,10 @@ extension OmniBLEPumpManager: PumpManager {
     }
 
     public func enactTempBasal(unitsPerHour: Double, for duration: TimeInterval, completion: @escaping (PumpManagerError?) -> Void) {
+        runTemporaryBasalProgram(unitsPerHour: unitsPerHour, for: duration, automatic: true, completion: completion)
+    }
+
+    public func runTemporaryBasalProgram(unitsPerHour: Double, for duration: TimeInterval, automatic: Bool, completion: @escaping (PumpManagerError?) -> Void) {
         guard self.hasActivePod else {
             completion(.deviceState(OmniBLEPumpManagerError.noPodPaired))
             return
@@ -1691,7 +1708,9 @@ extension OmniBLEPumpManager: PumpManager {
                     let scheduledRate = self.state.basalSchedule.currentRate(using: calendar, at: self.dateGenerator())
                     let isHighTemp = rate > scheduledRate
 
-                    let result = session.setTempBasal(rate: rate, duration: duration, isHighTemp: isHighTemp, acknowledgementBeep: false, completionBeep: false)
+                    let beep = !automatic && self.beepPreference.shouldBeepForManualCommand
+
+                    let result = session.setTempBasal(rate: rate, duration: duration, isHighTemp: isHighTemp, automatic: automatic, acknowledgementBeep: beep, completionBeep: false)
                     session.dosesForStorage() { (doses) -> Bool in
                         return self.store(doses: doses, in: session)
                     }
@@ -1731,11 +1750,16 @@ extension OmniBLEPumpManager: PumpManager {
         }
     }
 
-    // Delivery limits are not enforced/displayed on omnipods
     public func syncDeliveryLimits(limits deliveryLimits: DeliveryLimits, completion: @escaping (Result<DeliveryLimits, Error>) -> Void) {
-        completion(.success(deliveryLimits))
+        mutateState { state in
+            if let rate = deliveryLimits.maximumBasalRate?.doubleValue(for: .internationalUnitsPerHour) {
+                state.maximumTempBasalRate = rate
+                completion(.success(deliveryLimits))
+            } else {
+                completion(.failure(OmniBLEPumpManagerError.invalidSetting))
+            }
+        }
     }
-
 
     // MARK: - Alerts
 
