@@ -18,6 +18,14 @@ public protocol PodStateObserver: AnyObject {
     func podConnectionStateDidChange(isConnected: Bool)
 }
 
+public enum PodCommState: Equatable {
+    case noPod
+    case activating
+    case active
+    case fault(DetailedStatus)
+    case deactivating
+}
+
 public enum OmniBLEPumpManagerError: Error {
     case noPodPaired
     case podAlreadyPaired
@@ -26,14 +34,6 @@ public enum OmniBLEPumpManagerError: Error {
     case invalidSetting
     case communication(Error)
     case state(Error)
-}
-
-public enum PodCommState: Equatable {
-    case noPod
-    case activating
-    case active
-    case fault(DetailedStatus)
-    case deactivating
 }
 
 extension OmniBLEPumpManagerError: LocalizedError {
@@ -689,7 +689,7 @@ extension OmniBLEPumpManager {
 
     public func forgetPod(completion: @escaping () -> Void) {
 
-        self.podComms.disconnectPodAndFinalizeDelivery()
+        self.podComms.forgetPod()
 
         if let dosesToStore = state.podState?.dosesToStore {
             store(doses: dosesToStore, completion: { error in
@@ -846,6 +846,7 @@ extension OmniBLEPumpManager {
 
     // Called on the main thread
     public func insertCannula(completion: @escaping (Result<TimeInterval,OmniBLEPumpManagerError>) -> Void) {
+        
         #if targetEnvironment(simulator)
         let mockDelay = TimeInterval(seconds: 3)
         let mockFaultDuringInsertCannula = false
@@ -856,7 +857,7 @@ extension OmniBLEPumpManager {
                     var podState = state.podState
                     podState?.fault = fault
                     state.updatePodStateFromPodComms(podState)
-                    // return .failure(PodCommsError.podFault(fault: fault))
+                    return .failure(OmniBLEPumpManagerError.communication(PodCommsError.podFault(fault: fault)))
                 }
 
                 // Mock success
@@ -985,7 +986,7 @@ extension OmniBLEPumpManager {
 
             do {
                 let beepType: BeepConfigType? = self.beepPreference.shouldBeepForManualCommand ? .bipBip : nil
-                let alerts = try session.acknowledgePodAlerts(alerts: alertsToAcknowledge, confirmationBeepType: beepType)
+                let alerts = try session.acknowledgeAlerts(alerts: alertsToAcknowledge, confirmationBeepType: beepType)
                 completion(alerts)
             } catch {
                 completion(nil)
@@ -1785,7 +1786,7 @@ extension OmniBLEPumpManager: PumpManager {
             return
         }
 
-        self.podComms.runSession(withName: "Program Low Reservoir Reminder") { (result) in
+        self.podComms.runSession(withName: "Update Expiration Reminder") { (result) in
 
             let session: PodCommsSession
             switch result {
@@ -1973,7 +1974,7 @@ extension OmniBLEPumpManager: PumpManager {
                     switch result {
                     case .success(let session):
                         do {
-                            let _ = try session.acknowledgePodAlerts(alerts: AlertSet(slots: [slot]), confirmationBeepType: self.beepPreference.shouldBeepForManualCommand ? .beep : .noBeep)
+                            let _ = try session.acknowledgeAlerts(alerts: AlertSet(slots: [slot]), confirmationBeepType: self.beepPreference.shouldBeepForManualCommand ? .beep : .noBeep)
                         } catch {
                             return
                         }
@@ -2157,7 +2158,7 @@ extension OmniBLEPumpManager {
                         switch result {
                         case .success(let session):
                             do {
-                                let _ = try session.acknowledgePodAlerts(alerts: AlertSet(slots: [slot]), confirmationBeepType: self.beepPreference.shouldBeepForManualCommand ? .beep : .noBeep)
+                                let _ = try session.acknowledgeAlerts(alerts: AlertSet(slots: [slot]), confirmationBeepType: self.beepPreference.shouldBeepForManualCommand ? .beep : .noBeep)
                             } catch {
                                 self.mutateState { state in
                                     state.alertsWithPendingAcknowledgment.insert(alert)
