@@ -1528,7 +1528,7 @@ extension OmniBLEPumpManager: PumpManager {
         // Round to nearest supported volume
         let enactUnits = roundToSupportedBolusVolume(units: units)
 
-        let acknowledgementBeep = automatic ? beepPreference.shouldBeepForAutomaticBolus : beepPreference.shouldBeepForManualCommand
+        let acknowledgementBeep = self.beepPreference.shouldBeepForCommand(automatic: automatic)
         let completionBeep = beepPreference.shouldBeepForManualCommand && !automatic
 
         self.podComms.runSession(withName: "Bolus") { (result) in
@@ -1675,7 +1675,7 @@ extension OmniBLEPumpManager: PumpManager {
         // Round to nearest supported rate
         let rate = roundToSupportedBasalRate(unitsPerHour: unitsPerHour)
 
-        let acknowledgementBeep = automatic ? beepPreference.shouldBeepForAutomaticTempBasal : beepPreference.shouldBeepForManualCommand
+        let acknowledgementBeep = beepPreference.shouldBeepForCommand(automatic: automatic)
         let completionBeep = beepPreference.shouldBeepForManualCommand && !automatic
 
         self.podComms.runSession(withName: "Enact Temp Basal") { (result) in
@@ -1753,6 +1753,7 @@ extension OmniBLEPumpManager: PumpManager {
                     let isHighTemp = rate > scheduledRate
 
                     let result = session.setTempBasal(rate: rate, duration: duration, isHighTemp: isHighTemp, automatic: automatic, acknowledgementBeep: acknowledgementBeep, completionBeep: completionBeep)
+
                     session.dosesForStorage() { (doses) -> Bool in
                         return self.store(doses: doses, in: session)
                     }
@@ -2128,14 +2129,6 @@ extension OmniBLEPumpManager: PodCommsDelegate {
     func podComms(_ podComms: PodComms, didChange podState: PodState?) {
         if let podState = podState {
             let (newFault, oldAlerts, newAlerts) = setStateWithResult { (state) -> (DetailedStatus?,AlertSet,AlertSet) in
-                // Check for any updates to bolus certainty, and log them
-                if let bolus = state.podState?.unfinalizedBolus, bolus.scheduledCertainty == .uncertain, !bolus.isFinished() {
-                    if podState.unfinalizedBolus?.scheduledCertainty == .some(.certain) {
-                        self.log.default("Resolved bolus uncertainty: did bolus")
-                    } else if podState.unfinalizedBolus == nil {
-                        self.log.default("Resolved bolus uncertainty: did not bolus")
-                    }
-                }
                 if (state.suspendEngageState == .engaging && podState.isSuspended) ||
                    (state.suspendEngageState == .disengaging && !podState.isSuspended)
                 {
