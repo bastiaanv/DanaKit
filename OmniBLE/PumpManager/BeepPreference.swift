@@ -39,11 +39,15 @@ public enum BeepPreference: Int, CaseIterable {
         return self == .extended || self == .manualCommands
     }
 
-    var shouldBeepForAutomaticBolus: Bool {
+    var shouldBeepForAutomaticCommands: Bool {
         return self == .extended
     }
 
-    var shouldBeepForAutomaticTempBasal: Bool {
-        return self == .extended
+    func shouldBeepForCommand(automatic: Bool) -> Bool {
+        if automatic {
+            return shouldBeepForAutomaticCommands
+        } else {
+            return shouldBeepForManualCommand
+        }
     }
 }
