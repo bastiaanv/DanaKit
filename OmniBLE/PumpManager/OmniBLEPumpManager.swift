@@ -86,8 +86,6 @@ public class OmniBLEPumpManager: DeviceManager {
 
     static let podAlarmNotificationIdentifier = "OmniBLE:\(LoopNotificationCategory.pumpFault.rawValue)"
 
-    let podExpirationNotificationIdentifier: Alert.Identifier
-
     public init(state: OmniBLEPumpManagerState, dateGenerator: @escaping () -> Date = Date.init) {
         self.lockedState = Locked(state)
 
@@ -95,9 +93,6 @@ public class OmniBLEPumpManager: DeviceManager {
 
         let podComms = PodComms(podState: state.podState, myId: state.controllerId, podId: state.podId)
         self.lockedPodComms = Locked(podComms)
-
-        self.podExpirationNotificationIdentifier = Alert.Identifier(managerIdentifier: managerIdentifier,
-                                                               alertIdentifier: LoopNotificationCategory.pumpExpired.rawValue)
 
         self.podComms.delegate = self
         self.podComms.messageLogger = self
