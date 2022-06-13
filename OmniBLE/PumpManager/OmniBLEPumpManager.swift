@@ -1519,7 +1519,7 @@ extension OmniBLEPumpManager: PumpManager {
 
     // MARK: - Programming Delivery
 
-    public func enactBolus(units: Double, automatic: Bool, completion: @escaping (PumpManagerError?) -> Void) {
+    public func enactBolus(units: Double, activationType: BolusActivationType, completion: @escaping (PumpManagerError?) -> Void) {
         guard self.hasActivePod else {
             completion(.configuration(OmniBLEPumpManagerError.noPodPaired))
             return
@@ -1528,8 +1528,8 @@ extension OmniBLEPumpManager: PumpManager {
         // Round to nearest supported volume
         let enactUnits = roundToSupportedBolusVolume(units: units)
 
-        let acknowledgementBeep = automatic ? beepPreference.shouldBeepForAutomaticBolus : beepPreference.shouldBeepForManualCommand
-        let completionBeep = beepPreference.shouldBeepForManualCommand && !automatic
+        let acknowledgementBeep = activationType.isAutomatic ? beepPreference.shouldBeepForAutomaticBolus : beepPreference.shouldBeepForManualCommand
+        let completionBeep = beepPreference.shouldBeepForManualCommand && !activationType.isAutomatic
 
         self.podComms.runSession(withName: "Bolus") { (result) in
             let session: PodCommsSession
@@ -1586,9 +1586,9 @@ extension OmniBLEPumpManager: PumpManager {
             //     user or automatically initiated by app.
             //   The max possible "reminder" value, 0x3F, would cause the pod to beep
             //      in 63 minutes if bolus had not completed by then.
-            let bolusWasAutomaticIndicator: TimeInterval = automatic ? TimeInterval(minutes: 0x3F) : 0
+            let bolusWasAutomaticIndicator: TimeInterval = activationType.isAutomatic ? TimeInterval(minutes: 0x3F) : 0
 
-            let result = session.bolus(units: enactUnits, automatic: automatic, acknowledgementBeep: acknowledgementBeep, completionBeep: completionBeep, programReminderInterval: bolusWasAutomaticIndicator)
+            let result = session.bolus(units: enactUnits, automatic: activationType.isAutomatic, acknowledgementBeep: acknowledgementBeep, completionBeep: completionBeep, programReminderInterval: bolusWasAutomaticIndicator)
             session.dosesForStorage() { (doses) -> Bool in
                 return self.store(doses: doses, in: session)
             }
