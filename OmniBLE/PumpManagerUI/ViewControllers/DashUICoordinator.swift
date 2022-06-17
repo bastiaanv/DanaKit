@@ -389,6 +389,11 @@ class DashUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
         delegate = self
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        completionDelegate?.completionNotifyingDidComplete(self)
+    }
+
     public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
                 
         setOverrideTraitCollection(customTraitCollection, forChild: viewController)

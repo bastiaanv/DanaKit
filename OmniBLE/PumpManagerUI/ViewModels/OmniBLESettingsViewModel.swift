@@ -366,7 +366,7 @@ class OmniBLESettingsViewModel: ObservableObject {
             }
         case .active:
             if isPodDataStale {
-                return LocalizedString("No Data", comment: "Error message for reservoir view during general pod fault")
+                return LocalizedString("Signal Loss", comment: "Error message for reservoir view during general pod fault")
             } else {
                 return nil
             }
