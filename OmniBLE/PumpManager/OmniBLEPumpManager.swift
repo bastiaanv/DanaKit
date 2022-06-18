@@ -316,7 +316,8 @@ extension OmniBLEPumpManager {
             pumpBatteryChargeRemaining: nil,
             basalDeliveryState: basalDeliveryState(for: state),
             bolusState: bolusState(for: state),
-            insulinType: state.insulinType
+            insulinType: state.insulinType,
+            deliveryIsUncertain: state.podState?.pendingCommand != nil
         )
     }
 
@@ -623,7 +624,7 @@ extension OmniBLEPumpManager {
                     state: .warning)
             } else if date.timeIntervalSince(state.lastPumpDataReportDate ?? .distantPast) > .minutes(12) {
                 return PumpStatusHighlight(
-                    localizedMessage: NSLocalizedString("No Data", comment: "Status highlight when communications with the pod haven't happened recently."),
+                    localizedMessage: NSLocalizedString("Signal Loss", comment: "Status highlight when communications with the pod haven't happened recently."),
                     imageName: "exclamationmark.circle.fill",
                     state: .critical)
             } else if isRunningManualTempBasal(for: state) {
@@ -1545,35 +1546,11 @@ extension OmniBLEPumpManager: PumpManager {
                 state.bolusEngageState = .engaging
             })
 
-            var podStatus: StatusResponse
-
-            do {
-                podStatus = try session.getStatus()
-            } catch let error {
-                completion(.communication(error as? LocalizedError))
+            if case .some(.suspended) = self.state.podState?.suspendState {
+                self.log.error("enactBolus: returning pod suspended error for bolus")
+                completion(.deviceState(PodCommsError.podSuspended))
                 return
             }
-
-            // If pod suspended, resume basal before bolusing
-            if podStatus.deliveryStatus == .suspended {
-                do {
-                    let scheduleOffset = self.state.timeZone.scheduleOffset(forDate: Date())
-                    let podStatus = try session.resumeBasal(schedule: self.state.basalSchedule, scheduleOffset: scheduleOffset, acknowledgementBeep: acknowledgementBeep)
-                    self.clearSuspendReminder()
-                    guard podStatus.deliveryStatus.bolusing == false else {
-                        throw PodCommsError.unfinalizedBolus
-                    }
-                } catch let error {
-                    completion(.deviceState(error as? LocalizedError))
-                    return
-                }
-            }
-
-            guard !podStatus.deliveryStatus.bolusing else {
-                completion(.deviceState(PodCommsError.unfinalizedBolus))
-                return
-            }
-
 
             // Use bits for the program reminder interval (not used by app)
             //   This trick enables determination, from just the hex messages
