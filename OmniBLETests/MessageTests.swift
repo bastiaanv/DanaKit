@@ -33,7 +33,7 @@ class MessageTests: XCTestCase {
             
             let statusResponse = messageBlocks[0] as! StatusResponse
             
-            XCTAssertEqual(51.15, statusResponse.reservoirLevel)
+            XCTAssertEqual(Pod.reservoirLevelAboveThresholdMagicNumber, statusResponse.reservoirLevel)
             XCTAssertEqual(TimeInterval(minutes: 4261), statusResponse.timeActive)
 
             XCTAssertEqual(.scheduledBasal, statusResponse.deliveryStatus)
