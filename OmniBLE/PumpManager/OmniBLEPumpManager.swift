@@ -973,6 +973,10 @@ extension OmniBLEPumpManager {
     }
 
     public func getPodStatus(completion: ((_ result: PumpManagerResult<StatusResponse>) -> Void)? = nil) {
+        guard state.hasActivePod else {
+            completion?(.failure(PumpManagerError.configuration(OmniBLEPumpManagerError.noPodPaired)))
+            return
+        }
 
         podComms.runSession(withName: "Get pod status") { (result) in
             do {
