@@ -1422,8 +1422,10 @@ extension OmniBLEPumpManager: PumpManager {
             let result = session.suspendDelivery(suspendReminder: suspendReminder, beepBlock: beepBlock)
             switch result {
             case .certainFailure(let error):
+                self.log.error("Failed to suspend: %{public}@", String(describing: error))
                 completion(error)
             case .unacknowledged(let error):
+                self.log.error("Failed to suspend: %{public}@", String(describing: error))
                 completion(error)
             case .success:
                 session.dosesForStorage() { (doses) -> Bool in
@@ -1565,14 +1567,15 @@ extension OmniBLEPumpManager: PumpManager {
             let bolusWasAutomaticIndicator: TimeInterval = activationType.isAutomatic ? TimeInterval(minutes: 0x3F) : 0
 
             let result = session.bolus(units: enactUnits, automatic: activationType.isAutomatic, acknowledgementBeep: acknowledgementBeep, completionBeep: completionBeep, programReminderInterval: bolusWasAutomaticIndicator)
-            session.dosesForStorage() { (doses) -> Bool in
-                return self.store(doses: doses, in: session)
-            }
 
             switch result {
             case .success:
+                session.dosesForStorage() { (doses) -> Bool in
+                    return self.store(doses: doses, in: session)
+                }
                 completion(nil)
             case .certainFailure(let error):
+                self.log.error("enactBolus failed: %{public}@", String(describing: error))
                 completion(.communication(error))
             case .unacknowledged:
                 completion(.uncertainDelivery)
@@ -1730,17 +1733,16 @@ extension OmniBLEPumpManager: PumpManager {
 
                     let result = session.setTempBasal(rate: rate, duration: duration, isHighTemp: isHighTemp, automatic: automatic, acknowledgementBeep: acknowledgementBeep, completionBeep: completionBeep)
 
-                    session.dosesForStorage() { (doses) -> Bool in
-                        return self.store(doses: doses, in: session)
-                    }
                     switch result {
                     case .success:
+                        session.dosesForStorage() { (doses) -> Bool in
+                            return self.store(doses: doses, in: session)
+                        }
                         completion(nil)
                     case .unacknowledged(let error):
-                        self.log.error("Temp basal uncertain error: %@", String(describing: error))
-                        completion(nil)
+                        throw error
                     case .certainFailure(let error):
-                        completion(.communication(error))
+                        throw error
                     }
                 }
             } catch let error {

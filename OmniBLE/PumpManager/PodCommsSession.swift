@@ -487,10 +487,17 @@ public class PodCommsSession {
         let bolusSchedule = SetInsulinScheduleCommand.DeliverySchedule.bolus(units: units, timeBetweenPulses: timeBetweenPulses)
         let bolusScheduleCommand = SetInsulinScheduleCommand(nonce: podState.currentNonce, deliverySchedule: bolusSchedule)
         
-        guard podState.unfinalizedBolus == nil else {
-            return DeliveryCommandResult.certainFailure(error: .unfinalizedBolus)
+        if podState.unfinalizedBolus != nil {
+            var ongoingBolus = true
+            if let statusResponse: StatusResponse = try? send([GetStatusCommand()]) {
+                podState.updateFromStatusResponse(statusResponse)
+                ongoingBolus = podState.unfinalizedBolus != nil
+            }
+            guard !ongoingBolus else {
+                return DeliveryCommandResult.certainFailure(error: .unfinalizedBolus)
+            }
         }
-        
+
         let startTime = Date()
         
         let bolusExtraCommand = BolusExtraCommand(units: units, timeBetweenPulses: timeBetweenPulses, acknowledgementBeep: acknowledgementBeep, completionBeep: completionBeep, programReminderInterval: programReminderInterval)
@@ -836,10 +843,10 @@ public class PodCommsSession {
             self.log.debug("Recovering from unacknowledged command %{public}@, status = %{public}@", String(describing: pendingCommand), String(describing: status))
 
             if status.lastProgrammingMessageSeqNum == pendingCommand.sequence {
-                self.log.debug("Unacknowledged command was received")
+                self.log.debug("Unacknowledged command was received by pump")
                 unacknowledgedCommandWasReceived(pendingCommand: pendingCommand, podStatus: status)
             } else {
-                self.log.debug("Unacknowledged command was not received")
+                self.log.debug("Unacknowledged command was not received by pump")
                 podState.updateFromStatusResponse(status)
             }
             podState.pendingCommand = nil
