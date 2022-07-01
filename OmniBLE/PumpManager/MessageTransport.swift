@@ -14,6 +14,7 @@ protocol MessageLogger: AnyObject {
     // Comms logging
     func didSend(_ message: Data)
     func didReceive(_ message: Data)
+    func didError(_ message: String)
 }
 
 public struct MessageTransportState: Equatable, RawRepresentable {
@@ -217,6 +218,7 @@ class PodMessageTransport: MessageTransport {
         case .sentWithAcknowledgment:
             break;
         case .sentWithError(let error):
+            messageLogger?.didError("Unacknowledged message. seq:\(message.sequenceNum), error = \(error)")
             throw PodCommsError.unacknowledgedMessage(sequenceNumber: message.sequenceNum, error: error)
         case .unsentWithError(let error):
             throw PodCommsError.commsError(error: error)
@@ -227,6 +229,7 @@ class PodMessageTransport: MessageTransport {
             incrementMessageNumber() // bump the 4-bit Omnipod Message number
             return response
         } catch {
+            messageLogger?.didError("Unacknowledged message. seq:\(message.sequenceNum), error = \(error)")
             throw PodCommsError.unacknowledgedMessage(sequenceNumber: message.sequenceNum, error: error)
         }
     }
