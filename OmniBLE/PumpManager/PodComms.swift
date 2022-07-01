@@ -81,7 +81,7 @@ public class PodComms: CustomDebugStringConvertible {
 
         podStateLock.lock()
         podState?.resolveAnyPendingCommandWithUncertainty()
-        podState?.finalizeFinishedDoses()
+        podState?.finalizeAllDoses()
         podStateLock.unlock()
     }
 
