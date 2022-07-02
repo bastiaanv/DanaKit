@@ -223,9 +223,8 @@ public class OmniBLEPumpManager: DeviceManager {
 
     private func logDeviceCommunication(_ message: String, type: DeviceLogEntryType = .send) {
         let podAddress = String(format: "%04X", self.state.podId)
-        self.pumpDelegate.notify { (delegate) in
-            delegate?.deviceManager(self, logEventForDeviceIdentifier: podAddress, type: type, message: message, completion: nil)
-        }
+        // Not dispatching here; if delegate queue is blocked, timestamps will be delayed
+        self.pumpDelegate.delegate?.deviceManager(self, logEventForDeviceIdentifier: podAddress, type: type, message: message, completion: nil)
     }
     
     // Not persisted
@@ -317,7 +316,7 @@ extension OmniBLEPumpManager {
             basalDeliveryState: basalDeliveryState(for: state),
             bolusState: bolusState(for: state),
             insulinType: state.insulinType,
-            deliveryIsUncertain: state.podState?.pendingCommand != nil
+            deliveryIsUncertain: state.podState?.needsCommsRecovery == true
         )
     }
 
@@ -573,7 +572,7 @@ extension OmniBLEPumpManager {
     }
 
     public func buildPumpStatusHighlight(for state: OmniBLEPumpManagerState, andDate date: Date = Date()) -> PumpStatusHighlight? {
-        if state.podState?.pendingCommand != nil {
+        if state.podState?.needsCommsRecovery == true {
             return PumpStatusHighlight(localizedMessage: NSLocalizedString("Comms Issue", comment: "Status highlight that delivery is uncertain."),
                                                          imageName: "exclamationmark.circle.fill",
                                                          state: .critical)
