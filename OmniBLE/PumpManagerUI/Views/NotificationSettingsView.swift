@@ -114,7 +114,7 @@ struct NotificationSettingsView: View {
         {
             RoundedCardValueRow(
                 label: LocalizedString("Low Reservoir Reminder", comment: "Label for low reservoir reminder row"),
-                value: insulinQuantityFormatter.string(from: HKQuantity(unit: .internationalUnit(), doubleValue: Double(lowReservoirReminderValue)), for: .internationalUnit()) ?? "",
+                value: insulinQuantityFormatter.string(from: HKQuantity(unit: .internationalUnit(), doubleValue: Double(lowReservoirReminderValue))) ?? "",
                 highlightValue: false,
                 disclosure: true)
         }

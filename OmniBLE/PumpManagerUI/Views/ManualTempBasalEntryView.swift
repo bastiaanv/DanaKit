@@ -40,20 +40,18 @@ struct ManualTempBasalEntryView: View {
     }
 
     private static let rateFormatter: QuantityFormatter = {
-        let quantityFormatter = QuantityFormatter()
-        quantityFormatter.setPreferredNumberFormatter(for: .internationalUnitsPerHour)
+        let quantityFormatter = QuantityFormatter(for: .internationalUnitsPerHour)
         quantityFormatter.numberFormatter.minimumFractionDigits = 2
         return quantityFormatter
     }()
 
     private var rateUnitsLabel: some View {
-        Text(QuantityFormatter().string(from: .internationalUnitsPerHour))
+        Text(QuantityFormatter(for: .internationalUnitsPerHour).localizedUnitStringWithPlurality())
             .foregroundColor(Color(.secondaryLabel))
     }
 
     private static let durationFormatter: QuantityFormatter = {
-        let quantityFormatter = QuantityFormatter()
-        quantityFormatter.setPreferredNumberFormatter(for: .hour())
+        let quantityFormatter = QuantityFormatter(for: .hour())
         quantityFormatter.numberFormatter.minimumFractionDigits = 1
         quantityFormatter.numberFormatter.maximumFractionDigits = 1
         quantityFormatter.unitStyle = .long
@@ -61,18 +59,16 @@ struct ManualTempBasalEntryView: View {
     }()
 
     private var durationUnitsLabel: some View {
-        Text(QuantityFormatter().string(from: .hour()))
+        Text(QuantityFormatter(for: .hour()).localizedUnitStringWithPlurality())
             .foregroundColor(Color(.secondaryLabel))
     }
 
     func formatRate(_ rate: Double) -> String {
-        let unit = HKUnit.internationalUnitsPerHour
-        return ManualTempBasalEntryView.rateFormatter.string(from: HKQuantity(unit: unit, doubleValue: rate), for: unit) ?? ""
+        return ManualTempBasalEntryView.rateFormatter.string(from: HKQuantity(unit: .internationalUnitsPerHour, doubleValue: rate)) ?? ""
     }
 
     func formatDuration(_ duration: TimeInterval) -> String {
-        let unit = HKUnit.hour()
-        return ManualTempBasalEntryView.durationFormatter.string(from: HKQuantity(unit: unit, doubleValue: duration.hours), for: unit) ?? ""
+        return ManualTempBasalEntryView.durationFormatter.string(from: HKQuantity(unit: .hour(), doubleValue: duration.hours)) ?? ""
     }
 
     var body: some View {
