@@ -380,13 +380,13 @@ class OmniBLESettingsViewModel: ObservableObject {
         switch level {
         case .aboveThreshold:
             let quantity = HKQuantity(unit: .internationalUnit(), doubleValue: Pod.maximumReservoirReading)
-            let thresholdString = reservoirVolumeFormatter.string(from: quantity, for: .internationalUnit(), includeUnit: false) ?? ""
-            let unitString = reservoirVolumeFormatter.string(from: .internationalUnit(), forValue: Pod.maximumReservoirReading, avoidLineBreaking: true)
+            let thresholdString = reservoirVolumeFormatter.string(from: quantity, includeUnit: false) ?? ""
+            let unitString = reservoirVolumeFormatter.localizedUnitStringWithPlurality(forValue: Pod.maximumReservoirReading, avoidLineBreaking: true)
             return String(format: LocalizedString("%1$@+ %2$@", comment: "Format string for reservoir level above max measurable threshold. (1: measurable reservoir threshold) (2: units)"),
                           thresholdString, unitString)
         case .valid(let value):
             let quantity = HKQuantity(unit: .internationalUnit(), doubleValue: value)
-            return reservoirVolumeFormatter.string(from: quantity, for: .internationalUnit()) ?? ""
+            return reservoirVolumeFormatter.string(from: quantity) ?? ""
         }
     }
 
