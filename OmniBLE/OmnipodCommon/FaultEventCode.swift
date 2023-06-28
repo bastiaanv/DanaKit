@@ -26,6 +26,7 @@ public struct FaultEventCode: CustomStringConvertible, Equatable {
         case invalidBeepRepeatPattern             = 0x09
         case bf0notEqualToBF1                     = 0x0A
         case tableCorruptionTempBasalSubcommand   = 0x0B
+
         case resetDueToCOP                        = 0x0D
         case resetDueToIllegalOpcode              = 0x0E
         case resetDueToIllegalAddress             = 0x0F
@@ -76,6 +77,7 @@ public struct FaultEventCode: CustomStringConvertible, Equatable {
         case testInProgress                       = 0x3C
         case problemWithPumpAnchor                = 0x3D
         case errorFlashWrite                      = 0x3E
+
         case encoderCountTooHigh                  = 0x40
         case encoderCountExcessiveVariance        = 0x41
         case encoderCountTooLow                   = 0x42
@@ -90,6 +92,7 @@ public struct FaultEventCode: CustomStringConvertible, Equatable {
         case trimICSTooCloseTo0x1FF               = 0x4B
         case problemFindingBestTrimValue          = 0x4C
         case badSetTPM1MultiCasesValue            = 0x4D
+        case sawTrimError                         = 0x4E
         case unexpectedRFErrorFlagDuringReset     = 0x4F
         case timerPulseWidthModulatorOverflow     = 0x50
         case tickcntError                         = 0x51
@@ -110,11 +113,13 @@ public struct FaultEventCode: CustomStringConvertible, Equatable {
         case occlusionCheckStartup1               = 0x60
         case occlusionCheckStartup2               = 0x61
         case occlusionCheckTimeouts1              = 0x62
+
         case occlusionCheckTimeouts2              = 0x66
         case occlusionCheckTimeouts3              = 0x67
         case occlusionCheckPulseIssue             = 0x68
         case occlusionCheckBolusProblem           = 0x69
         case occlusionCheckAboveThreshold         = 0x6A
+
         case basalUnderInfusion                   = 0x80
         case basalOverInfusion                    = 0x81
         case tempBasalUnderInfusion               = 0x82
@@ -138,6 +143,7 @@ public struct FaultEventCode: CustomStringConvertible, Equatable {
         case illegalInterLockChan                 = 0x95
         case badStateInClearBolusIST2AndVars      = 0x96
         case badStateInMaybeInc33D                = 0x97
+
         case bleTimeout                           = 0xA0
         case bleInitiated                         = 0xA1
         case bleUnkAlarm                          = 0xA2
@@ -148,6 +154,7 @@ public struct FaultEventCode: CustomStringConvertible, Equatable {
         case bleNakError                          = 0xAB
         case bleReqHighTimeout                    = 0xAC
         case bleUnknownResp                       = 0xAD
+
         case bleReqStuckHigh                      = 0xAF
         case bleStateMachine1                     = 0xB1
         case bleStateMachine2                     = 0xB2
@@ -155,7 +162,17 @@ public struct FaultEventCode: CustomStringConvertible, Equatable {
         case bleEr48DualNack                      = 0xC0
         case bleQnExceedMaxRetry                  = 0xC1
         case bleQnCritVarFail                     = 0xC2
-        case valuesDoNotMatchOrAreGreaterThan0xC2 = 0xC3
+
+        case unknown0xCB                          = 0xCB
+
+        case unknown0xD4                          = 0xD4
+        case unknown0xD5                          = 0xD5
+        case resetFault0xD6                       = 0xD6
+        case resetFault0xD7                       = 0xD7
+        case unknown0xD8                          = 0xD8
+        case unknown0xD9                          = 0xD9
+
+        case valuesDoNotMatch                     = 0xFF
     }
 
     public var faultType: FaultEventType? {
@@ -187,7 +204,7 @@ public struct FaultEventCode: CustomStringConvertible, Equatable {
                 case .dataCorruptionInTestRTCInterrupt:
                     return "Data corruption error in test_RTC_interrupt"
                 case .rtcInterruptHandlerInconsistentState:
-                    return "RTC interrupt handler called with inconstent state"
+                    return "RTC interrupt handler called with inconsistent state"
                 case .valueGreaterThan8:
                     return "Value > 8"
                 case .invalidBeepRepeatPattern:
@@ -291,7 +308,7 @@ public struct FaultEventCode: CustomStringConvertible, Equatable {
                 case .failedTestSawReset:
                     return "SAW reset testing fail"
                 case .testInProgress:
-                    return "402D is 'Z' - test in progress"
+                    return "Test in progress"
                 case .problemWithPumpAnchor:
                     return "Problem with pump anchor"
                 case .errorFlashWrite:
@@ -324,6 +341,8 @@ public struct FaultEventCode: CustomStringConvertible, Equatable {
                     return "find_best_trim_value problem"
                 case .badSetTPM1MultiCasesValue:
                     return "Bad set_TPM1_multi_cases value"
+                case .sawTrimError:
+                    return "SAW Trim Error"
                 case .unexpectedRFErrorFlagDuringReset:
                     return "Unexpected TXSCR2 RF Tranmission Error Flag set during reset"
                 case .timerPulseWidthModulatorOverflow:
@@ -454,7 +473,11 @@ public struct FaultEventCode: CustomStringConvertible, Equatable {
                     return "BLE QN exceed max retry"
                 case .bleQnCritVarFail:
                     return "BLE QN critical variable fail"
-                case .valuesDoNotMatchOrAreGreaterThan0xC2:
+                case .unknown0xCB, .unknown0xD4, .unknown0xD5, .unknown0xD8, .unknown0xD9:
+                    return "Unknown fault"
+                case .resetFault0xD6, .resetFault0xD7:
+                    return "Reset fault of unknown origin"
+                case .valuesDoNotMatch:
                     return "Unknown fault code"
                 }
             }()
