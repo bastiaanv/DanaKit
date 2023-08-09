@@ -170,6 +170,46 @@
 		D895BF5B275DE64000D51FC7 /* StringLengthPrefixEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D895BF5A275DE64000D51FC7 /* StringLengthPrefixEncoding.swift */; };
 		D897B06B29347ED500FDB009 /* BolusDeliveryTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D897B06A29347ED500FDB009 /* BolusDeliveryTable.swift */; };
 		D897B06D29347EE500FDB009 /* InsulinTableEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D897B06C29347EE500FDB009 /* InsulinTableEntry.swift */; };
+		D8C72BDC2A50D7D700268D82 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C72BDB2A50D7D700268D82 /* main.swift */; };
+		D8C72BE02A50D8D400268D82 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8475315026EDA193009FD801 /* Data.swift */; };
+		D8C72BE12A50D8DD00268D82 /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8475314A26EDA193009FD801 /* LocalizedString.swift */; };
+		D8C72BE22A50D8F800268D82 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8475314626EDA193009FD801 /* TimeInterval.swift */; };
+		D8C72BE32A50D90A00268D82 /* AcknowledgeAlertCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A0926FF7841002115E9 /* AcknowledgeAlertCommand.swift */; };
+		D8C72BE42A50D90A00268D82 /* AssignAddressCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A1526FF7841002115E9 /* AssignAddressCommand.swift */; };
+		D8C72BE52A50D90A00268D82 /* BasalScheduleExtraCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A1326FF7841002115E9 /* BasalScheduleExtraCommand.swift */; };
+		D8C72BE62A50D90A00268D82 /* BeepConfigCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A1626FF7841002115E9 /* BeepConfigCommand.swift */; };
+		D8C72BE72A50D90A00268D82 /* BolusExtraCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A0E26FF7841002115E9 /* BolusExtraCommand.swift */; };
+		D8C72BE82A50D90A00268D82 /* CancelDeliveryCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A1426FF7841002115E9 /* CancelDeliveryCommand.swift */; };
+		D8C72BE92A50D90A00268D82 /* ConfigureAlertsCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A1C26FF7841002115E9 /* ConfigureAlertsCommand.swift */; };
+		D8C72BEA2A50D90A00268D82 /* DeactivatePodCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A0826FF7841002115E9 /* DeactivatePodCommand.swift */; };
+		D8C72BEB2A50D90A00268D82 /* DetailedStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A1926FF7841002115E9 /* DetailedStatus.swift */; };
+		D8C72BEC2A50D90A00268D82 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A1726FF7841002115E9 /* ErrorResponse.swift */; };
+		D8C72BED2A50D90A00268D82 /* FaultConfigCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A0F26FF7841002115E9 /* FaultConfigCommand.swift */; };
+		D8C72BEE2A50D90A00268D82 /* GetStatusCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A1226FF7841002115E9 /* GetStatusCommand.swift */; };
+		D8C72BEF2A50D90A00268D82 /* MessageBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A0B26FF7841002115E9 /* MessageBlock.swift */; };
+		D8C72BF02A50D90A00268D82 /* PlaceholderMessageBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A0C26FF7841002115E9 /* PlaceholderMessageBlock.swift */; };
+		D8C72BF12A50D90A00268D82 /* PodInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A0D26FF7841002115E9 /* PodInfo.swift */; };
+		D8C72BF22A50D90A00268D82 /* PodInfoActivationTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A0626FF7841002115E9 /* PodInfoActivationTime.swift */; };
+		D8C72BF32A50D90A00268D82 /* PodInfoConfiguredAlerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A0A26FF7841002115E9 /* PodInfoConfiguredAlerts.swift */; };
+		D8C72BF42A50D90A00268D82 /* PodInfoPulseLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A0426FF7841002115E9 /* PodInfoPulseLog.swift */; };
+		D8C72BF52A50D90A00268D82 /* PodInfoPulseLogPlus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A1026FF7841002115E9 /* PodInfoPulseLogPlus.swift */; };
+		D8C72BF62A50D90A00268D82 /* PodInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A1A26FF7841002115E9 /* PodInfoResponse.swift */; };
+		D8C72BF72A50D90A00268D82 /* SetInsulinScheduleCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A1B26FF7841002115E9 /* SetInsulinScheduleCommand.swift */; };
+		D8C72BF82A50D90A00268D82 /* SetupPodCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A1826FF7841002115E9 /* SetupPodCommand.swift */; };
+		D8C72BF92A50D90A00268D82 /* StatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A1126FF7841002115E9 /* StatusResponse.swift */; };
+		D8C72BFA2A50D90A00268D82 /* TempBasalExtraCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A0726FF7841002115E9 /* TempBasalExtraCommand.swift */; };
+		D8C72BFB2A50D90A00268D82 /* VersionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A0526FF7841002115E9 /* VersionResponse.swift */; };
+		D8C72BFC2A50D92000268D82 /* AlertSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1016325527185EE4007A3BC2 /* AlertSlot.swift */; };
+		D8C72BFD2A50D92000268D82 /* BasalDeliveryTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1016325427185EE4007A3BC2 /* BasalDeliveryTable.swift */; };
+		D8C72BFE2A50D93300268D82 /* BasalSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1016325727185EE4007A3BC2 /* BasalSchedule.swift */; };
+		D8C72BFF2A50D95200268D82 /* BeepType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1016325127185EE4007A3BC2 /* BeepType.swift */; };
+		D8C72C002A50D95200268D82 /* BolusDeliveryTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D897B06A29347ED500FDB009 /* BolusDeliveryTable.swift */; };
+		D8C72C012A50D95200268D82 /* CRC16.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A2026FF7841002115E9 /* CRC16.swift */; };
+		D8C72C022A50D95200268D82 /* FaultEventCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1016325227185EE4007A3BC2 /* FaultEventCode.swift */; };
+		D8C72C032A50D95200268D82 /* InsulinTableEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D897B06C29347EE500FDB009 /* InsulinTableEntry.swift */; };
+		D8C72C042A50D95200268D82 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A1D26FF7841002115E9 /* Message.swift */; };
+		D8C72C052A50D96800268D82 /* Pod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1016325327185EE4007A3BC2 /* Pod.swift */; };
+		D8C72C062A50D97500268D82 /* PodProgressStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1016325627185EE4007A3BC2 /* PodProgressStatus.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -199,6 +239,15 @@
 				C1D27A1727908DE500C41EBA /* OmniBLE.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8C72BD72A50D7D700268D82 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -391,6 +440,8 @@
 		D895BF5A275DE64000D51FC7 /* StringLengthPrefixEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringLengthPrefixEncoding.swift; sourceTree = "<group>"; };
 		D897B06A29347ED500FDB009 /* BolusDeliveryTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BolusDeliveryTable.swift; sourceTree = "<group>"; };
 		D897B06C29347EE500FDB009 /* InsulinTableEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsulinTableEntry.swift; sourceTree = "<group>"; };
+		D8C72BD92A50D7D700268D82 /* OmniBLEParser */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OmniBLEParser; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8C72BDB2A50D7D700268D82 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -416,6 +467,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1D27A1527908DC600C41EBA /* OmniBLE.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8C72BD62A50D7D700268D82 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -511,6 +569,7 @@
 				84752E8426ED0FFE009FD801 /* OmniBLE */,
 				84752E8F26ED0FFE009FD801 /* OmniBLETests */,
 				C187C198279086A8006E3557 /* OmniBLEPlugin */,
+				D8C72BDA2A50D7D700268D82 /* OmniBLEParser */,
 				84752E8326ED0FFE009FD801 /* Products */,
 				84752E9C26ED10A0009FD801 /* Frameworks */,
 			);
@@ -522,6 +581,7 @@
 				84752E8226ED0FFE009FD801 /* OmniBLE.framework */,
 				84752E8B26ED0FFE009FD801 /* OmniBLETests.xctest */,
 				C187C197279086A8006E3557 /* OmniBLEPlugin.loopplugin */,
+				D8C72BD92A50D7D700268D82 /* OmniBLEParser */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -802,6 +862,14 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		D8C72BDA2A50D7D700268D82 /* OmniBLEParser */ = {
+			isa = PBXGroup;
+			children = (
+				D8C72BDB2A50D7D700268D82 /* main.swift */,
+			);
+			path = OmniBLEParser;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -883,6 +951,23 @@
 			productReference = C187C197279086A8006E3557 /* OmniBLEPlugin.loopplugin */;
 			productType = "com.apple.product-type.framework";
 		};
+		D8C72BD82A50D7D700268D82 /* OmniBLEParser */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D8C72BDF2A50D7D700268D82 /* Build configuration list for PBXNativeTarget "OmniBLEParser" */;
+			buildPhases = (
+				D8C72BD52A50D7D700268D82 /* Sources */,
+				D8C72BD62A50D7D700268D82 /* Frameworks */,
+				D8C72BD72A50D7D700268D82 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OmniBLEParser;
+			productName = OmniBLEParser;
+			productReference = D8C72BD92A50D7D700268D82 /* OmniBLEParser */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -890,7 +975,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastSwiftUpdateCheck = 1250;
+				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = "Randall Knutson";
 				TargetAttributes = {
@@ -902,6 +987,9 @@
 					};
 					C187C196279086A8006E3557 = {
 						CreatedOnToolsVersion = 13.2.1;
+					};
+					D8C72BD82A50D7D700268D82 = {
+						CreatedOnToolsVersion = 14.3.1;
 					};
 				};
 			};
@@ -946,6 +1034,7 @@
 				84752E8126ED0FFE009FD801 /* OmniBLE */,
 				84752E8A26ED0FFE009FD801 /* OmniBLETests */,
 				C187C196279086A8006E3557 /* OmniBLEPlugin */,
+				D8C72BD82A50D7D700268D82 /* OmniBLEParser */,
 			);
 		};
 /* End PBXProject section */
@@ -1149,6 +1238,53 @@
 			files = (
 				C187C1A3279087A4006E3557 /* OSLog.swift in Sources */,
 				C10D6D6E27A2395700F53D58 /* OmniBLEPlugin.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8C72BD52A50D7D700268D82 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8C72C062A50D97500268D82 /* PodProgressStatus.swift in Sources */,
+				D8C72C052A50D96800268D82 /* Pod.swift in Sources */,
+				D8C72BFF2A50D95200268D82 /* BeepType.swift in Sources */,
+				D8C72C002A50D95200268D82 /* BolusDeliveryTable.swift in Sources */,
+				D8C72C012A50D95200268D82 /* CRC16.swift in Sources */,
+				D8C72C022A50D95200268D82 /* FaultEventCode.swift in Sources */,
+				D8C72C032A50D95200268D82 /* InsulinTableEntry.swift in Sources */,
+				D8C72C042A50D95200268D82 /* Message.swift in Sources */,
+				D8C72BFE2A50D93300268D82 /* BasalSchedule.swift in Sources */,
+				D8C72BFC2A50D92000268D82 /* AlertSlot.swift in Sources */,
+				D8C72BFD2A50D92000268D82 /* BasalDeliveryTable.swift in Sources */,
+				D8C72BE32A50D90A00268D82 /* AcknowledgeAlertCommand.swift in Sources */,
+				D8C72BE42A50D90A00268D82 /* AssignAddressCommand.swift in Sources */,
+				D8C72BE52A50D90A00268D82 /* BasalScheduleExtraCommand.swift in Sources */,
+				D8C72BE62A50D90A00268D82 /* BeepConfigCommand.swift in Sources */,
+				D8C72BE72A50D90A00268D82 /* BolusExtraCommand.swift in Sources */,
+				D8C72BE82A50D90A00268D82 /* CancelDeliveryCommand.swift in Sources */,
+				D8C72BE92A50D90A00268D82 /* ConfigureAlertsCommand.swift in Sources */,
+				D8C72BEA2A50D90A00268D82 /* DeactivatePodCommand.swift in Sources */,
+				D8C72BEB2A50D90A00268D82 /* DetailedStatus.swift in Sources */,
+				D8C72BEC2A50D90A00268D82 /* ErrorResponse.swift in Sources */,
+				D8C72BED2A50D90A00268D82 /* FaultConfigCommand.swift in Sources */,
+				D8C72BEE2A50D90A00268D82 /* GetStatusCommand.swift in Sources */,
+				D8C72BEF2A50D90A00268D82 /* MessageBlock.swift in Sources */,
+				D8C72BF02A50D90A00268D82 /* PlaceholderMessageBlock.swift in Sources */,
+				D8C72BF12A50D90A00268D82 /* PodInfo.swift in Sources */,
+				D8C72BF22A50D90A00268D82 /* PodInfoActivationTime.swift in Sources */,
+				D8C72BF32A50D90A00268D82 /* PodInfoConfiguredAlerts.swift in Sources */,
+				D8C72BF42A50D90A00268D82 /* PodInfoPulseLog.swift in Sources */,
+				D8C72BF52A50D90A00268D82 /* PodInfoPulseLogPlus.swift in Sources */,
+				D8C72BF62A50D90A00268D82 /* PodInfoResponse.swift in Sources */,
+				D8C72BF72A50D90A00268D82 /* SetInsulinScheduleCommand.swift in Sources */,
+				D8C72BF82A50D90A00268D82 /* SetupPodCommand.swift in Sources */,
+				D8C72BF92A50D90A00268D82 /* StatusResponse.swift in Sources */,
+				D8C72BFA2A50D90A00268D82 /* TempBasalExtraCommand.swift in Sources */,
+				D8C72BFB2A50D90A00268D82 /* VersionResponse.swift in Sources */,
+				D8C72BE22A50D8F800268D82 /* TimeInterval.swift in Sources */,
+				D8C72BE12A50D8DD00268D82 /* LocalizedString.swift in Sources */,
+				D8C72BE02A50D8D400268D82 /* Data.swift in Sources */,
+				D8C72BDC2A50D7D700268D82 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1517,6 +1653,30 @@
 			};
 			name = Release;
 		};
+		D8C72BDD2A50D7D700268D82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		D8C72BDE2A50D7D700268D82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1552,6 +1712,15 @@
 			buildConfigurations = (
 				C187C19C279086A8006E3557 /* Debug */,
 				C187C19D279086A8006E3557 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D8C72BDF2A50D7D700268D82 /* Build configuration list for PBXNativeTarget "OmniBLEParser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8C72BDD2A50D7D700268D82 /* Debug */,
+				D8C72BDE2A50D7D700268D82 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
