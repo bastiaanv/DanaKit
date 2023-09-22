@@ -80,7 +80,7 @@ extension OmniBLEPumpManagerError: LocalizedError {
 
 public class OmniBLEPumpManager: DeviceManager {
 
-    public let managerIdentifier: String = "Omnipod-Dash" // use a single token to make parsing log files easier
+    public static let pluginIdentifier: String = "Omnipod-Dash" // use a single token to make parsing log files easier
 
     public let localizedTitle = LocalizedString("Omnipod DASH", comment: "Generic title of the OmniBLE pump manager")
 
@@ -323,7 +323,7 @@ extension OmniBLEPumpManager {
     private func device(for state: OmniBLEPumpManagerState) -> HKDevice {
         if let podState = state.podState {
             return HKDevice(
-                name: managerIdentifier,
+                name: pluginIdentifier,
                 manufacturer: "Insulet",
                 model: "Dash",
                 hardwareVersion: String(podState.productId),
@@ -334,7 +334,7 @@ extension OmniBLEPumpManager {
             )
         } else {
             return HKDevice(
-                name: managerIdentifier,
+                name: pluginIdentifier,
                 manufacturer: "Insulet",
                 model: "Dash",
                 hardwareVersion: nil,
@@ -1486,8 +1486,8 @@ extension OmniBLEPumpManager: PumpManager {
 
     fileprivate func clearSuspendReminder() {
         self.pumpDelegate.notify { (delegate) in
-            delegate?.retractAlert(identifier: Alert.Identifier(managerIdentifier: self.managerIdentifier, alertIdentifier: PumpManagerAlert.suspendEnded(triggeringSlot: nil).alertIdentifier))
-            delegate?.retractAlert(identifier: Alert.Identifier(managerIdentifier: self.managerIdentifier, alertIdentifier: PumpManagerAlert.suspendEnded(triggeringSlot: nil).repeatingAlertIdentifier))
+            delegate?.retractAlert(identifier: Alert.Identifier(managerIdentifier: self.pluginIdentifier, alertIdentifier: PumpManagerAlert.suspendEnded(triggeringSlot: nil).alertIdentifier))
+            delegate?.retractAlert(identifier: Alert.Identifier(managerIdentifier: self.pluginIdentifier, alertIdentifier: PumpManagerAlert.suspendEnded(triggeringSlot: nil).repeatingAlertIdentifier))
         }
     }
 
@@ -1902,7 +1902,7 @@ extension OmniBLEPumpManager: PumpManager {
     }
 
     func issueAlert(alert: PumpManagerAlert) {
-        let identifier = Alert.Identifier(managerIdentifier: self.managerIdentifier, alertIdentifier: alert.alertIdentifier)
+        let identifier = Alert.Identifier(managerIdentifier: self.pluginIdentifier, alertIdentifier: alert.alertIdentifier)
         let loopAlert = Alert(identifier: identifier, foregroundContent: alert.foregroundContent, backgroundContent: alert.backgroundContent, trigger: .immediate)
         pumpDelegate.notify { (delegate) in
             delegate?.issueAlert(loopAlert)
@@ -1910,7 +1910,7 @@ extension OmniBLEPumpManager: PumpManager {
 
         if let repeatInterval = alert.repeatInterval {
             // Schedule an additional repeating 15 minute reminder for suspend period ended.
-            let repeatingIdentifier = Alert.Identifier(managerIdentifier: self.managerIdentifier, alertIdentifier: alert.repeatingAlertIdentifier)
+            let repeatingIdentifier = Alert.Identifier(managerIdentifier: self.pluginIdentifier, alertIdentifier: alert.repeatingAlertIdentifier)
             let loopAlert = Alert(identifier: repeatingIdentifier, foregroundContent: alert.foregroundContent, backgroundContent: alert.backgroundContent, trigger: .repeating(repeatInterval: repeatInterval))
             pumpDelegate.notify { (delegate) in
                 delegate?.issueAlert(loopAlert)
@@ -1923,12 +1923,12 @@ extension OmniBLEPumpManager: PumpManager {
     }
 
     func retractAlert(alert: PumpManagerAlert) {
-        let identifier = Alert.Identifier(managerIdentifier: self.managerIdentifier, alertIdentifier: alert.alertIdentifier)
+        let identifier = Alert.Identifier(managerIdentifier: self.pluginIdentifier, alertIdentifier: alert.alertIdentifier)
         pumpDelegate.notify { (delegate) in
             delegate?.retractAlert(identifier: identifier)
         }
         if alert.isRepeating {
-            let repeatingIdentifier = Alert.Identifier(managerIdentifier: self.managerIdentifier, alertIdentifier: alert.repeatingAlertIdentifier)
+            let repeatingIdentifier = Alert.Identifier(managerIdentifier: self.pluginIdentifier, alertIdentifier: alert.repeatingAlertIdentifier)
             pumpDelegate.notify { (delegate) in
                 delegate?.retractAlert(identifier: repeatingIdentifier)
             }
