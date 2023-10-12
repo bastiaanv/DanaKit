@@ -1734,7 +1734,7 @@
 /* Begin XCRemoteSwiftPackageReference section */
 		2742C7032AD875B100E67833 /* XCRemoteSwiftPackageReference "SlideButton" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/no-comment/SlideButton";
+			repositoryURL = "https://github.com/dabear/SlideButton";
 			requirement = {
 				branch = main;
 				kind = branch;
