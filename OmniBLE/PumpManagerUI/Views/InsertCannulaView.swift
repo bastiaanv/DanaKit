@@ -8,6 +8,7 @@
 
 import SwiftUI
 import LoopKitUI
+import SlideButton
 
 struct InsertCannulaView: View {
     
