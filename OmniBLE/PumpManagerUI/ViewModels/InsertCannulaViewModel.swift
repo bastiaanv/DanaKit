@@ -124,6 +124,14 @@ class InsertCannulaViewModel: ObservableObject, Identifiable {
     }
 
     @Published var state: InsertCannulaViewModelState = .ready
+    public var stateNeedsCriticalUserAcceptance : Bool {
+        switch state {
+        case .ready:
+            true
+        default:
+            false
+        }
+    }
     
     var didFinish: (() -> Void)?
     

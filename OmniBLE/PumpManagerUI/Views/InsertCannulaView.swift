@@ -66,17 +66,11 @@ struct InsertCannulaView: View {
                 }
                 
                 if (self.viewModel.error == nil || self.viewModel.error?.recoverable == true) {
-                    Button(action: {
-                        self.viewModel.continueButtonTapped()
-                    }) {
-                        Text(self.viewModel.state.nextActionButtonDescription)
-                            .accessibility(identifier: "button_next_action")
-                            .accessibility(label: Text(self.viewModel.state.actionButtonAccessibilityLabel))
-                            .actionButtonStyle(.primary)
-                    }
+                    actionButton
                     .disabled(self.viewModel.state.isProcessing)
                     .animation(nil)
                     .zIndex(1)
+                        
                 }
             }
             .transition(AnyTransition.opacity.combined(with: .move(edge: .bottom)))
@@ -87,6 +81,37 @@ struct InsertCannulaView: View {
         .navigationBarTitle(LocalizedString("Insert Cannula", comment: "navigation bar title for insert cannula"), displayMode: .automatic)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(trailing: cancelButton)
+    }
+    
+    
+    var actionText : some View {
+        Text(self.viewModel.state.nextActionButtonDescription)
+            .accessibility(identifier: "button_next_action")
+            .accessibility(label: Text(self.viewModel.state.actionButtonAccessibilityLabel))
+            .actionButtonStyle(.primary)
+    }
+    
+    
+    
+    @ViewBuilder
+    var actionButton: some View {
+        if self.viewModel.stateNeedsCriticalUserAcceptance {
+            SlideButton(action: {
+                self.viewModel.continueButtonTapped()
+            }) {
+                actionText
+            }
+            
+        } else {
+            Button(action: {
+                self.viewModel.continueButtonTapped()
+            }) {
+                actionText
+            }
+            
+        }
+        
+        
     }
     
     var cancelButton: some View {
