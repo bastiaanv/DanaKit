@@ -53,7 +53,7 @@ class InsertCannulaViewModel: ObservableObject, Identifiable {
         var nextActionButtonDescription: String {
             switch self {
             case .ready:
-                return LocalizedString("Insert Cannula", comment: "Cannula insertion button text while ready to insert")
+                return LocalizedString("Slide to Insert Cannula", comment: "Cannula insertion button text while ready to insert")
             case .error:
                 return LocalizedString("Retry", comment: "Cannula insertion button text while showing error")
             case .inserting, .startingInsertion:
