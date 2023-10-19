@@ -92,7 +92,6 @@ struct InsertCannulaView: View {
     }
     
     
-    
     @ViewBuilder
     var actionButton: some View {
         if self.viewModel.stateNeedsCriticalUserAcceptance {
