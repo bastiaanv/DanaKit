@@ -25,7 +25,7 @@ struct InsertCannulaView: View {
 
                 HStack {
                     InstructionList(instructions: [
-                        LocalizedString("Tap below to start cannula insertion.", comment: "Label text for step one of insert cannula instructions"),
+                        LocalizedString("Slide the switch below to start cannula insertion.", comment: "Label text for step one of insert cannula instructions"),
                         LocalizedString("Wait until insertion is completed.", comment: "Label text for step two of insert cannula instructions"),
                     ])
                     .disabled(viewModel.state.instructionsDisabled)
