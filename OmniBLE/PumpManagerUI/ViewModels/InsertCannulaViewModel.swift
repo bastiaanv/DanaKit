@@ -29,7 +29,7 @@ class InsertCannulaViewModel: ObservableObject, Identifiable {
         var actionButtonAccessibilityLabel: String {
             switch self {
             case .ready, .startingInsertion:
-                return LocalizedString("Insert Cannula", comment: "Insert cannula action button accessibility label while ready to pair")
+                return LocalizedString("Slide Button to insert Cannula", comment: "Insert cannula slider button accessibility label while ready to pair")
             case .inserting:
                 return LocalizedString("Inserting. Please wait.", comment: "Insert cannula action button accessibility label while pairing")
             case .checkingInsertion:
