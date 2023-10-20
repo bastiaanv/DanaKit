@@ -88,7 +88,8 @@ struct InsertCannulaView: View {
         Text(self.viewModel.state.nextActionButtonDescription)
             .accessibility(identifier: "button_next_action")
             .accessibility(label: Text(self.viewModel.state.actionButtonAccessibilityLabel))
-            .actionButtonStyle(.primary)
+            .font(.headline)
+            
     }
     
     
