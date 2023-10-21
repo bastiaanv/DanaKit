@@ -107,6 +107,7 @@ struct InsertCannulaView: View {
                 self.viewModel.continueButtonTapped()
             }) {
                 actionText
+                    .actionButtonStyle(.primary)
             }
             
         }
