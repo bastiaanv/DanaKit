@@ -1,5 +1,5 @@
-# OmniBLE
-Omnipod Bluetooth PumpManager For Loop
+# DanaKit
+Dana-I/Dana-RS Bluetooth PumpManager For Loop
 
 ## Status
 This repository contains code being tested in Loop.
