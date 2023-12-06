@@ -11,20 +11,7 @@ import OSLog
 
 
 public class DanaKit {
-    var manager: PeripheralManager
-    var advertisement: PodAdvertisement?
-
     private let log = OSLog(category: "DanaKit")
 
-    init(peripheralManager: PeripheralManager, advertisement: PodAdvertisement?) {
-        self.manager = peripheralManager        
-        self.advertisement = advertisement
-    }
-}
-
-
-extension DanaKit: CustomDebugStringConvertible {
-    public var debugDescription: String {
-        return "DanaKit - advertisement: \(String(describing: advertisement))"
-    }
+    init() { }
 }

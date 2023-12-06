@@ -6,4 +6,7 @@
 //  Copyright © 2023 Randall Knutson. All rights reserved.
 //
 
-import Foundation
+let DEVICE_NAME = "VJH00012FI"
+
+// 54, 54, 54, 56, 54, 54
+let Ble5Keys: (UInt8, UInt8, UInt8) = (44, 27, 44)

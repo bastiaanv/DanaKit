@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1029AE4827094D0E00B7F5B6 /* DanaKitPumpManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1029AE4627094D0E00B7F5B6 /* DanaKitPumpManager.swift */; };
 		1029AE4927094D0E00B7F5B6 /* DanaKitPumpManagerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1029AE4727094D0E00B7F5B6 /* DanaKitPumpManagerState.swift */; };
-		1029AE4B27094DDC00B7F5B6 /* OmniBLEPumpManager+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1029AE4A27094DDC00B7F5B6 /* OmniBLEPumpManager+UI.swift */; };
 		2742C7052AD875B100E67833 /* SlideButton in Frameworks */ = {isa = PBXBuildFile; productRef = 2742C7042AD875B100E67833 /* SlideButton */; };
 		4B67E2D5289B4EDB002D92AF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4B67E2D3289B4EDB002D92AF /* Localizable.strings */; };
 		84752E9326ED0FFE009FD801 /* DanaKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 84752E8526ED0FFE009FD801 /* DanaKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -17,50 +16,25 @@
 		847530F626ED65DD009FD801 /* LoopKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847530F426ED65DD009FD801 /* LoopKit.framework */; };
 		847530F826ED65DD009FD801 /* LoopKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847530F526ED65DD009FD801 /* LoopKitUI.framework */; };
 		A91B2DEC276E1E5E001B0E95 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A91B2DEB276E1E5E001B0E95 /* README.md */; };
+		B8179E5A2B20F2A10049EEE7 /* OSLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8179E592B20F2A10049EEE7 /* OSLog.swift */; };
+		B85418A82B20F46200C3B4D0 /* Lookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85418A72B20F46200C3B4D0 /* Lookup.swift */; };
+		B85418AA2B20F52200C3B4D0 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85418A92B20F52200C3B4D0 /* Common.swift */; };
+		B85418AC2B20F6B700C3B4D0 /* CommonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85418AB2B20F6B700C3B4D0 /* CommonTests.swift */; };
+		B85418AE2B20F6F800C3B4D0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85418AD2B20F6F800C3B4D0 /* Constants.swift */; };
+		B85418B02B20F77900C3B4D0 /* Encrypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85418AF2B20F77900C3B4D0 /* Encrypt.swift */; };
+		B85418B32B20F92C00C3B4D0 /* DanaPacketType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85418B22B20F92C00C3B4D0 /* DanaPacketType.swift */; };
+		B85418B52B20FBAD00C3B4D0 /* EncryptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85418B42B20FBAD00C3B4D0 /* EncryptTests.swift */; };
+		B85418B72B21001000C3B4D0 /* Decryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85418B62B21001000C3B4D0 /* Decryption.swift */; };
+		B85418B92B21032600C3B4D0 /* DecryptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85418B82B21032600C3B4D0 /* DecryptionTests.swift */; };
 		B857E7F22B1FABF000BDFFC4 /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = B857E7F12B1FABF000BDFFC4 /* LocalizedString.swift */; };
+		B87D571C2B20EEAF00FD82E9 /* Crc.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87D571B2B20EEAF00FD82E9 /* Crc.swift */; };
+		B87D571F2B20EFE700FD82E9 /* CrcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87D571E2B20EFE700FD82E9 /* CrcTests.swift */; };
 		C10D6D6E27A2395700F53D58 /* DanaKitPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10D6D6D27A2395700F53D58 /* DanaKitPlugin.swift */; };
-		C187C191278FCEC9006E3557 /* InsulinTypeConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C187C190278FCEC9006E3557 /* InsulinTypeConfirmation.swift */; };
 		C187C19A279086A8006E3557 /* DanaKitPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = C187C199279086A8006E3557 /* DanaKitPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C187C1A3279087A4006E3557 /* OSLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C187C1A2279087A4006E3557 /* OSLog.swift */; };
-		C18DAD622AE58BDD00FAB288 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C18DAD602AE58BDD00FAB288 /* Localizable.strings */; };
 		C1C001C127A2349D00533D35 /* DanaKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C001C027A2349D00533D35 /* DanaKit.swift */; };
-		C1C001C427A2351D00533D35 /* OmniBLEReservoirView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1C001C227A2351D00533D35 /* OmniBLEReservoirView.xib */; };
-		C1C001C527A2351D00533D35 /* OmniBLEReservoirView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C001C327A2351D00533D35 /* OmniBLEReservoirView.swift */; };
 		C1D27A1527908DC600C41EBA /* DanaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84752E8226ED0FFE009FD801 /* DanaKit.framework */; };
 		C1D27A1727908DE500C41EBA /* DanaKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 84752E8226ED0FFE009FD801 /* DanaKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C1DBD513282FF79D009FCF74 /* ManualTempBasalEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DBD512282FF79D009FCF74 /* ManualTempBasalEntryView.swift */; };
-		C1ED1E7227BAE44E00FED71C /* BeepPreferenceSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1ED1E7127BAE44E00FED71C /* BeepPreferenceSelectionView.swift */; };
-		C1F67E8B27975B830017487F /* AttachPodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67E7327975B830017487F /* AttachPodView.swift */; };
-		C1F67E8C27975B830017487F /* ScheduledExpirationReminderEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67E7427975B830017487F /* ScheduledExpirationReminderEditView.swift */; };
-		C1F67E8E27975B830017487F /* TimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67E7627975B830017487F /* TimeView.swift */; };
-		C1F67E8F27975B830017487F /* OmniBLESettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67E7727975B830017487F /* OmniBLESettingsView.swift */; };
-		C1F67E9027975B830017487F /* ExpirationReminderSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67E7827975B830017487F /* ExpirationReminderSetupView.swift */; };
-		C1F67E9127975B830017487F /* DeactivatePodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67E7927975B830017487F /* DeactivatePodView.swift */; };
-		C1F67E9227975B830017487F /* BasalStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67E7A27975B830017487F /* BasalStateView.swift */; };
-		C1F67E9327975B830017487F /* ExpirationReminderPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67E7B27975B830017487F /* ExpirationReminderPickerView.swift */; };
-		C1F67E9427975B830017487F /* LowReservoirReminderSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67E7C27975B830017487F /* LowReservoirReminderSetupView.swift */; };
-		C1F67E9527975B830017487F /* HUDAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1F67E7D27975B830017487F /* HUDAssets.xcassets */; };
-		C1F67E9727975B830017487F /* PairPodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67E7F27975B830017487F /* PairPodView.swift */; };
-		C1F67E9827975B830017487F /* CheckInsertedCannulaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67E8027975B830017487F /* CheckInsertedCannulaView.swift */; };
-		C1F67E9927975B830017487F /* NotificationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67E8127975B830017487F /* NotificationSettingsView.swift */; };
-		C1F67E9A27975B830017487F /* DeliveryUncertaintyRecoveryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67E8227975B830017487F /* DeliveryUncertaintyRecoveryView.swift */; };
-		C1F67E9C27975B830017487F /* UncertaintyRecoveredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67E8427975B830017487F /* UncertaintyRecoveredView.swift */; };
-		C1F67E9D27975B830017487F /* InsertCannulaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67E8527975B830017487F /* InsertCannulaView.swift */; };
-		C1F67E9E27975B830017487F /* LowReservoirReminderEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67E8627975B830017487F /* LowReservoirReminderEditView.swift */; };
-		C1F67E9F27975B830017487F /* SetupCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67E8727975B830017487F /* SetupCompleteView.swift */; };
-		C1F67EA027975B830017487F /* PodSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67E8827975B830017487F /* PodSetupView.swift */; };
-		C1F67EA227975B830017487F /* PodDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67E8A27975B830017487F /* PodDetailsView.swift */; };
-		C1F67EA427975CCA0017487F /* DashUICoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67EA327975CCA0017487F /* DashUICoordinator.swift */; };
-		C1F67EB627975E710017487F /* RoundedCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67EB327975E710017487F /* RoundedCard.swift */; };
-		C1F67EB727975E710017487F /* LeadingImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67EB427975E710017487F /* LeadingImage.swift */; };
-		C1F67EB827975E710017487F /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67EB527975E710017487F /* ErrorView.swift */; };
-		C1F67EC527975F360017487F /* InsertCannulaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67EBD27975F360017487F /* InsertCannulaViewModel.swift */; };
-		C1F67EC627975F360017487F /* PairPodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67EBE27975F360017487F /* PairPodViewModel.swift */; };
-		C1F67EC827975F360017487F /* DeactivatePodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67EC027975F360017487F /* DeactivatePodViewModel.swift */; };
-		C1F67EC927975F360017487F /* DeliveryUncertaintyRecoveryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67EC127975F360017487F /* DeliveryUncertaintyRecoveryViewModel.swift */; };
-		C1F67ECA27975F360017487F /* OmniBLESettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67EC227975F360017487F /* OmniBLESettingsViewModel.swift */; };
-		C1F67ECB27975F360017487F /* PodLifeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67EC327975F360017487F /* PodLifeState.swift */; };
-		C1F67EE02797B1EF0017487F /* OmniBLEHUDProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F67EDF2797B1EF0017487F /* OmniBLEHUDProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,14 +43,14 @@
 			containerPortal = 84752E7926ED0FFE009FD801 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 84752E8126ED0FFE009FD801;
-			remoteInfo = OmniBLE;
+			remoteInfo = DanaKit;
 		};
 		C187C19F279086FF006E3557 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 84752E7926ED0FFE009FD801 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 84752E8126ED0FFE009FD801;
-			remoteInfo = OmniBLE;
+			remoteInfo = DanaKit;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -91,21 +65,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D8C72BD72A50D7D700268D82 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1029AE4627094D0E00B7F5B6 /* DanaKitPumpManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DanaKitPumpManager.swift; sourceTree = "<group>"; };
 		1029AE4727094D0E00B7F5B6 /* DanaKitPumpManagerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DanaKitPumpManagerState.swift; sourceTree = "<group>"; };
-		1029AE4A27094DDC00B7F5B6 /* OmniBLEPumpManager+UI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OmniBLEPumpManager+UI.swift"; sourceTree = "<group>"; };
 		4B23AA6328D909E2009B453B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4B23AA6428D909E7009B453B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		4B23AA6528D909E9009B453B /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -131,14 +95,25 @@
 		847530F426ED65DD009FD801 /* LoopKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LoopKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		847530F526ED65DD009FD801 /* LoopKitUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LoopKitUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A91B2DEB276E1E5E001B0E95 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		B8179E592B20F2A10049EEE7 /* OSLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSLog.swift; sourceTree = "<group>"; };
+		B85418A72B20F46200C3B4D0 /* Lookup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lookup.swift; sourceTree = "<group>"; };
+		B85418A92B20F52200C3B4D0 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		B85418AB2B20F6B700C3B4D0 /* CommonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTests.swift; sourceTree = "<group>"; };
+		B85418AD2B20F6F800C3B4D0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B85418AF2B20F77900C3B4D0 /* Encrypt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encrypt.swift; sourceTree = "<group>"; };
+		B85418B22B20F92C00C3B4D0 /* DanaPacketType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanaPacketType.swift; sourceTree = "<group>"; };
+		B85418B42B20FBAD00C3B4D0 /* EncryptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptTests.swift; sourceTree = "<group>"; };
+		B85418B62B21001000C3B4D0 /* Decryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decryption.swift; sourceTree = "<group>"; };
+		B85418B82B21032600C3B4D0 /* DecryptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecryptionTests.swift; sourceTree = "<group>"; };
 		B857E7F12B1FABF000BDFFC4 /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
+		B87D571B2B20EEAF00FD82E9 /* Crc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crc.swift; sourceTree = "<group>"; };
+		B87D571E2B20EFE700FD82E9 /* CrcTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrcTests.swift; sourceTree = "<group>"; };
 		C10D6D6D27A2395700F53D58 /* DanaKitPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DanaKitPlugin.swift; sourceTree = "<group>"; };
 		C121D8D829C7866D00DA0520 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C13F70D42AE58C76002A292B /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C15A583029C7866600D3A5A1 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C17C23AA2AE58C87003AD249 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C17E22892AE58C5500CFDE99 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
-		C187C190278FCEC9006E3557 /* InsulinTypeConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinTypeConfirmation.swift; sourceTree = "<group>"; };
 		C187C197279086A8006E3557 /* DanaKitPlugin.loopplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DanaKitPlugin.loopplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		C187C199279086A8006E3557 /* DanaKitPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DanaKitPlugin.h; sourceTree = "<group>"; };
 		C187C1A2279087A4006E3557 /* OSLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSLog.swift; sourceTree = "<group>"; };
@@ -146,47 +121,11 @@
 		C18DAD612AE58BDD00FAB288 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C19E3881298638CE00851444 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C1C001C027A2349D00533D35 /* DanaKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DanaKit.swift; sourceTree = "<group>"; };
-		C1C001C227A2351D00533D35 /* OmniBLEReservoirView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OmniBLEReservoirView.xib; sourceTree = "<group>"; };
-		C1C001C327A2351D00533D35 /* OmniBLEReservoirView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmniBLEReservoirView.swift; sourceTree = "<group>"; };
-		C1DBD512282FF79D009FCF74 /* ManualTempBasalEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualTempBasalEntryView.swift; sourceTree = "<group>"; };
-		C1ED1E7127BAE44E00FED71C /* BeepPreferenceSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeepPreferenceSelectionView.swift; sourceTree = "<group>"; };
-		C1F67E7327975B830017487F /* AttachPodView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachPodView.swift; sourceTree = "<group>"; };
-		C1F67E7427975B830017487F /* ScheduledExpirationReminderEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduledExpirationReminderEditView.swift; sourceTree = "<group>"; };
-		C1F67E7627975B830017487F /* TimeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeView.swift; sourceTree = "<group>"; };
-		C1F67E7727975B830017487F /* OmniBLESettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmniBLESettingsView.swift; sourceTree = "<group>"; };
-		C1F67E7827975B830017487F /* ExpirationReminderSetupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpirationReminderSetupView.swift; sourceTree = "<group>"; };
-		C1F67E7927975B830017487F /* DeactivatePodView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeactivatePodView.swift; sourceTree = "<group>"; };
-		C1F67E7A27975B830017487F /* BasalStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasalStateView.swift; sourceTree = "<group>"; };
-		C1F67E7B27975B830017487F /* ExpirationReminderPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpirationReminderPickerView.swift; sourceTree = "<group>"; };
-		C1F67E7C27975B830017487F /* LowReservoirReminderSetupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LowReservoirReminderSetupView.swift; sourceTree = "<group>"; };
-		C1F67E7D27975B830017487F /* HUDAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = HUDAssets.xcassets; sourceTree = "<group>"; };
-		C1F67E7F27975B830017487F /* PairPodView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PairPodView.swift; sourceTree = "<group>"; };
-		C1F67E8027975B830017487F /* CheckInsertedCannulaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckInsertedCannulaView.swift; sourceTree = "<group>"; };
-		C1F67E8127975B830017487F /* NotificationSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationSettingsView.swift; sourceTree = "<group>"; };
-		C1F67E8227975B830017487F /* DeliveryUncertaintyRecoveryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryUncertaintyRecoveryView.swift; sourceTree = "<group>"; };
-		C1F67E8427975B830017487F /* UncertaintyRecoveredView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UncertaintyRecoveredView.swift; sourceTree = "<group>"; };
-		C1F67E8527975B830017487F /* InsertCannulaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertCannulaView.swift; sourceTree = "<group>"; };
-		C1F67E8627975B830017487F /* LowReservoirReminderEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LowReservoirReminderEditView.swift; sourceTree = "<group>"; };
-		C1F67E8727975B830017487F /* SetupCompleteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupCompleteView.swift; sourceTree = "<group>"; };
-		C1F67E8827975B830017487F /* PodSetupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PodSetupView.swift; sourceTree = "<group>"; };
-		C1F67E8A27975B830017487F /* PodDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PodDetailsView.swift; sourceTree = "<group>"; };
-		C1F67EA327975CCA0017487F /* DashUICoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashUICoordinator.swift; sourceTree = "<group>"; };
-		C1F67EB327975E710017487F /* RoundedCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedCard.swift; sourceTree = "<group>"; };
-		C1F67EB427975E710017487F /* LeadingImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeadingImage.swift; sourceTree = "<group>"; };
-		C1F67EB527975E710017487F /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
-		C1F67EBD27975F360017487F /* InsertCannulaViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertCannulaViewModel.swift; sourceTree = "<group>"; };
-		C1F67EBE27975F360017487F /* PairPodViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PairPodViewModel.swift; sourceTree = "<group>"; };
-		C1F67EC027975F360017487F /* DeactivatePodViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeactivatePodViewModel.swift; sourceTree = "<group>"; };
-		C1F67EC127975F360017487F /* DeliveryUncertaintyRecoveryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryUncertaintyRecoveryViewModel.swift; sourceTree = "<group>"; };
-		C1F67EC227975F360017487F /* OmniBLESettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OmniBLESettingsViewModel.swift; sourceTree = "<group>"; };
-		C1F67EC327975F360017487F /* PodLifeState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PodLifeState.swift; sourceTree = "<group>"; };
-		C1F67EDF2797B1EF0017487F /* OmniBLEHUDProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmniBLEHUDProvider.swift; sourceTree = "<group>"; };
 		C1FAB5C729C786B000D25073 /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C1FC36162AE58CCE00AC033A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C1FD685F2AE58C9A003DDFFD /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C1FDCC1029C786F90056E652 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C1FF3D5229C786A900BDC1EC /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
-		D8C72BD92A50D7D700268D82 /* DanaKitParser */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DanaKitParser; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,13 +155,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D8C72BD62A50D7D700268D82 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -246,7 +178,6 @@
 				84752E8226ED0FFE009FD801 /* DanaKit.framework */,
 				84752E8B26ED0FFE009FD801 /* DanaKitTests.xctest */,
 				C187C197279086A8006E3557 /* DanaKitPlugin.loopplugin */,
-				D8C72BD92A50D7D700268D82 /* DanaKitParser */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -254,8 +185,9 @@
 		84752E8426ED0FFE009FD801 /* DanaKit */ = {
 			isa = PBXGroup;
 			children = (
+				B85418B12B20F90200C3B4D0 /* Packets */,
+				B87D571A2B20EEA300FD82E9 /* Encryption */,
 				84752EAD26ED11A4009FD801 /* PumpManager */,
-				8475311D26ED8246009FD801 /* PumpManagerUI */,
 				84752E8526ED0FFE009FD801 /* DanaKit.h */,
 				84752E8626ED0FFE009FD801 /* Info.plist */,
 				4B67E2D3289B4EDB002D92AF /* Localizable.strings */,
@@ -266,7 +198,9 @@
 		84752E8F26ED0FFE009FD801 /* DanaKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				B87D571D2B20EFCF00FD82E9 /* Encryption */,
 				84752E9226ED0FFE009FD801 /* Info.plist */,
+				B85418AD2B20F6F800C3B4D0 /* Constants.swift */,
 			);
 			path = DanaKitTests;
 			sourceTree = "<group>";
@@ -294,61 +228,40 @@
 			isa = PBXGroup;
 			children = (
 				B857E7F12B1FABF000BDFFC4 /* LocalizedString.swift */,
+				B8179E592B20F2A10049EEE7 /* OSLog.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
 		};
-		8475311D26ED8246009FD801 /* PumpManagerUI */ = {
+		B85418B12B20F90200C3B4D0 /* Packets */ = {
 			isa = PBXGroup;
 			children = (
-				C1F67EBB27975F060017487F /* ViewModels */,
-				1029AE4A27094DDC00B7F5B6 /* OmniBLEPumpManager+UI.swift */,
-				8475312626ED838A009FD801 /* ViewControllers */,
-				8475311E26ED838A009FD801 /* Views */,
-				C1F67EDF2797B1EF0017487F /* OmniBLEHUDProvider.swift */,
+				B85418B22B20F92C00C3B4D0 /* DanaPacketType.swift */,
 			);
-			path = PumpManagerUI;
+			path = Packets;
 			sourceTree = "<group>";
 		};
-		8475311E26ED838A009FD801 /* Views */ = {
+		B87D571A2B20EEA300FD82E9 /* Encryption */ = {
 			isa = PBXGroup;
 			children = (
-				C1C001C327A2351D00533D35 /* OmniBLEReservoirView.swift */,
-				C1C001C227A2351D00533D35 /* OmniBLEReservoirView.xib */,
-				C1F67EB227975E710017487F /* DesignElements */,
-				C1F67E7327975B830017487F /* AttachPodView.swift */,
-				C1F67E7A27975B830017487F /* BasalStateView.swift */,
-				C1F67E8027975B830017487F /* CheckInsertedCannulaView.swift */,
-				C1F67E7727975B830017487F /* OmniBLESettingsView.swift */,
-				C1F67E7927975B830017487F /* DeactivatePodView.swift */,
-				C1F67E8227975B830017487F /* DeliveryUncertaintyRecoveryView.swift */,
-				C1F67E7B27975B830017487F /* ExpirationReminderPickerView.swift */,
-				C1F67E7827975B830017487F /* ExpirationReminderSetupView.swift */,
-				C1F67E7D27975B830017487F /* HUDAssets.xcassets */,
-				C1F67E8527975B830017487F /* InsertCannulaView.swift */,
-				C1F67E8627975B830017487F /* LowReservoirReminderEditView.swift */,
-				C1F67E7C27975B830017487F /* LowReservoirReminderSetupView.swift */,
-				C1F67E8127975B830017487F /* NotificationSettingsView.swift */,
-				C1F67E7F27975B830017487F /* PairPodView.swift */,
-				C1F67E8A27975B830017487F /* PodDetailsView.swift */,
-				C1F67E8827975B830017487F /* PodSetupView.swift */,
-				C1F67E7427975B830017487F /* ScheduledExpirationReminderEditView.swift */,
-				C1F67E8727975B830017487F /* SetupCompleteView.swift */,
-				C1F67E7627975B830017487F /* TimeView.swift */,
-				C1F67E8427975B830017487F /* UncertaintyRecoveredView.swift */,
-				C187C190278FCEC9006E3557 /* InsulinTypeConfirmation.swift */,
-				C1ED1E7127BAE44E00FED71C /* BeepPreferenceSelectionView.swift */,
-				C1DBD512282FF79D009FCF74 /* ManualTempBasalEntryView.swift */,
+				B87D571B2B20EEAF00FD82E9 /* Crc.swift */,
+				B85418A72B20F46200C3B4D0 /* Lookup.swift */,
+				B85418A92B20F52200C3B4D0 /* Common.swift */,
+				B85418AF2B20F77900C3B4D0 /* Encrypt.swift */,
+				B85418B62B21001000C3B4D0 /* Decryption.swift */,
 			);
-			path = Views;
+			path = Encryption;
 			sourceTree = "<group>";
 		};
-		8475312626ED838A009FD801 /* ViewControllers */ = {
+		B87D571D2B20EFCF00FD82E9 /* Encryption */ = {
 			isa = PBXGroup;
 			children = (
-				C1F67EA327975CCA0017487F /* DashUICoordinator.swift */,
+				B87D571E2B20EFE700FD82E9 /* CrcTests.swift */,
+				B85418AB2B20F6B700C3B4D0 /* CommonTests.swift */,
+				B85418B42B20FBAD00C3B4D0 /* EncryptTests.swift */,
+				B85418B82B21032600C3B4D0 /* DecryptionTests.swift */,
 			);
-			path = ViewControllers;
+			path = Encryption;
 			sourceTree = "<group>";
 		};
 		C187C198279086A8006E3557 /* DanaKitPlugin */ = {
@@ -368,29 +281,6 @@
 				C187C1A2279087A4006E3557 /* OSLog.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		C1F67EB227975E710017487F /* DesignElements */ = {
-			isa = PBXGroup;
-			children = (
-				C1F67EB327975E710017487F /* RoundedCard.swift */,
-				C1F67EB427975E710017487F /* LeadingImage.swift */,
-				C1F67EB527975E710017487F /* ErrorView.swift */,
-			);
-			path = DesignElements;
-			sourceTree = "<group>";
-		};
-		C1F67EBB27975F060017487F /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				C1F67EC227975F360017487F /* OmniBLESettingsViewModel.swift */,
-				C1F67EC027975F360017487F /* DeactivatePodViewModel.swift */,
-				C1F67EC127975F360017487F /* DeliveryUncertaintyRecoveryViewModel.swift */,
-				C1F67EBD27975F360017487F /* InsertCannulaViewModel.swift */,
-				C1F67EBE27975F360017487F /* PairPodViewModel.swift */,
-				C1F67EC327975F360017487F /* PodLifeState.swift */,
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -433,7 +323,7 @@
 				8475306D26ED15DE009FD801 /* CryptoSwift */,
 				2742C7042AD875B100E67833 /* SlideButton */,
 			);
-			productName = OmniBLE;
+			productName = DanaKit;
 			productReference = 84752E8226ED0FFE009FD801 /* DanaKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
@@ -451,7 +341,7 @@
 				84752E8E26ED0FFE009FD801 /* PBXTargetDependency */,
 			);
 			name = DanaKitTests;
-			productName = OmniBLETests;
+			productName = DanaKitTests;
 			productReference = 84752E8B26ED0FFE009FD801 /* DanaKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
@@ -471,27 +361,9 @@
 				C187C1A0279086FF006E3557 /* PBXTargetDependency */,
 			);
 			name = DanaKitPlugin;
-			productName = OmniBLEPlugin;
+			productName = DanaKitPlugin;
 			productReference = C187C197279086A8006E3557 /* DanaKitPlugin.loopplugin */;
 			productType = "com.apple.product-type.framework";
-		};
-		D8C72BD82A50D7D700268D82 /* DanaKitParser */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D8C72BDF2A50D7D700268D82 /* Build configuration list for PBXNativeTarget "DanaKitParser" */;
-			buildPhases = (
-				D8C72BD52A50D7D700268D82 /* Sources */,
-				D8C72BD62A50D7D700268D82 /* Frameworks */,
-				D8C72BD72A50D7D700268D82 /* CopyFiles */,
-				C18DAD672AE58BDD00FAB288 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = DanaKitParser;
-			productName = OmniBLEParser;
-			productReference = D8C72BD92A50D7D700268D82 /* DanaKitParser */;
-			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
@@ -509,12 +381,10 @@
 					};
 					84752E8A26ED0FFE009FD801 = {
 						CreatedOnToolsVersion = 12.5.1;
+						LastSwiftMigration = 1500;
 					};
 					C187C196279086A8006E3557 = {
 						CreatedOnToolsVersion = 13.2.1;
-					};
-					D8C72BD82A50D7D700268D82 = {
-						CreatedOnToolsVersion = 14.3.1;
 					};
 				};
 			};
@@ -560,7 +430,6 @@
 				84752E8126ED0FFE009FD801 /* DanaKit */,
 				84752E8A26ED0FFE009FD801 /* DanaKitTests */,
 				C187C196279086A8006E3557 /* DanaKitPlugin */,
-				D8C72BD82A50D7D700268D82 /* DanaKitParser */,
 			);
 		};
 /* End PBXProject section */
@@ -570,10 +439,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C1F67E9527975B830017487F /* HUDAssets.xcassets in Resources */,
 				4B67E2D5289B4EDB002D92AF /* Localizable.strings in Resources */,
 				A91B2DEC276E1E5E001B0E95 /* README.md in Resources */,
-				C1C001C427A2351D00533D35 /* OmniBLEReservoirView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -591,14 +458,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C18DAD672AE58BDD00FAB288 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C18DAD622AE58BDD00FAB288 /* Localizable.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -606,45 +465,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C1F67E8B27975B830017487F /* AttachPodView.swift in Sources */,
-				C1F67EE02797B1EF0017487F /* OmniBLEHUDProvider.swift in Sources */,
-				C1F67E9327975B830017487F /* ExpirationReminderPickerView.swift in Sources */,
-				C1F67E8C27975B830017487F /* ScheduledExpirationReminderEditView.swift in Sources */,
-				C1F67EB827975E710017487F /* ErrorView.swift in Sources */,
+				B85418AA2B20F52200C3B4D0 /* Common.swift in Sources */,
+				B85418B32B20F92C00C3B4D0 /* DanaPacketType.swift in Sources */,
+				B85418B72B21001000C3B4D0 /* Decryption.swift in Sources */,
+				B85418A82B20F46200C3B4D0 /* Lookup.swift in Sources */,
+				B87D571C2B20EEAF00FD82E9 /* Crc.swift in Sources */,
+				B85418B02B20F77900C3B4D0 /* Encrypt.swift in Sources */,
 				1029AE4927094D0E00B7F5B6 /* DanaKitPumpManagerState.swift in Sources */,
-				C1F67E9927975B830017487F /* NotificationSettingsView.swift in Sources */,
-				C1F67E9727975B830017487F /* PairPodView.swift in Sources */,
-				C1F67EB727975E710017487F /* LeadingImage.swift in Sources */,
-				C1F67ECB27975F360017487F /* PodLifeState.swift in Sources */,
-				C1F67E9E27975B830017487F /* LowReservoirReminderEditView.swift in Sources */,
-				C1F67E8E27975B830017487F /* TimeView.swift in Sources */,
-				C1F67E9827975B830017487F /* CheckInsertedCannulaView.swift in Sources */,
-				C1F67EC527975F360017487F /* InsertCannulaViewModel.swift in Sources */,
 				B857E7F22B1FABF000BDFFC4 /* LocalizedString.swift in Sources */,
-				C1F67E9027975B830017487F /* ExpirationReminderSetupView.swift in Sources */,
-				C1ED1E7227BAE44E00FED71C /* BeepPreferenceSelectionView.swift in Sources */,
-				C1F67E9A27975B830017487F /* DeliveryUncertaintyRecoveryView.swift in Sources */,
-				C1F67EA427975CCA0017487F /* DashUICoordinator.swift in Sources */,
-				C1C001C527A2351D00533D35 /* OmniBLEReservoirView.swift in Sources */,
-				C1F67EA227975B830017487F /* PodDetailsView.swift in Sources */,
-				1029AE4B27094DDC00B7F5B6 /* OmniBLEPumpManager+UI.swift in Sources */,
-				C1F67E9D27975B830017487F /* InsertCannulaView.swift in Sources */,
-				C1F67EC927975F360017487F /* DeliveryUncertaintyRecoveryViewModel.swift in Sources */,
-				C1F67ECA27975F360017487F /* OmniBLESettingsViewModel.swift in Sources */,
-				C1F67E9227975B830017487F /* BasalStateView.swift in Sources */,
+				B8179E5A2B20F2A10049EEE7 /* OSLog.swift in Sources */,
 				C1C001C127A2349D00533D35 /* DanaKit.swift in Sources */,
-				C1DBD513282FF79D009FCF74 /* ManualTempBasalEntryView.swift in Sources */,
-				C1F67EA027975B830017487F /* PodSetupView.swift in Sources */,
 				1029AE4827094D0E00B7F5B6 /* DanaKitPumpManager.swift in Sources */,
-				C1F67EC827975F360017487F /* DeactivatePodViewModel.swift in Sources */,
-				C1F67E9127975B830017487F /* DeactivatePodView.swift in Sources */,
-				C1F67E9427975B830017487F /* LowReservoirReminderSetupView.swift in Sources */,
-				C1F67EB627975E710017487F /* RoundedCard.swift in Sources */,
-				C1F67EC627975F360017487F /* PairPodViewModel.swift in Sources */,
-				C187C191278FCEC9006E3557 /* InsulinTypeConfirmation.swift in Sources */,
-				C1F67E9C27975B830017487F /* UncertaintyRecoveredView.swift in Sources */,
-				C1F67E8F27975B830017487F /* OmniBLESettingsView.swift in Sources */,
-				C1F67E9F27975B830017487F /* SetupCompleteView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -652,6 +483,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B85418B92B21032600C3B4D0 /* DecryptionTests.swift in Sources */,
+				B85418AC2B20F6B700C3B4D0 /* CommonTests.swift in Sources */,
+				B85418B52B20FBAD00C3B4D0 /* EncryptTests.swift in Sources */,
+				B87D571F2B20EFE700FD82E9 /* CrcTests.swift in Sources */,
+				B85418AE2B20F6F800C3B4D0 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,13 +497,6 @@
 			files = (
 				C187C1A3279087A4006E3557 /* OSLog.swift in Sources */,
 				C10D6D6E27A2395700F53D58 /* DanaKitPlugin.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D8C72BD52A50D7D700268D82 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -880,7 +709,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
-				INFOPLIST_FILE = OmniBLE/Info.plist;
+				INFOPLIST_FILE = DanaKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -895,7 +724,7 @@
 				);
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
-				PRODUCT_BUNDLE_IDENTIFIER = com.randallknutson.OmniBLE;
+				PRODUCT_BUNDLE_IDENTIFIER = com.randallknutson.DanaKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -920,7 +749,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
-				INFOPLIST_FILE = OmniBLE/Info.plist;
+				INFOPLIST_FILE = DanaKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -935,7 +764,7 @@
 				);
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
-				PRODUCT_BUNDLE_IDENTIFIER = com.randallknutson.OmniBLE;
+				PRODUCT_BUNDLE_IDENTIFIER = com.randallknutson.DanaKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -953,19 +782,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				FRAMEWORK_SEARCH_PATHS = "";
-				INFOPLIST_FILE = OmniBLETests/Info.plist;
+				INFOPLIST_FILE = DanaKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.randallknutson.OmniBLETests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.randallknutson.DanaKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -975,15 +806,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				FRAMEWORK_SEARCH_PATHS = "";
-				INFOPLIST_FILE = OmniBLETests/Info.plist;
+				INFOPLIST_FILE = DanaKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.randallknutson.OmniBLETests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.randallknutson.DanaKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1006,7 +838,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = OmniBLEPlugin/Info.plist;
+				INFOPLIST_FILE = DanaKitPlugin/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 LoopKit Authors. All rights reserved.";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
@@ -1017,7 +849,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.randallknutson.OmniBLEPlugin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.randallknutson.DanaKitPlugin;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1043,7 +875,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = OmniBLEPlugin/Info.plist;
+				INFOPLIST_FILE = DanaKitPlugin/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 LoopKit Authors. All rights reserved.";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
@@ -1054,7 +886,7 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.randallknutson.OmniBLEPlugin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.randallknutson.DanaKitPlugin;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1064,30 +896,6 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = loopplugin;
-			};
-			name = Release;
-		};
-		D8C72BDD2A50D7D700268D82 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				MACOSX_DEPLOYMENT_TARGET = 13.3;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		D8C72BDE2A50D7D700268D82 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
-				CODE_SIGN_STYLE = Automatic;
-				MACOSX_DEPLOYMENT_TARGET = 13.3;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
-				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -1126,15 +934,6 @@
 			buildConfigurations = (
 				C187C19C279086A8006E3557 /* Debug */,
 				C187C19D279086A8006E3557 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D8C72BDF2A50D7D700268D82 /* Build configuration list for PBXNativeTarget "DanaKitParser" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D8C72BDD2A50D7D700268D82 /* Debug */,
-				D8C72BDE2A50D7D700268D82 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
