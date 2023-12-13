@@ -82,8 +82,8 @@ struct DanaPacketType {
     static let OPCODE_OPTION__GET_USER_OPTION: UInt8 = 0x72
     static let OPCODE_OPTION__SET_USER_OPTION: UInt8 = 0x73
     static let OPCODE_BASAL__APS_SET_TEMPORARY_BASAL: UInt8 = 0xc1
-    static let OPCODE_APS_HISTORY_EVENTS: UInt8 = 0xc2
-    static let OPCODE_APS_SET_EVENT_HISTORY: UInt8 = 0xc3
+    static let OPCODE__APS_HISTORY_EVENTS: UInt8 = 0xc2
+    static let OPCODE__APS_SET_EVENT_HISTORY: UInt8 = 0xc3
     static let OPCODE_REVIEW__GET_PUMP_DEC_RATIO: UInt8 = 0x80
     static let OPCODE_GENERAL__GET_SHIPPING_VERSION: UInt8 = 0x81
     static let OPCODE_OPTION__GET_EASY_MENU_OPTION: UInt8 = 0x74
