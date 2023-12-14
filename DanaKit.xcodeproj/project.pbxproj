@@ -75,6 +75,8 @@
 		B8360AE22B2A3C3C00152188 /* DanaNotifyMissedBolus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8360ADF2B2A3C3B00152188 /* DanaNotifyMissedBolus.swift */; };
 		B8360AE32B2A3C3C00152188 /* DanaNotifyDeliveryRateDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8360AE02B2A3C3C00152188 /* DanaNotifyDeliveryRateDisplay.swift */; };
 		B8360AE62B2A3D9B00152188 /* GeneratePacketTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8360AE52B2A3D9B00152188 /* GeneratePacketTests.swift */; };
+		B8360AE92B2B954700152188 /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8360AE82B2B954700152188 /* BluetoothManager.swift */; };
+		B8360AEB2B2B95B000152188 /* EncryptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8360AEA2B2B95B000152188 /* EncryptionManager.swift */; };
 		B85418A82B20F46200C3B4D0 /* Lookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85418A72B20F46200C3B4D0 /* Lookup.swift */; };
 		B85418AA2B20F52200C3B4D0 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85418A92B20F52200C3B4D0 /* Common.swift */; };
 		B85418AC2B20F6B700C3B4D0 /* CommonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85418AB2B20F6B700C3B4D0 /* CommonTests.swift */; };
@@ -212,6 +214,8 @@
 		B8360ADF2B2A3C3B00152188 /* DanaNotifyMissedBolus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DanaNotifyMissedBolus.swift; sourceTree = "<group>"; };
 		B8360AE02B2A3C3C00152188 /* DanaNotifyDeliveryRateDisplay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DanaNotifyDeliveryRateDisplay.swift; sourceTree = "<group>"; };
 		B8360AE52B2A3D9B00152188 /* GeneratePacketTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratePacketTests.swift; sourceTree = "<group>"; };
+		B8360AE82B2B954700152188 /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
+		B8360AEA2B2B95B000152188 /* EncryptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionManager.swift; sourceTree = "<group>"; };
 		B85418A72B20F46200C3B4D0 /* Lookup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lookup.swift; sourceTree = "<group>"; };
 		B85418A92B20F52200C3B4D0 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		B85418AB2B20F6B700C3B4D0 /* CommonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTests.swift; sourceTree = "<group>"; };
@@ -337,6 +341,7 @@
 				C1C001C027A2349D00533D35 /* DanaKit.swift */,
 				1029AE4627094D0E00B7F5B6 /* DanaKitPumpManager.swift */,
 				1029AE4727094D0E00B7F5B6 /* DanaKitPumpManagerState.swift */,
+				B8360AE82B2B954700152188 /* BluetoothManager.swift */,
 			);
 			path = PumpManager;
 			sourceTree = "<group>";
@@ -423,6 +428,7 @@
 				B85418A92B20F52200C3B4D0 /* Common.swift */,
 				B85418AF2B20F77900C3B4D0 /* Encrypt.swift */,
 				B85418B62B21001000C3B4D0 /* Decryption.swift */,
+				B8360AEA2B2B95B000152188 /* EncryptionManager.swift */,
 			);
 			path = Encryption;
 			sourceTree = "<group>";
@@ -673,6 +679,7 @@
 				B8360A9F2B2A26C700152188 /* DanaGeneralClearUserTimeChangeFlag.swift in Sources */,
 				B8360A802B263EA200152188 /* DanaBasalSetTemporary.swift in Sources */,
 				B8360A992B26456600152188 /* DanaBolusStop.swift in Sources */,
+				B8360AE92B2B954700152188 /* BluetoothManager.swift in Sources */,
 				B8360AA52B2A281700152188 /* DanaGeneralGetPumpDecRatio.swift in Sources */,
 				B8360AB12B2A2A1900152188 /* DanaGeneralGetUserTimeChangeFlag.swift in Sources */,
 				B8360AC12B2A2DA600152188 /* DanaHistoryAll.swift in Sources */,
@@ -696,6 +703,7 @@
 				B8360AD32B2A348100152188 /* DanaHistorySuspend.swift in Sources */,
 				B8360AAF2B2A298200152188 /* DanaGeneralGetUserOption.swift in Sources */,
 				B8360A702B26011200152188 /* DanaPacketBase.swift in Sources */,
+				B8360AEB2B2B95B000152188 /* EncryptionManager.swift in Sources */,
 				1029AE4927094D0E00B7F5B6 /* DanaKitPumpManagerState.swift in Sources */,
 				B857E7F22B1FABF000BDFFC4 /* LocalizedString.swift in Sources */,
 				B8179E5A2B20F2A10049EEE7 /* OSLog.swift in Sources */,

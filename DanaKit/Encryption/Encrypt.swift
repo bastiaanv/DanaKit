@@ -54,78 +54,79 @@ func encrypt(_ options: EncryptParams) -> (data: Data, isEncryptionMode: Bool) {
     }
 }
 
-func encryptSecondLevel(
-    buffer: inout Data,
-    enhancedEncryption: UInt8,
-    pairingKey: Data,
-    randomPairingKey: Data,
-    randomSyncKey: UInt8,
-    bleRandomKeys: (UInt8, UInt8, UInt8)
-) -> (randomSyncKey: UInt8, buffer: Data) {
-    
-    var updatedRandomSyncKey = randomSyncKey
+struct EncryptSecondLevelParams {
+    var buffer: Data
+    var enhancedEncryption: UInt8
+    var pairingKey: Data
+    var randomPairingKey: Data
+    var randomSyncKey: UInt8
+    var bleRandomKeys: (UInt8, UInt8, UInt8)
+}
 
-    if enhancedEncryption == 1 {
-        if buffer[0] == 0xa5 && buffer[1] == 0xa5 {
-            buffer[0] = 0x7a
-            buffer[1] = 0x7a
+func encryptSecondLevel(_ params: inout EncryptSecondLevelParams) -> (randomSyncKey: UInt8, buffer: Data) {
+    var updatedRandomSyncKey = params.randomSyncKey
+
+    if params.enhancedEncryption == 1 {
+        if params.buffer[0] == 0xa5 && params.buffer[1] == 0xa5 {
+            params.buffer[0] = 0x7a
+            params.buffer[1] = 0x7a
         }
 
-        if buffer[buffer.count - 2] == 0x5a && buffer[buffer.count - 1] == 0x5a {
-            buffer[buffer.count - 2] = 0x2e
-            buffer[buffer.count - 1] = 0x2e
+        if params.buffer[params.buffer.count - 2] == 0x5a && params.buffer[params.buffer.count - 1] == 0x5a {
+            params.buffer[params.buffer.count - 2] = 0x2e
+            params.buffer[params.buffer.count - 1] = 0x2e
         }
 
-        for i in 0..<buffer.count {
-            buffer[i] ^= pairingKey[0]
-            buffer[i] &-= updatedRandomSyncKey
-            buffer[i] = ((buffer[i] >> 4) & 0xf) | (((buffer[i] & 0xf) << 4) & 0xff)
+        for i in 0..<params.buffer.count {
+            params.buffer[i] ^= params.pairingKey[0]
+            params.buffer[i] &-= updatedRandomSyncKey
+            params.buffer[i] = ((params.buffer[i] >> 4) & 0xf) | (((params.buffer[i] & 0xf) << 4) & 0xff)
 
-            buffer[i] &+= pairingKey[1]
-            buffer[i] ^= pairingKey[2]
-            buffer[i] = ((buffer[i] >> 4) & 0xf) | (((buffer[i] & 0xf) << 4) & 0xff)
+            params.buffer[i] &+= params.pairingKey[1]
+            params.buffer[i] ^= params.pairingKey[2]
+            params.buffer[i] = ((params.buffer[i] >> 4) & 0xf) | (((params.buffer[i] & 0xf) << 4) & 0xff)
 
-            buffer[i] &-= pairingKey[3]
-            buffer[i] ^= pairingKey[4]
-            buffer[i] = ((buffer[i] >> 4) & 0xf) | (((buffer[i] & 0xf) << 4) & 0xff)
+            params.buffer[i] &-= params.pairingKey[3]
+            params.buffer[i] ^= params.pairingKey[4]
+            params.buffer[i] = ((params.buffer[i] >> 4) & 0xf) | (((params.buffer[i] & 0xf) << 4) & 0xff)
 
-            buffer[i] ^= pairingKey[5]
-            buffer[i] ^= updatedRandomSyncKey
-            buffer[i] ^= secondLvlEncryptionLookup[Int(pairingKey[0])] // You need to define secondLvlEncryptionLookup
-            buffer[i] &+= secondLvlEncryptionLookup[Int(pairingKey[1])]
-            buffer[i] &-= secondLvlEncryptionLookup[Int(pairingKey[2])]
-            buffer[i] = ((buffer[i] >> 4) & 0xf) | (((buffer[i] & 0xf) << 4) & 0xff)
+            params.buffer[i] ^= params.pairingKey[5]
+            params.buffer[i] ^= updatedRandomSyncKey
+            params.buffer[i] ^= secondLvlEncryptionLookup[Int(params.pairingKey[0])] // You need to define secondLvlEncryptionLookup
+            params.buffer[i] &+= secondLvlEncryptionLookup[Int(params.pairingKey[1])]
+            params.buffer[i] &-= secondLvlEncryptionLookup[Int(params.pairingKey[2])]
+            params.buffer[i] = ((params.buffer[i] >> 4) & 0xf) | (((params.buffer[i] & 0xf) << 4) & 0xff)
 
-            buffer[i] ^= secondLvlEncryptionLookup[Int(pairingKey[3])]
-            buffer[i] &+= secondLvlEncryptionLookup[Int(pairingKey[4])]
-            buffer[i] &-= secondLvlEncryptionLookup[Int(pairingKey[5])]
-            buffer[i] ^= secondLvlEncryptionLookup[Int(randomPairingKey[0])]
-            buffer[i] &+= secondLvlEncryptionLookup[Int(randomPairingKey[1])]
-            buffer[i] &-= secondLvlEncryptionLookup[Int(randomPairingKey[2])]
+            params.buffer[i] ^= secondLvlEncryptionLookup[Int(params.pairingKey[3])]
+            params.buffer[i] &+= secondLvlEncryptionLookup[Int(params.pairingKey[4])]
+            params.buffer[i] &-= secondLvlEncryptionLookup[Int(params.pairingKey[5])]
+            params.buffer[i] ^= secondLvlEncryptionLookup[Int(params.randomPairingKey[0])]
+            params.buffer[i] &+= secondLvlEncryptionLookup[Int(params.randomPairingKey[1])]
+            params.buffer[i] &-= secondLvlEncryptionLookup[Int(params.randomPairingKey[2])]
 
-            updatedRandomSyncKey = buffer[i]
+            updatedRandomSyncKey = params.buffer[i]
         }
-    } else if enhancedEncryption == 2 {
-        if buffer[0] == 0xa5 && buffer[1] == 0xa5 {
-            buffer[0] = 0xaa
-            buffer[1] = 0xaa
-        }
-
-        if buffer[buffer.count - 2] == 0x5a && buffer[buffer.count - 1] == 0x5a {
-            buffer[buffer.count - 2] = 0xee
-            buffer[buffer.count - 1] = 0xee
+    } else if params.enhancedEncryption == 2 {
+        if params.buffer[0] == 0xa5 && params.buffer[1] == 0xa5 {
+            params.buffer[0] = 0xaa
+            params.buffer[1] = 0xaa
         }
 
-        for i in 0..<buffer.count {
-            buffer[i] &+= bleRandomKeys.0
-            buffer[i] = ((buffer[i] >> 4) & 0x0f) | (((buffer[i] & 0x0f) << 4) & 0xf0)
+        if params.buffer[params.buffer.count - 2] == 0x5a && params.buffer[params.buffer.count - 1] == 0x5a {
+            params.buffer[params.buffer.count - 2] = 0xee
+            params.buffer[params.buffer.count - 1] = 0xee
+        }
 
-            buffer[i] &-= bleRandomKeys.1
-            buffer[i] ^= bleRandomKeys.2
+        for i in 0..<params.buffer.count {
+            params.buffer[i] &+= params.bleRandomKeys.0
+            params.buffer[i] = ((params.buffer[i] >> 4) & 0x0f) | (((params.buffer[i] & 0x0f) << 4) & 0xf0)
+
+            params.buffer[i] &-= params.bleRandomKeys.1
+            params.buffer[i] ^= params.bleRandomKeys.2
         }
     }
 
-    return (updatedRandomSyncKey, buffer)
+    return (updatedRandomSyncKey, params.buffer)
 }
 
 func encodePumpCheckCommand(deviceName: String, enhancedEncryption: UInt8) -> (data: Data, isEncryptionMode: Bool) {

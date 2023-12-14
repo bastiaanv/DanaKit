@@ -173,7 +173,8 @@ class EncryptionTests: XCTestCase {
         let enhancedEncryption: UInt8 = 2
         let emptyKey: Data = Data([])
 
-        let result = encryptSecondLevel(buffer: &data, enhancedEncryption: enhancedEncryption, pairingKey: emptyKey, randomPairingKey: emptyKey, randomSyncKey: 0, bleRandomKeys: Ble5Keys)
+        var params = EncryptSecondLevelParams(buffer: data, enhancedEncryption: enhancedEncryption, pairingKey: emptyKey, randomPairingKey: emptyKey, randomSyncKey: 0, bleRandomKeys: Ble5Keys)
+        let result = encryptSecondLevel(&params)
 
         XCTAssertEqual(result.randomSyncKey, 0)
         XCTAssertEqual(result.buffer, Data([126, 126, 235, 16, 154, 122, 245, 170, 170]))
