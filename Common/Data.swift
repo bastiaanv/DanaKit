@@ -16,8 +16,8 @@ extension Data {
     mutating func addDate(at index: Int, date: Date, usingUTC: Bool) {
         let calendar: Calendar = usingUTC ? .current : .autoupdatingCurrent
         
-        self[index] = UInt8(calendar.component(.year, from: date) & 0xff)
-        self[index + 1] = UInt8((calendar.component(.month, from: date) + 1) & 0xff) // Months use zero-based index in Swift
+        self[index] = UInt8((calendar.component(.year, from: date) - 2000) & 0xff)
+        self[index + 1] = UInt8(calendar.component(.month, from: date) & 0xff)
         self[index + 2] = UInt8(calendar.component(.day, from: date) & 0xff)
         self[index + 3] = UInt8(calendar.component(.hour, from: date) & 0xff)
         self[index + 4] = UInt8(calendar.component(.minute, from: date) & 0xff)
@@ -26,7 +26,7 @@ extension Data {
     
     func date(at index: Int) -> Date {
         let year = 2000 + Int(self[startIndex])
-        let month = -1 + Int(self[startIndex + 1])
+        let month = Int(self[startIndex + 1])
         let day = Int(self[startIndex + 2])
         let hour = Int(self[startIndex + 3])
         let min = Int(self[startIndex + 4])

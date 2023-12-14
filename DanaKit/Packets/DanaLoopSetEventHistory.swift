@@ -45,8 +45,7 @@ func generatePacketLoopSetEventHistory(options: PacketLoopSetEventHistory) -> Da
     }
 
     data[0] = options.packetType
-
-    // Implement addDateToPacket logic here for the date at index 1
+    data.addDate(at: 1, date: options.time, usingUTC: options.usingUTC)
 
     data[7] = UInt8(param1 >> 8)
     data[8] = UInt8(param1 & 0xff)

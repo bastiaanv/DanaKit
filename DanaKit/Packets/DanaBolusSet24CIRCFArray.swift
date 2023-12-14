@@ -29,9 +29,12 @@ func generatePacketBolusSet24CIRCFArray(options: PacketBolusSet24CIRCFArray) thr
     for i in 0..<24 {
         let roundedIC = UInt16(Double(options.ic[i]).rounded())
         let roundedISF = UInt16(Double(adjustedISF[i]).rounded())
-
-        data.replaceSubrange(i * 2..<i * 2 + 2, with: withUnsafeBytes(of: roundedIC) { Data($0) })
-        data.replaceSubrange(i * 2 + 48..<i * 2 + 50, with: withUnsafeBytes(of: roundedISF) { Data($0) })
+        
+        data[i * 2] = UInt8(roundedIC & 0xff)
+        data[i * 2 + 1] = UInt8((roundedIC >> 8) & 0xff)
+        
+        data[i * 2 + 48] = UInt8(roundedISF & 0xff)
+        data[i * 2 + 49] = UInt8((roundedISF >> 8) & 0xff)
     }
 
     return DanaGeneratePacket(opCode: DanaPacketType.OPCODE_BOLUS__SET_24_CIR_CF_ARRAY, data: data)
