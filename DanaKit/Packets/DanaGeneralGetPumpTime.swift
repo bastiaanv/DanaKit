@@ -10,7 +10,7 @@ struct PacketGeneralGetPumpTime {
     var time: Date
 }
 
-let CommandGeneralGetPumpTime = (DanaPacketType.TYPE_RESPONSE & 0xff << 8) + (DanaPacketType.OPCODE_OPTION__GET_PUMP_TIME & 0xff)
+let CommandGeneralGetPumpTime: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xff) << 8) + UInt16(DanaPacketType.OPCODE_OPTION__GET_PUMP_TIME & 0xff)
 
 func generatePacketGeneralGetPumpTime() -> DanaGeneratePacket {
     return DanaGeneratePacket(

@@ -12,8 +12,7 @@ struct PacketGeneralGetShippingInformation {
     var shippingDate: Date
 }
 
-let CommandGeneralGetShippingInformation =
-    (DanaPacketType.TYPE_RESPONSE & 0xff << 8) + (DanaPacketType.OPCODE_REVIEW__GET_SHIPPING_INFORMATION & 0xff)
+let CommandGeneralGetShippingInformation: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xff) << 8) + UInt16(DanaPacketType.OPCODE_REVIEW__GET_SHIPPING_INFORMATION & 0xff)
 
 func generatePacketGeneralGetShippingInformation() -> DanaGeneratePacket {
     return DanaGeneratePacket(

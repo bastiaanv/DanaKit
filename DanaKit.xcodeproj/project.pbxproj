@@ -89,6 +89,7 @@
 		B857E7F22B1FABF000BDFFC4 /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = B857E7F12B1FABF000BDFFC4 /* LocalizedString.swift */; };
 		B87D571C2B20EEAF00FD82E9 /* Crc.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87D571B2B20EEAF00FD82E9 /* Crc.swift */; };
 		B87D571F2B20EFE700FD82E9 /* CrcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87D571E2B20EFE700FD82E9 /* CrcTests.swift */; };
+		B88516872B2F74D60063402A /* DanaPacketParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88516862B2F74D60063402A /* DanaPacketParser.swift */; };
 		C10D6D6E27A2395700F53D58 /* DanaKitPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10D6D6D27A2395700F53D58 /* DanaKitPlugin.swift */; };
 		C187C19A279086A8006E3557 /* DanaKitPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = C187C199279086A8006E3557 /* DanaKitPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C187C1A3279087A4006E3557 /* OSLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C187C1A2279087A4006E3557 /* OSLog.swift */; };
@@ -228,6 +229,7 @@
 		B857E7F12B1FABF000BDFFC4 /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
 		B87D571B2B20EEAF00FD82E9 /* Crc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crc.swift; sourceTree = "<group>"; };
 		B87D571E2B20EFE700FD82E9 /* CrcTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrcTests.swift; sourceTree = "<group>"; };
+		B88516862B2F74D60063402A /* DanaPacketParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanaPacketParser.swift; sourceTree = "<group>"; };
 		C10D6D6D27A2395700F53D58 /* DanaKitPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DanaKitPlugin.swift; sourceTree = "<group>"; };
 		C121D8D829C7866D00DA0520 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C13F70D42AE58C76002A292B /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -416,6 +418,7 @@
 				B8360ADE2B2A3C3B00152188 /* DanaNotifyAlarm.swift */,
 				B8360AE02B2A3C3C00152188 /* DanaNotifyDeliveryRateDisplay.swift */,
 				B8360ADF2B2A3C3B00152188 /* DanaNotifyMissedBolus.swift */,
+				B88516862B2F74D60063402A /* DanaPacketParser.swift */,
 			);
 			path = Packets;
 			sourceTree = "<group>";
@@ -664,6 +667,7 @@
 				B8360AA32B2A275400152188 /* DanaGeneralGetPumpCheck.swift in Sources */,
 				B85418B32B20F92C00C3B4D0 /* DanaPacketType.swift in Sources */,
 				B8360AA72B2A289A00152188 /* DanaGeneralGetPumpTime.swift in Sources */,
+				B88516872B2F74D60063402A /* DanaPacketParser.swift in Sources */,
 				B8360AC32B2A2DCC00152188 /* DanaHistoryBasal.swift in Sources */,
 				B8360AAD2B2A294400152188 /* DanaGeneralGetShippingVersion.swift in Sources */,
 				B85418B72B21001000C3B4D0 /* Decryption.swift in Sources */,

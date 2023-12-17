@@ -15,7 +15,7 @@ struct PacketGeneralSetHistoryUploadMode {
     var mode: UInt8
 }
 
-let CommandGeneralSetHistoryUploadMode = (DanaPacketType.TYPE_RESPONSE & 0xff << 8) + (DanaPacketType.OPCODE_REVIEW__SET_HISTORY_UPLOAD_MODE & 0xff)
+let CommandGeneralSetHistoryUploadMode: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xff) << 8) + UInt16(DanaPacketType.OPCODE_REVIEW__SET_HISTORY_UPLOAD_MODE & 0xff)
 
 func generatePacketGeneralSetHistoryUploadMode(options: PacketGeneralSetHistoryUploadMode) -> DanaGeneratePacket {
     let data = Data([options.mode])

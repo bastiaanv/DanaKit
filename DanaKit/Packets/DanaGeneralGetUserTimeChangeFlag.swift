@@ -10,7 +10,7 @@ struct PacketGeneralGetUserTimeChangeFlag {
     var userTimeChangeFlag: UInt8
 }
 
-let CommandGeneralGetUserTimeChangeFlag = (DanaPacketType.TYPE_RESPONSE & 0xff << 8) + (DanaPacketType.OPCODE_REVIEW__GET_USER_TIME_CHANGE_FLAG & 0xff)
+let CommandGeneralGetUserTimeChangeFlag: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xff) << 8) + UInt16(DanaPacketType.OPCODE_REVIEW__GET_USER_TIME_CHANGE_FLAG & 0xff)
 
 func generatePacketGeneralGetUserTimeChangeFlag() -> DanaGeneratePacket {
     return DanaGeneratePacket(

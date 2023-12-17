@@ -35,8 +35,11 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
     /// See: https://androidaps.readthedocs.io/en/latest/Configuration/DanaRS-Insulin-Pump.html#pairing-pump
     public var deviceIsRequestingPincode: Bool = false;
     
+    /// The pump should be in history fetch mode, before requesting history data
+    public var isInFetchHistoryMode: Bool = false
+    
     public var ignorePassword: Bool = false
-    public var devicePassword: Uint16 = 0
+    public var devicePassword: UInt16 = 0
     
     // Use of these 2 bools are unknown...
     public var isEasyMode: Bool = false

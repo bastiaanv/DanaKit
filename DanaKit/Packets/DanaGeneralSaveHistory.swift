@@ -13,8 +13,7 @@ struct PacketGeneralSaveHistory {
     var historyValue: UInt16
 }
 
-let CommandGeneralSaveHistory = (DanaPacketType.TYPE_RESPONSE & 0xff << 8) + (DanaPacketType.OPCODE_ETC__SET_HISTORY_SAVE & 0xff)
-
+let CommandGeneralSaveHistory: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xff) << 8) + UInt16(DanaPacketType.OPCODE_ETC__SET_HISTORY_SAVE & 0xff)
 
 func generatePacketGeneralSaveHistory(options: PacketGeneralSaveHistory) -> DanaGeneratePacket {
     var data = Data(count: 10)

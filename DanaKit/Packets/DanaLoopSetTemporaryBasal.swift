@@ -15,7 +15,7 @@ struct TemporaryBasalDuration {
     static let PARAM_15_MIN: UInt8 = 150
 }
 
-let CommandLoopSetTemporaryBasal = (DanaPacketType.TYPE_RESPONSE & 0xff << 8) + (DanaPacketType.OPCODE_BASAL__APS_SET_TEMPORARY_BASAL & 0xff)
+let CommandLoopSetTemporaryBasal: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xff) << 8) + UInt16(DanaPacketType.OPCODE_BASAL__APS_SET_TEMPORARY_BASAL & 0xff)
 
 func generatePacketLoopSetTemporaryBasal(options: PacketLoopSetTemporaryBasal) -> DanaGeneratePacket {
     var percent = options.percent

@@ -29,7 +29,7 @@ struct PacketGeneralSetUserOption {
     var targetBg: UInt16?
 }
 
-let CommandGeneralSetUserOption = (DanaPacketType.TYPE_RESPONSE & 0xff << 8) + (DanaPacketType.OPCODE_OPTION__SET_USER_OPTION & 0xff)
+let CommandGeneralSetUserOption: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xff) << 8) + UInt16(DanaPacketType.OPCODE_OPTION__SET_USER_OPTION & 0xff)
 
 func generatePacketGeneralSetUserOption(options: PacketGeneralSetUserOption) -> DanaGeneratePacket {
     var data = Data(count: options.targetBg != nil ? 15 : 13)

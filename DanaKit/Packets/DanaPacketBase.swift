@@ -14,7 +14,8 @@ struct DanaGeneratePacket {
 
 struct DanaParsePacket<T> {
     let success: Bool
-    var notifyType: UInt8? = nil
+    var command: UInt16? = nil
+    var notifyType: UInt16? = nil
     let data: T?
 }
 

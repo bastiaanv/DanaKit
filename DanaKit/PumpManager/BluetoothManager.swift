@@ -51,6 +51,9 @@ class BluetoothManager : NSObject {
     private var state: DanaKitPumpManagerState
     private var readBuffer = Data([])
     
+    private var isSendingRequest = false
+    private var continuationToken: CheckedContinuation<DanaParsePacket<Any?>, Error>? = nil
+    
     private var devices: [CBPeripheral] = []
 
     init(_ state: DanaKitPumpManagerState) {
@@ -64,6 +67,54 @@ class BluetoothManager : NSObject {
     
     func startScan() {
         manager.scanForPeripherals(withServices: [])
+    }
+    
+    func writeMessage(_ packet: DanaGeneratePacket) async throws -> DanaParsePacket<Any?> {
+        let isHistoryPacket = self.isHistoryPacket(opCode: packet.opCode)
+        if (isHistoryPacket && !self.state.isInFetchHistoryMode) {
+            throw NSError(domain: "Pump is not in history fetch mode", code: 0, userInfo: nil)
+        }
+        
+        // Make sure we have the correct state
+        if (packet.opCode == CommandGeneralSetHistoryUploadMode && packet.data != nil) {
+            self.state.isInFetchHistoryMode = packet.data![0] == 0x01
+        } else {
+            self.state.isInFetchHistoryMode = false
+        }
+        
+        
+        var data = DanaRSEncryption.encodePacket(operationCode: packet.opCode, buffer: packet.data, deviceName: self.state.deviceName ?? "")
+        log.debug("%{public}@: Encrypted data: %{public}@", #function, data.base64EncodedString())
+        
+        if (self.encryptionMode != .DEFAULT) {
+            data = DanaRSEncryption.encodeSecondLevel(data: data)
+            log.debug("%{public}@: Second level encrypted data: %{public}@", #function, data.base64EncodedString())
+        }
+        
+        while (data.count != 0) {
+            let end = min(20, data.count)
+            let message = data.subdata(in: 0..<end)
+            
+            self.writeQ(message)
+            data = data.subdata(in: end..<data.count)
+        }
+        
+        // Now schedule a 5 sec timeout (or 20 when in fetchHistoryMode) for the pump to send its message back
+        // This timeout will be cancelled by `processMessage` once it received the message
+        // If this timeout expired, disconnect from the pump and prompt an error...
+        return try await withCheckedThrowingContinuation { continuation in
+            self.continuationToken = continuation
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + (!isHistoryPacket ? 5 : 20)) {
+                // Check if the message still hasn't been received
+                // If not, we should throw an exception
+                if (!self.isSendingRequest || self.continuationToken == nil) {
+                    return
+                }
+                
+                self.continuationToken!.resume(throwing: NSError(domain: "Message write timeout", code: 0, userInfo: nil))
+            }
+        }
     }
 }
 
@@ -474,6 +525,28 @@ extension BluetoothManager {
     }
     
     private func processMessage(_ data: Data) {
-        // TODO: Implement this function with callback timeout
+        let message = parseMessage(data: data)
+        if (message == nil) {
+            log.error("%{public}@: Received unparsable message. Data: %{public}@", #function, data.base64EncodedString())
+            return
+        }
+        
+        if (message!.notifyType != nil) {
+            // TODO: send notification somehow
+            return
+        }
+        
+        // Message received and dequeueing timeout
+        self.isSendingRequest = false
+        if (self.continuationToken == nil) {
+            log.error("%{public}@: No continuation toke to send this message back...", #function)
+            return
+        }
+        
+        self.continuationToken?.resume(returning: message!)
+    }
+    
+    private func isHistoryPacket(opCode: UInt8) -> Bool {
+        return opCode > DanaPacketType.OPCODE_REVIEW__BASAL && opCode < DanaPacketType.OPCODE_REVIEW__ALL_HISTORY
     }
 }
