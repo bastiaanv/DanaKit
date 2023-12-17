@@ -20,4 +20,25 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         var value: [String : Any] = [:]
         return value
     }
+
+    public var autoConnect: Bool = true
+    
+    public var deviceName: String? = nil
+    public var deviceAddress: String? = nil
+    public var isConnected: Bool = false
+    
+    public var hwModel: UInt8 = 0x00;
+    public var pumpProtocol: UInt8 = 0x00;
+    
+    /// When this bool is set to true, the UI should ask the user for a pincode
+    /// and the code should call BluetoothManager.finishV3Pairing. Only applicable to DanaRS v3
+    /// See: https://androidaps.readthedocs.io/en/latest/Configuration/DanaRS-Insulin-Pump.html#pairing-pump
+    public var deviceIsRequestingPincode: Bool = false;
+    
+    public var ignorePassword: Bool = false
+    public var devicePassword: Uint16 = 0
+    
+    // Use of these 2 bools are unknown...
+    public var isEasyMode: Bool = false
+    public var isUnitUD: Bool = false
 }
