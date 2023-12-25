@@ -12,7 +12,15 @@ struct DanaGeneratePacket {
     let data: Data?
 }
 
-struct DanaParsePacket<T> {
+protocol DanaParsePacketProtocol {
+    var success: Bool { get }
+    var command: UInt16? { get set }
+    var notifyType: UInt16? { get set }
+    associatedtype PayloadType
+    var data: PayloadType? { get }
+}
+
+struct DanaParsePacket<T>: DanaParsePacketProtocol {
     let success: Bool
     var command: UInt16? = nil
     var notifyType: UInt16? = nil

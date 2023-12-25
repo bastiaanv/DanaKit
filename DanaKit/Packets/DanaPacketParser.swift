@@ -6,14 +6,14 @@
 //  Copyright © 2023 Randall Knutson. All rights reserved.
 //
 
-func parseMessage(data: Data) -> DanaParsePacket<Any?>? {
+func parseMessage(data: Data) -> (any DanaParsePacketProtocol)? {
     let receivedCommand = (UInt16(data[TypeIndex] & 0xff) << 8) + UInt16(data[OpCodeIndex] & 0xff)
 
     guard let parser = findMessageParser[receivedCommand] else {
         return nil
     }
 
-    var parsedResult = parser(data) as! DanaParsePacket<Any?>
+    var parsedResult = parser(data) as! (any DanaParsePacketProtocol)
     parsedResult.command = receivedCommand
 
     return parsedResult

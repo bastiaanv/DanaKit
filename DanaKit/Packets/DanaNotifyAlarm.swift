@@ -10,7 +10,7 @@ struct PacketNotifyAlarm {
     var message: String
 }
 
-let CommandNotifyAlarm: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xff) << 8) + UInt16(DanaPacketType.OPCODE_NOTIFY__ALARM & 0xff)
+let CommandNotifyAlarm: UInt16 = (UInt16(DanaPacketType.TYPE_NOTIFY & 0xff) << 8) + UInt16(DanaPacketType.OPCODE_NOTIFY__ALARM & 0xff)
 
 func parsePacketNotifyAlarm(data: Data) -> DanaParsePacket<PacketNotifyAlarm> {
     let code = data[DataStart]

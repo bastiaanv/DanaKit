@@ -58,7 +58,7 @@ func generatePacketLoopSetEventHistory(options: PacketLoopSetEventHistory) -> Da
     )
 }
 
-func parsePacketLoopSetEventHistory(data: Data) -> DanaParsePacket<Any?> {
+func parsePacketLoopSetEventHistory(data: Data) -> DanaParsePacket<Any> {
     return DanaParsePacket(
         success: data[DataStart] == 0,
         data: nil // Replace with the actual parsed data if needed

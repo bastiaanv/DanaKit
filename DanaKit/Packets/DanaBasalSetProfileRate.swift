@@ -33,6 +33,6 @@ func generatePacketBasalSetProfileRate(options: PacketBasalSetProfileRate) throw
 }
 
 
-func parsePacketBasalSetProfileRate(data: Data) -> DanaParsePacket<Any?> {
+func parsePacketBasalSetProfileRate(data: Data) -> DanaParsePacket<Any> {
     return DanaParsePacket(success: data[DataStart] == 0, data: nil)
 }

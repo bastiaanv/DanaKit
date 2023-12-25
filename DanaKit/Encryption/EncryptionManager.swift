@@ -33,7 +33,7 @@ class DanaRSEncryption {
     
     // Encoding functions -> Encryption in JNI lib
     static func encodePacket(operationCode: UInt8, buffer: Data?, deviceName: String) -> Data {
-        let params = EncryptParams(operationCode: operationCode, deviceName: deviceName, enhancedEncryption: self.enhancedEncryption, timeSecret: self.timeSecret, passwordSecret: self.passwordSecret, passKeySecret: self.passKeySecret)
+        let params = EncryptParams(operationCode: operationCode, data: buffer, deviceName: deviceName, enhancedEncryption: self.enhancedEncryption, timeSecret: self.timeSecret, passwordSecret: self.passwordSecret, passKeySecret: self.passKeySecret)
         let result = encrypt(params)
         
         self.isEncryptionMode = result.isEncryptionMode
@@ -98,9 +98,9 @@ class DanaRSEncryption {
     static func setBle5Key(ble5Key: Data) {
         self.ble5Key = ble5Key
         
-        let i1 = (ble5Key[0] - 0x30) * 10 + (ble5Key[1] - 0x30)
-        let i2 = (ble5Key[2] - 0x30) * 10 + (ble5Key[3] - 0x30)
-        let i3 = (ble5Key[4] - 0x30) * 10 + (ble5Key[5] - 0x30)
+        let i1 = Int((ble5Key[0] - 0x30) * 10) &+ Int(ble5Key[1] - 0x30)
+        let i2 = Int((ble5Key[2] - 0x30) * 10) &+ Int(ble5Key[3] - 0x30)
+        let i3 = Int((ble5Key[4] - 0x30) * 10) &+ Int(ble5Key[5] - 0x30)
         
         self.ble5RandomKeys = (
             secondLvlEncryptionLookupShort[Int(i1)],

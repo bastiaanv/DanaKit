@@ -22,7 +22,7 @@ func generatePacketGeneralSetPumpTime(options: PacketGeneralSetPumpTime) -> Dana
     )
 }
 
-func parsePacketGeneralSetPumpTime(data: Data) -> DanaParsePacket<Any?> {
+func parsePacketGeneralSetPumpTime(data: Data) -> DanaParsePacket<Any> {
     return DanaParsePacket(
         success: data[DataStart] == 0,
         data: nil

@@ -138,8 +138,9 @@ func encodePumpCheckCommand(deviceName: String, enhancedEncryption: UInt8) -> (d
     buffer[4] = 0x00 // pump_check command
 
     // Device name
-    let deviceNameBytes = Array(deviceName.utf8.prefix(10))
-    buffer.replaceSubrange(5..<15, with: deviceNameBytes)
+    for i in 0..<10 {
+        buffer[5 + i] = UInt8(deviceName.utf8CString[i])
+    }
 
     let crc = generateCrc(buffer: buffer[3..<15], enhancedEncryption: enhancedEncryption, isEncryptionCommand: true)
     buffer[15] = UInt8((crc >> 8) & 0xff) // crc 1

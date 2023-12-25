@@ -21,10 +21,10 @@
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2022 LoopKit Authors. All rights reserved.</string>
 	<key>com.loopkit.Loop.PumpManagerDisplayName</key>
-	<string>Omnipod DASH</string>
+	<string>Dana-i/RS</string>
 	<key>com.loopkit.Loop.PumpManagerIdentifier</key>
-	<string>Omnipod-Dash</string>
+	<string>Dana</string>
 	<key>NSPrincipalClass</key>
-	<string>DanaKitPlugin.OmnipodPlugin</string>
+	<string>DanaKitPlugin.DanaKitPlugin</string>
 </dict>
 </plist>

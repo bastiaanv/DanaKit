@@ -6,14 +6,14 @@
 //  Copyright © 2023 Randall Knutson. All rights reserved.
 //
 
-enum BolusSpeed: UInt8 {
+public enum BolusSpeed: UInt8 {
     case speed12 = 0
     case speed30 = 1
     case speed60 = 2
 }
 
 struct PacketBolusStart {
-    var amount: UInt16
+    var amount: Double
     var speed: BolusSpeed
 }
 
@@ -37,6 +37,6 @@ func generatePacketBolusStart(options: PacketBolusStart) -> DanaGeneratePacket {
  * 0x40 => Speed error
  * 0x80 => Insulin limit violation
  */
-func parsePacketBolusStart(data: Data) -> DanaParsePacket<Any?> {
+func parsePacketBolusStart(data: Data) -> DanaParsePacket<Any> {
     return DanaParsePacket(success: data[DataStart] == 0, data: nil)
 }

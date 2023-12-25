@@ -151,10 +151,10 @@ func decryptSecondLevel(_ params: inout DecryptSecondLevelParams) -> (randomSync
     } else if params.enhancedEncryption == 2 {
         for i in 0..<params.buffer.count {
             params.buffer[i] ^= params.bleRandomKeys.2
-            params.buffer[i] += params.bleRandomKeys.1
+            params.buffer[i] &+= params.bleRandomKeys.1
 
             params.buffer[i] = ((params.buffer[i] >> 4) & 0xf) | (((params.buffer[i] & 0xf) << 4) & 0xff)
-            params.buffer[i] -= params.bleRandomKeys.0
+            params.buffer[i] &-= params.bleRandomKeys.0
         }
     }
 

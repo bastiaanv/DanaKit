@@ -22,7 +22,7 @@ func generatePacketBolusGetStepInformation() -> DanaGeneratePacket {
 }
 
 func parsePacketBolusGetStepInformation(data: Data) -> DanaParsePacket<PacketBolusGetStepInformation> {
-    var lastBolusTime = Calendar.current.date(bySettingHour: Int(data[DataStart + 4]), minute: Int(data[DataStart + 5]), second: 0, of: Date()) ?? Date()
+    let lastBolusTime = Calendar.current.date(bySettingHour: Int(data[DataStart + 4]), minute: Int(data[DataStart + 5]), second: 0, of: Date()) ?? Date()
 
     return DanaParsePacket(success: data[DataStart] == 0, data: PacketBolusGetStepInformation(
         bolusType: data[DataStart + 1],

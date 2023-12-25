@@ -10,7 +10,7 @@ struct PacketNotifyMissedBolus {
     var endTime: Date
 }
 
-let CommandNotifyMissedBolus: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xff) << 8) + UInt16(DanaPacketType.OPCODE_NOTIFY__MISSED_BOLUS_ALARM & 0xff)
+let CommandNotifyMissedBolus: UInt16 = (UInt16(DanaPacketType.TYPE_NOTIFY & 0xff) << 8) + UInt16(DanaPacketType.OPCODE_NOTIFY__MISSED_BOLUS_ALARM & 0xff)
 
 func parsePacketNotifyMissedBolus(data: Data) -> DanaParsePacket<PacketNotifyMissedBolus> {
     let startTime = Date(
