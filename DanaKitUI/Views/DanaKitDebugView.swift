@@ -18,7 +18,7 @@ struct DanaKitDebugView: View {
                     .frame(width: 100, height: 100)
 
                 Button("Connect", action: viewModel.connect)
-//                    .disabled(viewModel.scannedDevices.count == 0)
+                    .disabled(viewModel.scannedDevices.count == 0)
                     .frame(width: 100, height: 100)
             }
             
