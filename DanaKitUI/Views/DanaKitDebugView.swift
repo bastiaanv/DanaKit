@@ -18,7 +18,7 @@ struct DanaKitDebugView: View {
                     .frame(width: 100, height: 100)
 
                 Button("Connect", action: viewModel.connect)
-                    .disabled(viewModel.scannedDevices.count == 0)
+//                    .disabled(viewModel.scannedDevices.count == 0)
                     .frame(width: 100, height: 100)
             }
             
@@ -58,6 +58,17 @@ struct DanaKitDebugView: View {
                actions: { detail in
                 Button("No", action: {})
                 Button("Yes", action: viewModel.connect)
+               },
+               message: { detail in Text(detail) }
+        )
+        .alert("Dana-RS v3 found!",
+               isPresented: $viewModel.isPresentingPincodeAlert,
+               presenting: viewModel.messagePincodeAlert,
+               actions: { detail in
+                TextField("Code 1", text: $viewModel.pin1)
+                TextField("Code 2", text: $viewModel.pin2)
+                Button("Cancel", action: {})
+                Button("Contiue", action: viewModel.danaRsPincode)
                },
                message: { detail in Text(detail) }
         )

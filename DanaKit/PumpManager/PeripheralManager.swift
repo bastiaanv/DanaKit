@@ -261,6 +261,8 @@ extension PeripheralManager {
     func finishV3Pairing(_ pairingKey: Data, _ randomPairingKey: Data) {
         DanaRSEncryption.setPairingKeys(pairingKey: pairingKey, randomPairingKey: randomPairingKey, randomSyncKey: 0)
         self.sendV3PairingInformation(0)
+            
+        self.pumpManager.state.deviceIsRequestingPincode = false
     }
     
     private func processEasyMenuCheck(_ data: Data) {
@@ -358,7 +360,9 @@ extension PeripheralManager {
     
     private func processEncryptionResponse(_ data: Data) {
         if (self.encryptionMode == .BLE_5) {
-            self.getInitialState()
+            Task {
+                await self.updateInitialState()
+            }
             
         } else if (self.encryptionMode == .RSv3) {
             // data[2] : 0x00 OK  0x01 Error, No pairing
@@ -367,10 +371,13 @@ extension PeripheralManager {
                 if (pairingKey.count == 0 || randomPairingKey.count == 0) {
                     log.default("%{public}@: Device is requesting pincode")
                     self.pumpManager.state.deviceIsRequestingPincode = true
+                    self.pumpManager.notifyStateDidChange()
                     return
                 }
                 
-                self.getInitialState()
+                Task {
+                    await self.updateInitialState()
+                }
             } else {
                 self.sendV3PairingInformation(1)
             }
@@ -384,7 +391,9 @@ extension PeripheralManager {
                 return
             }
             
-            self.getInitialState()
+            Task {
+                await self.updateInitialState()
+            }
         }
     }
     
@@ -400,37 +409,34 @@ extension PeripheralManager {
         return data[2] == busyCharCodes[0] && data[3] == busyCharCodes[1] && data[4] == busyCharCodes[2] && data[5] == busyCharCodes[3]
     }
     
-    private func getInitialState() {
-        Task {
-            do {
-                self.pumpManager.state.isConnected = true
-                log.default("%{public}@: Getting initial state", #function)
-                
-                let initialScreenPacket = generatePacketGeneralGetInitialScreenInformation()
-                let result = try await self.writeMessage(initialScreenPacket)
-                
-                guard result.success else {
-                    log.error("%{public}@: Failed to fetch data...", #function)
-                    self.pumpManager.disconnect(self.connectedDevice)
-                    return
-                }
-                
-                guard let data = result.data as? PacketGeneralGetInitialScreenInformation else {
-                    log.error("%{public}@: No data received...", #function)
-                    self.pumpManager.disconnect(self.connectedDevice)
-                    return
-                }
-                
-                self.pumpManager.state.reservoirLevel = data.reservoirRemainingUnits
-                self.pumpManager.currentBaseBasalRate = data.currentBasal
-                self.pumpManager.notifyStateDidChange()
-                
-                log.default("%{public}@: Connection & encryption successful!", #function)
-            } catch {
+    public func updateInitialState() async {
+        do {
+            self.pumpManager.state.isConnected = true
+            log.default("%{public}@: Getting initial state", #function)
+            
+            let initialScreenPacket = generatePacketGeneralGetInitialScreenInformation()
+            let result = try await self.writeMessage(initialScreenPacket)
+            
+            guard result.success else {
+                log.error("%{public}@: Failed to fetch Initial screen...", #function)
                 self.pumpManager.disconnect(self.connectedDevice)
+                return
             }
+            
+            guard let data = result.data as? PacketGeneralGetInitialScreenInformation else {
+                log.error("%{public}@: No data received (initial screen)...", #function)
+                self.pumpManager.disconnect(self.connectedDevice)
+                return
+            }
+            
+            self.pumpManager.state.reservoirLevel = data.reservoirRemainingUnits
+            self.pumpManager.currentBaseBasalRate = data.currentBasal
+            self.pumpManager.notifyStateDidChange()
+            
+            log.default("%{public}@: Connection & encryption successful!", #function)
+        } catch {
+            self.pumpManager.disconnect(self.connectedDevice)
         }
-        
     }
 }
 

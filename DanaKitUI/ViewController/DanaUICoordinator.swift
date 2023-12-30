@@ -14,12 +14,29 @@ import LoopKitUI
 
 enum DanaUIScreen {
     case debugView
+    case firstRunScreen
+    case deviceScanning
+    
+    func next() -> DanaUIScreen? {
+        switch self {
+        case .debugView:
+            return .firstRunScreen
+        case .firstRunScreen:
+            return .deviceScanning
+        case .deviceScanning:
+            return nil
+        }
+    }
+}
+
+protocol DanaUINavigator: AnyObject {
+    func navigateTo(_ screen: DanaUIScreen)
 }
 
 class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, CompletionNotifying, UINavigationControllerDelegate {
-    var pumpManagerOnboardingDelegate: LoopKitUI.PumpManagerOnboardingDelegate?
+    var pumpManagerOnboardingDelegate: PumpManagerOnboardingDelegate?
     
-    var completionDelegate: LoopKitUI.CompletionDelegate?
+    var completionDelegate: CompletionDelegate?
     
     var screenStack = [DanaUIScreen]()
     var currentScreen: DanaUIScreen {
@@ -59,8 +76,7 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
         super.viewWillAppear(animated)
 
         if screenStack.isEmpty {
-//            screenStack = [determineInitialStep()]
-            screenStack = [.debugView]
+            screenStack = [.firstRunScreen]
             let viewController = viewControllerForScreen(currentScreen)
             viewController.isModalInPresentation = false
             setViewControllers([viewController], animated: false)
@@ -76,6 +92,30 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
         case .debugView:
             let view = DanaKitDebugView(viewModel: DanaKitDebugViewModel(self.pumpManager))
             return hostingController(rootView: view)
+        case .firstRunScreen:
+            let view = DanaKitSetupView(nextAction: { self.stepFinished() }, debugAction: { self.navigateTo(.debugView) }) //self.allowDebugFeatures ? { self.navigateTo(.debugView) } : {})
+            return hostingController(rootView: view)
+        case .deviceScanning:
+            let view = DanaKitScanView(viewModel: DanaKitScanViewModel(self.pumpManager, nextStep: {}))
+            return hostingController(rootView: view)
         }
+    }
+    
+    func stepFinished() {
+        if let nextStep = currentScreen.next() {
+            navigateTo(nextStep)
+        } else {
+            completionDelegate?.completionNotifyingDidComplete(self)
+        }
+    }
+}
+
+extension DanaUICoordinator: DanaUINavigator {
+    func navigateTo(_ screen: DanaUIScreen) {
+        screenStack.append(screen)
+        let viewController = viewControllerForScreen(screen)
+        viewController.isModalInPresentation = false
+        self.pushViewController(viewController, animated: true)
+        viewController.view.layoutSubviews()
     }
 }

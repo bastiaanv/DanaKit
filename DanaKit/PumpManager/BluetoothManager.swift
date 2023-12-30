@@ -46,6 +46,8 @@ class BluetoothManager : NSObject {
     }
     
     func startScan() {
+        self.devices = []
+        
         manager.scanForPeripherals(withServices: [])
         log.info("%{public}@: Started scanning", #function)
     }
@@ -90,11 +92,27 @@ class BluetoothManager : NSObject {
     }
     
     func writeMessage(_ packet: DanaGeneratePacket) async throws -> (any DanaParsePacketProtocol) {
-        guard self.peripheralManager != nil else {
+        guard let peripheralManager = self.peripheralManager else {
             throw NSError(domain: "No connected device", code: 0, userInfo: nil)
         }
         
-        return try await self.peripheralManager!.writeMessage(packet)
+        return try await peripheralManager.writeMessage(packet)
+    }
+    
+    func updateInitialState() async throws {
+        guard let peripheralManager = self.peripheralManager else {
+            throw NSError(domain: "No connected device", code: 0, userInfo: nil)
+        }
+        
+        return await peripheralManager.updateInitialState()
+    }
+    
+    func finishV3Pairing(_ pairingKey: Data, _ randomPairingKey: Data) throws {
+        guard let peripheralManager = self.peripheralManager else {
+            throw NSError(domain: "No connected device", code: 0, userInfo: nil)
+        }
+        
+        peripheralManager.finishV3Pairing(pairingKey, randomPairingKey)
     }
 }
 
@@ -124,8 +142,9 @@ extension BluetoothManager : CBCentralManagerDelegate {
             return
         }
         
-        devices.append(DanaPumpScan(bleIdentifier: peripheral.identifier.uuidString, name: peripheral.name!, peripheral: peripheral))
-        self.pumpManager.notifyScanDeviceDidChange(self.devices)
+        let result = DanaPumpScan(bleIdentifier: peripheral.identifier.uuidString, name: peripheral.name!, peripheral: peripheral)
+        devices.append(result)
+        self.pumpManager.notifyScanDeviceDidChange(result)
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {

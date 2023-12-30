@@ -17,7 +17,11 @@ class DanaKitDebugViewModel : ObservableObject {
     @Published var isPresentingScanAlert = false
     @Published var isPresentingBolusAlert = false
     @Published var messageScanAlert = ""
+    @Published var messagePincodeAlert: String = "Pincodes required"
+    @Published var pin1 = ""
+    @Published var pin2 = ""
     @Published var isConnected = false
+    @Published var isPresentingPincodeAlert = false
     
     private let log = OSLog(category: "DebugView")
     private var pumpManager: DanaKitPumpManager?
@@ -96,8 +100,16 @@ class DanaKitDebugViewModel : ObservableObject {
     }
     
     func basal() {
-        let basal = Array(repeating: 0.5, count: 24)
-        self.pumpManager?.setBasal(basal)
+        let basal = Array(0..<24).map({ RepeatingScheduleValue<Double>(startTime: TimeInterval(60 * 30 * $0), value: 0.5) })
+        self.pumpManager?.syncBasalRateSchedule(items: basal, completion: basalCompletion)
+    }
+    
+    func basalCompletion(_ result: Result<DailyValueSchedule<Double>, any Error>) {
+        if case .success = result {
+            return
+        } else {
+            log.error("Cancel failed...")
+        }
     }
     
     func disconnect() {
@@ -107,22 +119,44 @@ class DanaKitDebugViewModel : ObservableObject {
         
         self.pumpManager?.disconnect(device.peripheral)
     }
+    
+    func danaRsPincode() {
+        guard self.pin1.count == 12, self.pin2.count == 8 else {
+            self.messagePincodeAlert = "Received invalid pincode lengths. Try again"
+            self.isPresentingPincodeAlert = true
+            return
+        }
+        
+        guard let pin1 = Data(hexString: self.pin1), let pin2 = Data(hexString: self.pin2) else {
+            self.messagePincodeAlert = "Received invalid hex strings. Try again"
+            self.isPresentingPincodeAlert = true
+            return
+        }
+        
+        do {
+            try self.pumpManager?.pincodeDanaRS(pin1, pin2)
+            self.isPresentingPincodeAlert = false
+        } catch {
+            self.messagePincodeAlert = "Something when wrong: " + error.localizedDescription
+            self.isPresentingPincodeAlert = true
+        }
+    }
 }
 
 extension DanaKitDebugViewModel: StateObserver {
-    func deviceScanDidUpdate(_ devices: [DanaPumpScan]) {
-        self.scannedDevices = devices
-        
-        guard let device = devices.last else {
-            return
-        }
+    func deviceScanDidUpdate(_ device: DanaPumpScan) {
+        self.scannedDevices.append(device)
         
         messageScanAlert = "Do you want to connect to: " + device.name + " (" + device.bleIdentifier + ")"
         isPresentingScanAlert = true
         
     }
     
-    func stateDidUpdate(_ state: DanaKitPumpManagerState) {
+    func stateDidUpdate(_ state: DanaKitPumpManagerState, _ oldState: DanaKitPumpManagerState) {
         self.isConnected = state.isConnected
+        
+        if (!oldState.deviceIsRequestingPincode && state.deviceIsRequestingPincode) {
+            self.isPresentingPincodeAlert = true
+        }
     }
 }

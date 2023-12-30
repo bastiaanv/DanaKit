@@ -84,11 +84,11 @@ internal class DanaKitHUDProvider: NSObject, HUDProvider {
 }
 
 extension DanaKitHUDProvider: StateObserver {
-    func deviceScanDidUpdate(_ devices: [DanaPumpScan]) {
+    func deviceScanDidUpdate(_ device: DanaPumpScan) {
         // Ble scan not needed here
     }
     
-    func stateDidUpdate(_ state: DanaKitPumpManagerState) {
+    func stateDidUpdate(_ state: DanaKitPumpManagerState, _ oldState: DanaKitPumpManagerState) {
         updateReservoirView()
         
         visible = state.deviceName != nil

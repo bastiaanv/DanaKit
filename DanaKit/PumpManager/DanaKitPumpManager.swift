@@ -14,13 +14,14 @@ import os.log
 import CoreBluetooth
 
 public protocol StateObserver: AnyObject {
-    func stateDidUpdate(_ state: DanaKitPumpManagerState)
-    func deviceScanDidUpdate(_ devices: [DanaPumpScan])
+    func stateDidUpdate(_ state: DanaKitPumpManagerState, _ oldState: DanaKitPumpManagerState)
+    func deviceScanDidUpdate(_ device: DanaPumpScan)
 }
 
 public class DanaKitPumpManager: DeviceManager {
     private var bluetoothManager: BluetoothManager!
     
+    private var oldState: DanaKitPumpManagerState
     public var state: DanaKitPumpManagerState
     public var rawState: PumpManager.RawStateValue {
         return state.rawValue
@@ -33,6 +34,7 @@ public class DanaKitPumpManager: DeviceManager {
 
     public init(state: DanaKitPumpManagerState, dateGenerator: @escaping () -> Date = Date.init) {
         self.state = state
+        self.oldState = DanaKitPumpManagerState(rawValue: state.rawValue)
         
         self.bluetoothManager = BluetoothManager(self)
     }
@@ -42,9 +44,12 @@ public class DanaKitPumpManager: DeviceManager {
     }
 
     private let log = OSLog(category: "DanaKitPumpManager")
+    private let pumpDelegate = WeakSynchronizedDelegate<PumpManagerDelegate>()
     
     private let stateObservers = WeakSynchronizedSet<StateObserver>()
     private let scanDeviceObservers = WeakSynchronizedSet<StateObserver>()
+    
+    private let basalProfileNumber: UInt8 = 1
 
     public var isOnboarded: Bool {
         self.state.deviceName != nil
@@ -84,68 +89,85 @@ public class DanaKitPumpManager: DeviceManager {
         self.bluetoothManager.stopScan()
     }
     
-    public func setBasal(_ basal: [Double]) {
-        Task {
-            do {
-                let packet = try generatePacketBasalSetProfileRate(options: PacketBasalSetProfileRate(profileNumber: UInt8(1), profileBasalRate: basal))
-                let result = try await self.bluetoothManager.writeMessage(packet)
-            }
-
+    public func pincodeDanaRS(_ pairingKey: Data, _ pin2: Data) throws {
+        let randomPairingKey = pin2.prefix(5)
+        let checkSum = pin2.dropFirst(6).prefix(1)
+        
+        var pairingKeyCheckSum: UInt8 = 0
+        for byte in pairingKey {
+            pairingKeyCheckSum ^= byte
         }
+        
+        for byte in randomPairingKey {
+            pairingKeyCheckSum ^= byte
+        }
+        
+        guard checkSum[0] == pairingKeyCheckSum else {
+            throw NSError(domain: "Checksum failed...", code: 0, userInfo: nil)
+        }
+        
+        try self.bluetoothManager.finishV3Pairing(pairingKey, randomPairingKey)
     }
 }
 
-// TODO: Implement
 extension DanaKitPumpManager: PumpManager {
     public static var onboardingMaximumBasalScheduleEntryCount: Int {
-        return 0
+        return 24
     }
     
     public static var onboardingSupportedBasalRates: [Double] {
-        return []
+        // 0.05 units for rates between 0.00-3U/hr
+        // 0 U/hr is a supported scheduled basal rate
+        return (0...30).map { Double($0) / 10 }
     }
     
     public static var onboardingSupportedBolusVolumes: [Double] {
-        return []
+        // 0.10 units for rates between 0.10-30U
+        // 0 is not a supported bolus volume
+        return (1...300).map { Double($0) / 10 }
     }
     
     public static var onboardingSupportedMaximumBolusVolumes: [Double] {
-        return []
+        return DanaKitPumpManager.onboardingSupportedBolusVolumes
     }
     
     public var delegateQueue: DispatchQueue! {
         get {
-            return nil
+            return pumpDelegate.queue
         }
-        set(newValue) {
+        set {
+            pumpDelegate.queue = newValue
         }
     }
     
     public var supportedBasalRates: [Double] {
-        return []
+        return DanaKitPumpManager.onboardingSupportedBasalRates
     }
     
     public var supportedBolusVolumes: [Double] {
-        return []
+        return DanaKitPumpManager.onboardingSupportedBolusVolumes
     }
     
     public var supportedMaximumBolusVolumes: [Double] {
-        return []
+        // 0.05 units for rates between 0.05-30U
+        // 0 is not a supported bolus volume
+        return DanaKitPumpManager.onboardingSupportedBolusVolumes
     }
     
     public var maximumBasalScheduleEntryCount: Int {
-        return 0
+        return DanaKitPumpManager.onboardingMaximumBasalScheduleEntryCount
     }
     
     public var minimumBasalScheduleEntryDuration: TimeInterval {
-        return 0
+        return TimeInterval(30 * 60)
     }
     
     public var pumpManagerDelegate: LoopKit.PumpManagerDelegate? {
         get {
-            return nil
+            return pumpDelegate.delegate
         }
-        set(newValue) {
+        set {
+            pumpDelegate.delegate = newValue
         }
     }
     
@@ -172,6 +194,23 @@ extension DanaKitPumpManager: PumpManager {
     }
     
     public func ensureCurrentPumpData(completion: ((Date?) -> Void)?) {
+        Task {
+            do {
+                try await self.bluetoothManager.updateInitialState()
+                
+                guard let completion = completion else {
+                    return
+                }
+                
+                completion(Date.now)
+            } catch {
+                guard let completion = completion else {
+                    return
+                }
+                
+                completion(nil)
+            }
+        }
     }
     
     public func setMustProvideBLEHeartbeat(_ mustProvideBLEHeartbeat: Bool) {
@@ -314,23 +353,101 @@ extension DanaKitPumpManager: PumpManager {
         }
     }
     
-    public func syncBasalRateSchedule(items scheduleItems: [LoopKit.RepeatingScheduleValue<Double>], completion: @escaping (Result<LoopKit.BasalRateSchedule, Error>) -> Void) {
+    public func syncBasalRateSchedule(items scheduleItems: [RepeatingScheduleValue<Double>], completion: @escaping (Result<BasalRateSchedule, Error>) -> Void) {
+        Task {
+            do {
+                let basal = self.convertBasal(scheduleItems)
+                let packet = try generatePacketBasalSetProfileRate(options: PacketBasalSetProfileRate(profileNumber: self.basalProfileNumber, profileBasalRate: basal))
+                let result = try await self.bluetoothManager.writeMessage(packet)
+                
+                if (!result.success) {
+                    completion(.failure(PumpManagerError.communication(nil)))
+                    return
+                }
+                
+                guard let schedule = DailyValueSchedule<Double>(dailyItems: scheduleItems) else {
+                    completion(.failure(NSError(domain: "Failed to generate schedule", code: 0, userInfo: nil)))
+                    return
+                }
+                
+                completion(.success(schedule))
+            } catch {
+                log.error("%{public}@: Failed to sync basal", #function)
+                completion(.failure(PumpManagerError.communication(nil)))
+            }
+
+        }
     }
     
-    public func syncDeliveryLimits(limits deliveryLimits: LoopKit.DeliveryLimits, completion: @escaping (Result<LoopKit.DeliveryLimits, Error>) -> Void) {
+    public func syncDeliveryLimits(limits deliveryLimits: DeliveryLimits, completion: @escaping (Result<DeliveryLimits, Error>) -> Void) {
+        // Dana does not allow the max basal and max bolus to be set
+        // Max basal = 3 U/hr
+        // Max bolus = 20U
+        
+        completion(.success(deliveryLimits))
     }
     
     private func device() -> HKDevice {
         return HKDevice(
             name: managerIdentifier,
             manufacturer: "Sooil",
-            model: "Dana",
-            hardwareVersion: nil,
-            firmwareVersion: nil,
+            model: getFriendlyDeviceName(),
+            hardwareVersion: String(self.state.hwModel),
+            firmwareVersion: String(self.state.pumpProtocol),
             softwareVersion: "",
-            localIdentifier: nil,
+            localIdentifier: self.state.deviceName,
             udiDeviceIdentifier: nil
         )
+    }
+    
+    private func getFriendlyDeviceName() -> String {
+        switch (self.state.hwModel) {
+            case 0x01:
+                return "DanaR Korean";
+
+            case 0x03:
+            switch (self.state.pumpProtocol) {
+                case 0x00:
+                  return "DanaR old";
+                case 0x02:
+                  return "DanaR v2";
+                default:
+                  return "DanaR"; // 0x01 and 0x03 known
+              }
+
+            case 0x05:
+                return self.state.pumpProtocol < 10 ? "DanaRS" : "DanaRS v3";
+
+            case 0x06:
+                return "DanaRS Korean";
+
+            case 0x07:
+                return "Dana-i (BLE4.2)";
+
+            case 0x09:
+                return "Dana-i (BLE5)";
+            case 0x0a:
+                return "Dana-i (BLE5, Korean)";
+            default:
+                return "Unknown Dana pump";
+          }
+    }
+    
+    private func convertBasal(_ scheduleItems: [RepeatingScheduleValue<Double>]) -> [Double] {
+        let basalIntervals: [TimeInterval] = Array(0..<24).map({ TimeInterval(60 * 30 * $0) })
+        var output: [Double] = []
+        
+        var currentIndex = 0
+        for i in 0..<24 {
+            if (scheduleItems[currentIndex].startTime != basalIntervals[i]) {
+                output.append(scheduleItems[currentIndex - 1].value)
+            } else {
+                output.append(scheduleItems[currentIndex].value)
+                currentIndex += 1
+            }
+        }
+        
+        return output
     }
 }
 
@@ -349,8 +466,8 @@ extension DanaKitPumpManager {
     }
 }
 
+// MARK: State observers
 extension DanaKitPumpManager {
-    // MARK: State observers
     public func addStateObserver(_ observer: StateObserver, queue: DispatchQueue) {
         stateObservers.insert(observer, queue: queue)
     }
@@ -361,8 +478,10 @@ extension DanaKitPumpManager {
     
     func notifyStateDidChange() {
         stateObservers.forEach { (observer) in
-            observer.stateDidUpdate(self.state)
+            observer.stateDidUpdate(self.state, self.oldState)
         }
+        
+        self.oldState = DanaKitPumpManagerState(rawValue: self.state.rawValue)
     }
     
     public func addScanDeviceObserver(_ observer: StateObserver, queue: DispatchQueue) {
@@ -373,9 +492,9 @@ extension DanaKitPumpManager {
         scanDeviceObservers.removeElement(observer)
     }
     
-    func notifyScanDeviceDidChange(_ devices: [DanaPumpScan]) {
+    func notifyScanDeviceDidChange(_ device: DanaPumpScan) {
         scanDeviceObservers.forEach { (observer) in
-            observer.deviceScanDidUpdate(devices)
+            observer.deviceScanDidUpdate(device)
         }
     }
 }
