@@ -45,7 +45,16 @@ class BluetoothManager : NSObject {
         }
     }
     
-    func startScan() {
+    func startScan() throws {
+        guard self.manager.state == .poweredOn else {
+            throw NSError(domain: "Invalid bluetooth state. State: " + String(self.manager.state.rawValue), code: 0, userInfo: nil)
+        }
+        
+        guard !self.manager.isScanning else {
+            log.info("%{public}@: Device is already scanning...", #function)
+            return
+        }
+        
         self.devices = []
         
         manager.scanForPeripherals(withServices: [])

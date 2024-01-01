@@ -81,8 +81,8 @@ public class DanaKitPumpManager: DeviceManager {
         self.bluetoothManager.disconnect(peripheral)
     }
     
-    public func startScan() {
-        self.bluetoothManager.startScan()
+    public func startScan() throws {
+        try self.bluetoothManager.startScan()
     }
     
     public func stopScan() {

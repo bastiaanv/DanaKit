@@ -113,6 +113,10 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
     /// See: https://androidaps.readthedocs.io/en/latest/Configuration/DanaRS-Insulin-Pump.html#pairing-pump
     public var deviceIsRequestingPincode: Bool = false;
     
+    /// When this bool is set to true, the UI should prompt the user to let them unbound the device and try it again.
+    /// This is only an issue with Dana-i pumps
+    public var deviceSendInvalidBLE5Keys = false
+    
     /// The pump should be in history fetch mode, before requesting history data
     public var isInFetchHistoryMode: Bool = false
     
@@ -122,4 +126,14 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
     // Use of these 2 bools are unknown...
     public var isEasyMode: Bool = false
     public var isUnitUD: Bool = false
+    
+    mutating func resetState() {
+        self.ignorePassword = false
+        self.devicePassword = 0
+        self.isEasyMode = false
+        self.isUnitUD = false
+        self.deviceSendInvalidBLE5Keys = false
+        self.isInFetchHistoryMode = false
+        self.deviceIsRequestingPincode = false
+    }
 }

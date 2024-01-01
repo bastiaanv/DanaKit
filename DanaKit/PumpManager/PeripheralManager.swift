@@ -344,6 +344,9 @@ extension PeripheralManager {
             guard ble5Keys.filter({ $0 == 0 }).count == 0 else {
                 log.error("%{public}@: Invalid BLE-5 keys. Please unbound device and try again.", #function)
                 self.pumpManager.disconnect(self.connectedDevice)
+                
+                self.pumpManager.state.deviceSendInvalidBLE5Keys = true
+                self.pumpManager.notifyStateDidChange()
                 return
             }
             

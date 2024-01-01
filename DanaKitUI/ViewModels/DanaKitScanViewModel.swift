@@ -30,7 +30,11 @@ class DanaKitScanViewModel : ObservableObject {
         self.pumpManager?.addScanDeviceObserver(self, queue: .main)
         self.pumpManager?.addStateObserver(self, queue: .main)
         
-        self.pumpManager?.startScan()
+        do {
+            try self.pumpManager?.startScan()
+        } catch {
+            log.error("Failed to start scan action: %{public}@", error.localizedDescription)
+        }
     }
     
     func connect(_ item: ScanResultItem) {

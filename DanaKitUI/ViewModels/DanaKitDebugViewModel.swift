@@ -16,6 +16,10 @@ class DanaKitDebugViewModel : ObservableObject {
     @Published var isPresentingTempBasalAlert = false
     @Published var isPresentingScanAlert = false
     @Published var isPresentingBolusAlert = false
+    @Published var isPresentingForgetBleAlert = false
+    @Published var isPresentingScanningErrorAlert = false
+    @Published var scanningErrorMessage = ""
+    @Published var connectedDeviceName = ""
     @Published var messageScanAlert = ""
     @Published var messagePincodeAlert: String = "Pincodes required"
     @Published var pin1 = ""
@@ -35,7 +39,12 @@ class DanaKitDebugViewModel : ObservableObject {
     }
     
     func scan() {
-        self.pumpManager?.startScan()
+        do {
+            try self.pumpManager?.startScan()
+        } catch {
+            self.isPresentingScanningErrorAlert = true
+            self.scanningErrorMessage = error.localizedDescription
+        }
     }
     
     func connect() {
@@ -145,6 +154,7 @@ class DanaKitDebugViewModel : ObservableObject {
 
 extension DanaKitDebugViewModel: StateObserver {
     func deviceScanDidUpdate(_ device: DanaPumpScan) {
+        log.debug("Found device %{public}@", device.name)
         self.scannedDevices.append(device)
         
         messageScanAlert = "Do you want to connect to: " + device.name + " (" + device.bleIdentifier + ")"
@@ -154,9 +164,14 @@ extension DanaKitDebugViewModel: StateObserver {
     
     func stateDidUpdate(_ state: DanaKitPumpManagerState, _ oldState: DanaKitPumpManagerState) {
         self.isConnected = state.isConnected
+        self.connectedDeviceName = state.deviceName ?? ""
         
         if (!oldState.deviceIsRequestingPincode && state.deviceIsRequestingPincode) {
             self.isPresentingPincodeAlert = true
+        }
+        
+        if (!oldState.deviceSendInvalidBLE5Keys && state.deviceSendInvalidBLE5Keys) {
+            self.isPresentingForgetBleAlert = true
         }
     }
 }
