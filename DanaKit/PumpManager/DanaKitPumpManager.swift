@@ -52,7 +52,7 @@ public class DanaKitPumpManager: DeviceManager {
     private let basalProfileNumber: UInt8 = 1
 
     public var isOnboarded: Bool {
-        self.state.deviceName != nil
+        self.state.isOnBoarded
     }
     
     public var currentBaseBasalRate: Double = 0
@@ -63,14 +63,6 @@ public class DanaKitPumpManager: DeviceManager {
             "TODO"
         ]
         return lines.joined(separator: "\n")
-    }
-    
-    public func connect(_ bleIdentifier: String) {
-        do {
-            try self.bluetoothManager.connect(bleIdentifier)
-        } catch {
-            log.error("Failed to connect: %{public}@", String(describing: error))
-        }
     }
     
     public func connect(_ peripheral: CBPeripheral) {
@@ -391,46 +383,13 @@ extension DanaKitPumpManager: PumpManager {
         return HKDevice(
             name: managerIdentifier,
             manufacturer: "Sooil",
-            model: getFriendlyDeviceName(),
+            model: self.state.getFriendlyDeviceName(),
             hardwareVersion: String(self.state.hwModel),
             firmwareVersion: String(self.state.pumpProtocol),
             softwareVersion: "",
             localIdentifier: self.state.deviceName,
             udiDeviceIdentifier: nil
         )
-    }
-    
-    private func getFriendlyDeviceName() -> String {
-        switch (self.state.hwModel) {
-            case 0x01:
-                return "DanaR Korean";
-
-            case 0x03:
-            switch (self.state.pumpProtocol) {
-                case 0x00:
-                  return "DanaR old";
-                case 0x02:
-                  return "DanaR v2";
-                default:
-                  return "DanaR"; // 0x01 and 0x03 known
-              }
-
-            case 0x05:
-                return self.state.pumpProtocol < 10 ? "DanaRS" : "DanaRS v3";
-
-            case 0x06:
-                return "DanaRS Korean";
-
-            case 0x07:
-                return "Dana-i (BLE4.2)";
-
-            case 0x09:
-                return "Dana-i (BLE5)";
-            case 0x0a:
-                return "Dana-i (BLE5, Korean)";
-            default:
-                return "Unknown Dana pump";
-          }
     }
     
     private func convertBasal(_ scheduleItems: [RepeatingScheduleValue<Double>]) -> [Double] {
@@ -479,6 +438,10 @@ extension DanaKitPumpManager {
     func notifyStateDidChange() {
         stateObservers.forEach { (observer) in
             observer.stateDidUpdate(self.state, self.oldState)
+        }
+        
+        self.pumpDelegate.notify { (delegate) in
+            delegate?.pumpManagerDidUpdateState(self)
         }
         
         self.oldState = DanaKitPumpManagerState(rawValue: self.state.rawValue)

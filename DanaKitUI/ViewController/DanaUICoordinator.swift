@@ -15,15 +15,21 @@ import LoopKitUI
 enum DanaUIScreen {
     case debugView
     case firstRunScreen
-    case deviceScanning
+    case insulinConfirmationScreen
+    case deviceScanningScreen
+    case settings
     
     func next() -> DanaUIScreen? {
         switch self {
         case .debugView:
             return .firstRunScreen
         case .firstRunScreen:
-            return .deviceScanning
-        case .deviceScanning:
+            return .insulinConfirmationScreen
+        case .insulinConfirmationScreen:
+            return .deviceScanningScreen
+        case .deviceScanningScreen:
+            return nil
+        case .settings:
             return nil
         }
     }
@@ -76,7 +82,7 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
         super.viewWillAppear(animated)
 
         if screenStack.isEmpty {
-            screenStack = [.firstRunScreen]
+            screenStack = [getInitialScreen()]
             let viewController = viewControllerForScreen(currentScreen)
             viewController.isModalInPresentation = false
             setViewControllers([viewController], animated: false)
@@ -95,8 +101,27 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
         case .firstRunScreen:
             let view = DanaKitSetupView(nextAction: { self.stepFinished() }, debugAction: { self.navigateTo(.debugView) }) //self.allowDebugFeatures ? { self.navigateTo(.debugView) } : {})
             return hostingController(rootView: view)
-        case .deviceScanning:
-            let view = DanaKitScanView(viewModel: DanaKitScanViewModel(self.pumpManager, nextStep: {}))
+        case .insulinConfirmationScreen:
+            let confirm: (InsulinType) -> Void = { confirmedType in
+                self.pumpManager?.state.insulinType = confirmedType
+                self.stepFinished()
+            }
+            let view = InsulinTypeConfirmation(initialValue: self.allowedInsulinTypes[0], supportedInsulinTypes: self.allowedInsulinTypes, didConfirm: confirm)
+            return hostingController(rootView: view)
+        case .deviceScanningScreen:
+            let nextStep: () -> Void = {
+                self.pumpManager?.state.isOnBoarded = true
+                self.pumpManager?.notifyStateDidChange()
+                self.stepFinished()
+            }
+            pumpManagerOnboardingDelegate?.pumpManagerOnboarding(didCreatePumpManager: self.pumpManager!)
+            
+            let view = DanaKitScanView(viewModel: DanaKitScanViewModel(self.pumpManager, nextStep: nextStep))
+            return hostingController(rootView: view)
+            
+        case .settings:
+            // TODO: Replace with acual screen
+            let view = DanaKitDebugView(viewModel: DanaKitDebugViewModel(self.pumpManager))
             return hostingController(rootView: view)
         }
     }
@@ -107,6 +132,22 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
         } else {
             completionDelegate?.completionNotifyingDidComplete(self)
         }
+    }
+    
+    func getInitialScreen() -> DanaUIScreen {
+        guard let pumpManager = self.pumpManager else {
+            return .firstRunScreen
+        }
+        
+        if (pumpManager.isOnboarded) {
+            return .settings
+        }
+        
+        if (pumpManager.state.insulinType != nil) {
+            return .deviceScanningScreen
+        }
+        
+        return .firstRunScreen
     }
 }
 

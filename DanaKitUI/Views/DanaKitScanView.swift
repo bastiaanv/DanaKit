@@ -13,7 +13,7 @@ struct DanaKitScanView: View {
     @Environment(\.isPresented) var isPresented
     @Environment(\.dismissAction) private var dismiss
 
-    public var viewModel: DanaKitScanViewModel
+    @ObservedObject var viewModel: DanaKitScanViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -35,18 +35,47 @@ struct DanaKitScanView: View {
                 viewModel.stopScan()
             }
         }
+        .alert(LocalizedString("ERROR: Failed to pair device", comment: "Dana-i invalid ble5 keys"),
+               isPresented: $viewModel.isPresentingBle5KeysError,
+               presenting: viewModel.connectedDeviceName,
+               actions: {_ in 
+                Button(action: {}, label: { Text(LocalizedString("Oke", comment: "Dana-i oke invalid ble5 keys")) })
+               },
+               message: { deviceName in
+                    Text(
+                        LocalizedString("Failed to pair to ", comment: "Dana-i failed to pair p1") +
+                        deviceName +
+                        LocalizedString(". Please go to your bluetooth settings, forget this device, and try again", comment: "Dana-i failed to pair p2")
+                   )
+                }
+        )
+        .alert(LocalizedString("Connecting to device", comment: "Dana-i/RS connecting alert title"),
+               isPresented: $viewModel.isConnecting,
+               actions: {
+                    ProgressView()
+                    Button(
+                        action: {
+                            
+                        },
+                        label: { Text("Cancel", comment: "Cancel connection alert") }
+                    )
+                }
+        )
     }
     
     @ViewBuilder
     private var content: some View {
-        VStack(alignment: .leading, spacing: 2) {
-            ScrollView {
-                List (viewModel.scannedDevices) { result in
-                    Text(result.device.name)
+        List ($viewModel.scannedDevices) { $result in
+            Button(action: { viewModel.connect($result.wrappedValue) }) {
+                HStack {
+                    Text($result.name.wrappedValue)
+                    Spacer()
+                    NavigationLink.empty
                 }
-                .listStyle(GroupedListStyle())
             }
+            .buttonStyle(.plain)
         }
+        .listStyle(.plain)
     }
     
     @ViewBuilder

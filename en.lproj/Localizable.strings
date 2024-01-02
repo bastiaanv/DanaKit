@@ -1,0 +1,23 @@
+/* Title for DanaKitSetupView */
+"Dana-i/RS Setup" = "Dana-i/RS Setup"
+
+/* bodyText for DanaKitSetupView */
+"You will now begin the process by connecting to your Dana-i/RS pump. After that, one of the three things can happen:" = "You will now begin the process by connecting to your Dana-i/RS pump. After that, one of the three things can happen:"
+
+/* danaRS v1 option text for DanaKitSetupView */
+"- For DanaRS-v1, set your pump password and the setup is completed!" = "- For DanaRS-v1, set your pump password and the setup is completed!"
+
+/* danaRS v3 option text for DanaKitSetupView */
+"- For DanaRS-v3, type 2 sequences of numbers and letters displayed on the pump to pair and the setup is completed!" = "- For DanaRS-v3, type 2 sequences of numbers and letters displayed on the pump to pair and the setup is completed!"
+
+/* dana-i option text for DanaKitSetupView */
+"- For Dana-i, the standard Bluetooth pairing pin dialog will appear. You have to enter a 6-digit number password, displayed on the pump, and the setup is completed!" = " For Dana-i, the standard Bluetooth pairing pin dialog will appear. You have to enter a 6-digit number password, displayed on the pump, and the setup is completed!"
+
+/* Dana-i/RS invalid ble5 keys */
+"ERROR: Failed to pair device" = "ERROR: Failed to pair device"
+
+/* Dana-i/RS connecting alert title */
+"Connecting to device" = "Connecting to device"
+
+/* Title text for insulin type confirmation page */
+"Select the type of insulin that you will be using in this pump" = "Selecteer het type insuline dat u in deze pomp gaat gebruiken"

@@ -150,6 +150,12 @@ class DanaKitDebugViewModel : ObservableObject {
             self.isPresentingPincodeAlert = true
         }
     }
+    
+    func getLogs() -> String {
+        let logs = log.getDebugLogs()
+        print(logs)
+        return logs
+    }
 }
 
 extension DanaKitDebugViewModel: StateObserver {

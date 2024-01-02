@@ -7,8 +7,10 @@
 //
 
 import SwiftUI
+import os.log
 
 struct DanaKitDebugView: View {
+    @Environment(\.openURL) var openURL
     @ObservedObject var viewModel: DanaKitDebugViewModel
     
     var body: some View {
@@ -49,6 +51,11 @@ struct DanaKitDebugView: View {
 
                 Button("Disconnect", action: viewModel.disconnect)
                     .disabled(viewModel.isConnected == false)
+                    .frame(width: 100, height: 100)
+            }
+            
+            HStack {
+                Button("Share logs", action: shareLogs)
                     .frame(width: 100, height: 100)
             }
         }
@@ -103,6 +110,19 @@ struct DanaKitDebugView: View {
                },
                message: { Text("Are you sure you want to set the temp basal to 200% for 1 hour?") }
         )
+    }
+    
+    func shareLogs() {
+        guard let logging = viewModel.getLogs().addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+            return
+        }
+        
+        let mailto = "mailto:verhaar.bastiaan@gmail.com?subject=Dana%20logs&body=" + logging
+        guard let url = URL(string: mailto) else {
+            return
+        }
+        
+        openURL(url)
     }
 }
 

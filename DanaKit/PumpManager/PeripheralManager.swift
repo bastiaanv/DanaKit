@@ -119,10 +119,6 @@ extension PeripheralManager : CBPeripheralDelegate {
         }
         
         log.default("%{public}@: Read RSSI %{public}@", #function, RSSI)
-        
-        self.pumpManager.state.rssi = RSSI.intValue
-        self.pumpManager.notifyStateDidChange()
-        
         peripheral.discoverServices([SERVICE_UUID])
     }
     
@@ -162,7 +158,7 @@ extension PeripheralManager : CBPeripheralDelegate {
             return
         }
         
-        log.default("%{public}@: Discovered characteristics %{public}@ & %{public}@", #function, READ_CHAR_UUID, WRITE_CHAR_UUID)
+        log.default("%{public}@: Discovered characteristics %{public}@ and %{public}@", #function, READ_CHAR_UUID, WRITE_CHAR_UUID)
         peripheral.setNotifyValue(true, for: self.readCharacteristic)
     }
     
@@ -353,11 +349,11 @@ extension PeripheralManager {
             DanaRSEncryption.setBle5Key(ble5Key: ble5Keys)
             self.sendBLE5PairingInformation()
         } else if (data.count == 6 && self.isPump(data)) {
-            log.error("%{public}@: PUMP_CHECK error. Data: %{public}@", data.base64EncodedString())
+            log.error("%{public}@: PUMP_CHECK error. Data: %{public}@", #function, data.base64EncodedString())
         } else if (data.count == 6 && isBusy(data)) {
-            log.error("%{public}@: PUMP_CHECK_BUSY error. Data: %{public}@", data.base64EncodedString())
+            log.error("%{public}@: PUMP_CHECK_BUSY error. Data: %{public}@", #function, data.base64EncodedString())
         } else {
-            log.error("%{public}@: PUMP_CHECK error, wrong serial number. Data: %{public}@", data.base64EncodedString())
+            log.error("%{public}@: PUMP_CHECK error, wrong serial number. Data: %{public}@", #function, data.base64EncodedString())
         }
     }
     
@@ -372,7 +368,7 @@ extension PeripheralManager {
             if (data[2] == 0x00) {
                 let (pairingKey, randomPairingKey) = DanaRSEncryption.getPairingKeys()
                 if (pairingKey.count == 0 || randomPairingKey.count == 0) {
-                    log.default("%{public}@: Device is requesting pincode")
+                    log.default("%{public}@: Device is requesting pincode", #function)
                     self.pumpManager.state.deviceIsRequestingPincode = true
                     self.pumpManager.notifyStateDidChange()
                     return
@@ -389,7 +385,7 @@ extension PeripheralManager {
             let lowByte = UInt16(data[data.count - 2] & 0xff)
             let password = (highByte + lowByte) ^ 0x0d87
             if (password != self.pumpManager.state.devicePassword && !self.pumpManager.state.ignorePassword) {
-                log.error("%{public}@: Invalid password")
+                log.error("%{public}@: Invalid password", #function)
                 self.bluetoothManager.disconnect(self.connectedDevice)
                 return
             }
@@ -436,7 +432,7 @@ extension PeripheralManager {
             self.pumpManager.currentBaseBasalRate = data.currentBasal
             self.pumpManager.notifyStateDidChange()
             
-            log.default("%{public}@: Connection & encryption successful!", #function)
+            log.default("%{public}@: Connection and encryption successful!", #function)
         } catch {
             self.pumpManager.disconnect(self.connectedDevice)
         }

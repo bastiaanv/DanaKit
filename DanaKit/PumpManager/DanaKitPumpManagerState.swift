@@ -25,8 +25,9 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         self.devicePassword = rawValue["devicePassword"] as? UInt16 ?? 0
         self.isEasyMode = rawValue["isEasyMode"] != nil
         self.isUnitUD = rawValue["isUnitUD"] != nil
-        self.rssi = rawValue["rssi"] as? Int ?? -1
+        self.insulinType = rawValue["insulinType"] as? InsulinType
         self.bolusSpeed = rawValue["bolusSpeed"] as? BolusSpeed ?? .speed12
+        self.isOnBoarded = rawValue["isOnBoarded"] as? Bool ?? false
     }
     
     public var rawValue: RawValue {
@@ -45,14 +46,21 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         value["devicePassword"] = self.devicePassword
         value["isEasyMode"] = self.isEasyMode
         value["isUnitUD"] = self.isUnitUD
-        value["rssi"] = self.rssi
+        value["insulinType"] = self.insulinType
         value["bolusSpeed"] = self.bolusSpeed
+        value["isOnBoarded"] = self.isOnBoarded
         
         return value
     }
     
     /// The last moment this state has been updated (only for relavant values like isConnected or reservoirLevel)
     public var lastStatusDate: Date = Date()
+    
+    public var isOnBoarded = false {
+        didSet {
+            lastStatusDate = Date()
+        }
+    }
     
     /// The name of the device. Needed for en/de-crypting messages
     public var deviceName: String? = nil {
@@ -96,17 +104,13 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         }
     }
     
-    public var rssi: Int = -1 {
-        didSet {
-            lastStatusDate = Date()
-        }
-    }
-    
     public var bolusSpeed: BolusSpeed = .speed12 {
         didSet {
             lastStatusDate = Date()
         }
     }
+    
+    public var insulinType: InsulinType? = nil
     
     /// When this bool is set to true, the UI should ask the user for a pincode
     /// and the code should call BluetoothManager.finishV3Pairing. Only applicable to DanaRS v3
@@ -135,5 +139,61 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         self.deviceSendInvalidBLE5Keys = false
         self.isInFetchHistoryMode = false
         self.deviceIsRequestingPincode = false
+    }
+    
+    func getFriendlyDeviceName() -> String {
+        switch (self.hwModel) {
+            case 0x01:
+                return "DanaR Korean";
+
+            case 0x03:
+            switch (self.pumpProtocol) {
+                case 0x00:
+                  return "DanaR old";
+                case 0x02:
+                  return "DanaR v2";
+                default:
+                  return "DanaR"; // 0x01 and 0x03 known
+              }
+
+            case 0x05:
+                return self.pumpProtocol < 10 ? "DanaRS" : "DanaRS v3";
+
+            case 0x06:
+                return "DanaRS Korean";
+
+            case 0x07:
+                return "Dana-i (BLE4.2)";
+
+            case 0x09:
+                return "Dana-i (BLE5)";
+            case 0x0a:
+                return "Dana-i (BLE5, Korean)";
+            default:
+                return "Unknown Dana pump";
+          }
+    }
+}
+
+extension DanaKitPumpManagerState: CustomDebugStringConvertible {
+    public var debugDescription: String {
+        return [
+            "## DanaKitPumpManagerState",
+            "* isOnboarded: \(isOnBoarded)",
+            "* isConnected: \(isConnected)",
+            "* deviceName: \(String(describing: deviceName))",
+            "* bleIdentifier: \(String(describing: bleIdentifier))",
+            "* friendlyDeviceName: \(getFriendlyDeviceName())",
+            "* insulinType: \(String(describing: insulinType))",
+            "* reservoirLevel: \(reservoirLevel)",
+            "* hwModel: \(hwModel)",
+            "* pumpProtocol: \(pumpProtocol)",
+            "* isInFetchHistoryMode: \(isInFetchHistoryMode)",
+            "* deviceIsRequestingPincode: \(deviceIsRequestingPincode)",
+            "* deviceSendInvalidBLE5Keys: \(deviceSendInvalidBLE5Keys)",
+            "* ignorePassword: \(ignorePassword)",
+            "* isEasyMode: \(isEasyMode)",
+            "* isUnitUD: \(isUnitUD)"
+        ].joined(separator: "\n")
     }
 }
