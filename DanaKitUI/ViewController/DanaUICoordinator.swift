@@ -120,8 +120,11 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
             return hostingController(rootView: view)
             
         case .settings:
-            // TODO: Replace with acual screen
-            let view = DanaKitDebugView(viewModel: DanaKitDebugViewModel(self.pumpManager))
+            let didFinish = {
+                self.stepFinished()
+            }
+            
+            let view = DanaKitSettingsView(viewModel: DanaKitSettingsViewModel(self.pumpManager, didFinish))
             return hostingController(rootView: view)
         }
     }

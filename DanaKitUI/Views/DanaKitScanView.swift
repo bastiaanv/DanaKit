@@ -16,51 +16,41 @@ struct DanaKitScanView: View {
     @ObservedObject var viewModel: DanaKitScanViewModel
     
     var body: some View {
-        VStack(alignment: .leading) {
-            title
-            content
-        }
-        .padding(.horizontal)
-        .navigationBarHidden(false)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(LocalizedString("Cancel", comment: "Cancel button title"), action: {
+        LoadingModal(isShowing: $viewModel.isConnecting, text: LocalizedString("Connecting to device", comment: "Dana-i/RS connecting alert title"), content:  {
+            VStack(alignment: .leading) {
+                title
+                content
+            }
+            .padding(.horizontal)
+            .navigationBarHidden(false)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(LocalizedString("Cancel", comment: "Cancel button title"), action: {
+                        viewModel.stopScan()
+                        self.dismiss()
+                    })
+                }
+            }
+            .onChange(of: isPresented) { newValue in
+                if !newValue {
                     viewModel.stopScan()
-                    self.dismiss()
-                })
+                }
             }
-        }
-        .onChange(of: isPresented) { newValue in
-            if !newValue {
-                viewModel.stopScan()
-            }
-        }
-        .alert(LocalizedString("ERROR: Failed to pair device", comment: "Dana-i invalid ble5 keys"),
-               isPresented: $viewModel.isPresentingBle5KeysError,
-               presenting: viewModel.connectedDeviceName,
-               actions: {_ in 
+            .alert(LocalizedString("ERROR: Failed to pair device", comment: "Dana-i invalid ble5 keys"),
+                   isPresented: $viewModel.isPresentingBle5KeysError,
+                   presenting: viewModel.connectedDeviceName,
+                   actions: {_ in
                 Button(action: {}, label: { Text(LocalizedString("Oke", comment: "Dana-i oke invalid ble5 keys")) })
-               },
-               message: { deviceName in
-                    Text(
-                        LocalizedString("Failed to pair to ", comment: "Dana-i failed to pair p1") +
-                        deviceName +
-                        LocalizedString(". Please go to your bluetooth settings, forget this device, and try again", comment: "Dana-i failed to pair p2")
-                   )
-                }
-        )
-        .alert(LocalizedString("Connecting to device", comment: "Dana-i/RS connecting alert title"),
-               isPresented: $viewModel.isConnecting,
-               actions: {
-                    ProgressView()
-                    Button(
-                        action: {
-                            
-                        },
-                        label: { Text("Cancel", comment: "Cancel connection alert") }
-                    )
-                }
-        )
+            },
+                   message: { deviceName in
+                Text(
+                    LocalizedString("Failed to pair to ", comment: "Dana-i failed to pair p1") +
+                    deviceName +
+                    LocalizedString(". Please go to your bluetooth settings, forget this device, and try again", comment: "Dana-i failed to pair p2")
+                )
+            }
+            )
+        })
     }
     
     @ViewBuilder

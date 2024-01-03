@@ -25,9 +25,12 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         self.devicePassword = rawValue["devicePassword"] as? UInt16 ?? 0
         self.isEasyMode = rawValue["isEasyMode"] != nil
         self.isUnitUD = rawValue["isUnitUD"] != nil
-        self.insulinType = rawValue["insulinType"] as? InsulinType
         self.bolusSpeed = rawValue["bolusSpeed"] as? BolusSpeed ?? .speed12
         self.isOnBoarded = rawValue["isOnBoarded"] as? Bool ?? false
+        
+        if let rawInsulinType = rawValue["insulinType"] as? InsulinType.RawValue {
+            insulinType = InsulinType(rawValue: rawInsulinType)
+        }
     }
     
     public var rawValue: RawValue {
@@ -46,8 +49,8 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         value["devicePassword"] = self.devicePassword
         value["isEasyMode"] = self.isEasyMode
         value["isUnitUD"] = self.isUnitUD
-        value["insulinType"] = self.insulinType
-        value["bolusSpeed"] = self.bolusSpeed
+        value["insulinType"] = self.insulinType?.rawValue
+        value["bolusSpeed"] = self.bolusSpeed.rawValue
         value["isOnBoarded"] = self.isOnBoarded
         
         return value

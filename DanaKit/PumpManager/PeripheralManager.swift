@@ -312,7 +312,6 @@ extension PeripheralManager {
             
             self.pumpManager.state.hwModel = data[5]
             self.pumpManager.state.pumpProtocol = data[7]
-            self.pumpManager.notifyStateDidChange()
             
             if (self.pumpManager.state.hwModel == 0x05) {
                 self.sendV3PairingInformationEmpty()
@@ -328,7 +327,6 @@ extension PeripheralManager {
             
             self.pumpManager.state.hwModel = data[5]
             self.pumpManager.state.pumpProtocol = data[7]
-            self.pumpManager.notifyStateDidChange()
             
             guard (self.pumpManager.state.hwModel == 0x09 || self.pumpManager.state.hwModel == 0x0a) else {
                 log.error("%{public}@: Got invalid hwModel ", #function, self.pumpManager.state.hwModel)
@@ -489,9 +487,8 @@ extension PeripheralManager {
         let decryptedData = DanaRSEncryption.decodePacket(buffer: self.readBuffer, deviceName: self.deviceName)
         self.readBuffer = Data([])
         
+        log.debug("%{public}@: Decoding successful! Data: %{public}@", #function, decryptedData.base64EncodedString())
         if (decryptedData[0] == DanaPacketType.TYPE_ENCRYPTION_RESPONSE) {
-            log.debug("%{public}@: Decoding successful! Start processing encryption message. Data: %{public}@", #function, decryptedData.base64EncodedString())
-            
             switch(decryptedData[1]) {
             case DanaPacketType.OPCODE_ENCRYPTION__PUMP_CHECK:
                 self.processConnectResponse(decryptedData)
@@ -533,7 +530,6 @@ extension PeripheralManager {
             return
         }
         
-        log.debug("%{public}@: Decoding successful! Start processing normal (or notify) message. Data: %{public}@", #function, decryptedData.base64EncodedString())
         self.processMessage(decryptedData)
     }
     

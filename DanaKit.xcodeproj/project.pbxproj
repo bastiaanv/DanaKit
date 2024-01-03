@@ -15,6 +15,9 @@
 		847530F626ED65DD009FD801 /* LoopKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847530F426ED65DD009FD801 /* LoopKit.framework */; };
 		847530F826ED65DD009FD801 /* LoopKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847530F526ED65DD009FD801 /* LoopKitUI.framework */; };
 		A91B2DEC276E1E5E001B0E95 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A91B2DEB276E1E5E001B0E95 /* README.md */; };
+		B80EC4AE2B45EFDD005E2A1A /* LoadingModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80EC4AD2B45EFDD005E2A1A /* LoadingModal.swift */; };
+		B80EC4B02B45F66E005E2A1A /* DanaKitSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80EC4AF2B45F66E005E2A1A /* DanaKitSettingsView.swift */; };
+		B80EC4B22B45F681005E2A1A /* DanaKitSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80EC4B12B45F681005E2A1A /* DanaKitSettingsViewModel.swift */; };
 		B8179E5A2B20F2A10049EEE7 /* OSLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8179E592B20F2A10049EEE7 /* OSLog.swift */; };
 		B81C52242B30E95E00FB801D /* IdentifiableClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81C52232B30E95E00FB801D /* IdentifiableClass.swift */; };
 		B82FA9452B3DF3AD004F2AFE /* DanaKitScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82FA9442B3DF3AD004F2AFE /* DanaKitScanView.swift */; };
@@ -154,6 +157,9 @@
 		847530F426ED65DD009FD801 /* LoopKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LoopKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		847530F526ED65DD009FD801 /* LoopKitUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LoopKitUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A91B2DEB276E1E5E001B0E95 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		B80EC4AD2B45EFDD005E2A1A /* LoadingModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingModal.swift; sourceTree = "<group>"; };
+		B80EC4AF2B45F66E005E2A1A /* DanaKitSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanaKitSettingsView.swift; sourceTree = "<group>"; };
+		B80EC4B12B45F681005E2A1A /* DanaKitSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanaKitSettingsViewModel.swift; sourceTree = "<group>"; };
 		B8179E592B20F2A10049EEE7 /* OSLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSLog.swift; sourceTree = "<group>"; };
 		B81C52232B30E95E00FB801D /* IdentifiableClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableClass.swift; sourceTree = "<group>"; };
 		B82FA9342B3CAEFC004F2AFE /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -498,6 +504,8 @@
 				B8313D262B3B162900A0F64D /* DanaKitSetupView.swift */,
 				B82FA9442B3DF3AD004F2AFE /* DanaKitScanView.swift */,
 				B8A0163E2B433E000054AECA /* InsulinTypeConfirmation.swift */,
+				B80EC4AD2B45EFDD005E2A1A /* LoadingModal.swift */,
+				B80EC4AF2B45F66E005E2A1A /* DanaKitSettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -515,6 +523,7 @@
 			children = (
 				B83815C72B322B0800627125 /* DanaKitDebugViewModel.swift */,
 				B82FA9462B3DF85F004F2AFE /* DanaKitScanViewModel.swift */,
+				B80EC4B12B45F681005E2A1A /* DanaKitSettingsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -739,6 +748,8 @@
 				B8360A7E2B263E5500152188 /* DanaBasalSetSuspendOn.swift in Sources */,
 				B8360AA92B2A28CE00152188 /* DanaGeneralGetPumpTimeUtcWithTimezone.swift in Sources */,
 				B8360A912B2643C900152188 /* DanaBolusSet24CIRCFArray.swift in Sources */,
+				B80EC4B22B45F681005E2A1A /* DanaKitSettingsViewModel.swift in Sources */,
+				B80EC4AE2B45EFDD005E2A1A /* LoadingModal.swift in Sources */,
 				B81C52242B30E95E00FB801D /* IdentifiableClass.swift in Sources */,
 				B8360ABB2B2A2C7300152188 /* DanaGeneralSetPumpTimeUtcWithTimezone.swift in Sources */,
 				B8360ACB2B2A341B00152188 /* DanaHistoryCarbohydrates.swift in Sources */,
@@ -790,6 +801,7 @@
 				B8360AA12B2A26EB00152188 /* DanaGeneralGetInitialScreenInformation.swift in Sources */,
 				B8360A9D2B2646A100152188 /* DanaGeneralAvgBolus.swift in Sources */,
 				B885169B2B30D8140063402A /* DanaKitDebugView.swift in Sources */,
+				B80EC4B02B45F66E005E2A1A /* DanaKitSettingsView.swift in Sources */,
 				B8360AD32B2A348100152188 /* DanaHistorySuspend.swift in Sources */,
 				B8360AAF2B2A298200152188 /* DanaGeneralGetUserOption.swift in Sources */,
 				B8360A702B26011200152188 /* DanaPacketBase.swift in Sources */,

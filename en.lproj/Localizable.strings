@@ -1,6 +1,9 @@
 /* Title for DanaKitSetupView */
 "Dana-i/RS Setup" = "Dana-i/RS Setup"
 
+/* Generic loading text */
+"loading" = "loading"
+
 /* bodyText for DanaKitSetupView */
 "You will now begin the process by connecting to your Dana-i/RS pump. After that, one of the three things can happen:" = "You will now begin the process by connecting to your Dana-i/RS pump. After that, one of the three things can happen:"
 
@@ -21,3 +24,15 @@
 
 /* Title text for insulin type confirmation page */
 "Select the type of insulin that you will be using in this pump" = "Selecteer het type insuline dat u in deze pomp gaat gebruiken"
+
+/* Title for Dana-i/RS PumpManager deletion action sheet. */
+"Remove Pump" = "Remove Pump"
+
+/* Message for Dana-i/RS PumpManager deletion action sheet */
+"Are you sure you want to stop using Dana-i/RS?" = "Are you sure you want to stop using Dana-i/RS?"
+
+/* Button text to confirm Dana-i/RS PumpManager deletion */
+"Delete pump" = "Delete pump"
+
+/* Label for PumpManager deletion button */
+"Switch to other insulin delivery device" = "Switch to other insulin delivery device"
