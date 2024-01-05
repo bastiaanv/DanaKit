@@ -76,23 +76,13 @@ struct DanaKitDebugView: View {
                },
                message: { detail in Text(detail) }
         )
-        .alert("Dana-RS v3 found!",
-               isPresented: $viewModel.isPresentingPincodeAlert,
-               presenting: viewModel.messagePincodeAlert,
+        .alert(LocalizedString("Error while connecting to device", comment: "Connection error message"),
+               isPresented: $viewModel.isConnectionError,
+               presenting: $viewModel.connectionErrorMessage,
                actions: { detail in
-                TextField("Code 1", text: $viewModel.pin1)
-                TextField("Code 2", text: $viewModel.pin2)
-                Button("Cancel", action: {})
-                Button("Contiue", action: viewModel.danaRsPincode)
-               },
-               message: { detail in Text(detail) }
-        )
-        .alert("ERROR: Failed to pair device",
-               isPresented: $viewModel.isPresentingForgetBleAlert,
-               actions: {
                 Button("Oke", action: {})
                },
-               message: { Text("Failed to pair to " + viewModel.connectedDeviceName + ". Please go to your bluetooth settings, forget this device, and try again") }
+               message: { detail in Text(detail.wrappedValue ?? "") }
         )
         .alert("DEBUG: Bolus action",
                isPresented: $viewModel.isPresentingBolusAlert,

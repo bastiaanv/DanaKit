@@ -11,6 +11,7 @@ import HealthKit
 import LoopKit
 import UserNotifications
 import os.log
+import SwiftUI
 import CoreBluetooth
 
 public protocol StateObserver: AnyObject {
@@ -26,23 +27,23 @@ public class DanaKitPumpManager: DeviceManager {
     public var rawState: PumpManager.RawStateValue {
         return state.rawValue
     }
-
+    
     public static let pluginIdentifier: String = "Dana" // use a single token to make parsing log files easier
     public let managerIdentifier: String = "Dana"
-
+    
     public let localizedTitle = LocalizedString("Dana-i/RS", comment: "Generic title of the DanaKit pump manager")
-
+    
     public init(state: DanaKitPumpManagerState, dateGenerator: @escaping () -> Date = Date.init) {
         self.state = state
         self.oldState = DanaKitPumpManagerState(rawValue: state.rawValue)
         
         self.bluetoothManager = BluetoothManager(self)
     }
-
+    
     public required convenience init?(rawState: PumpManager.RawStateValue) {
         self.init(state: DanaKitPumpManagerState(rawValue: rawState))
     }
-
+    
     private let log = OSLog(category: "DanaKitPumpManager")
     private let pumpDelegate = WeakSynchronizedDelegate<PumpManagerDelegate>()
     
@@ -50,7 +51,7 @@ public class DanaKitPumpManager: DeviceManager {
     private let scanDeviceObservers = WeakSynchronizedSet<StateObserver>()
     
     private let basalProfileNumber: UInt8 = 1
-
+    
     public var isOnboarded: Bool {
         self.state.isOnBoarded
     }
@@ -65,12 +66,13 @@ public class DanaKitPumpManager: DeviceManager {
         return lines.joined(separator: "\n")
     }
     
-    public func connect(_ peripheral: CBPeripheral) {
-        self.bluetoothManager.connect(peripheral)
+    public func connect(_ peripheral: CBPeripheral, _ view: UIViewController, _ completion: @escaping (Error?) -> Void) {
+        self.bluetoothManager.connect(peripheral, view, completion)
     }
     
     public func disconnect(_ peripheral: CBPeripheral) {
         self.bluetoothManager.disconnect(peripheral)
+        self.state.resetState()
     }
     
     public func startScan() throws {
@@ -79,26 +81,6 @@ public class DanaKitPumpManager: DeviceManager {
     
     public func stopScan() {
         self.bluetoothManager.stopScan()
-    }
-    
-    public func pincodeDanaRS(_ pairingKey: Data, _ pin2: Data) throws {
-        let randomPairingKey = pin2.prefix(5)
-        let checkSum = pin2.dropFirst(6).prefix(1)
-        
-        var pairingKeyCheckSum: UInt8 = 0
-        for byte in pairingKey {
-            pairingKeyCheckSum ^= byte
-        }
-        
-        for byte in randomPairingKey {
-            pairingKeyCheckSum ^= byte
-        }
-        
-        guard checkSum[0] == pairingKeyCheckSum else {
-            throw NSError(domain: "Checksum failed...", code: 0, userInfo: nil)
-        }
-        
-        try self.bluetoothManager.finishV3Pairing(pairingKey, randomPairingKey)
     }
 }
 
@@ -415,13 +397,13 @@ extension DanaKitPumpManager: AlertSoundVendor {
         return nil
     }
 
-    public func getSounds() -> [Alert.Sound] {
+    public func getSounds() -> [LoopKit.Alert.Sound] {
         return []
     }
 }
 
 extension DanaKitPumpManager {
-    public func acknowledgeAlert(alertIdentifier: Alert.AlertIdentifier, completion: @escaping (Error?) -> Void) {
+    public func acknowledgeAlert(alertIdentifier: LoopKit.Alert.AlertIdentifier, completion: @escaping (Error?) -> Void) {
     }
 }
 
@@ -436,15 +418,17 @@ extension DanaKitPumpManager {
     }
     
     func notifyStateDidChange() {
-        stateObservers.forEach { (observer) in
-            observer.stateDidUpdate(self.state, self.oldState)
+        DispatchQueue.main.async {
+            self.stateObservers.forEach { (observer) in
+                observer.stateDidUpdate(self.state, self.oldState)
+            }
+            
+            self.pumpDelegate.notify { (delegate) in
+                delegate?.pumpManagerDidUpdateState(self)
+            }
+            
+            self.oldState = DanaKitPumpManagerState(rawValue: self.state.rawValue)
         }
-        
-        self.pumpDelegate.notify { (delegate) in
-            delegate?.pumpManagerDidUpdateState(self)
-        }
-        
-        self.oldState = DanaKitPumpManagerState(rawValue: self.state.rawValue)
     }
     
     public func addScanDeviceObserver(_ observer: StateObserver, queue: DispatchQueue) {
@@ -456,8 +440,10 @@ extension DanaKitPumpManager {
     }
     
     func notifyScanDeviceDidChange(_ device: DanaPumpScan) {
-        scanDeviceObservers.forEach { (observer) in
-            observer.deviceScanDidUpdate(device)
+        DispatchQueue.main.async {
+            self.scanDeviceObservers.forEach { (observer) in
+                observer.deviceScanDidUpdate(device)
+            }
         }
     }
 }

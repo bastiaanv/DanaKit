@@ -20,12 +20,13 @@ struct ScanResultItem: Identifiable {
 class DanaKitScanViewModel : ObservableObject {
     @Published var scannedDevices: [ScanResultItem] = []
     @Published var isScanning = false
-    @Published var connectedDeviceName = ""
     @Published var isConnecting = false
-    @Published var isPresentingBle5KeysError = false
+    @Published var isConnectionError = false
+    @Published var connectionErrorMessage: String?
      
     private let log = OSLog(category: "ScanView")
     private var pumpManager: DanaKitPumpManager?
+    private var view: UIViewController?
     private var nextStep: () -> Void
     private var foundDevices: [String:CBPeripheral] = [:]
     
@@ -44,16 +45,31 @@ class DanaKitScanViewModel : ObservableObject {
         }
     }
     
+    func setView(_ view: UIViewController) {
+        self.view = view
+    }
+    
     func connect(_ item: ScanResultItem) {
-        guard let device = self.foundDevices[item.bleIdentifier] else {
+        guard let device = self.foundDevices[item.bleIdentifier], let view = self.view else {
+            log.error("No view or device...")
             return
         }
         
         self.stopScan()
         
-        self.connectedDeviceName = item.name
-        self.pumpManager?.connect(device)
+        self.pumpManager?.connect(device, view, self.connectComplete)
         self.isConnecting = true
+    }
+    
+    func connectComplete(_ error: Error?) {
+        self.isConnecting = false
+        
+        guard error == nil else {
+            self.connectionErrorMessage = error?.localizedDescription ?? ""
+            return
+        }
+        
+        self.nextStep()
     }
     
     func stopScan() {
@@ -69,15 +85,6 @@ extension DanaKitScanViewModel: StateObserver {
     }
     
     func stateDidUpdate(_ state: DanaKitPumpManagerState, _ oldState: DanaKitPumpManagerState) {
-        if (!oldState.deviceSendInvalidBLE5Keys && state.deviceSendInvalidBLE5Keys) {
-            self.isConnecting = false
-            self.isPresentingBle5KeysError = true
-            return
-        }
-        
-        if (state.isConnected && state.deviceName != nil) {
-            self.isConnecting = false
-            self.nextStep()
-        }
+        // Not needed
     }
 }

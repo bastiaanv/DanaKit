@@ -16,26 +16,28 @@ class DanaKitDebugViewModel : ObservableObject {
     @Published var isPresentingTempBasalAlert = false
     @Published var isPresentingScanAlert = false
     @Published var isPresentingBolusAlert = false
-    @Published var isPresentingForgetBleAlert = false
     @Published var isPresentingScanningErrorAlert = false
     @Published var scanningErrorMessage = ""
     @Published var connectedDeviceName = ""
     @Published var messageScanAlert = ""
-    @Published var messagePincodeAlert: String = "Pincodes required"
-    @Published var pin1 = ""
-    @Published var pin2 = ""
     @Published var isConnected = false
-    @Published var isPresentingPincodeAlert = false
+    @Published var isConnectionError = false
+    @Published var connectionErrorMessage: String?
     
     private let log = OSLog(category: "DebugView")
     private var pumpManager: DanaKitPumpManager?
     private var connectedDevice: DanaPumpScan?
+    private var view: UIViewController?
     
     init(_ pumpManager: DanaKitPumpManager? = nil) {
         self.pumpManager = pumpManager
         
         self.pumpManager?.addScanDeviceObserver(self, queue: .main)
         self.pumpManager?.addStateObserver(self, queue: .main)
+    }
+    
+    func setView(_ view: UIViewController) {
+        self.view = view
     }
     
     func scan() {
@@ -48,13 +50,24 @@ class DanaKitDebugViewModel : ObservableObject {
     }
     
     func connect() {
-        guard let device = scannedDevices.last else {
+        guard let device = scannedDevices.last, let view = self.view else {
+            log.error("No view or device...")
             return
         }
         
         self.pumpManager?.stopScan()
-        self.pumpManager?.connect(device.peripheral)
+        self.pumpManager?.connect(device.peripheral, view, connectCompletion)
         self.connectedDevice = device
+    }
+    
+    func connectCompletion(_ error: Error?) {
+        guard error == nil else {
+            self.isConnectionError = true
+            self.connectionErrorMessage = error?.localizedDescription ?? ""
+            return
+        }
+        
+        self.isConnected = true
     }
     
     func bolusModal() {
@@ -129,28 +142,6 @@ class DanaKitDebugViewModel : ObservableObject {
         self.pumpManager?.disconnect(device.peripheral)
     }
     
-    func danaRsPincode() {
-        guard self.pin1.count == 12, self.pin2.count == 8 else {
-            self.messagePincodeAlert = "Received invalid pincode lengths. Try again"
-            self.isPresentingPincodeAlert = true
-            return
-        }
-        
-        guard let pin1 = Data(hexString: self.pin1), let pin2 = Data(hexString: self.pin2) else {
-            self.messagePincodeAlert = "Received invalid hex strings. Try again"
-            self.isPresentingPincodeAlert = true
-            return
-        }
-        
-        do {
-            try self.pumpManager?.pincodeDanaRS(pin1, pin2)
-            self.isPresentingPincodeAlert = false
-        } catch {
-            self.messagePincodeAlert = "Something when wrong: " + error.localizedDescription
-            self.isPresentingPincodeAlert = true
-        }
-    }
-    
     func getLogs() -> String {
         let logs = log.getDebugLogs()
         print(logs)
@@ -171,13 +162,5 @@ extension DanaKitDebugViewModel: StateObserver {
     func stateDidUpdate(_ state: DanaKitPumpManagerState, _ oldState: DanaKitPumpManagerState) {
         self.isConnected = state.isConnected
         self.connectedDeviceName = state.deviceName ?? ""
-        
-        if (!oldState.deviceIsRequestingPincode && state.deviceIsRequestingPincode) {
-            self.isPresentingPincodeAlert = true
-        }
-        
-        if (!oldState.deviceSendInvalidBLE5Keys && state.deviceSendInvalidBLE5Keys) {
-            self.isPresentingForgetBleAlert = true
-        }
     }
 }

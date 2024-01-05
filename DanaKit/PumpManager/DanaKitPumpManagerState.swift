@@ -15,16 +15,15 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
     public init(rawValue: RawValue) {
         self.lastStatusDate = rawValue["lastStatusDate"] as? Date ?? Date()
         self.deviceName = rawValue["deviceName"] as? String
-        self.isConnected = rawValue["isConnected"] != nil
+        self.isConnected = false // To prevent having an old isConnected state
         self.reservoirLevel = rawValue["reservoirLevel"] as? Double ?? 0
         self.hwModel = rawValue["hwModel"] as? UInt8 ?? 0
         self.pumpProtocol = rawValue["pumpProtocol"] as? UInt8 ?? 0
-        self.deviceIsRequestingPincode = rawValue["deviceIsRequestingPincode"] != nil
         self.isInFetchHistoryMode = rawValue["isInFetchHistoryMode"] != nil
-        self.ignorePassword = rawValue["ignorePassword"] != nil
+        self.ignorePassword = rawValue["ignorePassword"] as? Bool ?? false
         self.devicePassword = rawValue["devicePassword"] as? UInt16 ?? 0
-        self.isEasyMode = rawValue["isEasyMode"] != nil
-        self.isUnitUD = rawValue["isUnitUD"] != nil
+        self.isEasyMode = rawValue["isEasyMode"] as? Bool ?? false
+        self.isUnitUD = rawValue["isUnitUD"] as? Bool ?? false
         self.bolusSpeed = rawValue["bolusSpeed"] as? BolusSpeed ?? .speed12
         self.isOnBoarded = rawValue["isOnBoarded"] as? Bool ?? false
         
@@ -39,11 +38,9 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         value["lastStatusDate"] = self.lastStatusDate
         value["deviceName"] = self.deviceName
         value["bleIdentifier"] = self.bleIdentifier
-        value["isConnected"] = self.isConnected
         value["reservoirLevel"] = self.reservoirLevel
         value["hwModel"] = self.hwModel
         value["pumpProtocol"] = self.pumpProtocol
-        value["deviceIsRequestingPincode"] = self.deviceIsRequestingPincode
         value["isInFetchHistoryMode"] = self.isInFetchHistoryMode
         value["ignorePassword"] = self.ignorePassword
         value["devicePassword"] = self.devicePassword
@@ -115,15 +112,6 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
     
     public var insulinType: InsulinType? = nil
     
-    /// When this bool is set to true, the UI should ask the user for a pincode
-    /// and the code should call BluetoothManager.finishV3Pairing. Only applicable to DanaRS v3
-    /// See: https://androidaps.readthedocs.io/en/latest/Configuration/DanaRS-Insulin-Pump.html#pairing-pump
-    public var deviceIsRequestingPincode: Bool = false;
-    
-    /// When this bool is set to true, the UI should prompt the user to let them unbound the device and try it again.
-    /// This is only an issue with Dana-i pumps
-    public var deviceSendInvalidBLE5Keys = false
-    
     /// The pump should be in history fetch mode, before requesting history data
     public var isInFetchHistoryMode: Bool = false
     
@@ -139,9 +127,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         self.devicePassword = 0
         self.isEasyMode = false
         self.isUnitUD = false
-        self.deviceSendInvalidBLE5Keys = false
         self.isInFetchHistoryMode = false
-        self.deviceIsRequestingPincode = false
     }
     
     func getFriendlyDeviceName() -> String {
@@ -192,8 +178,6 @@ extension DanaKitPumpManagerState: CustomDebugStringConvertible {
             "* hwModel: \(hwModel)",
             "* pumpProtocol: \(pumpProtocol)",
             "* isInFetchHistoryMode: \(isInFetchHistoryMode)",
-            "* deviceIsRequestingPincode: \(deviceIsRequestingPincode)",
-            "* deviceSendInvalidBLE5Keys: \(deviceSendInvalidBLE5Keys)",
             "* ignorePassword: \(ignorePassword)",
             "* isEasyMode: \(isEasyMode)",
             "* isUnitUD: \(isUnitUD)"

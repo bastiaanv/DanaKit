@@ -36,21 +36,15 @@ struct DanaKitScanView: View {
                     viewModel.stopScan()
                 }
             }
-            .alert(LocalizedString("ERROR: Failed to pair device", comment: "Dana-i invalid ble5 keys"),
-                   isPresented: $viewModel.isPresentingBle5KeysError,
-                   presenting: viewModel.connectedDeviceName,
-                   actions: {_ in
-                Button(action: {}, label: { Text(LocalizedString("Oke", comment: "Dana-i oke invalid ble5 keys")) })
-            },
-                   message: { deviceName in
-                Text(
-                    LocalizedString("Failed to pair to ", comment: "Dana-i failed to pair p1") +
-                    deviceName +
-                    LocalizedString(". Please go to your bluetooth settings, forget this device, and try again", comment: "Dana-i failed to pair p2")
-                )
-            }
-            )
         })
+        .alert(LocalizedString("Error while connecting to device", comment: "Connection error message"),
+               isPresented: $viewModel.isConnectionError,
+               presenting: $viewModel.connectionErrorMessage,
+               actions: { detail in
+                Button("Oke", action: {})
+               },
+               message: { detail in Text(detail.wrappedValue ?? "") }
+        )
     }
     
     @ViewBuilder

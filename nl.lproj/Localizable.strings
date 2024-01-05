@@ -19,6 +19,9 @@
 /* Dana-i invalid ble5 keys */
 "ERROR: Failed to pair device" = "Error: Kan niet koppelen met apparaat"
 
+/* Dana-i oke invalid ble5 keys */
+"OK" = "Oke"
+
 /* Dana-i failed to pair p1 */
 "Failed to pair to " = "Kan niet koppelen met "
 
@@ -42,3 +45,30 @@
 
 /* Label for PumpManager deletion button */
 "Switch to other insulin delivery device" = "Schakel over naar een ander insuline pump"
+
+/* Connection error message */
+"Error while connecting to device" = "Fout tijdens het verbinden met het apparaat"
+
+/* Dana-RS v3 found */
+"Dana-RS v3 found!" = "Dana-RS v3 gevonden!"
+
+/* Dana-RS v3 pincode prompt body */
+"Pincode required" = "Pincode vereist"
+
+/* Dana-RS v3 pincode prompt pin 1 */
+"Pin 1" = "Pin 1"
+
+/* Dana-RS v3 pincode prompt pin 2 */
+"Pin 2" = "Pin 2"
+
+/* Dana-RS v3 pincode prompt error invalid length */
+"Received invalid pincode lengths. Try again" = "Ongeldige pincode lengtes ontvangen. Probeer het nog eens"
+
+/* Dana-RS v3 pincode prompt error invalid hex */
+"Received invalid hex strings. Try again" = "Ongeldige hexadecimale waarde ontvangen. Probeer het nog eens"
+
+/* Dana-RS v3 pincode prompt oke */
+"OK" = "Oke"
+
+/* Dana-RS v3 pincode prompt error checksum failed */
+"Checksum failed. Try again" = "Checksum is mislukt. Probeer het nog eens"
