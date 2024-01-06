@@ -16,7 +16,9 @@ enum DanaUIScreen {
     case debugView
     case firstRunScreen
     case insulinConfirmationScreen
+    case bolusSpeedScreen
     case deviceScanningScreen
+    case setupComplete
     case settings
     
     func next() -> DanaUIScreen? {
@@ -26,8 +28,12 @@ enum DanaUIScreen {
         case .firstRunScreen:
             return .insulinConfirmationScreen
         case .insulinConfirmationScreen:
+            return .bolusSpeedScreen
+        case .bolusSpeedScreen:
             return .deviceScanningScreen
         case .deviceScanningScreen:
+            return .setupComplete
+        case .setupComplete:
             return nil
         case .settings:
             return nil
@@ -102,7 +108,7 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
             
             return view
         case .firstRunScreen:
-            let view = DanaKitSetupView(nextAction: { self.stepFinished() }, debugAction: { self.navigateTo(.debugView) }) //self.allowDebugFeatures ? { self.navigateTo(.debugView) } : {})
+            let view = DanaKitSetupView(nextAction: self.stepFinished, debugAction: { self.navigateTo(.debugView) }) //self.allowDebugFeatures ? { self.navigateTo(.debugView) } : {})
             return hostingController(rootView: view)
         case .insulinConfirmationScreen:
             let confirm: (InsulinType) -> Void = { confirmedType in
@@ -111,25 +117,33 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
             }
             let view = InsulinTypeConfirmation(initialValue: self.allowedInsulinTypes[0], supportedInsulinTypes: self.allowedInsulinTypes, didConfirm: confirm)
             return hostingController(rootView: view)
+        case .bolusSpeedScreen:
+            let next: (BolusSpeed) -> Void = { bolusSpeed in
+                self.pumpManager?.state.bolusSpeed = bolusSpeed
+                self.stepFinished()
+            }
+            let view = DanaKitPumpSpeed(next: next)
+            
+            return hostingController(rootView: view)
         case .deviceScanningScreen:
+            let viewModel = DanaKitScanViewModel(self.pumpManager, nextStep: self.stepFinished)
+            let view = hostingController(rootView: DanaKitScanView(viewModel: viewModel))
+            viewModel.setView(view)
+            
+            return view
+        case .setupComplete:
+            pumpManagerOnboardingDelegate?.pumpManagerOnboarding(didCreatePumpManager: self.pumpManager!)
+            
             let nextStep: () -> Void = {
                 self.pumpManager?.state.isOnBoarded = true
                 self.pumpManager?.notifyStateDidChange()
                 self.stepFinished()
             }
-            pumpManagerOnboardingDelegate?.pumpManagerOnboarding(didCreatePumpManager: self.pumpManager!)
             
-            let viewModel = DanaKitScanViewModel(self.pumpManager, nextStep: nextStep)
-            let view = hostingController(rootView: DanaKitScanView(viewModel: viewModel))
-            viewModel.setView(view)
-            
-            return view
+            let view = DanaKitSetupCompleteView(finish: nextStep, friendlyPumpModelName: self.pumpManager?.state.getFriendlyDeviceName() ?? "")
+            return hostingController(rootView: view)
         case .settings:
-            let didFinish = {
-                self.stepFinished()
-            }
-            
-            let view = DanaKitSettingsView(viewModel: DanaKitSettingsViewModel(self.pumpManager, didFinish))
+            let view = DanaKitSettingsView(viewModel: DanaKitSettingsViewModel(self.pumpManager, self.stepFinished))
             return hostingController(rootView: view)
         }
     }

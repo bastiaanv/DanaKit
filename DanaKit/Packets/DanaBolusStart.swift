@@ -10,6 +10,10 @@ public enum BolusSpeed: UInt8 {
     case speed12 = 0
     case speed30 = 1
     case speed60 = 2
+    
+    static func all() -> [Int] {
+        return [Int(BolusSpeed.speed12.rawValue), Int(BolusSpeed.speed30.rawValue), Int(BolusSpeed.speed60.rawValue)]
+    }
 }
 
 struct PacketBolusStart {

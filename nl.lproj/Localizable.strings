@@ -72,3 +72,27 @@
 
 /* Dana-RS v3 pincode prompt error checksum failed */
 "Checksum failed. Try again" = "Checksum is mislukt. Probeer het nog eens"
+
+/* Title for delivery speed */
+"Delivery speed" = "Bolus snelheid"
+
+/* Dana bolus speed 12u per min */
+"12 U/min" = "12 E/min"
+
+/* Dana bolus speed 30u per min */
+"30 U/min" = "30 E/min"
+
+/* Dana bolus speed 60u per min */
+"60 U/min" = "60 E/min"
+
+/* Dana delivery speed body */
+"The Dana pumps support different delivery speeds. You can set it up here, but also in the settings menu" = "De Dana-pompen ondersteunen verschillende bolus snelheden. Je kunt dit hier instellen, maar ook in het instellingenmenu"
+
+/* Text for finish button */
+"Finish" = "Afronden"
+
+/* Dana setup complete p1 */
+"Your " = "Jouw "
+
+/* Dana setup complete p2 */
+" is ready to be used!" = " is klaar voor gebruik!"
