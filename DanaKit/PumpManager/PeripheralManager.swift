@@ -497,8 +497,8 @@ extension PeripheralManager {
                         return
                     }
                     
-                    let randomPairingKey = pin2.prefix(5)
-                    let checkSum = pin2.dropFirst(6).prefix(1)
+                    let randomPairingKey = pin2.prefix(3)
+                    let checkSum = pin2.dropFirst(3).prefix(1)
                     
                     var pairingKeyCheckSum: UInt8 = 0
                     for byte in pin1 {
@@ -509,12 +509,12 @@ extension PeripheralManager {
                         pairingKeyCheckSum ^= byte
                     }
                     
-                    guard checkSum[0] == pairingKeyCheckSum else {
+                    guard checkSum.first == pairingKeyCheckSum else {
                         self.promptPincode(LocalizedString("Checksum failed. Try again", comment: "Dana-RS v3 pincode prompt error checksum failed"))
                         return
                     }
                     
-                    self.finishV3Pairing(pin1, pin2)
+                    self.finishV3Pairing(pin1, randomPairingKey)
                 }
             ))
             
