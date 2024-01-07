@@ -20,7 +20,7 @@ public protocol StateObserver: AnyObject {
 }
 
 public class DanaKitPumpManager: DeviceManager {
-    private var bluetoothManager: BluetoothManager!
+    private static var bluetoothManager = BluetoothManager()
     
     private var oldState: DanaKitPumpManagerState
     public var state: DanaKitPumpManagerState
@@ -37,7 +37,7 @@ public class DanaKitPumpManager: DeviceManager {
         self.state = state
         self.oldState = DanaKitPumpManagerState(rawValue: state.rawValue)
         
-        self.bluetoothManager = BluetoothManager(self)
+        DanaKitPumpManager.bluetoothManager.pumpManagerDelegate = self
     }
     
     public required convenience init?(rawState: PumpManager.RawStateValue) {
@@ -67,20 +67,20 @@ public class DanaKitPumpManager: DeviceManager {
     }
     
     public func connect(_ peripheral: CBPeripheral, _ view: UIViewController, _ completion: @escaping (Error?) -> Void) {
-        self.bluetoothManager.connect(peripheral, view, completion)
+        DanaKitPumpManager.bluetoothManager.connect(peripheral, view, completion)
     }
     
     public func disconnect(_ peripheral: CBPeripheral) {
-        self.bluetoothManager.disconnect(peripheral)
+        DanaKitPumpManager.bluetoothManager.disconnect(peripheral)
         self.state.resetState()
     }
     
     public func startScan() throws {
-        try self.bluetoothManager.startScan()
+        try DanaKitPumpManager.bluetoothManager.startScan()
     }
     
     public func stopScan() {
-        self.bluetoothManager.stopScan()
+        DanaKitPumpManager.bluetoothManager.stopScan()
     }
 }
 
@@ -170,7 +170,7 @@ extension DanaKitPumpManager: PumpManager {
     public func ensureCurrentPumpData(completion: ((Date?) -> Void)?) {
         Task {
             do {
-                try await self.bluetoothManager.updateInitialState()
+                try await DanaKitPumpManager.bluetoothManager.updateInitialState()
                 
                 guard let completion = completion else {
                     return
@@ -209,7 +209,7 @@ extension DanaKitPumpManager: PumpManager {
         Task {
             do {
                 let packet = generatePacketBolusStart(options: PacketBolusStart(amount: units, speed: self.state.bolusSpeed))
-                let result = try await self.bluetoothManager.writeMessage(packet)
+                let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
                 
                 if (!result.success) {
                     completion(PumpManagerError.uncertainDelivery)
@@ -227,7 +227,7 @@ extension DanaKitPumpManager: PumpManager {
         Task {
             do {
                 let packet = generatePacketBolusStop()
-                let result = try await self.bluetoothManager.writeMessage(packet)
+                let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
                 
                 if (!result.success) {
                     completion(.failure(PumpManagerError.communication(nil)))
@@ -251,7 +251,7 @@ extension DanaKitPumpManager: PumpManager {
             if (duration < .ulpOfOne) {
                 do {
                     let packet = generatePacketBasalCancelTemporary()
-                    let result = try await self.bluetoothManager.writeMessage(packet)
+                    let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
                     
                     if (!result.success) {
                         completion(PumpManagerError.communication(nil))
@@ -273,7 +273,7 @@ extension DanaKitPumpManager: PumpManager {
                     
                     let durationInHours = UInt8(round(duration / 3600))
                     let packet = generatePacketBasalSetTemporary(options: PacketBasalSetTemporary(temporaryBasalRatio: tempBasalPercentage, temporaryBasalDuration: durationInHours))
-                    let result = try await self.bluetoothManager.writeMessage(packet)
+                    let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
                     
                     if (!result.success) {
                         completion(PumpManagerError.communication(nil))
@@ -293,7 +293,7 @@ extension DanaKitPumpManager: PumpManager {
         Task {
             do {
                 let packet = generatePacketBasalSetSuspendOn()
-                let result = try await self.bluetoothManager.writeMessage(packet)
+                let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
                 
                 if (!result.success) {
                     completion(PumpManagerError.communication(nil))
@@ -312,7 +312,7 @@ extension DanaKitPumpManager: PumpManager {
         Task {
             do {
                 let packet = generatePacketBasalSetSuspendOff()
-                let result = try await self.bluetoothManager.writeMessage(packet)
+                let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
                 
                 if (!result.success) {
                     completion(PumpManagerError.communication(nil))
@@ -332,7 +332,7 @@ extension DanaKitPumpManager: PumpManager {
             do {
                 let basal = self.convertBasal(scheduleItems)
                 let packet = try generatePacketBasalSetProfileRate(options: PacketBasalSetProfileRate(profileNumber: self.basalProfileNumber, profileBasalRate: basal))
-                let result = try await self.bluetoothManager.writeMessage(packet)
+                let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
                 
                 if (!result.success) {
                     completion(.failure(PumpManagerError.communication(nil)))

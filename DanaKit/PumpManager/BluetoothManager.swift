@@ -32,15 +32,14 @@ class BluetoothManager : NSObject {
     private var manager: CBCentralManager! = nil
     private let managerQueue = DispatchQueue(label: "com.DanaKit.bluetoothManagerQueue", qos: .unspecified)
     
-    private var pumpManager: DanaKitPumpManager
+    public var pumpManagerDelegate: DanaKitPumpManager?
     private var peripheralManager: PeripheralManager?
     private var view: UIViewController?
     private var connectionCompletion: (Error?) -> Void = { _ in }
     
     private var devices: [DanaPumpScan] = []
 
-    init(_ pumpManager: DanaKitPumpManager) {
-        self.pumpManager = pumpManager
+    override init() {
         super.init()
         
         managerQueue.sync {
@@ -156,23 +155,17 @@ extension BluetoothManager : CBCentralManagerDelegate {
         
         let result = DanaPumpScan(bleIdentifier: peripheral.identifier.uuidString, name: peripheral.name!, peripheral: peripheral)
         devices.append(result)
-        self.pumpManager.notifyScanDeviceDidChange(result)
+        self.pumpManagerDelegate?.notifyScanDeviceDidChange(result)
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         dispatchPrecondition(condition: .onQueue(managerQueue))
         
-        guard let view = self.view else {
-            log.error("%{public}@: No view found...", #function)
-            self.disconnect(peripheral)
-            return
-        }
-        
         log.debug("%{public}@: %{public}@", #function, peripheral)
-        self.peripheralManager = PeripheralManager(peripheral, self, self.pumpManager, view, self.connectionCompletion)
+        self.peripheralManager = PeripheralManager(peripheral, self, self.pumpManagerDelegate!, self.view!, self.connectionCompletion)
         
-        self.pumpManager.state.deviceName = peripheral.name
-        self.pumpManager.notifyStateDidChange()
+        self.pumpManagerDelegate?.state.deviceName = peripheral.name
+        self.pumpManagerDelegate?.notifyStateDidChange()
         
         peripheral.readRSSI()
     }
@@ -180,7 +173,7 @@ extension BluetoothManager : CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         log.default("%{public}@: Device disconnected, name: %{public}@", #function, peripheral.name ?? "<NO_NAME>")
         
-        self.pumpManager.state.isConnected = false
-        self.pumpManager.notifyStateDidChange()
+        self.pumpManagerDelegate?.state.isConnected = false
+        self.pumpManagerDelegate?.notifyStateDidChange()
     }
 }
