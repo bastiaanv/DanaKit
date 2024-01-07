@@ -61,7 +61,7 @@ public class DanaKitPumpManager: DeviceManager {
     public var debugDescription: String {
         let lines = [
             "## DanaKitPumpManager",
-            "TODO"
+            state.debugDescription
         ]
         return lines.joined(separator: "\n")
     }
