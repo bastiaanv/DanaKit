@@ -139,7 +139,7 @@ func decryptionRandomSyncKey(randomSyncKey: UInt8, randomPairingKey: Data) -> UI
 func initialRandomSyncKey(pairingKey: Data) -> UInt8 {
     var tmp: UInt8 = 0
 
-    tmp = ((pairingKey[0] &+ pairingKey[1]) >> 4) | (((((pairingKey[0] &+ pairingKey[1]) & 0xF) << 4) ^ pairingKey[2]) &- pairingKey[3])
+    tmp = (((pairingKey[0] &+ pairingKey[1]) >> 4) | ((((pairingKey[0] &+ pairingKey[1]) & 0xF) << 4) ^ pairingKey[2])) &- pairingKey[3]
     tmp = ((tmp >> 4) | ((tmp & 0xF) << 4)) ^ pairingKey[4]
 
     return ((tmp >> 4) | ((tmp & 0xF) << 4)) ^ pairingKey[5]
