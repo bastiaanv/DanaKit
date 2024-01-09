@@ -6,6 +6,11 @@
 //  Copyright © 2023 Randall Knutson. All rights reserved.
 //
 
+// TEMP logging
+import os.log
+let log = OSLog(category: "ENCRYPTION")
+// END TEMP
+
 let timeInformationEnhancedEncryption2Lookup: [UInt8] = [
     0,
     0x17 ^ 0x1a,
@@ -78,33 +83,41 @@ func encryptSecondLevel(_ params: inout EncryptSecondLevelParams) -> (randomSync
         }
 
         for i in 0..<params.buffer.count {
+            log.debug("%{public}@: index %{public}@, value buffer before: %{public}@", #function, i, params.buffer[i])
+            
             params.buffer[i] ^= params.pairingKey[0]
             params.buffer[i] &-= updatedRandomSyncKey
-            params.buffer[i] = ((params.buffer[i] >> 4) & 0xf) | (((params.buffer[i] & 0xf) << 4) & 0xff)
+            params.buffer[i] = ((params.buffer[i] >> 4) & 0xf) | ((params.buffer[i] & 0xf) << 4)
 
             params.buffer[i] &+= params.pairingKey[1]
             params.buffer[i] ^= params.pairingKey[2]
-            params.buffer[i] = ((params.buffer[i] >> 4) & 0xf) | (((params.buffer[i] & 0xf) << 4) & 0xff)
+            params.buffer[i] = ((params.buffer[i] >> 4) & 0xf) | ((params.buffer[i] & 0xf) << 4)
 
             params.buffer[i] &-= params.pairingKey[3]
             params.buffer[i] ^= params.pairingKey[4]
-            params.buffer[i] = ((params.buffer[i] >> 4) & 0xf) | (((params.buffer[i] & 0xf) << 4) & 0xff)
+            params.buffer[i] = ((params.buffer[i] >> 4) & 0x0f) | ((params.buffer[i] & 0x0f) << 4)
 
             params.buffer[i] ^= params.pairingKey[5]
             params.buffer[i] ^= updatedRandomSyncKey
-            params.buffer[i] ^= secondLvlEncryptionLookup[Int(params.pairingKey[0])] // You need to define secondLvlEncryptionLookup
+            
+            params.buffer[i] ^= secondLvlEncryptionLookup[Int(params.pairingKey[0])]
             params.buffer[i] &+= secondLvlEncryptionLookup[Int(params.pairingKey[1])]
             params.buffer[i] &-= secondLvlEncryptionLookup[Int(params.pairingKey[2])]
-            params.buffer[i] = ((params.buffer[i] >> 4) & 0xf) | (((params.buffer[i] & 0xf) << 4) & 0xff)
+            params.buffer[i] = ((params.buffer[i] >> 4) & 0x0f) | ((params.buffer[i] & 0x0f) << 4)
 
             params.buffer[i] ^= secondLvlEncryptionLookup[Int(params.pairingKey[3])]
             params.buffer[i] &+= secondLvlEncryptionLookup[Int(params.pairingKey[4])]
             params.buffer[i] &-= secondLvlEncryptionLookup[Int(params.pairingKey[5])]
+            params.buffer[i] = ((params.buffer[i] >> 4) & 0x0f) | ((params.buffer[i] & 0x0f) << 4)
+            
             params.buffer[i] ^= secondLvlEncryptionLookup[Int(params.randomPairingKey[0])]
             params.buffer[i] &+= secondLvlEncryptionLookup[Int(params.randomPairingKey[1])]
             params.buffer[i] &-= secondLvlEncryptionLookup[Int(params.randomPairingKey[2])]
 
             updatedRandomSyncKey = params.buffer[i]
+            
+            log.debug("%{public}@: index %{public}@, value buffer after: %{public}@", #function, i, params.buffer[i])
+            log.debug("%{public}@: index %{public}@, randomSyncKey: %{public}@", #function, i, updatedRandomSyncKey)
         }
     } else if params.enhancedEncryption == 2 {
         if params.buffer[0] == 0xa5 && params.buffer[1] == 0xa5 {
