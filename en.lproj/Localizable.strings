@@ -90,3 +90,21 @@
 
 /* Dana setup complete p2 */
 " is ready to be used!" = " is ready to be used!"
+
+/* Dana setup SMB setting */
+"Note: You Dana pump has a special setting which allows you to silence your Dana pump beeps. To enable this, please contact your Dana distributor" = "Note: You Dana pump has a special setting which allows you to silence your Dana pump beeps. To enable this, please contact your Dana distributor"
+
+/* Error description when no dana connected */
+"Failed to make a connection" = "Failed to make a connection"
+
+/* Error description when failed temp adjustment */
+"Failed to adjust temp basal" = "Failed to adjust temp basal"
+
+/* Error description when failed suspension adjustment */
+"Failed to adjust suspension" = "Failed to adjust suspension"
+
+/* Error description when failed generating basal program */
+"Failed to generate Dana basal program" = "Failed to generate Dana basal program"
+
+/* Error description when failed basal adjustment */
+"Failed to adjust basal" = "Failed to adjust basal"

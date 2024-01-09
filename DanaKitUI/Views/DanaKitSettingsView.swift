@@ -15,6 +15,8 @@ struct DanaKitSettingsView: View {
     
     @ObservedObject var viewModel: DanaKitSettingsViewModel
     
+    var imageName: String
+    
     var removePumpManagerActionSheet: ActionSheet {
         ActionSheet(title: Text(LocalizedString("Remove Pump", comment: "Title for Dana-i/RS PumpManager deletion action sheet.")),
                     message: Text(LocalizedString("Are you sure you want to stop using Dana-i/RS?", comment: "Message for Dana-i/RS PumpManager deletion action sheet")),
@@ -27,6 +29,10 @@ struct DanaKitSettingsView: View {
     }
     
     var body: some View {
+        Image(uiImage: UIImage(named: imageName, in: Bundle(for: DanaKitHUDProvider.self), compatibleWith: nil)!)
+            .resizable()
+            .scaledToFit()
+            .frame(height: 200)
         Button(action: {
             viewModel.showingDeleteConfirmation = true
         }) {
@@ -40,5 +46,5 @@ struct DanaKitSettingsView: View {
 }
 
 #Preview {
-    DanaKitSettingsView(viewModel: DanaKitSettingsViewModel(nil, nil))
+    DanaKitSettingsView(viewModel: DanaKitSettingsViewModel(nil, nil), imageName: "danai")
 }

@@ -133,33 +133,33 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
     func getFriendlyDeviceName() -> String {
         switch (self.hwModel) {
             case 0x01:
-                return "DanaR Korean";
+                return "DanaR Korean"
 
             case 0x03:
             switch (self.pumpProtocol) {
                 case 0x00:
-                  return "DanaR old";
+                  return "DanaR old"
                 case 0x02:
-                  return "DanaR v2";
+                  return "DanaR v2"
                 default:
-                  return "DanaR"; // 0x01 and 0x03 known
+                  return "DanaR" // 0x01 and 0x03 known
               }
 
             case 0x05:
-                return self.pumpProtocol < 10 ? "DanaRS" : "DanaRS v3";
+                return self.pumpProtocol < 10 ? "DanaRS" : "DanaRS v3"
 
             case 0x06:
-                return "DanaRS Korean";
+                return "DanaRS Korean"
 
             case 0x07:
-                return "Dana-i (BLE4.2)";
+                return "Dana-i (BLE4.2)"
 
             case 0x09:
-                return "Dana-i (BLE5)";
+                return "Dana-i (BLE5)"
             case 0x0a:
-                return "Dana-i (BLE5, Korean)";
+                return "Dana-i (BLE5, Korean)"
             default:
-                return "Unknown Dana pump";
+                return "Unknown Dana pump"
           }
     }
 }

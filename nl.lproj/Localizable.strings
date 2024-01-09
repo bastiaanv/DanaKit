@@ -96,3 +96,21 @@
 
 /* Dana setup complete p2 */
 " is ready to be used!" = " is klaar voor gebruik!"
+
+/* Dana setup SMB setting */
+"Note: You Dana pump has a special setting which allows you to silence your Dana pump beeps. To enable this, please contact your Dana distributor" = "Belangrijk: Uw Dana-pomp heeft een speciale instelling waarmee u de pieptonen van uw Dana-pomp kunt uitschakelen. Neem contact op met uw Dana-distributeur om dit te activeren"
+
+/* Error description when no dana connected */
+"Failed to make a connection" = "Verbinding maken is mislukt"
+
+/* Error description when failed temp adjustment */
+"Failed to adjust temp basal" = "Aanpassing aan tijdelijk basal is mislukt"
+
+/* Error description when failed suspension adjustment */
+"Failed to adjust suspension" = "Aanpassing pauze functie is mislukt"
+
+/* Error description when failed generating basal program */
+"Failed to generate Dana basal program" = "Het genereren van basaal programma is mislukt"
+
+/* Error description when failed basal adjustment */
+"Failed to adjust basal" = "Aanpassing basaal is mislukt"

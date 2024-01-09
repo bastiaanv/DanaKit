@@ -16,11 +16,19 @@ struct DanaKitSetupCompleteView: View {
     
     var finish: (() -> Void)?
     var friendlyPumpModelName: String
+    var imageName: String
     
     var body: some View {
         GuidePage(content: {
             VStack(alignment: .leading) {
-                title
+                Image(uiImage: UIImage(named: imageName, in: Bundle(for: DanaKitHUDProvider.self), compatibleWith: nil)!)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 200)
+                Text(LocalizedString("Your ", comment: "Dana setup complete p1") + friendlyPumpModelName + LocalizedString(" is ready to be used!", comment: "Dana setup complete p2"))
+            }
+            VStack(alignment: .leading) {
+                Text(LocalizedString("Note: You Dana pump has a special setting which allows you to silence your Dana pump beeps. To enable this, please contact your Dana distributor", comment: "Dana setup SMB setting"))
             }
         }) {
             Button(action: {
@@ -33,16 +41,10 @@ struct DanaKitSetupCompleteView: View {
             .background(Color(UIColor.systemBackground))
             .zIndex(1)
         }
-        .animation(.default)
         .navigationBarTitle("Setup Complete", displayMode: .automatic)
     }
-    
-    @ViewBuilder
-    private var title: some View {
-        Text(LocalizedString("Your ", comment: "Dana setup complete p1") + friendlyPumpModelName + LocalizedString(" is ready to be used!", comment: "Dana setup complete p2"))
-    } 
 }
 
 #Preview {
-    DanaKitSetupCompleteView(finish: {}, friendlyPumpModelName: "Dana-i")
+    DanaKitSetupCompleteView(finish: {}, friendlyPumpModelName: "Dana-i", imageName: "danai")
 }

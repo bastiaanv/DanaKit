@@ -27,17 +27,23 @@ class BluetoothManager : NSObject {
     
     private let log = OSLog(category: "BluetoothManager")
     
+    private var autoConnectUUID: String?
     private let deviceNameRegex = try! NSRegularExpression(pattern: "^[a-zA-Z]{3}[0-9]{5}[a-zA-Z]{2}$")
     
     private var manager: CBCentralManager! = nil
     private let managerQueue = DispatchQueue(label: "com.DanaKit.bluetoothManagerQueue", qos: .unspecified)
     
     public var pumpManagerDelegate: DanaKitPumpManager?
+    private(set) var peripheral: CBPeripheral?
     private var peripheralManager: PeripheralManager?
     private var view: UIViewController?
     private var connectionCompletion: (Error?) -> Void = { _ in }
     
     private var devices: [DanaPumpScan] = []
+    
+    public var isConnected: Bool {
+        self.peripheralManager != nil
+    }
 
     override init() {
         super.init()
@@ -70,30 +76,23 @@ class BluetoothManager : NSObject {
         log.info("%{public}@: Stopped scanning", #function)
     }
     
-    func connect(_ bleIdentifier: String, _ view: UIViewController, _ completion: @escaping (Error?) -> Void) {
-        guard let uuid = UUID(uuidString: bleIdentifier) else {
-            completion(NSError(domain: "Invalid ble identifier", code: 0, userInfo: nil))
-            return
-        }
-        
-        let peripherals = manager.retrievePeripherals(withIdentifiers: [uuid])
-        if (peripherals.count != 1) {
-            completion(NSError(domain: "Device never connected", code: 0, userInfo: nil))
-            return
-        }
-        
-        if (self.peripheralManager != nil) {
-            self.disconnect(peripherals.first!)
-            self.peripheralManager = nil
-        }
-        
-        manager.connect(peripherals.first!)
-        
+    func connect(_ bleIdentifier: String, _ view: UIViewController?, _ completion: @escaping (Error?) -> Void) throws {
         self.view = view
         self.connectionCompletion = completion
+        
+        self.autoConnectUUID = bleIdentifier
+        try self.startScan()
+        
+        // throw error if device could not be found after 5 sec
+        Task {
+            try? await Task.sleep(nanoseconds: 5000000000)
+            guard self.peripheral != nil else {
+                throw NSError(domain: "Device is not findable", code: -1)
+            }
+        }
     }
     
-    func connect(_ peripheral: CBPeripheral, _ view: UIViewController, _ completion: @escaping (Error?) -> Void) {
+    func connect(_ peripheral: CBPeripheral, _ view: UIViewController?, _ completion: @escaping (Error?) -> Void) {
         if (self.peripheralManager != nil) {
             self.disconnect(peripheral)
             self.peripheralManager = nil
@@ -107,6 +106,7 @@ class BluetoothManager : NSObject {
     
     func disconnect(_ peripheral: CBPeripheral) {
         log.default("Disconnecting from pump...")
+        self.autoConnectUUID = nil
         self.manager.cancelPeripheralConnection(peripheral)
     }
     
@@ -148,6 +148,12 @@ extension BluetoothManager : CBCentralManagerDelegate {
         dispatchPrecondition(condition: .onQueue(managerQueue))
         log.debug("%{public}@: %{public}@, %{public}@", #function, peripheral, advertisementData)
         
+        if self.autoConnectUUID != nil && peripheral.identifier.uuidString == self.autoConnectUUID {
+            self.stopScan()
+            self.connect(peripheral, self.view, self.connectionCompletion)
+            return
+        }
+        
         let device: DanaPumpScan? = devices.first(where: { $0.bleIdentifier == peripheral.identifier.uuidString })
         if (device != nil) {
             return
@@ -161,10 +167,14 @@ extension BluetoothManager : CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         dispatchPrecondition(condition: .onQueue(managerQueue))
         
+        let view = self.view ?? UIApplication.shared.delegate!.window!!.rootViewController!
+        
         log.debug("%{public}@: %{public}@", #function, peripheral)
-        self.peripheralManager = PeripheralManager(peripheral, self, self.pumpManagerDelegate!, self.view!, self.connectionCompletion)
+        self.peripheral = peripheral
+        self.peripheralManager = PeripheralManager(peripheral, self, self.pumpManagerDelegate!, view, self.connectionCompletion)
         
         self.pumpManagerDelegate?.state.deviceName = peripheral.name
+        self.pumpManagerDelegate?.state.bleIdentifier = peripheral.identifier.uuidString
         self.pumpManagerDelegate?.notifyStateDidChange()
         
         peripheral.readRSSI()
@@ -175,5 +185,7 @@ extension BluetoothManager : CBCentralManagerDelegate {
         
         self.pumpManagerDelegate?.state.isConnected = false
         self.pumpManagerDelegate?.notifyStateDidChange()
+        
+        self.peripheralManager = nil
     }
 }

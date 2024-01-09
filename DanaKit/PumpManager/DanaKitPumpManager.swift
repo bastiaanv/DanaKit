@@ -14,6 +14,11 @@ import os.log
 import SwiftUI
 import CoreBluetooth
 
+private enum ConnectionResult {
+    case success
+    case failure
+}
+
 public protocol StateObserver: AnyObject {
     func stateDidUpdate(_ state: DanaKitPumpManagerState, _ oldState: DanaKitPumpManagerState)
     func deviceScanDidUpdate(_ device: DanaPumpScan)
@@ -61,12 +66,14 @@ public class DanaKitPumpManager: DeviceManager {
     public var debugDescription: String {
         let lines = [
             "## DanaKitPumpManager",
-            state.debugDescription
+            state.debugDescription,
+            "#### DanaKit logs:",
+            log.getDebugLogs()
         ]
         return lines.joined(separator: "\n")
     }
     
-    public func connect(_ peripheral: CBPeripheral, _ view: UIViewController, _ completion: @escaping (Error?) -> Void) {
+    public func connect(_ peripheral: CBPeripheral, _ view: UIViewController?, _ completion: @escaping (Error?) -> Void) {
         DanaKitPumpManager.bluetoothManager.connect(peripheral, view, completion)
     }
     
@@ -168,21 +175,20 @@ extension DanaKitPumpManager: PumpManager {
     }
     
     public func ensureCurrentPumpData(completion: ((Date?) -> Void)?) {
-        Task {
-            do {
-                try await DanaKitPumpManager.bluetoothManager.updateInitialState()
-                
-                guard let completion = completion else {
-                    return
+        self.ensureConnected { result in
+            switch result {
+            case .failure:
+                completion?(nil)
+                return
+            case .success:
+                Task {
+                    do {
+                        try await DanaKitPumpManager.bluetoothManager.updateInitialState()
+                        completion?(Date.now)
+                    } catch {
+                        completion?(nil)
+                    }
                 }
-                
-                completion(Date.now)
-            } catch {
-                guard let completion = completion else {
-                    return
-                }
-                
-                completion(nil)
             }
         }
     }
@@ -206,38 +212,54 @@ extension DanaKitPumpManager: PumpManager {
     }
     
     public func enactBolus(units: Double, activationType: BolusActivationType, completion: @escaping (PumpManagerError?) -> Void) {
-        Task {
-            do {
-                let packet = generatePacketBolusStart(options: PacketBolusStart(amount: units, speed: self.state.bolusSpeed))
-                let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
-                
-                if (!result.success) {
-                    completion(PumpManagerError.uncertainDelivery)
-                    return
+        self.ensureConnected { result in
+            switch result {
+            case .failure:
+                completion(PumpManagerError.connection(DanaKitPumpManagerError.noConnection))
+                return
+            case .success:
+                Task {
+                    do {
+                        let packet = generatePacketBolusStart(options: PacketBolusStart(amount: units, speed: self.state.bolusSpeed))
+                        let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
+                        
+                        if (!result.success) {
+                            completion(PumpManagerError.uncertainDelivery)
+                            return
+                        }
+                        
+                        completion(nil)
+                    } catch {
+                        self.log.error("%{public}@: Failed to do bolus. Error: %{public}@", #function, error.localizedDescription)
+                        completion(PumpManagerError.connection(DanaKitPumpManagerError.noConnection))
+                    }
                 }
-                
-                completion(nil)
-            } catch {
-                completion(PumpManagerError.uncertainDelivery)
             }
         }
     }
     
     public func cancelBolus(completion: @escaping (PumpManagerResult<DoseEntry?>) -> Void) {
-        Task {
-            do {
-                let packet = generatePacketBolusStop()
-                let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
-                
-                if (!result.success) {
-                    completion(.failure(PumpManagerError.communication(nil)))
-                    return
+        self.ensureConnected { result in
+            switch result {
+            case .failure:
+                completion(.failure(PumpManagerError.connection(DanaKitPumpManagerError.noConnection)))
+                return
+            case .success:
+                Task {
+                    do {
+                        let packet = generatePacketBolusStop()
+                        let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
+                        
+                        if (!result.success) {
+                            completion(.failure(PumpManagerError.communication(nil)))
+                            return
+                        }
+                        
+                        completion(.success(nil))
+                    } catch {
+                        completion(.failure(PumpManagerError.communication(DanaKitPumpManagerError.noConnection)))
+                    }
                 }
-                
-                completion(.success(nil))
-            } catch {
-                log.error("%{public}@: Failed to cancel bolus", #function)
-                completion(.failure(PumpManagerError.communication(nil)))
             }
         }
     }
@@ -247,109 +269,134 @@ extension DanaKitPumpManager: PumpManager {
     /// - A short APS-special temp basal command (which only accepts 15 (only above 100%) or 30 min (only below 100%)
     /// TODO: Need to discuss what to do here / how to make this work within the Loop algorithm AND if the convertion from absolute to percentage is acceptable
     public func enactTempBasal(unitsPerHour: Double, for duration: TimeInterval, completion: @escaping (PumpManagerError?) -> Void) {
-        Task {
-            if (duration < .ulpOfOne) {
-                do {
-                    let packet = generatePacketBasalCancelTemporary()
-                    let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
-                    
-                    if (!result.success) {
-                        completion(PumpManagerError.communication(nil))
-                        return
+        self.ensureConnected { result in
+            switch result {
+            case .failure:
+                completion(PumpManagerError.connection(DanaKitPumpManagerError.noConnection))
+                return
+            case .success:
+                Task {
+                    if (duration < .ulpOfOne) {
+                        do {
+                            let packet = generatePacketBasalCancelTemporary()
+                            let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
+                            
+                            if (!result.success) {
+                                completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedTempBasalAdjustment))
+                                return
+                            }
+                            
+                            completion(nil)
+                        } catch {
+                            completion(PumpManagerError.communication(nil))
+                        }
+                    } else {
+                        do {
+                            var tempBasalPercentage: UInt16 = 0
+                            // Any basal less than 0.10u/h will be dumped once per hour. So if it's less than .10u/h, set a zero temp.
+                            if (unitsPerHour >= 0.1) {
+                                tempBasalPercentage = UInt16(ceil(unitsPerHour / self.currentBaseBasalRate * 100))
+                            }
+                            
+                            let packet = generatePacketLoopSetTemporaryBasal(options: PacketLoopSetTemporaryBasal(percent: tempBasalPercentage))
+                            let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
+                            
+                            if (!result.success) {
+                                completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedTempBasalAdjustment))
+                                return
+                            }
+                            
+                            completion(nil)
+                        } catch {
+                            completion(PumpManagerError.communication(nil))
+                        }
                     }
-                    
-                    completion(nil)
-                } catch {
-                    log.error("%{public}@: Failed to cancel temp basal", #function)
-                    completion(PumpManagerError.communication(nil))
-                }
-            } else {
-                do {
-                    var tempBasalPercentage: UInt8 = 0
-                    // Any basal less than 0.10u/h will be dumped once per hour. So if it's less than .10u/h, set a zero temp.
-                    if (unitsPerHour >= 0.1) {
-                        tempBasalPercentage = UInt8(ceil(unitsPerHour / currentBaseBasalRate * 100))
-                    }
-                    
-                    let durationInHours = UInt8(round(duration / 3600))
-                    let packet = generatePacketBasalSetTemporary(options: PacketBasalSetTemporary(temporaryBasalRatio: tempBasalPercentage, temporaryBasalDuration: durationInHours))
-                    let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
-                    
-                    if (!result.success) {
-                        completion(PumpManagerError.communication(nil))
-                        return
-                    }
-                    
-                    completion(nil)
-                } catch {
-                    log.error("%{public}@: Failed to set temp basal", #function)
-                    completion(PumpManagerError.communication(nil))
                 }
             }
         }
     }
     
     public func suspendDelivery(completion: @escaping (Error?) -> Void) {
-        Task {
-            do {
-                let packet = generatePacketBasalSetSuspendOn()
-                let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
-                
-                if (!result.success) {
-                    completion(PumpManagerError.communication(nil))
-                    return
+        self.ensureConnected { result in
+            switch result {
+            case .failure:
+                completion(PumpManagerError.connection(DanaKitPumpManagerError.noConnection))
+                return
+            case .success:
+                Task {
+                    do {
+                        let packet = generatePacketBasalSetSuspendOn()
+                        let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
+                        
+                        if (!result.success) {
+                            completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedSuspensionAdjustment))
+                            return
+                        }
+                        
+                        completion(nil)
+                    } catch {
+                        completion(PumpManagerError.communication(DanaKitPumpManagerError.noConnection))
+                    }
                 }
-                
-                completion(nil)
-            } catch {
-                log.error("%{public}@: Failed to suspend pump", #function)
-                completion(PumpManagerError.communication(nil))
             }
         }
     }
     
     public func resumeDelivery(completion: @escaping (Error?) -> Void) {
-        Task {
-            do {
-                let packet = generatePacketBasalSetSuspendOff()
-                let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
-                
-                if (!result.success) {
-                    completion(PumpManagerError.communication(nil))
-                    return
+        self.ensureConnected { result in
+            switch result {
+            case .failure:
+                completion(PumpManagerError.connection(DanaKitPumpManagerError.noConnection))
+                return
+            case .success:
+                Task {
+                    do {
+                        let packet = generatePacketBasalSetSuspendOff()
+                        let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
+                        
+                        if (!result.success) {
+                            completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedSuspensionAdjustment))
+                            return
+                        }
+                        
+                        completion(nil)
+                    } catch {
+                        completion(PumpManagerError.communication(DanaKitPumpManagerError.noConnection))
+                    }
                 }
-                
-                completion(nil)
-            } catch {
-                log.error("%{public}@: Failed to resume pump", #function)
-                completion(PumpManagerError.communication(nil))
             }
         }
     }
     
     public func syncBasalRateSchedule(items scheduleItems: [RepeatingScheduleValue<Double>], completion: @escaping (Result<BasalRateSchedule, Error>) -> Void) {
-        Task {
-            do {
-                let basal = self.convertBasal(scheduleItems)
-                let packet = try generatePacketBasalSetProfileRate(options: PacketBasalSetProfileRate(profileNumber: self.basalProfileNumber, profileBasalRate: basal))
-                let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
-                
-                if (!result.success) {
-                    completion(.failure(PumpManagerError.communication(nil)))
-                    return
+        self.ensureConnected { result in
+            switch result {
+            case .failure:
+                completion(.failure(PumpManagerError.connection(DanaKitPumpManagerError.noConnection)))
+                return
+            case .success:
+                Task {
+                    do {
+                        let basal = self.convertBasal(scheduleItems)
+                        let packet = try generatePacketBasalSetProfileRate(options: PacketBasalSetProfileRate(profileNumber: self.basalProfileNumber, profileBasalRate: basal))
+                        let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
+                        
+                        if (!result.success) {
+                            completion(.failure(PumpManagerError.configuration(DanaKitPumpManagerError.failedBasalAdjustment)))
+                            return
+                        }
+                        
+                        guard let schedule = DailyValueSchedule<Double>(dailyItems: scheduleItems) else {
+                            completion(.failure(PumpManagerError.configuration(DanaKitPumpManagerError.failedBasalGeneration)))
+                            return
+                        }
+                        
+                        completion(.success(schedule))
+                    } catch {
+                        completion(.failure(PumpManagerError.communication(DanaKitPumpManagerError.noConnection)))
+                    }
                 }
-                
-                guard let schedule = DailyValueSchedule<Double>(dailyItems: scheduleItems) else {
-                    completion(.failure(NSError(domain: "Failed to generate schedule", code: 0, userInfo: nil)))
-                    return
-                }
-                
-                completion(.success(schedule))
-            } catch {
-                log.error("%{public}@: Failed to sync basal", #function)
-                completion(.failure(PumpManagerError.communication(nil)))
             }
-
         }
     }
     
@@ -389,6 +436,42 @@ extension DanaKitPumpManager: PumpManager {
         }
         
         return output
+    }
+    
+    private func ensureConnected(_ completion: @escaping (ConnectionResult) -> Void) {
+        // Device still has an active connection with pump
+        if DanaKitPumpManager.bluetoothManager.isConnected {
+            completion(.success)
+        
+        // There is no active connection, but we stored the peripheral. We can quickly reconnect
+        } else if !DanaKitPumpManager.bluetoothManager.isConnected && DanaKitPumpManager.bluetoothManager.peripheral != nil {
+            self.connect(DanaKitPumpManager.bluetoothManager.peripheral!, nil, { error in
+                if error == nil {
+                    completion(.success)
+                } else {
+                    completion(.failure)
+                }
+            })
+            
+        // No active connection and no stored peripheral. We have to scan for device before being able to send command
+        } else if !DanaKitPumpManager.bluetoothManager.isConnected && self.state.bleIdentifier != nil {
+            do {
+                try DanaKitPumpManager.bluetoothManager.connect(self.state.bleIdentifier!, nil, { error in
+                    if error == nil {
+                        completion(.success)
+                    } else {
+                        completion(.failure)
+                    }
+                })
+            } catch {
+                completion(.failure)
+            }
+        
+        // Should never reach, but is only possible if device is not onboard (we have no ble identifier to search for)
+        } else {
+            log.error("%{public}@: Pump is not onboarded", #function)
+            completion(.failure)
+        }
     }
 }
 
