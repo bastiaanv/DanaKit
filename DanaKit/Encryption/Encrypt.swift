@@ -83,7 +83,7 @@ func encryptSecondLevel(_ params: inout EncryptSecondLevelParams) -> (randomSync
         }
 
         for i in 0..<params.buffer.count {
-            log.debug("%{public}@: index %{public}@, value buffer before: %{public}@", #function, i, params.buffer[i])
+            log.default("%{public}@: index %{public}@, value buffer before: %{public}@", #function, i, params.buffer[i])
             
             params.buffer[i] ^= params.pairingKey[0]
             params.buffer[i] &-= updatedRandomSyncKey
@@ -116,8 +116,8 @@ func encryptSecondLevel(_ params: inout EncryptSecondLevelParams) -> (randomSync
 
             updatedRandomSyncKey = params.buffer[i]
             
-            log.debug("%{public}@: index %{public}@, value buffer after: %{public}@", #function, i, params.buffer[i])
-            log.debug("%{public}@: index %{public}@, randomSyncKey: %{public}@", #function, i, updatedRandomSyncKey)
+            log.default("%{public}@: index %{public}@, value buffer after: %{public}@", #function, i, params.buffer[i])
+            log.default("%{public}@: index %{public}@, randomSyncKey: %{public}@", #function, i, updatedRandomSyncKey)
         }
     } else if params.enhancedEncryption == 2 {
         if params.buffer[0] == 0xa5 && params.buffer[1] == 0xa5 {

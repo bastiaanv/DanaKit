@@ -79,13 +79,13 @@ class PeripheralManager: NSObject {
         
         
         var data = DanaRSEncryption.encodePacket(operationCode: packet.opCode, buffer: packet.data, deviceName: self.deviceName)
-        log.debug("%{public}@: Encrypted data: %{public}@", #function, data.base64EncodedString())
+        log.default("%{public}@: Encrypted data: %{public}@", #function, data.base64EncodedString())
         
         self.isSendingRequest = true
         
         if (self.encryptionMode != .DEFAULT) {
             data = DanaRSEncryption.encodeSecondLevel(data: data)
-            log.debug("%{public}@: Second level encrypted data: %{public}@", #function, data.base64EncodedString())
+            log.default("%{public}@: Second level encrypted data: %{public}@", #function, data.base64EncodedString())
         }
         
         while (data.count != 0) {
@@ -217,12 +217,12 @@ extension PeripheralManager : CBPeripheralDelegate {
             return
         }
         
-        log.debug("%{public}@: Receiving data: %{public}@", #function, data.base64EncodedString())
+        log.default("%{public}@: Receiving data: %{public}@", #function, data.base64EncodedString())
         self.parseReceivedValue(data)
     }
     
     private func writeQ(_ data: Data) {
-        log.debug("%{public}@: Writing data %{public}@", #function, data.base64EncodedString())
+        log.default("%{public}@: Writing data %{public}@", #function, data.base64EncodedString())
         self.connectedDevice.writeValue(data, for: self.writeCharacteristic, type: .withoutResponse)
     }
 }
@@ -230,24 +230,24 @@ extension PeripheralManager : CBPeripheralDelegate {
 // MARK: - Encryption/Connection functions
 extension PeripheralManager {
     private func sendFirstMessageEncryption() {
-        log.debug("%{public}@: %{public}@", #function, self.deviceName)
+        log.default("%{public}@: %{public}@", #function, self.deviceName)
         let data = DanaRSEncryption.encodePacket(operationCode: DanaPacketType.OPCODE_ENCRYPTION__PUMP_CHECK, buffer: nil, deviceName: self.deviceName)
         
-        log.debug("%{public}@: Sending Initial encryption request. Data: %{public}@", #function, data.base64EncodedString())
+        log.default("%{public}@: Sending Initial encryption request. Data: %{public}@", #function, data.base64EncodedString())
         self.writeQ(data)
     }
     
     private func sendTimeInfo() {
         let data = DanaRSEncryption.encodePacket(operationCode: DanaPacketType.OPCODE_ENCRYPTION__TIME_INFORMATION, buffer: nil, deviceName: self.deviceName)
         
-        log.debug("%{public}@: Sending normal time information. Data: %{public}@", #function, data.base64EncodedString())
+        log.default("%{public}@: Sending normal time information. Data: %{public}@", #function, data.base64EncodedString())
         self.writeQ(data)
     }
     
     private func sendV3PairingInformation(_ requestNewPairing: UInt8) {
         let data = DanaRSEncryption.encodePacket(operationCode: DanaPacketType.OPCODE_ENCRYPTION__TIME_INFORMATION, buffer: Data([requestNewPairing]), deviceName: self.deviceName)
         
-        log.debug("%{public}@: Sending RSv3 time information. Data: %{public}@", #function, data.base64EncodedString())
+        log.default("%{public}@: Sending RSv3 time information. Data: %{public}@", #function, data.base64EncodedString())
         self.writeQ(data)
     }
     
@@ -261,28 +261,28 @@ extension PeripheralManager {
     private func sendPairingRequest() {
         let data = DanaRSEncryption.encodePacket(operationCode: DanaPacketType.OPCODE_ENCRYPTION__PASSKEY_REQUEST, buffer: nil, deviceName: self.deviceName)
         
-        log.debug("%{public}@: Sending pairing request. Data: %{public}@", #function, data.base64EncodedString())
+        log.default("%{public}@: Sending pairing request. Data: %{public}@", #function, data.base64EncodedString())
         self.writeQ(data)
     }
     
     private func sendEasyMenuCheck() {
         let data = DanaRSEncryption.encodePacket(operationCode: DanaPacketType.OPCODE_ENCRYPTION__GET_EASYMENU_CHECK, buffer: nil, deviceName: self.deviceName)
         
-        log.debug("%{public}@: Sending easy menu check. Data: %{public}@", #function, data.base64EncodedString())
+        log.default("%{public}@: Sending easy menu check. Data: %{public}@", #function, data.base64EncodedString())
         self.writeQ(data)
     }
     
     private func sendBLE5PairingInformation() {
         let data = DanaRSEncryption.encodePacket(operationCode: DanaPacketType.OPCODE_ENCRYPTION__TIME_INFORMATION, buffer: Data([0, 0, 0, 0]), deviceName: self.deviceName)
         
-        log.debug("%{public}@: Sending BLE5 time information. Data: %{public}@", #function, Data([0, 0, 0, 0]).base64EncodedString())
+        log.default("%{public}@: Sending BLE5 time information. Data: %{public}@", #function, Data([0, 0, 0, 0]).base64EncodedString())
         self.writeQ(data)
     }
     
     private func sendPassKeyCheck(_ pairingKey: Data) {
         let data = DanaRSEncryption.encodePacket(operationCode: DanaPacketType.OPCODE_ENCRYPTION__CHECK_PASSKEY, buffer: pairingKey, deviceName: self.deviceName)
         
-        log.debug("%{public}@: Sending Passkey check. Data: %{public}@", #function, data.base64EncodedString())
+        log.default("%{public}@: Sending Passkey check. Data: %{public}@", #function, data.base64EncodedString())
         self.writeQ(data)
     }
     
@@ -328,7 +328,7 @@ extension PeripheralManager {
         if (data.count == 4 && self.isOk(data)) {
             // response OK v1
             self.encryptionMode = .DEFAULT
-            log.debug("%{public}@: Setting encryption mode to DEFAULT", #function)
+            log.default("%{public}@: Setting encryption mode to DEFAULT", #function)
             
             self.pumpManager.state.ignorePassword = false;
             
@@ -341,7 +341,7 @@ extension PeripheralManager {
         } else if (data.count == 9 && self.isOk(data)) {
             // response OK v3, 2nd layer encryption
             self.encryptionMode = .RSv3
-            log.debug("%{public}@: Setting encryption mode to RSv3", #function)
+            log.default("%{public}@: Setting encryption mode to RSv3", #function)
             
             self.pumpManager.state.ignorePassword = true;
             
@@ -362,7 +362,7 @@ extension PeripheralManager {
             }
         } else if (data.count == 14 && self.isOk(data)) {
             self.encryptionMode = .BLE_5
-            log.debug("%{public}@: Setting encryption mode to BLE5", #function)
+            log.default("%{public}@: Setting encryption mode to BLE5", #function)
             
             self.pumpManager.state.hwModel = data[5]
             self.pumpManager.state.pumpProtocol = data[7]
@@ -629,11 +629,11 @@ extension PeripheralManager {
             return
           }
         
-        log.debug("%{public}@: Received message! Starting to decrypt data: %{public}@", #function, self.readBuffer.base64EncodedString())
+        log.default("%{public}@: Received message! Starting to decrypt data: %{public}@", #function, self.readBuffer.base64EncodedString())
         let decryptedData = DanaRSEncryption.decodePacket(buffer: self.readBuffer, deviceName: self.deviceName)
         self.readBuffer = Data([])
         
-        log.debug("%{public}@: Decoding successful! Data: %{public}@", #function, decryptedData.base64EncodedString())
+        log.default("%{public}@: Decoding successful! Data: %{public}@", #function, decryptedData.base64EncodedString())
         if (decryptedData[0] == DanaPacketType.TYPE_ENCRYPTION_RESPONSE) {
             switch(decryptedData[1]) {
             case DanaPacketType.OPCODE_ENCRYPTION__PUMP_CHECK:

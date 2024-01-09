@@ -151,7 +151,7 @@ class DanaKitDebugViewModel : ObservableObject {
 
 extension DanaKitDebugViewModel: StateObserver {
     func deviceScanDidUpdate(_ device: DanaPumpScan) {
-        log.debug("Found device %{public}@", device.name)
+        log.default("Found device %{public}@", device.name)
         self.scannedDevices.append(device)
         
         messageScanAlert = "Do you want to connect to: " + device.name + " (" + device.bleIdentifier + ")"

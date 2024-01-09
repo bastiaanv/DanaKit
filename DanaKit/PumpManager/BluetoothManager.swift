@@ -146,7 +146,7 @@ extension BluetoothManager : CBCentralManagerDelegate {
         }
         
         dispatchPrecondition(condition: .onQueue(managerQueue))
-        log.debug("%{public}@: %{public}@, %{public}@", #function, peripheral, advertisementData)
+        log.default("%{public}@: %{public}@, %{public}@", #function, peripheral, advertisementData)
         
         if self.autoConnectUUID != nil && peripheral.identifier.uuidString == self.autoConnectUUID {
             self.stopScan()
@@ -169,7 +169,7 @@ extension BluetoothManager : CBCentralManagerDelegate {
         
         let view = self.view ?? UIApplication.shared.delegate!.window!!.rootViewController!
         
-        log.debug("%{public}@: %{public}@", #function, peripheral)
+        log.default("%{public}@: %{public}@", #function, peripheral)
         self.peripheral = peripheral
         self.peripheralManager = PeripheralManager(peripheral, self, self.pumpManagerDelegate!, view, self.connectionCompletion)
         
