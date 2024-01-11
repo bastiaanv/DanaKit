@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import LoopKit
 import LoopKitUI
 
 typealias DebugFunction = () -> Void
@@ -15,6 +16,7 @@ struct DanaKitSetupView: View {
     
     let nextAction: () -> Void
     let debugAction: DebugFunction?
+    let automaticDosingStrategy: AutomaticDosingStrategy
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -24,6 +26,7 @@ struct DanaKitSetupView: View {
             }
             Spacer()
             continueButton
+                .disabled(automaticDosingStrategy == .tempBasalOnly)
                 .padding(.bottom)
         }
         .padding(.horizontal)
@@ -59,6 +62,8 @@ struct DanaKitSetupView: View {
         Text(LocalizedString("- For DanaRS-v1, set your pump password and the setup is completed!", comment: "danaRS v1 option text for DanaKitSetupView"))
         Text(LocalizedString("- For DanaRS-v3, type 2 sequences of numbers and letters displayed on the pump to pair and the setup is completed!", comment: "danaRS v3 option text for DanaKitSetupView"))
         Text(LocalizedString("- For Dana-i, the standard Bluetooth pairing pin dialog will appear. You have to enter a 6-digit number password, displayed on the pump, and the setup is completed!", comment: "dana-i option text for DanaKitSetupView"))
+        Text(LocalizedString("Note: Dana pumps only support Automatic Bolus as Dosing Strategy. If the continue button is disabled, please consider changing your strategy in the setting menu", comment: "dana AB limitation warning"))
+            .padding(.top, 10)
     }
     
     @ViewBuilder
