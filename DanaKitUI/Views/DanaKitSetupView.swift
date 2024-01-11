@@ -92,5 +92,5 @@ struct DanaKitSetupView: View {
 }
 
 #Preview {
-    DanaKitSetupView(nextAction: {}, debugAction: nil)
+    DanaKitSetupView(nextAction: {}, debugAction: nil, automaticDosingStrategy: .automaticBolus)
 }
