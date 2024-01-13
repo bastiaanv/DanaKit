@@ -8,7 +8,6 @@
 
 // TEMP logging
 import os.log
-let log = OSLog(category: "ENCRYPTION")
 // END TEMP
 
 let timeInformationEnhancedEncryption2Lookup: [UInt8] = [
@@ -69,6 +68,7 @@ struct EncryptSecondLevelParams {
 }
 
 func encryptSecondLevel(_ params: inout EncryptSecondLevelParams) -> (randomSyncKey: UInt8, buffer: Data) {
+    let log = OSLog(category: "ENCRYPTION")
     var updatedRandomSyncKey = params.randomSyncKey
 
     if params.enhancedEncryption == 1 {
