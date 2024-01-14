@@ -19,33 +19,43 @@ struct DanaKitSetupView: View {
     let automaticDosingStrategy: AutomaticDosingStrategy
     
     var body: some View {
-        VStack(alignment: .leading) {
-            close
-            ScrollView {
-                content
-            }
-            Spacer()
-            continueButton
-                .disabled(automaticDosingStrategy == .tempBasalOnly)
-                .padding(.bottom)
-        }
-        .padding(.horizontal)
-        .navigationBarHidden(true)
-    }
-    
-    @ViewBuilder
-    private var content: some View {
-        VStack(alignment: .leading, spacing: 2) {
-            title
-                .padding(.top, 5)
-                .onLongPressGesture(minimumDuration: 2) {
-                    didLongPressOnTitle()
+        VStack(spacing: 0) {
+            VStack(alignment: .leading) {
+                close
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 2) {
+                        title
+                            .padding(.top, 5)
+                            .onLongPressGesture(minimumDuration: 2) {
+                                didLongPressOnTitle()
+                            }
+                        Divider()
+                        bodyText
+                            .foregroundColor(.secondary)
+                            .padding(.top)
+                    }
                 }
-            Divider()
-            bodyText
-                .foregroundColor(.secondary)
-                .padding(.top)
+            }
+            .padding(.horizontal)
+            Spacer()
+            VStack(spacing: 0) {
+                if automaticDosingStrategy == .tempBasalOnly {
+                    WarningView(
+                        title: Text(LocalizedString("Only Automatic Bolus is supported", comment: "dana AB limitation warning title")),
+                        caption: Text(LocalizedString("Please consider changing your dosing strategy in the setting menu", comment: "dana AB limitation warning body"))
+                    )
+                    .padding(.all)
+                }
+                continueButton
+                    .disabled(automaticDosingStrategy == .tempBasalOnly)
+                    .padding([.bottom, .horizontal])
+            }
+                .padding(.bottom, 10)
+                .background(Color(.secondarySystemGroupedBackground)
+                .shadow(radius: 5))
         }
+        .edgesIgnoringSafeArea(.bottom)
+        .navigationBarHidden(true)
     }
 
     @ViewBuilder
@@ -62,7 +72,6 @@ struct DanaKitSetupView: View {
         Text(LocalizedString("- For DanaRS-v1, set your pump password and the setup is completed!", comment: "danaRS v1 option text for DanaKitSetupView"))
         Text(LocalizedString("- For DanaRS-v3, type 2 sequences of numbers and letters displayed on the pump to pair and the setup is completed!", comment: "danaRS v3 option text for DanaKitSetupView"))
         Text(LocalizedString("- For Dana-i, the standard Bluetooth pairing pin dialog will appear. You have to enter a 6-digit number password, displayed on the pump, and the setup is completed!", comment: "dana-i option text for DanaKitSetupView"))
-        Text(LocalizedString("Note: Dana pumps only support Automatic Bolus as Dosing Strategy. If the continue button is disabled, please consider changing your strategy in the setting menu", comment: "dana AB limitation warning"))
             .padding(.top, 10)
     }
     

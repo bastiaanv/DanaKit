@@ -66,9 +66,7 @@ public class DanaKitPumpManager: DeviceManager {
     public var debugDescription: String {
         let lines = [
             "## DanaKitPumpManager",
-            state.debugDescription,
-            "#### DanaKit logs:",
-            log.getDebugLogs()
+            state.debugDescription
         ]
         return lines.joined(separator: "\n")
     }
@@ -188,6 +186,8 @@ extension DanaKitPumpManager: PumpManager {
                     } catch {
                         completion?(nil)
                     }
+                    
+                    self.disconnect()
                 }
             }
         }
@@ -233,6 +233,8 @@ extension DanaKitPumpManager: PumpManager {
                         self.log.error("%{public}@: Failed to do bolus. Error: %{public}@", #function, error.localizedDescription)
                         completion(PumpManagerError.connection(DanaKitPumpManagerError.noConnection))
                     }
+                    
+                    self.disconnect()
                 }
             }
         }
@@ -259,6 +261,8 @@ extension DanaKitPumpManager: PumpManager {
                     } catch {
                         completion(.failure(PumpManagerError.communication(DanaKitPumpManagerError.noConnection)))
                     }
+                    
+                    self.disconnect()
                 }
             }
         }
@@ -337,6 +341,8 @@ extension DanaKitPumpManager: PumpManager {
                     } catch {
                         completion(PumpManagerError.communication(DanaKitPumpManagerError.noConnection))
                     }
+                    
+                    self.disconnect()
                 }
             }
         }
@@ -363,6 +369,8 @@ extension DanaKitPumpManager: PumpManager {
                     } catch {
                         completion(PumpManagerError.communication(DanaKitPumpManagerError.noConnection))
                     }
+                    
+                    self.disconnect()
                 }
             }
         }
@@ -395,6 +403,8 @@ extension DanaKitPumpManager: PumpManager {
                     } catch {
                         completion(.failure(PumpManagerError.communication(DanaKitPumpManagerError.noConnection)))
                     }
+                    
+                    self.disconnect()
                 }
             }
         }
@@ -471,6 +481,12 @@ extension DanaKitPumpManager: PumpManager {
         } else {
             log.error("%{public}@: Pump is not onboarded", #function)
             completion(.failure)
+        }
+    }
+    
+    private func disconnect() {
+        if DanaKitPumpManager.bluetoothManager.isConnected {
+            DanaKitPumpManager.bluetoothManager.disconnect(DanaKitPumpManager.bluetoothManager.peripheral!)
         }
     }
 }

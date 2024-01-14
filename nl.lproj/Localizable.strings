@@ -115,5 +115,8 @@
 /* Error description when failed basal adjustment */
 "Failed to adjust basal" = "Aanpassing basaal is mislukt"
 
-/* dana AB limitation warning */
-"Note: Dana pumps only support Automatic Bolus as Dosing Strategy. If the continue button is disabled, please consider changing your strategy in the setting menu" = "Let op: Dana-pompen ondersteunen alleen automatische bolus als doseringsstrategie. Als de knop Doorgaan uitgeschakeld is, kunt u overwegen uw strategie te wijzigen in het instellingenmenu"
+/* dana AB limitation warning title */
+"Only Automatic Bolus is supported" = "Alleen automatische bolus wordt ondersteunt"
+
+/* dana AB limitation warning body */
+"Please consider changing your dosing strategy in the setting menu" = "Overweeg uw dosering strategie te wijzigen in het instellingenmenu"

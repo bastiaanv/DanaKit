@@ -57,11 +57,11 @@ class DanaKitScanViewModel : ObservableObject {
         
         self.stopScan()
         
-        self.pumpManager?.connect(device, view, self.connectComplete)
+        self.pumpManager?.connect(device, view, { error in self.connectComplete(error, device) })
         self.isConnecting = true
     }
     
-    func connectComplete(_ error: Error?) {
+    func connectComplete(_ error: Error?, _ peripheral: CBPeripheral) {
         self.isConnecting = false
         
         guard error == nil else {
@@ -69,6 +69,7 @@ class DanaKitScanViewModel : ObservableObject {
             return
         }
         
+        self.pumpManager?.disconnect(peripheral)
         self.nextStep()
     }
     

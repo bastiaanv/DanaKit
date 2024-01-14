@@ -15,6 +15,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
     public init(rawValue: RawValue) {
         self.lastStatusDate = rawValue["lastStatusDate"] as? Date ?? Date()
         self.deviceName = rawValue["deviceName"] as? String
+        self.bleIdentifier = rawValue["bleIdentifier"] as? String
         self.isConnected = false // To prevent having an old isConnected state
         self.reservoirLevel = rawValue["reservoirLevel"] as? Double ?? 0
         self.hwModel = rawValue["hwModel"] as? UInt8 ?? 0
