@@ -9,7 +9,6 @@
 import UIKit
 import SwiftUI
 import Combine
-import Loop
 import LoopKit
 import LoopKitUI
 
