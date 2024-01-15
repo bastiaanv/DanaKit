@@ -151,7 +151,7 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
             let view = DanaKitSetupCompleteView(finish: nextStep, friendlyPumpModelName: self.pumpManager?.state.getFriendlyDeviceName() ?? "", imageName: getDanaPumpImageName())
             return hostingController(rootView: view)
         case .settings:
-            let view = DanaKitSettingsView(viewModel: DanaKitSettingsViewModel(self.pumpManager, self.stepFinished), imageName: getDanaPumpImageName())
+            let view = DanaKitSettingsView(viewModel: DanaKitSettingsViewModel(self.pumpManager, self.stepFinished), supportedInsulinTypes: self.allowedInsulinTypes, imageName: getDanaPumpImageName())
             return hostingController(rootView: view)
         }
     }

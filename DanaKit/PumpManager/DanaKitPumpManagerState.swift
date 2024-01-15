@@ -111,6 +111,24 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         }
     }
     
+    public var batteryRemaining: Double = 0  {
+        didSet {
+            lastStatusDate = Date()
+        }
+    }
+    
+    public var isPumpSuspended: Bool = false  {
+        didSet {
+            lastStatusDate = Date()
+        }
+    }
+    
+    public var isTempBasalInProgress: Bool = false {
+        didSet {
+            lastStatusDate = Date()
+        }
+    }
+    
     public var insulinType: InsulinType? = nil
     
     /// The pump should be in history fetch mode, before requesting history data

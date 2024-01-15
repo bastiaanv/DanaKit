@@ -38,7 +38,7 @@
 "Delete pump" = "Delete pump"
 
 /* Label for PumpManager deletion button */
-"Switch to other insulin delivery device" = "Switch to other insulin delivery device"
+"Delete Pump" = "Delete Pump"
 
 /* Connection error message */
 "Error while connecting to device" = "Error while connecting to device"
@@ -114,3 +114,33 @@
 
 /* dana AB limitation warning body */
 "Please consider changing your dosing strategy in the setting menu" = "Please consider changing your dosing strategy in the setting menu"
+
+/* Dana settings resume delivery */
+"Resume delivery" = "Resume delivery"
+
+/* Dana settings suspend delivery */
+"Suspend delivery" = "Suspend delivery"
+
+/* Dana settings stop temp basal */
+"Stop temp basal" = "Stop temp basal"
+
+/* Text for confidence reminders navigation link */
+"Insulin Type" = "Insulin Type"
+
+/* Title of insulin delivery section */
+"Scheduled Basal" = "Scheduled Basal";
+
+/* Title of insulin delivery section */
+"Insulin Delivery" = "Insulin Delivery";
+
+/* Text shown in insulin delivery space when insulin suspended */
+"Insulin\nSuspended" = "Insulin\nSuspended";
+
+/* Text shown in basal rate space when delivery status is unknown */
+"Unknown" = "Unknown";
+
+/* Units for showing temp basal rate */
+"U/hr" = "U/hr";
+
+/* Header for insulin remaining on pod settings screen */
+"Insulin Remaining" = "Insulin Remaining";

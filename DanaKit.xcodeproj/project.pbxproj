@@ -85,6 +85,7 @@
 		B8360AEB2B2B95B000152188 /* EncryptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8360AEA2B2B95B000152188 /* EncryptionManager.swift */; };
 		B83815C82B322B0800627125 /* DanaKitDebugViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83815C72B322B0800627125 /* DanaKitDebugViewModel.swift */; };
 		B83815CA2B34C8CA00627125 /* PeripheralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83815C92B34C8CA00627125 /* PeripheralManager.swift */; };
+		B85335D82B55D3A900DB470A /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85335D72B55D3A900DB470A /* NumberFormatter.swift */; };
 		B85418A82B20F46200C3B4D0 /* Lookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85418A72B20F46200C3B4D0 /* Lookup.swift */; };
 		B85418AA2B20F52200C3B4D0 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85418A92B20F52200C3B4D0 /* Common.swift */; };
 		B85418AC2B20F6B700C3B4D0 /* CommonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85418AB2B20F6B700C3B4D0 /* CommonTests.swift */; };
@@ -248,6 +249,7 @@
 		B8360AEA2B2B95B000152188 /* EncryptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptionManager.swift; sourceTree = "<group>"; };
 		B83815C72B322B0800627125 /* DanaKitDebugViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanaKitDebugViewModel.swift; sourceTree = "<group>"; };
 		B83815C92B34C8CA00627125 /* PeripheralManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralManager.swift; sourceTree = "<group>"; };
+		B85335D72B55D3A900DB470A /* NumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatter.swift; sourceTree = "<group>"; };
 		B85418A72B20F46200C3B4D0 /* Lookup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lookup.swift; sourceTree = "<group>"; };
 		B85418A92B20F52200C3B4D0 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		B85418AB2B20F6B700C3B4D0 /* CommonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTests.swift; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 				B88516942B30C7170063402A /* NibLoadable.swift */,
 				B8FF96192B4305A300C14280 /* NavigationLink.swift */,
 				B8F8D2C42B54601F003BF384 /* PersistenceController.swift */,
+				B85335D72B55D3A900DB470A /* NumberFormatter.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -812,6 +815,7 @@
 				B8360A722B2601D600152188 /* DanaBasalCancelTemporary.swift in Sources */,
 				B85418B02B20F77900C3B4D0 /* Encrypt.swift in Sources */,
 				B8360A7A2B263CD400152188 /* DanaBasalSetProfileRate.swift in Sources */,
+				B85335D82B55D3A900DB470A /* NumberFormatter.swift in Sources */,
 				B8360A822B263ED700152188 /* DanaBolusCancelExtended.swift in Sources */,
 				B8360AA12B2A26EB00152188 /* DanaGeneralGetInitialScreenInformation.swift in Sources */,
 				B864F7A22B49EF3800C503A2 /* DanaKitSetupCompleteView.swift in Sources */,

@@ -44,7 +44,7 @@
 "Delete pump" = "Verwijder pomp"
 
 /* Label for PumpManager deletion button */
-"Switch to other insulin delivery device" = "Schakel over naar een ander insuline pump"
+"Delete Pump" = "Verwijder insuline pump"
 
 /* Connection error message */
 "Error while connecting to device" = "Fout tijdens het verbinden met het apparaat"
@@ -120,3 +120,36 @@
 
 /* dana AB limitation warning body */
 "Please consider changing your dosing strategy in the setting menu" = "Overweeg uw dosering strategie te wijzigen in het instellingenmenu"
+
+/* Dana settings resume delivery */
+"Resume delivery" = "Hervat toedieningen"
+
+/* Dana settings suspend delivery */
+"Suspend delivery" = "Pauzeer toedieningen"
+
+/* Dana settings stop temp basal */
+"Stop temp basal" = "Stop tijdelijke basaal"
+
+/* The title of the configuration section in DanaKit settings */
+"Configuration" = "Configuratie"
+
+/* Text for confidence reminders navigation link */
+"Insulin Type" = "Insuline type"
+
+/* Title of insulin delivery section */
+"Scheduled Basal" = "Ingesteld Basaal";
+
+/* Title of insulin delivery section */
+"Insulin Delivery" = "Insulinetoediening";
+
+/* Text shown in insulin delivery space when insulin suspended */
+"Insulin\nSuspended" = "Insuline\nOnderbroken";
+
+/* Text shown in basal rate space when delivery status is unknown */
+"Unknown" = "Onbekend";
+
+/* Units for showing temp basal rate */
+"U/hr" = "E/uur";
+
+/* Header for insulin remaining on pod settings screen */
+"Insulin Remaining" = "Resterende Insuline";

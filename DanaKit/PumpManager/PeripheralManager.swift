@@ -563,6 +563,9 @@ extension PeripheralManager {
             }
             
             self.pumpManager.state.reservoirLevel = data.reservoirRemainingUnits
+            self.pumpManager.state.batteryRemaining = data.batteryRemaining
+            self.pumpManager.state.isPumpSuspended = data.isPumpSuspended
+            self.pumpManager.state.isTempBasalInProgress = data.isTempBasalInProgress
             self.pumpManager.currentBaseBasalRate = data.currentBasal
             self.pumpManager.notifyStateDidChange()
             
