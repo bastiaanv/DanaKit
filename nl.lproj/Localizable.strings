@@ -8,7 +8,7 @@
 "You will now begin the process by connecting to your Dana-i/RS pump. After that, one of the three things can happen:" = "U begint nu het proces door verbinding te maken met uw Dana-i/RS-pomp. Daarna kan een van de drie dingen gebeuren:"
 
 /* danaRS v1 option text for DanaKitSetupView */
-"- For DanaRS-v1, set your pump password and the setup is completed!" = "- Voor DanaRS-v1, voer uw pomp wachtwoord in en de installatie is voltooid!"
+"- For DanaRS-v1, Unsupported (yet)" = "- Voor DanaRS-v1, wordt (nog) niet ondersteunt"
 
 /* danaRS v3 option text for DanaKitSetupView */
 "- For DanaRS-v3, type 2 sequences of numbers and letters displayed on the pump to pair and the setup is completed!" = "- Voor DanaRS-v3, typt u 2 reeksen cijfers en letters die op de pomp worden weergegeven om te koppelen en de installatie is voltooid!"
@@ -115,6 +115,9 @@
 /* Error description when failed basal adjustment */
 "Failed to adjust basal" = "Aanpassing basaal is mislukt"
 
+/* Error description when trying to set temp basal */
+"Setting temp basal is not supported at this time" = "Het zetten van een tijdelijk basaal wordt momenteel nog niet ondersteunt"
+
 /* dana AB limitation warning title */
 "Only Automatic Bolus is supported" = "Alleen automatische bolus wordt ondersteunt"
 
@@ -162,3 +165,4 @@
 
 /* Text for firmware version */
 "Firmware version" = "Firmware versie"
+

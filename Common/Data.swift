@@ -49,6 +49,14 @@ extension Data {
         let min = Int(self[startIndex + 4])
         let sec = Int(self[startIndex + 5])
 
-        return Calendar.current.date(bySetting: .year, value: year, of: Date()) ?? Date()
+        var components = DateComponents()
+        components.year = year
+        components.month = month
+        components.day = day
+        components.hour = hour
+        components.minute = min
+        components.second = sec
+
+        return Calendar(identifier: .gregorian).date(from: components)!
     }
 }

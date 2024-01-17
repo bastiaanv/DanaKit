@@ -8,7 +8,7 @@
 "You will now begin the process by connecting to your Dana-i/RS pump. After that, one of the three things can happen:" = "You will now begin the process by connecting to your Dana-i/RS pump. After that, one of the three things can happen:"
 
 /* danaRS v1 option text for DanaKitSetupView */
-"- For DanaRS-v1, set your pump password and the setup is completed!" = "- For DanaRS-v1, set your pump password and the setup is completed!"
+"- For DanaRS-v1, Unsupported (yet)" = "- For DanaRS-v1, Unsupported (yet)"
 
 /* danaRS v3 option text for DanaKitSetupView */
 "- For DanaRS-v3, type 2 sequences of numbers and letters displayed on the pump to pair and the setup is completed!" = "- For DanaRS-v3, type 2 sequences of numbers and letters displayed on the pump to pair and the setup is completed!"
@@ -108,6 +108,9 @@
 
 /* Error description when failed basal adjustment */
 "Failed to adjust basal" = "Failed to adjust basal"
+
+/* Error description when trying to set temp basal */
+"Setting temp basal is not supported at this time" = "Setting temp basal is not supported at this time"
 
 /* dana AB limitation warning title */
 "Only Automatic Bolus is supported" = "Only Automatic Bolus is supported"

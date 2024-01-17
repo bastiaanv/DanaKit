@@ -69,7 +69,7 @@ struct DanaKitSetupView: View {
     @ViewBuilder
     private var bodyText: some View {
         Text(LocalizedString("You will now begin the process by connecting to your Dana-i/RS pump. After that, one of the three things can happen:", comment: "bodyText for DanaKitSetupView"))
-        Text(LocalizedString("- For DanaRS-v1, set your pump password and the setup is completed!", comment: "danaRS v1 option text for DanaKitSetupView"))
+        Text(LocalizedString("- For DanaRS-v1, Unsupported (yet)", comment: "danaRS v1 option text for DanaKitSetupView"))
         Text(LocalizedString("- For DanaRS-v3, type 2 sequences of numbers and letters displayed on the pump to pair and the setup is completed!", comment: "danaRS v3 option text for DanaKitSetupView"))
         Text(LocalizedString("- For Dana-i, the standard Bluetooth pairing pin dialog will appear. You have to enter a 6-digit number password, displayed on the pump, and the setup is completed!", comment: "dana-i option text for DanaKitSetupView"))
             .padding(.top, 10)

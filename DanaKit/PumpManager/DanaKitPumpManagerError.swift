@@ -12,6 +12,7 @@ public enum DanaKitPumpManagerError {
     case failedSuspensionAdjustment
     case failedBasalGeneration
     case failedBasalAdjustment
+    case unsupportedTempBasal
 }
 
 
@@ -28,6 +29,8 @@ extension DanaKitPumpManagerError: LocalizedError {
             return LocalizedString("Failed to generate Dana basal program", comment: "Error description when failed generating basal program")
         case .failedBasalAdjustment:
             return LocalizedString("Failed to adjust basal", comment: "Error description when failed basal adjustment")
+        case .unsupportedTempBasal:
+            return LocalizedString("Setting temp basal is not supported at this time", comment: "Error description when trying to set temp basal")
         }
     }
 }

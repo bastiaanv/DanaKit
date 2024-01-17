@@ -269,8 +269,8 @@ extension DanaKitPumpManager: PumpManager {
     }
     
     /// NOTE: There are 2 ways to set a temp basal:
-    /// - The normal way (which only accepts full hours)
-    /// - A short APS-special temp basal command (which only accepts 15 (only above 100%) or 30 min (only below 100%)
+    /// - The normal way (which only accepts full hours and percentages)
+    /// - A short APS-special temp basal command (which only accepts 15 min (only above 100%) or 30 min (only below 100%)
     /// TODO: Need to discuss what to do here / how to make this work within the Loop algorithm AND if the convertion from absolute to percentage is acceptable
     public func enactTempBasal(unitsPerHour: Double, for duration: TimeInterval, completion: @escaping (PumpManagerError?) -> Void) {
         self.ensureConnected { result in
@@ -295,25 +295,7 @@ extension DanaKitPumpManager: PumpManager {
                             completion(PumpManagerError.communication(nil))
                         }
                     } else {
-                        do {
-                            var tempBasalPercentage: UInt16 = 0
-                            // Any basal less than 0.10u/h will be dumped once per hour. So if it's less than .10u/h, set a zero temp.
-                            if (unitsPerHour >= 0.1) {
-                                tempBasalPercentage = UInt16(ceil(unitsPerHour / self.currentBaseBasalRate * 100))
-                            }
-                            
-                            let packet = generatePacketLoopSetTemporaryBasal(options: PacketLoopSetTemporaryBasal(percent: tempBasalPercentage))
-                            let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
-                            
-                            if (!result.success) {
-                                completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedTempBasalAdjustment))
-                                return
-                            }
-                            
-                            completion(nil)
-                        } catch {
-                            completion(PumpManagerError.communication(nil))
-                        }
+                        completion(PumpManagerError.configuration(DanaKitPumpManagerError.unsupportedTempBasal))
                     }
                 }
             }
