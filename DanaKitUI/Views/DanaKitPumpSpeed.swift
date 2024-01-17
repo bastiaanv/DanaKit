@@ -40,7 +40,7 @@ struct DanaKitPumpSpeed: View {
             Divider()
             ResizeablePicker(selection: $speedDefault,
                                      data: self.speedsAllowed,
-                                     formatter: { formatter($0) })
+                             formatter: { BolusSpeed.init(rawValue: UInt8($0))!.format() })
             Spacer()
             VStack {
                 Button(action: {
@@ -65,21 +65,6 @@ struct DanaKitPumpSpeed: View {
         Text(LocalizedString("Delivery speed", comment: "Title for delivery speed"))
             .font(.title)
             .bold()
-    }
-    
-    func formatter(_ speedOrdinal: Int) -> String {
-        guard let speed = BolusSpeed(rawValue: UInt8(speedOrdinal)) else {
-            return ""
-        }
-        
-        switch(speed) {
-        case .speed12:
-            return LocalizedString("12 U/min", comment: "Dana bolus speed 12u per min")
-        case .speed30:
-            return LocalizedString("30 U/min", comment: "Dana bolus speed 30u per min")
-        case .speed60:
-            return LocalizedString("60 U/min", comment: "Dana bolus speed 60u per min")
-        }
     }
 }
 

@@ -144,3 +144,12 @@
 
 /* Header for insulin remaining on pod settings screen */
 "Insulin Remaining" = "Insulin Remaining";
+
+/* Text for Dana pump name */
+"Pump name" = "Pump name"
+
+/* Text for hardware model */
+"Hardware model" = "Hardware model"
+
+/* Text for firmware version */
+"Firmware version" = "Firmware version"

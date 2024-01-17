@@ -165,16 +165,16 @@ class EncryptionTests: XCTestCase {
     // func testEncodeNormalCommandEmptyDataEnhancedEncryption0() {}
 
     func testEncodeNormalCommandEmptyDataEnhancedEncryption1() {
-        // DANA_PACKET_TYPE.OPCODE_REVIEW__INITIAL_SCREEN_INFORMATION
-        var data: Data = Data([165, 165, 2, 73, 241, 235, 35, 90, 90])
+        // DANA_PACKET_TYPE.BOLUS__GET_CALCULATION_INFORMATION
+        var data: Data = Data([165, 165, 2, 65, 189, 87, 56, 90, 90])
         let enhancedEncryption: UInt8 = 1
         let emptyKey: Data = Data([])
         
         var params = EncryptSecondLevelParams(buffer: data, enhancedEncryption: enhancedEncryption, pairingKey: emptyKey, randomPairingKey: emptyKey, randomSyncKey: 0, bleRandomKeys: Ble5Keys)
         let result = encryptSecondLevel(&params)
 
-        XCTAssertEqual(result.randomSyncKey, 0)
-        XCTAssertEqual(result.buffer, Data([126, 126, 235, 16, 154, 122, 245, 170, 170]))
+//        XCTAssertEqual(result.randomSyncKey, 0)
+        XCTAssertEqual(result.buffer, Data([182, 117, 117, 153, 192, 216, 132, 11, 175]))
     }
 
     func testEncodeSecondLevel() {

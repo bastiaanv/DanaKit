@@ -13,6 +13,7 @@ import LoopKitUI
 struct DanaKitSettingsView: View {
     @Environment(\.guidanceColors) private var guidanceColors
     @Environment(\.dismissAction) private var dismiss
+    @Environment(\.insulinTintColor) var insulinTintColor
     
     @ObservedObject var viewModel: DanaKitSettingsViewModel
     
@@ -33,11 +34,15 @@ struct DanaKitSettingsView: View {
     var body: some View {
         List {
             Section() {
-                Image(uiImage: UIImage(named: imageName, in: Bundle(for: DanaKitHUDProvider.self), compatibleWith: nil)!)
-                    .resizable()
-                    .scaledToFit()
-                    .padding(.horizontal)
-                    .frame(height: 200)
+                HStack(){
+                    Spacer()
+                    Image(uiImage: UIImage(named: imageName, in: Bundle(for: DanaKitHUDProvider.self), compatibleWith: nil)!)
+                        .resizable()
+                        .scaledToFit()
+                        .padding(.horizontal)
+                        .frame(height: 200)
+                    Spacer()
+                }
                 
                 HStack(alignment: .top) {
                     deliveryStatus
@@ -64,6 +69,36 @@ struct DanaKitSettingsView: View {
                         Text(viewModel.insulineType.brandName)
                             .foregroundColor(.secondary)
                         }
+                }
+                NavigationLink(destination: DanaKitSettingsPumpSpeed(currentSpeed: Int(viewModel.bolusSpeed.rawValue), didChange: viewModel.didBolusSpeedChanged)) {
+                    HStack {
+                        Text(LocalizedString("Delivery speed", comment: "Title for delivery speed")).foregroundColor(Color.primary)
+                        Spacer()
+                        Text(viewModel.bolusSpeed.format())
+                            .foregroundColor(.secondary)
+                        }
+                }
+            }
+            
+            Section(header: SectionHeader(label: LocalizedString("Configuration", comment: "The title of the configuration section in DanaKit settings")))
+            {
+                HStack {
+                    Text(LocalizedString("Pump name", comment: "Text for Dana pump name")).foregroundColor(Color.primary)
+                    Spacer()
+                    Text(viewModel.deviceName ?? "")
+                        .foregroundColor(.secondary)
+                }
+                HStack {
+                    Text(LocalizedString("Hardware model", comment: "Text for hardware model")).foregroundColor(Color.primary)
+                    Spacer()
+                    Text(String(viewModel.hardwareModel ?? 0))
+                        .foregroundColor(.secondary)
+                }
+                HStack {
+                    Text(LocalizedString("Firmware version", comment: "Text for firmware version")).foregroundColor(Color.primary)
+                    Spacer()
+                    Text(String(viewModel.firmwareVersion ?? 0))
+                        .foregroundColor(.secondary)
                 }
             }
             
@@ -94,19 +129,17 @@ struct DanaKitSettingsView: View {
         VStack(alignment: .leading, spacing: 5) {
             Text(LocalizedString("Insulin Remaining", comment: "Header for insulin remaining on pod settings screen"))
                 .foregroundColor(Color(UIColor.secondaryLabel))
-//            if let reservoirReading = viewModel.reservoirReading,
-//               let reservoirLevelHighlightState = viewModel.reservoirLevelHighlightState,
-//               let reservoirPercent = viewModel.reservoirPercentage
-//            {
-//                HStack {
-//                    MinimedReservoirView(filledPercent: reservoirPercent, fillColor: reservoirColor(for: reservoirLevelHighlightState))
-//                        .frame(width: 23, height: 32)
-//                    Text(viewModel.reservoirText(for: reservoirReading.units))
-//                        .font(.system(size: 28))
-//                        .fontWeight(.heavy)
-//                        .fixedSize()
-//                }
-//            }
+            if let reservoirLevel = viewModel.reservoirLevel
+            {
+                HStack {
+                    ReservoirView(reservoirLevel: reservoirLevel, fillColor: reservoirColor(reservoirLevel))
+                        .frame(width: 23, height: 32)
+                    Text(viewModel.reservoirText(for: reservoirLevel))
+                        .font(.system(size: 28))
+                        .fontWeight(.heavy)
+                        .fixedSize()
+                }
+            }
         }
     }
     
@@ -155,6 +188,18 @@ struct DanaKitSettingsView: View {
         } else {
             return LocalizedString("Insulin Delivery", comment: "Title of insulin delivery section")
         }
+    }
+    
+    private func reservoirColor(_ reservoirLevel: Double) -> Color {
+        if reservoirLevel > viewModel.reservoirLevelWarning {
+            return insulinTintColor
+        }
+        
+        if reservoirLevel > 0 {
+            return guidanceColors.warning
+        }
+        
+        return guidanceColors.critical
     }
 }
 

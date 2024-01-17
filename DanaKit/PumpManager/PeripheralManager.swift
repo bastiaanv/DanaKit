@@ -348,6 +348,9 @@ extension PeripheralManager {
             self.pumpManager.state.hwModel = data[5]
             self.pumpManager.state.pumpProtocol = data[7]
             
+            // TODO: Inject or store the randomSyncKey somewhere
+//            DanaRSEncryption.setPairingKeys(pairingKey: nil, randomPairingKey: nil, randomSyncKey: data[data.count - 1])
+            
             if (self.pumpManager.state.hwModel == 0x05) {
                 self.sendV3PairingInformationEmpty()
             } else if (self.pumpManager.state.hwModel == 0x06) {

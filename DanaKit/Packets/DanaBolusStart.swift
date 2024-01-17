@@ -14,6 +14,17 @@ public enum BolusSpeed: UInt8 {
     static func all() -> [Int] {
         return [Int(BolusSpeed.speed12.rawValue), Int(BolusSpeed.speed30.rawValue), Int(BolusSpeed.speed60.rawValue)]
     }
+    
+    func format() -> String {
+        switch(self) {
+        case .speed12:
+            return LocalizedString("12 U/min", comment: "Dana bolus speed 12u per min")
+        case .speed30:
+            return LocalizedString("30 U/min", comment: "Dana bolus speed 30u per min")
+        case .speed60:
+            return LocalizedString("60 U/min", comment: "Dana bolus speed 60u per min")
+        }
+    }
 }
 
 struct PacketBolusStart {
