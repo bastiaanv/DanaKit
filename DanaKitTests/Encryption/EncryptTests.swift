@@ -165,21 +165,62 @@ class EncryptionTests: XCTestCase {
     // func testEncodeNormalCommandEmptyDataEnhancedEncryption0() {}
 
     func testEncodeNormalCommandEmptyDataEnhancedEncryption1() {
-        // DANA_PACKET_TYPE.BOLUS__GET_CALCULATION_INFORMATION
-        var data: Data = Data([165, 165, 2, 65, 189, 87, 56, 90, 90])
+        // DANA_PACKET_TYPE.ETC__KEEP_CONNECTION
+        let data: Data = Data([165, 165, 2, 65, 9, 176, 75, 90, 90])
         let enhancedEncryption: UInt8 = 1
-        let emptyKey: Data = Data([])
+        let pairingKey = Data([237, 241, 117, 95, 135, 61])
+        let randomPairingKey = Data([181, 201, 65])
         
-        var params = EncryptSecondLevelParams(buffer: data, enhancedEncryption: enhancedEncryption, pairingKey: emptyKey, randomPairingKey: emptyKey, randomSyncKey: 0, bleRandomKeys: Ble5Keys)
+        let randomSyncKey = initialRandomSyncKey(pairingKey: pairingKey)
+        
+        var params = EncryptSecondLevelParams(buffer: data, enhancedEncryption: enhancedEncryption, pairingKey: pairingKey, randomPairingKey: randomPairingKey, randomSyncKey: randomSyncKey, bleRandomKeys: Ble5Keys)
         let result = encryptSecondLevel(&params)
 
-//        XCTAssertEqual(result.randomSyncKey, 0)
-        XCTAssertEqual(result.buffer, Data([182, 117, 117, 153, 192, 216, 132, 11, 175]))
+        XCTAssertEqual(result.randomSyncKey, 207)
+        XCTAssertEqual(result.buffer, Data([19, 203, 1, 47, 8, 203, 194, 168, 207]))
+    }
+    
+    func testEncodeNormalCommandEmptyDataEnhancedEncryption1MultipleMessages() {
+        // DANA_PACKET_TYPE.ETC__KEEP_CONNECTION
+        let dataKeepConnection: Data = Data([165, 165, 2, 65, 9, 176, 75, 90, 90])
+        let enhancedEncryption: UInt8 = 1
+        let pairingKey = Data([237, 241, 117, 95, 135, 61])
+        let randomPairingKey = Data([181, 201, 65])
+        
+        var randomSyncKey = initialRandomSyncKey(pairingKey: pairingKey)
+        
+        var paramsKeepConnection = EncryptSecondLevelParams(buffer: dataKeepConnection, enhancedEncryption: enhancedEncryption, pairingKey: pairingKey, randomPairingKey: randomPairingKey, randomSyncKey: randomSyncKey, bleRandomKeys: Ble5Keys)
+        let resultKeepConnection = encryptSecondLevel(&paramsKeepConnection)
+
+        XCTAssertEqual(resultKeepConnection.randomSyncKey, 207)
+        XCTAssertEqual(resultKeepConnection.buffer, Data([19, 203, 1, 47, 8, 203, 194, 168, 207]))
+        
+        randomSyncKey = resultKeepConnection.randomSyncKey
+        
+        // Decrypt ETC__KEEP_CONNECTION
+        let decryptKeepConnection = Data([83, 143, 118, 179, 100, 46, 5, 39, 50, 225])
+        
+        var paramsDecryptKeepConnection = DecryptSecondLevelParams(buffer: decryptKeepConnection, enhancedEncryption: enhancedEncryption, pairingKey: pairingKey, randomPairingKey: randomPairingKey, randomSyncKey: randomSyncKey, bleRandomKeys: Ble5Keys)
+        let resultDecryptKeepConnection = decryptSecondLevel(&paramsDecryptKeepConnection)
+        
+        XCTAssertEqual(resultDecryptKeepConnection.randomSyncKey, 225)
+        XCTAssertEqual(resultDecryptKeepConnection.buffer, Data([165, 165, 3, 82, 9, 136, 174, 2, 90, 90]))
+        
+        randomSyncKey = resultDecryptKeepConnection.randomSyncKey
+        
+        // DANA_PACKET_TYPE.REVIEW__GET_SHIPPING_INFORMATION
+        let dataGetShippingInformation: Data = Data([165, 165, 2, 65, 214, 138, 205, 90, 90])
+        
+        var paramsGetShippingInformation = EncryptSecondLevelParams(buffer: dataGetShippingInformation, enhancedEncryption: enhancedEncryption, pairingKey: pairingKey, randomPairingKey: randomPairingKey, randomSyncKey: randomSyncKey, bleRandomKeys: Ble5Keys)
+        let resultGetShippingInformation = encryptSecondLevel(&paramsGetShippingInformation)
+        
+        XCTAssertEqual(resultGetShippingInformation.randomSyncKey, 177)
+        XCTAssertEqual(resultGetShippingInformation.buffer, Data([70, 81, 52, 121, 145, 240, 177, 76, 177]))
     }
 
     func testEncodeSecondLevel() {
         // DANA_PACKET_TYPE.OPCODE_REVIEW__INITIAL_SCREEN_INFORMATION
-        var data: Data = Data([165, 165, 2, 73, 241, 235, 35, 90, 90])
+        let data: Data = Data([165, 165, 2, 73, 241, 235, 35, 90, 90])
         let enhancedEncryption: UInt8 = 2
         let emptyKey: Data = Data([])
 
