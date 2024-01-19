@@ -639,6 +639,11 @@ extension PeripheralManager {
         let decryptedData = DanaRSEncryption.decodePacket(buffer: self.readBuffer, deviceName: self.deviceName)
         self.readBuffer = Data([])
         
+        guard decryptedData.count > 0 else {
+            log.error("%{public}@: Decryption failed...", #function)
+            return
+        }
+        
         log.default("%{public}@: Decoding successful! Data: %{public}@", #function, decryptedData.base64EncodedString())
         if (decryptedData[0] == DanaPacketType.TYPE_ENCRYPTION_RESPONSE) {
             switch(decryptedData[1]) {

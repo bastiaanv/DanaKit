@@ -97,7 +97,7 @@ extension DanaKitPumpManager: PumpManager {
     public static var onboardingSupportedBasalRates: [Double] {
         // 0.05 units for rates between 0.00-3U/hr
         // 0 U/hr is a supported scheduled basal rate
-        return (0...30).map { Double($0) / 10 }
+        return (0...60).map { Double($0) / 20 }
     }
     
     public static var onboardingSupportedBolusVolumes: [Double] {
@@ -138,7 +138,8 @@ extension DanaKitPumpManager: PumpManager {
     }
     
     public var minimumBasalScheduleEntryDuration: TimeInterval {
-        return TimeInterval(30 * 60)
+        // One per hour
+        return TimeInterval(60 * 60)
     }
     
     public var pumpManagerDelegate: LoopKit.PumpManagerDelegate? {
@@ -179,16 +180,8 @@ extension DanaKitPumpManager: PumpManager {
                 completion?(nil)
                 return
             case .success:
-                Task {
-                    do {
-                        try await DanaKitPumpManager.bluetoothManager.updateInitialState()
-                        completion?(Date.now)
-                    } catch {
-                        completion?(nil)
-                    }
-                    
-                    self.disconnect()
-                }
+                // By connecting to the pump, the state gets updated
+                completion?(Date.now)
             }
         }
     }
@@ -376,6 +369,14 @@ extension DanaKitPumpManager: PumpManager {
                             return
                         }
                         
+                        let activatePacket = generatePacketBasalSetProfileNumber(options: PacketBasalSetProfileNumber(profileNumber: self.basalProfileNumber))
+                        let activateResult = try await DanaKitPumpManager.bluetoothManager.writeMessage(activatePacket)
+                        
+                        if (!activateResult.success) {
+                            completion(.failure(PumpManagerError.configuration(DanaKitPumpManagerError.failedBasalAdjustment)))
+                            return
+                        }
+                        
                         guard let schedule = DailyValueSchedule<Double>(dailyItems: scheduleItems) else {
                             completion(.failure(PumpManagerError.configuration(DanaKitPumpManagerError.failedBasalGeneration)))
                             return
@@ -414,12 +415,14 @@ extension DanaKitPumpManager: PumpManager {
     }
     
     private func convertBasal(_ scheduleItems: [RepeatingScheduleValue<Double>]) -> [Double] {
-        let basalIntervals: [TimeInterval] = Array(0..<24).map({ TimeInterval(60 * 30 * $0) })
+        let basalIntervals: [TimeInterval] = Array(0..<24).map({ TimeInterval(60 * 60 * $0) })
         var output: [Double] = []
         
         var currentIndex = 0
         for i in 0..<24 {
-            if (scheduleItems[currentIndex].startTime != basalIntervals[i]) {
+            if (currentIndex >= scheduleItems.count) {
+                output.append(scheduleItems[currentIndex - 1].value)
+            } else if (scheduleItems[currentIndex].startTime != basalIntervals[i]) {
                 output.append(scheduleItems[currentIndex - 1].value)
             } else {
                 output.append(scheduleItems[currentIndex].value)

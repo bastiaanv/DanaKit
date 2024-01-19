@@ -27,9 +27,7 @@ func generatePacketBasalSetProfileRate(options: PacketBasalSetProfileRate) throw
         dataArray[2 + i * 2] = UInt8((rate >> 8) & 0xff)
     }
 
-    let data = Data(dataArray)
-
-    return DanaGeneratePacket(opCode: DanaPacketType.OPCODE_BASAL__SET_PROFILE_BASAL_RATE, data: data)
+    return DanaGeneratePacket(opCode: DanaPacketType.OPCODE_BASAL__SET_PROFILE_BASAL_RATE, data: Data(dataArray))
 }
 
 
