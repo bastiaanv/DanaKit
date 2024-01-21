@@ -21,10 +21,14 @@ struct DanaKitSetupCompleteView: View {
     var body: some View {
         GuidePage(content: {
             VStack(alignment: .leading) {
-                Image(uiImage: UIImage(named: imageName, in: Bundle(for: DanaKitHUDProvider.self), compatibleWith: nil)!)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 200)
+                HStack {
+                    Spacer()
+                    Image(uiImage: UIImage(named: imageName, in: Bundle(for: DanaKitHUDProvider.self), compatibleWith: nil)!)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 200)
+                    Spacer()
+                }
                 Text(LocalizedString("Your ", comment: "Dana setup complete p1") + friendlyPumpModelName + LocalizedString(" is ready to be used!", comment: "Dana setup complete p2"))
             }
             VStack(alignment: .leading) {

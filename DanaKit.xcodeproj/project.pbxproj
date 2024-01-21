@@ -114,6 +114,8 @@
 		B885169B2B30D8140063402A /* DanaKitDebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B885169A2B30D8140063402A /* DanaKitDebugView.swift */; };
 		B8A0163F2B433E000054AECA /* InsulinTypeConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8A0163E2B433E000054AECA /* InsulinTypeConfirmation.swift */; };
 		B8F8D2C52B54601F003BF384 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F8D2C42B54601F003BF384 /* PersistenceController.swift */; };
+		B8FB5F152B5D705D001C88BA /* DoseEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FB5F142B5D705D001C88BA /* DoseEntry.swift */; };
+		B8FB5F172B5D91A6001C88BA /* NewPumpEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FB5F162B5D91A6001C88BA /* NewPumpEvent.swift */; };
 		B8FF961A2B4305A300C14280 /* NavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FF96192B4305A300C14280 /* NavigationLink.swift */; };
 		C10D6D6E27A2395700F53D58 /* DanaKitPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10D6D6D27A2395700F53D58 /* DanaKitPlugin.swift */; };
 		C187C19A279086A8006E3557 /* DanaKitPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = C187C199279086A8006E3557 /* DanaKitPlugin.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -280,6 +282,8 @@
 		B885169A2B30D8140063402A /* DanaKitDebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanaKitDebugView.swift; sourceTree = "<group>"; };
 		B8A0163E2B433E000054AECA /* InsulinTypeConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinTypeConfirmation.swift; sourceTree = "<group>"; };
 		B8F8D2C42B54601F003BF384 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		B8FB5F142B5D705D001C88BA /* DoseEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseEntry.swift; sourceTree = "<group>"; };
+		B8FB5F162B5D91A6001C88BA /* NewPumpEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPumpEvent.swift; sourceTree = "<group>"; };
 		B8FF96192B4305A300C14280 /* NavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLink.swift; sourceTree = "<group>"; };
 		C10D6D6D27A2395700F53D58 /* DanaKitPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DanaKitPlugin.swift; sourceTree = "<group>"; };
 		C13F70D42AE58C76002A292B /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -406,6 +410,8 @@
 				B8FF96192B4305A300C14280 /* NavigationLink.swift */,
 				B8F8D2C42B54601F003BF384 /* PersistenceController.swift */,
 				B85335D72B55D3A900DB470A /* NumberFormatter.swift */,
+				B8FB5F142B5D705D001C88BA /* DoseEntry.swift */,
+				B8FB5F162B5D91A6001C88BA /* NewPumpEvent.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -822,6 +828,8 @@
 				B8360A722B2601D600152188 /* DanaBasalCancelTemporary.swift in Sources */,
 				B85418B02B20F77900C3B4D0 /* Encrypt.swift in Sources */,
 				B8360A7A2B263CD400152188 /* DanaBasalSetProfileRate.swift in Sources */,
+				B8FB5F172B5D91A6001C88BA /* NewPumpEvent.swift in Sources */,
+				B8FB5F152B5D705D001C88BA /* DoseEntry.swift in Sources */,
 				B85335D82B55D3A900DB470A /* NumberFormatter.swift in Sources */,
 				B8360A822B263ED700152188 /* DanaBolusCancelExtended.swift in Sources */,
 				B8360AA12B2A26EB00152188 /* DanaGeneralGetInitialScreenInformation.swift in Sources */,

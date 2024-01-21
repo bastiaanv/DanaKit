@@ -105,11 +105,11 @@ class PeripheralManager: NSObject {
             DispatchQueue.main.asyncAfter(deadline: .now() + (!isHistoryPacket ? 5 : 20)) {
                 // Check if the message still hasn't been received
                 // If not, we should throw an exception
-                if (!self.isSendingRequest || self.continuationToken == nil) {
+                guard let continuationToken = self.continuationToken, self.isSendingRequest else {
                     return
                 }
                 
-                self.continuationToken!.resume(throwing: NSError(domain: "Message write timeout", code: 0, userInfo: nil))
+                continuationToken.resume(throwing: NSError(domain: "Message write timeout", code: 0, userInfo: nil))
             }
         }
     }
@@ -288,6 +288,7 @@ extension PeripheralManager {
     
     /// Used after entering PIN codes (only for DanaRS v3)
     private func finishV3Pairing(_ pairingKey: Data, _ randomPairingKey: Data) {
+        log.default("%{public}@: Storing security keys: Pairing key: %{public}@, random pairing key: %{public}@", #function, pairingKey.base64EncodedString(), randomPairingKey.base64EncodedString())
         DanaRSEncryption.setPairingKeys(pairingKey: pairingKey, randomPairingKey: randomPairingKey, randomSyncKey: 0)
         self.sendV3PairingInformation(0)
     }
@@ -347,9 +348,6 @@ extension PeripheralManager {
             
             self.pumpManager.state.hwModel = data[5]
             self.pumpManager.state.pumpProtocol = data[7]
-            
-            // TODO: Inject or store the randomSyncKey somewhere
-//            DanaRSEncryption.setPairingKeys(pairingKey: nil, randomPairingKey: nil, randomSyncKey: data[data.count - 1])
             
             if (self.pumpManager.state.hwModel == 0x05) {
                 self.sendV3PairingInformationEmpty()
@@ -540,12 +538,26 @@ extension PeripheralManager {
     public func updateInitialState() async {
         do {
             self.pumpManager.state.isConnected = true
+            log.default("%{public}@: Sending keep connetcion", #function)
+            
+            let keepConnection = generatePacketGeneralKeepConnection()
+            let resultKeepConnection = try await self.writeMessage(keepConnection)
+            guard resultKeepConnection.success else {
+                log.error("%{public}@: Failed to send keep connection...", #function)
+                self.pumpManager.disconnect(self.connectedDevice)
+                
+                DispatchQueue.main.async {
+                    self.completion(NSError(domain: "Failed to send keep connection", code: 0, userInfo: nil))
+                }
+                return
+            }
+            
+            
             log.default("%{public}@: Getting initial state", #function)
-            
             let initialScreenPacket = generatePacketGeneralGetInitialScreenInformation()
-            let result = try await self.writeMessage(initialScreenPacket)
+            let resultInitialScreenInformation = try await self.writeMessage(initialScreenPacket)
             
-            guard result.success else {
+            guard resultInitialScreenInformation.success else {
                 log.error("%{public}@: Failed to fetch Initial screen...", #function)
                 self.pumpManager.disconnect(self.connectedDevice)
                 
@@ -555,7 +567,8 @@ extension PeripheralManager {
                 return
             }
             
-            guard let data = result.data as? PacketGeneralGetInitialScreenInformation else {
+            
+            guard let data = resultInitialScreenInformation.data as? PacketGeneralGetInitialScreenInformation else {
                 log.error("%{public}@: No data received (initial screen)...", #function)
                 self.pumpManager.disconnect(self.connectedDevice)
                 
@@ -565,11 +578,36 @@ extension PeripheralManager {
                 return
             }
             
+            log.default("%{public}@: Getting pump time with timezone", #function)
+            let timeUtcWithTimezonePacket = generatePacketGeneralGetPumpTimeUtcWithTimezone()
+            let resultTimeUtcWithTimezone = try await self.writeMessage(timeUtcWithTimezonePacket)
+            guard resultInitialScreenInformation.success else {
+                log.error("%{public}@: Failed to fetch pump time...", #function)
+                self.pumpManager.disconnect(self.connectedDevice)
+                
+                DispatchQueue.main.async {
+                    self.completion(NSError(domain: "Failed to fetch pump time", code: 0, userInfo: nil))
+                }
+                return
+            }
+            
+            
+            guard let dataTimeUtc = resultTimeUtcWithTimezone.data as? PacketGeneralGetPumpTimeUtcWithTimezone else {
+                log.error("%{public}@: No data received (time utc with timezone)...", #function)
+                self.pumpManager.disconnect(self.connectedDevice)
+                
+                DispatchQueue.main.async {
+                    self.completion(NSError(domain: "No data received (time utc with timezone)", code: 0, userInfo: nil))
+                }
+                return
+            }
+            
             self.pumpManager.state.reservoirLevel = data.reservoirRemainingUnits
             self.pumpManager.state.batteryRemaining = data.batteryRemaining
             self.pumpManager.state.isPumpSuspended = data.isPumpSuspended
             self.pumpManager.state.isTempBasalInProgress = data.isTempBasalInProgress
             self.pumpManager.currentBaseBasalRate = data.currentBasal
+            self.pumpManager.state.pumpTime = dataTimeUtc.time
             self.pumpManager.notifyStateDidChange()
             
             log.default("%{public}@: Connection and encryption successful!", #function)

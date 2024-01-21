@@ -14,6 +14,8 @@ class DanaKitSettingsViewModel : ObservableObject {
     @Published var showingDeleteConfirmation = false
     @Published var basalButtonText: String = ""
     @Published var bolusSpeed: BolusSpeed
+    @Published var isSyncing: Bool = false
+    @Published var lastSync: Date? = nil
     
     private(set) var insulineType: InsulinType
     private var pumpManager: DanaKitPumpManager?
@@ -57,11 +59,17 @@ class DanaKitSettingsViewModel : ObservableObject {
         return numberFormatter
     }()
     
-    let reservoirVolumeFormatter = {
+    let reservoirVolumeFormatter: QuantityFormatter = {
         let formatter = QuantityFormatter(for: .internationalUnit())
         formatter.numberFormatter.maximumFractionDigits = 1
         return formatter
     }()
+    
+    private let dateFormatter = {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .long
+        return formatter
+    }
     
     public init(_ pumpManager: DanaKitPumpManager?, _ didFinish: (() -> Void)?) {
         self.pumpManager = pumpManager
@@ -69,6 +77,7 @@ class DanaKitSettingsViewModel : ObservableObject {
         
         self.insulineType = self.pumpManager?.state.insulinType ?? .novolog
         self.bolusSpeed = self.pumpManager?.state.bolusSpeed ?? .speed12
+        self.lastSync = self.pumpManager?.state.lastStatusDate
         
         self.basalButtonText = self.updateBasalButtonText()
     }
@@ -90,9 +99,29 @@ class DanaKitSettingsViewModel : ObservableObject {
         self.insulineType = type
     }
     
+    func formatDate(_ date: Date?) -> String {
+        guard let date = date else {
+            return ""
+        }
+        
+        return self.dateFormatter().string(from: date)
+    }
+    
     func didBolusSpeedChanged(_ bolusSpeed: BolusSpeed) {
         self.pumpManager?.state.bolusSpeed = bolusSpeed
         self.bolusSpeed = bolusSpeed
+    }
+    
+    func syncData() {
+        guard let pumpManager = self.pumpManager else {
+            return
+        }
+        
+        self.isSyncing = true
+        pumpManager.ensureCurrentPumpData(completion: { date in
+            self.isSyncing = false
+            self.lastSync = date
+        })
     }
     
     func reservoirText(for units: Double) -> String {

@@ -53,10 +53,26 @@ struct DanaKitSettingsView: View {
             }
             
             Section {
-                HStack {
-                    Button($viewModel.basalButtonText.wrappedValue) {
-                        viewModel.suspendResumeButtonPressed()
+                Button($viewModel.basalButtonText.wrappedValue) {
+                    viewModel.suspendResumeButtonPressed()
+                }
+                Button(action: {
+                    viewModel.syncData()
+                }) {
+                    HStack {
+                        Text(LocalizedString("Sync pump data", comment: "DanaKit sync pump"))
+                        Spacer()
+                        if viewModel.isSyncing {
+                            ActivityIndicator(isAnimating: .constant(true), style: .medium)
+                        }
                     }
+                }
+                .disabled(viewModel.isSyncing)
+                HStack {
+                    Text(LocalizedString("Last sync", comment: "Text for last sync")).foregroundColor(Color.primary)
+                    Spacer()
+                    Text(String(viewModel.formatDate(viewModel.lastSync)))
+                        .foregroundColor(.secondary)
                 }
             }
             
@@ -80,8 +96,7 @@ struct DanaKitSettingsView: View {
                 }
             }
             
-            Section(header: SectionHeader(label: LocalizedString("Configuration", comment: "The title of the configuration section in DanaKit settings")))
-            {
+            Section {
                 HStack {
                     Text(LocalizedString("Pump name", comment: "Text for Dana pump name")).foregroundColor(Color.primary)
                     Spacer()
@@ -129,8 +144,7 @@ struct DanaKitSettingsView: View {
         VStack(alignment: .leading, spacing: 5) {
             Text(LocalizedString("Insulin Remaining", comment: "Header for insulin remaining on pod settings screen"))
                 .foregroundColor(Color(UIColor.secondaryLabel))
-            if let reservoirLevel = viewModel.reservoirLevel
-            {
+            if let reservoirLevel = viewModel.reservoirLevel {
                 HStack {
                     ReservoirView(reservoirLevel: reservoirLevel, fillColor: reservoirColor(reservoirLevel))
                         .frame(width: 23, height: 32)

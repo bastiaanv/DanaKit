@@ -52,6 +52,7 @@ public class DanaKitPumpManager: DeviceManager {
     private let log = OSLog(category: "DanaKitPumpManager")
     private let pumpDelegate = WeakSynchronizedDelegate<PumpManagerDelegate>()
     
+    private let statusObservers = WeakSynchronizedSet<PumpManagerStatusObserver>()
     private let stateObservers = WeakSynchronizedSet<StateObserver>()
     private let scanDeviceObservers = WeakSynchronizedSet<StateObserver>()
     
@@ -62,6 +63,9 @@ public class DanaKitPumpManager: DeviceManager {
     }
     
     public var currentBaseBasalRate: Double = 0
+    public var status: PumpManagerStatus {
+        return self.status(state)
+    }
     
     public var debugDescription: String {
         let lines = [
@@ -163,14 +167,15 @@ extension DanaKitPumpManager: PumpManager {
         return self.state.lastStatusDate
     }
     
-    public var status: LoopKit.PumpManagerStatus {
-        return PumpManagerStatus(timeZone: TimeZone(identifier: "Europe/Amsterdam")!, device: device(), pumpBatteryChargeRemaining: nil, basalDeliveryState: nil, bolusState: .noBolus, insulinType: nil)
-    }
-    
-    public func addStatusObserver(_ observer: PumpManagerStatusObserver, queue: DispatchQueue) {
-    }
-    
-    public func removeStatusObserver(_ observer: PumpManagerStatusObserver) {
+    private func status(_ state: DanaKitPumpManagerState) -> LoopKit.PumpManagerStatus {
+        return PumpManagerStatus(
+            timeZone: TimeZone.current,
+            device: device(),
+            pumpBatteryChargeRemaining: state.batteryRemaining,
+            basalDeliveryState: state.basalDeliveryState,
+            bolusState: .noBolus,
+            insulinType: state.insulinType
+        )
     }
     
     public func ensureCurrentPumpData(completion: ((Date?) -> Void)?) {
@@ -181,7 +186,17 @@ extension DanaKitPumpManager: PumpManager {
                 return
             case .success:
                 // By connecting to the pump, the state gets updated
-                completion?(Date.now)
+                
+                self.pumpDelegate.notify { (delegate) in
+                    guard let delegate = delegate else {
+                        preconditionFailure("pumpManagerDelegate cannot be nil")
+                    }
+
+                    self.disconnect()
+                    delegate.pumpManager(self, hasNewPumpEvents: [], lastReconciliation: Date.now, completion: { (error) in
+                        completion?(Date.now)
+                    })
+                }
             }
         }
     }
@@ -221,7 +236,16 @@ extension DanaKitPumpManager: PumpManager {
                             return
                         }
                         
-                        completion(nil)
+                        let dose = DoseEntry.bolus(units: units, duration: self.estimatedDuration(toBolus: units), activationType: activationType, insulinType: self.state.insulinType!)
+                        self.pumpDelegate.notify { (delegate) in
+                            guard let delegate = delegate else {
+                                preconditionFailure("pumpManagerDelegate cannot be nil")
+                            }
+
+                            delegate.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: units)], lastReconciliation: Date.now, completion: { (error) in
+                                completion(nil)
+                            })
+                        }
                     } catch {
                         self.log.error("%{public}@: Failed to do bolus. Error: %{public}@", #function, error.localizedDescription)
                         completion(PumpManagerError.connection(DanaKitPumpManagerError.noConnection))
@@ -283,7 +307,20 @@ extension DanaKitPumpManager: PumpManager {
                                 return
                             }
                             
-                            completion(nil)
+                            self.state.basalDeliveryOrdinal = .active
+                            self.state.basalDeliveryDate = Date.now
+                            self.notifyStateDidChange()
+                            
+                            let dose = DoseEntry.basal(rate: self.currentBaseBasalRate, insulinType: self.state.insulinType!)
+                            self.pumpDelegate.notify { (delegate) in
+                                guard let delegate = delegate else {
+                                    preconditionFailure("pumpManagerDelegate cannot be nil")
+                                }
+                                
+                                delegate.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.basal(dose: dose)], lastReconciliation: Date.now, completion: { (error) in
+                                    completion(nil)
+                                })
+                            }
                         } catch {
                             completion(PumpManagerError.communication(nil))
                         }
@@ -312,7 +349,20 @@ extension DanaKitPumpManager: PumpManager {
                             return
                         }
                         
-                        completion(nil)
+                        self.state.basalDeliveryOrdinal = .suspended
+                        self.state.basalDeliveryDate = Date.now
+                        self.notifyStateDidChange()
+                        
+                        let dose = DoseEntry.suspend()
+                        self.pumpDelegate.notify { (delegate) in
+                            guard let delegate = delegate else {
+                                preconditionFailure("pumpManagerDelegate cannot be nil")
+                            }
+                            
+                            delegate.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.suspend(dose: dose)], lastReconciliation: Date.now, completion: { (error) in
+                                completion(nil)
+                            })
+                        }
                     } catch {
                         completion(PumpManagerError.communication(DanaKitPumpManagerError.noConnection))
                     }
@@ -340,7 +390,20 @@ extension DanaKitPumpManager: PumpManager {
                             return
                         }
                         
-                        completion(nil)
+                        self.state.basalDeliveryOrdinal = .active
+                        self.state.basalDeliveryDate = Date.now
+                        self.notifyStateDidChange()
+                        
+                        let dose = DoseEntry.resume(insulinType: self.state.insulinType!)
+                        self.pumpDelegate.notify { (delegate) in
+                            guard let delegate = delegate else {
+                                preconditionFailure("pumpManagerDelegate cannot be nil")
+                            }
+                            
+                            delegate.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.resume(dose: dose)], lastReconciliation: Date.now, completion: { (error) in
+                                completion(nil)
+                            })
+                        }
                     } catch {
                         completion(PumpManagerError.communication(DanaKitPumpManagerError.noConnection))
                     }
@@ -382,7 +445,21 @@ extension DanaKitPumpManager: PumpManager {
                             return
                         }
                         
-                        completion(.success(schedule))
+                        self.currentBaseBasalRate = schedule.value(at: Date.now)
+                        self.state.basalDeliveryOrdinal = .active
+                        self.state.basalDeliveryDate = Date.now
+                        self.notifyStateDidChange()
+                        
+                        let dose = DoseEntry.basal(rate: self.currentBaseBasalRate, insulinType: self.state.insulinType!)
+                        self.pumpDelegate.notify { (delegate) in
+                            guard let delegate = delegate else {
+                                preconditionFailure("pumpManagerDelegate cannot be nil")
+                            }
+                            
+                            delegate.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.basal(dose: dose)], lastReconciliation: Date.now, completion: { (error) in
+                                completion(.success(schedule))
+                            })
+                        }
                     } catch {
                         completion(.failure(PumpManagerError.communication(DanaKitPumpManagerError.noConnection)))
                     }
@@ -493,6 +570,14 @@ extension DanaKitPumpManager {
 
 // MARK: State observers
 extension DanaKitPumpManager {
+    public func addStatusObserver(_ observer: PumpManagerStatusObserver, queue: DispatchQueue) {
+        statusObservers.insert(observer, queue: queue)
+    }
+    
+    public func removeStatusObserver(_ observer: PumpManagerStatusObserver) {
+        statusObservers.removeElement(observer)
+    }
+    
     public func addStateObserver(_ observer: StateObserver, queue: DispatchQueue) {
         stateObservers.insert(observer, queue: queue)
     }
@@ -501,7 +586,7 @@ extension DanaKitPumpManager {
         stateObservers.removeElement(observer)
     }
     
-    func notifyStateDidChange() {
+    public func notifyStateDidChange() {
         DispatchQueue.main.async {
             self.stateObservers.forEach { (observer) in
                 observer.stateDidUpdate(self.state, self.oldState)
@@ -509,6 +594,10 @@ extension DanaKitPumpManager {
             
             self.pumpDelegate.notify { (delegate) in
                 delegate?.pumpManagerDidUpdateState(self)
+            }
+            
+            self.statusObservers.forEach { (observer) in
+                observer.pumpManager(self, didUpdate: self.status(self.state), oldStatus: self.status(self.oldState))
             }
             
             self.oldState = DanaKitPumpManagerState(rawValue: self.state.rawValue)

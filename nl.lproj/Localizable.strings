@@ -166,3 +166,8 @@
 /* Text for firmware version */
 "Firmware version" = "Firmware versie"
 
+/* DanaKit sync pump */
+"Sync pump data" = "Synchroniseer pompgegevens"
+
+/* Text for last sync */
+"Last sync" = "Laatste synchronisatie"

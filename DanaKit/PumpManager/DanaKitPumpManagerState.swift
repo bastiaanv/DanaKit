@@ -9,6 +9,11 @@
 
 import LoopKit
 
+public enum DanaKitBasal: Int {
+    case active = 0
+    case suspended = 1
+}
+
 public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
     public typealias RawValue = PumpManager.RawStateValue
     
@@ -27,9 +32,16 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         self.isUnitUD = rawValue["isUnitUD"] as? Bool ?? false
         self.bolusSpeed = rawValue["bolusSpeed"] as? BolusSpeed ?? .speed12
         self.isOnBoarded = rawValue["isOnBoarded"] as? Bool ?? false
+        self.basalDeliveryDate = rawValue["basalDeliveryDate"] as? Date ?? Date.now
         
         if let rawInsulinType = rawValue["insulinType"] as? InsulinType.RawValue {
             insulinType = InsulinType(rawValue: rawInsulinType)
+        }
+        
+        if let rawBasalDeliveryOrdinal = rawValue["basalDeliveryOrdinal"] as? DanaKitBasal.RawValue {
+            self.basalDeliveryOrdinal = DanaKitBasal(rawValue: rawBasalDeliveryOrdinal) ?? .active
+        } else {
+            self.basalDeliveryOrdinal = .active
         }
     }
     
@@ -50,6 +62,8 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         value["insulinType"] = self.insulinType?.rawValue
         value["bolusSpeed"] = self.bolusSpeed.rawValue
         value["isOnBoarded"] = self.isOnBoarded
+        value["basalDeliveryDate"] = self.basalDeliveryDate
+        value["basalDeliveryOrdinal"] = self.basalDeliveryOrdinal.rawValue
         
         return value
     }
@@ -141,6 +155,21 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
     public var isEasyMode: Bool = false
     public var isUnitUD: Bool = false
     
+    // Do not store this value
+    public var pumpTime: Date?
+    
+    public var basalDeliveryState: PumpManagerStatus.BasalDeliveryState {
+        switch(self.basalDeliveryOrdinal) {
+        case .active:
+            return .active(self.basalDeliveryDate)
+        case .suspended:
+            return .suspended(self.basalDeliveryDate)
+        }
+    }
+    
+    public var basalDeliveryDate: Date = Date.now
+    public var basalDeliveryOrdinal: DanaKitBasal = .active
+    
     mutating func resetState() {
         self.ignorePassword = false
         self.devicePassword = 0
@@ -194,6 +223,8 @@ extension DanaKitPumpManagerState: CustomDebugStringConvertible {
             "* friendlyDeviceName: \(getFriendlyDeviceName())",
             "* insulinType: \(String(describing: insulinType))",
             "* reservoirLevel: \(reservoirLevel)",
+            "* basalDeliveryDate: \(basalDeliveryDate)",
+            "* basalDeliveryOrdinal: \(basalDeliveryOrdinal)",
             "* hwModel: \(hwModel)",
             "* pumpProtocol: \(pumpProtocol)",
             "* isInFetchHistoryMode: \(isInFetchHistoryMode)",
