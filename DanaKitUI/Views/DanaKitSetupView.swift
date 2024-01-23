@@ -50,7 +50,7 @@ struct DanaKitSetupView: View {
                     .disabled(automaticDosingStrategy == .tempBasalOnly)
                     .padding([.bottom, .horizontal])
             }
-                .padding(.bottom, 10)
+                .padding(.vertical, 10)
                 .background(Color(.secondarySystemGroupedBackground)
                 .shadow(radius: 5))
         }

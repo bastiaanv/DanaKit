@@ -148,10 +148,10 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
                 self.stepFinished()
             }
             
-            let view = DanaKitSetupCompleteView(finish: nextStep, friendlyPumpModelName: self.pumpManager?.state.getFriendlyDeviceName() ?? "", imageName: getDanaPumpImageName())
+            let view = DanaKitSetupCompleteView(finish: nextStep, friendlyPumpModelName: self.pumpManager?.state.getFriendlyDeviceName() ?? "", imageName: self.pumpManager?.state.getDanaPumpImageName() ?? "danai")
             return hostingController(rootView: view)
         case .settings:
-            let view = DanaKitSettingsView(viewModel: DanaKitSettingsViewModel(self.pumpManager, self.stepFinished), supportedInsulinTypes: self.allowedInsulinTypes, imageName: getDanaPumpImageName())
+            let view = DanaKitSettingsView(viewModel: DanaKitSettingsViewModel(self.pumpManager, self.stepFinished), supportedInsulinTypes: self.allowedInsulinTypes, imageName: self.pumpManager?.state.getDanaPumpImageName() ?? "danai")
             return hostingController(rootView: view)
         }
     }
@@ -178,31 +178,6 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
         }
         
         return .firstRunScreen
-    }
-    
-    func getDanaPumpImageName() -> String {
-        guard let pumpManager = self.pumpManager else {
-            return "danai"
-        }
-        
-        switch (pumpManager.state.hwModel) {
-        case 0x03:
-            return "danars"
-        case 0x05:
-            return "danars"
-        case 0x06:
-            return "danars"
-            
-        case 0x07:
-            return "danai"
-        case 0x09:
-            return "danai"
-        case 0x0a:
-            return "danai"
-            
-        default:
-            return "danai"
-        }
     }
 }
 

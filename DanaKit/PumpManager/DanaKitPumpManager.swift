@@ -185,6 +185,8 @@ extension DanaKitPumpManager: PumpManager {
                 completion?(nil)
                 return
             case .success:
+                // TODO: Sync pump history
+                
                 // By connecting to the pump, the state gets updated
                 
                 self.pumpDelegate.notify { (delegate) in
@@ -227,11 +229,16 @@ extension DanaKitPumpManager: PumpManager {
                 return
             case .success:
                 Task {
+                    guard !self.state.isPumpSuspended else {
+                        completion(PumpManagerError.deviceState(DanaKitPumpManagerError.pumpSuspended))
+                        return
+                    }
+                    
                     do {
                         let packet = generatePacketBolusStart(options: PacketBolusStart(amount: units, speed: self.state.bolusSpeed))
                         let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
                         
-                        if (!result.success) {
+                        guard result.success else {
                             completion(PumpManagerError.uncertainDelivery)
                             return
                         }
@@ -297,12 +304,17 @@ extension DanaKitPumpManager: PumpManager {
                 return
             case .success:
                 Task {
+                    guard !self.state.isPumpSuspended else {
+                        completion(PumpManagerError.deviceState(DanaKitPumpManagerError.pumpSuspended))
+                        return
+                    }
+                    
                     if (duration < .ulpOfOne) {
                         do {
                             let packet = generatePacketBasalCancelTemporary()
                             let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
                             
-                            if (!result.success) {
+                            guard result.success else {
                                 completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedTempBasalAdjustment))
                                 return
                             }
@@ -344,7 +356,7 @@ extension DanaKitPumpManager: PumpManager {
                         let packet = generatePacketBasalSetSuspendOn()
                         let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
                         
-                        if (!result.success) {
+                        guard result.success else {
                             completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedSuspensionAdjustment))
                             return
                         }
@@ -385,7 +397,7 @@ extension DanaKitPumpManager: PumpManager {
                         let packet = generatePacketBasalSetSuspendOff()
                         let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
                         
-                        if (!result.success) {
+                        guard result.success else {
                             completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedSuspensionAdjustment))
                             return
                         }
@@ -427,7 +439,7 @@ extension DanaKitPumpManager: PumpManager {
                         let packet = try generatePacketBasalSetProfileRate(options: PacketBasalSetProfileRate(profileNumber: self.basalProfileNumber, profileBasalRate: basal))
                         let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
                         
-                        if (!result.success) {
+                        guard result.success else {
                             completion(.failure(PumpManagerError.configuration(DanaKitPumpManagerError.failedBasalAdjustment)))
                             return
                         }
@@ -435,7 +447,7 @@ extension DanaKitPumpManager: PumpManager {
                         let activatePacket = generatePacketBasalSetProfileNumber(options: PacketBasalSetProfileNumber(profileNumber: self.basalProfileNumber))
                         let activateResult = try await DanaKitPumpManager.bluetoothManager.writeMessage(activatePacket)
                         
-                        if (!activateResult.success) {
+                        guard activateResult.success else {
                             completion(.failure(PumpManagerError.configuration(DanaKitPumpManagerError.failedBasalAdjustment)))
                             return
                         }
@@ -539,7 +551,7 @@ extension DanaKitPumpManager: PumpManager {
                 completion(.failure)
             }
         
-        // Should never reach, but is only possible if device is not onboard (we have no ble identifier to search for)
+        // Should never reach, but is only possible if device is not onboard (we have no ble identifier to connect to)
         } else {
             log.error("%{public}@: Pump is not onboarded", #function)
             completion(.failure)

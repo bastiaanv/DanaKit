@@ -33,11 +33,11 @@ extension DanaKitPumpManager : PumpManagerUI {
     }
     
     public static var onboardingImage: UIImage? {
-        return nil
+        return UIImage(named: "danai", in: Bundle(for: DanaKitHUDProvider.self), compatibleWith: nil)
     }
     
     public var smallImage: UIImage? {
-        return nil
+        return UIImage(named: state.getDanaPumpImageName(), in: Bundle(for: DanaKitHUDProvider.self), compatibleWith: nil)
     }
     
     public var pumpStatusHighlight: DeviceStatusHighlight? {

@@ -41,7 +41,7 @@ struct DanaKitSetupCompleteView: View {
                 Text(LocalizedString("Finish", comment: "Text for finish button"))
                     .actionButtonStyle(.primary)
             }
-            .padding()
+            .padding(.vertical, 10)
             .background(Color(UIColor.systemBackground))
             .zIndex(1)
         }

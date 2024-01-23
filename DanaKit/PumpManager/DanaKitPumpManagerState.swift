@@ -210,6 +210,27 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
                 return "Unknown Dana pump"
           }
     }
+    
+    func getDanaPumpImageName() -> String {
+        switch (self.hwModel) {
+        case 0x03:
+            return "danars"
+        case 0x05:
+            return "danars"
+        case 0x06:
+            return "danars"
+            
+        case 0x07:
+            return "danai"
+        case 0x09:
+            return "danai"
+        case 0x0a:
+            return "danai"
+            
+        default:
+            return "danai"
+        }
+    }
 }
 
 extension DanaKitPumpManagerState: CustomDebugStringConvertible {

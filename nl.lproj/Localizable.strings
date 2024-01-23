@@ -115,6 +115,9 @@
 /* Error description when failed basal adjustment */
 "Failed to adjust basal" = "Aanpassing basaal is mislukt"
 
+/* Error description when pump is suspended */
+"The insulin delivery has been suspend. Action failed" = "De insulinetoediening is opgeschort. Actie mislukt"
+
 /* Error description when trying to set temp basal */
 "Setting temp basal is not supported at this time" = "Het zetten van een tijdelijk basaal wordt momenteel nog niet ondersteunt"
 
