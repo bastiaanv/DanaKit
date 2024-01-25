@@ -56,6 +56,8 @@ public class DanaKitPumpManager: DeviceManager {
     private let stateObservers = WeakSynchronizedSet<StateObserver>()
     private let scanDeviceObservers = WeakSynchronizedSet<StateObserver>()
     
+    private var doseReporter: DanaKitDoseProgressReporter?
+    private var doseEntry: UnfinalizedDose?
     private let basalProfileNumber: UInt8 = 1
     
     public var isOnboarded: Bool {
@@ -146,6 +148,11 @@ extension DanaKitPumpManager: PumpManager {
         return TimeInterval(60 * 60)
     }
     
+    public func roundToSupportedBolusVolume(units: Double) -> Double {
+        // We do support rounding a 0 U volume to 0
+        return supportedBolusVolumes.last(where: { $0 <= units }) ?? 0
+    }
+    
     public var pumpManagerDelegate: LoopKit.PumpManagerDelegate? {
         get {
             return pumpDelegate.delegate
@@ -173,12 +180,34 @@ extension DanaKitPumpManager: PumpManager {
             device: device(),
             pumpBatteryChargeRemaining: state.batteryRemaining,
             basalDeliveryState: state.basalDeliveryState,
-            bolusState: .noBolus,
+            bolusState: bolusState(self.state.bolusState),
             insulinType: state.insulinType
         )
     }
     
+    private func bolusState(_ bolusState: BolusState) -> PumpManagerStatus.BolusState {
+        switch bolusState {
+        case .noBolus:
+            return .noBolus
+        case .initiating:
+            return .initiating
+        case .canceling:
+            return .canceling
+        case .inProgress:
+            if let dose = self.doseEntry?.toDoseEntry() {
+                return .inProgress(dose)
+            }
+            
+            return .noBolus
+        }
+    }
+    
     public func ensureCurrentPumpData(completion: ((Date?) -> Void)?) {
+        guard self.state.bolusState == .noBolus else {
+            completion?(nil)
+            return
+        }
+        
         self.ensureConnected { result in
             switch result {
             case .failure:
@@ -187,14 +216,16 @@ extension DanaKitPumpManager: PumpManager {
             case .success:
                 // TODO: Sync pump history
                 
+                self.state.lastStatusDate = Date()
+                
                 // By connecting to the pump, the state gets updated
+                self.disconnect()
                 
                 self.pumpDelegate.notify { (delegate) in
                     guard let delegate = delegate else {
                         preconditionFailure("pumpManagerDelegate cannot be nil")
                     }
 
-                    self.disconnect()
                     delegate.pumpManager(self, hasNewPumpEvents: [], lastReconciliation: Date.now, completion: { (error) in
                         completion?(Date.now)
                     })
@@ -206,30 +237,45 @@ extension DanaKitPumpManager: PumpManager {
     public func setMustProvideBLEHeartbeat(_ mustProvideBLEHeartbeat: Bool) {
     }
     
-    public func createBolusProgressReporter(reportingOn dispatchQueue: DispatchQueue) -> LoopKit.DoseProgressReporter? {
-        return nil
+    public func createBolusProgressReporter(reportingOn dispatchQueue: DispatchQueue) -> DoseProgressReporter? {
+        return doseReporter
     }
     
     public func estimatedDuration(toBolus units: Double) -> TimeInterval {
         switch(self.state.bolusSpeed) {
         case .speed12:
-            return units / 720
+            return units / 12 * 60
         case .speed30:
-            return units / 1800
+            return units / 30 * 60
         case .speed60:
-            return units / 3600
+            return units // / 60 * 60
         }
     }
     
     public func enactBolus(units: Double, activationType: BolusActivationType, completion: @escaping (PumpManagerError?) -> Void) {
+        guard self.state.bolusState == .noBolus else {
+            completion(PumpManagerError.deviceState(DanaKitPumpManagerError.pumpIsBusy))
+            return
+        }
+        
+        self.state.bolusState = .initiating
+        self.notifyStateDidChange()
+        
         self.ensureConnected { result in
             switch result {
             case .failure:
+                self.state.bolusState = .noBolus
+                self.notifyStateDidChange()
+                
                 completion(PumpManagerError.connection(DanaKitPumpManagerError.noConnection))
                 return
             case .success:
                 Task {
                     guard !self.state.isPumpSuspended else {
+                        self.state.bolusState = .noBolus
+                        self.notifyStateDidChange()
+                        self.disconnect()
+                        
                         completion(PumpManagerError.deviceState(DanaKitPumpManagerError.pumpSuspended))
                         return
                     }
@@ -239,35 +285,45 @@ extension DanaKitPumpManager: PumpManager {
                         let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
                         
                         guard result.success else {
+                            self.state.bolusState = .noBolus
+                            self.notifyStateDidChange()
+                            self.disconnect()
+                            
                             completion(PumpManagerError.uncertainDelivery)
                             return
                         }
                         
-                        let dose = DoseEntry.bolus(units: units, duration: self.estimatedDuration(toBolus: units), activationType: activationType, insulinType: self.state.insulinType!)
-                        self.pumpDelegate.notify { (delegate) in
-                            guard let delegate = delegate else {
-                                preconditionFailure("pumpManagerDelegate cannot be nil")
-                            }
-
-                            delegate.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: units)], lastReconciliation: Date.now, completion: { (error) in
-                                completion(nil)
-                            })
-                        }
+                        self.doseEntry = UnfinalizedDose(units: units, duration: self.estimatedDuration(toBolus: units), activationType: activationType, insulinType: self.state.insulinType!)
+                        self.doseReporter = DanaKitDoseProgressReporter(total: units)
+                        
+                        self.state.bolusState = .inProgress
+                        self.notifyStateDidChange()
+                        
+                        completion(nil)
                     } catch {
+                        self.state.bolusState = .noBolus
+                        self.notifyStateDidChange()
+                        self.disconnect()
+                        
                         self.log.error("%{public}@: Failed to do bolus. Error: %{public}@", #function, error.localizedDescription)
                         completion(PumpManagerError.connection(DanaKitPumpManagerError.noConnection))
                     }
-                    
-                    self.disconnect()
                 }
             }
         }
     }
     
     public func cancelBolus(completion: @escaping (PumpManagerResult<DoseEntry?>) -> Void) {
+        let oldBolusState = self.state.bolusState
+        self.state.bolusState = .canceling
+        self.notifyStateDidChange()
+        
         self.ensureConnected { result in
             switch result {
             case .failure:
+                self.state.bolusState = oldBolusState
+                self.notifyStateDidChange()
+                
                 completion(.failure(PumpManagerError.connection(DanaKitPumpManagerError.noConnection)))
                 return
             case .success:
@@ -276,17 +332,28 @@ extension DanaKitPumpManager: PumpManager {
                         let packet = generatePacketBolusStop()
                         let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
                         
+                        self.disconnect()
+                        
                         if (!result.success) {
+                            self.state.bolusState = oldBolusState
+                            self.notifyStateDidChange()
+                            
                             completion(.failure(PumpManagerError.communication(nil)))
                             return
                         }
                         
+                        self.state.bolusState = .noBolus
+                        self.notifyStateDidChange()
+                        
                         completion(.success(nil))
+                        return
                     } catch {
+                        self.state.bolusState = oldBolusState
+                        self.notifyStateDidChange()
+                        self.disconnect()
+                        
                         completion(.failure(PumpManagerError.communication(DanaKitPumpManagerError.noConnection)))
                     }
-                    
-                    self.disconnect()
                 }
             }
         }
@@ -297,6 +364,11 @@ extension DanaKitPumpManager: PumpManager {
     /// - A short APS-special temp basal command (which only accepts 15 min (only above 100%) or 30 min (only below 100%)
     /// TODO: Need to discuss what to do here / how to make this work within the Loop algorithm AND if the convertion from absolute to percentage is acceptable
     public func enactTempBasal(unitsPerHour: Double, for duration: TimeInterval, completion: @escaping (PumpManagerError?) -> Void) {
+        guard self.state.bolusState == .noBolus else {
+            completion(PumpManagerError.deviceState(DanaKitPumpManagerError.pumpIsBusy))
+            return
+        }
+        
         self.ensureConnected { result in
             switch result {
             case .failure:
@@ -305,6 +377,7 @@ extension DanaKitPumpManager: PumpManager {
             case .success:
                 Task {
                     guard !self.state.isPumpSuspended else {
+                        self.disconnect()
                         completion(PumpManagerError.deviceState(DanaKitPumpManagerError.pumpSuspended))
                         return
                     }
@@ -313,6 +386,8 @@ extension DanaKitPumpManager: PumpManager {
                         do {
                             let packet = generatePacketBasalCancelTemporary()
                             let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
+                            
+                            self.disconnect()
                             
                             guard result.success else {
                                 completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedTempBasalAdjustment))
@@ -334,9 +409,11 @@ extension DanaKitPumpManager: PumpManager {
                                 })
                             }
                         } catch {
+                            self.disconnect()
                             completion(PumpManagerError.communication(nil))
                         }
                     } else {
+                        self.disconnect()
                         completion(PumpManagerError.configuration(DanaKitPumpManagerError.unsupportedTempBasal))
                     }
                 }
@@ -345,6 +422,11 @@ extension DanaKitPumpManager: PumpManager {
     }
     
     public func suspendDelivery(completion: @escaping (Error?) -> Void) {
+        guard self.state.bolusState == .noBolus else {
+            completion(PumpManagerError.deviceState(DanaKitPumpManagerError.pumpIsBusy))
+            return
+        }
+        
         self.ensureConnected { result in
             switch result {
             case .failure:
@@ -355,6 +437,8 @@ extension DanaKitPumpManager: PumpManager {
                     do {
                         let packet = generatePacketBasalSetSuspendOn()
                         let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
+                        
+                        self.disconnect()
                         
                         guard result.success else {
                             completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedSuspensionAdjustment))
@@ -376,16 +460,20 @@ extension DanaKitPumpManager: PumpManager {
                             })
                         }
                     } catch {
+                        self.disconnect()
                         completion(PumpManagerError.communication(DanaKitPumpManagerError.noConnection))
                     }
-                    
-                    self.disconnect()
                 }
             }
         }
     }
     
     public func resumeDelivery(completion: @escaping (Error?) -> Void) {
+        guard self.state.bolusState == .noBolus else {
+            completion(PumpManagerError.deviceState(DanaKitPumpManagerError.pumpIsBusy))
+            return
+        }
+        
         self.ensureConnected { result in
             switch result {
             case .failure:
@@ -396,6 +484,8 @@ extension DanaKitPumpManager: PumpManager {
                     do {
                         let packet = generatePacketBasalSetSuspendOff()
                         let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
+                        
+                        self.disconnect()
                         
                         guard result.success else {
                             completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedSuspensionAdjustment))
@@ -417,16 +507,20 @@ extension DanaKitPumpManager: PumpManager {
                             })
                         }
                     } catch {
+                        self.disconnect()
                         completion(PumpManagerError.communication(DanaKitPumpManagerError.noConnection))
                     }
-                    
-                    self.disconnect()
                 }
             }
         }
     }
     
     public func syncBasalRateSchedule(items scheduleItems: [RepeatingScheduleValue<Double>], completion: @escaping (Result<BasalRateSchedule, Error>) -> Void) {
+        guard self.state.bolusState == .noBolus else {
+            completion(.failure(PumpManagerError.deviceState(DanaKitPumpManagerError.pumpIsBusy)))
+            return
+        }
+        
         self.ensureConnected { result in
             switch result {
             case .failure:
@@ -440,12 +534,15 @@ extension DanaKitPumpManager: PumpManager {
                         let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
                         
                         guard result.success else {
+                            self.disconnect()
                             completion(.failure(PumpManagerError.configuration(DanaKitPumpManagerError.failedBasalAdjustment)))
                             return
                         }
                         
                         let activatePacket = generatePacketBasalSetProfileNumber(options: PacketBasalSetProfileNumber(profileNumber: self.basalProfileNumber))
                         let activateResult = try await DanaKitPumpManager.bluetoothManager.writeMessage(activatePacket)
+                        
+                        self.disconnect()
                         
                         guard activateResult.success else {
                             completion(.failure(PumpManagerError.configuration(DanaKitPumpManagerError.failedBasalAdjustment)))
@@ -473,10 +570,9 @@ extension DanaKitPumpManager: PumpManager {
                             })
                         }
                     } catch {
+                        self.disconnect()
                         completion(.failure(PumpManagerError.communication(DanaKitPumpManagerError.noConnection)))
                     }
-                    
-                    self.disconnect()
                 }
             }
         }
@@ -524,8 +620,18 @@ extension DanaKitPumpManager: PumpManager {
     
     private func ensureConnected(_ completion: @escaping (ConnectionResult) -> Void) {
         // Device still has an active connection with pump
-        if DanaKitPumpManager.bluetoothManager.isConnected {
+        if DanaKitPumpManager.bluetoothManager.isConnected && DanaKitPumpManager.bluetoothManager.peripheral?.state == .connected {
             completion(.success)
+            
+        // State hasnt been updated yet, so we have to try to connect
+        } else if DanaKitPumpManager.bluetoothManager.isConnected && DanaKitPumpManager.bluetoothManager.peripheral != nil {
+            self.connect(DanaKitPumpManager.bluetoothManager.peripheral!, nil, { error in
+                if error == nil {
+                    completion(.success)
+                } else {
+                    completion(.failure)
+                }
+            })
         
         // There is no active connection, but we stored the peripheral. We can quickly reconnect
         } else if !DanaKitPumpManager.bluetoothManager.isConnected && DanaKitPumpManager.bluetoothManager.peripheral != nil {
@@ -629,6 +735,73 @@ extension DanaKitPumpManager {
             self.scanDeviceObservers.forEach { (observer) in
                 observer.deviceScanDidUpdate(device)
             }
+        }
+    }
+    
+    func notifyBolusError() {
+        guard let doseEntry = self.doseEntry, self.state.bolusState != .noBolus else {
+            // Ignore if no bolus is going
+            return
+        }
+        
+        self.state.bolusState = .noBolus
+        self.notifyStateDidChange()
+        
+        let dose = doseEntry.toDoseEntry()
+        let deliveredUnits = doseEntry.deliveredUnits
+        
+        self.doseEntry = nil
+        self.doseReporter = nil
+        
+        guard let dose = dose else {
+            return
+        }
+        
+        DispatchQueue.main.async {
+            self.pumpDelegate.notify { (delegate) in
+                guard let delegate = delegate else {
+                    preconditionFailure("pumpManagerDelegate cannot be nil")
+                }
+                
+                delegate.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: deliveredUnits)], lastReconciliation: Date.now, completion: { _ in })
+            }
+        }
+    }
+    
+    func notifyBolusDidUpdate(deliveredUnits: Double) {
+        guard let doseEntry = self.doseEntry else {
+            return
+        }
+        
+        doseEntry.deliveredUnits = deliveredUnits
+        self.doseReporter?.notify(deliveredUnits: deliveredUnits)
+    }
+    
+    func notifyBolusDone(deliveredUnits: Double) {
+        self.state.bolusState = .noBolus
+        self.notifyStateDidChange()
+        self.disconnect()
+        
+        guard let doseEntry = self.doseEntry else {
+            return
+        }
+        
+        doseEntry.deliveredUnits = deliveredUnits
+        
+        let dose = doseEntry.toDoseEntry()
+        self.doseEntry = nil
+        self.doseReporter = nil
+        
+        guard let dose = dose else {
+            return
+        }
+        
+        self.pumpDelegate.notify { (delegate) in
+            guard let delegate = delegate else {
+                preconditionFailure("pumpManagerDelegate cannot be nil")
+            }
+
+            delegate.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: deliveredUnits)], lastReconciliation: Date.now, completion: { _ in })
         }
     }
 }
