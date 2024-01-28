@@ -222,11 +222,13 @@ extension DanaKitPumpManager: PumpManager {
                     
                     DispatchQueue.main.async {
                         self.pumpDelegate.notify { (delegate) in
-                            delegate?.pumpManager(self, hasNewPumpEvents: events, lastReconciliation: Date.now, completion: { (error) in
-                                completion?(Date.now)
-                            })
+                            delegate?.pumpManager(self, hasNewPumpEvents: events, lastReconciliation: Date.now, completion: { _ in })
+                            delegate?.pumpManager(self, didReadReservoirValue: self.state.reservoirLevel, at: Date.now, completion: { _ in })
+                            delegate?.pumpManagerDidUpdateState(self)
                         }
                     }
+                    
+                    completion?(Date.now)
                 }
             }
         }
