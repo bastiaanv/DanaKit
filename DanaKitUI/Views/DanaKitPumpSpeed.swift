@@ -36,7 +36,7 @@ struct DanaKitPumpSpeed: View {
     @ViewBuilder
     private var content: some View {
         VStack(alignment: .leading, spacing: 15) {
-            Text(LocalizedString("The Dana pumps support different delivery speeds. You can set it up here, but also in the settings menu", comment: "Dana delivery speed body")).fixedSize(horizontal: false, vertical: true)
+            Text(LocalizedString("The Dana pumps support different delivery speeds. You can set it up here", comment: "Dana delivery speed body")).fixedSize(horizontal: false, vertical: true)
             Divider()
             ResizeablePicker(selection: $speedDefault,
                                      data: self.speedsAllowed,

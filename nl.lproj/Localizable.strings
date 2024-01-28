@@ -77,16 +77,16 @@
 "Delivery speed" = "Bolus snelheid"
 
 /* Dana bolus speed 12u per min */
-"12 U/min" = "12 E/min"
+"12 sec/U" = "12 sec/E"
 
 /* Dana bolus speed 30u per min */
-"30 U/min" = "30 E/min"
+"30 sec/U" = "30 sec/E"
 
 /* Dana bolus speed 60u per min */
-"60 U/min" = "60 E/min"
+"60 sec/U" = "60 sec/E"
 
 /* Dana delivery speed body */
-"The Dana pumps support different delivery speeds. You can set it up here, but also in the settings menu" = "De Dana-pompen ondersteunen verschillende bolus snelheden. Je kunt dit hier instellen, maar ook in het instellingenmenu"
+"The Dana pumps support different delivery speeds. You can set it up here" = "De Dana-pompen ondersteunen verschillende bolus snelheden. Je kunt dit hier instellen"
 
 /* Text for finish button */
 "Finish" = "Afronden"

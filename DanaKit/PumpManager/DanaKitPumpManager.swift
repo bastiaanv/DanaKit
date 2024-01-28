@@ -220,10 +220,12 @@ extension DanaKitPumpManager: PumpManager {
                     
                     self.disconnect()
                     
-                    self.pumpDelegate.notify { (delegate) in
-                        delegate?.pumpManager(self, hasNewPumpEvents: events, lastReconciliation: Date.now, completion: { (error) in
-                            completion?(Date.now)
-                        })
+                    DispatchQueue.main.async {
+                        self.pumpDelegate.notify { (delegate) in
+                            delegate?.pumpManager(self, hasNewPumpEvents: events, lastReconciliation: Date.now, completion: { (error) in
+                                completion?(Date.now)
+                            })
+                        }
                     }
                 }
             }
@@ -258,7 +260,7 @@ extension DanaKitPumpManager: PumpManager {
                 case HistoryCode.RECORD_TYPE_BOLUS:
                     // If we find a bolus here, we assume that is hasnt been synced to Loop
                     return NewPumpEvent.bolus(
-                        dose: DoseEntry.bolus(units: item.value!, deliveredUnits: item.value!, duration: item.durationInMin! * 60, activationType: .manualNoRecommendation, insulinType: self.state.insulinType!),
+                        dose: DoseEntry.bolus(units: item.value!, deliveredUnits: item.value!, duration: item.durationInMin! * 60, activationType: .manualNoRecommendation, insulinType: self.state.insulinType!, startDate: item.timestamp),
                         units: item.value!)
                     
                 case HistoryCode.RECORD_TYPE_SUSPEND:
@@ -358,6 +360,7 @@ extension DanaKitPumpManager: PumpManager {
                         self.doseEntry = UnfinalizedDose(units: units, duration: self.estimatedDuration(toBolus: units), activationType: activationType, insulinType: self.state.insulinType!)
                         self.doseReporter = DanaKitDoseProgressReporter(total: units)
                         
+                        self.state.lastStatusDate = Date()
                         self.state.bolusState = .inProgress
                         self.notifyStateDidChange()
                         

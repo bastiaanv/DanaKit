@@ -71,16 +71,16 @@
 "Delivery speed" = "Delivery speed"
 
 /* Dana bolus speed 12u per min */
-"12 U/min" = "12 U/min"
+"12 sec/U" = "12 sec/U"
 
 /* Dana bolus speed 30u per min */
-"30 U/min" = "30 U/min"
+"30 sec/U" = "30 sec/U"
 
 /* Dana bolus speed 60u per min */
-"60 U/min" = "60 U/min"
+"60 sec/U" = "60 sec/U"
 
 /* Dana delivery speed body */
-"The Dana pumps support different delivery speeds. You can set it up here, but also in the settings menu" = "The Dana pumps support different delivery speeds. You can set it up here, but also in the settings menu"
+"The Dana pumps support different delivery speeds. You can set it up here" = "The Dana pumps support different delivery speeds. You can set it up here"
 
 /* Text for finish button */
 "Finish" = "Finish"
