@@ -601,7 +601,7 @@ class GeneratePacketTests: XCTestCase {
     }
 
     func testGenerateLoopHistoryEventsFromDateInUTC() {
-        let options = PacketLoopHistoryEvents(from: Date(timeIntervalSince1970: 1701774000), usingUTC: true)
+        let options = PacketLoopHistoryEvents(from: Date(timeIntervalSince1970: 1701774000))
         let packet = generatePacketLoopHistoryEvents(options: options)
         let expectedData = Data([23, 12, 5, 12, 0, 0])
         let expectedSnapshot = DanaGeneratePacket(opCode: 194, data: expectedData)
@@ -612,7 +612,7 @@ class GeneratePacketTests: XCTestCase {
     }
 
     func testGenerateLoopHistoryEvents() {
-        let options = PacketLoopHistoryEvents(from: nil, usingUTC: false)
+        let options = PacketLoopHistoryEvents(from: nil)
         let packet = generatePacketLoopHistoryEvents(options: options)
         let expectedData = Data([0, 1, 1, 0, 0, 0])
         let expectedSnapshot = DanaGeneratePacket(opCode: 194, data: expectedData)
@@ -627,8 +627,7 @@ class GeneratePacketTests: XCTestCase {
             packetType: LoopHistoryEvents.carbs,
             time: Date(timeIntervalSince1970: 1701774000),
             param1: 0,
-            param2: 0,
-            usingUTC: false
+            param2: 0
         )
         let packet = generatePacketLoopSetEventHistory(options: options)
         let expectedData = Data([14, 23, 12, 5, 12, 0, 0, 0, 0, 0, 0])

@@ -650,6 +650,40 @@ extension DanaKitPumpManager: PumpManager {
         completion(.success(deliveryLimits))
     }
     
+    public func syndPumpTime(completion: @escaping (Error?) -> Void) {
+        guard self.state.bolusState == .noBolus else {
+            completion(PumpManagerError.deviceState(DanaKitPumpManagerError.pumpIsBusy))
+            return
+        }
+        
+        self.ensureConnected { result in
+            switch result {
+            case .failure:
+                completion(PumpManagerError.connection(DanaKitPumpManagerError.noConnection))
+                return
+            case .success:
+                Task {
+                    do {
+                        let packet = generatePacketGeneralSetPumpTimeUtcWithTimezone(options: PacketGeneralSetPumpTimeUtcWithTimezone(time: Date.now, zoneOffset: UInt8(round(Double(TimeZone.current.secondsFromGMT(for: Date.now) / 3600)))))
+                        let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
+                        
+                        self.disconnect()
+                        
+                        guard result.success else {
+                            completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedTimeAdjustment))
+                            return
+                        }
+                        
+                        completion(nil)
+                    } catch {
+                        self.disconnect()
+                        completion(PumpManagerError.communication(DanaKitPumpManagerError.noConnection))
+                    }
+                }
+            }
+        }
+    }
+    
     private func device() -> HKDevice {
         return HKDevice(
             name: managerIdentifier,
@@ -860,12 +894,16 @@ extension DanaKitPumpManager {
             return
         }
         
-        self.pumpDelegate.notify { (delegate) in
-            guard let delegate = delegate else {
-                preconditionFailure("pumpManagerDelegate cannot be nil")
+        DispatchQueue.main.async {
+            self.pumpDelegate.notify { (delegate) in
+                guard let delegate = delegate else {
+                    preconditionFailure("pumpManagerDelegate cannot be nil")
+                }
+                
+                delegate.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: deliveredUnits)], lastReconciliation: Date.now, completion: { _ in })
             }
-
-            delegate.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: deliveredUnits)], lastReconciliation: Date.now, completion: { _ in })
+            
+            self.notifyStateDidChange()
         }
     }
 }
