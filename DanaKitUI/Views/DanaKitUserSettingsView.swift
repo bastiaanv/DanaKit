@@ -7,42 +7,63 @@
 //
 
 import SwiftUI
+import LoopKitUI
 
 struct DanaKitUserSettingsView: View {
-    @Environment(\.isPresented) var isPresented
-    @Environment(\.dismissAction) private var dismiss
-    
     @ObservedObject var viewModel: DanaKitUserSettingsViewModel
     
     private var revervoirWarningView: PickerView {
         PickerView(
-            currentOption: viewModel.lowReservoirLevel,
+            currentOption: Int(viewModel.lowReservoirRate),
             allowedOptions: Array(5...40),
             formatter: { value in String(value) + LocalizedString("U", comment: "Insulin unit")},
+            didChange: { value in viewModel.lowReservoirRate = UInt8(value) },
             title: LocalizedString("Low reservoir reminder", comment: "Text for low reservoir reminder"),
             description: LocalizedString("The pump reminds you when the amount of insulin in the pump reaches this level", comment: "Description for low reservoir reminder")
         )
     }
     
+    private var time24hView: PickerView {
+        PickerView(
+            currentOption: viewModel.isTimeDisplay24H ? 1 : 0,
+            allowedOptions: [0, 1],
+            formatter: { value in value == 1 ? LocalizedString("On", comment: "text on") : LocalizedString("Off", comment: "text off")},
+            didChange: { value in viewModel.isTimeDisplay24H = value == 1 },
+            title: LocalizedString("24h display", comment: "Text for 24h display"),
+            description: LocalizedString("Should time be display in 12h or 24h", comment: "Description for 24h display")
+        )
+    }
+    
+    @ViewBuilder
     var body: some View {
-        List {
-            NavigationLink(destination: revervoirWarningView) {
-                Text(LocalizedString("Low reservoir reminder", comment: "Text for low reservoir reminder"))
-                    .foregroundColor(Color.primary)
+        VStack {
+            List {
+                NavigationLink(destination: revervoirWarningView) {
+                    HStack {
+                        Text(LocalizedString("Low reservoir reminder", comment: "Text for low reservoir reminder"))
+                            .foregroundColor(Color.primary)
+                        Spacer()
+                        Text(String(viewModel.lowReservoirRate) + LocalizedString("U", comment: "Insulin unit"))
+                    }
+                }
+                NavigationLink(destination: time24hView) {
+                    HStack {
+                        Text(LocalizedString("24h display", comment: "Text for 24h display"))
+                            .foregroundColor(Color.primary)
+                        Spacer()
+                        Text(viewModel.isTimeDisplay24H ? LocalizedString("On", comment: "text on") : LocalizedString("Off", comment: "text off"))
+                    }
+                }
             }
-        }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(LocalizedString("Cancel", comment: "Cancel button title"), action: {
-                    self.dismiss()
-                })
+            Spacer()
+            Button(action: { viewModel.storeUserOption() }) {
+                Text(LocalizedString("Save", comment: "Text for save button"))
+                    .actionButtonStyle(.primary)
+                    .padding()
             }
+            .disabled(viewModel.storingUseroption)
         }
-        .onChange(of: isPresented) { newValue in
-            if newValue {
-                viewModel.start()
-            }
-        }
+        .navigationBarTitle(LocalizedString("User options", comment: "Title for user options"))
     }
 }
 

@@ -10,9 +10,12 @@ import SwiftUI
 import LoopKitUI
 
 struct PickerView: View {
-    @Environment(\.dismissAction) private var dismiss
+    @State var currentOption: Int {
+        didSet {
+            didChange?(currentOption)
+        }
+    }
     
-    @State var currentOption: Int = 0
     var allowedOptions: [Int]
     var formatter: (Int) -> String
     var didChange: ((Int) -> Void)?
@@ -28,13 +31,6 @@ struct PickerView: View {
         }
         .padding(.horizontal)
         .navigationBarHidden(false)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(LocalizedString("Cancel", comment: "Cancel button title"), action: {
-                    self.dismiss()
-                })
-            }
-        }
     }
     
     @ViewBuilder
