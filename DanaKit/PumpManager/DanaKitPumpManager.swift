@@ -239,7 +239,7 @@ extension DanaKitPumpManager: PumpManager {
                         self.notifyStateDidChange()
                         
                         self.pumpDelegate.notify { (delegate) in
-                            delegate?.pumpManager(self, hasNewPumpEvents: events, lastReconciliation: Date.now, completion: { _ in })
+                            delegate?.pumpManager(self, hasNewPumpEvents: events, lastReconciliation: Date.now, replacePendingEvents: true, completion: { _ in })
                             delegate?.pumpManager(self, didReadReservoirValue: self.state.reservoirLevel, at: Date.now, completion: { _ in })
                             delegate?.pumpManagerDidUpdateState(self)
                         }
@@ -498,7 +498,7 @@ extension DanaKitPumpManager: PumpManager {
                             
                             let dose = DoseEntry.basal(rate: self.currentBaseBasalRate, insulinType: self.state.insulinType!)
                             self.pumpDelegate.notify { (delegate) in
-                                delegate?.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.basal(dose: dose)], lastReconciliation: Date.now, completion: { _ in })
+                                delegate?.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.basal(dose: dose)], lastReconciliation: Date.now, replacePendingEvents: true, completion: { _ in })
                             }
                             
                             completion(nil)
@@ -531,7 +531,7 @@ extension DanaKitPumpManager: PumpManager {
                             self.notifyStateDidChange()
                             
                             self.pumpDelegate.notify { (delegate) in
-                                delegate?.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.tempBasal(dose: dose, units: unitsPerHour, duration: duration)], lastReconciliation: Date.now, completion: { _ in })
+                                delegate?.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.tempBasal(dose: dose, units: unitsPerHour, duration: duration)], lastReconciliation: Date.now, replacePendingEvents: true, completion: { _ in })
                             }
                         } else if duration == 1800 {
                             // 30 min. Only temp basal below 100% allowed here
@@ -561,7 +561,7 @@ extension DanaKitPumpManager: PumpManager {
                             self.notifyStateDidChange()
                             
                             self.pumpDelegate.notify { (delegate) in
-                                delegate?.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.tempBasal(dose: dose, units: unitsPerHour, duration: duration)], lastReconciliation: Date.now, completion: { _ in })
+                                delegate?.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.tempBasal(dose: dose, units: unitsPerHour, duration: duration)], lastReconciliation: Date.now, replacePendingEvents: true, completion: { _ in })
                             }
                         } else if Int(duration) % 60 == 0 {
                             // Only full hours are allowed here
@@ -587,7 +587,7 @@ extension DanaKitPumpManager: PumpManager {
                             self.notifyStateDidChange()
                             
                             self.pumpDelegate.notify { (delegate) in
-                                delegate?.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.tempBasal(dose: dose, units: unitsPerHour, duration: duration)], lastReconciliation: Date.now, completion: { _ in })
+                                delegate?.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.tempBasal(dose: dose, units: unitsPerHour, duration: duration)], lastReconciliation: Date.now, replacePendingEvents: true, completion: { _ in })
                             }
                         } else {
                             self.log.error("%{public}@: Unsupported temp basal duration: %{public}@", #function, duration)
@@ -641,7 +641,7 @@ extension DanaKitPumpManager: PumpManager {
                                 preconditionFailure("pumpManagerDelegate cannot be nil")
                             }
                             
-                            delegate.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.suspend(dose: dose)], lastReconciliation: Date.now, completion: { (error) in
+                            delegate.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.suspend(dose: dose)], lastReconciliation: Date.now, replacePendingEvents: true, completion: { (error) in
                                 completion(nil)
                             })
                         }
@@ -692,7 +692,7 @@ extension DanaKitPumpManager: PumpManager {
                                 preconditionFailure("pumpManagerDelegate cannot be nil")
                             }
                             
-                            delegate.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.resume(dose: dose)], lastReconciliation: Date.now, completion: { (error) in
+                            delegate.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.resume(dose: dose)], lastReconciliation: Date.now, replacePendingEvents: true, completion: { (error) in
                                 completion(nil)
                             })
                         }
@@ -759,7 +759,7 @@ extension DanaKitPumpManager: PumpManager {
                                 preconditionFailure("pumpManagerDelegate cannot be nil")
                             }
                             
-                            delegate.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.basal(dose: dose)], lastReconciliation: Date.now, completion: { (error) in
+                            delegate.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.basal(dose: dose)], lastReconciliation: Date.now, replacePendingEvents: true, completion: { (error) in
                                 completion(.success(schedule))
                             })
                         }
@@ -1034,7 +1034,7 @@ extension DanaKitPumpManager {
                     preconditionFailure("pumpManagerDelegate cannot be nil")
                 }
                 
-                delegate.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: deliveredUnits)], lastReconciliation: Date.now, completion: { _ in })
+                delegate.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: deliveredUnits)], lastReconciliation: Date.now, replacePendingEvents: true, completion: { _ in })
             }
         }
     }
@@ -1073,7 +1073,7 @@ extension DanaKitPumpManager {
                     preconditionFailure("pumpManagerDelegate cannot be nil")
                 }
                 
-                delegate.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: deliveredUnits)], lastReconciliation: Date.now, completion: { _ in })
+                delegate.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: deliveredUnits)], lastReconciliation: Date.now, replacePendingEvents: true, completion: { _ in })
             }
             
             self.notifyStateDidChange()
