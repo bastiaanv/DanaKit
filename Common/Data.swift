@@ -58,6 +58,10 @@ extension Data {
         components.minute = min
         components.second = sec
 
-        return Calendar(identifier: .gregorian).date(from: components)!
+        let utcTimeZone = TimeZone(identifier: "UTC")!
+        var calendar = Calendar.current
+        calendar.timeZone = utcTimeZone
+        
+        return calendar.date(from: components)!
     }
 }

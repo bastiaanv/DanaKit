@@ -22,7 +22,7 @@ func generatePacketBasalSetProfileRate(options: PacketBasalSetProfileRate) throw
     dataArray[0] = options.profileNumber
 
     for i in 0..<24 {
-        let rate = UInt16(options.profileBasalRate[i] * 100)
+        let rate = UInt16(round(options.profileBasalRate[i] * 100))
         dataArray[1 + i * 2] = UInt8(rate & 0xff)
         dataArray[2 + i * 2] = UInt8((rate >> 8) & 0xff)
     }

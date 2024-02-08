@@ -93,7 +93,7 @@ class BluetoothManager : NSObject {
                 self.peripheral = peripheral
                 self.peripheralManager = PeripheralManager(peripheral, self, self.pumpManagerDelegate!, view, self.connectionCompletion)
                 
-                self.log.default("%{public}@: Found peripheral! %{public}@", #function, peripheral)
+//                self.log.default("%{public}@: Found peripheral! %{public}@", #function, peripheral)
                 self.manager.connect(peripheral, options: nil)
             }
             return
@@ -123,7 +123,6 @@ class BluetoothManager : NSObject {
     }
     
     func disconnect(_ peripheral: CBPeripheral) {
-        log.default("Disconnecting from pump...")
         self.autoConnectUUID = nil
         self.manager.cancelPeripheralConnection(peripheral)
     }
@@ -185,7 +184,7 @@ extension BluetoothManager : CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         dispatchPrecondition(condition: .onQueue(managerQueue))
         
-        log.default("%{public}@: %{public}@", #function, peripheral)
+//        log.default("%{public}@: %{public}@", #function, peripheral)
         
         DispatchQueue.main.async {
             let view = self.view ?? UIApplication.shared.windows.last!.rootViewController!
