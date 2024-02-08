@@ -124,6 +124,7 @@ class DanaKitSettingsViewModel : ObservableObject {
     
     func didBolusSpeedChanged(_ bolusSpeed: BolusSpeed) {
         self.pumpManager?.state.bolusSpeed = bolusSpeed
+        self.pumpManager?.notifyStateDidChange()
         self.bolusSpeed = bolusSpeed
     }
     
