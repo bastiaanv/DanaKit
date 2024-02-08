@@ -131,7 +131,7 @@ struct DanaKitSettingsView: View {
                             .foregroundColor(.secondary)
                         }
                 }
-                NavigationLink(destination: DanaKitSettingsPumpSpeed(currentSpeed: Int(viewModel.bolusSpeed.rawValue), didChange: viewModel.didBolusSpeedChanged)) {
+                NavigationLink(destination: DanaKitSettingsPumpSpeed(value: .constant(Int(viewModel.bolusSpeed.rawValue)), didChange: viewModel.didBolusSpeedChanged)) {
                     HStack {
                         Text(LocalizedString("Delivery speed", comment: "Title for delivery speed")).foregroundColor(Color.primary)
                         Spacer()
