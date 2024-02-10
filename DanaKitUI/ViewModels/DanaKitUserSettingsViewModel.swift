@@ -16,7 +16,7 @@ class DanaKitUserSettingsViewModel : ObservableObject {
     @Published var isButtonScrollOnOff: Bool
     @Published var beepAndAlarm: UInt8
     @Published var lcdOnTimeInSec: UInt8
-    @Published var backlightOnTimInSec: UInt8
+    @Published var backlightOnTimeInSec: UInt8
     
     private let pumpManager: DanaKitPumpManager?
     
@@ -28,7 +28,7 @@ class DanaKitUserSettingsViewModel : ObservableObject {
         self.isButtonScrollOnOff = self.pumpManager?.state.isButtonScrollOnOff ?? false
         self.beepAndAlarm = self.pumpManager?.state.beepAndAlarm ?? 0
         self.lcdOnTimeInSec = self.pumpManager?.state.lcdOnTimeInSec ?? 0
-        self.backlightOnTimInSec = self.pumpManager?.state.backlightOnTimInSec ?? 0
+        self.backlightOnTimeInSec = self.pumpManager?.state.backlightOnTimInSec ?? 0
     }
     
     func storeUserOption() {
@@ -42,7 +42,7 @@ class DanaKitUserSettingsViewModel : ObservableObject {
             isButtonScrollOnOff: self.isButtonScrollOnOff,
             beepAndAlarm: self.beepAndAlarm,
             lcdOnTimeInSec: self.lcdOnTimeInSec,
-            backlightOnTimInSec: self.backlightOnTimInSec,
+            backlightOnTimeInSec: self.backlightOnTimeInSec,
             selectedLanguage: pumpManager.state.selectedLanguage,
             units: pumpManager.state.units,
             shutdownHour: pumpManager.state.shutdownHour,

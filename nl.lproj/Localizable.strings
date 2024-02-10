@@ -251,3 +251,21 @@
 
 /* text off */
 "Off" = "Uit"
+
+/* 12h */
+"12h notation" = "12 uursnotatie"
+
+/* 24h */
+"24h notation" = "24 uursnotatie"
+
+/* Text for Scroll function */
+"Scroll function" = "Scrol functie"
+
+/* text for second */
+"sec" = "sec"
+
+/* backlightOnTimeInSec */
+"Backlight on time" = "Verlichting aan tijd"
+
+/* lcdOnTimeInSec */
+"Lcd on time" = "Lcd aan tijd"

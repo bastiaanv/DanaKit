@@ -234,11 +234,6 @@ extension DanaKitPumpManager: PumpManager {
     
     public func ensureCurrentPumpData(completion: ((Date?) -> Void)?) {
         log.default("%{public}@: Syncing pump data", #function)
-        guard self.state.bolusState == .noBolus else {
-            log.error("%{public}@: Bolus state is incorrect", #function)
-            completion?(nil)
-            return
-        }
         
         self.ensureConnected { result in
             switch result {

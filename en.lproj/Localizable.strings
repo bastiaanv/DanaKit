@@ -233,3 +233,21 @@
 
 /* text off */
 "Off" = "Off"
+
+/* 12h */
+"12h notation" = "12h notation"
+
+/* 24h */
+"24h notation" = "24h notation"
+
+/* Text for Scroll function */
+"Scroll function" = "Scroll function"
+
+/* text for second */
+"sec" = "sec"
+
+/* backlightOnTimeInSec */
+"Backlight on time" = "Verlichting aan tijd"
+
+/* lcdOnTimeInSec */
+"Lcd on time" = "Lcd on time"
