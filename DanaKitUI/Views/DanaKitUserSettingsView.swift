@@ -14,7 +14,7 @@ struct DanaKitUserSettingsView: View {
     
     private var revervoirWarningView: PickerView {
         PickerView(
-            currentOption: Int(viewModel.lowReservoirRate),
+            value: Int(viewModel.lowReservoirRate),
             allowedOptions: Array(5...40),
             formatter: { value in String(value) + LocalizedString("U", comment: "Insulin unit")},
             didChange: { value in viewModel.lowReservoirRate = UInt8(value) },
@@ -25,7 +25,7 @@ struct DanaKitUserSettingsView: View {
     
     private var time24hView: PickerView {
         PickerView(
-            currentOption: viewModel.isTimeDisplay24H ? 1 : 0,
+            value: viewModel.isTimeDisplay24H ? 1 : 0,
             allowedOptions: [0, 1],
             formatter: { value in value == 1 ? LocalizedString("On", comment: "text on") : LocalizedString("Off", comment: "text off")},
             didChange: { value in viewModel.isTimeDisplay24H = value == 1 },
