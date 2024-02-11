@@ -15,7 +15,6 @@ class PeripheralManager: NSObject {
     
     private let connectedDevice: CBPeripheral
     private let bluetoothManager: BluetoothManager
-    private let view: UIViewController
     private var completion: (Error?) -> Void
     
     private var pumpManager: DanaKitPumpManager
@@ -53,12 +52,11 @@ class PeripheralManager: NSObject {
         }
     }
     
-    public init(_ peripheral: CBPeripheral, _ bluetoothManager: BluetoothManager, _ pumpManager: DanaKitPumpManager, _ view: UIViewController, _ completion: @escaping (Error?) -> Void) {
+    public init(_ peripheral: CBPeripheral, _ bluetoothManager: BluetoothManager, _ pumpManager: DanaKitPumpManager,_ completion: @escaping (Error?) -> Void) {
         self.connectedDevice = peripheral
         self.encryptionMode = .DEFAULT
         self.bluetoothManager = bluetoothManager
         self.pumpManager = pumpManager
-        self.view = view
         self.completion = completion
         
         super.init()
@@ -384,21 +382,9 @@ extension PeripheralManager {
             
             guard ble5Keys.filter({ $0 == 0 }).count == 0 else {
                 log.error("%{public}@: Invalid BLE-5 keys. Please unbound device and try again.", #function)
-                self.pumpManager.disconnect(self.connectedDevice)
                 
-                DispatchQueue.main.async {
-                    let dialogMessage = UIAlertController(
-                        title: LocalizedString("ERROR: Failed to pair device", comment: "Dana-i invalid ble5 keys"),
-                        message: LocalizedString("Failed to pair to ", comment: "Dana-i failed to pair p1") + (self.pumpManager.state.deviceName ?? "<NO NAME>") + LocalizedString(". Please go to your bluetooth settings, forget this device, and try again", comment: "Dana-i failed to pair p2"),
-                        preferredStyle: .alert)
-                    dialogMessage.addAction(UIAlertAction(
-                        title: LocalizedString("OK", comment: "Dana-i oke invalid ble5 keys"),
-                        style: .default,
-                        handler: { _ in }
-                    ))
-                    
-                    self.view.present(dialogMessage, animated: true, completion: nil)
-                }
+                self.pumpManager.disconnect(self.connectedDevice)
+                self.pumpManager.notifyAlert(PumpManagerAlert.ble5InvalidKeys(self.pumpManager.state.deviceName ?? "<NO NAME>"))
                 
                 DispatchQueue.main.async {
                     self.completion(NSError(domain: "Invalid ble5 keys", code: 0, userInfo: nil))
@@ -523,7 +509,11 @@ extension PeripheralManager {
                 }
             ))
             
-            self.view.present(dialogMessage, animated: true, completion: nil)
+            guard let view = UIApplication.shared.windows.last?.rootViewController else {
+                return
+            }
+            
+            view.present(dialogMessage, animated: true, completion: nil)
         }
     }
     
@@ -787,6 +777,11 @@ extension PeripheralManager {
             case CommandNotifyDeliveryRateDisplay:
                 let data = message.data as! PacketNotifyDeliveryRateDisplay
                 self.pumpManager.notifyBolusDidUpdate(deliveredUnits: data.deliveredInsulin)
+                return
+            case CommandNotifyAlarm:
+                let data = message.data as! PacketNotifyAlarm
+                self.pumpManager.notifyBolusError()
+                self.pumpManager.notifyAlert(data.alert)
                 return
             default:
                 self.pumpManager.notifyBolusError()
