@@ -48,7 +48,6 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         self.ble5Keys = rawValue["ble5Keys"] as? Data ?? Data([0, 0, 0, 0, 0, 0])
         self.isTimeDisplay24H = rawValue["isTimeDisplay24H"] as? Bool ?? false
         self.isButtonScrollOnOff = rawValue["isButtonScrollOnOff"] as? Bool ?? false
-        self.beepAndAlarm = rawValue["beepAndAlarm"] as? UInt8 ?? 0
         self.lcdOnTimeInSec = rawValue["lcdOnTimeInSec"] as? UInt8 ?? 0
         self.backlightOnTimInSec = rawValue["backlightOnTimInSec"] as? UInt8 ?? 0
         self.units = rawValue["units"] as? UInt8 ?? 0
@@ -65,6 +64,12 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         
         if let rawInsulinType = rawValue["insulinType"] as? InsulinType.RawValue {
             insulinType = InsulinType(rawValue: rawInsulinType)
+        }
+        
+        if let rawBeepAndAlarmType = rawValue["beepAndAlarm"] as? UInt8 {
+            beepAndAlarm = BeepAlarmType(rawValue: rawBeepAndAlarmType) ?? .sound
+        } else {
+            beepAndAlarm = .sound
         }
         
         if let rawBasalDeliveryOrdinal = rawValue["basalDeliveryOrdinal"] as? DanaKitBasal.RawValue {
@@ -92,7 +97,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         self.basalDeliveryOrdinal = .active
         self.isTimeDisplay24H = false
         self.isButtonScrollOnOff = false
-        self.beepAndAlarm = 0
+        self.beepAndAlarm = .sound
         self.lcdOnTimeInSec = 0
         self.backlightOnTimInSec = 0
         self.units = 0
@@ -134,7 +139,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         value["ble5Keys"] = self.ble5Keys
         value["isTimeDisplay24H"] = self.isTimeDisplay24H
         value["isButtonScrollOnOff"] = self.isButtonScrollOnOff
-        value["beepAndAlarm"] = self.beepAndAlarm
+        value["beepAndAlarm"] = self.beepAndAlarm.rawValue
         value["lcdOnTimeInSec"] = self.lcdOnTimeInSec
         value["backlightOnTimInSec"] = self.backlightOnTimInSec
         value["units"] = self.units
@@ -206,7 +211,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
     /// User options
     public var isTimeDisplay24H: Bool
     public var isButtonScrollOnOff: Bool
-    public var beepAndAlarm: UInt8
+    public var beepAndAlarm: BeepAlarmType
     public var lcdOnTimeInSec: UInt8
     public var backlightOnTimInSec: UInt8
     public var selectedLanguage: UInt8
