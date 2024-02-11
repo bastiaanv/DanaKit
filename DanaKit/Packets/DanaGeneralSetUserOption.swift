@@ -19,12 +19,6 @@ public struct PacketGeneralSetUserOption {
     var cannulaVolume: UInt16
     var refillAmount: UInt16
 
-    var selectableLanguage1: UInt8
-    var selectableLanguage2: UInt8
-    var selectableLanguage3: UInt8
-    var selectableLanguage4: UInt8
-    var selectableLanguage5: UInt8
-
     /** Only on hw v7+ */
     var targetBg: UInt16?
 }

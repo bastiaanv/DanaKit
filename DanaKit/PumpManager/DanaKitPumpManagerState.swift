@@ -56,11 +56,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         self.shutdownHour = rawValue["shutdownHour"] as? UInt8 ?? 0
         self.cannulaVolume = rawValue["cannulaVolume"] as? UInt16 ?? 0
         self.refillAmount = rawValue["refillAmount"] as? UInt16 ?? 0
-        self.selectableLanguage1 = rawValue["selectableLanguage1"] as? UInt8 ?? 0
-        self.selectableLanguage2 = rawValue["selectableLanguage2"] as? UInt8 ?? 0
-        self.selectableLanguage3 = rawValue["selectableLanguage3"] as? UInt8 ?? 0
-        self.selectableLanguage4 = rawValue["selectableLanguage4"] as? UInt8 ?? 0
-        self.selectableLanguage5 = rawValue["selectableLanguage5"] as? UInt8 ?? 0
+        self.targetBg = rawValue["targetBg"] as? UInt16
         
         if let rawInsulinType = rawValue["insulinType"] as? InsulinType.RawValue {
             insulinType = InsulinType(rawValue: rawInsulinType)
@@ -106,11 +102,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         self.shutdownHour = 0
         self.cannulaVolume = 0
         self.refillAmount = 0
-        self.selectableLanguage1 = 0
-        self.selectableLanguage2 = 0
-        self.selectableLanguage3 = 0
-        self.selectableLanguage4 = 0
-        self.selectableLanguage5 = 0
+        self.targetBg = nil
     }
     
     public var rawValue: RawValue {
@@ -147,11 +139,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         value["shutdownHour"] = self.shutdownHour
         value["cannulaVolume"] = self.cannulaVolume
         value["refillAmount"] = self.refillAmount
-        value["selectableLanguage1"] = self.selectableLanguage1
-        value["selectableLanguage2"] = self.selectableLanguage2
-        value["selectableLanguage3"] = self.selectableLanguage3
-        value["selectableLanguage4"] = self.selectableLanguage4
-        value["selectableLanguage5"] = self.selectableLanguage5
+        value["targetBg"] = self.targetBg
         
         return value
     }
@@ -220,11 +208,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
     public var lowReservoirRate: UInt8
     public var cannulaVolume: UInt16
     public var refillAmount: UInt16
-    public var selectableLanguage1: UInt8
-    public var selectableLanguage2: UInt8
-    public var selectableLanguage3: UInt8
-    public var selectableLanguage4: UInt8
-    public var selectableLanguage5: UInt8
+    public var targetBg: UInt16?
     
     public var basalDeliveryDate: Date = Date.now
     public var basalDeliveryOrdinal: DanaKitBasal = .active

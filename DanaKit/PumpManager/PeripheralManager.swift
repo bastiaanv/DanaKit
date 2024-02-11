@@ -29,14 +29,13 @@ class PeripheralManager: NSObject {
     private let ENCRYPTED_START_BYTE: UInt8 = 0xaa
     private let ENCRYPTED_END_BYTE: UInt8 = 0xee
     
-    private let SERVICE_UUID = CBUUID(string: "FFF0")
+    public static let SERVICE_UUID = CBUUID(string: "FFF0")
     private let READ_CHAR_UUID = CBUUID(string: "FFF1")
     private var readCharacteristic: CBCharacteristic!
     private let WRITE_CHAR_UUID = CBUUID(string: "FFF2")
     private var writeCharacteristic: CBCharacteristic!
     
-    private var sendingTimer: Timer? = nil
-    private var continuationToken: CheckedContinuation<(any DanaParsePacketProtocol), Error>? = nil
+    private var writeQueue: Dictionary<UInt16, (Timer, CheckedContinuation<(any DanaParsePacketProtocol), Error>)> = [:]
     
     private var historyLog: [HistoryItem] = []
     
@@ -65,11 +64,12 @@ class PeripheralManager: NSObject {
     }
     
     func writeMessage(_ packet: DanaGeneratePacket) async throws -> (any DanaParsePacketProtocol)  {
-        guard self.continuationToken == nil, self.sendingTimer == nil else {
-            throw NSError(domain: "Another write action is running. Please wait", code: 0, userInfo: nil)
+        let command = (UInt16((packet.type ?? DanaPacketType.TYPE_RESPONSE)) << 8) + UInt16(packet.opCode)
+        guard self.writeQueue[command] == nil else {
+            throw NSError(domain: "This command is already running. Please wait", code: 0, userInfo: nil)
         }
         
-        let command = UInt16(((packet.type ?? DanaPacketType.TYPE_RESPONSE) & 0xff) << 8) + UInt16(packet.opCode & 0xff)
+        
         let isHistoryPacket = self.isHistoryPacket(opCode: command)
         if (isHistoryPacket && !self.pumpManager.state.isInFetchHistoryMode) {
             throw NSError(domain: "Pump is not in history fetch mode", code: 0, userInfo: nil)
@@ -103,34 +103,23 @@ class PeripheralManager: NSObject {
         // This timeout will be cancelled by `processMessage` once it received the message
         // If this timeout expired, disconnect from the pump and prompt an error...
         return try await withCheckedThrowingContinuation { continuation in
-            self.continuationToken = continuation
-            self.sendingTimer = Timer.scheduledTimer(withTimeInterval: !isHistoryPacket ? 5 : 20, repeats: false) { _ in
-                guard let continuationToken = self.continuationToken else {
-                    return
+            DispatchQueue.main.async {
+                let sendingTimer = Timer.scheduledTimer(withTimeInterval: !isHistoryPacket ? 5 : 20, repeats: false) { _ in
+                    guard let queueItem = self.writeQueue[command] else {
+                        return
+                    }
+                    
+                    queueItem.1.resume(throwing: NSError(domain: "Message write timeout", code: 0, userInfo: nil))
+                    self.writeQueue[command] = nil
                 }
                 
-                continuationToken.resume(throwing: NSError(domain: "Message write timeout", code: 0, userInfo: nil))
+                self.writeQueue[command] = (sendingTimer, continuation)
             }
         }
     }
 }
 
 extension PeripheralManager : CBPeripheralDelegate {
-    func peripheral(_ peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: Error?) {
-        guard error == nil else {
-            log.error("%{public}@: %{public}@", #function, error!.localizedDescription)
-            self.bluetoothManager.disconnect(peripheral)
-            
-            DispatchQueue.main.async {
-                self.completion(error!)
-            }
-            return
-        }
-        
-//        log.default("%{public}@: Read RSSI %{public}@", #function, RSSI)
-        peripheral.discoverServices([SERVICE_UUID])
-    }
-    
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         guard error == nil else {
             log.error("%{public}@: %{public}@", #function, error!.localizedDescription)
@@ -142,7 +131,7 @@ extension PeripheralManager : CBPeripheralDelegate {
             return
         }
         
-        let service = peripheral.services?.first(where: { $0.uuid == SERVICE_UUID })
+        let service = peripheral.services?.first(where: { $0.uuid == PeripheralManager.SERVICE_UUID })
         if (service == nil) {
             log.error("%{public}@: Failed to discover dana data service...", #function)
             self.bluetoothManager.disconnect(peripheral)
@@ -169,7 +158,7 @@ extension PeripheralManager : CBPeripheralDelegate {
             return
         }
         
-        let service = peripheral.services!.first(where: { $0.uuid == SERVICE_UUID })!
+        let service = peripheral.services!.first(where: { $0.uuid == PeripheralManager.SERVICE_UUID })!
         self.readCharacteristic = service.characteristics?.first(where: { $0.uuid == READ_CHAR_UUID })
         self.writeCharacteristic = service.characteristics?.first(where: { $0.uuid == WRITE_CHAR_UUID })
         
@@ -624,19 +613,17 @@ extension PeripheralManager {
             self.pumpManager.state.isPumpSuspended = data.isPumpSuspended
             self.pumpManager.state.isTempBasalInProgress = data.isTempBasalInProgress
             self.pumpManager.state.lowReservoirRate = dataUserOption.lowReservoirRate
+            self.pumpManager.state.isTimeDisplay24H = dataUserOption.isTimeDisplay24H
             self.pumpManager.state.isButtonScrollOnOff = dataUserOption.isButtonScrollOnOff
             self.pumpManager.state.beepAndAlarm = dataUserOption.beepAndAlarm
             self.pumpManager.state.lcdOnTimeInSec = dataUserOption.lcdOnTimeInSec
-            self.pumpManager.state.backlightOnTimInSec = dataUserOption.selectedLanguage
+            self.pumpManager.state.backlightOnTimInSec = dataUserOption.backlightOnTimInSec
+            self.pumpManager.state.selectedLanguage = dataUserOption.selectedLanguage
             self.pumpManager.state.units = dataUserOption.units
             self.pumpManager.state.shutdownHour = dataUserOption.shutdownHour
             self.pumpManager.state.cannulaVolume = dataUserOption.cannulaVolume
             self.pumpManager.state.refillAmount = dataUserOption.refillAmount
-            self.pumpManager.state.selectableLanguage1 = dataUserOption.selectableLanguage1
-            self.pumpManager.state.selectableLanguage2 = dataUserOption.selectableLanguage2
-            self.pumpManager.state.selectableLanguage3 = dataUserOption.selectableLanguage3
-            self.pumpManager.state.selectableLanguage4 = dataUserOption.selectableLanguage4
-            self.pumpManager.state.selectableLanguage5 = dataUserOption.selectableLanguage5
+            self.pumpManager.state.targetBg = dataUserOption.targetBg
             self.pumpManager.state.units = dataUserOption.units
             self.pumpManager.state.bolusState = .noBolus
             self.pumpManager.currentBaseBasalRate = data.currentBasal
@@ -790,17 +777,16 @@ extension PeripheralManager {
         }
         
         // Message received and dequeueing timeout
-        self.sendingTimer?.invalidate()
-        self.sendingTimer = nil
-        guard let token = self.continuationToken else {
+        guard let queueItem = self.writeQueue[message.command ?? 0] else {
             log.error("%{public}@: No continuation toke to send this message back...", #function)
             return
         }
         
+        queueItem.0.invalidate()
+        
         if let data = message.data as? HistoryItem {
             if data.code == HistoryCode.RECORD_TYPE_DONE_UPLOAD {
-                token.resume(returning: DanaParsePacket<[HistoryItem]>(success: true, rawData: Data([]), data: self.historyLog.map({ $0 })))
-                self.continuationToken = nil
+                queueItem.1.resume(returning: DanaParsePacket<[HistoryItem]>(success: true, rawData: Data([]), data: self.historyLog.map({ $0 })))
                 self.historyLog = []
             } else {
                 self.historyLog.append(data)
@@ -809,8 +795,8 @@ extension PeripheralManager {
             return
         }
         
-        token.resume(returning: message)
-        self.continuationToken = nil
+        queueItem.1.resume(returning: message)
+        self.writeQueue[message.command ?? 0] = nil
     }
     
     private func isHistoryPacket(opCode: UInt16) -> Bool {

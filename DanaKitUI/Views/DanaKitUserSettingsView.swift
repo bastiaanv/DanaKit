@@ -64,6 +64,16 @@ struct DanaKitUserSettingsView: View {
         )
     }
     
+    private var beepAlarmView: PickerView {
+        PickerView(
+            value: Int(viewModel.beepAndAlarm.rawValue),
+            allowedOptions: BeepAlarmType.all(),
+            formatter: beepFormatter,
+            didChange: { value in viewModel.beepAndAlarm = BeepAlarmType(rawValue: UInt8(value)) ?? .sound },
+            title: LocalizedString("Alarm beeps", comment: "beepAndAlarm")
+        )
+    }
+    
     @ViewBuilder
     var body: some View {
         VStack {
@@ -108,16 +118,41 @@ struct DanaKitUserSettingsView: View {
                         Text("\(viewModel.lcdOnTimeInSec) \(LocalizedString("sec", comment: "text for second"))")
                     }
                 }
+                NavigationLink(destination: beepAlarmView) {
+                    HStack {
+                        Text(LocalizedString("Alarm beeps", comment: "beepAndAlarm"))
+                            .foregroundColor(Color.primary)
+                        Spacer()
+                        Text(beepFormatter(value: Int(viewModel.beepAndAlarm.rawValue)))
+                    }
+                }
             }
             Spacer()
             Button(action: { viewModel.storeUserOption() }) {
-                Text(LocalizedString("Save", comment: "Text for save button"))
-                    .actionButtonStyle(.primary)
-                    .padding()
+                if viewModel.storingUseroption {
+                    ActivityIndicator(isAnimating: .constant(true), style: .medium)
+                } else {
+                    Text(LocalizedString("Save", comment: "Text for save button"))
+                        .actionButtonStyle(.primary)
+                        .padding()
+                }
             }
             .disabled(viewModel.storingUseroption)
         }
         .navigationBarTitle(LocalizedString("User options", comment: "Title for user options"))
+    }
+    
+    private func beepFormatter(value: Int) -> String {
+        switch value {
+        case 1:
+            return LocalizedString("Sound", comment: "beepAndAlarm.sound")
+        case 2:
+            return LocalizedString("Vibration", comment: "beepAndAlarm.vibration")
+        case 3:
+            return LocalizedString("Both", comment: "beepAndAlarm.both")
+        default:
+            return ""
+        }
     }
 }
 

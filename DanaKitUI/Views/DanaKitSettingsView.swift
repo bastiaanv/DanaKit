@@ -139,7 +139,7 @@ struct DanaKitSettingsView: View {
                             .foregroundColor(.secondary)
                         }
                 }
-                NavigationLink(destination: DanaKitUserSettingsView(viewModel: DanaKitUserSettingsViewModel(viewModel.pumpManager))) {
+                NavigationLink(destination: viewModel.userOptionsView) {
                     Text(LocalizedString("User options", comment: "Title for user options"))
                         .foregroundColor(Color.primary)
                 }
