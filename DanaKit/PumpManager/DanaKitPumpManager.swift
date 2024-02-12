@@ -207,7 +207,7 @@ extension DanaKitPumpManager: PumpManager {
         return PumpManagerStatus(
             timeZone: TimeZone.current,
             device: device(),
-            pumpBatteryChargeRemaining: state.batteryRemaining,
+            pumpBatteryChargeRemaining: state.batteryRemaining / 100,
             basalDeliveryState: state.basalDeliveryState,
             bolusState: bolusState(self.state.bolusState),
             insulinType: state.insulinType
@@ -488,15 +488,21 @@ extension DanaKitPumpManager: PumpManager {
                     }
                     
                     do {
-                        if (duration < .ulpOfOne) {
+                        
+                        if self.state.isTempBasalInProgress {
                             let packet = generatePacketBasalCancelTemporary()
                             let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
-                            self.disconnect()
                             
                             guard result.success else {
-                                completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedTempBasalAdjustment("Pump send error")))
+                                self.disconnect()
+                                self.log.error("%{public}@: Could not cancel old temp basal (full hour)", #function)
+                                completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedTempBasalAdjustment("Could not cancel old temp basal (full hour)")))
                                 return
                             }
+                        }
+                        
+                        if (duration < .ulpOfOne) {
+                            self.disconnect()
                             
                             self.state.basalDeliveryOrdinal = .active
                             self.state.basalDeliveryDate = Date.now
@@ -509,33 +515,25 @@ extension DanaKitPumpManager: PumpManager {
                                 delegate?.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.basal(dose: dose)], lastReconciliation: Date.now, completion: { _ in })
                             }
                             
+                            self.log.default("%{public}@: Succesfully cancelled temp basal", #function)
                             completion(nil)
                             
                         } else if duration == 900 {
                             // 15 min. Only basal boosts allowed here
-                            let percentage = absoluteBasalRateToPercentage(absoluteValue: unitsPerHour, basalSchedule: self.state.basalSchedule)
+                            let percentage = self.absoluteBasalRateToPercentage(absoluteValue: unitsPerHour, basalSchedule: self.state.basalSchedule)
                             guard let percentage = percentage else {
                                 self.disconnect()
+                                self.log.error("%{public}@: Basal schedule is not available... (15 min)", #function)
                                 completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedTempBasalAdjustment("Basal schedule is not available... (15 min)")))
                                 return
                             }
                             
-                            if self.state.isTempBasalInProgress {
-                                let packet = generatePacketBasalCancelTemporary()
-                                let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
-                                
-                                guard result.success else {
-                                    self.disconnect()
-                                    completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedTempBasalAdjustment("Could not cancel old temp basal (15 min)")))
-                                    return
-                                }
-                            }
-                            
-                            let packet = generatePacketLoopSetTemporaryBasal(options: PacketLoopSetTemporaryBasal(percent: percentage))
+                            let packet = generatePacketLoopSetTemporaryBasal(options: PacketLoopSetTemporaryBasal(percent: percentage, duration: .min15))
                             let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
                             self.disconnect()
                             
                             guard result.success else {
+                                self.log.error("%{public}@: Pump rejected command (15 min)", #function)
                                 completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedTempBasalAdjustment("Pump rejected command (15 min)")))
                                 return
                             }
@@ -550,31 +548,25 @@ extension DanaKitPumpManager: PumpManager {
                             self.pumpDelegate.notify { (delegate) in
                                 delegate?.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.tempBasal(dose: dose, units: unitsPerHour, duration: duration)], lastReconciliation: Date.now, completion: { _ in })
                             }
+                            
+                            self.log.default("%{public}@: Succesfully started 15 min temp basal", #function)
+                            completion(nil)
                         } else if duration == 1800 {
                             // 30 min. Only temp basal below 100% allowed here
-                            let percentage = absoluteBasalRateToPercentage(absoluteValue: unitsPerHour, basalSchedule: self.state.basalSchedule)
+                            let percentage = self.absoluteBasalRateToPercentage(absoluteValue: unitsPerHour, basalSchedule: self.state.basalSchedule)
                             guard let percentage = percentage else {
                                 self.disconnect()
+                                self.log.error("%{public}@: Basal schedule is not available... (30 min)", #function)
                                 completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedTempBasalAdjustment("Basal schedule is not available... (30 min)")))
                                 return
                             }
                             
-                            if self.state.isTempBasalInProgress {
-                                let packet = generatePacketBasalCancelTemporary()
-                                let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
-                                
-                                guard result.success else {
-                                    self.disconnect()
-                                    completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedTempBasalAdjustment("Could not cancel old temp basal (30 min)")))
-                                    return
-                                }
-                            }
-                            
-                            let packet = generatePacketLoopSetTemporaryBasal(options: PacketLoopSetTemporaryBasal(percent: percentage))
+                            let packet = generatePacketLoopSetTemporaryBasal(options: PacketLoopSetTemporaryBasal(percent: percentage, duration: .min30))
                             let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
                             self.disconnect()
                             
                             guard result.success else {
+                                self.log.error("%{public}@: Pump rejected command (30 min)", #function)
                                 completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedTempBasalAdjustment("Pump rejected command (30 min)")))
                                 return
                             }
@@ -589,31 +581,31 @@ extension DanaKitPumpManager: PumpManager {
                             self.pumpDelegate.notify { (delegate) in
                                 delegate?.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.tempBasal(dose: dose, units: unitsPerHour, duration: duration)], lastReconciliation: Date.now, completion: { _ in })
                             }
-                        } else if Int(duration) % 60 == 0 {
+                            
+                            self.log.default("%{public}@: Succesfully started 30 min temp basal", #function)
+                            completion(nil)
+                        } else if Int(duration) % 3600 == 0 {
                             // Only full hours are allowed here
-                            let percentage = absoluteBasalRateToPercentage(absoluteValue: unitsPerHour, basalSchedule: self.state.basalSchedule)
+                            let percentage = self.absoluteBasalRateToPercentage(absoluteValue: unitsPerHour, basalSchedule: self.state.basalSchedule)
                             guard let percentage = percentage else {
                                 self.disconnect()
+                                self.log.error("%{public}@: Basal schedule is not available... (full hour)", #function)
                                 completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedTempBasalAdjustment("Basal schedule is not available... (full hour)")))
                                 return
                             }
-                            
-                            if self.state.isTempBasalInProgress {
-                                let packet = generatePacketBasalCancelTemporary()
-                                let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
-                                
-                                guard result.success else {
-                                    self.disconnect()
-                                    completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedTempBasalAdjustment("Could not cancel old temp basal (full hour)")))
-                                    return
-                                }
+                            guard percentage < UInt8.max else {
+                                self.disconnect()
+                                self.log.error("%{public}@: Percentage exceeds 255%... (full hour)", #function)
+                                completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedTempBasalAdjustment("Percentage exceeds 255%... (full hour)")))
+                                return
                             }
                             
-                            let packet = generatePacketLoopSetTemporaryBasal(options: PacketLoopSetTemporaryBasal(percent: percentage))
+                            let packet = generatePacketBasalSetTemporary(options: PacketBasalSetTemporary(temporaryBasalRatio: UInt8(percentage), temporaryBasalDuration: UInt8(floor(duration / 3600))))
                             let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
                             self.disconnect()
                             
                             guard result.success else {
+                                self.log.error("%{public}@: Pump rejected command (full hour)", #function)
                                 completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedTempBasalAdjustment("Pump rejected command (full hour)")))
                                 return
                             }
@@ -628,10 +620,74 @@ extension DanaKitPumpManager: PumpManager {
                             self.pumpDelegate.notify { (delegate) in
                                 delegate?.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.tempBasal(dose: dose, units: unitsPerHour, duration: duration)], lastReconciliation: Date.now, completion: { _ in })
                             }
+                            
+                            self.log.default("%{public}@: Succesfully started full hourly temp basal", #function)
+                            completion(nil)
                         } else {
-                            self.log.error("%{public}@: Unsupported temp basal duration: %{public}@", #function, duration)
+                            // We got an unsupported duration...
+                            // We will round it down to the nearest supported duration (15min, 30min, or full hour) and report the new duration back to Loop
+                            
+                            let percentage = self.absoluteBasalRateToPercentage(absoluteValue: unitsPerHour, basalSchedule: self.state.basalSchedule)
+                            guard let percentage = percentage else {
+                                self.disconnect()
+                                self.log.error("%{public}@: Basal schedule is not available... (floor duration)", #function)
+                                completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedTempBasalAdjustment("Basal schedule is not available... (floor duration)")))
+                                return
+                            }
+                            
+                            let newDuration: TimeInterval
+                            let packet: DanaGeneratePacket
+                            if duration > 3600 {
+                                guard percentage < UInt8.max else {
+                                    self.disconnect()
+                                    self.log.error("%{public}@: Percentage exceeds 255%... (floor duration)", #function)
+                                    completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedTempBasalAdjustment("Percentage exceeds 255%... (floor duration)")))
+                                    return
+                                }
+                                
+                                // Round down to nearest full hour
+                                newDuration = 3600 * floor(duration / 3600)
+                                packet = generatePacketBasalSetTemporary(options: PacketBasalSetTemporary(temporaryBasalRatio: UInt8(percentage), temporaryBasalDuration: UInt8(floor(duration / 3600))))
+                                
+                            } else if duration > 1800 {
+                                // Round down to 30 min
+                                newDuration = 1800
+                                packet = generatePacketLoopSetTemporaryBasal(options: PacketLoopSetTemporaryBasal(percent: percentage, duration: .min30))
+                                
+                            } else if duration > 900 {
+                                // Round down to 15 min
+                                newDuration = 900
+                                packet = generatePacketLoopSetTemporaryBasal(options: PacketLoopSetTemporaryBasal(percent: percentage, duration: .min15))
+                                
+                            } else {
+                                self.disconnect()
+                                self.log.error("%{public}@: Temp basal below 15 min is unsupported (floor duration)", #function)
+                                completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedTempBasalAdjustment("Temp basal below 15 min is unsupported... (floor duration)")))
+                                return
+                            }
+                            
+                            let result = try await DanaKitPumpManager.bluetoothManager.writeMessage(packet)
                             self.disconnect()
-                            completion(PumpManagerError.configuration(DanaKitPumpManagerError.unsupportedTempBasal(duration)))
+                            
+                            guard result.success else {
+                                self.log.error("%{public}@: Pump rejected command (full hour)", #function)
+                                completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedTempBasalAdjustment("Pump rejected command (full hour)")))
+                                return
+                            }
+                            
+                            let dose = DoseEntry.tempBasal(absoluteUnit: unitsPerHour, duration: newDuration, insulinType: self.state.insulinType!)
+                            self.state.basalDeliveryOrdinal = .tempBasal
+                            self.state.basalDeliveryDate = Date.now
+                            self.state.tempBasalUnits = unitsPerHour
+                            self.state.tempBasalDuration = newDuration
+                            self.notifyStateDidChange()
+                            
+                            self.pumpDelegate.notify { (delegate) in
+                                delegate?.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.tempBasal(dose: dose, units: unitsPerHour, duration: duration)], lastReconciliation: Date.now, completion: { _ in })
+                            }
+                            
+                            self.log.default("%{public}@: Succesfully started full hourly temp basal", #function)
+                            completion(nil)
                         }
                     } catch {
                         self.disconnect()
@@ -939,6 +995,22 @@ extension DanaKitPumpManager: PumpManager {
         if DanaKitPumpManager.bluetoothManager.isConnected {
             DanaKitPumpManager.bluetoothManager.disconnect(DanaKitPumpManager.bluetoothManager.peripheral!)
         }
+    }
+    
+    private func absoluteBasalRateToPercentage(absoluteValue: Double, basalSchedule: [Double]) -> UInt16? {
+        guard basalSchedule.count > 0 else {
+            return nil
+        }
+        
+        let now = Date()
+        let startOfDay = Calendar.current.startOfDay(for: now)
+        let nowTimeInterval = now.timeIntervalSince(startOfDay)
+        
+        let basalIntervals: [TimeInterval] = Array(0..<24).map({ TimeInterval(60 * 60 * $0) })
+        let basalIndex = basalIntervals.firstIndex(where: { $0 > nowTimeInterval})! - 1
+        let basalRate = basalSchedule[basalIndex]
+        
+        return UInt16(round(absoluteValue / basalRate * 100))
     }
 }
 
