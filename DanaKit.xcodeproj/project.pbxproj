@@ -15,6 +15,7 @@
 		847530F626ED65DD009FD801 /* LoopKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847530F426ED65DD009FD801 /* LoopKit.framework */; };
 		847530F826ED65DD009FD801 /* LoopKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847530F526ED65DD009FD801 /* LoopKitUI.framework */; };
 		A91B2DEC276E1E5E001B0E95 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A91B2DEB276E1E5E001B0E95 /* README.md */; };
+		B80C73D62B7D534300821A38 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80C73D52B7D534300821A38 /* TimeInterval.swift */; };
 		B80EC4AE2B45EFDD005E2A1A /* LoadingModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80EC4AD2B45EFDD005E2A1A /* LoadingModal.swift */; };
 		B80EC4B02B45F66E005E2A1A /* DanaKitSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80EC4AF2B45F66E005E2A1A /* DanaKitSettingsView.swift */; };
 		B80EC4B22B45F681005E2A1A /* DanaKitSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80EC4B12B45F681005E2A1A /* DanaKitSettingsViewModel.swift */; };
@@ -173,6 +174,7 @@
 		847530F426ED65DD009FD801 /* LoopKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LoopKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		847530F526ED65DD009FD801 /* LoopKitUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LoopKitUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A91B2DEB276E1E5E001B0E95 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		B80C73D52B7D534300821A38 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		B80EC4AD2B45EFDD005E2A1A /* LoadingModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingModal.swift; sourceTree = "<group>"; };
 		B80EC4AF2B45F66E005E2A1A /* DanaKitSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanaKitSettingsView.swift; sourceTree = "<group>"; };
 		B80EC4B12B45F681005E2A1A /* DanaKitSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanaKitSettingsViewModel.swift; sourceTree = "<group>"; };
@@ -430,6 +432,7 @@
 				B8FB5F162B5D91A6001C88BA /* NewPumpEvent.swift */,
 				B87E6BAA2B605F5F001B7FAD /* UnfinalizedDose.swift */,
 				B81E9D042B66906000AB6AA1 /* PumpAlarmType.swift */,
+				B80C73D52B7D534300821A38 /* TimeInterval.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -877,6 +880,7 @@
 				B8360AAF2B2A298200152188 /* DanaGeneralGetUserOption.swift in Sources */,
 				B8360A702B26011200152188 /* DanaPacketBase.swift in Sources */,
 				B8360AEB2B2B95B000152188 /* EncryptionManager.swift in Sources */,
+				B80C73D62B7D534300821A38 /* TimeInterval.swift in Sources */,
 				1029AE4927094D0E00B7F5B6 /* DanaKitPumpManagerState.swift in Sources */,
 				B857E7F22B1FABF000BDFFC4 /* LocalizedString.swift in Sources */,
 				B8179E5A2B20F2A10049EEE7 /* OSLog.swift in Sources */,
