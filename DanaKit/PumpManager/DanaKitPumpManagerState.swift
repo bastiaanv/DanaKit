@@ -58,6 +58,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         self.refillAmount = rawValue["refillAmount"] as? UInt16 ?? 0
         self.targetBg = rawValue["targetBg"] as? UInt16
         self.useSilentTones = rawValue["useSilentTones"] as? Bool ?? true
+        self.batteryRemaining = rawValue["batteryRemaining"] as? Double ?? 0
         
         if let rawInsulinType = rawValue["insulinType"] as? InsulinType.RawValue {
             insulinType = InsulinType(rawValue: rawInsulinType)
@@ -105,6 +106,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         self.refillAmount = 0
         self.targetBg = nil
         self.useSilentTones = false
+        self.batteryRemaining = 0
     }
     
     public var rawValue: RawValue {
@@ -143,6 +145,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         value["refillAmount"] = self.refillAmount
         value["targetBg"] = self.targetBg
         value["useSilentTones"] = self.useSilentTones
+        value["batteryRemaining"] = self.batteryRemaining
         
         return value
     }
