@@ -71,7 +71,7 @@ public class DanaKitPumpManager: DeviceManager {
     
     private var doseReporter: DanaKitDoseProgressReporter?
     private var doseEntry: UnfinalizedDose?
-    private let basalProfileNumber: UInt8 = 1
+    private let basalProfileNumber: UInt8 = 0
     
     public var isOnboarded: Bool {
         self.state.isOnBoarded

@@ -36,10 +36,8 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         self.isInFetchHistoryMode = rawValue["isInFetchHistoryMode"] != nil
         self.ignorePassword = rawValue["ignorePassword"] as? Bool ?? false
         self.devicePassword = rawValue["devicePassword"] as? UInt16 ?? 0
-        self.bolusSpeed = rawValue["bolusSpeed"] as? BolusSpeed ?? .speed12
         self.isOnBoarded = rawValue["isOnBoarded"] as? Bool ?? false
         self.basalDeliveryDate = rawValue["basalDeliveryDate"] as? Date ?? Date.now
-        self.bolusState = rawValue["bolusState"] as? BolusState ?? .noBolus
         self.pumpTime = rawValue["pumpTime"] as? Date
         self.pumpTimeSyncedAt = rawValue["pumpTimeSyncedAt"] as? Date
         self.basalSchedule = rawValue["basalSchedule"] as? [Double] ?? []
@@ -59,6 +57,18 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         self.targetBg = rawValue["targetBg"] as? UInt16
         self.useSilentTones = rawValue["useSilentTones"] as? Bool ?? true
         self.batteryRemaining = rawValue["batteryRemaining"] as? Double ?? 0
+        
+        if let bolusSpeedRaw = rawValue["bolusSpeed"] as? BolusSpeed.RawValue {
+            bolusSpeed = BolusSpeed(rawValue: bolusSpeedRaw) ?? .speed12
+        } else {
+            bolusSpeed = .speed12
+        }
+        
+        if let bolusStateRaw = rawValue["bolusState"] as? BolusState.RawValue {
+            bolusState = BolusState(rawValue: bolusStateRaw) ?? .noBolus
+        } else {
+            bolusState = .noBolus
+        }
         
         if let rawInsulinType = rawValue["insulinType"] as? InsulinType.RawValue {
             insulinType = InsulinType(rawValue: rawInsulinType)
