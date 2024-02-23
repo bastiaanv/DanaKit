@@ -24,9 +24,8 @@ class DanaKitScanViewModel : ObservableObject {
     @Published var isConnectionError = false
     @Published var connectionErrorMessage: String?
      
-    private let log = OSLog(category: "ScanView")
+    private let log = Logger(category: "ScanView")
     private var pumpManager: DanaKitPumpManager?
-    private var view: UIViewController?
     private var nextStep: () -> Void
     private var foundDevices: [String:CBPeripheral] = [:]
     
@@ -41,23 +40,19 @@ class DanaKitScanViewModel : ObservableObject {
             try self.pumpManager?.startScan()
             self.isScanning = true
         } catch {
-            log.error("Failed to start scan action: %{public}@", error.localizedDescription)
+            log.error("\(#function): Failed to start scan action: \(error.localizedDescription, privacy: .public)")
         }
     }
     
-    func setView(_ view: UIViewController) {
-        self.view = view
-    }
-    
     func connect(_ item: ScanResultItem) {
-        guard let device = self.foundDevices[item.bleIdentifier], let view = self.view else {
+        guard let device = self.foundDevices[item.bleIdentifier] else {
             log.error("No view or device...")
             return
         }
         
         self.stopScan()
         
-        self.pumpManager?.connect(device, view, { error in self.connectComplete(error, device) })
+        self.pumpManager?.connect(device) { error in self.connectComplete(error, device) }
         self.isConnecting = true
     }
     

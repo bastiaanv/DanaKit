@@ -61,7 +61,6 @@ extension Data {
         let utcTimeZone = TimeZone(identifier: "UTC")!
         var calendar = Calendar.current
         calendar.timeZone = utcTimeZone
-        
         return calendar.date(from: components)!
     }
 }

@@ -39,7 +39,7 @@ struct DanaKitPumpSpeed: View {
             Text(LocalizedString("The Dana pumps support different delivery speeds. You can set it up here", comment: "Dana delivery speed body")).fixedSize(horizontal: false, vertical: true)
             Divider()
             ResizeablePicker(selection: $speedDefault,
-                                     data: self.speedsAllowed,
+                             data: self.speedsAllowed,
                              formatter: { BolusSpeed.init(rawValue: UInt8($0))!.format() })
             Spacer()
             VStack {

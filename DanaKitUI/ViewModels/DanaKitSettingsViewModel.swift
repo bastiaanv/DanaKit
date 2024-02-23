@@ -20,6 +20,8 @@ class DanaKitSettingsViewModel : ObservableObject {
     @Published var isSyncing: Bool = false
     @Published var lastSync: Date? = nil
     @Published var batteryLevel: Double = 0
+    @Published var showingSilentTone: Bool = false
+    @Published var silentTone: Bool = false
     
     @Published var showPumpTimeSyncWarning: Bool = false
     @Published var pumpTime: Date? = nil
@@ -28,10 +30,11 @@ class DanaKitSettingsViewModel : ObservableObject {
     @Published var reservoirLevel: Double?
     @Published var isSuspended: Bool = false
     
-    private let log = OSLog(category: "SettingsView")
+    private let log = Logger(category: "SettingsView")
     private(set) var insulineType: InsulinType
     private(set) var pumpManager: DanaKitPumpManager?
     private var didFinish: (() -> Void)?
+    private(set) var userOptionsView: DanaKitUserSettingsView
 
     public var pumpModel: String {
         self.pumpManager?.state.getFriendlyDeviceName() ?? ""
@@ -78,6 +81,8 @@ class DanaKitSettingsViewModel : ObservableObject {
         self.pumpManager = pumpManager
         self.didFinish = didFinish
         
+        self.userOptionsView = DanaKitUserSettingsView(viewModel: DanaKitUserSettingsViewModel(self.pumpManager))
+        
         self.insulineType = self.pumpManager?.state.insulinType ?? .novolog
         self.bolusSpeed = self.pumpManager?.state.bolusSpeed ?? .speed12
         self.lastSync = self.pumpManager?.state.lastStatusDate
@@ -85,6 +90,7 @@ class DanaKitSettingsViewModel : ObservableObject {
         self.isSuspended = self.pumpManager?.state.isPumpSuspended ?? false
         self.pumpTime = self.pumpManager?.state.pumpTime
         self.batteryLevel = self.pumpManager?.state.batteryRemaining ?? 0
+        self.silentTone = self.pumpManager?.state.useSilentTones ?? false
         self.reservoirLevelWarning = Double(self.pumpManager?.state.lowReservoirRate ?? 20)
         self.showPumpTimeSyncWarning = shouldShowTimeWarning(pumpTime: self.pumpTime, syncedAt: self.pumpManager?.state.pumpTimeSyncedAt)
         
@@ -124,6 +130,7 @@ class DanaKitSettingsViewModel : ObservableObject {
     
     func didBolusSpeedChanged(_ bolusSpeed: BolusSpeed) {
         self.pumpManager?.state.bolusSpeed = bolusSpeed
+        self.pumpManager?.notifyStateDidChange()
         self.bolusSpeed = bolusSpeed
     }
     
@@ -136,12 +143,12 @@ class DanaKitSettingsViewModel : ObservableObject {
             self.isSyncing = true
         }
         
-        pumpManager.ensureCurrentPumpData(completion: { date in
+        pumpManager.syncPump { date in
             DispatchQueue.main.async {
                 self.isSyncing = false
                 self.lastSync = date
             }
-        })
+        }
     }
     
     func syncPumpTime() {
@@ -160,11 +167,20 @@ class DanaKitSettingsViewModel : ObservableObject {
         return reservoirVolumeFormatter.string(from: quantity, includeUnit: true) ?? ""
     }
     
+    func toggleSilentTone() {
+        guard let pumpManager = self.pumpManager else {
+            return
+        }
+        
+        pumpManager.state.useSilentTones = !self.silentTone
+        self.silentTone = pumpManager.state.useSilentTones
+    }
+    
     func suspendResumeButtonPressed() {
         self.isUpdatingPumpState = true
         
         if self.pumpManager?.state.isPumpSuspended ?? false {
-            self.pumpManager?.resumeDelivery(completion: { error in
+            self.pumpManager?.resumeDelivery{ error in
                 DispatchQueue.main.async {
                     self.basalButtonText = self.updateBasalButtonText()
                     self.isUpdatingPumpState = false
@@ -172,11 +188,10 @@ class DanaKitSettingsViewModel : ObservableObject {
                 
                 // Check if action failed, otherwise skip state sync
                 guard error == nil else {
+                    self.log.error("\(#function): failed to resume delivery. Error: \(error!.localizedDescription)")
                     return
                 }
-                
-                self.pumpManager?.ensureCurrentPumpData(completion: { _ in })
-            })
+            }
             
             return
         }
@@ -191,10 +206,9 @@ class DanaKitSettingsViewModel : ObservableObject {
                 
                 // Check if action failed, otherwise skip state sync
                 guard error == nil else {
+                    self.log.error("\(#function): failed to stop temp basal. Error: \(error!.localizedDescription)")
                     return
                 }
-                
-                self.pumpManager?.ensureCurrentPumpData(completion: { _ in })
             })
             
             return
@@ -208,10 +222,9 @@ class DanaKitSettingsViewModel : ObservableObject {
             
             // Check if action failed, otherwise skip state sync
             guard error == nil else {
+                self.log.error("\(#function): failed to suspend delivery. Error: \(error!.localizedDescription)")
                 return
             }
-            
-            self.pumpManager?.ensureCurrentPumpData(completion: { _ in })
         })
     }
     
@@ -232,8 +245,8 @@ class DanaKitSettingsViewModel : ObservableObject {
             return false
         }
         
-        // Allow a 10 sec diff in time
-        return abs(syncedAt.timeIntervalSince1970 - pumpTime.timeIntervalSince1970) > 10
+        // Allow a 1 min diff in time
+        return abs(syncedAt.timeIntervalSince1970 - pumpTime.timeIntervalSince1970) > 60
     }
 }
 
@@ -246,6 +259,7 @@ extension DanaKitSettingsViewModel: StateObserver {
         self.isSuspended = state.isPumpSuspended
         self.pumpTime = self.pumpManager?.state.pumpTime
         self.batteryLevel = self.pumpManager?.state.batteryRemaining ?? 0
+        self.silentTone = self.pumpManager?.state.useSilentTones ?? false
         self.showPumpTimeSyncWarning = shouldShowTimeWarning(pumpTime: self.pumpTime, syncedAt: self.pumpManager?.state.pumpTimeSyncedAt)
         
         self.basalButtonText = self.updateBasalButtonText()

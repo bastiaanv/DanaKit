@@ -16,7 +16,6 @@ struct DanaKitSetupView: View {
     
     let nextAction: () -> Void
     let debugAction: DebugFunction?
-    let automaticDosingStrategy: AutomaticDosingStrategy
     
     var body: some View {
         VStack(spacing: 0) {
@@ -38,19 +37,8 @@ struct DanaKitSetupView: View {
             }
             .padding(.horizontal)
             Spacer()
-            VStack(spacing: 0) {
-                if automaticDosingStrategy == .tempBasalOnly {
-                    WarningView(
-                        title: Text(LocalizedString("Only Automatic Bolus is supported", comment: "dana AB limitation warning title")),
-                        caption: Text(LocalizedString("Please consider changing your dosing strategy in the setting menu", comment: "dana AB limitation warning body"))
-                    )
-                    .padding(.all)
-                }
-                continueButton
-                    .disabled(automaticDosingStrategy == .tempBasalOnly)
-                    .padding([.bottom, .horizontal])
-            }
-                .padding(.vertical, 10)
+            continueButton
+                .padding(.all)
                 .background(Color(.secondarySystemGroupedBackground)
                 .shadow(radius: 5))
         }
@@ -101,5 +89,5 @@ struct DanaKitSetupView: View {
 }
 
 #Preview {
-    DanaKitSetupView(nextAction: {}, debugAction: nil, automaticDosingStrategy: .automaticBolus)
+    DanaKitSetupView(nextAction: {}, debugAction: nil)
 }

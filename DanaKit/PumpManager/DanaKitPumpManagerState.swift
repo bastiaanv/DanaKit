@@ -36,10 +36,8 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         self.isInFetchHistoryMode = rawValue["isInFetchHistoryMode"] != nil
         self.ignorePassword = rawValue["ignorePassword"] as? Bool ?? false
         self.devicePassword = rawValue["devicePassword"] as? UInt16 ?? 0
-        self.bolusSpeed = rawValue["bolusSpeed"] as? BolusSpeed ?? .speed12
         self.isOnBoarded = rawValue["isOnBoarded"] as? Bool ?? false
         self.basalDeliveryDate = rawValue["basalDeliveryDate"] as? Date ?? Date.now
-        self.bolusState = rawValue["bolusState"] as? BolusState ?? .noBolus
         self.pumpTime = rawValue["pumpTime"] as? Date
         self.pumpTimeSyncedAt = rawValue["pumpTimeSyncedAt"] as? Date
         self.basalSchedule = rawValue["basalSchedule"] as? [Double] ?? []
@@ -48,7 +46,6 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         self.ble5Keys = rawValue["ble5Keys"] as? Data ?? Data([0, 0, 0, 0, 0, 0])
         self.isTimeDisplay24H = rawValue["isTimeDisplay24H"] as? Bool ?? false
         self.isButtonScrollOnOff = rawValue["isButtonScrollOnOff"] as? Bool ?? false
-        self.beepAndAlarm = rawValue["beepAndAlarm"] as? UInt8 ?? 0
         self.lcdOnTimeInSec = rawValue["lcdOnTimeInSec"] as? UInt8 ?? 0
         self.backlightOnTimInSec = rawValue["backlightOnTimInSec"] as? UInt8 ?? 0
         self.units = rawValue["units"] as? UInt8 ?? 0
@@ -57,14 +54,30 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         self.shutdownHour = rawValue["shutdownHour"] as? UInt8 ?? 0
         self.cannulaVolume = rawValue["cannulaVolume"] as? UInt16 ?? 0
         self.refillAmount = rawValue["refillAmount"] as? UInt16 ?? 0
-        self.selectableLanguage1 = rawValue["selectableLanguage1"] as? UInt8 ?? 0
-        self.selectableLanguage2 = rawValue["selectableLanguage2"] as? UInt8 ?? 0
-        self.selectableLanguage3 = rawValue["selectableLanguage3"] as? UInt8 ?? 0
-        self.selectableLanguage4 = rawValue["selectableLanguage4"] as? UInt8 ?? 0
-        self.selectableLanguage5 = rawValue["selectableLanguage5"] as? UInt8 ?? 0
+        self.targetBg = rawValue["targetBg"] as? UInt16
+        self.useSilentTones = rawValue["useSilentTones"] as? Bool ?? true
+        self.batteryRemaining = rawValue["batteryRemaining"] as? Double ?? 0
+        
+        if let bolusSpeedRaw = rawValue["bolusSpeed"] as? BolusSpeed.RawValue {
+            bolusSpeed = BolusSpeed(rawValue: bolusSpeedRaw) ?? .speed12
+        } else {
+            bolusSpeed = .speed12
+        }
+        
+        if let bolusStateRaw = rawValue["bolusState"] as? BolusState.RawValue {
+            bolusState = BolusState(rawValue: bolusStateRaw) ?? .noBolus
+        } else {
+            bolusState = .noBolus
+        }
         
         if let rawInsulinType = rawValue["insulinType"] as? InsulinType.RawValue {
             insulinType = InsulinType(rawValue: rawInsulinType)
+        }
+        
+        if let rawBeepAndAlarmType = rawValue["beepAndAlarm"] as? UInt8 {
+            beepAndAlarm = BeepAlarmType(rawValue: rawBeepAndAlarmType) ?? .sound
+        } else {
+            beepAndAlarm = .sound
         }
         
         if let rawBasalDeliveryOrdinal = rawValue["basalDeliveryOrdinal"] as? DanaKitBasal.RawValue {
@@ -92,7 +105,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         self.basalDeliveryOrdinal = .active
         self.isTimeDisplay24H = false
         self.isButtonScrollOnOff = false
-        self.beepAndAlarm = 0
+        self.beepAndAlarm = .sound
         self.lcdOnTimeInSec = 0
         self.backlightOnTimInSec = 0
         self.units = 0
@@ -101,11 +114,9 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         self.shutdownHour = 0
         self.cannulaVolume = 0
         self.refillAmount = 0
-        self.selectableLanguage1 = 0
-        self.selectableLanguage2 = 0
-        self.selectableLanguage3 = 0
-        self.selectableLanguage4 = 0
-        self.selectableLanguage5 = 0
+        self.targetBg = nil
+        self.useSilentTones = false
+        self.batteryRemaining = 0
     }
     
     public var rawValue: RawValue {
@@ -134,7 +145,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         value["ble5Keys"] = self.ble5Keys
         value["isTimeDisplay24H"] = self.isTimeDisplay24H
         value["isButtonScrollOnOff"] = self.isButtonScrollOnOff
-        value["beepAndAlarm"] = self.beepAndAlarm
+        value["beepAndAlarm"] = self.beepAndAlarm.rawValue
         value["lcdOnTimeInSec"] = self.lcdOnTimeInSec
         value["backlightOnTimInSec"] = self.backlightOnTimInSec
         value["units"] = self.units
@@ -142,11 +153,9 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         value["shutdownHour"] = self.shutdownHour
         value["cannulaVolume"] = self.cannulaVolume
         value["refillAmount"] = self.refillAmount
-        value["selectableLanguage1"] = self.selectableLanguage1
-        value["selectableLanguage2"] = self.selectableLanguage2
-        value["selectableLanguage3"] = self.selectableLanguage3
-        value["selectableLanguage4"] = self.selectableLanguage4
-        value["selectableLanguage5"] = self.selectableLanguage5
+        value["targetBg"] = self.targetBg
+        value["useSilentTones"] = self.useSilentTones
+        value["batteryRemaining"] = self.batteryRemaining
         
         return value
     }
@@ -206,7 +215,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
     /// User options
     public var isTimeDisplay24H: Bool
     public var isButtonScrollOnOff: Bool
-    public var beepAndAlarm: UInt8
+    public var beepAndAlarm: BeepAlarmType
     public var lcdOnTimeInSec: UInt8
     public var backlightOnTimInSec: UInt8
     public var selectedLanguage: UInt8
@@ -215,11 +224,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
     public var lowReservoirRate: UInt8
     public var cannulaVolume: UInt16
     public var refillAmount: UInt16
-    public var selectableLanguage1: UInt8
-    public var selectableLanguage2: UInt8
-    public var selectableLanguage3: UInt8
-    public var selectableLanguage4: UInt8
-    public var selectableLanguage5: UInt8
+    public var targetBg: UInt16?
     
     public var basalDeliveryDate: Date = Date.now
     public var basalDeliveryOrdinal: DanaKitBasal = .active
@@ -235,6 +240,8 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
             return .tempBasal(DoseEntry.tempBasal(absoluteUnit: tempBasalUnits ?? 0, duration: tempBasalDuration ?? 0, insulinType: insulinType!, startDate: basalDeliveryDate))
         }
     }
+    
+    public var useSilentTones: Bool = false
     
     mutating func resetState() {
         self.ignorePassword = false

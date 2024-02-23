@@ -55,8 +55,6 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
         return screenStack.last!
     }
     
-    private let automaticDosingStrategy: AutomaticDosingStrategy
-    
     private let colorPalette: LoopUIColorPalette
 
     private var pumpManager: DanaKitPumpManager?
@@ -81,12 +79,6 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
         self.allowDebugFeatures = allowDebugFeatures
         
         self.allowedInsulinTypes = allowedInsulinTypes
-        
-        // During onboarding, we should alert the user if he/she uses tempBasalOnly, since it is not (yet) supported by LoopKit
-        let localCacheDuration: TimeInterval = 86400 // 1 day
-        let cacheStore = PersistenceController.controllerInAppGroupDirectory()
-        let settingsStore = SettingsStore(store: cacheStore, expireAfter: localCacheDuration)
-        self.automaticDosingStrategy = settingsStore.latestSettings?.automaticDosingStrategy ?? .tempBasalOnly
         
         super.init(navigationBarClass: UINavigationBar.self, toolbarClass: UIToolbar.self)
     }
@@ -114,12 +106,10 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
         switch(screen) {
         case .debugView:
             let viewModel = DanaKitDebugViewModel(self.pumpManager)
-            let view = hostingController(rootView: DanaKitDebugView(viewModel: viewModel))
-            viewModel.setView(view)
             
-            return view
+            return hostingController(rootView: DanaKitDebugView(viewModel: viewModel))
         case .firstRunScreen:
-            let view = DanaKitSetupView(nextAction: self.stepFinished, debugAction: { self.navigateTo(.debugView) }, automaticDosingStrategy: automaticDosingStrategy) //self.allowDebugFeatures ? { self.navigateTo(.debugView) } : {})
+            let view = DanaKitSetupView(nextAction: self.stepFinished, debugAction: { self.navigateTo(.debugView) }) //self.allowDebugFeatures ? { self.navigateTo(.debugView) } : {})
             return hostingController(rootView: view)
         case .insulinConfirmationScreen:
             let confirm: (InsulinType) -> Void = { confirmedType in
@@ -138,10 +128,8 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
             return hostingController(rootView: view)
         case .deviceScanningScreen:
             let viewModel = DanaKitScanViewModel(self.pumpManager, nextStep: self.stepFinished)
-            let view = hostingController(rootView: DanaKitScanView(viewModel: viewModel))
-            viewModel.setView(view)
-            
-            return view
+
+            return hostingController(rootView: DanaKitScanView(viewModel: viewModel))
         case .setupComplete:
             pumpManagerOnboardingDelegate?.pumpManagerOnboarding(didCreatePumpManager: self.pumpManager!)
             

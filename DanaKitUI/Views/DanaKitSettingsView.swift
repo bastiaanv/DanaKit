@@ -43,6 +43,19 @@ struct DanaKitSettingsView: View {
         ])
     }
     
+    var silentTone: ActionSheet {
+        ActionSheet(title: Text(LocalizedString("Toggle silent tone?", comment: "Title for silent tone action sheet")),
+                    buttons: [
+                        .default(Text(viewModel.silentTone ?
+                                      LocalizedString("Yes, Disable silent tones", comment: "Button text to disable silent tone") :
+                                      LocalizedString("Yes, Enable silent tones", comment: "Button text to enable silent tone")
+                                 )) {
+                            self.viewModel.toggleSilentTone()
+                        },
+                        .cancel(Text(LocalizedString("No, Keep as is", comment: "Button text to cancel silent tone")))
+                    ])
+    }
+    
     var body: some View {
         List {
             Section() {
@@ -100,19 +113,6 @@ struct DanaKitSettingsView: View {
                 }
                 .disabled(viewModel.isUpdatingPumpState || viewModel.isSyncing)
                 
-                Button(action: {
-                    shareLogs()
-                }) {
-                    HStack {
-                        Text(LocalizedString("Share Dana pump logs", comment: "DanaKit share logs"))
-                        Spacer()
-                        if self.loadingLogs {
-                            ActivityIndicator(isAnimating: .constant(true), style: .medium)
-                        }
-                    }
-                }
-                .disabled(self.loadingLogs)
-                
                 HStack {
                     Text(LocalizedString("Last sync", comment: "Text for last sync")).foregroundColor(Color.primary)
                     Spacer()
@@ -131,7 +131,7 @@ struct DanaKitSettingsView: View {
                             .foregroundColor(.secondary)
                         }
                 }
-                NavigationLink(destination: DanaKitSettingsPumpSpeed(value: .constant(Int(viewModel.bolusSpeed.rawValue)), didChange: viewModel.didBolusSpeedChanged)) {
+                NavigationLink(destination: DanaKitSettingsPumpSpeed(value: Int(viewModel.bolusSpeed.rawValue), didChange: viewModel.didBolusSpeedChanged)) {
                     HStack {
                         Text(LocalizedString("Delivery speed", comment: "Title for delivery speed")).foregroundColor(Color.primary)
                         Spacer()
@@ -139,18 +139,24 @@ struct DanaKitSettingsView: View {
                             .foregroundColor(.secondary)
                         }
                 }
-                NavigationLink(destination: DanaKitUserSettingsView(viewModel: DanaKitUserSettingsViewModel(viewModel.pumpManager))) {
+                NavigationLink(destination: viewModel.userOptionsView) {
                     Text(LocalizedString("User options", comment: "Title for user options"))
                         .foregroundColor(Color.primary)
                 }
             }
             
-            Section {
+            Section(header: SectionHeader(label: LocalizedString("Pump information", comment: "The title of the pump information section in DanaKit settings"))) {
                 HStack {
                     Text(LocalizedString("Pump name", comment: "Text for Dana pump name")).foregroundColor(Color.primary)
                     Spacer()
                     Text(viewModel.deviceName ?? "")
                         .foregroundColor(.secondary)
+                }
+                .onLongPressGesture(perform: {
+                    viewModel.showingSilentTone = true
+                })
+                .actionSheet(isPresented: $viewModel.showingSilentTone) {
+                    silentTone
                 }
                 HStack {
                     Text(LocalizedString("Hardware model", comment: "Text for hardware model")).foregroundColor(Color.primary)
@@ -193,6 +199,19 @@ struct DanaKitSettingsView: View {
                         syncPumpTime
                     }
                 }
+                
+                Button(action: {
+                    shareLogs()
+                }) {
+                    HStack {
+                        Text(LocalizedString("Share Dana pump logs", comment: "DanaKit share logs"))
+                        Spacer()
+                        if self.loadingLogs {
+                            ActivityIndicator(isAnimating: .constant(true), style: .medium)
+                        }
+                    }
+                }
+                .disabled(self.loadingLogs)
             }
             
             Section() {
