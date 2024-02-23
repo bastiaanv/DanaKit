@@ -431,6 +431,7 @@ extension DanaKitPumpManager: PumpManager {
                         completion(nil)
                         
                         self.state.bolusState = .noBolus
+                        self.state.lastStatusDate = Date()
                         self.doseReporter = nil
                         self.notifyStateDidChange()
                     }
