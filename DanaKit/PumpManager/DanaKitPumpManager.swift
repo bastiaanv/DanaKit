@@ -378,6 +378,8 @@ extension DanaKitPumpManager: PumpManager {
     public func enactBolus(units: Double, activationType: BolusActivationType, completion: @escaping (PumpManagerError?) -> Void) {
         self.log.info("\(#function): Enact bolus")
         
+        let duration = self.estimatedDuration(toBolus: units)
+        self.doseEntry = UnfinalizedDose(units: units, duration: duration, activationType: activationType, insulinType: self.state.insulinType!)
         self.state.bolusState = .initiating
         self.doseReporter = DanaKitDoseProgressReporter(total: units)
         self.notifyStateDidChange()
@@ -396,6 +398,7 @@ extension DanaKitPumpManager: PumpManager {
                 guard !self.state.isPumpSuspended else {
                     self.state.bolusState = .noBolus
                     self.doseReporter = nil
+                    self.doseReporter = nil
                     self.notifyStateDidChange()
                     self.disconnect()
                     
@@ -411,15 +414,13 @@ extension DanaKitPumpManager: PumpManager {
                     guard result.success else {
                         self.state.bolusState = .noBolus
                         self.doseReporter = nil
+                        self.doseReporter = nil
                         self.notifyStateDidChange()
                         self.disconnect()
                         
                         completion(PumpManagerError.uncertainDelivery)
                         return
                     }
-                    
-                    let duration = self.estimatedDuration(toBolus: units)
-                    self.doseEntry = UnfinalizedDose(units: units, duration: duration, activationType: activationType, insulinType: self.state.insulinType!)
                     
                     self.state.lastStatusDate = Date()
                     self.state.bolusState = .inProgress
@@ -433,10 +434,12 @@ extension DanaKitPumpManager: PumpManager {
                         self.state.bolusState = .noBolus
                         self.state.lastStatusDate = Date()
                         self.doseReporter = nil
+                        self.doseReporter = nil
                         self.notifyStateDidChange()
                     }
                 } catch {
                     self.state.bolusState = .noBolus
+                    self.doseReporter = nil
                     self.doseReporter = nil
                     self.notifyStateDidChange()
                     self.disconnect()
