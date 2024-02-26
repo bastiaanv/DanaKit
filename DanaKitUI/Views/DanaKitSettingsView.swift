@@ -234,6 +234,7 @@ struct DanaKitSettingsView: View {
         }
         .listStyle(InsetGroupedListStyle())
         .navigationBarItems(trailing: doneButton)
+        .navigationBarTitle(viewModel.pumpModel)
     }
     
     private var doneButton: some View {
@@ -273,7 +274,7 @@ struct DanaKitSettingsView: View {
                         .fontWeight(.bold)
                         .fixedSize()
                 }
-            } else if let basalRate = self.viewModel.basalRate {
+            } else if let basalRate = $viewModel.basalRate.wrappedValue {
                 HStack(alignment: .center) {
                     HStack(alignment: .lastTextBaseline, spacing: 3) {
                         Text(viewModel.basalRateFormatter.string(from: basalRate) ?? "")

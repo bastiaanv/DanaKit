@@ -30,6 +30,7 @@ class DanaKitSettingsViewModel : ObservableObject {
     @Published var reservoirLevelWarning: Double
     @Published var reservoirLevel: Double?
     @Published var isSuspended: Bool = false
+    @Published var basalRate: Double?
     
     private let log = Logger(category: "SettingsView")
     private(set) var insulineType: InsulinType
@@ -41,9 +42,7 @@ class DanaKitSettingsViewModel : ObservableObject {
         self.pumpManager?.state.getFriendlyDeviceName() ?? ""
     }
     
-    public var basalRate: Double? {
-        self.pumpManager?.currentBaseBasalRate
-    }
+    
     
     public var deviceName: String? {
         self.pumpManager?.state.deviceName
@@ -95,6 +94,7 @@ class DanaKitSettingsViewModel : ObservableObject {
         self.reservoirLevelWarning = Double(self.pumpManager?.state.lowReservoirRate ?? 20)
         self.basalProfile = transformBasalProfile(self.pumpManager?.basalProfileNumber ?? 0)
         self.showPumpTimeSyncWarning = shouldShowTimeWarning(pumpTime: self.pumpTime, syncedAt: self.pumpManager?.state.pumpTimeSyncedAt)
+        updateBasalRate()
         
         self.basalButtonText = self.updateBasalButtonText()
         
@@ -262,6 +262,19 @@ class DanaKitSettingsViewModel : ObservableObject {
             return "D"
         }
     }
+    
+    private func updateBasalRate() {
+        guard let pumpManager = self.pumpManager else {
+            self.basalRate = 0
+            return
+        }
+        
+        if pumpManager.state.basalDeliveryOrdinal == .tempBasal && pumpManager.state.basalDeliveryDate + (pumpManager.state.tempBasalDuration ?? 0) < Date.now {
+            self.basalRate = pumpManager.state.tempBasalUnits ?? 0
+        } else {
+            self.basalRate = pumpManager.currentBaseBasalRate
+        }
+    }
 }
 
 extension DanaKitSettingsViewModel: StateObserver {
@@ -276,6 +289,7 @@ extension DanaKitSettingsViewModel: StateObserver {
         self.silentTone = self.pumpManager?.state.useSilentTones ?? false
         self.basalProfile = transformBasalProfile(self.pumpManager?.basalProfileNumber ?? 0)
         self.showPumpTimeSyncWarning = shouldShowTimeWarning(pumpTime: self.pumpTime, syncedAt: self.pumpManager?.state.pumpTimeSyncedAt)
+        updateBasalRate()
         
         self.basalButtonText = self.updateBasalButtonText()
     }
