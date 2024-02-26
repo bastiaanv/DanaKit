@@ -177,6 +177,12 @@ struct DanaKitSettingsView: View {
                         .foregroundColor(.secondary)
                 }
                 HStack {
+                    Text(LocalizedString("Basal profile", comment: "Text for Basal profile")).foregroundColor(Color.primary)
+                    Spacer()
+                    Text(viewModel.basalProfile)
+                        .foregroundColor(.secondary)
+                }
+                HStack {
                     Text(LocalizedString("Pump time", comment: "Text for pump time")).foregroundColor(Color.primary)
                     Spacer()
                     if viewModel.showPumpTimeSyncWarning {
@@ -226,9 +232,8 @@ struct DanaKitSettingsView: View {
                 }
             }
         }
-        .insetGroupedListStyle()
+        .listStyle(InsetGroupedListStyle())
         .navigationBarItems(trailing: doneButton)
-        .navigationBarTitle(viewModel.pumpModel)
     }
     
     private var doneButton: some View {

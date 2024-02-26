@@ -371,3 +371,6 @@
 
 /* Button text to enable silent tone */
 "Yes, Enable silent tones" = "Ja, schakel stille tonen in"
+
+/* Text for Basal profile */
+"Basal profile" = "Basaal profiel"
