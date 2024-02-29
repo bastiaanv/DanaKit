@@ -590,7 +590,7 @@ extension DanaKitPumpManager: PumpManager {
                             
                             let dose = DoseEntry.basal(rate: self.currentBaseBasalRate, insulinType: self.state.insulinType!)
                             self.pumpDelegate.notify { (delegate) in
-                                delegate?.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.basal(dose: dose)], lastReconciliation: Date.now, completion: { _ in })
+                                delegate?.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.basal(dose: dose)], lastReconciliation: Date.now, replacePendingEvents: true, completion: { _ in })
                             }
                             
                             self.log.info("\(#function, privacy: .public): Succesfully cancelled temp basal")
