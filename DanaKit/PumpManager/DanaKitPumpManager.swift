@@ -615,7 +615,7 @@ extension DanaKitPumpManager: PumpManager {
                             self.notifyStateDidChange()
                             
                             self.pumpDelegate.notify { (delegate) in
-                                delegate?.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.tempBasal(dose: dose, units: unitsPerHour, duration: duration)], lastReconciliation: Date.now, completion: { _ in })
+                                delegate?.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.tempBasal(dose: dose, units: unitsPerHour, duration: duration)], lastReconciliation: Date.now, replacePendingEvents: true, completion: { _ in })
                             }
                             
                             self.log.info("\(#function, privacy: .public): Succesfully started 15 min temp basal")
@@ -640,7 +640,7 @@ extension DanaKitPumpManager: PumpManager {
                             self.notifyStateDidChange()
                             
                             self.pumpDelegate.notify { (delegate) in
-                                delegate?.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.tempBasal(dose: dose, units: unitsPerHour, duration: duration)], lastReconciliation: Date.now, completion: { _ in })
+                                delegate?.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.tempBasal(dose: dose, units: unitsPerHour, duration: duration)], lastReconciliation: Date.now, replacePendingEvents: true, completion: { _ in })
                             }
                             
                             self.log.info("\(#function, privacy: .public): Succesfully started 30 min temp basal")
@@ -666,7 +666,7 @@ extension DanaKitPumpManager: PumpManager {
                             self.notifyStateDidChange()
                             
                             self.pumpDelegate.notify { (delegate) in
-                                delegate?.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.tempBasal(dose: dose, units: unitsPerHour, duration: duration)], lastReconciliation: Date.now, completion: { _ in })
+                                delegate?.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.tempBasal(dose: dose, units: unitsPerHour, duration: duration)], lastReconciliation: Date.now, replacePendingEvents: true, completion: { _ in })
                             }
                             
                             self.log.info("\(#function, privacy: .public): Succesfully started full hourly temp basal")
