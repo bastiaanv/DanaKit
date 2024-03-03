@@ -15,6 +15,10 @@ import LoopKitUI
 enum DanaUIScreen {
     case debugView
     case firstRunScreen
+    case danarsv1Explaination
+    case danarsv1Password
+    case danarsv3Explaination
+    case danaiExplaination
     case insulinConfirmationScreen
     case bolusSpeedScreen
     case deviceScanningScreen
@@ -26,6 +30,14 @@ enum DanaUIScreen {
         case .debugView:
             return .firstRunScreen
         case .firstRunScreen:
+            return nil
+        case .danarsv1Explaination:
+            return .danarsv1Password
+        case .danarsv1Password:
+            return .insulinConfirmationScreen
+        case .danarsv3Explaination:
+            return .insulinConfirmationScreen
+        case .danaiExplaination:
             return .insulinConfirmationScreen
         case .insulinConfirmationScreen:
             return .bolusSpeedScreen
@@ -106,10 +118,29 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
         switch(screen) {
         case .debugView:
             let viewModel = DanaKitDebugViewModel(self.pumpManager)
-            
             return hostingController(rootView: DanaKitDebugView(viewModel: viewModel))
         case .firstRunScreen:
-            let view = DanaKitSetupView(nextAction: self.stepFinished, debugAction: { self.navigateTo(.debugView) }) //self.allowDebugFeatures ? { self.navigateTo(.debugView) } : {})
+            let view = DanaKitSetupView(nextAction: self.goToExplaination, debugAction: { self.navigateTo(.debugView) }) //self.allowDebugFeatures ? { self.navigateTo(.debugView) } : {})
+            return hostingController(rootView: view)
+        case .danarsv1Explaination:
+            let view = DanaRSv1Explaination(nextAction: self.stepFinished)
+            return hostingController(rootView: view)
+        case .danarsv1Password:
+            let view = DanaRSvv1Password(nextAction: { password in
+                guard let pumpManager = self.pumpManager else {
+                    self.stepFinished()
+                    return
+                }
+                
+                pumpManager.state.devicePassword = password
+                self.stepFinished()
+            })
+            return hostingController(rootView: view)
+        case .danarsv3Explaination:
+            let view = DanaRSv3Explaination(nextAction: self.stepFinished)
+            return hostingController(rootView: view)
+        case .danaiExplaination:
+            let view = DanaIExplainationView(nextAction: self.stepFinished)
             return hostingController(rootView: view)
         case .insulinConfirmationScreen:
             let confirm: (InsulinType) -> Void = { confirmedType in
@@ -127,18 +158,18 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
             
             return hostingController(rootView: view)
         case .deviceScanningScreen:
+            self.pumpManagerOnboardingDelegate?.pumpManagerOnboarding(didOnboardPumpManager: self.pumpManager!)
+            self.pumpManager?.state.isOnBoarded = true
+            self.pumpManager?.notifyStateDidChange()
+            
             let viewModel = DanaKitScanViewModel(self.pumpManager, nextStep: self.stepFinished)
-
             return hostingController(rootView: DanaKitScanView(viewModel: viewModel))
         case .setupComplete:
-            pumpManagerOnboardingDelegate?.pumpManagerOnboarding(didCreatePumpManager: self.pumpManager!)
-            
             let nextStep: () -> Void = {
-                self.pumpManager?.state.isOnBoarded = true
-                self.pumpManager?.notifyStateDidChange()
+                self.pumpManagerOnboardingDelegate?.pumpManagerOnboarding(didCreatePumpManager: self.pumpManager!)
                 self.stepFinished()
             }
-            
+
             let view = DanaKitSetupCompleteView(finish: nextStep, friendlyPumpModelName: self.pumpManager?.state.getFriendlyDeviceName() ?? "", imageName: self.pumpManager?.state.getDanaPumpImageName() ?? "danai")
             return hostingController(rootView: view)
         case .settings:
@@ -169,6 +200,22 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
         }
         
         return .firstRunScreen
+    }
+    
+    func goToExplaination(_ index: Int) {
+        switch (index) {
+        case 0:
+            navigateTo(.danarsv1Explaination)
+            return
+        case 1:
+            navigateTo(.danarsv3Explaination)
+            return
+        case 2:
+            navigateTo(.danaiExplaination)
+            return
+        default:
+            return
+        }
     }
 }
 
