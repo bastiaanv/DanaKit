@@ -126,7 +126,7 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
             let view = DanaRSv1Explaination(nextAction: self.stepFinished)
             return hostingController(rootView: view)
         case .danarsv1Password:
-            let view = DanaRSvv1Password(nextAction: { password in
+            let view = DanaRSv1Password(nextAction: { password in
                 guard let pumpManager = self.pumpManager else {
                     self.stepFinished()
                     return
@@ -158,9 +158,9 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
             
             return hostingController(rootView: view)
         case .deviceScanningScreen:
-            self.pumpManagerOnboardingDelegate?.pumpManagerOnboarding(didOnboardPumpManager: self.pumpManager!)
             self.pumpManager?.state.isOnBoarded = true
             self.pumpManager?.notifyStateDidChange()
+            self.pumpManagerOnboardingDelegate?.pumpManagerOnboarding(didOnboardPumpManager: self.pumpManager!)
             
             let viewModel = DanaKitScanViewModel(self.pumpManager, nextStep: self.stepFinished)
             return hostingController(rootView: DanaKitScanView(viewModel: viewModel))

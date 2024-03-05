@@ -1,5 +1,5 @@
 //
-//  InsulinTypeConfirmation.swift
+//  InsulinTypeView.swift
 //  DanaKit
 //
 //  Created by Bastiaan Verhaar on 28/12/2023.
@@ -10,7 +10,7 @@ import SwiftUI
 import LoopKit
 import LoopKitUI
 
-struct InsulinTypeConfirmation: View {
+struct InsulinTypeView: View {
     @Environment(\.dismissAction) private var dismiss
     
     @State private var insulinType: InsulinType?
@@ -71,8 +71,8 @@ struct InsulinTypeConfirmation: View {
     }
 }
 
-struct InsulinTypeConfirmation_Previews: PreviewProvider {
+struct InsulinTypeView_Previews: PreviewProvider {
     static var previews: some View {
-        InsulinTypeConfirmation(initialValue: .novolog, supportedInsulinTypes: InsulinType.allCases, didConfirm: { (newType) in })
+        InsulinTypeView(initialValue: .novolog, supportedInsulinTypes: InsulinType.allCases, didConfirm: { (newType) in })
     }
 }

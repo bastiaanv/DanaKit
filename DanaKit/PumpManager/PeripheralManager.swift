@@ -389,6 +389,7 @@ extension PeripheralManager {
                     ))
                     
                     guard let view = UIApplication.shared.windows.last?.rootViewController else {
+                        self.log.error("No views are found to prompt ble 5 error")
                         return
                     }
                     
@@ -628,6 +629,7 @@ extension PeripheralManager {
             self.pumpManager.state.batteryRemaining = data.batteryRemaining
             self.pumpManager.state.isPumpSuspended = data.isPumpSuspended
             self.pumpManager.state.isTempBasalInProgress = data.isTempBasalInProgress
+            self.pumpManager.state.basalDeliveryOrdinal = data.isTempBasalInProgress ? .tempBasal : data.isPumpSuspended ? .suspended : .active
             self.pumpManager.state.lowReservoirRate = dataUserOption.lowReservoirRate
             self.pumpManager.state.isTimeDisplay24H = dataUserOption.isTimeDisplay24H
             self.pumpManager.state.isButtonScrollOnOff = dataUserOption.isButtonScrollOnOff

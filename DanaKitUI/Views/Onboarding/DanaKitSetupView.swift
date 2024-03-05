@@ -30,41 +30,34 @@ struct DanaKitSetupView: View {
     private let allowedOptions: [Int] = [0, 1, 2]
     
     var body: some View {
-        VStack(spacing: 0) {
-            VStack(alignment: .leading) {
-                close
-                title
-                    .padding(.all)
-                    .onLongPressGesture(minimumDuration: 2) {
-                        didLongPressOnTitle()
-                    }
-                Divider()
-                
-                VStack(alignment: .center, spacing: 2) {
-                    Spacer()
-                    
-                    Text(LocalizedString("Select your pump", comment: "Subtitle for DanaKitSetupView"))
-                        .fixedSize(horizontal: false, vertical: true)
-                    
-                    ResizeablePicker(selection: currentValue,
-                                     data: self.allowedOptions,
-                                     formatter: { formatter($0) })
-                    
-                    Spacer()
+        VStack(alignment: .leading) {
+            title
+                .onLongPressGesture(minimumDuration: 2) {
+                    didLongPressOnTitle()
                 }
+            
+            VStack(alignment: .leading) {
+                Spacer()
+                
+                ResizeablePicker(selection: currentValue,
+                                 data: self.allowedOptions,
+                                 formatter: { formatter($0) })
+                
+                Spacer()
             }
             .padding(.horizontal)
-            VStack(spacing: 0) {
-                Button(LocalizedString("Continue", comment: "Text for continue button"), action: { nextAction(value) })
-                    .buttonStyle(ActionButtonStyle())
-                    .padding([.bottom, .horizontal])
-            }
-                .padding(.top, 10)
-                .background(Color(.secondarySystemGroupedBackground)
-                .shadow(radius: 5))
+            
+            ContinueButton(action: { nextAction(value) })
         }
         .edgesIgnoringSafeArea(.bottom)
-        .navigationBarHidden(true)
+        .navigationBarHidden(false)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(LocalizedString("Cancel", comment: "Cancel button title"), action: {
+                    self.dismiss()
+                })
+            }
+        }
     }
 
     @ViewBuilder
@@ -72,7 +65,12 @@ struct DanaKitSetupView: View {
         Text(LocalizedString("Dana-i/RS Setup", comment: "Title for DanaKitSetupView"))
             .font(.largeTitle)
             .bold()
-            .padding(.vertical)
+            .padding(.horizontal)
+        Text(LocalizedString("Select your pump", comment: "Subtitle for DanaKitSetupView"))
+            .fixedSize(horizontal: false, vertical: true)
+            .padding(.horizontal)
+        
+        Divider()
     }
     
     private func formatter(_ index: Int) -> String {
@@ -86,17 +84,6 @@ struct DanaKitSetupView: View {
         default:
             return ""
         }
-    }
-    
-    @ViewBuilder
-    private var close: some View {
-        HStack {
-            Spacer()
-            Button(LocalizedString("Cancel", comment: "Cancel button title"), action: {
-                self.dismiss()
-            })
-        }
-        .padding(.top)
     }
     
     private func didLongPressOnTitle() {

@@ -123,7 +123,7 @@ struct DanaKitSettingsView: View {
             
             Section(header: SectionHeader(label: LocalizedString("Configuration", comment: "The title of the configuration section in DanaKit settings")))
             {
-                NavigationLink(destination: InsulinTypeSetting(initialValue: viewModel.insulineType, supportedInsulinTypes: supportedInsulinTypes, allowUnsetInsulinType: false, didChange: viewModel.didChangeInsulinType)) {
+                NavigationLink(destination: InsulinTypeView(initialValue: viewModel.insulineType, supportedInsulinTypes: supportedInsulinTypes, didConfirm: viewModel.didChangeInsulinType)) {
                     HStack {
                         Text(LocalizedString("Insulin Type", comment: "Text for confidence reminders navigation link")).foregroundColor(Color.primary)
                         Spacer()
@@ -138,6 +138,14 @@ struct DanaKitSettingsView: View {
                         Text(viewModel.bolusSpeed.format())
                             .foregroundColor(.secondary)
                         }
+                }
+                NavigationLink(destination: viewModel.basalProfileView) {
+                    HStack {
+                        Text(LocalizedString("Basal profile", comment: "Text for Basal profile")).foregroundColor(Color.primary)
+                        Spacer()
+                        Text(viewModel.transformBasalProfile(viewModel.basalProfileNumber))
+                            .foregroundColor(.secondary)
+                    }
                 }
                 NavigationLink(destination: viewModel.userOptionsView) {
                     Text(LocalizedString("User options", comment: "Title for user options"))
@@ -174,12 +182,6 @@ struct DanaKitSettingsView: View {
                     Text(LocalizedString("Battery level", comment: "Text for Battery level")).foregroundColor(Color.primary)
                     Spacer()
                     Text(String(viewModel.batteryLevel) + "%")
-                        .foregroundColor(.secondary)
-                }
-                HStack {
-                    Text(LocalizedString("Basal profile", comment: "Text for Basal profile")).foregroundColor(Color.primary)
-                    Spacer()
-                    Text(viewModel.basalProfile)
                         .foregroundColor(.secondary)
                 }
                 HStack {

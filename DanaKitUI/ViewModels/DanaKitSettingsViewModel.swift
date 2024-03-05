@@ -22,7 +22,7 @@ class DanaKitSettingsViewModel : ObservableObject {
     @Published var batteryLevel: Double = 0
     @Published var showingSilentTone: Bool = false
     @Published var silentTone: Bool = false
-    @Published var basalProfile: String = "A"
+    @Published var basalProfileNumber: UInt8 = 0
     
     @Published var showPumpTimeSyncWarning: Bool = false
     @Published var pumpTime: Date? = nil
@@ -37,6 +37,7 @@ class DanaKitSettingsViewModel : ObservableObject {
     private(set) var pumpManager: DanaKitPumpManager?
     private var didFinish: (() -> Void)?
     private(set) var userOptionsView: DanaKitUserSettingsView
+    private(set) var basalProfileView: BasalProfileView
 
     public var pumpModel: String {
         self.pumpManager?.state.getFriendlyDeviceName() ?? ""
@@ -82,6 +83,7 @@ class DanaKitSettingsViewModel : ObservableObject {
         self.didFinish = didFinish
         
         self.userOptionsView = DanaKitUserSettingsView(viewModel: DanaKitUserSettingsViewModel(self.pumpManager))
+        self.basalProfileView = BasalProfileView(viewModel: BasalProfileViewModel(self.pumpManager))
         
         self.insulineType = self.pumpManager?.state.insulinType ?? .novolog
         self.bolusSpeed = self.pumpManager?.state.bolusSpeed ?? .speed12
@@ -92,7 +94,7 @@ class DanaKitSettingsViewModel : ObservableObject {
         self.batteryLevel = self.pumpManager?.state.batteryRemaining ?? 0
         self.silentTone = self.pumpManager?.state.useSilentTones ?? false
         self.reservoirLevelWarning = Double(self.pumpManager?.state.lowReservoirRate ?? 20)
-        self.basalProfile = transformBasalProfile(self.pumpManager?.basalProfileNumber ?? 0)
+        self.basalProfileNumber = self.pumpManager?.state.basalProfileNumber ?? 0
         self.showPumpTimeSyncWarning = shouldShowTimeWarning(pumpTime: self.pumpTime, syncedAt: self.pumpManager?.state.pumpTimeSyncedAt)
         updateBasalRate()
         
@@ -102,7 +104,14 @@ class DanaKitSettingsViewModel : ObservableObject {
     }
     
     func stopUsingDana() {
-        self.pumpManager?.notifyDelegateOfDeactivation {
+        guard let pumpManager = self.pumpManager else {
+            return
+        }
+        
+        pumpManager.state.isOnBoarded = false
+        pumpManager.notifyStateDidChange()
+        
+        pumpManager.notifyDelegateOfDeactivation {
             DispatchQueue.main.async {
                 self.didFinish?()
             }
@@ -178,6 +187,18 @@ class DanaKitSettingsViewModel : ObservableObject {
         self.silentTone = pumpManager.state.useSilentTones
     }
     
+    func transformBasalProfile(_ index: UInt8) -> String {
+        if index == 0 {
+            return "A"
+        } else if index == 1 {
+            return "B"
+        } else if index == 2 {
+            return "C"
+        } else {
+            return "D"
+        }
+    }
+    
     func suspendResumeButtonPressed() {
         self.isUpdatingPumpState = true
         
@@ -251,26 +272,14 @@ class DanaKitSettingsViewModel : ObservableObject {
         return abs(syncedAt.timeIntervalSince1970 - pumpTime.timeIntervalSince1970) > 60
     }
     
-    private func transformBasalProfile(_ index: UInt8) -> String {
-        if index == 0 {
-            return "A"
-        } else if index == 1 {
-            return "B"
-        } else if index == 2 {
-            return "C"
-        } else {
-            return "D"
-        }
-    }
-    
     private func updateBasalRate() {
         guard let pumpManager = self.pumpManager else {
             self.basalRate = 0
             return
         }
         
-        if pumpManager.state.basalDeliveryOrdinal == .tempBasal && pumpManager.state.basalDeliveryDate + (pumpManager.state.tempBasalDuration ?? 0) < Date.now {
-            self.basalRate = pumpManager.state.tempBasalUnits ?? 0
+        if pumpManager.state.isTempBasalInProgress && pumpManager.state.basalDeliveryDate + (pumpManager.state.tempBasalDuration ?? 0) > Date.now {
+            self.basalRate = pumpManager.state.tempBasalUnits ?? pumpManager.currentBaseBasalRate
         } else {
             self.basalRate = pumpManager.currentBaseBasalRate
         }
@@ -284,11 +293,11 @@ extension DanaKitSettingsViewModel: StateObserver {
         self.lastSync = state.lastStatusDate
         self.reservoirLevel = state.reservoirLevel
         self.isSuspended = state.isPumpSuspended
-        self.pumpTime = self.pumpManager?.state.pumpTime
-        self.batteryLevel = self.pumpManager?.state.batteryRemaining ?? 0
-        self.silentTone = self.pumpManager?.state.useSilentTones ?? false
-        self.basalProfile = transformBasalProfile(self.pumpManager?.basalProfileNumber ?? 0)
-        self.showPumpTimeSyncWarning = shouldShowTimeWarning(pumpTime: self.pumpTime, syncedAt: self.pumpManager?.state.pumpTimeSyncedAt)
+        self.pumpTime = state.pumpTime
+        self.batteryLevel = state.batteryRemaining
+        self.silentTone = state.useSilentTones
+        self.basalProfileNumber = state.basalProfileNumber
+        self.showPumpTimeSyncWarning = shouldShowTimeWarning(pumpTime: self.pumpTime, syncedAt: state.pumpTimeSyncedAt)
         updateBasalRate()
         
         self.basalButtonText = self.updateBasalButtonText()
