@@ -257,6 +257,15 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
     
     public var useSilentTones: Bool = false
     
+    func shouldShowTimeWarning() -> Bool {
+        guard let pumpTime = self.pumpTime, let syncedAt = self.pumpTimeSyncedAt else {
+            return false
+        }
+        
+        // Allow a 1 min diff in time
+        return abs(syncedAt.timeIntervalSince1970 - pumpTime.timeIntervalSince1970) > 60
+    }
+    
     mutating func resetState() {
         self.ignorePassword = false
         self.devicePassword = 0
