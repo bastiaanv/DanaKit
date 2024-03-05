@@ -375,13 +375,16 @@ extension DanaKitPumpManager: PumpManager {
     }
     
     public func enactBolus(units: Double, activationType: BolusActivationType, completion: @escaping (PumpManagerError?) -> Void) {
+        guard self.state.bolusState == .noBolus else {
+            self.log.error("\(#function, privacy: .public): Pump already busy bolossing")
+            completion(.deviceState(DanaKitPumpManagerError.pumpIsBusy))
+            return
+        }
+        
         delegateQueue.async {
             self.log.info("\(#function, privacy: .public): Enact bolus")
             
-            let duration = self.estimatedDuration(toBolus: units)
-            self.doseEntry = UnfinalizedDose(units: units, duration: duration, activationType: activationType, insulinType: self.state.insulinType!)
             self.state.bolusState = .initiating
-            self.doseReporter = DanaKitDoseProgressReporter(total: units)
             self.notifyStateDidChange()
             
             self.ensureConnected { result in
@@ -419,6 +422,9 @@ extension DanaKitPumpManager: PumpManager {
                             return
                         }
                         
+                        let duration = self.estimatedDuration(toBolus: units)
+                        self.doseEntry = UnfinalizedDose(units: units, duration: duration, activationType: activationType, insulinType: self.state.insulinType!)
+                        self.doseReporter = DanaKitDoseProgressReporter(total: units)
                         self.state.lastStatusDate = Date()
                         self.state.bolusState = .inProgress
                         self.notifyStateDidChange()
