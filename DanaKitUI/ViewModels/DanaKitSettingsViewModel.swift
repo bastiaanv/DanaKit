@@ -43,6 +43,8 @@ class DanaKitSettingsViewModel : ObservableObject {
         self.pumpManager?.state.getFriendlyDeviceName() ?? ""
     }
     
+    
+    
     public var deviceName: String? {
         self.pumpManager?.state.deviceName
     }
@@ -173,7 +175,7 @@ class DanaKitSettingsViewModel : ObservableObject {
     
     func reservoirText(for units: Double) -> String {
         let quantity = HKQuantity(unit: .internationalUnit(), doubleValue: units)
-        return reservoirVolumeFormatter.string(from: quantity) ?? ""
+        return reservoirVolumeFormatter.string(from: quantity, for: .internationalUnit()) ?? ""
     }
     
     func toggleSilentTone() {
@@ -198,9 +200,13 @@ class DanaKitSettingsViewModel : ObservableObject {
     }
     
     func suspendResumeButtonPressed() {
+        guard let pumpManager = self.pumpManager else {
+            return
+        }
+        
         self.isUpdatingPumpState = true
         
-        if self.pumpManager?.state.isPumpSuspended ?? false {
+        if pumpManager.state.isPumpSuspended {
             self.pumpManager?.resumeDelivery{ error in
                 DispatchQueue.main.async {
                     self.basalButtonText = self.updateBasalButtonText()
@@ -217,7 +223,7 @@ class DanaKitSettingsViewModel : ObservableObject {
             return
         }
         
-        if self.pumpManager?.state.isTempBasalInProgress ?? false {
+        if pumpManager.state.basalDeliveryOrdinal == .tempBasal && pumpManager.state.tempBasalEndsAt > Date.now {
             // Stop temp basal
             self.pumpManager?.enactTempBasal(unitsPerHour: 0, for: 0, completion: { error in
                 DispatchQueue.main.async {
@@ -235,7 +241,7 @@ class DanaKitSettingsViewModel : ObservableObject {
             return
         }
         
-        self.pumpManager?.suspendDelivery(completion: { error in
+        pumpManager.suspendDelivery(completion: { error in
             DispatchQueue.main.async {
                 self.basalButtonText = self.updateBasalButtonText()
                 self.isUpdatingPumpState = false
