@@ -335,6 +335,10 @@ extension DanaKitPumpManager: PumpManager {
                     return NewPumpEvent(date: item.timestamp, dose: nil, raw: item.raw, title: "Prime \(item.value!)U", type: .prime, alarmType: nil)
                     
                 case HistoryCode.RECORD_TYPE_REFILL:
+                    if self.state.cannulaDate == nil || item.timestamp > self.state.cannulaDate! {
+                        self.state.cannulaDate = item.timestamp
+                    }
+                    
                     return NewPumpEvent(date: item.timestamp, dose: nil, raw: item.raw, title: "Rewind \(item.value!)U", type: .rewind, alarmType: nil)
                     
                 case HistoryCode.RECORD_TYPE_TEMP_BASAL:
@@ -493,9 +497,31 @@ extension DanaKitPumpManager: PumpManager {
             }
             
             // Increase status update date, to prevent double bolus entries
-            self.state.lastStatusDate = Date()
+            self.state.lastStatusDate = Date.now
             self.state.bolusState = .noBolus
             self.notifyStateDidChange()
+            
+            guard let doseEntry = self.doseEntry else {
+                completion(.success(nil))
+                return
+            }
+            
+            let dose = doseEntry.toDoseEntry()
+            self.doseEntry = nil
+            self.doseReporter = nil
+            
+            guard let dose = dose else {
+                completion(.success(nil))
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self.pumpDelegate.notify { (delegate) in
+                    delegate?.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: dose.deliveredUnits ?? 0)], lastReconciliation: Date.now, replacePendingEvents: true, completion: { _ in })
+                }
+                
+                self.notifyStateDidChange()
+            }
             
             completion(.success(nil))
         } catch {
