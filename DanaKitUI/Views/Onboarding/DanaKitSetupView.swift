@@ -27,7 +27,7 @@ struct DanaKitSetupView: View {
        )
     }
     
-    private let allowedOptions: [Int] = [0, 1, 2]
+    private let allowedOptions: [Int] = [1, 2]
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -76,6 +76,7 @@ struct DanaKitSetupView: View {
     private func formatter(_ index: Int) -> String {
         switch (index) {
         case 0:
+            // UNSUPPORTED ATM
             return LocalizedString("DanaRS-v1", comment: "danaRS v1 option text for DanaKitSetupView")
         case 1:
             return LocalizedString("DanaRS-v3", comment: "danaRS v3 option text for DanaKitSetupView")
