@@ -71,7 +71,7 @@ class PeripheralManager: NSObject {
         
         let isHistoryPacket = self.isHistoryPacket(opCode: command)
         if (isHistoryPacket && !self.pumpManager.state.isInFetchHistoryMode) {
-            throw NSError(domain: "Pump is not in history fetch mode", code: 0, userInfo: nil)
+//            throw NSError(domain: "Pump is not in history fetch mode", code: 0, userInfo: nil)
         }
         
         // Make sure we have the correct state
