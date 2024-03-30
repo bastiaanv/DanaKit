@@ -107,6 +107,8 @@
 		B864F7A22B49EF3800C503A2 /* DanaKitSetupCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B864F7A12B49EF3800C503A2 /* DanaKitSetupCompleteView.swift */; };
 		B871156F2B4C8419004B4A98 /* DanaKitUI.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B885168B2B305E740063402A /* DanaKitUI.xcassets */; };
 		B87115752B4DD0AC004B4A98 /* DanaKitPumpManagerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87115742B4DD0AC004B4A98 /* DanaKitPumpManagerError.swift */; };
+		B87730972BB865B100D2C653 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87730962BB865B100D2C653 /* ActivityViewController.swift */; };
+		B87730982BB8683D00D2C653 /* DanaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84752E8226ED0FFE009FD801 /* DanaKit.framework */; };
 		B87D571C2B20EEAF00FD82E9 /* Crc.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87D571B2B20EEAF00FD82E9 /* Crc.swift */; };
 		B87D571F2B20EFE700FD82E9 /* CrcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87D571E2B20EFE700FD82E9 /* CrcTests.swift */; };
 		B87E6BA92B6053CD001B7FAD /* DanaKitDoseProgressReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87E6BA82B6053CD001B7FAD /* DanaKitDoseProgressReporter.swift */; };
@@ -145,6 +147,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		84752E8D26ED0FFE009FD801 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84752E7926ED0FFE009FD801 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84752E8126ED0FFE009FD801;
+			remoteInfo = DanaKit;
+		};
+		B87730992BB8683D00D2C653 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 84752E7926ED0FFE009FD801 /* Project object */;
 			proxyType = 1;
@@ -292,6 +301,7 @@
 		B864F79F2B49E29700C503A2 /* DanaKitPumpSpeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanaKitPumpSpeed.swift; sourceTree = "<group>"; };
 		B864F7A12B49EF3800C503A2 /* DanaKitSetupCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanaKitSetupCompleteView.swift; sourceTree = "<group>"; };
 		B87115742B4DD0AC004B4A98 /* DanaKitPumpManagerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanaKitPumpManagerError.swift; sourceTree = "<group>"; };
+		B87730962BB865B100D2C653 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		B87D571B2B20EEAF00FD82E9 /* Crc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crc.swift; sourceTree = "<group>"; };
 		B87D571E2B20EFE700FD82E9 /* CrcTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrcTests.swift; sourceTree = "<group>"; };
 		B87E6BA82B6053CD001B7FAD /* DanaKitDoseProgressReporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanaKitDoseProgressReporter.swift; sourceTree = "<group>"; };
@@ -359,6 +369,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1D27A1527908DC600C41EBA /* DanaKit.framework in Frameworks */,
+				B87730982BB8683D00D2C653 /* DanaKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,6 +590,7 @@
 			isa = PBXGroup;
 			children = (
 				B88516982B30D6EC0063402A /* DanaUICoordinator.swift */,
+				B87730962BB865B100D2C653 /* ActivityViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -720,6 +732,7 @@
 			);
 			dependencies = (
 				C187C1A0279086FF006E3557 /* PBXTargetDependency */,
+				B877309A2BB8683D00D2C653 /* PBXTargetDependency */,
 			);
 			name = DanaKitPlugin;
 			productName = DanaKitPlugin;
@@ -831,6 +844,7 @@
 				B8360AD52B2A349400152188 /* DanaHistoryTemporary.swift in Sources */,
 				B82FA9472B3DF85F004F2AFE /* DanaKitScanViewModel.swift in Sources */,
 				B8360AE32B2A3C3C00152188 /* DanaNotifyDeliveryRateDisplay.swift in Sources */,
+				B87730972BB865B100D2C653 /* ActivityViewController.swift in Sources */,
 				B87115752B4DD0AC004B4A98 /* DanaKitPumpManagerError.swift in Sources */,
 				B85418AA2B20F52200C3B4D0 /* Common.swift in Sources */,
 				B8360AB32B2A2A6A00152188 /* DanaGeneralKeepConnection.swift in Sources */,
@@ -974,6 +988,11 @@
 			isa = PBXTargetDependency;
 			target = 84752E8126ED0FFE009FD801 /* DanaKit */;
 			targetProxy = 84752E8D26ED0FFE009FD801 /* PBXContainerItemProxy */;
+		};
+		B877309A2BB8683D00D2C653 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84752E8126ED0FFE009FD801 /* DanaKit */;
+			targetProxy = B87730992BB8683D00D2C653 /* PBXContainerItemProxy */;
 		};
 		C187C1A0279086FF006E3557 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

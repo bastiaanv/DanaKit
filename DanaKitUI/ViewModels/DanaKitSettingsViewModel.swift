@@ -9,7 +9,6 @@
 import SwiftUI
 import LoopKit
 import HealthKit
-import os.log
 
 class DanaKitSettingsViewModel : ObservableObject {
     @Published var showingDeleteConfirmation = false
@@ -23,7 +22,8 @@ class DanaKitSettingsViewModel : ObservableObject {
     @Published var showingSilentTone: Bool = false
     @Published var silentTone: Bool = false
     @Published var basalProfileNumber: UInt8 = 0
-    @Published var cannulaAge: String = ""
+    @Published var cannulaAge: String? = nil
+    @Published var reservoirAge: String? = nil
     
     @Published var showPumpTimeSyncWarning: Bool = false
     @Published var pumpTime: Date? = nil
@@ -33,7 +33,7 @@ class DanaKitSettingsViewModel : ObservableObject {
     @Published var isSuspended: Bool = false
     @Published var basalRate: Double?
     
-    private let log = Logger(category: "SettingsView")
+    private let log = DanaLogger(category: "SettingsView")
     private(set) var insulineType: InsulinType
     private(set) var pumpManager: DanaKitPumpManager?
     private var didFinish: (() -> Void)?
@@ -43,8 +43,6 @@ class DanaKitSettingsViewModel : ObservableObject {
     public var pumpModel: String {
         self.pumpManager?.state.getFriendlyDeviceName() ?? ""
     }
-    
-    
     
     public var deviceName: String? {
         self.pumpManager?.state.deviceName
@@ -108,7 +106,11 @@ class DanaKitSettingsViewModel : ObservableObject {
         updateBasalRate()
         
         if let cannulaDate = self.pumpManager?.state.cannulaDate {
-            self.cannulaAge = "\(round(-cannulaDate.timeIntervalSinceNow / .days(1))) \(LocalizedString("day(s)", comment: "Text for Day unit"))"
+            self.cannulaAge = "\(String(format: "%.1f", -cannulaDate.timeIntervalSinceNow / .days(1))) \(LocalizedString("day(s)", comment: "Text for Day unit"))"
+        }
+        
+        if let reservoirDate = self.pumpManager?.state.reservoirDate {
+            self.reservoirAge = "\(String(format: "%.1f", -reservoirDate.timeIntervalSinceNow / .days(1))) \(LocalizedString("day(s)", comment: "Text for Day unit"))"
         }
         
         self.basalButtonText = self.updateBasalButtonText()
@@ -133,7 +135,7 @@ class DanaKitSettingsViewModel : ObservableObject {
         self.insulineType = type
     }
     
-    func getLogs() -> String {
+    func getLogs() -> [URL] {
         return log.getDebugLogs()
     }
     

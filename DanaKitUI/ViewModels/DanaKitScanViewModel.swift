@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import os.log
 import LoopKit
 import CoreBluetooth
 
@@ -24,7 +23,7 @@ class DanaKitScanViewModel : ObservableObject {
     @Published var isConnectionError = false
     @Published var connectionErrorMessage: String?
      
-    private let log = Logger(category: "ScanView")
+    private let log = DanaLogger(category: "ScanView")
     private var pumpManager: DanaKitPumpManager?
     private var nextStep: () -> Void
     private var foundDevices: [String:CBPeripheral] = [:]
@@ -40,7 +39,7 @@ class DanaKitScanViewModel : ObservableObject {
             try self.pumpManager?.startScan()
             self.isScanning = true
         } catch {
-            log.error("\(#function): Failed to start scan action: \(error.localizedDescription, privacy: .public)")
+            log.error("Failed to start scan action: \(error.localizedDescription)")
         }
     }
     

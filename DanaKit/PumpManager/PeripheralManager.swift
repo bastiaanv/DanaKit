@@ -7,11 +7,10 @@
 //
 
 import CoreBluetooth
-import os.log
 import SwiftUI
 
 class PeripheralManager: NSObject {
-    private let log = Logger(category: "PeripheralManager")
+    private let log = DanaLogger(category: "PeripheralManager")
     
     private let connectedDevice: CBPeripheral
     private let bluetoothManager: BluetoothManager
@@ -35,6 +34,7 @@ class PeripheralManager: NSObject {
     private let WRITE_CHAR_UUID = CBUUID(string: "FFF2")
     private var writeCharacteristic: CBCharacteristic!
     
+    private var lock: DispatchQueue = DispatchQueue.init(label: "writeQueue")
     private var writeQueue: Dictionary<UInt8, (Timer, CheckedContinuation<(any DanaParsePacketProtocol), Error>)> = [:]
     
     private var historyLog: [HistoryItem] = []
@@ -65,8 +65,13 @@ class PeripheralManager: NSObject {
     
     func writeMessage(_ packet: DanaGeneratePacket) async throws -> (any DanaParsePacketProtocol)  {
         let command = (UInt16((packet.type ?? DanaPacketType.TYPE_RESPONSE)) << 8) + UInt16(packet.opCode)
-        guard self.writeQueue[packet.opCode] == nil else {
-            throw NSError(domain: "This command is already running. Please wait", code: 0, userInfo: nil)
+        
+        // Add objetc sync to prevent:
+        // -[NSTaggedPointerString objectForKey:]: unrecognized selector sent to instance 0x8000000000000000
+        try lock.sync {
+            guard self.writeQueue[packet.opCode] == nil else {
+                throw NSError(domain: "This command is already running. Please wait", code: 0, userInfo: nil)
+            }
         }
         
         // Make sure we have the correct state
@@ -655,7 +660,7 @@ extension PeripheralManager {
                 self.completion = { _ in }
             }
         } catch {
-            log.error("\(#function): Caught error during sending the message. error: \(error.localizedDescription, privacy: .public)")
+            log.error("\(#function): Caught error during sending the message. error: \(error.localizedDescription)")
             self.pumpManager.disconnect(self.connectedDevice)
             DispatchQueue.main.async {
                 self.completion(error)
