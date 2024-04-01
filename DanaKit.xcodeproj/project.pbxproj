@@ -700,7 +700,7 @@
 			productReference = 84752E8226ED0FFE009FD801 /* DanaKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		84752E8A26ED0FFE009FD801 /* DanaKitTests */ = {
+		84752E9F26ED0FFE009FD801 /* DanaKitTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84752E9926ED0FFE009FD801 /* Build configuration list for PBXNativeTarget "DanaKitTests" */;
 			buildPhases = (
@@ -718,7 +718,7 @@
 			productReference = 84752E8B26ED0FFE009FD801 /* DanaKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		C187C196279086A8006E3557 /* DanaKitPlugin */ = {
+		C187C166279086A8006E3557 /* DanaKitPlugin */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C187C19B279086A8006E3557 /* Build configuration list for PBXNativeTarget "DanaKitPlugin" */;
 			buildPhases = (
@@ -753,11 +753,11 @@
 					84752E8126ED0FFE009FD801 = {
 						CreatedOnToolsVersion = 12.5.1;
 					};
-					84752E8A26ED0FFE009FD801 = {
+					84752E9F26ED0FFE009FD801 = {
 						CreatedOnToolsVersion = 12.5.1;
 						LastSwiftMigration = 1500;
 					};
-					C187C196279086A8006E3557 = {
+					C187C166279086A8006E3557 = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
 				};
@@ -802,8 +802,8 @@
 			projectRoot = "";
 			targets = (
 				84752E8126ED0FFE009FD801 /* DanaKit */,
-				84752E8A26ED0FFE009FD801 /* DanaKitTests */,
-				C187C196279086A8006E3557 /* DanaKitPlugin */,
+				84752E9F26ED0FFE009FD801 /* DanaKitTests */,
+				C187C166279086A8006E3557 /* DanaKitPlugin */,
 			);
 		};
 /* End PBXProject section */

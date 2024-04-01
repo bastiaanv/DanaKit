@@ -445,18 +445,13 @@ class GeneratePacketTests: XCTestCase {
             isButtonScrollOnOff: true,
             beepAndAlarm: 0,
             lcdOnTimeInSec: 10,
-            backlightOnTimInSec: 10,
+            backlightOnTimeInSec: 10,
             selectedLanguage: 1,
             units: 1,
             shutdownHour: 0,
             lowReservoirRate: 20,
             cannulaVolume: 250,
             refillAmount: 7,
-            selectableLanguage1: 1,
-            selectableLanguage2: 2,
-            selectableLanguage3: 3,
-            selectableLanguage4: 4,
-            selectableLanguage5: 5,
             targetBg: 55
         )
         let packet = generatePacketGeneralSetUserOption(options: options)
@@ -639,9 +634,9 @@ class GeneratePacketTests: XCTestCase {
     }
 
     func testGenerateLoopSetTemporaryBasal() {
-        let options = PacketLoopSetTemporaryBasal(percent: 200)
+        let options = PacketLoopSetTemporaryBasal(percent: 200, duration: .min30)
         let packet = generatePacketLoopSetTemporaryBasal(options: options)
-        let expectedData = Data([200, 0, 150])
+        let expectedData = Data([200, 0, 160])
         let expectedSnapshot = DanaGeneratePacket(opCode: 193, data: expectedData)
 
         XCTAssertEqual(packet.type, expectedSnapshot.type)
@@ -650,7 +645,7 @@ class GeneratePacketTests: XCTestCase {
     }
     
     func testGenerateLoopSetTemporaryBasalPercentGreaterThan500() {
-        let options = PacketLoopSetTemporaryBasal(percent: 750)
+        let options = PacketLoopSetTemporaryBasal(percent: 750, duration: .min15)
         let packet = generatePacketLoopSetTemporaryBasal(options: options)
         let expectedData = Data([244, 1, 150])
         let expectedSnapshot = DanaGeneratePacket(opCode: 193, data: expectedData)
