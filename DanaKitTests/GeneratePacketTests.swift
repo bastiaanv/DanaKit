@@ -387,7 +387,7 @@ class GeneratePacketTests: XCTestCase {
     func testGenerateGeneralSaveHistory() {
         let options = PacketGeneralSaveHistory(historyType: 1, historyDate: Date(timeIntervalSince1970: 1701774000), historyCode: 1, historyValue: 1)
         let packet = generatePacketGeneralSaveHistory(options: options)
-        let expectedData = Data([1, 23, 12, 5, 12, 0, 0, 1, 1, 0])
+        let expectedData = Data([1, 23, 12, 5, 11, 0, 0, 1, 1, 0])
         let expectedSnapshot = DanaGeneratePacket(opCode: 224, data: expectedData)
 
         XCTAssertEqual(packet.type, expectedSnapshot.type)
@@ -418,9 +418,10 @@ class GeneratePacketTests: XCTestCase {
     }
 
     func testGenerateGeneralSetPumpTime() {
+        // 2023-12-05T11:00:00.000 UTC
         let options = PacketGeneralSetPumpTime(time: Date(timeIntervalSince1970: 1701774000))
         let packet = generatePacketGeneralSetPumpTime(options: options)
-        let expectedData = Data([23, 12, 5, 12, 0, 0])
+        let expectedData = Data([23, 12, 5, 11, 0, 0])
         let expectedSnapshot = DanaGeneratePacket(opCode: 113, data: expectedData)
 
         XCTAssertEqual(packet.type, expectedSnapshot.type)
@@ -431,7 +432,7 @@ class GeneratePacketTests: XCTestCase {
     func testGenerateGeneralSetPumpTimeWithTimezone() {
         let options = PacketGeneralSetPumpTimeUtcWithTimezone(time: Date(timeIntervalSince1970: 1701774000), zoneOffset: 1)
         let packet = generatePacketGeneralSetPumpTimeUtcWithTimezone(options: options)
-        let expectedData = Data([23, 12, 5, 12, 0, 0, 1])
+        let expectedData = Data([23, 12, 5, 11, 0, 0, 1])
         let expectedSnapshot = DanaGeneratePacket(opCode: 121, data: expectedData)
 
         XCTAssertEqual(packet.type, expectedSnapshot.type)
@@ -455,7 +456,7 @@ class GeneratePacketTests: XCTestCase {
             targetBg: 55
         )
         let packet = generatePacketGeneralSetUserOption(options: options)
-        let expectedData = Data([1, 1, 0, 10, 10, 1, 1, 0, 20, 250, 0, 7, 0, 55, 0])
+        let expectedData = Data([0, 1, 0, 10, 10, 1, 1, 0, 20, 250, 0, 7, 0, 55, 0])
         let expectedSnapshot = DanaGeneratePacket(opCode: 115, data: expectedData)
 
         XCTAssertEqual(packet.type, expectedSnapshot.type)
@@ -466,7 +467,7 @@ class GeneratePacketTests: XCTestCase {
     func testGenerateHistoryAlarmFromDate() {
         let options = PacketHistoryBase(from: Date(timeIntervalSince1970: 1701774000))
         let packet = generatePacketHistoryAlarm(options: options)
-        let expectedData = Data([23, 12, 5, 12, 0, 0])
+        let expectedData = Data([23, 12, 5, 11, 0, 0])
         let expectedSnapshot = DanaGeneratePacket(opCode: 25, data: expectedData)
 
         XCTAssertEqual(packet.type, expectedSnapshot.type)
@@ -598,7 +599,7 @@ class GeneratePacketTests: XCTestCase {
     func testGenerateLoopHistoryEventsFromDateInUTC() {
         let options = PacketLoopHistoryEvents(from: Date(timeIntervalSince1970: 1701774000))
         let packet = generatePacketLoopHistoryEvents(options: options)
-        let expectedData = Data([23, 12, 5, 12, 0, 0])
+        let expectedData = Data([23, 12, 5, 11, 0, 0])
         let expectedSnapshot = DanaGeneratePacket(opCode: 194, data: expectedData)
 
         XCTAssertEqual(packet.type, expectedSnapshot.type)
@@ -625,7 +626,7 @@ class GeneratePacketTests: XCTestCase {
             param2: 0
         )
         let packet = generatePacketLoopSetEventHistory(options: options)
-        let expectedData = Data([14, 23, 12, 5, 12, 0, 0, 0, 0, 0, 0])
+        let expectedData = Data([14, 23, 12, 5, 11, 0, 0, 0, 0, 0, 0])
         let expectedSnapshot = DanaGeneratePacket(opCode: 195, data: expectedData)
 
         XCTAssertEqual(packet.type, expectedSnapshot.type)

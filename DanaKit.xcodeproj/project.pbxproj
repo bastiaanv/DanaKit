@@ -700,9 +700,9 @@
 			productReference = 84752E8226ED0FFE009FD801 /* DanaKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		84752E9F26ED0FFE009FD801 /* DanaKitTests */ = {
+		84762E9F26ED0FFE009FD801 /* DanaKitTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 84752E9926ED0FFE009FD801 /* Build configuration list for PBXNativeTarget "DanaKitTests" */;
+			buildConfigurationList = 84762E9926ED0FFE009FD801 /* Build configuration list for PBXNativeTarget "DanaKitTests" */;
 			buildPhases = (
 				84752E8726ED0FFE009FD801 /* Sources */,
 				84752E8826ED0FFE009FD801 /* Frameworks */,
@@ -753,7 +753,7 @@
 					84752E8126ED0FFE009FD801 = {
 						CreatedOnToolsVersion = 12.5.1;
 					};
-					84752E9F26ED0FFE009FD801 = {
+					84762E9F26ED0FFE009FD801 = {
 						CreatedOnToolsVersion = 12.5.1;
 						LastSwiftMigration = 1500;
 					};
@@ -802,7 +802,7 @@
 			projectRoot = "";
 			targets = (
 				84752E8126ED0FFE009FD801 /* DanaKit */,
-				84752E9F26ED0FFE009FD801 /* DanaKitTests */,
+				84762E9F26ED0FFE009FD801 /* DanaKitTests */,
 				C187C166279086A8006E3557 /* DanaKitPlugin */,
 			);
 		};
@@ -1251,7 +1251,7 @@
 			};
 			name = Release;
 		};
-		84752E9A26ED0FFE009FD801 /* Debug */ = {
+		84762E9A26ED0FFE009FD801 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -1275,7 +1275,7 @@
 			};
 			name = Debug;
 		};
-		84752E9B26ED0FFE009FD801 /* Release */ = {
+		84762E9B26ED0FFE009FD801 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -1393,11 +1393,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		84752E9926ED0FFE009FD801 /* Build configuration list for PBXNativeTarget "DanaKitTests" */ = {
+		84762E9926ED0FFE009FD801 /* Build configuration list for PBXNativeTarget "DanaKitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				84752E9A26ED0FFE009FD801 /* Debug */,
-				84752E9B26ED0FFE009FD801 /* Release */,
+				84762E9A26ED0FFE009FD801 /* Debug */,
+				84762E9B26ED0FFE009FD801 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

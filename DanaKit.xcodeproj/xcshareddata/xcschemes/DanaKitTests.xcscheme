@@ -14,7 +14,7 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "84752E8A26ED0FFE009FD801"
+               BlueprintIdentifier = "84762E9F26ED0FFE009FD801"
                BuildableName = "DanaKitTests.xctest"
                BlueprintName = "DanaKitTests"
                ReferencedContainer = "container:DanaKit.xcodeproj">
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "84752E8A26ED0FFE009FD801"
+               BlueprintIdentifier = "84762E9F26ED0FFE009FD801"
                BuildableName = "DanaKitTests.xctest"
                BlueprintName = "DanaKitTests"
                ReferencedContainer = "container:DanaKit.xcodeproj">
@@ -60,7 +60,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "84752E8A26ED0FFE009FD801"
+            BlueprintIdentifier = "84762E9F26ED0FFE009FD801"
             BuildableName = "DanaKitTests.xctest"
             BlueprintName = "DanaKitTests"
             ReferencedContainer = "container:DanaKit.xcodeproj">

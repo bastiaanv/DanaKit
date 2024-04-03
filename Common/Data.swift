@@ -30,9 +30,13 @@ extension Data {
         return UInt16(littleEndian: value)
     }
     
-    mutating func addDate(at index: Int, date: Date) {
+    mutating func addDate(at index: Int, date: Date, asUtc: Bool = true) {
         var calendar = Calendar(identifier: .gregorian)
-        calendar.timeZone = TimeZone(identifier: "UTC")!
+        if asUtc {
+            calendar.timeZone = TimeZone(identifier: "UTC")!
+        } else {
+            calendar.timeZone = TimeZone.current
+        }
         
         self[index] = UInt8((calendar.component(.year, from: date) - 2000) & 0xff)
         self[index + 1] = UInt8(calendar.component(.month, from: date) & 0xff)
