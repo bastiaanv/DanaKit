@@ -119,7 +119,15 @@ class DanaKitSettingsViewModel : ObservableObject {
     }
     
     func stopUsingDana() {
-        self.pumpManager?.notifyDelegateOfDeactivation {
+        guard let pumpManager = self.pumpManager else {
+            return
+        }
+        
+        // reset state
+        pumpManager.state = DanaKitPumpManagerState()
+        pumpManager.notifyStateDidChange()
+        
+        pumpManager.notifyDelegateOfDeactivation {
             DispatchQueue.main.async {
                 self.didFinish?()
             }
@@ -308,6 +316,14 @@ extension DanaKitSettingsViewModel: StateObserver {
         updateBasalRate()
         
         self.basalButtonText = self.updateBasalButtonText()
+        
+        if let cannulaDate = state.cannulaDate {
+            self.cannulaAge = "\(String(format: "%.1f", -cannulaDate.timeIntervalSinceNow / .days(1))) \(LocalizedString("day(s)", comment: "Text for Day unit"))"
+        }
+        
+        if let reservoirDate = state.reservoirDate {
+            self.reservoirAge = "\(String(format: "%.1f", -reservoirDate.timeIntervalSinceNow / .days(1))) \(LocalizedString("day(s)", comment: "Text for Day unit"))"
+        }
     }
     
     func deviceScanDidUpdate(_ device: DanaPumpScan) {

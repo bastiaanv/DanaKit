@@ -22,7 +22,7 @@ func generatePacketBasalSetProfileRate(options: PacketBasalSetProfileRate) throw
     dataArray[0] = options.profileNumber
 
     for i in 0..<24 {
-        let rate = UInt16(round(options.profileBasalRate[i] * 100))
+        let rate = UInt16(options.profileBasalRate[i] * 100)
         dataArray[1 + i * 2] = UInt8(rate & 0xff)
         dataArray[2 + i * 2] = UInt8((rate >> 8) & 0xff)
     }
@@ -31,6 +31,6 @@ func generatePacketBasalSetProfileRate(options: PacketBasalSetProfileRate) throw
 }
 
 
-func parsePacketBasalSetProfileRate(data: Data) -> DanaParsePacket<Any> {
+func parsePacketBasalSetProfileRate(data: Data, usingUtc: Bool?) -> DanaParsePacket<Any> {
     return DanaParsePacket(success: data[DataStart] == 0, rawData: data, data: nil)
 }
