@@ -1292,13 +1292,8 @@ extension DanaKitPumpManager {
         self.doseEntry = nil
         self.doseReporter = nil
         
-        guard let dose = dose else {
-            return
-        }
-        
-        self.pumpDelegate.notify { (delegate) in
-            delegate?.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: deliveredUnits)], lastReconciliation: self.state.lastStatusDate, replacePendingEvents: true,  completion: { _ in })
-        }
+        // We dont store the bolus or anything
+        // The ensurePumpData will make sure everything is up-to-date
     }
     
     func notifyBolusDidUpdate(deliveredUnits: Double) {
