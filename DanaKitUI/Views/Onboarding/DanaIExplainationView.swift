@@ -11,6 +11,7 @@ import LoopKitUI
 
 struct DanaIExplainationView: View {
     @Environment(\.dismissAction) private var dismiss
+    @Environment(\.appName) var appName
     
     let nextAction: () -> Void
     
@@ -20,7 +21,7 @@ struct DanaIExplainationView: View {
 
             ScrollView {
                 VStack(alignment: .leading) {
-                    Text(LocalizedString("After setting up the insulin type and bolus speed, you will see all the found Dana pumps. Select the pump you want to link with Loop.", comment: "General subtext for dana"))
+                    Text(String(format: LocalizedString("After setting up the insulin type and bolus speed, you will see all the found Dana pumps. Select the pump you want to link with %1$@.", comment: "General subtext for dana (1: appName)"), appName))
                     
                     HStack {
                         Spacer()

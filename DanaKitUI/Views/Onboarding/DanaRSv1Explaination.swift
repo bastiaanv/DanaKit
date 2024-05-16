@@ -11,6 +11,7 @@ import LoopKitUI
 
 struct DanaRSv1Explaination: View {
     @Environment(\.dismissAction) private var dismiss
+    @Environment(\.appName) private var appName
     
     let nextAction: () -> Void
     
@@ -23,7 +24,7 @@ struct DanaRSv1Explaination: View {
                     Text(LocalizedString("Before starting with the pairing process, it is recommended to check, and if needed update, the pump password. You can do this by going to the pump settings -> user settings -> password. The default password is 1234, if this is your password, please consider changing it", comment: "check password text for danars v1"))
                         .padding(.bottom)
                     
-                    Text(LocalizedString("After setting up the insulin type and bolus speed, you will see all the found Dana pumps. Select the pump you want to link with Loop.", comment: "General subtext for dana"))
+                    Text(String(format: LocalizedString("After setting up the insulin type and bolus speed, you will see all the found Dana pumps. Select the pump you want to link with %1$@.", comment: "General subtext for dana (1: appName)"), appName))
                     
                     HStack {
                         Spacer()

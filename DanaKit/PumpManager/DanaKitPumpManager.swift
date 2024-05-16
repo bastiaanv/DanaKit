@@ -488,7 +488,7 @@ extension DanaKitPumpManager: PumpManager {
             self.state.bolusState = .canceling
             self.notifyStateDidChange()
             
-            // It is very likely that Loop is doing a bolus if the cancel action is triggerd
+            // It is very likely that the app is doing a bolus if the cancel action is triggerd
             // Therefore, we can reuse the connection and directly send the cancel command
             if DanaKitPumpManager.bluetoothManager.isConnected && DanaKitPumpManager.bluetoothManager.peripheral?.state == .connected {
                 Task {
