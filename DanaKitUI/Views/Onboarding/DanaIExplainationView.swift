@@ -33,7 +33,7 @@ struct DanaIExplainationView: View {
                     }
                     .padding(.vertical, 10)
                     
-                    Text(LocalizedString("During the pairing process, your Dana-i will show a pairing prompt while your iPhone will show a prompt for a pairing code. On you pump, select OK and type the 6-digit code in screen on your iPhone. After that, Loop is ready to communicate with your Dana-i", comment: "Subtext for dana-i"))
+                    Text(String(format: LocalizedString("During the pairing process, your Dana-i will show a pairing prompt while your iPhone will show a prompt for a pairing code. On you pump, select OK and type the 6-digit code in screen on your iPhone. After that, %1$@ is ready to communicate with your Dana-i", comment: "Subtext for dana-i (1: appName)"), appName))
                     
                     Spacer()
                 }
