@@ -83,7 +83,7 @@ struct DanaKitUserSettingsView: View {
                         Text(LocalizedString("Low reservoir reminder", comment: "Text for low reservoir reminder"))
                             .foregroundColor(Color.primary)
                         Spacer()
-                        Text("\(viewModel.lowReservoirRate) \(LocalizedString("U", comment: "Insulin unit"))")
+                        Text(String(viewModel.lowReservoirRate) + LocalizedString("U", comment: "Insulin unit"))
                     }
                 }
                 NavigationLink(destination: time24hView) {

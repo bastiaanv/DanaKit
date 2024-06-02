@@ -43,7 +43,7 @@ class DanaKitSettingsViewModel : ObservableObject {
     public var pumpModel: String {
         self.pumpManager?.state.getFriendlyDeviceName() ?? ""
     }
-    
+
     public var deviceName: String? {
         self.pumpManager?.state.deviceName
     }
@@ -191,7 +191,7 @@ class DanaKitSettingsViewModel : ObservableObject {
     
     func reservoirText(for units: Double) -> String {
         let quantity = HKQuantity(unit: .internationalUnit(), doubleValue: units)
-        return reservoirVolumeFormatter.string(from: quantity) ?? ""
+        return reservoirVolumeFormatter.string(from: quantity, for: .internationalUnit()) ?? ""
     }
     
     func toggleSilentTone() {

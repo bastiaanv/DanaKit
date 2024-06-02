@@ -128,7 +128,6 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         self.useSilentTones = false
         self.batteryRemaining = 0
         self.cannulaDate = nil
-        self.reservoirDate = nil
     }
     
     public var rawValue: RawValue {
@@ -287,8 +286,8 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
             return false
         }
         
-        // Allow a 1 min diff in time
-        return abs(syncedAt.timeIntervalSince1970 - pumpTime.timeIntervalSince1970) > 60
+        // Allow a 5 sec diff in time
+        return abs(syncedAt.timeIntervalSince1970 - pumpTime.timeIntervalSince1970) > 5
     }
     
     mutating func resetState() {

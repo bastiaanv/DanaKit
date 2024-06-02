@@ -33,9 +33,13 @@ struct PickerView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            titleView
-            
             VStack(alignment: .leading) {
+                titleView
+                if description != nil {
+                    Text(description!).fixedSize(horizontal: false, vertical: true)
+                }
+                
+                Divider()
                 Spacer()
                 
                 ResizeablePicker(selection: currentValue,
@@ -44,6 +48,8 @@ struct PickerView: View {
                     .padding(.horizontal)
                 
                 Spacer()
+                
+                
             }
             .padding(.horizontal)
             
@@ -63,15 +69,6 @@ struct PickerView: View {
         Text(title)
             .font(.title)
             .bold()
-            .padding(.horizontal)
-        
-        if (description != nil) {
-            Text(description!)
-                .fixedSize(horizontal: false, vertical: true)
-                .padding(.horizontal)
-        }
-        
-        Divider()
     }
 }
 
