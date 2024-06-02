@@ -304,7 +304,7 @@ extension DanaKitPumpManager: PumpManager {
                 self.notifyStateDidChange()
                 
                 self.pumpDelegate.notify { (delegate) in
-                    delegate?.pumpManager(self, hasNewPumpEvents: events, lastReconciliation: self.state.lastStatusDate, completion: { _ in })
+                    delegate?.pumpManager(self, hasNewPumpEvents: events, lastReconciliation: self.state.lastStatusDate, replacePendingEvents: true, completion: { _ in })
                     delegate?.pumpManager(self, didReadReservoirValue: self.state.reservoirLevel, at: Date.now, completion: { _ in })
                     delegate?.pumpManagerDidUpdateState(self)
                 }
