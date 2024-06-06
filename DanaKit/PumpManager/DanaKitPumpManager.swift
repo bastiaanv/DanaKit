@@ -296,6 +296,22 @@ extension DanaKitPumpManager: PumpManager {
                 await self.syncUserOptions()
                 await self.syncTime()
                 let events = await self.syncHistory()
+                
+                // Sync the pump time
+                do {
+                    let timePacket = self.state.usingUtc ? generatePacketGeneralGetPumpTimeUtcWithTimezone() : generatePacketGeneralGetPumpTime()
+                    let timeResult = try await DanaKitPumpManager.bluetoothManager.writeMessage(timePacket)
+                    
+                    if timeResult.success {
+                        let date = self.state.usingUtc ? (timeResult.data as! PacketGeneralGetPumpTimeUtcWithTimezone).time : (timeResult.data as! PacketGeneralGetPumpTime).time
+                        self.state.lastStatusPumpDateTime = date
+                    } else {
+                        self.state.lastStatusPumpDateTime = Date.now
+                    }
+                } catch {
+                    self.state.lastStatusPumpDateTime = Date.now
+                }
+                
                 self.state.lastStatusDate = Date.now
                 
                 self.disconnect()
