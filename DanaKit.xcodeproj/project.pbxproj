@@ -9,9 +9,7 @@
 /* Begin PBXBuildFile section */
 		1029AE4827094D0E00B7F5B6 /* DanaKitPumpManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1029AE4627094D0E00B7F5B6 /* DanaKitPumpManager.swift */; };
 		1029AE4927094D0E00B7F5B6 /* DanaKitPumpManagerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1029AE4727094D0E00B7F5B6 /* DanaKitPumpManagerState.swift */; };
-		2742C7052AD875B100E67833 /* SlideButton in Frameworks */ = {isa = PBXBuildFile; productRef = 2742C7042AD875B100E67833 /* SlideButton */; };
 		84752E9326ED0FFE009FD801 /* DanaKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 84752E8526ED0FFE009FD801 /* DanaKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8475306E26ED15DE009FD801 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8475306D26ED15DE009FD801 /* CryptoSwift */; };
 		847530F626ED65DD009FD801 /* LoopKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847530F426ED65DD009FD801 /* LoopKit.framework */; };
 		847530F826ED65DD009FD801 /* LoopKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847530F526ED65DD009FD801 /* LoopKitUI.framework */; };
 		A91B2DEC276E1E5E001B0E95 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A91B2DEB276E1E5E001B0E95 /* README.md */; };
@@ -352,9 +350,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2742C7052AD875B100E67833 /* SlideButton in Frameworks */,
 				847530F626ED65DD009FD801 /* LoopKit.framework in Frameworks */,
-				8475306E26ED15DE009FD801 /* CryptoSwift in Frameworks */,
 				847530F826ED65DD009FD801 /* LoopKitUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -696,8 +692,6 @@
 			);
 			name = DanaKit;
 			packageProductDependencies = (
-				8475306D26ED15DE009FD801 /* CryptoSwift */,
-				2742C7042AD875B100E67833 /* SlideButton */,
 			);
 			productName = DanaKit;
 			productReference = 84752E8226ED0FFE009FD801 /* DanaKit.framework */;
@@ -1435,19 +1429,6 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		2742C7042AD875B100E67833 /* SlideButton */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2742C7032AD875B100E67833 /* XCRemoteSwiftPackageReference "SlideButton" */;
-			productName = SlideButton;
-		};
-		8475306D26ED15DE009FD801 /* CryptoSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8475306C26ED15DE009FD801 /* XCRemoteSwiftPackageReference "CryptoSwift" */;
-			productName = CryptoSwift;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 84752E7926ED0FFE009FD801 /* Project object */;
 }

@@ -583,12 +583,14 @@ extension PeripheralManager {
         
 //        log.info("Received message! Starting to decrypt data: \(self.readBuffer.base64EncodedString())")
         let decryptedData = DanaRSEncryption.decodePacket(buffer: self.readBuffer, deviceName: self.deviceName)
-        self.readBuffer = Data([])
-        
         guard decryptedData.count > 0 else {
-            log.error("Decryption failed...")
+            log.error("Decryption failed. Encrypted data: \(self.readBuffer.base64EncodedString())")
+            
+            self.readBuffer = Data([])
             return
         }
+        
+        self.readBuffer = Data([])
         
 //        log.info("Decoding successful! Data: \(decryptedData.base64EncodedString())")
         if (decryptedData[0] == DanaPacketType.TYPE_ENCRYPTION_RESPONSE) {
