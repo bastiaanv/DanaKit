@@ -14,8 +14,10 @@
 		847530F826ED65DD009FD801 /* LoopKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847530F526ED65DD009FD801 /* LoopKitUI.framework */; };
 		A91B2DEC276E1E5E001B0E95 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A91B2DEB276E1E5E001B0E95 /* README.md */; };
 		B62557432BF65396006C4517 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62557422BF65396006C4517 /* Bundle.swift */; };
+		B802D5062C1F674600B92C35 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B802D5052C1F674600B92C35 /* NotificationHelper.swift */; };
+		B802D5092C1F675600B92C35 /* InteractiveBluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B802D5072C1F675600B92C35 /* InteractiveBluetoothManager.swift */; };
+		B802D50A2C1F675600B92C35 /* ContinousBluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B802D5082C1F675600B92C35 /* ContinousBluetoothManager.swift */; };
 		B80C73D62B7D534300821A38 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80C73D52B7D534300821A38 /* TimeInterval.swift */; };
-		B80EC4AE2B45EFDD005E2A1A /* LoadingModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80EC4AD2B45EFDD005E2A1A /* LoadingModal.swift */; };
 		B80EC4B02B45F66E005E2A1A /* DanaKitSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80EC4AF2B45F66E005E2A1A /* DanaKitSettingsView.swift */; };
 		B80EC4B22B45F681005E2A1A /* DanaKitSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80EC4B12B45F681005E2A1A /* DanaKitSettingsViewModel.swift */; };
 		B8179E5A2B20F2A10049EEE7 /* OSLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8179E592B20F2A10049EEE7 /* OSLog.swift */; };
@@ -129,7 +131,6 @@
 		B8F4DCAE2B94CF8100AB00E6 /* ContinueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4DCAD2B94CF8100AB00E6 /* ContinueButton.swift */; };
 		B8F4DCB22B97290800AB00E6 /* InsulinTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4DCB12B97290800AB00E6 /* InsulinTypeView.swift */; };
 		B8F4DCB42B9729E800AB00E6 /* BasalProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4DCB32B9729E800AB00E6 /* BasalProfileView.swift */; };
-		B8F4DCB62B972AB400AB00E6 /* BasalProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4DCB52B972AB400AB00E6 /* BasalProfileViewModel.swift */; };
 		B8F4E1A82B83D28A000F4AE1 /* BackgroundTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4E1A72B83D28A000F4AE1 /* BackgroundTask.swift */; };
 		B8F4E1AA2B83D4F1000F4AE1 /* blank.wav in Resources */ = {isa = PBXBuildFile; fileRef = B8F4E1A92B83D4F1000F4AE1 /* blank.wav */; };
 		B8FB5F152B5D705D001C88BA /* DoseEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FB5F142B5D705D001C88BA /* DoseEntry.swift */; };
@@ -193,8 +194,10 @@
 		847530F526ED65DD009FD801 /* LoopKitUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LoopKitUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A91B2DEB276E1E5E001B0E95 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B62557422BF65396006C4517 /* Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
+		B802D5052C1F674600B92C35 /* NotificationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
+		B802D5072C1F675600B92C35 /* InteractiveBluetoothManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractiveBluetoothManager.swift; sourceTree = "<group>"; };
+		B802D5082C1F675600B92C35 /* ContinousBluetoothManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContinousBluetoothManager.swift; sourceTree = "<group>"; };
 		B80C73D52B7D534300821A38 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
-		B80EC4AD2B45EFDD005E2A1A /* LoadingModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingModal.swift; sourceTree = "<group>"; };
 		B80EC4AF2B45F66E005E2A1A /* DanaKitSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanaKitSettingsView.swift; sourceTree = "<group>"; };
 		B80EC4B12B45F681005E2A1A /* DanaKitSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanaKitSettingsViewModel.swift; sourceTree = "<group>"; };
 		B8179E592B20F2A10049EEE7 /* OSLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSLog.swift; sourceTree = "<group>"; };
@@ -324,7 +327,6 @@
 		B8F4DCAD2B94CF8100AB00E6 /* ContinueButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinueButton.swift; sourceTree = "<group>"; };
 		B8F4DCB12B97290800AB00E6 /* InsulinTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinTypeView.swift; sourceTree = "<group>"; };
 		B8F4DCB32B9729E800AB00E6 /* BasalProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasalProfileView.swift; sourceTree = "<group>"; };
-		B8F4DCB52B972AB400AB00E6 /* BasalProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasalProfileViewModel.swift; sourceTree = "<group>"; };
 		B8F4E1A72B83D28A000F4AE1 /* BackgroundTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTask.swift; sourceTree = "<group>"; };
 		B8F4E1A92B83D4F1000F4AE1 /* blank.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = blank.wav; sourceTree = "<group>"; };
 		B8FB5F142B5D705D001C88BA /* DoseEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseEntry.swift; sourceTree = "<group>"; };
@@ -434,6 +436,8 @@
 		84752EAD26ED11A4009FD801 /* PumpManager */ = {
 			isa = PBXGroup;
 			children = (
+				B802D5082C1F675600B92C35 /* ContinousBluetoothManager.swift */,
+				B802D5072C1F675600B92C35 /* InteractiveBluetoothManager.swift */,
 				C1C001C027A2349D00533D35 /* DanaKit.swift */,
 				1029AE4627094D0E00B7F5B6 /* DanaKitPumpManager.swift */,
 				1029AE4727094D0E00B7F5B6 /* DanaKitPumpManagerState.swift */,
@@ -449,6 +453,7 @@
 		84752EE926ED1402009FD801 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				B802D5052C1F674600B92C35 /* NotificationHelper.swift */,
 				B62557422BF65396006C4517 /* Bundle.swift */,
 				B857E7F12B1FABF000BDFFC4 /* LocalizedString.swift */,
 				B8179E592B20F2A10049EEE7 /* OSLog.swift */,
@@ -577,7 +582,6 @@
 				B8F4DCA12B94C01C00AB00E6 /* Onboarding */,
 				B88516902B30638D0063402A /* DanaKitReservoirView.swift */,
 				B88516922B30C6DA0063402A /* DanaKitReservoirView.xib */,
-				B80EC4AD2B45EFDD005E2A1A /* LoadingModal.swift */,
 				B85335D92B58599300DB470A /* ReservoirView.swift */,
 				B8F4DCA32B94C06100AB00E6 /* Image.swift */,
 				B8F4DCAD2B94CF8100AB00E6 /* ContinueButton.swift */,
@@ -601,7 +605,6 @@
 				B82FA9462B3DF85F004F2AFE /* DanaKitScanViewModel.swift */,
 				B80EC4B12B45F681005E2A1A /* DanaKitSettingsViewModel.swift */,
 				B86326A62B683538005D8ECD /* DanaKitUserSettingsViewModel.swift */,
-				B8F4DCB52B972AB400AB00E6 /* BasalProfileViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -853,7 +856,6 @@
 				B8A0163F2B433E000054AECA /* InsulinTypeConfirmation.swift in Sources */,
 				B8360AB92B2A2C3C00152188 /* DanaGeneralSetPumpTime.swift in Sources */,
 				B8FF961A2B4305A300C14280 /* NavigationLink.swift in Sources */,
-				B8F4DCB62B972AB400AB00E6 /* BasalProfileViewModel.swift in Sources */,
 				B8360A932B2644A800152188 /* DanaBolusSetExtended.swift in Sources */,
 				B8360AD72B2A34E300152188 /* DanaLoopHistoryEvents.swift in Sources */,
 				B82FA9452B3DF3AD004F2AFE /* DanaKitScanView.swift in Sources */,
@@ -861,10 +863,10 @@
 				B8360A7E2B263E5500152188 /* DanaBasalSetSuspendOn.swift in Sources */,
 				B864F7A02B49E29700C503A2 /* DanaKitPumpSpeed.swift in Sources */,
 				B81E9D052B66906000AB6AA1 /* PumpAlarmType.swift in Sources */,
+				B802D5092C1F675600B92C35 /* InteractiveBluetoothManager.swift in Sources */,
 				B8360AA92B2A28CE00152188 /* DanaGeneralGetPumpTimeUtcWithTimezone.swift in Sources */,
 				B8360A912B2643C900152188 /* DanaBolusSet24CIRCFArray.swift in Sources */,
 				B80EC4B22B45F681005E2A1A /* DanaKitSettingsViewModel.swift in Sources */,
-				B80EC4AE2B45EFDD005E2A1A /* LoadingModal.swift in Sources */,
 				B81C52242B30E95E00FB801D /* IdentifiableClass.swift in Sources */,
 				B8360ABB2B2A2C7300152188 /* DanaGeneralSetPumpTimeUtcWithTimezone.swift in Sources */,
 				B8360ACB2B2A341B00152188 /* DanaHistoryCarbohydrates.swift in Sources */,
@@ -922,12 +924,14 @@
 				B8360A722B2601D600152188 /* DanaBasalCancelTemporary.swift in Sources */,
 				B8F4E1A82B83D28A000F4AE1 /* BackgroundTask.swift in Sources */,
 				B8F4DCA62B94C0D800AB00E6 /* DanaIExplainationView.swift in Sources */,
+				B802D5062C1F674600B92C35 /* NotificationHelper.swift in Sources */,
 				B85418B02B20F77900C3B4D0 /* Encrypt.swift in Sources */,
 				B8360A7A2B263CD400152188 /* DanaBasalSetProfileRate.swift in Sources */,
 				B8FDA0DE2B77D037007004A5 /* PumpManagerAlert.swift in Sources */,
 				B8FB5F172B5D91A6001C88BA /* NewPumpEvent.swift in Sources */,
 				B8FB5F152B5D705D001C88BA /* DoseEntry.swift in Sources */,
 				B85335D82B55D3A900DB470A /* NumberFormatter.swift in Sources */,
+				B802D50A2C1F675600B92C35 /* ContinousBluetoothManager.swift in Sources */,
 				B8360A822B263ED700152188 /* DanaBolusCancelExtended.swift in Sources */,
 				B8360AA12B2A26EB00152188 /* DanaGeneralGetInitialScreenInformation.swift in Sources */,
 				B86326AC2B683E25005D8ECD /* PickerView.swift in Sources */,
