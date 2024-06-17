@@ -35,7 +35,7 @@
 "Setting up DanaRS v3" = "Opsætning af DanaRS v3"
 
 /* Subtext for danars v3 */
-"During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for two pairing codes. On your pump, select OK and type the two codes on your iPhone. After that, Loop is ready to communicate with your DanaRS v3" = "Under parringsprocessen vil din DanaRS v3 vise en parringsprompt, mens din iPhone vil vise en prompt om to parringskoder. På din pumpe skal du vælge OK og indtaste de to koder på din iPhone. Herefter er Loop klar til at kommunikere med din DanaRS v3"
+"During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for two pairing codes. On your pump, select OK and type the two codes on your iPhone. After that, Loop is ready to communicate with your DanaRS v3" = "Under parringsprocessen vil din DanaRS v3 vise en parringsprompt, mens din iPhone viser en prompt om to parringskoder. På din pumpe skal du vælge OK og indtaste de to koder på din iPhone. Herefter er Loop klar til at kommunikere med din DanaRS v3"
 
 /* Title for dana-i explaination */
 "Setting up Dana-i" = "Opsætning af Dana-i"
@@ -334,7 +334,7 @@
 "Pump shutdown" = "Pumpestop"
 
 /* Alert body for shutdown */
-"There has not been any interactions with the pump for too long. Either disable this function in the pump or interact with the pump" = "Der har ikke været nogen interaktion med pumpen for længe. Deaktiver enten denne funktion i pumpen eller interager med pumpen"
+"There has not been any interactions with the pump for too long. Either disable this function in the pump or interact with the pump" = "Der har ikke været nogen interaktioner med pumpen for længe. Deaktiver enten denne funktion i pumpen eller interager med pumpen"
 
 /* Alert title for basalCompare */
 "Basal Compare" = "Basal Sammenlign"
@@ -468,3 +468,9 @@
 
 /* Button text to just disconnect */
 "No, just disconnect" = "Nej, bare afbryd"
+
+/* Title disconnect warning notification */
+"Pump is disconnected" = "Pumpen er afbrudt"
+
+/* Body disconnect warning notification */
+"Your pump is disconnected longer than 5 minutes!" = "Din pumpe er afbrudt i mere end 5 minutter!"

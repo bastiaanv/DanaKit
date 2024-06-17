@@ -340,7 +340,7 @@
 "Basal Compare" = "Basale vergelijking"
 
 /* Alert title for bloodSugarMeasure */
-"Blood glucose Measure" = "Bloedglucosemeting"
+"Blood glucose Measure" = "Bloedglucose Meten"
 
 /* Alert title for remainingInsulinLevel */
 "Remaining insulin level" = "Resterend insulineniveau"
@@ -349,7 +349,7 @@
 "Empty reservoir" = "Leeg reservoir"
 
 /* Alert body for emptyReservoir */
-"Reservoir is empty. Replace it now!" = "Reservoir is leeg. Vervang hem nu!"
+"Reservoir is empty. Replace it now!" = "Reservoir is leeg. Vervang het nu!"
 
 /* Alert title for emptyReservoir */
 "Check chaft" = "Controleer chaft"
@@ -452,7 +452,7 @@
 "Set reminder for disconnect" = "Herinnering instellen voor het verbreken van de verbinding"
 
 /* body disconnect reminder sheet */
-"Do you wish to receive a notification when the pump is longer disconnected for a specific time?" = "Wilt u een melding ontvangen wanneer de pomp voor een bepaalde tijd langer uitgeschakeld is?"
+"Do you wish to receive a notification when the pump is longer disconnected for a specific time?" = "Wilt u een melding ontvangen wanneer de pomp gedurende een bepaalde tijd langer uitgeschakeld is?"
 
 /* Button text to 5 min */
 "Yes, 5 minutes" = "Ja, 5 minuten"
@@ -468,3 +468,9 @@
 
 /* Button text to just disconnect */
 "No, just disconnect" = "Nee, gewoon de verbinding verbreken"
+
+/* Title disconnect warning notification */
+"Pump is disconnected" = "Pomp is losgekoppeld"
+
+/* Body disconnect warning notification */
+"Your pump is disconnected longer than 5 minutes!" = "Uw pomp is langer dan 5 minuten uitgeschakeld!"

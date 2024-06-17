@@ -468,3 +468,9 @@
 
 /* Button text to just disconnect */
 "No, just disconnect" = "Nu, doar deconectați-vă"
+
+/* Title disconnect warning notification */
+"Pump is disconnected" = "Pompa este deconectată"
+
+/* Body disconnect warning notification */
+"Your pump is disconnected longer than 5 minutes!" = "Pompa dvs. este deconectată mai mult de 5 minute!"

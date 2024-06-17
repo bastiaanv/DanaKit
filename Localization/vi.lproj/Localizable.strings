@@ -468,3 +468,9 @@
 
 /* Button text to just disconnect */
 "No, just disconnect" = "Không, chỉ cần ngắt kết nối"
+
+/* Title disconnect warning notification */
+"Pump is disconnected" = "Máy bơm bị ngắt kết nối"
+
+/* Body disconnect warning notification */
+"Your pump is disconnected longer than 5 minutes!" = "Máy bơm của bạn bị ngắt kết nối lâu hơn 5 phút!"

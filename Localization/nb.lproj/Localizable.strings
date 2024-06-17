@@ -428,7 +428,7 @@
 "Disconnecting..." = "Kobler fra ..."
 
 /* DanaKit connecting */
-"Reconnecting..." = "Kobler på nytt ..."
+"Reconnecting..." = "Kobler til på nytt..."
 
 /* DanaKit disconnect */
 "Disconnect from pump" = "Koble fra pumpen"
@@ -468,3 +468,9 @@
 
 /* Button text to just disconnect */
 "No, just disconnect" = "Nei, bare koble fra"
+
+/* Title disconnect warning notification */
+"Pump is disconnected" = "Pumpen er frakoblet"
+
+/* Body disconnect warning notification */
+"Your pump is disconnected longer than 5 minutes!" = "Pumpen din er frakoblet i mer enn 5 minutter!"

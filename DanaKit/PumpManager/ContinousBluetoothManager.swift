@@ -39,8 +39,9 @@ class ContinousBluetoothManager : NSObject, BluetoothManager {
     
     private func keepConnectionAlive() async {
         do {
-            try await Task.sleep(nanoseconds: 45000000000) // Sleep for 45sec
+            try await Task.sleep(nanoseconds: 30000000000) // Sleep for 30sec
             
+            self.log.info("Sending keep alive message")
             let keepAlivePacket = generatePacketGeneralKeepConnection()
             let result = try await self.writeMessage(keepAlivePacket)
             guard result.success else {
@@ -135,12 +136,27 @@ class ContinousBluetoothManager : NSObject, BluetoothManager {
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         self.bleCentralManager(central, didConnect: peripheral)
         
-        let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.removeDeliveredNotifications(withIdentifiers: [DanaKit.disconnectReminderNotificationUUID])
+        NotificationHelper.clearDisconnectWarning()
+        NotificationHelper.clearDisconnectReminder()
     }
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         self.bleCentralManager(central, didDisconnectPeripheral: peripheral, error: error)
+        
+        NotificationHelper.setDisconnectWarning()
+        
+        if let autoConnectUUID = self.autoConnectUUID {
+            self.log.info("Connection lost. Trying to reconnect...")
+            if self.peripheral?.identifier.uuidString == autoConnectUUID {
+                self.connect(self.peripheral!, { _ in })
+            } else {
+                do {
+                    try self.connect(autoConnectUUID, { _ in })
+                } catch {
+                    self.log.error("Failed to auto reconnect: \(error.localizedDescription)")
+                }
+            }
+        }
     }
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {

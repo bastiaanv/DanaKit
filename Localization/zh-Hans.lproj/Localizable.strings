@@ -20,7 +20,7 @@
 "Setting up DanaRS v1" = "设置 DanaRS v1"
 
 /* Subtext for danars v1 */
-"During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, Loop is ready to communicate with your DanaRS v1" = "在配对过程中，您的 DanaRS v3 将显示配对提示，而您的 iPhone 将显示配对代码提示。在您的泵上，选择“确定”，然后在您的 iPhone 上输入代码。之后，Loop 即可与您的 DanaRS v1 通信"
+"During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, Loop is ready to communicate with your DanaRS v1" = "在配对过程中，您的 DanaRS v3 将显示配对提示，而您的 iPhone 将显示配对代码提示。在您的泵上，选择“确定”，然后在您的 iPhone 上输入代码。之后，Loop 即可与您的 DanaRS v1 进行通信"
 
 /* check password text for danars v1 */
 "Before starting with the pairing process, it is recommended to check, and if needed update, the pump password. You can do this by going to the pump settings -> user settings -> password. The default password is 1234, if this is your password, please consider changing it" = "在开始配对过程之前，建议检查泵密码，如果需要，请更新。您可以通过泵设置 -&gt; 用户设置 -&gt; 密码来执行此操作。默认密码为 1234，如果这是您的密码，请考虑更改它"
@@ -361,7 +361,7 @@
 "Basal limit reached" = "已达到基础极限"
 
 /* Alert body for basalMax */
-"Your daily basal limit has been reached. Please contact your Dana distributer to increase the limit" = "您的每日基础剂量已达到上限。请联系您的 Dana 经销商以提高上限"
+"Your daily basal limit has been reached. Please contact your Dana distributer to increase the limit" = "您的每日基础剂量已达到上限。请联系您的 Dana 经销商以增加上限"
 
 /* Alert title for dailyMax */
 "Daily limit reached" = "已达到每日限额"
@@ -373,7 +373,7 @@
 "Missed Blood glucose check" = "错过血糖检查"
 
 /* Alert body for bloodSugarCheckMiss */
-"A blood glucose check reminder has been setup in your pump and is triggered. Please remove it or give your glucose level to the pump" = "您的泵中已设置血糖检查提醒，并且已触发。请将其移除或将您的血糖水平提供给泵"
+"A blood glucose check reminder has been setup in your pump and is triggered. Please remove it or give your glucose level to the pump" = "您的泵中已设置血糖检查提醒并已触发。请将其移除或将您的血糖水平提供给泵"
 
 /* Alert title for unknown */
 "Unknown error" = "未知错误"
@@ -468,3 +468,9 @@
 
 /* Button text to just disconnect */
 "No, just disconnect" = "否，只需断开连接"
+
+/* Title disconnect warning notification */
+"Pump is disconnected" = "泵已断开"
+
+/* Body disconnect warning notification */
+"Your pump is disconnected longer than 5 minutes!" = "您的泵断开时间已超过 5 分钟！"

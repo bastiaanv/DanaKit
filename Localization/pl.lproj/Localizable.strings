@@ -35,7 +35,7 @@
 "Setting up DanaRS v3" = "Konfigurowanie DanaRS v3"
 
 /* Subtext for danars v3 */
-"During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for two pairing codes. On your pump, select OK and type the two codes on your iPhone. After that, Loop is ready to communicate with your DanaRS v3" = "Podczas procesu parowania Twój DanaRS v3 wyświetli monit o parowanie, a iPhone wyświetli monit o podanie dwóch kodów parowania. Na pompie wybierz OK i wpisz dwa kody na swoim iPhonie. Następnie Loop będzie gotowy do komunikacji z Twoim DanaRS v3"
+"During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for two pairing codes. On your pump, select OK and type the two codes on your iPhone. After that, Loop is ready to communicate with your DanaRS v3" = "Podczas procesu parowania Twój DanaRS v3 wyświetli monit o parowanie, a iPhone wyświetli monit o podanie dwóch kodów parowania. Na pompie wybierz OK i wpisz dwa kody na swoim iPhonie. Następnie Loop jest gotowy do komunikacji z Twoim DanaRS v3"
 
 /* Title for dana-i explaination */
 "Setting up Dana-i" = "Konfigurowanie Dana-i"
@@ -431,7 +431,7 @@
 "Reconnecting..." = "Ponowne łączenie..."
 
 /* DanaKit disconnect */
-"Disconnect from pump" = "Odłączyć od pompy"
+"Disconnect from pump" = "Odłącz od pompy"
 
 /* DanaKit connect */
 "Reconnect tp pump" = "Podłącz ponownie pompę tp"
@@ -468,3 +468,9 @@
 
 /* Button text to just disconnect */
 "No, just disconnect" = "Nie, po prostu się rozłącz"
+
+/* Title disconnect warning notification */
+"Pump is disconnected" = "Pompa jest odłączona"
+
+/* Body disconnect warning notification */
+"Your pump is disconnected longer than 5 minutes!" = "Twoja pompa jest odłączona na dłużej niż 5 minut!"

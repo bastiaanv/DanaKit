@@ -468,3 +468,9 @@
 
 /* Button text to just disconnect */
 "No, just disconnect" = "Nej, bara koppla ur"
+
+/* Title disconnect warning notification */
+"Pump is disconnected" = "Pumpen är frånkopplad"
+
+/* Body disconnect warning notification */
+"Your pump is disconnected longer than 5 minutes!" = "Din pump är frånkopplad längre än 5 minuter!"

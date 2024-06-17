@@ -130,7 +130,6 @@
 		B8F4DCAC2B94C10800AB00E6 /* DanaRSv1Password.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4DCAB2B94C10800AB00E6 /* DanaRSv1Password.swift */; };
 		B8F4DCAE2B94CF8100AB00E6 /* ContinueButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4DCAD2B94CF8100AB00E6 /* ContinueButton.swift */; };
 		B8F4DCB22B97290800AB00E6 /* InsulinTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4DCB12B97290800AB00E6 /* InsulinTypeView.swift */; };
-		B8F4DCB42B9729E800AB00E6 /* BasalProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4DCB32B9729E800AB00E6 /* BasalProfileView.swift */; };
 		B8F4E1A82B83D28A000F4AE1 /* BackgroundTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F4E1A72B83D28A000F4AE1 /* BackgroundTask.swift */; };
 		B8F4E1AA2B83D4F1000F4AE1 /* blank.wav in Resources */ = {isa = PBXBuildFile; fileRef = B8F4E1A92B83D4F1000F4AE1 /* blank.wav */; };
 		B8FB5F152B5D705D001C88BA /* DoseEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FB5F142B5D705D001C88BA /* DoseEntry.swift */; };
@@ -326,7 +325,6 @@
 		B8F4DCAB2B94C10800AB00E6 /* DanaRSv1Password.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanaRSv1Password.swift; sourceTree = "<group>"; };
 		B8F4DCAD2B94CF8100AB00E6 /* ContinueButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContinueButton.swift; sourceTree = "<group>"; };
 		B8F4DCB12B97290800AB00E6 /* InsulinTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsulinTypeView.swift; sourceTree = "<group>"; };
-		B8F4DCB32B9729E800AB00E6 /* BasalProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasalProfileView.swift; sourceTree = "<group>"; };
 		B8F4E1A72B83D28A000F4AE1 /* BackgroundTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTask.swift; sourceTree = "<group>"; };
 		B8F4E1A92B83D4F1000F4AE1 /* blank.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = blank.wav; sourceTree = "<group>"; };
 		B8FB5F142B5D705D001C88BA /* DoseEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoseEntry.swift; sourceTree = "<group>"; };
@@ -634,7 +632,6 @@
 				B86326A82B68354D005D8ECD /* DanaKitUserSettingsView.swift */,
 				B86326AB2B683E25005D8ECD /* PickerView.swift */,
 				B8F4DCB12B97290800AB00E6 /* InsulinTypeView.swift */,
-				B8F4DCB32B9729E800AB00E6 /* BasalProfileView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -918,7 +915,6 @@
 				B87D571C2B20EEAF00FD82E9 /* Crc.swift in Sources */,
 				B8360A782B263C8900152188 /* DanaBasalSetProfileNumber.swift in Sources */,
 				B88516972B30CA860063402A /* DanaKitHUDProvider.swift in Sources */,
-				B8F4DCB42B9729E800AB00E6 /* BasalProfileView.swift in Sources */,
 				B88516952B30C7170063402A /* NibLoadable.swift in Sources */,
 				B88516912B30638D0063402A /* DanaKitReservoirView.swift in Sources */,
 				B8360A722B2601D600152188 /* DanaBasalCancelTemporary.swift in Sources */,

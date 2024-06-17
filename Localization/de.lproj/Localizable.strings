@@ -161,7 +161,7 @@
 "The max bolus limit is reached. Please try a lower amount or increase the limit" = "Das maximale Boluslimit ist erreicht. Bitte versuchen Sie es mit einer niedrigeren Menge oder erhöhen Sie das Limit"
 
 /* Error description when pump has reached the daily max */
-"The max daily insulin limit is reached. Please try a lower amount or increase the limit" = "Die maximale Tagesmenge an Insulin ist erreicht. Bitte versuchen Sie es mit einer geringeren Menge oder erhöhen Sie die Grenze"
+"The max daily insulin limit is reached. Please try a lower amount or increase the limit" = "Das maximale tägliche Insulinlimit ist erreicht. Bitte versuchen Sie es mit einer niedrigeren Menge oder erhöhen Sie das Limit"
 
 /* dana AB limitation warning title */
 "Only Automatic Bolus is supported" = "Nur automatischer Bolus wird unterstützt"
@@ -434,7 +434,7 @@
 "Disconnect from pump" = "Von der Pumpe trennen"
 
 /* DanaKit connect */
-"Reconnect tp pump" = "TP-Pumpe wieder anschließen"
+"Reconnect tp pump" = "Schließen Sie die TP-Pumpe erneut an"
 
 /* DanaKit disconnected */
 "Disconnected" = "Getrennt"
@@ -468,3 +468,9 @@
 
 /* Button text to just disconnect */
 "No, just disconnect" = "Nein, einfach trennen"
+
+/* Title disconnect warning notification */
+"Pump is disconnected" = "Pumpe ist abgeklemmt"
+
+/* Body disconnect warning notification */
+"Your pump is disconnected longer than 5 minutes!" = "Ihre Pumpe ist länger als 5 Minuten nicht angeschlossen!"

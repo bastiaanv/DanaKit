@@ -468,3 +468,9 @@
 
 /* Button text to just disconnect */
 "No, just disconnect" = "Nie, stačí sa odpojiť"
+
+/* Title disconnect warning notification */
+"Pump is disconnected" = "Čerpadlo je odpojené"
+
+/* Body disconnect warning notification */
+"Your pump is disconnected longer than 5 minutes!" = "Vaša pumpa je odpojená dlhšie ako 5 minút!"

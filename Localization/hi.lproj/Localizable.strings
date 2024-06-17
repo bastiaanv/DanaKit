@@ -468,3 +468,9 @@
 
 /* Button text to just disconnect */
 "No, just disconnect" = "नहीं, बस डिस्कनेक्ट करें"
+
+/* Title disconnect warning notification */
+"Pump is disconnected" = "पंप डिस्कनेक्ट हो गया है"
+
+/* Body disconnect warning notification */
+"Your pump is disconnected longer than 5 minutes!" = "आपका पंप 5 मिनट से अधिक समय से बंद है!"

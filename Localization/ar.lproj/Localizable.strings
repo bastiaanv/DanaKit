@@ -468,3 +468,9 @@
 
 /* Button text to just disconnect */
 "No, just disconnect" = "لا، فقط قطع الاتصال"
+
+/* Title disconnect warning notification */
+"Pump is disconnected" = "المضخة مفصولة"
+
+/* Body disconnect warning notification */
+"Your pump is disconnected longer than 5 minutes!" = "تم فصل المضخة لمدة تزيد عن 5 دقائق!"

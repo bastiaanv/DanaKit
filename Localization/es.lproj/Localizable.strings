@@ -468,3 +468,9 @@
 
 /* Button text to just disconnect */
 "No, just disconnect" = "No, solo desconecta"
+
+/* Title disconnect warning notification */
+"Pump is disconnected" = "La bomba está desconectada"
+
+/* Body disconnect warning notification */
+"Your pump is disconnected longer than 5 minutes!" = "¡Su bomba está desconectada por más de 5 minutos!"

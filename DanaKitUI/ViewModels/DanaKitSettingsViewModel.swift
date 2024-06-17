@@ -146,6 +146,7 @@ class DanaKitSettingsViewModel : ObservableObject {
         }
         
         self.pumpManager?.state.insulinType = type
+        self.pumpManager?.notifyStateDidChange()
         self.insulineType = type
     }
     
@@ -155,6 +156,11 @@ class DanaKitSettingsViewModel : ObservableObject {
     
     func toggleBleMode() {
         self.pumpManager?.toggleBluetoothMode()
+        self.isTogglingConnection = true;
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+            self.isTogglingConnection = false;
+        }
     }
     
     func reconnect() {

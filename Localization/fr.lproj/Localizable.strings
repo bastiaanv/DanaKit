@@ -241,7 +241,7 @@
 "Bolus" = "Bol";
 
 /* Pump Event title for UnfinalizedDose with doseType of .tempBasal */
-"Temp Basal" = "Température basale";
+"Temp Basal" = "Temp. Basal";
 
 /* Pump Event title for UnfinalizedDose with doseType of .basal */
 "Basal" = "Basal";
@@ -468,3 +468,9 @@
 
 /* Button text to just disconnect */
 "No, just disconnect" = "Non, déconnecte-toi simplement"
+
+/* Title disconnect warning notification */
+"Pump is disconnected" = "La pompe est déconnectée"
+
+/* Body disconnect warning notification */
+"Your pump is disconnected longer than 5 minutes!" = "Votre pompe est débranchée plus de 5 minutes !"

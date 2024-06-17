@@ -452,7 +452,7 @@
 "Set reminder for disconnect" = "Nastavit připomenutí pro odpojení"
 
 /* body disconnect reminder sheet */
-"Do you wish to receive a notification when the pump is longer disconnected for a specific time?" = "Přejete si obdržet upozornění, když je čerpadlo delší dobu odpojeno?"
+"Do you wish to receive a notification when the pump is longer disconnected for a specific time?" = "Přejete si dostávat upozornění, když je pumpa déle odpojená po určitou dobu?"
 
 /* Button text to 5 min */
 "Yes, 5 minutes" = "Ano, 5 minut"
@@ -468,3 +468,9 @@
 
 /* Button text to just disconnect */
 "No, just disconnect" = "Ne, stačí se odpojit"
+
+/* Title disconnect warning notification */
+"Pump is disconnected" = "Čerpadlo je odpojeno"
+
+/* Body disconnect warning notification */
+"Your pump is disconnected longer than 5 minutes!" = "Vaše pumpa je odpojena déle než 5 minut!"

@@ -223,7 +223,7 @@
 /* Alert content title for timeOffsetChangeDetected pod alert
    Title for pod sync time action sheet.
    title for time change detected notice */
-"Time Change Detected" = "時間変更が検出されました"
+"Time Change Detected" = "時間の変更が検出されました"
 
 /* Message for pod sync time action sheet */
 "The time on your pump is different from the current time. Do you want to update the time on your pump to the current time?" = "ポンプの時刻が現在の時刻と異なります。ポンプの時刻を現在の時刻に更新しますか?"
@@ -361,7 +361,7 @@
 "Basal limit reached" = "基礎制限に達した"
 
 /* Alert body for basalMax */
-"Your daily basal limit has been reached. Please contact your Dana distributer to increase the limit" = "1日の基礎用量の上限に達しました。上限を増やすには、Danaの販売代理店にお問い合わせください。"
+"Your daily basal limit has been reached. Please contact your Dana distributer to increase the limit" = "1日の基礎摂取量制限に達しました。制限値を増やすには、Dana販売店にお問い合わせください。"
 
 /* Alert title for dailyMax */
 "Daily limit reached" = "1日の制限に達しました"
@@ -468,3 +468,9 @@
 
 /* Button text to just disconnect */
 "No, just disconnect" = "いいえ、切断するだけです"
+
+/* Title disconnect warning notification */
+"Pump is disconnected" = "ポンプが切断されています"
+
+/* Body disconnect warning notification */
+"Your pump is disconnected longer than 5 minutes!" = "ポンプが 5 分以上切断されています。"

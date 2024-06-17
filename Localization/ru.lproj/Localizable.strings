@@ -158,7 +158,7 @@
 "A bolus timeout is active. The loop cycle cannot be completed till the timeout is inactive" = "Тайм-аут болюса активен. Цикл цикла не может быть завершен, пока тайм-аут не станет неактивным."
 
 /* Error description when pump has reached the bolus max */
-"The max bolus limit is reached. Please try a lower amount or increase the limit" = "Достигнут максимальный предел болюса. Пожалуйста, попробуйте уменьшить сумму или увеличить лимит."
+"The max bolus limit is reached. Please try a lower amount or increase the limit" = "Достигнут максимальный предел болюса. Попробуйте уменьшить сумму или увеличить лимит."
 
 /* Error description when pump has reached the daily max */
 "The max daily insulin limit is reached. Please try a lower amount or increase the limit" = "Достигнут максимальный дневной лимит инсулина. Попробуйте уменьшить сумму или увеличить лимит."
@@ -295,7 +295,7 @@
 "Lcd on time" = "ЖК вовремя"
 
 /* beepAndAlarm */
-"Alarm beeps" = "Звуковой сигнал тревоги"
+"Alarm beeps" = "Звуковые сигналы"
 
 /* beepAndAlarm.sound */
 "Sound" = "Звук"
@@ -468,3 +468,9 @@
 
 /* Button text to just disconnect */
 "No, just disconnect" = "Нет, просто отключи"
+
+/* Title disconnect warning notification */
+"Pump is disconnected" = "Насос отключен"
+
+/* Body disconnect warning notification */
+"Your pump is disconnected longer than 5 minutes!" = "Ваша помпа отключена более чем на 5 минут!"
