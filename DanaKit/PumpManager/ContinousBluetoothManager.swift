@@ -62,6 +62,10 @@ class ContinousBluetoothManager : NSObject, BluetoothManager {
             return
         }
         
+        if self.autoConnectUUID == nil {
+            self.autoConnectUUID = self.pumpManagerDelegate?.state.bleIdentifier
+        }
+        
         if self.peripheral != nil {
             self.connect(self.peripheral!) { result in
                 switch(result) {
@@ -77,10 +81,6 @@ class ContinousBluetoothManager : NSObject, BluetoothManager {
                 }
             }
             return
-        }
-        
-        if self.autoConnectUUID == nil {
-            self.autoConnectUUID = self.pumpManagerDelegate?.state.bleIdentifier
         }
         
         guard let autoConnect = self.autoConnectUUID else {
@@ -142,8 +142,14 @@ class ContinousBluetoothManager : NSObject, BluetoothManager {
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         self.bleCentralManagerDidUpdateState(central)
         
-        if central.state == .poweredOn {
-            self.reconnect{ _ in }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            if central.state == .poweredOn {
+                self.reconnect { result in
+                    if result {
+                        self.pumpManagerDelegate?.syncPump { _ in }
+                    }
+                }
+            }
         }
     }
     
