@@ -1302,6 +1302,7 @@ extension DanaKitPumpManager {
         self.notifyStateDidChange()
         
         self.bolusCompleted?.resume()
+        self.bolusCompleted = nil
         
         // We dont store the bolus or anything
         // The ensurePumpData will make sure everything is up-to-date
@@ -1339,6 +1340,7 @@ extension DanaKitPumpManager {
             self.notifyStateDidChange()
             
             self.bolusCompleted?.resume()
+            self.bolusCompleted = nil
             
             delegateQueue.asyncAfter(deadline: .now() + 1) {
                 // Always try to disconnect when this event happens
@@ -1375,6 +1377,7 @@ extension DanaKitPumpManager {
         
         self.log.error("Bolus was not completed... \(doseEntry.deliveredUnits)U of the \(doseEntry.value)U")
         self.bolusCompleted?.resume()
+        self.bolusCompleted = nil
         
         // There was a bolus going on, unsure if the bolus is completed...
         self.state.bolusState = .noBolus
