@@ -62,6 +62,7 @@ class ContinousBluetoothManager : NSObject, BluetoothManager {
             return
         }
         
+        NotificationHelper.setDisconnectWarning()
         if self.autoConnectUUID == nil {
             self.autoConnectUUID = self.pumpManagerDelegate?.state.bleIdentifier
         }
@@ -145,9 +146,11 @@ class ContinousBluetoothManager : NSObject, BluetoothManager {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             if central.state == .poweredOn {
                 self.reconnect { result in
-                    if result {
-                        self.pumpManagerDelegate?.syncPump { _ in }
+                    guard result else {
+                        return
                     }
+
+                    self.pumpManagerDelegate?.syncPump { _ in }
                 }
             }
         }
@@ -171,19 +174,12 @@ class ContinousBluetoothManager : NSObject, BluetoothManager {
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         self.bleCentralManager(central, didDisconnectPeripheral: peripheral, error: error)
         
-        if let autoConnectUUID = self.autoConnectUUID {
-            do {
-                self.log.info("Connection lost. Trying to reconnect...")
-                NotificationHelper.setDisconnectWarning()
-                
-                if self.peripheral?.identifier.uuidString == autoConnectUUID {
-                    self.connect(self.peripheral!) { _ in }
-                } else {
-                    try self.connect(autoConnectUUID) { _ in }
-                }
-            } catch {
-                self.log.error("Failed to auto reconnect: \(error.localizedDescription)")
+        self.reconnect { result in
+            guard result else {
+                return
             }
+
+            self.pumpManagerDelegate?.syncPump { _ in }
         }
     }
     
