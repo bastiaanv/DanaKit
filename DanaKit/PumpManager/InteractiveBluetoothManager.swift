@@ -113,6 +113,14 @@ class InteractiveBluetoothManager : NSObject, BluetoothManager {
         }
     }
     
+    func writeMessage(_ packet: DanaGeneratePacket) async throws -> (any DanaParsePacketProtocol) {
+        guard let peripheralManager = self.peripheralManager else {
+            throw NSError(domain: "No connected device", code: 0, userInfo: nil)
+        }
+        
+        return try await peripheralManager.writeMessage(packet)
+    }
+    
     func disconnect(_ peripheral: CBPeripheral, force: Bool) {
         self.autoConnectUUID = nil
         

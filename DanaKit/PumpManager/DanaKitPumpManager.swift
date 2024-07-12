@@ -312,7 +312,6 @@ extension DanaKitPumpManager: PumpManager {
                 return
             case .success:
                 await self.syncUserOptions()
-                await self.syncTime()
                 let events = await self.syncHistory()
                 
                 // Sync the pump time
@@ -323,6 +322,7 @@ extension DanaKitPumpManager: PumpManager {
                     if timeResult.success {
                         let date = self.state.usingUtc ? (timeResult.data as! PacketGeneralGetPumpTimeUtcWithTimezone).time : (timeResult.data as! PacketGeneralGetPumpTime).time
                         self.state.lastStatusPumpDateTime = date
+                        self.state.pumpTime = date
                     } else {
                         self.state.lastStatusPumpDateTime = Date.now
                     }
@@ -372,49 +372,6 @@ extension DanaKitPumpManager: PumpManager {
             self.state.units = dataUserOption.units
         } catch {
             self.log.error("Failed to sync user options: \(error.localizedDescription)")
-        }
-    }
-
-    private func syncTime() async {
-        do {
-            if self.state.usingUtc {
-                // Only the Dana-i supports command with timezone...
-                let timeUtcWithTimezonePacket = generatePacketGeneralGetPumpTimeUtcWithTimezone()
-                let resultTimeUtcWithTimezone = try await self.bluetooth.writeMessage(timeUtcWithTimezonePacket)
-                guard resultTimeUtcWithTimezone.success else {
-                    log.error("Failed to fetch pump time with utc...")
-                    self.disconnect()
-                    return
-                }
-                
-                
-                guard let dataTime = resultTimeUtcWithTimezone.data as? PacketGeneralGetPumpTimeUtcWithTimezone else {
-                    log.error("No data received (time utc with timezone)...")
-                    self.disconnect()
-                    return
-                }
-                
-                self.state.pumpTime = dataTime.time
-            } else {
-                let timePacket = generatePacketGeneralGetPumpTime()
-                let resultTime = try await self.bluetooth.writeMessage(timePacket)
-                guard resultTime.success else {
-                    log.error("Failed to fetch pump time...")
-                    self.disconnect()
-                    return
-                }
-                
-                
-                guard let dataTime = resultTime.data as? PacketGeneralGetPumpTime else {
-                    log.error("No data received (time utc with timezone)...")
-                    self.disconnect()
-                    return
-                }
-                
-                self.state.pumpTime = dataTime.time
-            }
-        } catch {
-            self.log.error("Failed to sync time: \(error.localizedDescription)")
         }
     }
     
@@ -1375,7 +1332,7 @@ extension DanaKitPumpManager {
             return
         }
         
-        self.log.error("Bolus was not completed... \(doseEntry.deliveredUnits)U of the \(doseEntry.value)U")
+        self.log.warning("Bolus was not completed... \(doseEntry.deliveredUnits)U of the \(doseEntry.value)U")
         self.bolusCompleted?.resume()
         self.bolusCompleted = nil
         
