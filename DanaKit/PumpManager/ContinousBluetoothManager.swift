@@ -30,6 +30,10 @@ class ContinousBluetoothManager : NSObject, BluetoothManager {
     var peripheralManager: PeripheralManager?
     var forcedDisconnect = false
     
+    public var isConnected: Bool {
+        self.manager.state == .poweredOn && self.peripheral?.state == .connected && self.pumpManagerDelegate?.state.isConnected ?? false
+    }
+    
     override init() {
         super.init()
         
@@ -205,6 +209,11 @@ class ContinousBluetoothManager : NSObject, BluetoothManager {
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         self.bleCentralManager(central, didDisconnectPeripheral: peripheral, error: error)
+        
+        guard !self.forcedDisconnect else {
+            // Dont reconnect if the user has manually disconnected
+            return
+        }
         
         self.reconnect { result in
             guard result else {

@@ -40,6 +40,7 @@ public class DanaKitPumpManager: DeviceManager {
     init(state: DanaKitPumpManagerState, dateGenerator: @escaping () -> Date = Date.init) {
         self.state = state
         self.oldState = DanaKitPumpManagerState(rawValue: state.rawValue)
+        DanaRSEncryption.setEnhancedEncryption(self.state.encryptionMode)
         
         self.bluetooth = self.state.isUsingContinuousMode ? ContinousBluetoothManager() : InteractiveBluetoothManager()
         self.bluetooth.pumpManagerDelegate = self

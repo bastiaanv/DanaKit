@@ -25,6 +25,10 @@ class InteractiveBluetoothManager : NSObject, BluetoothManager {
     var peripheral: CBPeripheral?
     var peripheralManager: PeripheralManager?
     
+    public var isConnected: Bool {
+        self.manager.state == .poweredOn && self.peripheral?.state == .connected
+    }
+    
     override init() {
         super.init()
         

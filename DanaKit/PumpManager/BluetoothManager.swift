@@ -42,6 +42,7 @@ protocol BluetoothManager : AnyObject, CBCentralManagerDelegate {
     var managerQueue: DispatchQueue { get }
     var pumpManagerDelegate: DanaKitPumpManager? { get set }
     
+    var isConnected: Bool { get }
     var autoConnectUUID: String? { get set }
     
     var connectionCompletion: ((ConnectionResult) -> Void)? { get set }
@@ -55,10 +56,6 @@ protocol BluetoothManager : AnyObject, CBCentralManagerDelegate {
 }
 
 extension BluetoothManager {
-    public var isConnected: Bool {
-        self.manager.state == .poweredOn && self.peripheral?.state == .connected
-    }
-    
     func startScan() throws {
         guard self.manager.state == .poweredOn else {
             throw NSError(domain: "Invalid bluetooth state. State: " + String(self.manager.state.rawValue), code: 0, userInfo: nil)
