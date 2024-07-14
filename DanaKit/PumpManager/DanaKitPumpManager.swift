@@ -312,25 +312,20 @@ extension DanaKitPumpManager: PumpManager {
                 completion?(nil)
                 return
             case .success:
+                if let continousBluetooth = self.bluetooth as? ContinousBluetoothManager {
+                    await continousBluetooth.peripheralManager?.updateInitialState()
+                }
+                
                 await self.syncUserOptions()
                 let events = await self.syncHistory()
                 
-                // Sync the pump time
-                do {
-                    let timePacket = self.state.usingUtc ? generatePacketGeneralGetPumpTimeUtcWithTimezone() : generatePacketGeneralGetPumpTime()
-                    let timeResult = try await self.bluetooth.writeMessage(timePacket)
-                    
-                    if timeResult.success {
-                        let date = self.state.usingUtc ? (timeResult.data as! PacketGeneralGetPumpTimeUtcWithTimezone).time : (timeResult.data as! PacketGeneralGetPumpTime).time
-                        self.state.lastStatusPumpDateTime = date
-                        self.state.pumpTime = date
-                    } else {
-                        self.state.lastStatusPumpDateTime = Date.now
-                    }
-                } catch {
-                    self.state.lastStatusPumpDateTime = Date.now
+                let pumpTime = await self.fetchPumpTime()
+                if let pumpTime = pumpTime {
+                    self.state.pumpTimeSyncedAt = Date.now
+                    self.state.pumpTime = pumpTime
                 }
                 
+                self.state.lastStatusPumpDateTime = pumpTime ?? Date.now
                 self.state.lastStatusDate = Date.now
                 self.disconnect()
                 
@@ -373,6 +368,28 @@ extension DanaKitPumpManager: PumpManager {
             self.state.units = dataUserOption.units
         } catch {
             self.log.error("Failed to sync user options: \(error.localizedDescription)")
+        }
+    }
+    
+    private func fetchPumpTime() async -> Date? {
+        do {
+            let timePacket = self.state.usingUtc ? generatePacketGeneralGetPumpTimeUtcWithTimezone() : generatePacketGeneralGetPumpTime()
+            let timeResult = try await self.bluetooth.writeMessage(timePacket)
+            
+            guard timeResult.success else {
+                self.log.error("Failed to fetch pump time with utc...")
+                return nil
+            }
+            
+            let date = self.state.usingUtc ? (timeResult.data as? PacketGeneralGetPumpTimeUtcWithTimezone)?.time : (timeResult.data as? PacketGeneralGetPumpTime)?.time
+            guard let date = date else {
+                return nil
+            }
+            
+            return date
+        } catch {
+            self.log.error("Failed to sync time: \(error.localizedDescription)")
+            return nil
         }
     }
     
@@ -521,19 +538,7 @@ extension DanaKitPumpManager: PumpManager {
                         }
                         
                         // Sync the pump time
-                        do {
-                            let timePacket = self.state.usingUtc ? generatePacketGeneralGetPumpTimeUtcWithTimezone() : generatePacketGeneralGetPumpTime()
-                            let timeResult = try await self.bluetooth.writeMessage(timePacket)
-                            
-                            if timeResult.success {
-                                let date = self.state.usingUtc ? (timeResult.data as! PacketGeneralGetPumpTimeUtcWithTimezone).time : (timeResult.data as! PacketGeneralGetPumpTime).time
-                                self.state.lastStatusPumpDateTime = date
-                            } else {
-                                self.state.lastStatusPumpDateTime = Date.now
-                            }
-                        } catch {
-                            self.state.lastStatusPumpDateTime = Date.now
-                        }
+                        self.state.lastStatusPumpDateTime = (await self.fetchPumpTime()) ?? Date.now
                         self.state.lastStatusDate = Date.now
                         
                         self.doseEntry = UnfinalizedDose(units: units, duration: duration, activationType: activationType, insulinType: self.state.insulinType!)
@@ -607,19 +612,7 @@ extension DanaKitPumpManager: PumpManager {
             }
             
             // Sync the pump time
-            do {
-                let timePacket = self.state.usingUtc ? generatePacketGeneralGetPumpTimeUtcWithTimezone() : generatePacketGeneralGetPumpTime()
-                let timeResult = try await self.bluetooth.writeMessage(timePacket)
-                
-                if timeResult.success {
-                    let date = self.state.usingUtc ? (timeResult.data as! PacketGeneralGetPumpTimeUtcWithTimezone).time : (timeResult.data as! PacketGeneralGetPumpTime).time
-                    self.state.lastStatusPumpDateTime = date
-                } else {
-                    self.state.lastStatusPumpDateTime = Date.now
-                }
-            } catch {
-                self.state.lastStatusPumpDateTime = Date.now
-            }
+            self.state.lastStatusPumpDateTime = (await self.fetchPumpTime()) ?? Date.now
             self.state.lastStatusDate = Date.now
             
             self.disconnect()
@@ -1233,11 +1226,11 @@ extension DanaKitPumpManager {
         let identifier = Alert.Identifier(managerIdentifier: self.managerIdentifier, alertIdentifier: alert.identifier)
         let loopAlert = Alert(identifier: identifier, foregroundContent: alert.foregroundContent, backgroundContent: alert.backgroundContent, trigger: .immediate)
         
-        let event = NewPumpEvent(date: Date(), dose: nil, raw: alert.raw, title: "Alarm: \(alert.foregroundContent.title)", type: .alarm, alarmType: alert.type)
+        let event = NewPumpEvent(date: Date.now, dose: nil, raw: alert.raw, title: "Alarm: \(alert.foregroundContent.title)", type: .alarm, alarmType: alert.type)
         
         self.pumpDelegate.notify { delegate in
             delegate?.issueAlert(loopAlert)
-            delegate?.pumpManager(self, hasNewPumpEvents: [event], lastReconciliation: Date(), replacePendingEvents: true, completion: { _ in })
+            delegate?.pumpManager(self, hasNewPumpEvents: [event], lastReconciliation: Date.now, replacePendingEvents: true, completion: { _ in })
         }
     }
     
@@ -1250,7 +1243,7 @@ extension DanaKitPumpManager {
     }
     
     func notifyBolusError() {
-        guard let doseEntry = self.doseEntry, self.state.bolusState != .noBolus else {
+        guard self.doseEntry != nil, self.state.bolusState != .noBolus else {
             // Ignore if no bolus is going
             return
         }
@@ -1280,23 +1273,11 @@ extension DanaKitPumpManager {
     func notifyBolusDone(deliveredUnits: Double) {
         Task {
             self.state.bolusState = .noBolus
-            // Sync the pump time
-            do {
-                let timePacket = self.state.usingUtc ? generatePacketGeneralGetPumpTimeUtcWithTimezone() : generatePacketGeneralGetPumpTime()
-                let timeResult = try await self.bluetooth.writeMessage(timePacket)
-                
-                if timeResult.success {
-                    let date = self.state.usingUtc ? (timeResult.data as! PacketGeneralGetPumpTimeUtcWithTimezone).time : (timeResult.data as! PacketGeneralGetPumpTime).time
-                    self.state.lastStatusPumpDateTime = date
-                } else {
-                    self.state.lastStatusPumpDateTime = Date.now
-                }
-            } catch {
-                self.state.lastStatusPumpDateTime = Date.now
-            }
+            
+            self.state.lastStatusPumpDateTime = (await self.fetchPumpTime()) ?? Date.now
             self.state.lastStatusDate = Date.now
             self.notifyStateDidChange()
-            
+
             self.bolusCompleted?.resume()
             self.bolusCompleted = nil
             
