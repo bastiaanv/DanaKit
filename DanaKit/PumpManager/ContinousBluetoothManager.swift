@@ -38,7 +38,7 @@ class ContinousBluetoothManager : NSObject, BluetoothManager {
         super.init()
         
         managerQueue.sync {
-            self.manager = CBCentralManager(delegate: self, queue: managerQueue, options: [CBCentralManagerOptionRestoreIdentifierKey: "com.DanaKit"])
+            self.manager = CBCentralManager(delegate: self, queue: managerQueue)
         }
     }
     
@@ -154,7 +154,7 @@ class ContinousBluetoothManager : NSObject, BluetoothManager {
             }
         } else {
             // We aren't connected, the user has disconnected the pump by hand
-            self.log.error("Device is forced disconnected...")
+            self.log.warning("Device is forced disconnected...")
             self.logDeviceCommunication("Dana - Pump is not connected. Please reconnect to pump before doing any operations", type: .connection)
             
             self.resetConnectionCompletion()

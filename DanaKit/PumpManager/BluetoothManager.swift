@@ -203,7 +203,7 @@ extension BluetoothManager {
         
         guard let connectionCompletion = self.connectionCompletion else {
             log.error("No connection callback found... Timeout hit probably")
-            self.disconnect(peripheral, force: true)
+            self.disconnect(peripheral, force: false)
             
             return
         }

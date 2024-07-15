@@ -313,7 +313,7 @@ extension DanaKitPumpManager: PumpManager {
                 return
             case .success:
                 if let continousBluetooth = self.bluetooth as? ContinousBluetoothManager {
-                    await continousBluetooth.peripheralManager?.updateInitialState()
+                    await self.updateInitialState()
                 }
                 
                 await self.syncUserOptions()
@@ -466,6 +466,42 @@ extension DanaKitPumpManager: PumpManager {
                 } catch {}
             }
             return []
+        }
+    }
+    
+    private func updateInitialState() async -> Void {
+        do {
+            let initialScreenPacket = generatePacketGeneralGetInitialScreenInformation()
+            let resultInitialScreenInformation = try await self.bluetooth.writeMessage(initialScreenPacket)
+            
+            guard resultInitialScreenInformation.success else {
+                log.error("Failed to fetch Initial screen...")
+                self.disconnect()
+                return
+            }
+            
+            guard let data = resultInitialScreenInformation.data as? PacketGeneralGetInitialScreenInformation else {
+                log.error("No data received (initial screen)...")
+                self.disconnect()
+                return
+            }
+            
+            self.state.reservoirLevel = data.reservoirRemainingUnits
+            self.state.batteryRemaining = data.batteryRemaining
+            self.state.isPumpSuspended = data.isPumpSuspended
+            self.state.isTempBasalInProgress = data.isTempBasalInProgress
+            
+            if self.state.basalDeliveryOrdinal != .suspended && data.isPumpSuspended {
+                // Suspended has been enabled via the pump
+                // We cannot be sure at what point it has been enabled...
+                self.state.basalDeliveryDate = Date.now
+            }
+            
+            self.state.basalDeliveryOrdinal = data.isTempBasalInProgress ? .tempBasal :
+            data.isPumpSuspended ? .suspended : .active
+            self.state.bolusState = .noBolus
+        } catch {
+            log.error("Error while updating initial state: \(error.localizedDescription)")
         }
     }
     

@@ -453,14 +453,17 @@ extension PeripheralManager {
             self.pumpManager.state.isConnected = true
 //            log.info("Sending keep connection")
             
-            let keepConnection = generatePacketGeneralKeepConnection()
-            let resultKeepConnection = try await self.writeMessage(keepConnection)
-            guard resultKeepConnection.success else {
-                log.error("Failed to send keep connection...")
-                self.pumpManager.disconnect(self.connectedDevice)
-                
-                connectionFailure(NSError(domain: "Failed to send keep connection", code: 0, userInfo: nil))
-                return
+            // ContinousBluetoothManager sends its own
+            if (self.bluetoothManager as? InteractiveBluetoothManager) != nil {
+                let keepConnection = generatePacketGeneralKeepConnection()
+                let resultKeepConnection = try await self.writeMessage(keepConnection)
+                guard resultKeepConnection.success else {
+                    log.error("Failed to send keep connection...")
+                    self.pumpManager.disconnect(self.connectedDevice)
+                    
+                    connectionFailure(NSError(domain: "Failed to send keep connection", code: 0, userInfo: nil))
+                    return
+                }
             }
             
             
