@@ -94,6 +94,7 @@ class ContinousBluetoothManager : NSObject, BluetoothManager {
                 case .success:
                     self.forcedDisconnect = false
                     Task {
+                        await self.updateInitialState()
                         await self.keepConnectionAlive()
                         callback(true)
                     }
@@ -118,6 +119,7 @@ class ContinousBluetoothManager : NSObject, BluetoothManager {
                 case .success:
                     self.forcedDisconnect = false
                     Task {
+                        await self.updateInitialState()
                         await self.keepConnectionAlive()
                         callback(true)
                     }

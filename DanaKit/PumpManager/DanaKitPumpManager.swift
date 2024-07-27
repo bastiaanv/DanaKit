@@ -63,7 +63,6 @@ public class DanaKitPumpManager: DeviceManager {
     
     private var doseReporter: DanaKitDoseProgressReporter?
     private var doseEntry: UnfinalizedDose?
-    private var bolusCompleted: CheckedContinuation<Void, Error>?
     
     public var isOnboarded: Bool {
         self.state.isOnBoarded
@@ -549,12 +548,19 @@ extension DanaKitPumpManager: PumpManager {
                         self.state.bolusState = .inProgress
                         self.notifyStateDidChange()
                         
-                        completion(nil)
-                        
-                        // Wait for bolus to complete before continueing to next item in queue
-                        try await withCheckedThrowingContinuation { continuation in
-                            self.bolusCompleted = continuation
+                        DispatchQueue.main.async {
+                            let dose = self.doseEntry?.toDoseEntry(isMutable: true)
+                            
+                            if let dose = dose {
+                                self.pumpDelegate.notify { (delegate) in
+                                    delegate?.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: dose.programmedUnits)], lastReconciliation: Date.now, replacePendingEvents: false, completion: { _ in })
+                                }
+                                
+                                self.notifyStateDidChange()
+                            }
                         }
+                        
+                        completion(nil)
                     } catch {
                         self.state.bolusState = .noBolus
                         self.doseReporter = nil
@@ -1256,9 +1262,6 @@ extension DanaKitPumpManager {
         self.state.lastStatusDate = Date.now
         self.notifyStateDidChange()
         
-        self.bolusCompleted?.resume()
-        self.bolusCompleted = nil
-        
         // We dont store the bolus or anything
         // The ensurePumpData will make sure everything is up-to-date
     }
@@ -1281,9 +1284,6 @@ extension DanaKitPumpManager {
             self.state.lastStatusPumpDateTime = (await self.fetchPumpTime()) ?? Date.now
             self.state.lastStatusDate = Date.now
             self.notifyStateDidChange()
-
-            self.bolusCompleted?.resume()
-            self.bolusCompleted = nil
             
             delegateQueue.asyncAfter(deadline: .now() + 1) {
                 // Always try to disconnect when this event happens
@@ -1319,8 +1319,6 @@ extension DanaKitPumpManager {
         }
         
         self.log.warning("Bolus was not completed... \(doseEntry.deliveredUnits)U of the \(doseEntry.value)U")
-        self.bolusCompleted?.resume()
-        self.bolusCompleted = nil
         
         // There was a bolus going on, unsure if the bolus is completed...
         self.state.bolusState = .noBolus
