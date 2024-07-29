@@ -37,9 +37,11 @@ class PeripheralManager: NSObject {
     
     private var lock: DispatchQueue = DispatchQueue.init(label: "writeQueue")
     private var writeQueue: Dictionary<UInt8, CheckedContinuation<(any DanaParsePacketProtocol), Error>> = [:]
+    private var writeTimeoutTask: Task<(), Never>?
+    private let communicationGroup = DispatchGroup()
     
     private var historyLog: [HistoryItem] = []
-    
+
     private var encryptionMode: EncryptionType = .DEFAULT
     
     private var deviceName: String {
@@ -60,16 +62,26 @@ class PeripheralManager: NSObject {
         peripheral.delegate = self
     }
     
-    func writeMessage(_ packet: DanaGeneratePacket) async throws -> (any DanaParsePacketProtocol)  {
-        let command = (UInt16((packet.type ?? DanaPacketType.TYPE_RESPONSE)) << 8) + UInt16(packet.opCode)
+    deinit {
+        self.writeTimeoutTask?.cancel()
         
-        // Add objetc sync to prevent:
-        // -[NSTaggedPointerString objectForKey:]: unrecognized selector sent to instance 0x8000000000000000
-        try lock.sync {
-            guard self.writeQueue[packet.opCode] == nil else {
-                throw NSError(domain: "This command is already running. Please wait - Operation code: \(packet.opCode)", code: 0, userInfo: nil)
-            }
+        for (opCode, continuation) in self.writeQueue {
+            continuation.resume(throwing: NSError(domain: "PeripheralManager deinit hit... Most likely an encryption issue - opCode: \(opCode)", code: 0, userInfo: nil))
         }
+    }
+    
+    func writeMessage(_ packet: DanaGeneratePacket) async throws -> (any DanaParsePacketProtocol)  {
+        return try await withCheckedThrowingContinuation { continuation in
+            self.writeQueue[packet.opCode] = continuation
+            self.write(packet)
+        }
+    }
+    
+    private func write(_ packet: DanaGeneratePacket) {
+        self.communicationGroup.wait()
+        self.communicationGroup.enter()
+        
+        let command = (UInt16((packet.type ?? DanaPacketType.TYPE_RESPONSE)) << 8) + UInt16(packet.opCode)
         
         // Make sure we have the correct state
         if (packet.opCode == CommandGeneralSetHistoryUploadMode && packet.data != nil) {
@@ -91,30 +103,33 @@ class PeripheralManager: NSObject {
         // This timeout will be cancelled by `processMessage` once it received the message
         // If this timeout expired, disconnect from the pump and prompt an error...
         let isHistoryPacket = self.isHistoryPacket(opCode: command)
-        return try await withCheckedThrowingContinuation { continuation in
-            self.writeQueue[packet.opCode] = continuation
+        while (data.count != 0) {
+            let end = min(20, data.count)
+            let message = data.subdata(in: 0..<end)
             
-            while (data.count != 0) {
-                let end = min(20, data.count)
-                let message = data.subdata(in: 0..<end)
-                
-                self.writeQ(message)
-                data = data.subdata(in: end..<data.count)
-            }
-            
-            Task {
-                do {
-                    try await Task.sleep(nanoseconds: UInt64(!isHistoryPacket ? .seconds(4) : .seconds(21)) * 1_000_000_000)
-                    guard let queueItem = self.writeQueue[packet.opCode] else {
-                        // We did what we must, so exist and be happy :)
-                        return
-                    }
-                    
-                    queueItem.resume(throwing: NSError(domain: "Message write timeout", code: 0, userInfo: nil))
-                    self.writeQueue[packet.opCode] = nil
-                } catch {
-                    self.log.error("Failed to sleep: \(error.localizedDescription)")
+            self.writeQ(message)
+            data = data.subdata(in: end..<data.count)
+        }
+        
+        self.writeTimeoutTask = Task {
+            do {
+                try await Task.sleep(nanoseconds: UInt64(!isHistoryPacket ? .seconds(4) : .seconds(21)) * 1_000_000_000)
+                guard let queueItem = self.writeQueue[packet.opCode] else {
+                    // We did what we must, so exist and be happy :)
+                    return
                 }
+                
+                // We hit a timeout
+                // This means the pump received the message but could decrypt it
+                // We need to reconnect in order to fix the encryption keys
+                self.bluetoothManager.manager.cancelPeripheralConnection(self.connectedDevice)
+                queueItem.resume(throwing: NSError(domain: "Message write timeout. Most likely an encryption issue - opCode: \(packet.opCode)", code: 0, userInfo: nil))
+                
+                self.communicationGroup.leave()
+                self.writeQueue[packet.opCode] = nil
+                self.writeTimeoutTask = nil
+            } catch {
+                // Task was cancelled because message has been received
             }
         }
     }
@@ -592,13 +607,18 @@ extension PeripheralManager {
         // Message received and dequeueing timeout
         guard let opCode = message.opCode, let continuation = self.writeQueue[opCode] else {
             log.error("No continuation token found to send this message back...")
+            self.communicationGroup.leave()
             return
         }
         
         if let data = message.data as? HistoryItem {
             if data.code == HistoryCode.RECORD_TYPE_DONE_UPLOAD {
                 continuation.resume(returning: DanaParsePacket<[HistoryItem]>(success: true, rawData: Data([]), data: self.historyLog.map({ $0 })))
+                
+                self.communicationGroup.leave()
                 self.writeQueue[opCode] = nil
+                self.writeTimeoutTask?.cancel()
+                self.writeTimeoutTask = nil
                 self.historyLog = []
             } else {
                 self.historyLog.append(data)
@@ -608,7 +628,11 @@ extension PeripheralManager {
         }
         
         continuation.resume(returning: message)
+        
         self.writeQueue[opCode] = nil
+        self.writeTimeoutTask?.cancel()
+        self.writeTimeoutTask = nil
+        self.communicationGroup.leave()
     }
     
     private func isHistoryPacket(opCode: UInt16) -> Bool {

@@ -43,7 +43,7 @@ public class UnfinalizedDose {
                 endDate: endDate,
                 value: value,
                 unit: .units,
-                deliveredUnits: deliveredUnits,
+                deliveredUnits: isMutable ? value : deliveredUnits,
                 insulinType: insulinType,
                 automatic: automatic,
                 isMutable: isMutable
