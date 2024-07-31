@@ -35,14 +35,11 @@ class PeripheralManager: NSObject {
     private let WRITE_CHAR_UUID = CBUUID(string: "FFF2")
     private var writeCharacteristic: CBCharacteristic!
     
-    private var lock: DispatchQueue = DispatchQueue.init(label: "writeQueue")
     private var writeQueue: Dictionary<UInt8, CheckedContinuation<(any DanaParsePacketProtocol), Error>> = [:]
     private var writeTimeoutTask: Task<(), Never>?
-    private let communicationGroup = DispatchGroup()
+    private let writeSemaphore = DispatchSemaphore(value: 1)
     
     private var historyLog: [HistoryItem] = []
-
-    private var encryptionMode: EncryptionType = .DEFAULT
     
     private var deviceName: String {
         get {
@@ -52,7 +49,6 @@ class PeripheralManager: NSObject {
     
     public init(_ peripheral: CBPeripheral, _ bluetoothManager: BluetoothManager, _ pumpManager: DanaKitPumpManager,_ completion: @escaping (ConnectionResult) -> Void) {
         self.connectedDevice = peripheral
-        self.encryptionMode = .DEFAULT
         self.bluetoothManager = bluetoothManager
         self.pumpManager = pumpManager
         self.completion = completion
@@ -78,8 +74,7 @@ class PeripheralManager: NSObject {
     }
     
     private func write(_ packet: DanaGeneratePacket) {
-        self.communicationGroup.wait()
-        self.communicationGroup.enter()
+        self.writeSemaphore.wait()
         
         let command = (UInt16((packet.type ?? DanaPacketType.TYPE_RESPONSE)) << 8) + UInt16(packet.opCode)
         
@@ -92,11 +87,11 @@ class PeripheralManager: NSObject {
         
         
         var data = DanaRSEncryption.encodePacket(operationCode: packet.opCode, buffer: packet.data, deviceName: self.deviceName)
-//        log.info("Encrypted data: \(data.base64EncodedString())")
+//        self.log.info("Sending opCode: \(packet.opCode), encrypted data: \(data.base64EncodedString())")
         
-        if (self.encryptionMode != .DEFAULT) {
+        if (DanaRSEncryption.enhancedEncryption != EncryptionType.DEFAULT.rawValue) {
             data = DanaRSEncryption.encodeSecondLevel(data: data)
-//            log.info("Second level encrypted data: \(data.base64EncodedString())")
+//            self.log.info("Second level encrypted data: \(data.base64EncodedString())")
         }
         
         // Now schedule a 6 sec timeout (or 21 when in fetchHistoryMode) for the pump to send its message back
@@ -125,9 +120,9 @@ class PeripheralManager: NSObject {
                 self.bluetoothManager.manager.cancelPeripheralConnection(self.connectedDevice)
                 queueItem.resume(throwing: NSError(domain: "Message write timeout. Most likely an encryption issue - opCode: \(packet.opCode)", code: 0, userInfo: nil))
                 
-                self.communicationGroup.leave()
                 self.writeQueue[packet.opCode] = nil
                 self.writeTimeoutTask = nil
+                self.writeSemaphore.signal()
             } catch {
                 // Task was cancelled because message has been received
             }
@@ -135,7 +130,7 @@ class PeripheralManager: NSObject {
     }
     
     private func connectionFailure(_ error: any Error) {
-        self.bluetoothManager.disconnect(self.connectedDevice, force: true)
+        self.bluetoothManager.manager.cancelPeripheralConnection(self.connectedDevice)
         
         guard let completion = self.completion else {
             return
@@ -303,7 +298,7 @@ extension PeripheralManager {
     }
     
     private func processEasyMenuCheck(_ data: Data) {
-        if (self.encryptionMode == .RSv3) {
+        if (DanaRSEncryption.enhancedEncryption == EncryptionType.RSv3.rawValue) {
             self.sendV3PairingInformationEmpty()
         } else {
             self.sendTimeInfo()
@@ -331,7 +326,6 @@ extension PeripheralManager {
         if (data.count == 4 && self.isOk(data)) {
             // response OK v1
             self.log.info("Setting encryption mode to DEFAULT")
-            self.encryptionMode = .DEFAULT
             DanaRSEncryption.setEnhancedEncryption(EncryptionType.DEFAULT.rawValue)
             
             self.pumpManager.state.ignorePassword = false;
@@ -345,7 +339,6 @@ extension PeripheralManager {
         } else if (data.count == 9 && self.isOk(data)) {
             // response OK v3, 2nd layer encryption
             log.info("Setting encryption mode to RSv3")
-            self.encryptionMode = .RSv3
             DanaRSEncryption.setEnhancedEncryption(EncryptionType.RSv3.rawValue)
             
             self.pumpManager.state.ignorePassword = true;
@@ -366,7 +359,6 @@ extension PeripheralManager {
             }
         } else if (data.count == 14 && self.isOk(data)) {
             log.info("Setting encryption mode to BLE5")
-            self.encryptionMode = .BLE_5
             DanaRSEncryption.setEnhancedEncryption(EncryptionType.BLE_5.rawValue)
             
             self.pumpManager.state.hwModel = data[5]
@@ -387,7 +379,7 @@ extension PeripheralManager {
             guard ble5Keys.filter({ $0 == 0 }).count == 0 else {
                 log.error("Invalid BLE-5 keys. Please unbound device and try again.")
                 
-                self.pumpManager.disconnect(self.connectedDevice)
+                self.bluetoothManager.manager.cancelPeripheralConnection(self.connectedDevice)
                 guard let completion = self.completion else {
                     return
                 }
@@ -412,10 +404,10 @@ extension PeripheralManager {
     }
     
     private func processEncryptionResponse(_ data: Data) {
-        if (self.encryptionMode == .BLE_5) {
+        if (DanaRSEncryption.enhancedEncryption == EncryptionType.BLE_5.rawValue) {
             self.finishConnection()
             
-        } else if (self.encryptionMode == .RSv3) {
+        } else if (DanaRSEncryption.enhancedEncryption == EncryptionType.RSv3.rawValue) {
             // data[2] : 0x00 OK  0x01 Error, No pairing
             if (data[2] == 0x00) {
                 let (pairingKey, randomPairingKey) = DanaRSEncryption.getPairingKeys()
@@ -478,13 +470,15 @@ extension PeripheralManager {
 extension PeripheralManager {
     private func parseReceivedValue(_ receievedData: Data) {
         var data = receievedData
-        if (self.pumpManager.state.isConnected && self.encryptionMode != .DEFAULT) {
+        if (self.pumpManager.state.isConnected && DanaRSEncryption.enhancedEncryption != EncryptionType.DEFAULT.rawValue) {
+//            self.log.info("Second lvl decryption")
             data = DanaRSEncryption.decodeSecondLevel(data: data)
         }
         
         self.readBuffer.append(data)
-        guard (self.readBuffer.count >= 6) else {
+        guard self.readBuffer.count >= 6 else {
             // Buffer is not ready to be processed
+//            self.log.warning("Buffer not ready yet: \(self.readBuffer.base64EncodedString())")
             return
         }
         
@@ -500,7 +494,7 @@ extension PeripheralManager {
             } else {
                 log.error("Received invalid packets. Starting bytes do not exists in message. Encryption mode possibly wrong Data: \(self.readBuffer.base64EncodedString())")
                 self.readBuffer = Data([])
-                self.bluetoothManager.disconnect(self.connectedDevice, force: true)
+                self.bluetoothManager.manager.cancelPeripheralConnection(self.connectedDevice)
                 return
             }
         }
@@ -508,6 +502,7 @@ extension PeripheralManager {
         let length = Int(self.readBuffer[2])
         guard (length + 7 == self.readBuffer.count) else {
             // Not all packets have been received yet...
+//            self.log.warning("Not all packets have been received yet - Should be: \(length + 7), currently: \(self.readBuffer.count)")
             return
         }
         
@@ -607,7 +602,7 @@ extension PeripheralManager {
         // Message received and dequeueing timeout
         guard let opCode = message.opCode, let continuation = self.writeQueue[opCode] else {
             log.error("No continuation token found to send this message back...")
-            self.communicationGroup.leave()
+            self.writeSemaphore.signal()
             return
         }
         
@@ -615,11 +610,11 @@ extension PeripheralManager {
             if data.code == HistoryCode.RECORD_TYPE_DONE_UPLOAD {
                 continuation.resume(returning: DanaParsePacket<[HistoryItem]>(success: true, rawData: Data([]), data: self.historyLog.map({ $0 })))
                 
-                self.communicationGroup.leave()
                 self.writeQueue[opCode] = nil
                 self.writeTimeoutTask?.cancel()
                 self.writeTimeoutTask = nil
                 self.historyLog = []
+                self.writeSemaphore.signal()
             } else {
                 self.historyLog.append(data)
             }
@@ -632,7 +627,7 @@ extension PeripheralManager {
         self.writeQueue[opCode] = nil
         self.writeTimeoutTask?.cancel()
         self.writeTimeoutTask = nil
-        self.communicationGroup.leave()
+        self.writeSemaphore.signal()
     }
     
     private func isHistoryPacket(opCode: UInt16) -> Bool {

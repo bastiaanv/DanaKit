@@ -7,7 +7,7 @@
 //
 
 class DanaRSEncryption {
-    private static var enhancedEncryption: UInt8 = 0
+    public private(set) static var enhancedEncryption: UInt8 = 0
     private static var isEncryptionMode: Bool = true
     
     // Length 2
