@@ -218,11 +218,6 @@ extension BluetoothManager {
         log.info("\(String(describing: central.state.rawValue))")
     }
     
-    func bleCentralManager(_ central: CBCentralManager, willRestoreState dict: [String : Any]) {
-        dispatchPrecondition(condition: .onQueue(managerQueue))
-        log.info("\(dict)")
-    }
-    
     func bleCentralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         if (peripheral.name == nil || deviceNameRegex.firstMatch(in: peripheral.name!, range: NSMakeRange(0, peripheral.name!.count)) == nil) {
             return
