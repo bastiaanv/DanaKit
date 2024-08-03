@@ -229,7 +229,7 @@
 "The time on your pump is different from the current time. Do you want to update the time on your pump to the current time?" = "L&#39;ora visualizzata sul microinfusore è diversa dall&#39;ora corrente. Vuoi aggiornare l&#39;ora del tuo microinfusore all&#39;ora corrente?"
 
 /* description for time change detected notice */
-"The time on your pump is different from the current time. Your pump’s time controls your scheduled therapy settings. Scroll down to Pump Time row to review the time difference and configure your pump." = "L&#39;ora visualizzata sul microinfusore è diversa dall&#39;ora corrente. Il tempo del microinfusore controlla le impostazioni della terapia programmata. Scorri verso il basso fino alla riga Orario pompa per verificare la differenza oraria e configurare la tua pompa.";
+"The time on your pump is different from the current time. Your pump’s time controls your scheduled therapy settings. Scroll down to Pump Time row to review the time difference and configure your pump." = "L&#39;ora visualizzata sul microinfusore è diversa dall&#39;ora corrente. Il tempo del microinfusore controlla le impostazioni della terapia programmata. Scorri verso il basso fino alla riga Orario pompa per verificare la differenza oraria e configurare la pompa.";
 
 /* Button text to confirm pump time sync */
 "Yes, Sync to Current Time" = "Sì, sincronizza con l&#39;ora corrente"
@@ -420,3 +420,57 @@
 
 /* Text for reservoir age */
 "Reservoir age" = "Età del serbatoio"
+
+/* Text for status */
+"Status" = "Stato"
+
+/* DanaKit disconnecting */
+"Disconnecting..." = "Disconnessione..."
+
+/* DanaKit connecting */
+"Reconnecting..." = "Riconnessione..."
+
+/* DanaKit disconnect */
+"Disconnect from pump" = "Scollegare dalla pompa"
+
+/* DanaKit connect */
+"Reconnect tp pump" = "Ricollegare la pompa"
+
+/* DanaKit disconnected */
+"Disconnected" = "Disconnesso"
+
+/* DanaKit connected */
+"Connected" = "Collegato"
+
+/* Title disconnect reminder notification */
+"Pump is still disconnected" = "La pompa è ancora scollegata"
+
+/* Body disconnect reminder notification" */
+"Your pump is still disconnected after the set period!" = "La pompa è ancora scollegata dopo il periodo impostato!"
+
+/* Title disconnect reminder sheet */
+"Set reminder for disconnect" = "Imposta promemoria per la disconnessione"
+
+/* body disconnect reminder sheet */
+"Do you wish to receive a notification when the pump is longer disconnected for a specific time?" = "Desideri ricevere una notifica quando la pompa rimane disconnessa per un periodo di tempo specifico?"
+
+/* Button text to 5 min */
+"Yes, 5 minutes" = "Sì, 5 minuti"
+
+/* Button text to 15 min */
+"Yes, 15 minutes" = "Sì, 15 minuti"
+
+/* Button text to 30 min */
+"Yes, 30 minutes" = "Sì, 30 minuti"
+
+/* Button text to 1h */
+"Yes, 1 hour" = "Sì, 1 ora"
+
+/* Button text to just disconnect */
+"No, just disconnect" = "No, disconnettiti e basta"
+
+/* Title disconnect warning notification */
+"Pump is disconnected" = "La pompa è scollegata"
+
+/* Body disconnect warning notification */
+"Your pump is disconnected longer than 5 minutes!" = "La pompa è stata scollegata per più di 5 minuti!"

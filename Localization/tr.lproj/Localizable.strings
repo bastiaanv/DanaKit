@@ -20,10 +20,10 @@
 "Setting up DanaRS v1" = "DanaRS v1&#39;i kurma"
 
 /* Subtext for danars v1 */
-"During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, Loop is ready to communicate with your DanaRS v1" = "Eşleştirme işlemi sırasında DanaRS v3&#39;ünüz bir eşleştirme istemi görüntülerken, iPhone&#39;unuz bir eşleştirme kodu istemi gösterecektir. Pompanızda Tamam&#39;ı seçin ve iPhone&#39;unuza kodu yazın. Bundan sonra Loop, DanaRS v1&#39;inizle iletişim kurmaya hazırdır"
+"During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, Loop is ready to communicate with your DanaRS v1" = "Eşleştirme işlemi sırasında, DanaRS v3&#39;ünüz bir eşleştirme istemi görüntülerken, iPhone&#39;unuz bir eşleştirme kodu istemi gösterecektir. Pompanızda Tamam&#39;ı seçin ve iPhone&#39;unuza kodu yazın. Bundan sonra Loop, DanaRS v1&#39;inizle iletişim kurmaya hazırdır"
 
 /* check password text for danars v1 */
-"Before starting with the pairing process, it is recommended to check, and if needed update, the pump password. You can do this by going to the pump settings -> user settings -> password. The default password is 1234, if this is your password, please consider changing it" = "Eşleştirme işlemine başlamadan önce pompa şifresinin kontrol edilmesi ve gerekirse güncellenmesi önerilir. Bunu pompa ayarları -&gt; kullanıcı ayarları -&gt; şifre seçeneğine giderek yapabilirsiniz. Varsayılan şifre 1234&#39;tür, şifreniz buysa lütfen değiştirmeyi düşünün"
+"Before starting with the pairing process, it is recommended to check, and if needed update, the pump password. You can do this by going to the pump settings -> user settings -> password. The default password is 1234, if this is your password, please consider changing it" = "Eşleştirme işlemine başlamadan önce pompa şifresinin kontrol edilmesi ve gerekiyorsa güncellenmesi önerilir. Bunu pompa ayarları -&gt; kullanıcı ayarları -&gt; şifre seçeneğine giderek yapabilirsiniz. Varsayılan şifre 1234&#39;tür, şifreniz buysa lütfen değiştirmeyi düşünün"
 
 /* Title for danars v1 password */
 "Password DanaRS v1" = "Şifre DanaRS v1"
@@ -38,7 +38,7 @@
 "During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for two pairing codes. On your pump, select OK and type the two codes on your iPhone. After that, Loop is ready to communicate with your DanaRS v3" = "Eşleştirme işlemi sırasında, DanaRS v3&#39;ünüz bir eşleştirme istemi gösterecek, iPhone&#39;unuz ise iki eşleştirme kodu istemi gösterecektir. Pompanızda Tamam&#39;ı seçin ve iPhone&#39;unuza iki kodu yazın. Bundan sonra Loop, DanaRS v3&#39;ünüzle iletişim kurmaya hazırdır"
 
 /* Title for dana-i explaination */
-"Setting up Dana-i" = "Dana-i&#39;yi kurma"
+"Setting up Dana-i" = "Dana-i&#39;yi ayarlama"
 
 /* General subtext for dana */
 "After setting up the insulin type and bolus speed, you will see a screen with all found Dana pumps. Select the pump you want to link with %1$@." = "İnsülin tipini ve bolus hızını ayarladıktan sonra bulunan tüm Dana pompalarını içeren bir ekran göreceksiniz. %1$@ ile bağlamak istediğiniz pompayı seçin."
@@ -420,3 +420,57 @@
 
 /* Text for reservoir age */
 "Reservoir age" = "Rezervuar yaşı"
+
+/* Text for status */
+"Status" = "Durum"
+
+/* DanaKit disconnecting */
+"Disconnecting..." = "Bağlantı kesiliyor..."
+
+/* DanaKit connecting */
+"Reconnecting..." = "Yeniden bağlanılıyor..."
+
+/* DanaKit disconnect */
+"Disconnect from pump" = "Pompayla bağlantıyı kesin"
+
+/* DanaKit connect */
+"Reconnect tp pump" = "Tp pompasını yeniden bağlayın"
+
+/* DanaKit disconnected */
+"Disconnected" = "Bağlantı kesildi"
+
+/* DanaKit connected */
+"Connected" = "Bağlı"
+
+/* Title disconnect reminder notification */
+"Pump is still disconnected" = "Pompanın bağlantısı hala kesik"
+
+/* Body disconnect reminder notification" */
+"Your pump is still disconnected after the set period!" = "Ayarlanan sürenin sonunda pompanızın bağlantısı hala kesik!"
+
+/* Title disconnect reminder sheet */
+"Set reminder for disconnect" = "Bağlantıyı kesmek için hatırlatıcı ayarla"
+
+/* body disconnect reminder sheet */
+"Do you wish to receive a notification when the pump is longer disconnected for a specific time?" = "Pompanın bağlantısı belirli bir süreliğine kesildiğinde bildirim almak ister misiniz?"
+
+/* Button text to 5 min */
+"Yes, 5 minutes" = "Evet, 5 dakika"
+
+/* Button text to 15 min */
+"Yes, 15 minutes" = "Evet, 15 dakika"
+
+/* Button text to 30 min */
+"Yes, 30 minutes" = "Evet, 30 dakika"
+
+/* Button text to 1h */
+"Yes, 1 hour" = "Evet, 1 saat"
+
+/* Button text to just disconnect */
+"No, just disconnect" = "Hayır, sadece bağlantıyı kes"
+
+/* Title disconnect warning notification */
+"Pump is disconnected" = "Pompa bağlantısı kesildi"
+
+/* Body disconnect warning notification */
+"Your pump is disconnected longer than 5 minutes!" = "Pompanızın bağlantısı 5 dakikadan uzun süre kesildi!"

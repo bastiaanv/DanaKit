@@ -20,7 +20,7 @@
 "Setting up DanaRS v1" = "Asennetaan DanaRS v1"
 
 /* Subtext for danars v1 */
-"During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, Loop is ready to communicate with your DanaRS v1" = "Pariliitoksen muodostusprosessin aikana DanaRS v3 näyttää pariliitoskehotteen, kun taas iPhone näyttää pariliitoskoodin kehotteen. Valitse pumpussasi OK ja kirjoita koodi iPhoneen. Sen jälkeen Loop on valmis kommunikoimaan DanaRS v1:n kanssa"
+"During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, Loop is ready to communicate with your DanaRS v1" = "Pariliitoksen muodostusprosessin aikana DanaRS v3 näyttää pariliitoskehotteen, kun taas iPhone näyttää pariliitoskoodin kehotteen. Valitse pumpussasi OK ja kirjoita koodi iPhonellasi. Sen jälkeen Loop on valmis kommunikoimaan DanaRS v1:n kanssa"
 
 /* check password text for danars v1 */
 "Before starting with the pairing process, it is recommended to check, and if needed update, the pump password. You can do this by going to the pump settings -> user settings -> password. The default password is 1234, if this is your password, please consider changing it" = "Ennen pariliitosprosessin aloittamista on suositeltavaa tarkistaa pumpun salasana ja tarvittaessa päivittää se. Voit tehdä tämän siirtymällä kohtaan Pumpun asetukset -&gt; Käyttäjäasetukset -&gt; Salasana. Oletussalasana on 1234, jos tämä on salasanasi, harkitse sen vaihtamista"
@@ -101,7 +101,7 @@
 "Checksum failed. Try again" = "Tarkistussumma epäonnistui. Yritä uudelleen"
 
 /* Title for delivery speed */
-"Delivery speed" = "Toimituksen nopeus"
+"Delivery speed" = "Toimitusnopeus"
 
 /* Dana bolus speed 12u per min */
 "12 sec/U" = "12 s/U"
@@ -367,7 +367,7 @@
 "Daily limit reached" = "Päivittäinen raja saavutettu"
 
 /* Alert body for basalMax */
-"Your daily insulin limit has been reached. Please contact your Dana distributer to increase the limit" = "Päivittäinen insuliinirajasi on saavutettu. Ota yhteyttä Dana-jälleenmyyjään rajan nostamiseksi"
+"Your daily insulin limit has been reached. Please contact your Dana distributer to increase the limit" = "Päivittäinen insuliinirajasi on saavutettu. Ota yhteyttä Dana-jälleenmyyjääsi rajan nostamiseksi"
 
 /* Alert title for bloodSugarCheckMiss */
 "Missed Blood glucose check" = "Verensokerin mittaus jäi väliin"
@@ -420,3 +420,57 @@
 
 /* Text for reservoir age */
 "Reservoir age" = "Säiliön ikä"
+
+/* Text for status */
+"Status" = "Tila"
+
+/* DanaKit disconnecting */
+"Disconnecting..." = "Katkaistaan..."
+
+/* DanaKit connecting */
+"Reconnecting..." = "Yhdistetään uudelleen..."
+
+/* DanaKit disconnect */
+"Disconnect from pump" = "Irrota pumpusta"
+
+/* DanaKit connect */
+"Reconnect tp pump" = "Kytke tp-pumppu uudelleen"
+
+/* DanaKit disconnected */
+"Disconnected" = "Yhteys katkaistu"
+
+/* DanaKit connected */
+"Connected" = "Yhdistetty"
+
+/* Title disconnect reminder notification */
+"Pump is still disconnected" = "Pumppu on edelleen irti"
+
+/* Body disconnect reminder notification" */
+"Your pump is still disconnected after the set period!" = "Pumppu on edelleen irti asetetun ajan jälkeen!"
+
+/* Title disconnect reminder sheet */
+"Set reminder for disconnect" = "Aseta muistutus yhteyden katkeamisesta"
+
+/* body disconnect reminder sheet */
+"Do you wish to receive a notification when the pump is longer disconnected for a specific time?" = "Haluatko saada ilmoituksen, kun pumppu on pidempään irti tietyn ajan?"
+
+/* Button text to 5 min */
+"Yes, 5 minutes" = "Kyllä, 5 minuuttia"
+
+/* Button text to 15 min */
+"Yes, 15 minutes" = "Kyllä, 15 minuuttia"
+
+/* Button text to 30 min */
+"Yes, 30 minutes" = "Kyllä, 30 minuuttia"
+
+/* Button text to 1h */
+"Yes, 1 hour" = "Kyllä, 1 tunti"
+
+/* Button text to just disconnect */
+"No, just disconnect" = "Ei, vain katkaise yhteys"
+
+/* Title disconnect warning notification */
+"Pump is disconnected" = "Pumppu on irrotettu"
+
+/* Body disconnect warning notification */
+"Your pump is disconnected longer than 5 minutes!" = "Pumppu on irrotettu yli 5 minuutiksi!"

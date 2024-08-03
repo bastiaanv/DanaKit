@@ -35,7 +35,7 @@
 "Setting up DanaRS v3" = "Configurando o DanaRS v3"
 
 /* Subtext for danars v3 */
-"During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for two pairing codes. On your pump, select OK and type the two codes on your iPhone. After that, Loop is ready to communicate with your DanaRS v3" = "Durante o processo de emparelhamento, seu DanaRS v3 mostrará um aviso de emparelhamento enquanto o seu iPhone mostrará um aviso para dois códigos de emparelhamento. Na sua bomba, selecione OK e digite os dois códigos no seu iPhone. Depois disso, o Loop está pronto para se comunicar com o seu DanaRS v3"
+"During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for two pairing codes. On your pump, select OK and type the two codes on your iPhone. After that, Loop is ready to communicate with your DanaRS v3" = "Durante o processo de emparelhamento, seu DanaRS v3 mostrará um aviso de emparelhamento enquanto o seu iPhone mostrará um aviso para dois códigos de emparelhamento. Na sua bomba, selecione OK e digite os dois códigos no seu iPhone. Depois disso, o Loop está pronto para se comunicar com seu DanaRS v3"
 
 /* Title for dana-i explaination */
 "Setting up Dana-i" = "Configurando Dana-i"
@@ -161,7 +161,7 @@
 "The max bolus limit is reached. Please try a lower amount or increase the limit" = "O limite máximo de bolus foi atingido. Tente um valor menor ou aumente o limite"
 
 /* Error description when pump has reached the daily max */
-"The max daily insulin limit is reached. Please try a lower amount or increase the limit" = "O limite diário máximo de insulina foi atingido. Tente um valor menor ou aumente o limite"
+"The max daily insulin limit is reached. Please try a lower amount or increase the limit" = "O limite máximo diário de insulina foi atingido. Tente um valor menor ou aumente o limite"
 
 /* dana AB limitation warning title */
 "Only Automatic Bolus is supported" = "Somente Bolus Automático é suportado"
@@ -229,7 +229,7 @@
 "The time on your pump is different from the current time. Do you want to update the time on your pump to the current time?" = "A hora na sua bomba é diferente da hora atual. Deseja atualizar a hora da sua bomba para a hora atual?"
 
 /* description for time change detected notice */
-"The time on your pump is different from the current time. Your pump’s time controls your scheduled therapy settings. Scroll down to Pump Time row to review the time difference and configure your pump." = "A hora na sua bomba é diferente da hora atual. O tempo da sua bomba controla as configurações da terapia programada. Role para baixo até a linha Pump Time para revisar a diferença horária e configurar sua bomba.";
+"The time on your pump is different from the current time. Your pump’s time controls your scheduled therapy settings. Scroll down to Pump Time row to review the time difference and configure your pump." = "A hora na sua bomba é diferente da hora atual. O tempo da sua bomba controla as configurações da terapia programada. Role para baixo até a linha Pump Time para revisar a diferença de horário e configurar sua bomba.";
 
 /* Button text to confirm pump time sync */
 "Yes, Sync to Current Time" = "Sim, sincronizar com a hora atual"
@@ -420,3 +420,57 @@
 
 /* Text for reservoir age */
 "Reservoir age" = "Idade do reservatório"
+
+/* Text for status */
+"Status" = "Status"
+
+/* DanaKit disconnecting */
+"Disconnecting..." = "Desconectando..."
+
+/* DanaKit connecting */
+"Reconnecting..." = "Reconectando..."
+
+/* DanaKit disconnect */
+"Disconnect from pump" = "Desconecte da bomba"
+
+/* DanaKit connect */
+"Reconnect tp pump" = "Reconecte a bomba tp"
+
+/* DanaKit disconnected */
+"Disconnected" = "Desconectado"
+
+/* DanaKit connected */
+"Connected" = "Conectado"
+
+/* Title disconnect reminder notification */
+"Pump is still disconnected" = "A bomba ainda está desconectada"
+
+/* Body disconnect reminder notification" */
+"Your pump is still disconnected after the set period!" = "Sua bomba ainda está desconectada após o período definido!"
+
+/* Title disconnect reminder sheet */
+"Set reminder for disconnect" = "Definir lembrete para desconexão"
+
+/* body disconnect reminder sheet */
+"Do you wish to receive a notification when the pump is longer disconnected for a specific time?" = "Deseja receber uma notificação quando a bomba estiver desligada por mais tempo por um período específico?"
+
+/* Button text to 5 min */
+"Yes, 5 minutes" = "Sim, 5 minutos"
+
+/* Button text to 15 min */
+"Yes, 15 minutes" = "Sim, 15 minutos"
+
+/* Button text to 30 min */
+"Yes, 30 minutes" = "Sim, 30 minutos"
+
+/* Button text to 1h */
+"Yes, 1 hour" = "Sim, 1 hora"
+
+/* Button text to just disconnect */
+"No, just disconnect" = "Não, apenas desconecte"
+
+/* Title disconnect warning notification */
+"Pump is disconnected" = "A bomba está desconectada"
+
+/* Body disconnect warning notification */
+"Your pump is disconnected longer than 5 minutes!" = "A sua bomba está desligada há mais de 5 minutos!"

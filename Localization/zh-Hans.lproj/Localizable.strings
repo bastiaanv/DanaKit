@@ -128,7 +128,7 @@
 "Note: You Dana pump has a special setting which allows you to silence your Dana pump beeps. To enable this, please contact your Dana distributor" = "注意：您的 Dana 泵具有特殊设置，可让您关闭 Dana 泵蜂鸣声。要启用此功能，请联系您的 Dana 经销商"
 
 /* Error description when no dana connected */
-"Failed to make a connection" = "连接失败"
+"Failed to make a connection" = "无法建立连接"
 
 /* Error description when failed temp adjustment */
 "Failed to adjust temp basal" = "调整基础体温失败"
@@ -420,3 +420,57 @@
 
 /* Text for reservoir age */
 "Reservoir age" = "储层年龄"
+
+/* Text for status */
+"Status" = "地位"
+
+/* DanaKit disconnecting */
+"Disconnecting..." = "正在断开连接..."
+
+/* DanaKit connecting */
+"Reconnecting..." = "正在重新连接..."
+
+/* DanaKit disconnect */
+"Disconnect from pump" = "断开与泵的连接"
+
+/* DanaKit connect */
+"Reconnect tp pump" = "重新连接 TP 泵"
+
+/* DanaKit disconnected */
+"Disconnected" = "断开连接"
+
+/* DanaKit connected */
+"Connected" = "连接的"
+
+/* Title disconnect reminder notification */
+"Pump is still disconnected" = "泵仍处于断开状态"
+
+/* Body disconnect reminder notification" */
+"Your pump is still disconnected after the set period!" = "您的泵在设定的时间段后仍处于断开状态！"
+
+/* Title disconnect reminder sheet */
+"Set reminder for disconnect" = "设置断开连接的提醒"
+
+/* body disconnect reminder sheet */
+"Do you wish to receive a notification when the pump is longer disconnected for a specific time?" = "当泵断开连接特定时间后，您是否希望收到通知？"
+
+/* Button text to 5 min */
+"Yes, 5 minutes" = "是的，5分钟"
+
+/* Button text to 15 min */
+"Yes, 15 minutes" = "是的，15分钟"
+
+/* Button text to 30 min */
+"Yes, 30 minutes" = "是的，30 分钟"
+
+/* Button text to 1h */
+"Yes, 1 hour" = "是的，1 小时"
+
+/* Button text to just disconnect */
+"No, just disconnect" = "否，只需断开连接"
+
+/* Title disconnect warning notification */
+"Pump is disconnected" = "泵已断开"
+
+/* Body disconnect warning notification */
+"Your pump is disconnected longer than 5 minutes!" = "您的泵断开时间已超过 5 分钟！"

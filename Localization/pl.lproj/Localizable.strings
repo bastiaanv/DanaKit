@@ -35,7 +35,7 @@
 "Setting up DanaRS v3" = "Konfigurowanie DanaRS v3"
 
 /* Subtext for danars v3 */
-"During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for two pairing codes. On your pump, select OK and type the two codes on your iPhone. After that, Loop is ready to communicate with your DanaRS v3" = "Podczas procesu parowania Twój DanaRS v3 wyświetli monit o parowanie, a iPhone wyświetli monit o podanie dwóch kodów parowania. Na pompie wybierz OK i wpisz dwa kody na swoim iPhonie. Następnie Loop będzie gotowy do komunikacji z Twoim DanaRS v3"
+"During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for two pairing codes. On your pump, select OK and type the two codes on your iPhone. After that, Loop is ready to communicate with your DanaRS v3" = "Podczas procesu parowania Twój DanaRS v3 wyświetli monit o parowanie, a iPhone wyświetli monit o podanie dwóch kodów parowania. Na pompie wybierz OK i wpisz dwa kody na swoim iPhonie. Następnie Loop jest gotowy do komunikacji z Twoim DanaRS v3"
 
 /* Title for dana-i explaination */
 "Setting up Dana-i" = "Konfigurowanie Dana-i"
@@ -140,7 +140,7 @@
 "Failed to generate Dana basal program" = "Wygenerowanie programu podstawowego Dana nie powiodło się"
 
 /* Error description when failed basal adjustment */
-"Failed to adjust basal" = "Nie udało się dostosować bazy"
+"Failed to adjust basal" = "Nie udało się dostosować dawki podstawowej"
 
 /* Error description when pump time failed to sync */
 "Failed to adjust pump time" = "Nie udało się ustawić czasu pompy"
@@ -420,3 +420,57 @@
 
 /* Text for reservoir age */
 "Reservoir age" = "Wiek zbiornika"
+
+/* Text for status */
+"Status" = "Status"
+
+/* DanaKit disconnecting */
+"Disconnecting..." = "Rozłączanie..."
+
+/* DanaKit connecting */
+"Reconnecting..." = "Ponowne łączenie..."
+
+/* DanaKit disconnect */
+"Disconnect from pump" = "Odłącz od pompy"
+
+/* DanaKit connect */
+"Reconnect tp pump" = "Podłącz ponownie pompę tp"
+
+/* DanaKit disconnected */
+"Disconnected" = "Bezładny"
+
+/* DanaKit connected */
+"Connected" = "Połączony"
+
+/* Title disconnect reminder notification */
+"Pump is still disconnected" = "Pompa jest nadal odłączona"
+
+/* Body disconnect reminder notification" */
+"Your pump is still disconnected after the set period!" = "Po upływie ustawionego czasu pompa nadal jest odłączona!"
+
+/* Title disconnect reminder sheet */
+"Set reminder for disconnect" = "Ustaw przypomnienie o rozłączeniu"
+
+/* body disconnect reminder sheet */
+"Do you wish to receive a notification when the pump is longer disconnected for a specific time?" = "Chcesz otrzymać powiadomienie w przypadku dłuższej przerwy w pracy pompy na określony czas?"
+
+/* Button text to 5 min */
+"Yes, 5 minutes" = "Tak, 5 minut"
+
+/* Button text to 15 min */
+"Yes, 15 minutes" = "Tak, 15 minut"
+
+/* Button text to 30 min */
+"Yes, 30 minutes" = "Tak, 30 minut"
+
+/* Button text to 1h */
+"Yes, 1 hour" = "Tak, 1 godzina"
+
+/* Button text to just disconnect */
+"No, just disconnect" = "Nie, po prostu się rozłącz"
+
+/* Title disconnect warning notification */
+"Pump is disconnected" = "Pompa jest odłączona"
+
+/* Body disconnect warning notification */
+"Your pump is disconnected longer than 5 minutes!" = "Twoja pompa jest odłączona na dłużej niż 5 minut!"
