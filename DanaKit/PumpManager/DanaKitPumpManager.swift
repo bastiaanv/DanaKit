@@ -35,8 +35,10 @@ public class DanaKitPumpManager: DeviceManager {
     public static let pluginIdentifier: String = "Dana" // use a single token to make parsing log files easier
     public let managerIdentifier: String = "Dana"
     
-    public let localizedTitle = LocalizedString("Dana-i/RS", comment: "Generic title of the DanaKit pump manager")
-    
+    public var localizedTitle: String {
+        self.state.getFriendlyDeviceName()
+    }
+
     init(state: DanaKitPumpManagerState, dateGenerator: @escaping () -> Date = Date.init) {
         self.state = state
         self.oldState = DanaKitPumpManagerState(rawValue: state.rawValue)
