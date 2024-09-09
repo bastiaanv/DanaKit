@@ -74,6 +74,19 @@ struct DanaKitSettingsView: View {
                     ])
     }
     
+    var disableBolusSync: ActionSheet {
+        ActionSheet(title: Text(LocalizedString(viewModel.isBolusSyncingDisabled ? "Re-enable bolus syncing?" : "Disable bolus syncing?", comment: "Title for bolus syncing disable action sheet")),
+                    buttons: [
+                        .default(Text(viewModel.isBolusSyncingDisabled ?
+                                      LocalizedString("Yes, re-enable bolus syncing", comment: "Button text to re-enable bplus syncing") :
+                                      LocalizedString("Yes, disable bolus syncing", comment: "Button text to disable bplus syncing")
+                                 )) {
+                            self.viewModel.toggleBolusSyncing()
+                        },
+                        .cancel(Text(LocalizedString("No, Keep as is", comment: "Button text to cancel silent tone")))
+                    ])
+    }
+    
     var disconnectReminder: ActionSheet {
         ActionSheet(title: Text(LocalizedString("Set reminder for disconnect", comment: "Title disconnect reminder sheet")),
                                 message: Text(LocalizedString("Do you wish to receive a notification when the pump is longer disconnected for a specific time?", comment: "body disconnect reminder sheet")),
@@ -210,6 +223,9 @@ struct DanaKitSettingsView: View {
                         Text(String(viewModel.reservoirAge!))
                             .foregroundColor(.secondary)
                     }
+                    .onLongPressGesture(perform: {
+                        viewModel.updateReservoirAge()
+                    })
                 }
                 
                 if (viewModel.cannulaAge != nil) {
@@ -219,16 +235,19 @@ struct DanaKitSettingsView: View {
                         Text(String(viewModel.cannulaAge!))
                             .foregroundColor(.secondary)
                     }
+                    .onLongPressGesture(perform: {
+                        viewModel.updateCannulaAge()
+                    })
                 }
             }
             
             Section(header: SectionHeader(label: LocalizedString("Configuration", comment: "The title of the configuration section in DanaKit settings")))
             {
-                NavigationLink(destination: InsulinTypeView(initialValue: viewModel.insulineType, supportedInsulinTypes: supportedInsulinTypes, didConfirm: viewModel.didChangeInsulinType)) {
+                NavigationLink(destination: InsulinTypeView(initialValue: viewModel.insulinType, supportedInsulinTypes: supportedInsulinTypes, didConfirm: viewModel.didChangeInsulinType)) {
                     HStack {
                         Text(LocalizedString("Insulin Type", comment: "Text for confidence reminders navigation link")).foregroundColor(Color.primary)
                         Spacer()
-                        Text(viewModel.insulineType.brandName)
+                        Text(viewModel.insulinType.brandName)
                             .foregroundColor(.secondary)
                         }
                 }
@@ -288,6 +307,12 @@ struct DanaKitSettingsView: View {
                     Spacer()
                     Text(String(viewModel.batteryLevel) + "%")
                         .foregroundColor(.secondary)
+                }
+                .onLongPressGesture(perform: {
+                    viewModel.showingBolusSyncingDisabled = true
+                })
+                .actionSheet(isPresented: $viewModel.showingBolusSyncingDisabled) {
+                    disableBolusSync
                 }
                 HStack {
                     Text(LocalizedString("Pump time", comment: "Text for pump time")).foregroundColor(Color.primary)

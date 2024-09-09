@@ -411,6 +411,7 @@ extension DanaKitPumpManager: PumpManager {
             let fetchHistoryPacket = generatePacketHistoryAll(options: PacketHistoryBase(from: state.lastStatusPumpDateTime, usingUtc: self.state.usingUtc))
             let fetchHistoryResult = try await self.bluetooth.writeMessage(fetchHistoryPacket)
             guard fetchHistoryResult.success else {
+                log.error("Failed to fetch history: unsuccessful command...")
                 return []
             }
             
@@ -423,6 +424,11 @@ extension DanaKitPumpManager: PumpManager {
                     return NewPumpEvent(date: item.timestamp, dose: nil, raw: item.raw, title: "Alarm: \(getAlarmMessage(param8: item.alarm))", type: .alarm, alarmType: PumpAlarmType.fromParam8(item.alarm))
                 
                 case HistoryCode.RECORD_TYPE_BOLUS:
+                    // Skip bolus syncing if enabled by user
+                    if self.state.isBolusSyncDisabled {
+                        return nil
+                    }
+                    
                     // If we find a bolus here, we assume that is hasnt been synced to Loop
                     return NewPumpEvent.bolus(
                         dose: DoseEntry.bolus(units: item.value!, deliveredUnits: item.value!, duration: item.durationInMin! * 60, activationType: .manualNoRecommendation, insulinType: self.state.insulinType!, startDate: item.timestamp),
