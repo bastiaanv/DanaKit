@@ -201,26 +201,26 @@
 		B8179E592B20F2A10049EEE7 /* OSLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSLog.swift; sourceTree = "<group>"; };
 		B81C52232B30E95E00FB801D /* IdentifiableClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableClass.swift; sourceTree = "<group>"; };
 		B81E9D042B66906000AB6AA1 /* PumpAlarmType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PumpAlarmType.swift; sourceTree = "<group>"; };
-		B82FA9342B3CAEFC004F2AFE /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = Localization/ar.lproj/Localizable.strings; sourceTree = "<group>"; };
-		B82FA9352B3CAEFD004F2AFE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "Localization/zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		B82FA9362B3CAEFE004F2AFE /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = Localization/cs.lproj/Localizable.strings; sourceTree = "<group>"; };
-		B82FA9372B3CAEFF004F2AFE /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = Localization/da.lproj/Localizable.strings; sourceTree = "<group>"; };
-		B82FA9382B3CAF00004F2AFE /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = Localization/fi.lproj/Localizable.strings; sourceTree = "<group>"; };
-		B82FA9392B3CAF00004F2AFE /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Localization/fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		B82FA93A2B3CAF01004F2AFE /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = Localization/he.lproj/Localizable.strings; sourceTree = "<group>"; };
-		B82FA93B2B3CAF06004F2AFE /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = Localization/hi.lproj/Localizable.strings; sourceTree = "<group>"; };
-		B82FA93C2B3CAF06004F2AFE /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = Localization/ja.lproj/Localizable.strings; sourceTree = "<group>"; };
-		B82FA93D2B3CAF07004F2AFE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "Localization/pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		B82FA93E2B3CAF08004F2AFE /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = Localization/ro.lproj/Localizable.strings; sourceTree = "<group>"; };
-		B82FA93F2B3CAF0A004F2AFE /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = Localization/sk.lproj/Localizable.strings; sourceTree = "<group>"; };
-		B82FA9402B3CAF0A004F2AFE /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Localization/es.lproj/Localizable.strings; sourceTree = "<group>"; };
-		B82FA9412B3CAF0B004F2AFE /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = Localization/sv.lproj/Localizable.strings; sourceTree = "<group>"; };
-		B82FA9422B3CAF0C004F2AFE /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = Localization/tr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		B82FA9432B3CAF0C004F2AFE /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = Localization/vi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B82FA9342B3CAEFC004F2AFE /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ../Localization/ar.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B82FA9352B3CAEFD004F2AFE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "../Localization/zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		B82FA9362B3CAEFE004F2AFE /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = ../Localization/cs.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B82FA9372B3CAEFF004F2AFE /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = ../Localization/da.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B82FA9382B3CAF00004F2AFE /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = ../Localization/fi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B82FA9392B3CAF00004F2AFE /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = ../Localization/fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B82FA93A2B3CAF01004F2AFE /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = ../Localization/he.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B82FA93B2B3CAF06004F2AFE /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = ../Localization/hi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B82FA93C2B3CAF06004F2AFE /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ../Localization/ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B82FA93D2B3CAF07004F2AFE /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "../Localization/pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		B82FA93E2B3CAF08004F2AFE /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ../Localization/ro.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B82FA93F2B3CAF0A004F2AFE /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = ../Localization/sk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B82FA9402B3CAF0A004F2AFE /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = ../Localization/es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B82FA9412B3CAF0B004F2AFE /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = ../Localization/sv.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B82FA9422B3CAF0C004F2AFE /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = ../Localization/tr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B82FA9432B3CAF0C004F2AFE /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = ../Localization/vi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B82FA9442B3DF3AD004F2AFE /* DanaKitScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanaKitScanView.swift; sourceTree = "<group>"; };
 		B82FA9462B3DF85F004F2AFE /* DanaKitScanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanaKitScanViewModel.swift; sourceTree = "<group>"; };
 		B8313D262B3B162900A0F64D /* DanaKitSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanaKitSetupView.swift; sourceTree = "<group>"; };
-		B8313D282B3B168800A0F64D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localization/en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B8313D282B3B168800A0F64D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ../Localization/en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B8360A6F2B26011200152188 /* DanaPacketBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanaPacketBase.swift; sourceTree = "<group>"; };
 		B8360A712B2601D600152188 /* DanaBasalCancelTemporary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanaBasalCancelTemporary.swift; sourceTree = "<group>"; };
 		B8360A732B26037100152188 /* DanaBasalGetProfileNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanaBasalGetProfileNumber.swift; sourceTree = "<group>"; };
@@ -331,17 +331,17 @@
 		B8FDA0DD2B77D037007004A5 /* PumpManagerAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PumpManagerAlert.swift; sourceTree = "<group>"; };
 		B8FF96192B4305A300C14280 /* NavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLink.swift; sourceTree = "<group>"; };
 		C10D6D6D27A2395700F53D58 /* DanaKitPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DanaKitPlugin.swift; sourceTree = "<group>"; };
-		C13F70D42AE58C76002A292B /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = Localization/nb.lproj/Localizable.strings; sourceTree = "<group>"; };
-		C17C23AA2AE58C87003AD249 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = Localization/nl.lproj/Localizable.strings; sourceTree = "<group>"; };
-		C17E22892AE58C5500CFDE99 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = Localization/it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C13F70D42AE58C76002A292B /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = ../Localization/nb.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C17C23AA2AE58C87003AD249 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = ../Localization/nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C17E22892AE58C5500CFDE99 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = ../Localization/it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C187C197279086A8006E3557 /* DanaKitPlugin.loopplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DanaKitPlugin.loopplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		C187C199279086A8006E3557 /* DanaKitPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DanaKitPlugin.h; sourceTree = "<group>"; };
 		C187C1A2279087A4006E3557 /* OSLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSLog.swift; sourceTree = "<group>"; };
 		C187C1A427908B1C006E3557 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C18DAD612AE58BDD00FAB288 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Localization/de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C18DAD612AE58BDD00FAB288 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = ../Localization/de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C1C001C027A2349D00533D35 /* DanaKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DanaKit.swift; sourceTree = "<group>"; };
-		C1FC36162AE58CCE00AC033A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = Localization/ru.lproj/Localizable.strings; sourceTree = "<group>"; };
-		C1FD685F2AE58C9A003DDFFD /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = Localization/pl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C1FC36162AE58CCE00AC033A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ../Localization/ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C1FD685F2AE58C9A003DDFFD /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = ../Localization/pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -375,7 +375,6 @@
 		84752E7826ED0FFE009FD801 = {
 			isa = PBXGroup;
 			children = (
-				C18DAD602AE58BDD00FAB288 /* Localizable.strings */,
 				A91B2DEB276E1E5E001B0E95 /* README.md */,
 				84752EE926ED1402009FD801 /* Common */,
 				84752E8426ED0FFE009FD801 /* DanaKit */,
@@ -567,6 +566,7 @@
 				B885168B2B305E740063402A /* DanaKitUI.xcassets */,
 				B8F4E1A92B83D4F1000F4AE1 /* blank.wav */,
 				B88516962B30CA860063402A /* DanaKitHUDProvider.swift */,
+				C18DAD602AE58BDD00FAB288 /* Localizable.strings */,
 			);
 			path = DanaKitUI;
 			sourceTree = "<group>";
