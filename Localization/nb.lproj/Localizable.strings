@@ -543,3 +543,15 @@
 
 /* Insulin unit */
 "U" = "U";
+
+/* Label for first step refill */
+"Step 1: Set reservoir level" = "Trinn 1: Angi reservoarnivå";
+
+/* Label for reservoir refilled amount */
+"Reservoir amount" = "Reservoar^beløp";
+
+/* Label for second step refill */
+"Step 2: Set tube refill amount" = "Trinn 2: Påfyllingsmengde til tube";
+
+/* Label for tube refilled amount */
+"Tube refill amount" = "Rør påfylling beløp";

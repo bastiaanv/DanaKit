@@ -543,3 +543,15 @@
 
 /* Insulin unit */
 "U" = "U";
+
+/* Label for first step refill */
+"Step 1: Set reservoir level" = "Krok 1: Ustawienie poziomu zbiornika";
+
+/* Label for reservoir refilled amount */
+"Reservoir amount" = "Pojemność zbiornika";
+
+/* Label for second step refill */
+"Step 2: Set tube refill amount" = "Krok 2: Ustawienie ilości napełnienia tuby";
+
+/* Label for tube refilled amount */
+"Tube refill amount" = "Ilość napełnienia tuby";

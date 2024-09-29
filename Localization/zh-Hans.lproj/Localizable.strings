@@ -543,3 +543,15 @@
 
 /* Insulin unit */
 "U" = "U";
+
+/* Label for first step refill */
+"Step 1: Set reservoir level" = "步骤 1：设置蓄水池水位";
+
+/* Label for reservoir refilled amount */
+"Reservoir amount" = "水库容量";
+
+/* Label for second step refill */
+"Step 2: Set tube refill amount" = "步骤 2：设置软管填充量";
+
+/* Label for tube refilled amount */
+"Tube refill amount" = "软管填充量";
