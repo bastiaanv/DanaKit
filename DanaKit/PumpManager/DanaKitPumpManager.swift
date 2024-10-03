@@ -63,6 +63,7 @@ public class DanaKitPumpManager: DeviceManager {
     private let stateObservers = WeakSynchronizedSet<StateObserver>()
     private let scanDeviceObservers = WeakSynchronizedSet<StateObserver>()
     
+    private var isPriming = false
     private var doseReporter: DanaKitDoseProgressReporter?
     private var doseEntry: UnfinalizedDose?
     
@@ -530,6 +531,12 @@ extension DanaKitPumpManager: PumpManager {
             return
         }
         
+        guard let insulinType = self.state.insulinType else {
+            self.log.error("Insulin type is nil...")
+            completion(.configuration(DanaKitPumpManagerError.unknown("Missing insulin type")))
+            return
+        }
+        
         delegateQueue.async {
             let duration = self.estimatedDuration(toBolus: units)
             self.log.info("Enact bolus, units: \(units)U, duration: \(duration)sec")
@@ -561,7 +568,7 @@ extension DanaKitPumpManager: PumpManager {
                     }
                     
                     do {
-                        let packet = generatePacketBolusStart(options: PacketBolusStart(amount: units, speed: self.state.bolusSpeed))
+                        let packet = generatePacketBolusStart(options: PacketBolusStart(amount: units, speed: !self.isPriming ? self.state.bolusSpeed : .speed12))
                         let result = try await self.bluetooth.writeMessage(packet)
                         
                         guard result.success else {
@@ -580,20 +587,22 @@ extension DanaKitPumpManager: PumpManager {
                         self.state.lastStatusPumpDateTime = (await self.fetchPumpTime()) ?? Date.now
                         self.state.lastStatusDate = Date.now
                         
-                        self.doseEntry = UnfinalizedDose(units: units, duration: duration, activationType: activationType, insulinType: self.state.insulinType!)
+                        self.doseEntry = UnfinalizedDose(units: units, duration: duration, activationType: activationType, insulinType: insulinType)
                         self.doseReporter = DanaKitDoseProgressReporter(total: units)
                         self.state.bolusState = .inProgress
                         self.notifyStateDidChange()
                         
-                        DispatchQueue.main.async {
-                            let dose = self.doseEntry?.toDoseEntry(isMutable: true)
-                            
-                            if let dose = dose {
-                                self.pumpDelegate.notify { (delegate) in
-                                    delegate?.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: dose.programmedUnits)], lastReconciliation: Date.now, replacePendingEvents: false, completion: { _ in })
-                                }
+                        if !self.isPriming {
+                            DispatchQueue.main.async {
+                                let dose = self.doseEntry?.toDoseEntry(isMutable: true)
                                 
-                                self.notifyStateDidChange()
+                                if let dose = dose {
+                                    self.pumpDelegate.notify { (delegate) in
+                                        delegate?.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: dose.programmedUnits)], lastReconciliation: Date.now, replacePendingEvents: false, completion: { _ in })
+                                    }
+                                    
+                                    self.notifyStateDidChange()
+                                }
                             }
                         }
                         
@@ -609,6 +618,19 @@ extension DanaKitPumpManager: PumpManager {
                     }
                 }
             }
+        }
+    }
+    
+    public func enactPrime(unit: Double, completion: @escaping (PumpManagerError?) -> Void) {
+        self.isPriming = true
+        self.enactBolus(units: unit, activationType: .manualNoRecommendation) { error in
+            if let error = error {
+                self.isPriming = false
+                completion(error)
+                return
+            }
+            
+            completion(nil)
         }
     }
     
@@ -1295,6 +1317,8 @@ extension DanaKitPumpManager {
             return
         }
         
+        self.doseEntry = nil
+        self.doseReporter = nil
         self.state.bolusState = .noBolus
         self.state.lastStatusDate = Date.now
         self.notifyStateDidChange()
@@ -1337,7 +1361,7 @@ extension DanaKitPumpManager {
             self.doseEntry = nil
             self.doseReporter = nil
             
-            guard let dose = dose else {
+            guard let dose = dose, !self.isPriming else {
                 return
             }
             
