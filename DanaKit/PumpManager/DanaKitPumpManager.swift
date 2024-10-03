@@ -1240,6 +1240,7 @@ extension DanaKitPumpManager: AlertSoundVendor {
 
 extension DanaKitPumpManager {
     public func acknowledgeAlert(alertIdentifier: LoopKit.Alert.AlertIdentifier, completion: @escaping (Error?) -> Void) {
+        completion(nil)
     }
 }
 
