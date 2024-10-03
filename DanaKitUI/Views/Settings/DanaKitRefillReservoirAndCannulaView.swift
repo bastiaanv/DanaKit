@@ -80,7 +80,7 @@ struct DanaKitRefillReservoirAndCannulaView: View {
                     
                     if self.isEditingTubeRefillAmount {
                         ResizeablePicker(selection: $viewModel.tubeAmount,
-                                         data: Array(0...100).map({ Double($0) / 10 }),
+                                         data: Array(0...150).map({ Double($0) / 10 }),
                                          formatter:  { value in "\(value)\(self.unitText)" }
                         )
                         .padding(.horizontal)
