@@ -43,6 +43,18 @@ struct DanaKitSettingsView: View {
         ])
     }
     
+    var blindReservoirCannulaRefill: ActionSheet {
+        ActionSheet(title: Text(LocalizedString("Type of refill", comment: "Title for refill action")), buttons: [
+            .default(Text(LocalizedString("Cannula only", comment: "Button text to cannula only"))) {
+                viewModel.navigateToRefillView(true)
+            },
+            .default(Text(LocalizedString("Reservoir and cannula", comment: "Button text to Reservoir and cannula"))) {
+                viewModel.navigateToRefillView(false)
+            },
+            .cancel(Text(LocalizedString("Cancel", comment: "Button text to cancel")))
+        ])
+    }
+    
     var silentTone: ActionSheet {
         ActionSheet(title: Text(LocalizedString("Toggle silent tone?", comment: "Title for silent tone action sheet")),
                     buttons: [
@@ -216,11 +228,11 @@ struct DanaKitSettingsView: View {
                         .foregroundColor(.secondary)
                 }
                 
-                if (viewModel.reservoirAge != nil) {
+                if let reservoirAge = viewModel.reservoirAge {
                     HStack {
                         Text(LocalizedString("Reservoir age", comment: "Text for reservoir age")).foregroundColor(Color.primary)
                         Spacer()
-                        Text(String(viewModel.reservoirAge!))
+                        Text(String(reservoirAge))
                             .foregroundColor(.secondary)
                     }
                     .onLongPressGesture(perform: {
@@ -228,11 +240,11 @@ struct DanaKitSettingsView: View {
                     })
                 }
                 
-                if (viewModel.cannulaAge != nil) {
+                if let cannulaAge = viewModel.cannulaAge {
                     HStack {
                         Text(LocalizedString("Cannula age", comment: "Text for cannula age")).foregroundColor(Color.primary)
                         Spacer()
-                        Text(String(viewModel.cannulaAge!))
+                        Text(String(cannulaAge))
                             .foregroundColor(.secondary)
                     }
                     .onLongPressGesture(perform: {
@@ -262,6 +274,24 @@ struct DanaKitSettingsView: View {
                 NavigationLink(destination: viewModel.userOptionsView) {
                     Text(LocalizedString("User options", comment: "Title for user options"))
                         .foregroundColor(Color.primary)
+                }
+                Button(action: {
+                    viewModel.showingBlindReservoirCannulaRefill = true
+                }) {
+                    HStack {
+                        Text(LocalizedString("Reservoir/cannula refill", comment: "Title for reservoir/cannula refill"))
+                        Spacer()
+                        NavigationLink(destination: viewModel.refillView, isActive: $viewModel.showingReservoirCannulaRefillView) { EmptyView() }
+                            .hidden()
+                            .frame(width: 0, height: 0)
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: UIFont.systemFontSize, weight: .medium))
+                            .opacity(0.35)
+                    }
+                    .foregroundColor(Color.primary)
+                }
+                .actionSheet(isPresented: $viewModel.showingBlindReservoirCannulaRefill) {
+                    blindReservoirCannulaRefill
                 }
             }
             
