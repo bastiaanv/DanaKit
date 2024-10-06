@@ -592,20 +592,6 @@ extension DanaKitPumpManager: PumpManager {
                         self.state.bolusState = .inProgress
                         self.notifyStateDidChange()
                         
-                        if !self.isPriming {
-                            DispatchQueue.main.async {
-                                let dose = self.doseEntry?.toDoseEntry(isMutable: true)
-                                
-                                if let dose = dose {
-                                    self.pumpDelegate.notify { (delegate) in
-                                        delegate?.pumpManager(self, hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: dose.programmedUnits)], lastReconciliation: Date.now, replacePendingEvents: false, completion: { _ in })
-                                    }
-                                    
-                                    self.notifyStateDidChange()
-                                }
-                            }
-                        }
-                        
                         completion(nil)
                     } catch {
                         self.state.bolusState = .noBolus
