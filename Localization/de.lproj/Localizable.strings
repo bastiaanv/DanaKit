@@ -176,7 +176,7 @@
 "Please consider changing your dosing strategy in the setting menu" = "Bitte beachten Sie, dass Sie Ihre Dosierungsstrategie im Einstellungsmenü ändern müssen";
 
 /* Dana settings resume delivery */
-"Resume delivery" = "Lebenslauf";
+"Resume delivery" = "Lieferung starten";
 
 /* Dana settings suspend delivery */
 "Suspend delivery" = "Lieferung stoppen";
