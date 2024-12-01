@@ -32,6 +32,7 @@ class DanaKitSettingsViewModel : ObservableObject {
     @Published var basalProfileNumber: UInt8 = 0
     @Published var cannulaAge: String? = nil
     @Published var reservoirAge: String? = nil
+    @Published var batteryAge: String? = nil
     
     @Published var showPumpTimeSyncWarning: Bool = false
     @Published var pumpTime: Date? = nil
@@ -92,7 +93,7 @@ class DanaKitSettingsViewModel : ObservableObject {
     
     private let dateFormatter = {
         let formatter = DateFormatter()
-        formatter.timeStyle = .short
+        formatter.timeStyle = .medium
         return formatter
     }()
     
@@ -129,6 +130,10 @@ class DanaKitSettingsViewModel : ObservableObject {
             self.reservoirAge = formatDateToDayHour(reservoirDate)
         }
         
+        if let batteryDate = self.pumpManager?.state.batteryAge {
+            self.batteryAge = formatDateToDayHour(batteryDate)
+        }
+        
         self.basalButtonText = self.updateBasalButtonText()
         
         self.pumpManager?.addStateObserver(self, queue: .main)
@@ -151,6 +156,12 @@ class DanaKitSettingsViewModel : ObservableObject {
     func updateCannulaAge() {
         self.pumpManager?.state.cannulaDate = Date.now
         self.cannulaAge = formatDateToDayHour(Date.now)
+        self.pumpManager?.notifyStateDidChange()
+    }
+    
+    func updateBettryAge() {
+        self.pumpManager?.state.batteryAge = Date.now
+        self.batteryAge = formatDateToDayHour(Date.now)
         self.pumpManager?.notifyStateDidChange()
     }
     
@@ -263,7 +274,7 @@ class DanaKitSettingsViewModel : ObservableObject {
     
     func reservoirText(for units: Double) -> String {
         let quantity = HKQuantity(unit: .internationalUnit(), doubleValue: units)
-        return reservoirVolumeFormatter.string(from: quantity) ?? ""
+        return reservoirVolumeFormatter.string(from: quantity, for: .internationalUnit()) ?? ""
     }
     
     func toggleSilentTone() {
@@ -418,6 +429,10 @@ extension DanaKitSettingsViewModel: StateObserver {
         
         if let reservoirDate = state.reservoirDate {
             self.reservoirAge = formatDateToDayHour(reservoirDate)
+        }
+        
+        if let batteryAge = state.batteryAge {
+            self.batteryAge = formatDateToDayHour(batteryAge)
         }
     }
     

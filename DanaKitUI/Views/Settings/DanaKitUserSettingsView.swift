@@ -10,8 +10,6 @@ import SwiftUI
 import LoopKitUI
 
 struct DanaKitUserSettingsView: View {
-    private static let showRefillAmount = true
-    
     @ObservedObject var viewModel: DanaKitUserSettingsViewModel
     
     private var revervoirWarningView: PickerView {
@@ -77,14 +75,14 @@ struct DanaKitUserSettingsView: View {
     }
     
     private var refillAmountView: PickerView {
-        PickerView(
-            value: Int(viewModel.refillAmount),
-            allowedOptions: Array(0...60).map({ $0 * 5 }),
-            formatter: { value in "\(value) \(LocalizedString("U", comment: "Insulin unit")) "},
-            didChange: { value in viewModel.refillAmount = UInt16(value) },
-            title: LocalizedString("Refill amount", comment: "refillAmount")
-        )
-    }
+            PickerView(
+                value: Int(viewModel.refillAmount),
+                allowedOptions: Array(0...60).map({ $0 * 5 }),
+                formatter: { value in "\(value) \(LocalizedString("U", comment: "Insulin unit")) "},
+                didChange: { value in viewModel.refillAmount = UInt16(value) },
+                title: LocalizedString("Refill amount", comment: "refillAmount")
+            )
+        }
     
     @ViewBuilder
     var body: some View {
@@ -138,22 +136,20 @@ struct DanaKitUserSettingsView: View {
                         Text(beepFormatter(value: Int(viewModel.beepAndAlarm.rawValue)))
                     }
                 }
-                if DanaKitUserSettingsView.showRefillAmount {
-                    NavigationLink(destination: refillAmountView) {
-                        HStack {
-                            Text(LocalizedString("Refill amount", comment: "refillAmount"))
-                                .foregroundColor(Color.primary)
-                            Spacer()
-                            Text(String(viewModel.refillAmount) + LocalizedString("U", comment: "Insulin unit"))
-                        }
+                NavigationLink(destination: refillAmountView) {
+                    HStack {
+                        Text(LocalizedString("Refill amount", comment: "refillAmount"))
+                            .foregroundColor(Color.primary)
+                        Spacer()
+                        Text(String(viewModel.refillAmount) + LocalizedString("U", comment: "Insulin unit"))
                     }
                 }
             }
             Spacer()
             
             ContinueButton(
-                loading: $viewModel.storingUseroption,
                 text: LocalizedString("Save", comment: "Text for save button"),
+                loading: $viewModel.storingUseroption,
                 action: { viewModel.storeUserOption() }
             )
         }
