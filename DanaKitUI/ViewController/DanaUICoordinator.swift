@@ -110,10 +110,10 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
         }
     }
     
-    private func hostingController<Content: View>(rootView: Content) -> DismissibleHostingController<some View> {
+    private func hostingController<Content: View>(rootView: Content) -> DismissibleHostingController {
         let rootView = rootView
             .environment(\.appName, Bundle.main.bundleDisplayName)
-        return DismissibleHostingController(content: rootView, colorPalette: colorPalette)
+        return DismissibleHostingController(rootView: rootView, colorPalette: colorPalette)
     }
     
     private func viewControllerForScreen(_ screen: DanaUIScreen) -> UIViewController {

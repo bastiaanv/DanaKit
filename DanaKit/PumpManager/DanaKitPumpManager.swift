@@ -71,6 +71,10 @@ public class DanaKitPumpManager: DeviceManager {
         self.state.isOnBoarded
     }
     
+    public var isBluetoothConnected: Bool {
+        self.bluetooth.isConnected
+    }
+    
     private let basalIntervals: [TimeInterval] = Array(0..<24).map({ TimeInterval(60 * 60 * $0) })
     public var currentBaseBasalRate: Double {
         guard self.state.basalSchedule.count > 0 else {
@@ -441,7 +445,6 @@ extension DanaKitPumpManager: PumpManager {
             let fetchHistoryPacket = generatePacketHistoryAll(options: PacketHistoryBase(from: state.lastStatusPumpDateTime, usingUtc: self.state.usingUtc))
             let fetchHistoryResult = try await self.bluetooth.writeMessage(fetchHistoryPacket)
             guard fetchHistoryResult.success else {
-                log.error("Failed to fetch history: unsuccessful command...")
                 return []
             }
             
