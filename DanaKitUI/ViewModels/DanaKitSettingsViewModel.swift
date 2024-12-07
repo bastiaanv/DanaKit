@@ -159,7 +159,7 @@ class DanaKitSettingsViewModel : ObservableObject {
         self.pumpManager?.notifyStateDidChange()
     }
     
-    func updateBettryAge() {
+    func updateBatteryAge() {
         self.pumpManager?.state.batteryAge = Date.now
         self.batteryAge = formatDateToDayHour(Date.now)
         self.pumpManager?.notifyStateDidChange()
@@ -274,7 +274,7 @@ class DanaKitSettingsViewModel : ObservableObject {
     
     func reservoirText(for units: Double) -> String {
         let quantity = HKQuantity(unit: .internationalUnit(), doubleValue: units)
-        return reservoirVolumeFormatter.string(from: quantity, for: .internationalUnit()) ?? ""
+        return reservoirVolumeFormatter.string(from: quantity) ?? ""
     }
     
     func toggleSilentTone() {

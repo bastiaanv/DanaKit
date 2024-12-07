@@ -124,7 +124,7 @@ struct DanaKitSettingsView: View {
     
     var body: some View {
         List {
-            Section() {
+            Section {
                 HStack(){
                     Spacer()
                     Image(uiImage: UIImage(named: imageName, in: Bundle(for: DanaKitHUDProvider.self), compatibleWith: nil)!)
