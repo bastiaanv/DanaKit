@@ -1,14 +1,6 @@
-//
-//  LocalizedString.swift
-//  DanaKit
-//
-//  Created by Bastiaan Verhaar on 05/12/2023.
-//  Copyright © 2023 Randall Knutson. All rights reserved.
-//
-
 import Foundation
 
-private class FrameworkBundle {
+private enum FrameworkBundle {
     static let main = Bundle(for: DanaKitHUDProvider.self)
 }
 

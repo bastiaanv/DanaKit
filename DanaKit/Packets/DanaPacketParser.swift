@@ -1,13 +1,5 @@
-//
-//  DanaPacketParser.swift
-//  DanaKit
-//
-//  Created by Bastiaan Verhaar on 17/12/2023.
-//  Copyright © 2023 Randall Knutson. All rights reserved.
-//
-
 func parseMessage(data: Data, usingUtc: Bool) -> (any DanaParsePacketProtocol)? {
-    let receivedCommand = (UInt16(data[TypeIndex] & 0xff) << 8) + UInt16(data[OpCodeIndex] & 0xff)
+    let receivedCommand = (UInt16(data[TypeIndex] & 0xFF) << 8) + UInt16(data[OpCodeIndex] & 0xFF)
 
     guard let parser = findMessageParser[receivedCommand] else {
         return nil
@@ -15,7 +7,7 @@ func parseMessage(data: Data, usingUtc: Bool) -> (any DanaParsePacketProtocol)? 
 
     var parsedResult = parser(data, usingUtc) as! (any DanaParsePacketProtocol)
     parsedResult.command = receivedCommand
-    parsedResult.opCode = data[OpCodeIndex] & 0xff
+    parsedResult.opCode = data[OpCodeIndex] & 0xFF
 
     return parsedResult
 }
@@ -74,5 +66,5 @@ let findMessageParser: [UInt16: (Data, Bool?) -> Any] = [
     CommandNotifyAlarm: parsePacketNotifyAlarm,
     CommandNotifyDeliveryComplete: parsePacketNotifyDeliveryComplete,
     CommandNotifyDeliveryRateDisplay: parsePacketNotifyDeliveryRateDisplay,
-    CommandNotifyMissedBolus: parsePacketNotifyMissedBolus,
+    CommandNotifyMissedBolus: parsePacketNotifyMissedBolus
 ]

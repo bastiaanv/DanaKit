@@ -1,25 +1,16 @@
-//
-//  GeneratePacketTests.swift
-//  DanaKitTests
-//
-//  Created by Bastiaan Verhaar on 13/12/2023.
-//  Copyright © 2023 Randall Knutson. All rights reserved.
-//
-
-import XCTest
 @testable import DanaKit
+import XCTest
 
 class GeneratePacketTests: XCTestCase {
-    
     func testGenerateBasalCancelTemporary() {
         let packet = generatePacketBasalCancelTemporary()
         let expectedSnapshot = DanaGeneratePacket(opCode: 98, data: nil)
-        
+
         XCTAssertEqual(packet.type, expectedSnapshot.type)
         XCTAssertEqual(packet.opCode, expectedSnapshot.opCode)
         XCTAssertEqual(packet.data, expectedSnapshot.data)
     }
-    
+
     func testGenerateBasalGetProfileNumber() {
         let packet = generatePacketBasalGetProfileNumber()
         let expectedSnapshot = DanaGeneratePacket(opCode: 101, data: nil)
@@ -28,7 +19,7 @@ class GeneratePacketTests: XCTestCase {
         XCTAssertEqual(packet.opCode, expectedSnapshot.opCode)
         XCTAssertEqual(packet.data, expectedSnapshot.data)
     }
-    
+
     func testGenerateBasalGetRate() {
         let packet = generatePacketBasalGetRate()
         let expectedSnapshot = DanaGeneratePacket(opCode: 103, data: nil)
@@ -51,12 +42,12 @@ class GeneratePacketTests: XCTestCase {
     func testGenerateBasalSetProfileRate() {
         let profileBasalRate: [Double] = Array(repeating: 0.5, count: 24)
         let options = PacketBasalSetProfileRate(profileNumber: 0, profileBasalRate: profileBasalRate)
-        
+
         do {
             let packet = try generatePacketBasalSetProfileRate(options: options)
-            let expectedData = Data([0] + Array(repeating: [50, 0], count: 24).flatMap{$0})
+            let expectedData = Data([0] + Array(repeating: [50, 0], count: 24).flatMap { $0 })
             let expectedSnapshot = DanaGeneratePacket(opCode: 102, data: expectedData)
-            
+
             XCTAssertEqual(packet.type, expectedSnapshot.type)
             XCTAssertEqual(packet.opCode, expectedSnapshot.opCode)
             XCTAssertEqual(packet.data, expectedSnapshot.data)
@@ -68,7 +59,7 @@ class GeneratePacketTests: XCTestCase {
     func testGenerateBasalSetProfileRate_InvalidRateLength() {
         let profileBasalRate: [Double] = Array(repeating: 0.5, count: 23)
         let options = PacketBasalSetProfileRate(profileNumber: 0, profileBasalRate: profileBasalRate)
-        
+
         XCTAssertThrowsError(try generatePacketBasalSetProfileRate(options: options))
     }
 
@@ -100,7 +91,7 @@ class GeneratePacketTests: XCTestCase {
         XCTAssertEqual(packet.opCode, expectedSnapshot.opCode)
         XCTAssertEqual(packet.data, expectedSnapshot.data)
     }
-    
+
     func testGenerateBolusCancelExtended() {
         let packet = generatePacketBolusCancelExtended()
         let expectedSnapshot = DanaGeneratePacket(opCode: 73, data: nil)
@@ -156,10 +147,17 @@ class GeneratePacketTests: XCTestCase {
     }
 
     func testGenerateBolusSet24Circf_mmolPerL() {
-        let options = PacketBolusSet24CIRCFArray(unit: 1, ic: Array(repeating: 0.5, count: 24), isf: Array(repeating: 1, count: 24))
+        let options = PacketBolusSet24CIRCFArray(
+            unit: 1,
+            ic: Array(repeating: 0.5, count: 24),
+            isf: Array(repeating: 1, count: 24)
+        )
         do {
             let packet = try generatePacketBolusSet24CIRCFArray(options: options)
-            let expectedData = Data(Array(repeating: [1, 0], count: 24).flatMap{$0} + Array(repeating: [100, 0], count: 24).flatMap{$0})
+            let expectedData = Data(
+                Array(repeating: [1, 0], count: 24).flatMap { $0 } + Array(repeating: [100, 0], count: 24)
+                    .flatMap { $0 }
+            )
             let expectedSnapshot = DanaGeneratePacket(opCode: 83, data: expectedData)
 
             XCTAssertEqual(packet.type, expectedSnapshot.type)
@@ -171,10 +169,14 @@ class GeneratePacketTests: XCTestCase {
     }
 
     func testGenerateBolusSet24Circf() {
-        let options = PacketBolusSet24CIRCFArray(unit: 0, ic: Array(repeating: 0.5, count: 24), isf: Array(repeating: 1, count: 24))
+        let options = PacketBolusSet24CIRCFArray(
+            unit: 0,
+            ic: Array(repeating: 0.5, count: 24),
+            isf: Array(repeating: 1, count: 24)
+        )
         do {
             let packet = try generatePacketBolusSet24CIRCFArray(options: options)
-            let expectedData = Data(Array(repeating: [1, 0], count: 48).flatMap{$0})
+            let expectedData = Data(Array(repeating: [1, 0], count: 48).flatMap { $0 })
             let expectedSnapshot = DanaGeneratePacket(opCode: 83, data: expectedData)
 
             XCTAssertEqual(packet.type, expectedSnapshot.type)
@@ -186,9 +188,17 @@ class GeneratePacketTests: XCTestCase {
     }
 
     func testGenerateBolusSet24Circf_InvalidInput() {
-        let optionsInvalidIc = PacketBolusSet24CIRCFArray(unit: 0, ic: Array(repeating: 0.5, count: 23), isf: Array(repeating: 1, count: 24))
-        let optionsInvalidIsf = PacketBolusSet24CIRCFArray(unit: 0, ic: Array(repeating: 0.5, count: 24), isf: Array(repeating: 1, count: 23))
-       
+        let optionsInvalidIc = PacketBolusSet24CIRCFArray(
+            unit: 0,
+            ic: Array(repeating: 0.5, count: 23),
+            isf: Array(repeating: 1, count: 24)
+        )
+        let optionsInvalidIsf = PacketBolusSet24CIRCFArray(
+            unit: 0,
+            ic: Array(repeating: 0.5, count: 24),
+            isf: Array(repeating: 1, count: 23)
+        )
+
         XCTAssertThrowsError(try generatePacketBolusSet24CIRCFArray(options: optionsInvalidIc))
         XCTAssertThrowsError(try generatePacketBolusSet24CIRCFArray(options: optionsInvalidIsf))
     }
@@ -245,6 +255,7 @@ class GeneratePacketTests: XCTestCase {
         XCTAssertEqual(packet.opCode, expectedSnapshot.opCode)
         XCTAssertEqual(packet.data, expectedSnapshot.data)
     }
+
     func testGenerateBolusStart_Speed30() {
         let options = PacketBolusStart(amount: 5, speed: .speed30)
         let packet = generatePacketBolusStart(options: options)
@@ -266,7 +277,7 @@ class GeneratePacketTests: XCTestCase {
         XCTAssertEqual(packet.opCode, expectedSnapshot.opCode)
         XCTAssertEqual(packet.data, expectedSnapshot.data)
     }
-    
+
     func testGenerateBolusStop() {
         let packet = generatePacketBolusStop()
         let expectedSnapshot = DanaGeneratePacket(opCode: 68, data: nil)
@@ -385,7 +396,12 @@ class GeneratePacketTests: XCTestCase {
     }
 
     func testGenerateGeneralSaveHistory() {
-        let options = PacketGeneralSaveHistory(historyType: 1, historyDate: Date(timeIntervalSince1970: 1701774000), historyCode: 1, historyValue: 1)
+        let options = PacketGeneralSaveHistory(
+            historyType: 1,
+            historyDate: Date(timeIntervalSince1970: 1_701_774_000),
+            historyCode: 1,
+            historyValue: 1
+        )
         let packet = generatePacketGeneralSaveHistory(options: options)
         let expectedData = Data([1, 23, 12, 5, 11, 0, 0, 1, 1, 0])
         let expectedSnapshot = DanaGeneratePacket(opCode: 224, data: expectedData)
@@ -419,7 +435,7 @@ class GeneratePacketTests: XCTestCase {
 
     func testGenerateGeneralSetPumpTime() {
         // 2023-12-05T11:00:00.000 UTC
-        let options = PacketGeneralSetPumpTime(time: Date(timeIntervalSince1970: 1701774000))
+        let options = PacketGeneralSetPumpTime(time: Date(timeIntervalSince1970: 1_701_774_000))
         let packet = generatePacketGeneralSetPumpTime(options: options)
         let expectedData = Data([23, 12, 5, 11, 0, 0])
         let expectedSnapshot = DanaGeneratePacket(opCode: 113, data: expectedData)
@@ -430,7 +446,7 @@ class GeneratePacketTests: XCTestCase {
     }
 
     func testGenerateGeneralSetPumpTimeWithTimezone() {
-        let options = PacketGeneralSetPumpTimeUtcWithTimezone(time: Date(timeIntervalSince1970: 1701774000), zoneOffset: 1)
+        let options = PacketGeneralSetPumpTimeUtcWithTimezone(time: Date(timeIntervalSince1970: 1_701_774_000), zoneOffset: 1)
         let packet = generatePacketGeneralSetPumpTimeUtcWithTimezone(options: options)
         let expectedData = Data([23, 12, 5, 11, 0, 0, 1])
         let expectedSnapshot = DanaGeneratePacket(opCode: 121, data: expectedData)
@@ -439,7 +455,7 @@ class GeneratePacketTests: XCTestCase {
         XCTAssertEqual(packet.opCode, expectedSnapshot.opCode)
         XCTAssertEqual(packet.data, expectedSnapshot.data)
     }
-    
+
     func testGenerateGeneralSetUserOption() {
         let options = PacketGeneralSetUserOption(
             isTimeDisplay24H: true,
@@ -465,7 +481,7 @@ class GeneratePacketTests: XCTestCase {
     }
 
     func testGenerateHistoryAlarmFromDate() {
-        let options = PacketHistoryBase(from: Date(timeIntervalSince1970: 1701774000))
+        let options = PacketHistoryBase(from: Date(timeIntervalSince1970: 1_701_774_000))
         let packet = generatePacketHistoryAlarm(options: options)
         let expectedData = Data([23, 12, 5, 11, 0, 0])
         let expectedSnapshot = DanaGeneratePacket(opCode: 25, data: expectedData)
@@ -597,7 +613,7 @@ class GeneratePacketTests: XCTestCase {
     }
 
     func testGenerateLoopHistoryEventsFromDateInUTC() {
-        let options = PacketLoopHistoryEvents(from: Date(timeIntervalSince1970: 1701774000))
+        let options = PacketLoopHistoryEvents(from: Date(timeIntervalSince1970: 1_701_774_000))
         let packet = generatePacketLoopHistoryEvents(options: options)
         let expectedData = Data([23, 12, 5, 11, 0, 0])
         let expectedSnapshot = DanaGeneratePacket(opCode: 194, data: expectedData)
@@ -621,7 +637,7 @@ class GeneratePacketTests: XCTestCase {
     func testGenerateLoopSetHistoryEvent() {
         let options = PacketLoopSetEventHistory(
             packetType: LoopHistoryEvents.carbs,
-            time: Date(timeIntervalSince1970: 1701774000),
+            time: Date(timeIntervalSince1970: 1_701_774_000),
             param1: 0,
             param2: 0
         )
@@ -644,7 +660,7 @@ class GeneratePacketTests: XCTestCase {
         XCTAssertEqual(packet.opCode, expectedSnapshot.opCode)
         XCTAssertEqual(packet.data, expectedSnapshot.data)
     }
-    
+
     func testGenerateLoopSetTemporaryBasalPercentGreaterThan500() {
         let options = PacketLoopSetTemporaryBasal(percent: 750, duration: .min15)
         let packet = generatePacketLoopSetTemporaryBasal(options: options)

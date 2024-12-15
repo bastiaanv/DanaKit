@@ -1,11 +1,3 @@
-//
-//  DanaBolusGetCalculationInformation.swift
-//  DanaKit
-//
-//  Created by Bastiaan Verhaar on 10/12/2023.
-//  Copyright © 2023 Randall Knutson. All rights reserved.
-//
-
 struct PacketBolusGetCalculationInformation {
     var currentBg: UInt16
     var carbohydrate: UInt16
@@ -17,13 +9,17 @@ struct PacketBolusGetCalculationInformation {
     var units: UInt8
 }
 
-let CommandBolusGetCalculationInformation: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xff) << 8) + UInt16(DanaPacketType.OPCODE_BOLUS__GET_CALCULATION_INFORMATION & 0xff)
+let CommandBolusGetCalculationInformation: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
+    UInt16(DanaPacketType.OPCODE_BOLUS__GET_CALCULATION_INFORMATION & 0xFF)
 
 func generatePacketBolusGetCalculationInformation() -> DanaGeneratePacket {
-    return DanaGeneratePacket(opCode: DanaPacketType.OPCODE_BOLUS__GET_CALCULATION_INFORMATION, data: nil)
+    DanaGeneratePacket(opCode: DanaPacketType.OPCODE_BOLUS__GET_CALCULATION_INFORMATION, data: nil)
 }
 
-func parsePacketBolusGetCalculationInformation(data: Data, usingUtc: Bool?) -> DanaParsePacket<PacketBolusGetCalculationInformation> {
+func parsePacketBolusGetCalculationInformation(
+    data: Data,
+    usingUtc _: Bool?
+) -> DanaParsePacket<PacketBolusGetCalculationInformation> {
     let currentBg = data.uint16(at: DataStart + 1)
     let carbohydrate = data.uint16(at: DataStart + 3)
     let currentTarget = data.uint16(at: DataStart + 5)

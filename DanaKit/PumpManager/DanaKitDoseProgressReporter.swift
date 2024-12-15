@@ -1,19 +1,11 @@
-//
-//  DoseProgressEstimator.swift
-//  DanaKit
-//
-//  Created by Bastiaan Verhaar on 23/01/2024.
-//  Copyright © 2024 Randall Knutson. All rights reserved.
-//
-
 import Foundation
 import LoopKit
 
 class DanaKitDoseProgressReporter: DoseProgressReporter {
     var progress: DoseProgress {
-        return DoseProgress(deliveredUnits: self.deliveredUnits, percentComplete: self.deliveredUnits / self.total)
+        DoseProgress(deliveredUnits: deliveredUnits, percentComplete: deliveredUnits / total)
     }
-    
+
     private var observers = WeakSet<DoseProgressObserver>()
 
     private let total: Double
@@ -33,7 +25,7 @@ class DanaKitDoseProgressReporter: DoseProgressReporter {
 
     public func notify(deliveredUnits: Double) {
         self.deliveredUnits = deliveredUnits
-        
+
         DispatchQueue.main.async {
             for observer in self.observers {
                 observer.doseProgressReporterDidUpdate(self)

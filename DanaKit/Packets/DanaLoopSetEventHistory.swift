@@ -1,12 +1,4 @@
-//
-//  DanaLoopSetEventHistory.swift
-//  DanaKit
-//
-//  Created by Bastiaan Verhaar on 13/12/2023.
-//  Copyright © 2023 Randall Knutson. All rights reserved.
-//
-
-struct LoopHistoryEvents {
+enum LoopHistoryEvents {
     static let tempStart: UInt8 = 1
     static let tempStop: UInt8 = 2
     static let extendedStart: UInt8 = 3
@@ -32,13 +24,14 @@ struct PacketLoopSetEventHistory {
     var param2: UInt16
 }
 
-let CommandLoopSetEventHistory: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xff) << 8) + UInt16(DanaPacketType.OPCODE__APS_SET_EVENT_HISTORY & 0xff)
+let CommandLoopSetEventHistory: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
+    UInt16(DanaPacketType.OPCODE__APS_SET_EVENT_HISTORY & 0xFF)
 
 func generatePacketLoopSetEventHistory(options: PacketLoopSetEventHistory) -> DanaGeneratePacket {
     var data = Data(count: 11)
     var param1 = options.param1
 
-    if (options.packetType == LoopHistoryEvents.carbs || options.packetType == LoopHistoryEvents.bolus) && param1 < 0 {
+    if options.packetType == LoopHistoryEvents.carbs || options.packetType == LoopHistoryEvents.bolus, param1 < 0 {
         // Assuming LoopHistoryEvents is an enum with associated values, you may need to adjust this condition
         param1 = 0
     }
@@ -47,9 +40,9 @@ func generatePacketLoopSetEventHistory(options: PacketLoopSetEventHistory) -> Da
     data.addDate(at: 1, date: options.time)
 
     data[7] = UInt8(param1 >> 8)
-    data[8] = UInt8(param1 & 0xff)
+    data[8] = UInt8(param1 & 0xFF)
     data[9] = UInt8(options.param2 >> 8)
-    data[10] = UInt8(options.param2 & 0xff)
+    data[10] = UInt8(options.param2 & 0xFF)
 
     return DanaGeneratePacket(
         opCode: DanaPacketType.OPCODE__APS_SET_EVENT_HISTORY,
@@ -57,8 +50,8 @@ func generatePacketLoopSetEventHistory(options: PacketLoopSetEventHistory) -> Da
     )
 }
 
-func parsePacketLoopSetEventHistory(data: Data, usingUtc: Bool?) -> DanaParsePacket<Any> {
-    return DanaParsePacket(
+func parsePacketLoopSetEventHistory(data: Data, usingUtc _: Bool?) -> DanaParsePacket<Any> {
+    DanaParsePacket(
         success: data[DataStart] == 0,
         rawData: data,
         data: nil // Replace with the actual parsed data if needed
