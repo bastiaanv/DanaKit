@@ -662,8 +662,31 @@ extension DanaKitPumpManager: PumpManager {
                         )
                         self.doseReporter = DanaKitDoseProgressReporter(total: units)
                         self.state.bolusState = .inProgress
-                        self.notifyStateDidChange()
 
+                        if !self.isPriming {
+                            let dose = self.doseEntry?.toDoseEntry(isMutable: true)
+
+                            if let dose = dose {
+                                await withCheckedContinuation{ continuation in
+                                    self.pumpDelegate.notify { delegate in
+                                        delegate?.pumpManager(
+                                            self,
+                                            hasNewPumpEvents: [
+                                                NewPumpEvent
+                                                    .bolus(dose: dose, units: dose.programmedUnits, date: dose.startDate)
+                                            ],
+                                            lastReconciliation: Date.now,
+                                            replacePendingEvents: false,
+                                            completion: { _ in
+                                                continuation.resume()
+                                            }
+                                        )
+                                    }
+                                }
+                            }
+                        }
+
+                        self.notifyStateDidChange()
                         completion(nil)
                     } catch {
                         self.state.bolusState = .noBolus
@@ -763,7 +786,7 @@ extension DanaKitPumpManager: PumpManager {
                 self.pumpDelegate.notify { delegate in
                     delegate?.pumpManager(
                         self,
-                        hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: dose.deliveredUnits ?? 0)],
+                        hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: dose.deliveredUnits ?? 0, date: dose.startDate)],
                         lastReconciliation: Date.now,
                         replacePendingEvents: true,
                         completion: { _ in }
@@ -1611,7 +1634,7 @@ public extension DanaKitPumpManager {
             self.pumpDelegate.notify { delegate in
                 delegate?.pumpManager(
                     self,
-                    hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: deliveredUnits)],
+                    hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: deliveredUnits, date: dose.startDate)],
                     lastReconciliation: Date.now,
                     replacePendingEvents: true,
                     completion: { _ in }

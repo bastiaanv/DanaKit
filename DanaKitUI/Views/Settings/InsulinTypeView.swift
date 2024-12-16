@@ -40,7 +40,7 @@ struct InsulinTypeView: View {
         .navigationBarHidden(false)
     }
 
-    @ViewBuilder  private var title: some View {
+    @ViewBuilder private var title: some View {
         Text(LocalizedString("Select insulin type", comment: "Title for insulin type"))
             .font(.title)
             .bold()

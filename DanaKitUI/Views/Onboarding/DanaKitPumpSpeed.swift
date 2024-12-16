@@ -43,7 +43,7 @@ struct DanaKitPumpSpeed: View {
         }
     }
 
-    @ViewBuilder  private var title: some View {
+    @ViewBuilder private var title: some View {
         Text(LocalizedString("Delivery speed", comment: "Title for delivery speed"))
             .font(.title)
             .bold()

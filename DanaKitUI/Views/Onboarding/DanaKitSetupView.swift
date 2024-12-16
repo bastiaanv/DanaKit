@@ -54,7 +54,7 @@ struct DanaKitSetupView: View {
         }
     }
 
-    @ViewBuilder  private var title: some View {
+    @ViewBuilder private var title: some View {
         Text(LocalizedString("Dana-i/RS Setup", comment: "Title for DanaKitSetupView"))
             .font(.largeTitle)
             .bold()

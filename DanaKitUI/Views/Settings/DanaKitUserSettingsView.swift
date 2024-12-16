@@ -82,7 +82,7 @@ struct DanaKitUserSettingsView: View {
         )
     }
 
-    @ViewBuilder  var body: some View {
+    @ViewBuilder var body: some View {
         VStack {
             List {
                 NavigationLink(destination: revervoirWarningView) {

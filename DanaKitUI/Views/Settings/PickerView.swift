@@ -55,7 +55,7 @@ struct PickerView: View {
         .navigationBarHidden(false)
     }
 
-    @ViewBuilder  private var titleView: some View {
+    @ViewBuilder private var titleView: some View {
         Text(title)
             .font(.title)
             .bold()

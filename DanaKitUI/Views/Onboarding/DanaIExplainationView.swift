@@ -57,7 +57,7 @@ struct DanaIExplainationView: View {
         }
     }
 
-    @ViewBuilder  private var title: some View {
+    @ViewBuilder private var title: some View {
         Text(LocalizedString("Setting up Dana-i", comment: "Title for dana-i explaination"))
             .font(.title)
             .bold()

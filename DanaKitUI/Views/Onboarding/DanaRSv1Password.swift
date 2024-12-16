@@ -37,7 +37,7 @@ struct DanaRSv1Password: View {
         }
     }
 
-    @ViewBuilder  private var title: some View {
+    @ViewBuilder private var title: some View {
         Text(LocalizedString("Password DanaRS v1", comment: "Title for danars v1 password"))
             .font(.title)
             .bold()

@@ -72,7 +72,7 @@ struct DanaKitScanView: View {
         }
     }
 
-    @ViewBuilder  private var content: some View {
+    @ViewBuilder private var content: some View {
         List($viewModel.scannedDevices) { $result in
             Button(action: { viewModel.connect($result.wrappedValue) }) {
                 HStack {

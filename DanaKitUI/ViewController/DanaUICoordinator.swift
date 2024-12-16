@@ -93,7 +93,7 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
         super.init(navigationBarClass: UINavigationBar.self, toolbarClass: UIToolbar.self)
     }
 
-    @available(*, unavailable)  required init?(coder _: NSCoder) {
+    @available(*, unavailable) required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 

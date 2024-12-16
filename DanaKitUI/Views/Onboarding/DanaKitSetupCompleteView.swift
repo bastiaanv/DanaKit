@@ -39,7 +39,7 @@ struct DanaKitSetupCompleteView: View {
         .navigationBarHidden(false)
     }
 
-    @ViewBuilder  private var title: some View {
+    @ViewBuilder private var title: some View {
         Text(LocalizedString("Setup Complete", comment: "Title for setup complete"))
             .font(.title)
             .bold()
