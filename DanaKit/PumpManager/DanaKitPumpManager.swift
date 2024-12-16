@@ -667,7 +667,7 @@ extension DanaKitPumpManager: PumpManager {
                             let dose = self.doseEntry?.toDoseEntry(isMutable: true)
 
                             if let dose = dose {
-                                await withCheckedContinuation{ continuation in
+                                await withCheckedContinuation { continuation in
                                     self.pumpDelegate.notify { delegate in
                                         delegate?.pumpManager(
                                             self,
