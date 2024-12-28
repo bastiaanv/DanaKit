@@ -266,9 +266,11 @@ class DanaKitSettingsViewModel: ObservableObject {
         }
 
         isSyncing = true
-        pumpManager.syncPumpTime(completion: { _ in
-            self.syncData()
-        })
+        pumpManager.syncPumpTime { _ in
+            DispatchQueue.main.async {
+                self.isSyncing = false
+            }
+        }
     }
 
     func reservoirText(for units: Double) -> String {

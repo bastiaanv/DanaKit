@@ -275,8 +275,15 @@ extension DanaKitPumpManager: PumpManager {
             self.state.tempBasalUnits = nil
         }
 
+        var calendarUTC = Calendar(identifier: .gregorian)
+        calendarUTC.timeZone = TimeZone(secondsFromGMT: 0) ?? TimeZone.current
+
+        let calendar = Calendar(identifier: .gregorian)
+
+        let timezoneOffsetInHours = calendar.component(.hour, from: state.pumpTime ?? Date.now) - calendarUTC
+            .component(.hour, from: Date.now)
         return PumpManagerStatus(
-            timeZone: TimeZone.current,
+            timeZone: TimeZone(secondsFromGMT: timezoneOffsetInHours * 3600) ?? TimeZone.current,
             device: device(),
             pumpBatteryChargeRemaining: state.batteryRemaining / 100,
             basalDeliveryState: state.basalDeliveryState,
@@ -1408,10 +1415,11 @@ extension DanaKitPumpManager: PumpManager {
                         let offset = Date.now.timeIntervalSince(self.state.pumpTime ?? Date.distantPast)
                         let packet: DanaGeneratePacket
                         if self.state.usingUtc {
+                            let offsetInHours = round(Double(TimeZone.current.secondsFromGMT(for: Date.now) / 3600))
                             packet =
                                 generatePacketGeneralSetPumpTimeUtcWithTimezone(options: PacketGeneralSetPumpTimeUtcWithTimezone(
                                     time: Date.now,
-                                    zoneOffset: UInt8(round(Double(TimeZone.current.secondsFromGMT(for: Date.now) / 3600)))
+                                    zoneOffset: UInt8(truncatingIfNeeded: Int8(offsetInHours))
                                 ))
                         } else {
                             packet = generatePacketGeneralSetPumpTime(options: PacketGeneralSetPumpTime(time: Date.now))
@@ -1419,9 +1427,18 @@ extension DanaKitPumpManager: PumpManager {
 
                         let result = try await self.bluetooth.writeMessage(packet)
 
+                        let pumpTime = await self.fetchPumpTime()
+                        if let pumpTime = pumpTime {
+                            self.state.pumpTimeSyncedAt = Date.now
+                            self.state.pumpTime = pumpTime
+                        }
+
+                        self.notifyStateDidChange()
+
                         self.disconnect()
 
                         guard result.success else {
+                            self.log.error("Failed to sync pump time: Pump rejected command")
                             completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedTimeAdjustment))
                             return
                         }
