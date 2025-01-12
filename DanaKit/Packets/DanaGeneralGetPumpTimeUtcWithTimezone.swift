@@ -1,5 +1,6 @@
 struct PacketGeneralGetPumpTimeUtcWithTimezone {
     var time: Date
+    var timezoneOffset: Int
 }
 
 let CommandGeneralGetPumpTimeUtcWithTimezone: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
@@ -35,6 +36,6 @@ func parsePacketGeneralGetPumpTimeUtcWithTimezone(
     return DanaParsePacket(
         success: true,
         rawData: data,
-        data: PacketGeneralGetPumpTimeUtcWithTimezone(time: parsedTime)
+        data: PacketGeneralGetPumpTimeUtcWithTimezone(time: parsedTime, timezoneOffset: timezoneOffsetInHours)
     )
 }

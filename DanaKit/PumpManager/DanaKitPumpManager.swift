@@ -275,15 +275,8 @@ extension DanaKitPumpManager: PumpManager {
             self.state.tempBasalUnits = nil
         }
 
-        var calendarUTC = Calendar(identifier: .gregorian)
-        calendarUTC.timeZone = TimeZone(secondsFromGMT: 0) ?? TimeZone.current
-
-        let calendar = Calendar(identifier: .gregorian)
-
-        let timezoneOffsetInHours = calendar.component(.hour, from: state.pumpTime ?? Date.now) - calendarUTC
-            .component(.hour, from: Date.now)
         return PumpManagerStatus(
-            timeZone: TimeZone(secondsFromGMT: timezoneOffsetInHours * 3600) ?? TimeZone.current,
+            timeZone: state.pumpTimeZone ?? TimeZone.current,
             device: device(),
             pumpBatteryChargeRemaining: state.batteryRemaining / 100,
             basalDeliveryState: state.basalDeliveryState,
@@ -443,6 +436,10 @@ extension DanaKitPumpManager: PumpManager {
             guard timeResult.success else {
                 log.error("Failed to fetch pump time with utc...")
                 return nil
+            }
+
+            if let data = timeResult.data as? PacketGeneralGetPumpTimeUtcWithTimezone {
+                state.pumpTimeZone = TimeZone(secondsFromGMT: data.timezoneOffset * 3600)
             }
 
             let date = state.usingUtc ? (timeResult.data as? PacketGeneralGetPumpTimeUtcWithTimezone)?

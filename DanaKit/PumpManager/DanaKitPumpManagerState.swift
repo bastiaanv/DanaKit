@@ -60,6 +60,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         allowAutomaticTimeSync = rawValue["allowAutomaticTimeSync"] as? Bool ?? true
         isBolusSyncDisabled = rawValue["isBolusSyncDisabled"] as? Bool ?? false
         batteryAge = rawValue["batteryAge"] as? Date
+        pumpTimeZone = rawValue["pumpTimeZone"] as? TimeZone
 
         if let bolusSpeedRaw = rawValue["bolusSpeed"] as? BolusSpeed.RawValue {
             bolusSpeed = BolusSpeed(rawValue: bolusSpeedRaw) ?? .speed12
@@ -131,6 +132,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         allowAutomaticTimeSync = true
         isBolusSyncDisabled = false
         batteryAge = nil
+        pumpTimeZone = nil
     }
 
     public var rawValue: RawValue {
@@ -182,6 +184,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         value["allowAutomaticTimeSync"] = allowAutomaticTimeSync
         value["isBolusSyncDisabled"] = isBolusSyncDisabled
         value["batteryAge"] = batteryAge
+        value["pumpTimeZone"] = pumpTimeZone
 
         return value
     }
@@ -246,6 +249,8 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
             pumpTimeSyncedAt = Date.now
         }
     }
+
+    public var pumpTimeZone: TimeZone?
 
     public var pumpTimeSyncedAt: Date?
 
