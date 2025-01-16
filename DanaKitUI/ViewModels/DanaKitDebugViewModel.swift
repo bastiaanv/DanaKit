@@ -71,6 +71,14 @@ class DanaKitDebugViewModel: ObservableObject {
         case let .requestedPincode(message):
             isPromptingPincode = true
             pinCodePromptError = message
+
+        case .timeout:
+            isConnectionError = true
+            connectionErrorMessage = "Connection timeout is hit..."
+
+        case .alreadyConnectedAndBusy:
+            isConnectionError = true
+            connectionErrorMessage = "Device is already connected..."
         }
     }
 

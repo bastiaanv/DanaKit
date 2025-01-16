@@ -7,8 +7,9 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
 
     var autoConnectUUID: String?
     var connectionCompletion: ((ConnectionResult) -> Void)?
-    var connectionCallback: [String: (ConnectionResultShort) -> Void] = [:]
+    var connectionCallback: [String: (ConnectionResult) -> Void] = [:]
     var devices: [DanaPumpScan] = []
+    var isBusy: Bool = false
 
     let log = DanaLogger(category: "InteractiveBluetoothManager")
     var manager: CBCentralManager!
@@ -33,13 +34,14 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
         self.manager = nil
     }
 
-    func ensureConnected(_ completion: @escaping (ConnectionResultShort) async -> Void, _ identifier: String = #function) {
+    func ensureConnected(_ completion: @escaping (ConnectionResult) async -> Void, _ identifier: String = #function) {
         connectionCallback[identifier] = { result in
             Task {
+                self.isBusy = true
                 self.resetConnectionCompletion()
                 self.connectionCallback[identifier] = nil
 
-                if result == .success {
+                if case .success = result {
                     do {
                         self.log.info("Sending keep alive message")
 
@@ -53,14 +55,21 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
                 }
 
                 await completion(result)
+                self.isBusy = false
             }
         }
 
         // Device still has an active connection with pump and is probably busy with something
         if isConnected {
-            log.error("Failed to connect: Already connected")
-            logDeviceCommunication("Dana - Failed to connect: Already connected", type: .connection)
-            connectionCallback[identifier]!(.failure)
+            if isBusy {
+                log.error("Failed to connect: Already connected")
+                logDeviceCommunication("Dana - Failed to connect: Already connected", type: .connection)
+                connectionCallback[identifier]!(.alreadyConnectedAndBusy)
+                return
+            }
+
+            // We can re-use the current connection. YEAH!!
+            connectionCallback[identifier]!(.success)
 
             // We stored the peripheral. We can quickly reconnect
         } else if peripheral != nil {
@@ -73,22 +82,24 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
                     return
                 }
 
-                switch result {
-                case .success:
+                if case .success = result {
                     self.logDeviceCommunication("Dana - Connected", type: .connection)
-                    connectionCallback(.success)
-                case let .failure(err):
+                    connectionCallback(result)
+
+                } else if case let .failure(err) = result {
                     self.log.error("Failed to connect: " + err.localizedDescription)
                     self.logDeviceCommunication("Dana - Failed to connect: " + err.localizedDescription, type: .connection)
-                    connectionCallback(.failure)
-                case .requestedPincode:
+                    connectionCallback(result)
+
+                } else if case .requestedPincode = result {
                     self.log.error("Failed to connect: Requested pincode")
                     self.logDeviceCommunication("Dana - Requested pincode", type: .connection)
-                    connectionCallback(.failure)
-                case .invalidBle5Keys:
+                    connectionCallback(result)
+
+                } else if case .invalidBle5Keys = result {
                     self.log.error("Failed to connect: Invalid ble 5 keys")
                     self.logDeviceCommunication("Dana - Invalid ble 5 keys", type: .connection)
-                    connectionCallback(.failure)
+                    connectionCallback(result)
                 }
             }
             // No active connection and no stored peripheral. We have to scan for device before being able to send command
@@ -103,35 +114,37 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
                         return
                     }
 
-                    switch result {
-                    case .success:
+                    if case .success = result {
                         self.logDeviceCommunication("Dana - Connected", type: .connection)
-                        connectionCallback(.success)
-                    case let .failure(err):
+                        connectionCallback(result)
+
+                    } else if case let .failure(err) = result {
                         self.log.error("Failed to connect: " + err.localizedDescription)
                         self.logDeviceCommunication("Dana - Failed to connect: " + err.localizedDescription, type: .connection)
-                        connectionCallback(.failure)
-                    case .requestedPincode:
+                        connectionCallback(result)
+
+                    } else if case .requestedPincode = result {
                         self.log.error("Failed to connect: Requested pincode")
                         self.logDeviceCommunication("Dana - Requested pincode", type: .connection)
-                        connectionCallback(.failure)
-                    case .invalidBle5Keys:
+                        connectionCallback(result)
+
+                    } else if case .invalidBle5Keys = result {
                         self.log.error("Failed to connect: Invalid ble 5 keys")
                         self.logDeviceCommunication("Dana - Invalid ble 5 keys", type: .connection)
-                        connectionCallback(.failure)
+                        connectionCallback(result)
                     }
                 }
             } catch {
                 log.error("Failed to connect: " + error.localizedDescription)
                 logDeviceCommunication("Dana - Failed to connect: " + error.localizedDescription, type: .connection)
-                connectionCallback[identifier]?(.failure)
+                connectionCallback[identifier]?(.failure(error))
             }
 
-            // Should never reach, but is only possible if device is not onboard (we have no ble identifier to connect to)
         } else {
+            // Should never reach, but is only possible if device is not onboard (we have no ble identifier to connect to)
             log.error("Pump is not onboarded")
             logDeviceCommunication("Dana - Pump is not onboarded", type: .connection)
-            connectionCallback[identifier]!(.failure)
+            connectionCallback[identifier]!(.failure(NSError(domain: "Pump is not onboarded", code: -1)))
         }
     }
 
