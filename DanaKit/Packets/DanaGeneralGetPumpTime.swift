@@ -1,25 +1,18 @@
-//
-//  DanaGeneralGetPumpTime.swift
-//  DanaKit
-//
-//  Created by Bastiaan Verhaar on 13/12/2023.
-//  Copyright © 2023 Randall Knutson. All rights reserved.
-//
-
 struct PacketGeneralGetPumpTime {
     var time: Date
 }
 
-let CommandGeneralGetPumpTime: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xff) << 8) + UInt16(DanaPacketType.OPCODE_OPTION__GET_PUMP_TIME & 0xff)
+let CommandGeneralGetPumpTime: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
+    UInt16(DanaPacketType.OPCODE_OPTION__GET_PUMP_TIME & 0xFF)
 
 func generatePacketGeneralGetPumpTime() -> DanaGeneratePacket {
-    return DanaGeneratePacket(
+    DanaGeneratePacket(
         opCode: DanaPacketType.OPCODE_OPTION__GET_PUMP_TIME,
         data: nil
     )
 }
 
-func parsePacketGeneralGetPumpTime(data: Data, usingUtc: Bool?) -> DanaParsePacket<PacketGeneralGetPumpTime> {
+func parsePacketGeneralGetPumpTime(data: Data, usingUtc _: Bool?) -> DanaParsePacket<PacketGeneralGetPumpTime> {
     let time = DateComponents(
         year: 2000 + Int(data[DataStart]),
         month: Int(data[DataStart + 1]),

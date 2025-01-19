@@ -1,11 +1,3 @@
-//
-//  PumpManagerAlert.swift
-//  DanaKit
-//
-//  Created by Bastiaan Verhaar on 10/02/2024.
-//  Copyright © 2024 Randall Knutson. All rights reserved.
-//
-
 import Foundation
 import LoopKit
 
@@ -25,7 +17,7 @@ public enum PumpManagerAlert: Hashable {
     case bloodSugarCheckMiss(_ raw: Data)
     case ble5InvalidKeys(_ deviceName: String)
     case unknown(_ raw: Data?)
-    
+
     var contentTitle: String {
         switch self {
         case .batteryZeroPercent:
@@ -60,7 +52,7 @@ public enum PumpManagerAlert: Hashable {
             return LocalizedString("Unknown error", comment: "Alert title for unknown")
         }
     }
-    
+
     var contentBody: String {
         switch self {
         case .batteryZeroPercent:
@@ -72,7 +64,10 @@ public enum PumpManagerAlert: Hashable {
         case .lowBattery:
             return LocalizedString("Pump battery needs to be replaced soon", comment: "Alert body for lowBattery")
         case .shutdown:
-            return LocalizedString("There has not been any interactions with the pump for too long. Either disable this function in the pump or interact with the pump", comment: "Alert body for shutdown")
+            return LocalizedString(
+                "There has not been any interactions with the pump for too long. Either disable this function in the pump or interact with the pump",
+                comment: "Alert body for shutdown"
+            )
         case .basalCompare:
             return ""
         case .bloodSugarMeasure:
@@ -82,20 +77,38 @@ public enum PumpManagerAlert: Hashable {
         case .emptyReservoir:
             return LocalizedString("Reservoir is empty. Replace it now!", comment: "Alert body for emptyReservoir")
         case .checkShaft:
-            return LocalizedString("The pump has detected an issue with its chaft. Please remove the reservoir, check everything and try again", comment: "Alert body for checkShaft")
+            return LocalizedString(
+                "The pump has detected an issue with its chaft. Please remove the reservoir, check everything and try again",
+                comment: "Alert body for checkShaft"
+            )
         case .basalMax:
-            return LocalizedString("Your daily basal limit has been reached. Please contact your Dana distributer to increase the limit", comment: "Alert body for basalMax")
+            return LocalizedString(
+                "Your daily basal limit has been reached. Please contact your Dana distributer to increase the limit",
+                comment: "Alert body for basalMax"
+            )
         case .dailyMax:
-            return LocalizedString("Your daily insulin limit has been reached. Please contact your Dana distributer to increase the limit", comment: "Alert body for dailyMax")
+            return LocalizedString(
+                "Your daily insulin limit has been reached. Please contact your Dana distributer to increase the limit",
+                comment: "Alert body for dailyMax"
+            )
         case .bloodSugarCheckMiss:
-            return LocalizedString("A blood glucose check reminder has been setup in your pump and is triggered. Please remove it or give your glucose level to the pump", comment: "Alert body for bloodSugarCheckMiss")
-        case .ble5InvalidKeys(let deviceName):
-            return LocalizedString("Failed to pair to ", comment: "Dana-i failed to pair p1") + deviceName + LocalizedString(". Please go to your bluetooth settings, forget this device, and try again", comment: "Dana-i failed to pair p2")
+            return LocalizedString(
+                "A blood glucose check reminder has been setup in your pump and is triggered. Please remove it or give your glucose level to the pump",
+                comment: "Alert body for bloodSugarCheckMiss"
+            )
+        case let .ble5InvalidKeys(deviceName):
+            return LocalizedString("Failed to pair to ", comment: "Dana-i failed to pair p1") + deviceName + LocalizedString(
+                ". Please go to your bluetooth settings, forget this device, and try again",
+                comment: "Dana-i failed to pair p2"
+            )
         case .unknown:
-            return LocalizedString("An unknown error has occurred during processing the alert from the pump. Please report this", comment: "Alert body for unknown")
+            return LocalizedString(
+                "An unknown error has occurred during processing the alert from the pump. Please report this",
+                comment: "Alert body for unknown"
+            )
         }
     }
-    
+
     public var identifier: String {
         switch self {
         case .batteryZeroPercent:
@@ -130,7 +143,7 @@ public enum PumpManagerAlert: Hashable {
             return "unknown"
         }
     }
-    
+
     var type: PumpAlarmType {
         switch self {
         case .batteryZeroPercent:
@@ -165,51 +178,51 @@ public enum PumpManagerAlert: Hashable {
             return .other("unknown")
         }
     }
-    
+
     var raw: Data {
         switch self {
-        case .batteryZeroPercent(let raw):
+        case let .batteryZeroPercent(raw):
             return raw
-        case .pumpError(let raw):
+        case let .pumpError(raw):
             return raw
-        case .occlusion(let raw):
+        case let .occlusion(raw):
             return raw
-        case .lowBattery(let raw):
+        case let .lowBattery(raw):
             return raw
-        case .shutdown(let raw):
+        case let .shutdown(raw):
             return raw
-        case .basalCompare(let raw):
+        case let .basalCompare(raw):
             return raw
-        case .bloodSugarMeasure(let raw):
+        case let .bloodSugarMeasure(raw):
             return raw
-        case .remainingInsulinLevel(let raw):
+        case let .remainingInsulinLevel(raw):
             return raw
-        case .emptyReservoir(let raw):
+        case let .emptyReservoir(raw):
             return raw
-        case .checkShaft(let raw):
+        case let .checkShaft(raw):
             return raw
-        case .basalMax(let raw):
+        case let .basalMax(raw):
             return raw
-        case .dailyMax(let raw):
+        case let .dailyMax(raw):
             return raw
-        case .bloodSugarCheckMiss(let raw):
+        case let .bloodSugarCheckMiss(raw):
             return raw
         case .ble5InvalidKeys:
             return Data()
-        case .unknown(let raw):
+        case let .unknown(raw):
             return raw ?? Data()
         }
     }
-    
+
     var actionButtonLabel: String {
-        return LocalizedString("OK", comment: "Ok")
+        LocalizedString("OK", comment: "Ok")
     }
-    
+
     var foregroundContent: Alert.Content {
-        return Alert.Content(title: contentTitle, body: contentBody, acknowledgeActionButtonLabel: actionButtonLabel)
+        Alert.Content(title: contentTitle, body: contentBody, acknowledgeActionButtonLabel: actionButtonLabel)
     }
-    
+
     var backgroundContent: Alert.Content {
-        return Alert.Content(title: contentTitle, body: contentBody, acknowledgeActionButtonLabel: actionButtonLabel)
+        Alert.Content(title: contentTitle, body: contentBody, acknowledgeActionButtonLabel: actionButtonLabel)
     }
 }

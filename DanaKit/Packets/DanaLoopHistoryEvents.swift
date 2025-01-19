@@ -1,16 +1,9 @@
-//
-//  DanaLoopHistoryEvents.swift
-//  DanaKit
-//
-//  Created by Bastiaan Verhaar on 13/12/2023.
-//  Copyright © 2023 Randall Knutson. All rights reserved.
-//
-
 struct PacketLoopHistoryEvents {
     var from: Date?
 }
 
-let CommandLoopHistoryEvents: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xff) << 8) + UInt16(DanaPacketType.OPCODE__APS_HISTORY_EVENTS & 0xff)
+let CommandLoopHistoryEvents: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
+    UInt16(DanaPacketType.OPCODE__APS_HISTORY_EVENTS & 0xFF)
 
 func generatePacketLoopHistoryEvents(options: PacketLoopHistoryEvents) -> DanaGeneratePacket {
     var data = Data(count: 6)
@@ -32,7 +25,7 @@ func generatePacketLoopHistoryEvents(options: PacketLoopHistoryEvents) -> DanaGe
     )
 }
 
-func parsePacketLoopHistoryEvents(data: Data, usingUtc: Bool?) -> DanaParsePacket<Any> {
+func parsePacketLoopHistoryEvents(data _: Data, usingUtc _: Bool?) -> DanaParsePacket<Any> {
     // Implement the parse logic as needed
     fatalError("Not implemented")
 }

@@ -1,15 +1,6 @@
-//
-//  ReservoirView.swift
-//  DanaKit
-//
-//  Created by Bastiaan Verhaar on 17/01/2024.
-//  Copyright © 2024 Randall Knutson. All rights reserved.
-//
-
 import SwiftUI
 
 struct ReservoirView: View {
-
     let reservoirLevel: Double
     let fillColor: Color
 
@@ -23,11 +14,13 @@ struct ReservoirView: View {
         if frameAspectRatio > reservoirAspectRatio {
             return CGSize(
                 width: frame.height * reservoirAspectRatio,
-                height: frame.height)
+                height: frame.height
+            )
         } else {
             return CGSize(
                 width: frame.width,
-                height: frame.width / reservoirAspectRatio)
+                height: frame.width / reservoirAspectRatio
+            )
         }
     }
 
@@ -48,10 +41,16 @@ struct ReservoirView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(height: maskHeight)
-                            .position(x:frameCenterX, y:frameCenterY+maskOffset)
+                            .position(x: frameCenterX, y: frameCenterY + maskOffset)
                     )
                     .mask(
-                        Rectangle().path(in: CGRect(x:0, y: frameCenterY+maskHeight/2 - fillHeight + maskOffset, width: geometry.size.width, height: fillHeight))
+                        Rectangle()
+                            .path(in: CGRect(
+                                x: 0,
+                                y: frameCenterY + maskHeight / 2 - fillHeight + maskOffset,
+                                width: geometry.size.width,
+                                height: fillHeight
+                            ))
                     )
             }
             Image(danaImage: "reservoir")

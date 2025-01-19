@@ -1,11 +1,3 @@
-//
-//  DanaBolusGetOption.swift
-//  DanaKit
-//
-//  Created by Bastiaan Verhaar on 10/12/2023.
-//  Copyright © 2023 Randall Knutson. All rights reserved.
-//
-
 struct PacketBolusGetOption {
     var isExtendedBolusEnabled: Bool
     var bolusCalculationOption: UInt8
@@ -28,13 +20,14 @@ struct PacketBolusGetOption {
     var missedBolus04EndMinute: UInt8
 }
 
-let CommandBolusGetOption: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xff) << 8) + UInt16(DanaPacketType.OPCODE_BOLUS__GET_BOLUS_OPTION & 0xff)
+let CommandBolusGetOption: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
+    UInt16(DanaPacketType.OPCODE_BOLUS__GET_BOLUS_OPTION & 0xFF)
 
 func generatePacketBolusGetOption() -> DanaGeneratePacket {
-    return DanaGeneratePacket(opCode: DanaPacketType.OPCODE_BOLUS__GET_BOLUS_OPTION, data: nil)
+    DanaGeneratePacket(opCode: DanaPacketType.OPCODE_BOLUS__GET_BOLUS_OPTION, data: nil)
 }
 
-func parsePacketBolusGetOption(data: Data, usingUtc: Bool?) -> DanaParsePacket<PacketBolusGetOption> {
+func parsePacketBolusGetOption(data: Data, usingUtc _: Bool?) -> DanaParsePacket<PacketBolusGetOption> {
     let isExtendedBolusEnabled = data[DataStart] == 1
 
     return DanaParsePacket(success: isExtendedBolusEnabled, rawData: data, data: PacketBolusGetOption(

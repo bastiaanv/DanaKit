@@ -1,18 +1,12 @@
-//
-//  DanaNotifyDeliveryRateDisplay.swift
-//  
-//
-//  Created by Bastiaan Verhaar on 13/12/2023.
-//
-
 struct PacketNotifyDeliveryRateDisplay {
     var deliveredInsulin: Double
 }
 
-let CommandNotifyDeliveryRateDisplay: UInt16 = (UInt16(DanaPacketType.TYPE_NOTIFY & 0xff) << 8) + UInt16(DanaPacketType.OPCODE_NOTIFY__DELIVERY_RATE_DISPLAY & 0xff)
+let CommandNotifyDeliveryRateDisplay: UInt16 = (UInt16(DanaPacketType.TYPE_NOTIFY & 0xFF) << 8) +
+    UInt16(DanaPacketType.OPCODE_NOTIFY__DELIVERY_RATE_DISPLAY & 0xFF)
 
-func parsePacketNotifyDeliveryRateDisplay(data: Data, usingUtc: Bool?) -> DanaParsePacket<PacketNotifyDeliveryRateDisplay> {
-    return DanaParsePacket(
+func parsePacketNotifyDeliveryRateDisplay(data: Data, usingUtc _: Bool?) -> DanaParsePacket<PacketNotifyDeliveryRateDisplay> {
+    DanaParsePacket(
         success: true,
         notifyType: CommandNotifyDeliveryRateDisplay,
         rawData: data,

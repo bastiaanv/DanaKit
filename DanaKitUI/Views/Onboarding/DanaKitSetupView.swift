@@ -1,22 +1,14 @@
-//
-//  DanaKitSetupView.swift
-//  DanaKit
-//
-//  Created by Bastiaan Verhaar on 26/12/2023.
-//  Copyright © 2023 Randall Knutson. All rights reserved.
-//
-
-import SwiftUI
 import LoopKit
 import LoopKitUI
+import SwiftUI
 
 typealias DebugFunction = () -> Void
 struct DanaKitSetupView: View {
     @Environment(\.dismissAction) private var dismiss
-    
+
     let nextAction: (Int) -> Void
     let debugAction: DebugFunction?
-    
+
     @State var value: Int = 2
     private var currentValue: Binding<Int> {
         Binding(
@@ -24,29 +16,31 @@ struct DanaKitSetupView: View {
             set: { newValue in
                 self.value = newValue
             }
-       )
+        )
     }
-    
+
     private let allowedOptions: [Int] = [0, 1, 2]
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             title
                 .onLongPressGesture(minimumDuration: 2) {
                     didLongPressOnTitle()
                 }
-            
+
             VStack(alignment: .leading) {
                 Spacer()
-                
-                ResizeablePicker(selection: currentValue,
-                                 data: self.allowedOptions,
-                                 formatter: { formatter($0) })
-                
+
+                ResizeablePicker(
+                    selection: currentValue,
+                    data: self.allowedOptions,
+                    formatter: { formatter($0) }
+                )
+
                 Spacer()
             }
             .padding(.horizontal)
-            
+
             ContinueButton(action: { nextAction(value) })
         }
         .edgesIgnoringSafeArea(.bottom)
@@ -60,8 +54,7 @@ struct DanaKitSetupView: View {
         }
     }
 
-    @ViewBuilder
-    private var title: some View {
+    @ViewBuilder private var title: some View {
         Text(LocalizedString("Dana-i/RS Setup", comment: "Title for DanaKitSetupView"))
             .font(.largeTitle)
             .bold()
@@ -69,12 +62,12 @@ struct DanaKitSetupView: View {
         Text(LocalizedString("Select your pump", comment: "Subtitle for DanaKitSetupView"))
             .fixedSize(horizontal: false, vertical: true)
             .padding(.horizontal)
-        
+
         Divider()
     }
-    
+
     private func formatter(_ index: Int) -> String {
-        switch (index) {
+        switch index {
         case 0:
             // UNSUPPORTED ATM
             return LocalizedString("DanaRS-v1", comment: "danaRS v1 option text for DanaKitSetupView")
@@ -86,9 +79,9 @@ struct DanaKitSetupView: View {
             return ""
         }
     }
-    
+
     private func didLongPressOnTitle() {
-        self.debugAction?()
+        debugAction?()
     }
 }
 

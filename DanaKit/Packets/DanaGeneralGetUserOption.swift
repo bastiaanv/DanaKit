@@ -1,16 +1,8 @@
-//
-//  DanaGeneralGetUserOption.swift
-//  DanaKit
-//
-//  Created by Bastiaan Verhaar on 13/12/2023.
-//  Copyright © 2023 Randall Knutson. All rights reserved.
-//
-
 public enum BeepAlarmType: UInt8 {
     case sound = 1
     case vibration = 2
     case both = 3
-    
+
     static func all() -> [Int] {
         [1, 2, 3]
     }
@@ -39,17 +31,18 @@ public struct PacketGeneralGetUserOption {
     var targetBg: UInt16?
 }
 
-let CommandGeneralGetUserOption: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xff) << 8) + UInt16(DanaPacketType.OPCODE_OPTION__GET_USER_OPTION & 0xff)
+let CommandGeneralGetUserOption: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
+    UInt16(DanaPacketType.OPCODE_OPTION__GET_USER_OPTION & 0xFF)
 
 func generatePacketGeneralGetUserOption() -> DanaGeneratePacket {
-    return DanaGeneratePacket(
+    DanaGeneratePacket(
         opCode: DanaPacketType.OPCODE_OPTION__GET_USER_OPTION,
         data: nil
     )
 }
 
-func parsePacketGeneralGetUserOption(data: Data, usingUtc: Bool?) -> DanaParsePacket<PacketGeneralGetUserOption> {
-    return DanaParsePacket(
+func parsePacketGeneralGetUserOption(data: Data, usingUtc _: Bool?) -> DanaParsePacket<PacketGeneralGetUserOption> {
+    DanaParsePacket(
         success: data[DataStart + 3] >= 5,
         rawData: data,
         data: PacketGeneralGetUserOption(
