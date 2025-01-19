@@ -1,5 +1,5 @@
 public enum DanaKitPumpManagerError {
-    case noConnection
+    case noConnection(_ result: ConnectionResult)
     case pumpSuspended
     case pumpIsBusy
     case failedTempBasalAdjustment(_ extraMessage: String)
@@ -17,8 +17,11 @@ public enum DanaKitPumpManagerError {
 extension DanaKitPumpManagerError: LocalizedError {
     public var errorDescription: String? {
         switch self {
-        case .noConnection:
-            return LocalizedString("Failed to make a connection", comment: "Error description when no rileylink connected")
+        case let .noConnection(result):
+            return LocalizedString(
+                "Failed to make a connection: " + connectionDescription(result),
+                comment: "Error description when no rileylink connected"
+            )
         case let .failedTempBasalAdjustment(reason):
             return LocalizedString(
                 "Failed to adjust temp basal. \(reason)",
@@ -67,6 +70,23 @@ extension DanaKitPumpManagerError: LocalizedError {
             )
         case let .unknown(message):
             return "Unknown error occured: \(message)"
+        }
+    }
+
+    private func connectionDescription(_ result: ConnectionResult) -> String {
+        switch result {
+        case .success:
+            return "Connected"
+        case let .failure(error):
+            return "Failure: \(error)"
+        case .invalidBle5Keys:
+            return "Invalid BLE5 keys"
+        case .requestedPincode:
+            return "Requested PIN"
+        case .timeout:
+            return "Timeout was hit"
+        case .alreadyConnectedAndBusy:
+            return "Is already connected and is busy"
         }
     }
 }

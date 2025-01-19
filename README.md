@@ -4,9 +4,9 @@ Dana-I/Dana-RS Bluetooth PumpManager For Loop.
 
 Library is based on JS port: https://github.com/bastiaanv/danars-js
 
-## Status
+## Troubleshooting
 
-This repository contains code being tested in Loop.
+If you are encountering issues, please review the FAQ page first: https://loopkit.github.io/loopdocs/troubleshooting/dana-faq/
 
 ## For more information
 

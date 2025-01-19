@@ -81,6 +81,14 @@ class DanaKitScanViewModel: ObservableObject {
             isConnecting = true
             isPromptingPincode = true
             pinCodePromptError = message
+        case .timeout:
+            isConnecting = false
+            isConnectionError = true
+            connectionErrorMessage = "Connection timeout is hit..."
+        case .alreadyConnectedAndBusy:
+            isConnecting = false
+            isConnectionError = true
+            connectionErrorMessage = "Device is already connected..."
         }
     }
 

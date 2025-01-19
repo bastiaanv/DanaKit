@@ -4,11 +4,6 @@ import LoopKit
 import UIKit
 import UserNotifications
 
-public enum ConnectionResultShort {
-    case success
-    case failure
-}
-
 public protocol StateObserver: AnyObject {
     func stateDidUpdate(_ state: DanaKitPumpManagerState, _ oldState: DanaKitPumpManagerState)
     func deviceScanDidUpdate(_ device: DanaPumpScan)
@@ -327,9 +322,6 @@ extension DanaKitPumpManager: PumpManager {
 
         bluetooth.ensureConnected { result in
             switch result {
-            case .failure:
-                completion?(nil)
-                return
             case .success:
                 await self.syncUserOptions()
                 let events = await self.syncHistory()
@@ -370,6 +362,9 @@ extension DanaKitPumpManager: PumpManager {
 
                 self.log.info("Sync successful!")
                 completion?(Date.now)
+            default:
+                completion?(nil)
+                return
             }
         }
     }
@@ -613,14 +608,6 @@ extension DanaKitPumpManager: PumpManager {
 
             self.bluetooth.ensureConnected { result in
                 switch result {
-                case .failure:
-                    self.log.error("Connection error")
-                    self.state.bolusState = .noBolus
-                    self.doseReporter = nil
-                    self.notifyStateDidChange()
-
-                    completion(PumpManagerError.connection(DanaKitPumpManagerError.noConnection))
-                    return
                 case .success:
                     guard !self.state.isPumpSuspended else {
                         self.state.bolusState = .noBolus
@@ -701,6 +688,14 @@ extension DanaKitPumpManager: PumpManager {
                         self.log.error("Failed to do bolus. Error: \(error.localizedDescription)")
                         completion(PumpManagerError.connection(DanaKitPumpManagerError.unknown(error.localizedDescription)))
                     }
+                default:
+                    self.log.error("Connection error")
+                    self.state.bolusState = .noBolus
+                    self.doseReporter = nil
+                    self.notifyStateDidChange()
+
+                    completion(PumpManagerError.connection(DanaKitPumpManagerError.noConnection(result)))
+                    return
                 }
             }
         }
@@ -738,14 +733,14 @@ extension DanaKitPumpManager: PumpManager {
 
             self.bluetooth.ensureConnected { result in
                 switch result {
-                case .failure:
+                case .success:
+                    await self.doCancelAction(oldBolusState: oldBolusState, completion: completion)
+                default:
                     self.state.bolusState = oldBolusState
                     self.notifyStateDidChange()
 
-                    completion(.failure(PumpManagerError.connection(DanaKitPumpManagerError.noConnection)))
+                    completion(.failure(PumpManagerError.connection(DanaKitPumpManagerError.noConnection(result))))
                     return
-                case .success:
-                    await self.doCancelAction(oldBolusState: oldBolusState, completion: completion)
                 }
             }
         }
@@ -826,10 +821,6 @@ extension DanaKitPumpManager: PumpManager {
 
             self.bluetooth.ensureConnected { result in
                 switch result {
-                case .failure:
-                    self.log.error("Connection error")
-                    completion(PumpManagerError.connection(DanaKitPumpManagerError.noConnection))
-                    return
                 case .success:
                     guard !self.state.isPumpSuspended else {
                         self.log.error("Pump is suspended")
@@ -1098,6 +1089,10 @@ extension DanaKitPumpManager: PumpManager {
                         self.log.error("Failed to set temp basal. Error: \(error.localizedDescription)")
                         completion(PumpManagerError.communication(DanaKitPumpManagerError.unknown(error.localizedDescription)))
                     }
+                default:
+                    self.log.error("Connection error")
+                    completion(PumpManagerError.connection(DanaKitPumpManagerError.noConnection(result)))
+                    return
                 }
             }
         }
@@ -1113,10 +1108,6 @@ extension DanaKitPumpManager: PumpManager {
 
             self.bluetooth.ensureConnected { result in
                 switch result {
-                case .failure:
-                    self.log.error("Connection error")
-                    completion(PumpManagerError.connection(DanaKitPumpManagerError.noConnection))
-                    return
                 case .success:
                     do {
                         let packet = generatePacketBasalSetSuspendOn()
@@ -1157,6 +1148,10 @@ extension DanaKitPumpManager: PumpManager {
                         self.log.error("Failed to suspend delivery. Error: \(error.localizedDescription)")
                         completion(PumpManagerError.communication(DanaKitPumpManagerError.unknown(error.localizedDescription)))
                     }
+                default:
+                    self.log.error("Connection error")
+                    completion(PumpManagerError.connection(DanaKitPumpManagerError.noConnection(result)))
+                    return
                 }
             }
         }
@@ -1168,10 +1163,6 @@ extension DanaKitPumpManager: PumpManager {
 
             self.bluetooth.ensureConnected { result in
                 switch result {
-                case .failure:
-                    self.log.error("Connection error")
-                    completion(PumpManagerError.connection(DanaKitPumpManagerError.noConnection))
-                    return
                 case .success:
                     do {
                         let packet = generatePacketBasalSetSuspendOff()
@@ -1212,6 +1203,10 @@ extension DanaKitPumpManager: PumpManager {
                         self.log.error("Failed to suspend delivery. Error: \(error.localizedDescription)")
                         completion(PumpManagerError.communication(DanaKitPumpManagerError.unknown(error.localizedDescription)))
                     }
+                default:
+                    self.log.error("Connection error")
+                    completion(PumpManagerError.connection(DanaKitPumpManagerError.noConnection(result)))
+                    return
                 }
             }
         }
@@ -1226,10 +1221,6 @@ extension DanaKitPumpManager: PumpManager {
 
             self.bluetooth.ensureConnected { result in
                 switch result {
-                case .failure:
-                    self.log.error("Connection error")
-                    completion(.failure(PumpManagerError.connection(DanaKitPumpManagerError.noConnection)))
-                    return
                 case .success:
                     do {
                         let basal = DanaKitPumpManagerState.convertBasal(scheduleItems)
@@ -1299,6 +1290,10 @@ extension DanaKitPumpManager: PumpManager {
                                 .communication(DanaKitPumpManagerError.unknown(error.localizedDescription))
                         ))
                     }
+                default:
+                    self.log.error("Connection error")
+                    completion(.failure(PumpManagerError.connection(DanaKitPumpManagerError.noConnection(result))))
+                    return
                 }
             }
         }
@@ -1310,10 +1305,6 @@ extension DanaKitPumpManager: PumpManager {
 
             self.bluetooth.ensureConnected { result in
                 switch result {
-                case .failure:
-                    self.log.error("Connection error")
-                    completion(false)
-                    return
                 case .success:
                     do {
                         let packet = generatePacketGeneralSetUserOption(options: data)
@@ -1331,6 +1322,10 @@ extension DanaKitPumpManager: PumpManager {
                         self.disconnect()
                         completion(false)
                     }
+                default:
+                    self.log.error("Connection error")
+                    completion(false)
+                    return
                 }
             }
         }
@@ -1343,10 +1338,6 @@ extension DanaKitPumpManager: PumpManager {
 
             self.bluetooth.ensureConnected { result in
                 switch result {
-                case .failure:
-                    self.log.error("Connection error")
-                    completion(.failure(PumpManagerError.connection(DanaKitPumpManagerError.noConnection)))
-                    return
                 case .success:
                     do {
                         let basalPacket = generatePacketBasalGetRate()
@@ -1394,6 +1385,10 @@ extension DanaKitPumpManager: PumpManager {
                                 .communication(DanaKitPumpManagerError.unknown(error.localizedDescription))
                         ))
                     }
+                default:
+                    self.log.error("Connection error")
+                    completion(.failure(PumpManagerError.connection(DanaKitPumpManagerError.noConnection(result))))
+                    return
                 }
             }
         }
@@ -1403,10 +1398,6 @@ extension DanaKitPumpManager: PumpManager {
         delegateQueue.async {
             self.bluetooth.ensureConnected { result in
                 switch result {
-                case .failure:
-                    self.log.error("Connection error")
-                    completion(PumpManagerError.connection(DanaKitPumpManagerError.noConnection))
-                    return
                 case .success:
                     do {
                         let offset = Date.now.timeIntervalSince(self.state.pumpTime ?? Date.distantPast)
@@ -1449,6 +1440,10 @@ extension DanaKitPumpManager: PumpManager {
                         self.log.error("Failed to sync time. Error: \(error.localizedDescription)")
                         completion(PumpManagerError.communication(DanaKitPumpManagerError.unknown(error.localizedDescription)))
                     }
+                default:
+                    self.log.error("Connection error")
+                    completion(PumpManagerError.connection(DanaKitPumpManagerError.noConnection(result)))
+                    return
                 }
             }
         }
@@ -1616,6 +1611,35 @@ public extension DanaKitPumpManager {
         doseEntry.deliveredUnits = deliveredUnits
         doseReporter?.notify(deliveredUnits: deliveredUnits)
         notifyStateDidChange()
+
+        if deliveredUnits.truncatingRemainder(dividingBy: getDoseDivider()) == 0.0 {
+            Task {
+                do {
+                    let command = generatePacketGeneralKeepConnection()
+                    let result = try await bluetooth.writeMessage(command)
+
+                    guard result.success else {
+                        self.log.warning("Pump declined keepalive")
+                        return
+                    }
+
+                    self.log.info("Pump accepted keepalive")
+                } catch {
+                    self.log.error("Failed to send keepalive: \(error)")
+                }
+            }
+        }
+    }
+
+    private func getDoseDivider() -> Double {
+        switch state.bolusSpeed {
+        case .speed12:
+            return 20.0
+        case .speed30:
+            return 8.0
+        case .speed60:
+            return 4.0
+        }
     }
 
     internal func notifyBolusDone(deliveredUnits: Double) {

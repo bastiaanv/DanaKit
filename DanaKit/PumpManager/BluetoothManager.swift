@@ -9,6 +9,8 @@ public enum ConnectionResult {
     case requestedPincode(String?)
     case invalidBle5Keys
     case failure(Error)
+    case timeout
+    case alreadyConnectedAndBusy
 }
 
 public struct DanaPumpScan {
@@ -37,13 +39,13 @@ protocol BluetoothManager: AnyObject, CBCentralManagerDelegate {
     var autoConnectUUID: String? { get set }
 
     var connectionCompletion: ((ConnectionResult) -> Void)? { get set }
-    var connectionCallback: [String: (ConnectionResultShort) -> Void] { get set }
+    var connectionCallback: [String: (ConnectionResult) -> Void] { get set }
 
     var devices: [DanaPumpScan] { get set }
 
     func writeMessage(_ packet: DanaGeneratePacket) async throws -> (any DanaParsePacketProtocol)
     func disconnect(_ peripheral: CBPeripheral, force: Bool) -> Void
-    func ensureConnected(_ completion: @escaping (ConnectionResultShort) async -> Void, _ identifier: String) -> Void
+    func ensureConnected(_ completion: @escaping (ConnectionResult) async -> Void, _ identifier: String) -> Void
 }
 
 extension BluetoothManager {
@@ -110,7 +112,7 @@ extension BluetoothManager {
         connectionCompletion = completion
     }
 
-    func ensureConnected(_ completion: @escaping (ConnectionResultShort) async -> Void, _ identifier: String = #function) {
+    func ensureConnected(_ completion: @escaping (ConnectionResult) async -> Void, _ identifier: String = #function) {
         ensureConnected(completion, identifier)
     }
 
@@ -138,7 +140,7 @@ extension BluetoothManager {
                 self.logDeviceCommunication("Dana - Failed to connect: Timeout reached...", type: .connection)
                 self.log.error("Failed to connect: Timeout reached...")
 
-                connectionCallback(.failure)
+                connectionCallback(.timeout)
                 self.connectionCallback[identifier] = nil
             } catch {}
         }
