@@ -60,6 +60,7 @@ public class DanaKitPumpManager: DeviceManager {
     private let scanDeviceObservers = WeakSynchronizedSet<StateObserver>()
 
     private var isPriming = false
+    private var bolusCallback: CheckedContinuation<Void, Never>?
     private var doseReporter: DanaKitDoseProgressReporter?
     private var doseEntry: UnfinalizedDose?
 
@@ -678,6 +679,11 @@ extension DanaKitPumpManager: PumpManager {
                         }
 
                         self.notifyStateDidChange()
+
+                        await withCheckedContinuation { continuation in
+                            self.bolusCallback = continuation
+                        }
+
                         completion(nil)
                     } catch {
                         self.state.bolusState = .noBolus
@@ -766,6 +772,11 @@ extension DanaKitPumpManager: PumpManager {
             disconnect()
             state.bolusState = .noBolus
             notifyStateDidChange()
+
+            if let bolusCallback = self.bolusCallback {
+                bolusCallback.resume()
+                self.bolusCallback = nil
+            }
 
             guard let doseEntry = self.doseEntry else {
                 completion(.success(nil))
@@ -1587,6 +1598,11 @@ public extension DanaKitPumpManager {
     }
 
     internal func notifyBolusError() {
+        if let bolusCallback = self.bolusCallback {
+            bolusCallback.resume()
+            self.bolusCallback = nil
+        }
+
         guard doseEntry != nil, state.bolusState != .noBolus else {
             // Ignore if no bolus is going
             return
@@ -1597,9 +1613,6 @@ public extension DanaKitPumpManager {
         state.bolusState = .noBolus
         state.lastStatusDate = Date.now
         notifyStateDidChange()
-
-        // We dont store the bolus or anything
-        // The ensurePumpData will make sure everything is up-to-date
     }
 
     internal func notifyBolusDidUpdate(deliveredUnits: Double) {
@@ -1655,6 +1668,11 @@ public extension DanaKitPumpManager {
                 self.disconnect()
             }
 
+            if let bolusCallback = self.bolusCallback {
+                bolusCallback.resume()
+                self.bolusCallback = nil
+            }
+
             guard let doseEntry = self.doseEntry else {
                 return
             }
@@ -1687,6 +1705,11 @@ public extension DanaKitPumpManager {
         guard let doseEntry = self.doseEntry else {
             // Disconnect was done after bolus was complete!
             return
+        }
+
+        if let bolusCallback = self.bolusCallback {
+            bolusCallback.resume()
+            self.bolusCallback = nil
         }
 
         log.warning("Bolus was not completed... \(doseEntry.deliveredUnits)U of the \(doseEntry.value)U")
