@@ -682,9 +682,9 @@ extension DanaKitPumpManager: PumpManager {
 
                         await withCheckedContinuation { continuation in
                             self.bolusCallback = continuation
+                            
+                            completion(nil)
                         }
-
-                        completion(nil)
                     } catch {
                         self.state.bolusState = .noBolus
                         self.doseReporter = nil
