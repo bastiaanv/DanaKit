@@ -682,7 +682,7 @@ extension DanaKitPumpManager: PumpManager {
 
                         await withCheckedContinuation { continuation in
                             self.bolusCallback = continuation
-                            
+
                             completion(nil)
                         }
                     } catch {

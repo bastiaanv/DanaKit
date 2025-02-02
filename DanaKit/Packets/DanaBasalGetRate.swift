@@ -23,7 +23,7 @@ func parsePacketBasalGetRate(data: Data, usingUtc _: Bool?) -> DanaParsePacket<P
     }
 
     return DanaParsePacket(
-        success: basalStep == 0.01,
+        success: basalStep < 1,
         rawData: data,
         data: PacketBasalGetRate(maxBasal: maxBasal, basalStep: basalStep, basalProfile: basalProfile)
     )
