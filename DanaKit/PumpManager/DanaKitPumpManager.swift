@@ -654,35 +654,11 @@ extension DanaKitPumpManager: PumpManager {
                         )
                         self.doseReporter = DanaKitDoseProgressReporter(total: units)
                         self.state.bolusState = .inProgress
-
-                        if !self.isPriming {
-                            let dose = self.doseEntry?.toDoseEntry(isMutable: true)
-
-                            if let dose = dose {
-                                await withCheckedContinuation { continuation in
-                                    self.pumpDelegate.notify { delegate in
-                                        delegate?.pumpManager(
-                                            self,
-                                            hasNewPumpEvents: [
-                                                NewPumpEvent
-                                                    .bolus(dose: dose, units: dose.programmedUnits, date: dose.startDate)
-                                            ],
-                                            lastReconciliation: Date.now,
-                                            replacePendingEvents: false,
-                                            completion: { _ in
-                                                continuation.resume()
-                                            }
-                                        )
-                                    }
-                                }
-                            }
-                        }
-
                         self.notifyStateDidChange()
 
                         await withCheckedContinuation { continuation in
                             self.bolusCallback = continuation
-                            
+
                             completion(nil)
                         }
                     } catch {
