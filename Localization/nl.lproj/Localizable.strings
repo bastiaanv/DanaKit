@@ -203,7 +203,7 @@
 "Unknown" = "Onbekend";
 
 /* Units for showing temp basal rate */
-"U/hr" = "U/u";
+"U/hr" = "Eh/u";
 
 /* Header for insulin remaining on pod settings screen */
 "Insulin Remaining" = "Resterende insuline";
@@ -227,7 +227,7 @@
 "Pump time" = "Pomptijd";
 
 /* Text for pump time synced at */
-"Checked at" = "Gecontroleerd bij";
+"Checked at" = "Gecontroleerd op";
 
 /* Text for Nightly pump time sync */
 "Nightly pump time sync" = "Nachtelijke pomptijdsynchronisatie";
@@ -256,13 +256,13 @@
 "Bolus" = "Bolus";
 
 /* Pump Event title for UnfinalizedDose with doseType of .tempBasal */
-"Temp Basal" = "Temp basaal";
+"Temp Basal" = "Tijdelijk basaal";
 
 /* Pump Event title for UnfinalizedDose with doseType of .basal */
 "Basal" = "Basaal";
 
 /* Pump Event title for UnfinalizedDose with doseType of .resume */
-"Resume" = "CV";
+"Resume" = "Hervat";
 
 /* Pump Event title for UnfinalizedDose with doseType of .suspend */
 "Suspend" = "opschorten";
@@ -277,7 +277,7 @@
 "Loading" = "Laden";
 
 /* Text for save button */
-"Save" = "Sla";
+"Save" = "Opslaan";
 
 /* Text for 24h display */
 "24h display" = "24-uurs weergave";
@@ -286,7 +286,7 @@
 "Should time be display in 12h or 24h" = "Moet de tijd worden weergegeven in 12u of 24u?";
 
 /* text on */
-"On" = "Op";
+"On" = "Aan";
 
 /* text off */
 "Off" = "Uit";
@@ -307,7 +307,7 @@
 "Backlight on time" = "Tijd achtergrondverlichting";
 
 /* lcdOnTimeInSec */
-"Lcd on time" = "Lcd op tijd";
+"Lcd on time" = "Lcd aan tijd";
 
 /* beepAndAlarm */
 "Alarm beeps" = "Alarm pieptonen";
@@ -373,7 +373,7 @@
 "The pump has detected an issue with its chaft. Please remove the reservoir, check everything and try again" = "De pomp heeft een probleem met de as gedetecteerd. Verwijder het reservoir, controleer alles en probeer het opnieuw.";
 
 /* Alert title for basalMax */
-"Basal limit reached" = "Basale limiet bereikt";
+"Basal limit reached" = "Basaal limiet bereikt";
 
 /* Alert body for basalMax */
 "Your daily basal limit has been reached. Please contact your Dana distributer to increase the limit" = "Uw dagelijkse basaallimiet is bereikt. Neem contact op met uw Dana-distributeur om de limiet te verhogen.";
@@ -542,7 +542,7 @@
 "Refill amount" = "Navulhoeveelheid";
 
 /* Insulin unit */
-"U" = "U";
+"U" = "Eh";
 
 /* Label for first step refill */
 "Step 1: Set reservoir level" = "Stap 1: Stel het reservoirniveau in";
