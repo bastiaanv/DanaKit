@@ -240,7 +240,7 @@ extension DanaKitPumpManager: PumpManager {
         // We do support rounding a 0 U volume to 0
         supportedBolusVolumes.last(where: { $0 <= units }) ?? 0
     }
-    
+
     public func roundToSupportedBasalRate(unitsPerHour: Double) -> Double {
         supportedBasalRates.last(where: { $0 <= unitsPerHour }) ?? 0
     }
