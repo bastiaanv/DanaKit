@@ -559,14 +559,14 @@ extension DanaKitPumpManager: PumpManager {
             })
                 // Filter nil values
                 .compactMap { $0 }
-            
+
             if output.contains(where: { $0.type == .rewind }) {
                 // After a rewind, the pump stops the current temp basal (if running)
                 // So we have to tell the algorithm, it is back on normal Basal Schedule
-                let dose = DoseEntry.basal(rate: self.currentBaseBasalRate, insulinType: self.state.insulinType!)
+                let dose = DoseEntry.basal(rate: currentBaseBasalRate, insulinType: state.insulinType!)
                 output.append(NewPumpEvent.basal(dose: dose))
             }
-            
+
             return output
 
         } catch {
