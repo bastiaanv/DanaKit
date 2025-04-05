@@ -478,7 +478,7 @@ extension DanaKitPumpManager: PumpManager {
                 generatePacketGeneralSetHistoryUploadMode(options: PacketGeneralSetHistoryUploadMode(mode: 0))
             _ = try await bluetooth.writeMessage(deactivateHistoryModePacket)
 
-            var output = (fetchHistoryResult.data as! [HistoryItem]).map({ item in
+            return (fetchHistoryResult.data as! [HistoryItem]).map({ item in
                 switch item.code {
                 case HistoryCode.RECORD_TYPE_ALARM:
                     return NewPumpEvent(
@@ -559,15 +559,6 @@ extension DanaKitPumpManager: PumpManager {
             })
                 // Filter nil values
                 .compactMap { $0 }
-
-            if output.contains(where: { $0.type == .rewind }) {
-                // After a rewind, the pump stops the current temp basal (if running)
-                // So we have to tell the algorithm, it is back on normal Basal Schedule
-                let dose = DoseEntry.basal(rate: currentBaseBasalRate, insulinType: state.insulinType!)
-                output.append(NewPumpEvent.basal(dose: dose))
-            }
-
-            return output
 
         } catch {
             log.error("Failed to sync history. Error: \(error.localizedDescription)")

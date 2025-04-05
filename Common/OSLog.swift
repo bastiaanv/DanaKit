@@ -9,6 +9,13 @@ class DanaLogger {
         logger = Logger(subsystem: "com.randallknutson.DanaKit", category: category)
     }
 
+    public func debug(_ msg: String, file: String = #file, _ function: String = #function, _ line: Int = #line) {
+        #if DANAKIT_DEBUG_LOGGING
+            let message = "\(file.file) - \(function)#\(line): \(msg)"
+            logger.debug("\(message, privacy: .public)")
+        #endif
+    }
+
     public func info(_ msg: String, file: String = #file, _ function: String = #function, _ line: Int = #line) {
         let message = "\(file.file) - \(function)#\(line): \(msg)"
         logger.info("\(message, privacy: .public)")

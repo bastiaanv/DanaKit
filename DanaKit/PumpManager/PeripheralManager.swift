@@ -23,9 +23,9 @@ class PeripheralManager: NSObject {
 
     public static let SERVICE_UUID = CBUUID(string: "FFF0")
     private let READ_CHAR_UUID = CBUUID(string: "FFF1")
-    private var readCharacteristic: CBCharacteristic!
+    private var readCharacteristic: CBCharacteristic?
     private let WRITE_CHAR_UUID = CBUUID(string: "FFF2")
-    private var writeCharacteristic: CBCharacteristic!
+    private var writeCharacteristic: CBCharacteristic?
 
     private var writeQueue: [UInt8: CheckedContinuation<any DanaParsePacketProtocol, Error>] = [:]
     private var writeTimeoutTask: Task<Void, Never>?
@@ -85,11 +85,14 @@ class PeripheralManager: NSObject {
         }
 
         var data = DanaRSEncryption.encodePacket(operationCode: packet.opCode, buffer: packet.data, deviceName: deviceName)
-//        self.log.info("Sending opCode: \(packet.opCode), encrypted data: \(data.base64EncodedString()), randomSyncKey: \(DanaRSEncryption.randomSyncKey)")
+        log
+            .debug(
+                "Sending opCode: \(packet.opCode), encrypted data: \(data.base64EncodedString()), randomSyncKey: \(DanaRSEncryption.randomSyncKey)"
+            )
 
         if DanaRSEncryption.enhancedEncryption != EncryptionType.DEFAULT.rawValue {
             data = DanaRSEncryption.encodeSecondLevel(data: data)
-//            self.log.info("Second level encrypted data: \(data.base64EncodedString())")
+            log.debug("Second level encrypted data: \(data.base64EncodedString())")
         }
 
         // Now schedule a 6 sec timeout (or 21 when in fetchHistoryMode) for the pump to send its message back
@@ -159,8 +162,7 @@ extension PeripheralManager: CBPeripheralDelegate {
             return
         }
 
-//        log.info("Discovered service \(PeripheralManager.SERVICE_UUID)")
-
+        log.debug("Discovered service \(PeripheralManager.SERVICE_UUID)")
         peripheral.discoverCharacteristics([READ_CHAR_UUID, WRITE_CHAR_UUID], for: service!)
     }
 
@@ -175,13 +177,13 @@ extension PeripheralManager: CBPeripheralDelegate {
         readCharacteristic = service.characteristics?.first(where: { $0.uuid == READ_CHAR_UUID })
         writeCharacteristic = service.characteristics?.first(where: { $0.uuid == WRITE_CHAR_UUID })
 
-        if writeCharacteristic == nil || readCharacteristic == nil {
+        guard writeCharacteristic != nil, let readCharacteristic = readCharacteristic else {
             log.error("Failed to discover dana write or read characteristic")
             connectionFailure(NSError(domain: "Failed to discover dana write or read characteristic", code: 0, userInfo: nil))
             return
         }
 
-//        log.info("Discovered characteristics \(READ_CHAR_UUID) and \(WRITE_CHAR_UUID)")
+        log.debug("Discovered characteristics \(READ_CHAR_UUID) and \(WRITE_CHAR_UUID)")
         peripheral.setNotifyValue(true, for: readCharacteristic)
     }
 
@@ -192,7 +194,7 @@ extension PeripheralManager: CBPeripheralDelegate {
             return
         }
 
-//        log.info("Notifications has been enabled. Sending starting handshake")
+        log.debug("Notifications has been enabled. Sending starting handshake")
         sendFirstMessageEncryption()
     }
 
@@ -207,12 +209,17 @@ extension PeripheralManager: CBPeripheralDelegate {
             return
         }
 
-//        log.info("Receiving data: \(data.base64EncodedString())")
+        log.debug("Receiving data: \(data.base64EncodedString())")
         parseReceivedValue(data)
     }
 
     private func writeQ(_ data: Data) {
-//        log.info("Writing data \(data.base64EncodedString())")
+        guard let writeCharacteristic = writeCharacteristic else {
+            log.error("No write characteristic available. Device might be disconnected...")
+            return
+        }
+
+        log.debug("Writing data \(data.base64EncodedString())")
         connectedDevice.writeValue(data, for: writeCharacteristic, type: .withoutResponse)
     }
 }
@@ -227,7 +234,7 @@ extension PeripheralManager {
             deviceName: deviceName
         )
 
-//        log.info("Sending Initial encryption request. Data: \(data.base64EncodedString())")
+        log.debug("Sending Initial encryption request. Data: \(data.base64EncodedString())")
         writeQ(data)
     }
 
@@ -238,7 +245,7 @@ extension PeripheralManager {
             deviceName: deviceName
         )
 
-//        log.info("Sending normal time information. Data: \(data.base64EncodedString())")
+        log.debug("Sending normal time information. Data: \(data.base64EncodedString())")
         writeQ(data)
     }
 
@@ -249,7 +256,7 @@ extension PeripheralManager {
             deviceName: deviceName
         )
 
-//        log.info("Sending RSv3 time information. Data: \(data.base64EncodedString())")
+        log.debug("Sending RSv3 time information. Data: \(data.base64EncodedString())")
         writeQ(data)
     }
 
@@ -267,7 +274,10 @@ extension PeripheralManager {
         }
 
         let randomSyncKey = pumpManager.state.randomSyncKey
-//        self.log.info("Setting encryption keys. Pairing key: \(pairingKey.base64EncodedString()), random pairing key: \(randomPairingKey.base64EncodedString()), random sync key: \(randomSyncKey)")
+        log
+            .debug(
+                "Setting encryption keys. Pairing key: \(pairingKey.base64EncodedString()), random pairing key: \(randomPairingKey.base64EncodedString()), random sync key: \(randomSyncKey)"
+            )
         DanaRSEncryption.setPairingKeys(pairingKey: pairingKey, randomPairingKey: randomPairingKey, randomSyncKey: randomSyncKey)
 
         sendV3PairingInformation(0)
@@ -280,7 +290,7 @@ extension PeripheralManager {
             deviceName: deviceName
         )
 
-//        log.info("Sending pairing request. Data: \(data.base64EncodedString())")
+        log.debug("Sending pairing request. Data: \(data.base64EncodedString())")
         writeQ(data)
     }
 
@@ -291,7 +301,7 @@ extension PeripheralManager {
             deviceName: deviceName
         )
 
-//        log.info("Sending easy menu check. Data: \(data.base64EncodedString())")
+        log.debug("Sending easy menu check. Data: \(data.base64EncodedString())")
         writeQ(data)
     }
 
@@ -302,7 +312,7 @@ extension PeripheralManager {
             deviceName: deviceName
         )
 
-//        log.info("Sending BLE5 time information. Data: \(Data([0, 0, 0, 0]).base64EncodedString())")
+        log.debug("Sending BLE5 time information. Data: \(Data([0, 0, 0, 0]).base64EncodedString())")
         writeQ(data)
     }
 
@@ -313,13 +323,16 @@ extension PeripheralManager {
             deviceName: deviceName
         )
 
-//        log.info("Sending Passkey check. Data: \(data.base64EncodedString())")
+        log.debug("Sending Passkey check. Data: \(data.base64EncodedString())")
         writeQ(data)
     }
 
     /// Used after entering PIN codes (only for DanaRS v3)
     public func finishV3Pairing(_ pairingKey: Data, _ randomPairingKey: Data) {
-//        log.info("Storing security keys: Pairing key: \(pairingKey.base64EncodedString()), random pairing key: \(randomPairingKey.base64EncodedString())")
+        log
+            .debug(
+                "Storing security keys: Pairing key: \(pairingKey.base64EncodedString()), random pairing key: \(randomPairingKey.base64EncodedString())"
+            )
 
         DanaRSEncryption.setPairingKeys(pairingKey: pairingKey, randomPairingKey: randomPairingKey, randomSyncKey: nil)
         pumpManager.state.pairingKey = pairingKey
@@ -443,7 +456,7 @@ extension PeripheralManager {
             if data[2] == 0x00 {
                 let (pairingKey, randomPairingKey) = DanaRSEncryption.getPairingKeys()
                 if pairingKey.isEmpty || randomPairingKey.isEmpty {
-//                    log.info("Device is requesting pincode")
+                    log.debug("Device is requesting pincode")
                     promptPincode(nil)
                     return
                 }
@@ -505,14 +518,13 @@ extension PeripheralManager {
         if !data.isEmpty && pumpManager.state.isConnected && DanaRSEncryption.enhancedEncryption != EncryptionType.DEFAULT
             .rawValue
         {
-//            self.log.info("Second lvl decryption")
+            log.debug("Second lvl decryption")
             data = DanaRSEncryption.decodeSecondLevel(data: data)
         }
 
         readBuffer.append(data)
         guard readBuffer.count >= 6 else {
             // Buffer is not ready to be processed
-//            self.log.warning("Buffer not ready yet: \(self.readBuffer.base64EncodedString())")
             return
         }
 
@@ -539,7 +551,7 @@ extension PeripheralManager {
         let length = Int(readBuffer[2])
         guard length + 7 == readBuffer.count else {
             // Not all packets have been received yet...
-//            self.log.warning("Not all packets have been received yet - Should be: \(length + 7), currently: \(self.readBuffer.count)")
+            log.debug("Not all packets have been received yet - Should be: \(length + 7), currently: \(readBuffer.count)")
             return
         }
 
@@ -553,7 +565,7 @@ extension PeripheralManager {
             return
         }
 
-//        log.info("Received message! Starting to decrypt data: \(self.readBuffer.base64EncodedString())")
+        log.debug("Received message! Starting to decrypt data: \(readBuffer.base64EncodedString())")
         let decryptedData = DanaRSEncryption.decodePacket(buffer: readBuffer, deviceName: deviceName)
         readBuffer = Data([])
 
@@ -562,7 +574,7 @@ extension PeripheralManager {
             return
         }
 
-//        log.info("Decoding successful! Data: \(decryptedData.base64EncodedString())")
+        log.debug("Decoding successful! Data: \(decryptedData.base64EncodedString())")
         if decryptedData[0] == DanaPacketType.TYPE_ENCRYPTION_RESPONSE {
             switch decryptedData[1] {
             case DanaPacketType.OPCODE_ENCRYPTION__PUMP_CHECK:
