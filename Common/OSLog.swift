@@ -63,7 +63,7 @@ class DanaLogger {
     }
 
     private var logFile: String {
-        getDocumentsDirectory().appendingPathComponent("danakit/log.txt").path
+        getDocumentsDirectory().appendingPathComponent("danakit/dana_log.txt").path
     }
 
     private var logDir: String {
@@ -71,7 +71,8 @@ class DanaLogger {
     }
 
     private var logFilePrev: String {
-        getDocumentsDirectory().appendingPathComponent("danakit/log_prev.txt").path
+        getDocumentsDirectory().appendingPathComponent("danakit/dana_log
+                                                       _prev.txt").path
     }
 
     private func getDocumentsDirectory() -> URL {
