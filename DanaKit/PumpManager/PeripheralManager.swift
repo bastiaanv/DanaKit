@@ -55,13 +55,13 @@ class PeripheralManager: NSObject {
 
     deinit {
         self.writeTimeoutTask?.cancel()
-        
+
         for (opCode, stream) in self.writeQueue {
             stream.finish()
         }
     }
-    
-    func writeMessage(_ packet: DanaGeneratePacket) async throws -> (any DanaParsePacketProtocol)  {
+
+    func writeMessage(_ packet: DanaGeneratePacket) async throws -> (any DanaParsePacketProtocol) {
         guard writeQueue[packet.opCode] == nil else {
             throw NSError(domain: "Command already running", code: 0, userInfo: nil)
         }
@@ -73,8 +73,10 @@ class PeripheralManager: NSObject {
 
         return try await firstValue(from: stream)
     }
-    
-    private func firstValue(from stream: AsyncThrowingStream<any DanaParsePacketProtocol, Error>) async throws -> (any DanaParsePacketProtocol) {
+
+    private func firstValue(from stream: AsyncThrowingStream<any DanaParsePacketProtocol, Error>) async throws
+        -> (any DanaParsePacketProtocol)
+    {
         for try await value in stream {
             return value
         }
@@ -129,7 +131,7 @@ class PeripheralManager: NSObject {
                 // We need to reconnect in order to fix the encryption keys
                 self.bluetoothManager.manager.cancelPeripheralConnection(self.connectedDevice)
                 stream.finish()
-                
+
                 self.writeQueue.removeValue(forKey: packet.opCode)
                 self.writeTimeoutTask = nil
                 self.writeSemaphore.signal()
@@ -683,7 +685,7 @@ extension PeripheralManager {
 
         stream.yield(message)
         stream.finish()
-        
+
         writeQueue.removeValue(forKey: opCode)
         writeTimeoutTask?.cancel()
         writeTimeoutTask = nil
