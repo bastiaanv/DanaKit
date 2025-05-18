@@ -799,8 +799,8 @@ extension DanaKitPumpManager: PumpManager {
                 completion(.success(nil))
                 return
             }
-            
-            self.sendCancelEvent(dose)
+
+            sendCancelEvent(dose)
             completion(.success(nil))
         } catch {
             state.bolusState = oldBolusState
@@ -811,7 +811,7 @@ extension DanaKitPumpManager: PumpManager {
             completion(.failure(PumpManagerError.communication(DanaKitPumpManagerError.unknown(error.localizedDescription))))
         }
     }
-    
+
     private func sendCancelEvent(_ dose: DoseEntry) {
         DispatchQueue.main.async {
             self.pumpDelegate.notify { delegate in
@@ -1134,7 +1134,7 @@ extension DanaKitPumpManager: PumpManager {
                     do {
                         let packet = generatePacketBasalSetSuspendOn()
                         let result = try await self.bluetooth.writeMessage(packet)
-                        
+
                         let pumpTime = await self.fetchPumpTime()
                         if let pumpTime = pumpTime {
                             self.state.pumpTimeSyncedAt = Date.now
@@ -1193,7 +1193,7 @@ extension DanaKitPumpManager: PumpManager {
                     do {
                         let packet = generatePacketBasalSetSuspendOff()
                         let result = try await self.bluetooth.writeMessage(packet)
-                        
+
                         let pumpTime = await self.fetchPumpTime()
                         if let pumpTime = pumpTime {
                             self.state.pumpTimeSyncedAt = Date.now

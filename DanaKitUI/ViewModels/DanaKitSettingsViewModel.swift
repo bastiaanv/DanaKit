@@ -307,11 +307,11 @@ class DanaKitSettingsViewModel: ObservableObject {
             return "D"
         }
     }
-    
+
     func stopTempBasal() {
         if isTempBasal {
             // Stop temp basal
-            self.pumpManager?.enactTempBasal(unitsPerHour: 0, for: 0, completion: { error in
+            pumpManager?.enactTempBasal(unitsPerHour: 0, for: 0, completion: { error in
                 DispatchQueue.main.async {
                     self.basalButtonText = self.updateBasalButtonText()
                     self.isUpdatingPumpState = false

@@ -212,7 +212,7 @@ struct DanaKitSettingsView: View {
                     }
                 }
                 .disabled(viewModel.isUpdatingPumpState || viewModel.isSyncing)
-                
+
                 if viewModel.isTempBasal {
                     Button(action: {
                         viewModel.stopTempBasal()
