@@ -307,6 +307,26 @@ class DanaKitSettingsViewModel: ObservableObject {
             return "D"
         }
     }
+    
+    func stopTempBasal() {
+        if isTempBasal {
+            // Stop temp basal
+            self.pumpManager?.enactTempBasal(unitsPerHour: 0, for: 0, completion: { error in
+                DispatchQueue.main.async {
+                    self.basalButtonText = self.updateBasalButtonText()
+                    self.isUpdatingPumpState = false
+                }
+
+                // Check if action failed, otherwise skip state sync
+                guard error == nil else {
+                    self.log.error("\(#function): failed to stop temp basal. Error: \(error!.localizedDescription)")
+                    return
+                }
+            })
+
+            return
+        }
+    }
 
     func suspendResumeButtonPressed() {
         guard let pumpManager = self.pumpManager else {
@@ -332,24 +352,6 @@ class DanaKitSettingsViewModel: ObservableObject {
             return
         }
 
-        if isTempBasal {
-            // Stop temp basal
-            self.pumpManager?.enactTempBasal(unitsPerHour: 0, for: 0, completion: { error in
-                DispatchQueue.main.async {
-                    self.basalButtonText = self.updateBasalButtonText()
-                    self.isUpdatingPumpState = false
-                }
-
-                // Check if action failed, otherwise skip state sync
-                guard error == nil else {
-                    self.log.error("\(#function): failed to stop temp basal. Error: \(error!.localizedDescription)")
-                    return
-                }
-            })
-
-            return
-        }
-
         pumpManager.suspendDelivery(completion: { error in
             DispatchQueue.main.async {
                 self.basalButtonText = self.updateBasalButtonText()
@@ -371,10 +373,6 @@ class DanaKitSettingsViewModel: ObservableObject {
 
         if pumpManager.state.isPumpSuspended {
             return LocalizedString("Resume delivery", comment: "Dana settings resume delivery")
-        }
-
-        if isTempBasal {
-            return LocalizedString("Stop temp basal", comment: "Dana settings stop temp basal")
         }
 
         return LocalizedString("Suspend delivery", comment: "Dana settings suspend delivery")

@@ -212,6 +212,21 @@ struct DanaKitSettingsView: View {
                     }
                 }
                 .disabled(viewModel.isUpdatingPumpState || viewModel.isSyncing)
+                
+                if viewModel.isTempBasal {
+                    Button(action: {
+                        viewModel.stopTempBasal()
+                    }) {
+                        HStack {
+                            Text(LocalizedString("Stop temp basal", comment: "Dana settings stop temp basal"))
+                            Spacer()
+                            if viewModel.isUpdatingPumpState {
+                                ActivityIndicator(isAnimating: .constant(true), style: .medium)
+                            }
+                        }
+                    }
+                    .disabled(viewModel.isUpdatingPumpState || viewModel.isSyncing)
+                }
 
                 Button(action: {
                     viewModel.syncData()
