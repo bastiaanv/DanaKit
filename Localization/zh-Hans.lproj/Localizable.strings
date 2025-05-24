@@ -304,7 +304,7 @@
 "sec" = "秒钟";
 
 /* backlightOnTimeInSec */
-"Backlight on time" = "生活";
+"Backlight on time" = "背光开启时间";
 
 /* lcdOnTimeInSec */
 "Lcd on time" = "液晶显示屏开机时间";
@@ -579,3 +579,9 @@
 
 /* Label for error second step refill */
 "Failed to prime the tube. Please try again later" = "管道填料失败。请稍后再试";
+
+/* Battery age */
+"Battery age" = "电池寿命";
+
+/* advertise contact DanaRS v1 */
+"NOTE: The DanaRS v1 is not supported (yet). If you have a DanaRS v1 pump available for testing, please contact Bastiaan Verhaar!" = "注意： 目前尚不支持 DanaRS v1。如果您有 DanaRS v1 泵可供测试，请联系 Bastiaan Verhaar！";
