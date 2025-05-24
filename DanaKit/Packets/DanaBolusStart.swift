@@ -1,22 +1,14 @@
-//
-//  DanaBolusStart.swift
-//  DanaKit
-//
-//  Created by Bastiaan Verhaar on 10/12/2023.
-//  Copyright © 2023 Randall Knutson. All rights reserved.
-//
-
 public enum BolusSpeed: UInt8 {
     case speed12 = 0
     case speed30 = 1
     case speed60 = 2
-    
+
     static func all() -> [Int] {
-        return [Int(BolusSpeed.speed12.rawValue), Int(BolusSpeed.speed30.rawValue), Int(BolusSpeed.speed60.rawValue)]
+        [Int(BolusSpeed.speed12.rawValue), Int(BolusSpeed.speed30.rawValue), Int(BolusSpeed.speed60.rawValue)]
     }
-    
+
     func format() -> String {
-        switch(self) {
+        switch self {
         case .speed12:
             return LocalizedString("12 sec/E", comment: "Dana bolus speed 12u per min")
         case .speed30:
@@ -32,20 +24,21 @@ struct PacketBolusStart {
     var speed: BolusSpeed
 }
 
-let CommandBolusStart: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xff) << 8) + UInt16(DanaPacketType.OPCODE_BOLUS__SET_STEP_BOLUS_START & 0xff)
+let CommandBolusStart: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
+    UInt16(DanaPacketType.OPCODE_BOLUS__SET_STEP_BOLUS_START & 0xFF)
 
 func generatePacketBolusStart(options: PacketBolusStart) -> DanaGeneratePacket {
     let bolusRate = UInt16(options.amount * 100)
     var data = Data(count: 3)
-    data[0] = UInt8(bolusRate & 0xff)
-    data[1] = UInt8((bolusRate >> 8) & 0xff)
+    data[0] = UInt8(bolusRate & 0xFF)
+    data[1] = UInt8((bolusRate >> 8) & 0xFF)
     data[2] = options.speed.rawValue
 
     return DanaGeneratePacket(opCode: DanaPacketType.OPCODE_BOLUS__SET_STEP_BOLUS_START, data: data)
 }
 
-func parsePacketBolusStart(data: Data, usingUtc: Bool?) -> DanaParsePacket<Any> {
-    return DanaParsePacket(success: data[DataStart] == 0, rawData: data, data: nil)
+func parsePacketBolusStart(data: Data, usingUtc _: Bool?) -> DanaParsePacket<Any> {
+    DanaParsePacket(success: data[DataStart] == 0, rawData: data, data: nil)
 }
 
 /**
@@ -58,7 +51,7 @@ func parsePacketBolusStart(data: Data, usingUtc: Bool?) -> DanaParsePacket<Any> 
  * 0x80 => Insulin limit violation
  */
 func transformBolusError(code: UInt8) -> DanaKitPumpManagerError {
-    switch(code) {
+    switch code {
     case 0x01:
         return DanaKitPumpManagerError.pumpSuspended
     case 0x04:

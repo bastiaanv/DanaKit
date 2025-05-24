@@ -1,12 +1,4 @@
-//
-//  DanaHistoryBase.swift
-//  DanaKit
-//
-//  Created by Bastiaan Verhaar on 13/12/2023.
-//  Copyright © 2023 Randall Knutson. All rights reserved.
-//
-
-struct HistoryCode {
+enum HistoryCode {
     static let RECORD_TYPE_DONE_UPLOAD = -0x01
     static let RECORD_TYPE_UNKNOWN = 0x00
     static let RECORD_TYPE_BOLUS = 0x02
@@ -16,8 +8,8 @@ struct HistoryCode {
     static let RECORD_TYPE_GLUCOSE = 0x06
     static let RECORD_TYPE_CARBO = 0x07
     static let RECORD_TYPE_SUSPEND = 0x09
-    static let RECORD_TYPE_ALARM = 0x0a
-    static let RECORD_TYPE_BASALHOUR = 0x0b
+    static let RECORD_TYPE_ALARM = 0x0A
+    static let RECORD_TYPE_BASALHOUR = 0x0B
     static let RECORD_TYPE_TEMP_BASAL = 0x99
 }
 
@@ -51,7 +43,7 @@ func generatePacketHistoryData(options: PacketHistoryBase) -> Data {
     } else {
         data.addDate(at: 0, date: options.from!, utc: options.usingUtc)
     }
-    
+
     return data
 }
 
@@ -99,7 +91,7 @@ func parsePacketHistory(data: Data, usingUtc: Bool?) -> DanaParsePacket<HistoryI
                 raw: data,
                 timestamp: data.date(at: DataStart + 1, usingUtc),
                 value: Double(value) * 0.01,
-                durationInMin: Double((param8 & 0x0f) * 60 + param7),
+                durationInMin: Double((param8 & 0x0F) * 60 + param7),
                 bolusType: getBolusType(param8: param8)
             )
         )
@@ -202,7 +194,7 @@ func parsePacketHistory(data: Data, usingUtc: Bool?) -> DanaParsePacket<HistoryI
                 code: HistoryCode.RECORD_TYPE_SUSPEND,
                 raw: data,
                 timestamp: data.date(at: DataStart + 1, usingUtc),
-                value: param8 == 0x4f ? 1 : 0
+                value: param8 == 0x4F ? 1 : 0
             )
         )
 
@@ -227,17 +219,17 @@ func parsePacketHistory(data: Data, usingUtc: Bool?) -> DanaParsePacket<HistoryI
                 code: HistoryCode.RECORD_TYPE_UNKNOWN,
                 raw: data,
                 timestamp: data.date(at: DataStart + 1, usingUtc),
-                alarm: UInt8(recordType) //"UNKNOWN Message type: \(recordType)"
+                alarm: UInt8(recordType) // "UNKNOWN Message type: \(recordType)"
             )
         )
     }
 }
 
 func getBolusType(param8: UInt8) -> String {
-    switch param8 & 0xf0 {
-    case 0xa0:
+    switch param8 & 0xF0 {
+    case 0xA0:
         return "DS"
-    case 0xc0:
+    case 0xC0:
         return "E"
     case 0x80:
         return "S"
@@ -252,7 +244,7 @@ func getAlarmMessage(param8: UInt8?) -> String {
     guard let param8 = param8 else {
         return ""
     }
-    
+
     switch param8 {
     case 0x50:
         return "Basal Compare"
@@ -260,9 +252,9 @@ func getAlarmMessage(param8: UInt8?) -> String {
         return "Empty Reservoir"
     case 0x43:
         return "Check"
-    case 0x4f:
+    case 0x4F:
         return "Occlusion"
-    case 0x4d:
+    case 0x4D:
         return "Basal max"
     case 0x44:
         return "Daily max"

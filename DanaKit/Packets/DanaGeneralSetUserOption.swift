@@ -1,11 +1,3 @@
-//
-//  DanaGeneralSetUserOption.swift
-//  DanaKit
-//
-//  Created by Bastiaan Verhaar on 13/12/2023.
-//  Copyright © 2023 Randall Knutson. All rights reserved.
-//
-
 public struct PacketGeneralSetUserOption {
     var isTimeDisplay24H: Bool
     var isButtonScrollOnOff: Bool
@@ -23,7 +15,8 @@ public struct PacketGeneralSetUserOption {
     var targetBg: UInt16?
 }
 
-let CommandGeneralSetUserOption: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xff) << 8) + UInt16(DanaPacketType.OPCODE_OPTION__SET_USER_OPTION & 0xff)
+let CommandGeneralSetUserOption: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
+    UInt16(DanaPacketType.OPCODE_OPTION__SET_USER_OPTION & 0xFF)
 
 func generatePacketGeneralSetUserOption(options: PacketGeneralSetUserOption) -> DanaGeneratePacket {
     var data = Data(count: options.targetBg != nil ? 15 : 13)
@@ -36,14 +29,14 @@ func generatePacketGeneralSetUserOption(options: PacketGeneralSetUserOption) -> 
     data[6] = options.units
     data[7] = options.shutdownHour
     data[8] = options.lowReservoirRate
-    data[9] = UInt8(options.cannulaVolume & 0xff)
-    data[10] = UInt8((options.cannulaVolume >> 8) & 0xff)
-    data[11] = UInt8(options.refillAmount & 0xff)
-    data[12] = UInt8((options.refillAmount >> 8) & 0xff)
+    data[9] = UInt8(options.cannulaVolume & 0xFF)
+    data[10] = UInt8((options.cannulaVolume >> 8) & 0xFF)
+    data[11] = UInt8(options.refillAmount & 0xFF)
+    data[12] = UInt8((options.refillAmount >> 8) & 0xFF)
 
     if let targetBg = options.targetBg {
-        data[13] = UInt8(targetBg & 0xff)
-        data[14] = UInt8((targetBg >> 8) & 0xff)
+        data[13] = UInt8(targetBg & 0xFF)
+        data[14] = UInt8((targetBg >> 8) & 0xFF)
     }
 
     return DanaGeneratePacket(
@@ -52,8 +45,8 @@ func generatePacketGeneralSetUserOption(options: PacketGeneralSetUserOption) -> 
     )
 }
 
-func parsePacketGeneralSetUserOption(data: Data, usingUtc: Bool?) -> DanaParsePacket<Any> {
-    return DanaParsePacket(
+func parsePacketGeneralSetUserOption(data: Data, usingUtc _: Bool?) -> DanaParsePacket<Any> {
+    DanaParsePacket(
         success: data[DataStart] == 0,
         rawData: data,
         data: nil

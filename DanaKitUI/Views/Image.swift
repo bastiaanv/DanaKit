@@ -1,11 +1,3 @@
-//
-//  Image.swift
-//  DanaKit
-//
-//  Created by Bastiaan Verhaar on 02/03/2024.
-//  Copyright © 2024 Randall Knutson. All rights reserved.
-//
-
 import SwiftUI
 
 extension Image {

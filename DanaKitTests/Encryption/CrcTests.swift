@@ -1,22 +1,13 @@
-//
-//  CrcTests.swift
-//  DanaKitTests
-//
-//  Created by Bastiaan Verhaar on 06/12/2023.
-//  Copyright © 2023 Randall Knutson. All rights reserved.
-//
-
-import XCTest
 @testable import DanaKit
+import XCTest
 
 class CRCTests: XCTestCase {
-
     func testGenerateCrcEnhancedEncryption0IsEncryptionCommandTrue() {
         // pump_check command
         let data: [UInt8] = [1, 0] + Array(DEVICE_NAME.utf8)
         let crc = generateCrc(buffer: Data(data), enhancedEncryption: 0, isEncryptionCommand: true)
-        
-        XCTAssertEqual(crc, 0xbc7a)
+
+        XCTAssertEqual(crc, 0xBC7A)
     }
 
     func testGenerateCrcEnhancedEncryption1IsEncryptionCommandFalse() {
@@ -24,7 +15,7 @@ class CRCTests: XCTestCase {
         let data: [UInt8] = [161, 96, 200, 1]
         let crc = generateCrc(buffer: Data(data), enhancedEncryption: 1, isEncryptionCommand: false)
 
-        XCTAssertEqual(crc, 0x33fd)
+        XCTAssertEqual(crc, 0x33FD)
     }
 
     func testGenerateCrcEnhancedEncryption1IsEncryptionCommandTrue() {
@@ -40,7 +31,7 @@ class CRCTests: XCTestCase {
         let data: [UInt8] = [161, 96, 200, 1]
         let crc = generateCrc(buffer: Data(data), enhancedEncryption: 2, isEncryptionCommand: false)
 
-        XCTAssertEqual(crc, 0x7a1a)
+        XCTAssertEqual(crc, 0x7A1A)
     }
 
     func testGenerateCrcEnhancedEncryption2IsEncryptionCommandTrue() {
@@ -48,6 +39,6 @@ class CRCTests: XCTestCase {
         let data: [UInt8] = [1, 1, 0, 0, 0, 0]
         let crc = generateCrc(buffer: Data(data), enhancedEncryption: 2, isEncryptionCommand: true)
 
-        XCTAssertEqual(crc, 0x1fef)
+        XCTAssertEqual(crc, 0x1FEF)
     }
 }

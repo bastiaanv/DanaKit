@@ -1,27 +1,23 @@
-//
-//  DanaGeneralGetShippingInformation.swift
-//  DanaKit
-//
-//  Created by Bastiaan Verhaar on 13/12/2023.
-//  Copyright © 2023 Randall Knutson. All rights reserved.
-//
-
 struct PacketGeneralGetShippingInformation {
     var serialNumber: String
     var shippingCountry: String
     var shippingDate: Date
 }
 
-let CommandGeneralGetShippingInformation: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xff) << 8) + UInt16(DanaPacketType.OPCODE_REVIEW__GET_SHIPPING_INFORMATION & 0xff)
+let CommandGeneralGetShippingInformation: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
+    UInt16(DanaPacketType.OPCODE_REVIEW__GET_SHIPPING_INFORMATION & 0xFF)
 
 func generatePacketGeneralGetShippingInformation() -> DanaGeneratePacket {
-    return DanaGeneratePacket(
+    DanaGeneratePacket(
         opCode: DanaPacketType.OPCODE_REVIEW__GET_SHIPPING_INFORMATION,
         data: nil
     )
 }
 
-func parsePacketGeneralGetShippingInformation(data: Data, usingUtc: Bool?) -> DanaParsePacket<PacketGeneralGetShippingInformation> {
+func parsePacketGeneralGetShippingInformation(
+    data: Data,
+    usingUtc _: Bool?
+) -> DanaParsePacket<PacketGeneralGetShippingInformation> {
     guard data.count >= 18 else {
         return DanaParsePacket(
             success: false,
@@ -34,8 +30,8 @@ func parsePacketGeneralGetShippingInformation(data: Data, usingUtc: Bool?) -> Da
         )
     }
 
-    let serialNumberData = data.subdata(in: DataStart..<DataStart + 10)
-    let shippingCountryData = data.subdata(in: DataStart + 10..<DataStart + 13)
+    let serialNumberData = data.subdata(in: DataStart ..< DataStart + 10)
+    let shippingCountryData = data.subdata(in: DataStart + 10 ..< DataStart + 13)
 
     let serialNumber = String(data: serialNumberData, encoding: .utf8) ?? ""
     let shippingCountry = String(data: shippingCountryData, encoding: .utf8) ?? ""

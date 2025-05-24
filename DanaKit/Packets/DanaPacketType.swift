@@ -1,25 +1,17 @@
-//
-//  DanaPacketType.swift
-//  DanaKit
-//
-//  Created by Bastiaan Verhaar on 06/12/2023.
-//  Copyright © 2023 Randall Knutson. All rights reserved.
-//
-
-struct DanaPacketType {
+enum DanaPacketType {
     static let TYPE_ENCRYPTION_REQUEST: UInt8 = 0x01
     static let TYPE_ENCRYPTION_RESPONSE: UInt8 = 0x02
-    static let TYPE_COMMAND: UInt8 = 0xa1
-    static let TYPE_RESPONSE: UInt8 = 0xb2
-    static let TYPE_NOTIFY: UInt8 = 0xc3
+    static let TYPE_COMMAND: UInt8 = 0xA1
+    static let TYPE_RESPONSE: UInt8 = 0xB2
+    static let TYPE_NOTIFY: UInt8 = 0xC3
 
     static let OPCODE_ENCRYPTION__PUMP_CHECK: UInt8 = 0x00
     static let OPCODE_ENCRYPTION__TIME_INFORMATION: UInt8 = 0x01
-    static let OPCODE_ENCRYPTION__CHECK_PASSKEY: UInt8 = 0xd0
-    static let OPCODE_ENCRYPTION__PASSKEY_REQUEST: UInt8 = 0xd1
-    static let OPCODE_ENCRYPTION__PASSKEY_RETURN: UInt8 = 0xd2
-    static let OPCODE_ENCRYPTION__GET_PUMP_CHECK: UInt8 = 0xf3
-    static let OPCODE_ENCRYPTION__GET_EASYMENU_CHECK: UInt8 = 0xf4
+    static let OPCODE_ENCRYPTION__CHECK_PASSKEY: UInt8 = 0xD0
+    static let OPCODE_ENCRYPTION__PASSKEY_REQUEST: UInt8 = 0xD1
+    static let OPCODE_ENCRYPTION__PASSKEY_RETURN: UInt8 = 0xD2
+    static let OPCODE_ENCRYPTION__GET_PUMP_CHECK: UInt8 = 0xF3
+    static let OPCODE_ENCRYPTION__GET_EASYMENU_CHECK: UInt8 = 0xF4
     static let OPCODE_NOTIFY__DELIVERY_COMPLETE: UInt8 = 0x01
     static let OPCODE_NOTIFY__DELIVERY_RATE_DISPLAY: UInt8 = 0x02
     static let OPCODE_NOTIFY__ALARM: UInt8 = 0x03
@@ -37,8 +29,8 @@ struct DanaPacketType {
     static let OPCODE_REVIEW__TEMPORARY: UInt8 = 0x17
     static let OPCODE_REVIEW__SUSPEND: UInt8 = 0x18
     static let OPCODE_REVIEW__ALARM: UInt8 = 0x19
-    static let OPCODE_REVIEW__BASAL: UInt8 = 0x1a
-    static let OPCODE_REVIEW__ALL_HISTORY: UInt8 = 0x1f
+    static let OPCODE_REVIEW__BASAL: UInt8 = 0x1A
+    static let OPCODE_REVIEW__ALL_HISTORY: UInt8 = 0x1F
     static let OPCODE_REVIEW__GET_SHIPPING_INFORMATION: UInt8 = 0x20
     static let OPCODE_REVIEW__GET_PUMP_CHECK: UInt8 = 0x21
     static let OPCODE_REVIEW__GET_USER_TIME_CHANGE_FLAG: UInt8 = 0x22
@@ -56,12 +48,12 @@ struct DanaPacketType {
     static let OPCODE_BOLUS__SET_EXTENDED_BOLUS: UInt8 = 0x47
     static let OPCODE_BOLUS__SET_DUAL_BOLUS: UInt8 = 0x48
     static let OPCODE_BOLUS__SET_EXTENDED_BOLUS_CANCEL: UInt8 = 0x49
-    static let OPCODE_BOLUS__SET_STEP_BOLUS_START: UInt8 = 0x4a
-    static let OPCODE_BOLUS__GET_CALCULATION_INFORMATION: UInt8 = 0x4b
-    static let OPCODE_BOLUS__GET_BOLUS_RATE: UInt8 = 0x4c
-    static let OPCODE_BOLUS__SET_BOLUS_RATE: UInt8 = 0x4d
-    static let OPCODE_BOLUS__GET_CIR_CF_ARRAY: UInt8 = 0x4e
-    static let OPCODE_BOLUS__SET_CIR_CF_ARRAY: UInt8 = 0x4f
+    static let OPCODE_BOLUS__SET_STEP_BOLUS_START: UInt8 = 0x4A
+    static let OPCODE_BOLUS__GET_CALCULATION_INFORMATION: UInt8 = 0x4B
+    static let OPCODE_BOLUS__GET_BOLUS_RATE: UInt8 = 0x4C
+    static let OPCODE_BOLUS__SET_BOLUS_RATE: UInt8 = 0x4D
+    static let OPCODE_BOLUS__GET_CIR_CF_ARRAY: UInt8 = 0x4E
+    static let OPCODE_BOLUS__SET_CIR_CF_ARRAY: UInt8 = 0x4F
     static let OPCODE_BOLUS__GET_BOLUS_OPTION: UInt8 = 0x50
     static let OPCODE_BOLUS__SET_BOLUS_OPTION: UInt8 = 0x51
     static let OPCODE_BOLUS__GET_24_CIR_CF_ARRAY: UInt8 = 0x52
@@ -76,14 +68,14 @@ struct DanaPacketType {
     static let OPCODE_BASAL__GET_BASAL_RATE: UInt8 = 0x67
     static let OPCODE_BASAL__SET_BASAL_RATE: UInt8 = 0x68
     static let OPCODE_BASAL__SET_SUSPEND_ON: UInt8 = 0x69
-    static let OPCODE_BASAL__SET_SUSPEND_OFF: UInt8 = 0x6a
+    static let OPCODE_BASAL__SET_SUSPEND_OFF: UInt8 = 0x6A
     static let OPCODE_OPTION__GET_PUMP_TIME: UInt8 = 0x70
     static let OPCODE_OPTION__SET_PUMP_TIME: UInt8 = 0x71
     static let OPCODE_OPTION__GET_USER_OPTION: UInt8 = 0x72
     static let OPCODE_OPTION__SET_USER_OPTION: UInt8 = 0x73
-    static let OPCODE_BASAL__APS_SET_TEMPORARY_BASAL: UInt8 = 0xc1
-    static let OPCODE__APS_HISTORY_EVENTS: UInt8 = 0xc2
-    static let OPCODE__APS_SET_EVENT_HISTORY: UInt8 = 0xc3
+    static let OPCODE_BASAL__APS_SET_TEMPORARY_BASAL: UInt8 = 0xC1
+    static let OPCODE__APS_HISTORY_EVENTS: UInt8 = 0xC2
+    static let OPCODE__APS_SET_EVENT_HISTORY: UInt8 = 0xC3
     static let OPCODE_REVIEW__GET_PUMP_DEC_RATIO: UInt8 = 0x80
     static let OPCODE_GENERAL__GET_SHIPPING_VERSION: UInt8 = 0x81
     static let OPCODE_OPTION__GET_EASY_MENU_OPTION: UInt8 = 0x74
@@ -92,8 +84,8 @@ struct DanaPacketType {
     static let OPCODE_OPTION__SET_EASY_MENU_STATUS: UInt8 = 0x77
     static let OPCODE_OPTION__GET_PUMP_UTC_AND_TIME_ZONE: UInt8 = 0x78
     static let OPCODE_OPTION__SET_PUMP_UTC_AND_TIME_ZONE: UInt8 = 0x79
-    static let OPCODE_OPTION__GET_PUMP_TIME_ZONE: UInt8 = 0x7a
-    static let OPCODE_OPTION__SET_PUMP_TIME_ZONE: UInt8 = 0x7b
-    static let OPCODE_ETC__SET_HISTORY_SAVE: UInt8 = 0xe0
-    static let OPCODE_ETC__KEEP_CONNECTION: UInt8 = 0xff
+    static let OPCODE_OPTION__GET_PUMP_TIME_ZONE: UInt8 = 0x7A
+    static let OPCODE_OPTION__SET_PUMP_TIME_ZONE: UInt8 = 0x7B
+    static let OPCODE_ETC__SET_HISTORY_SAVE: UInt8 = 0xE0
+    static let OPCODE_ETC__KEEP_CONNECTION: UInt8 = 0xFF
 }

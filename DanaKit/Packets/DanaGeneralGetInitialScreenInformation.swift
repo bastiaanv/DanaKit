@@ -1,11 +1,3 @@
-//
-//  DanaGeneralGetInitialScreenInformation.swift
-//  DanaKit
-//
-//  Created by Bastiaan Verhaar on 13/12/2023.
-//  Copyright © 2023 Randall Knutson. All rights reserved.
-//
-
 struct PacketGeneralGetInitialScreenInformation {
     let isPumpSuspended: Bool
     let isTempBasalInProgress: Bool
@@ -22,13 +14,17 @@ struct PacketGeneralGetInitialScreenInformation {
     let errorState: Int?
 }
 
-let CommandGeneralGetInitialScreenInformation: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xff) << 8) + UInt16(DanaPacketType.OPCODE_REVIEW__INITIAL_SCREEN_INFORMATION & 0xff)
+let CommandGeneralGetInitialScreenInformation: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
+    UInt16(DanaPacketType.OPCODE_REVIEW__INITIAL_SCREEN_INFORMATION & 0xFF)
 
 func generatePacketGeneralGetInitialScreenInformation() -> DanaGeneratePacket {
-    return DanaGeneratePacket(opCode: DanaPacketType.OPCODE_REVIEW__INITIAL_SCREEN_INFORMATION, data: nil)
+    DanaGeneratePacket(opCode: DanaPacketType.OPCODE_REVIEW__INITIAL_SCREEN_INFORMATION, data: nil)
 }
 
-func parsePacketGeneralGetInitialScreenInformation(data: Data, usingUtc: Bool?) -> DanaParsePacket<PacketGeneralGetInitialScreenInformation> {
+func parsePacketGeneralGetInitialScreenInformation(
+    data: Data,
+    usingUtc _: Bool?
+) -> DanaParsePacket<PacketGeneralGetInitialScreenInformation> {
     if data.count < 17 {
         return DanaParsePacket(success: false, rawData: data, data: PacketGeneralGetInitialScreenInformation(
             isPumpSuspended: false,

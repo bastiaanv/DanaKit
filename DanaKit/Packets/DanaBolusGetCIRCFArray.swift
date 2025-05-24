@@ -1,11 +1,3 @@
-//
-//  DanaBolusGetCIRCFArray.swift
-//  DanaKit
-//
-//  Created by Bastiaan Verhaar on 10/12/2023.
-//  Copyright © 2023 Randall Knutson. All rights reserved.
-//
-
 struct PacketBolusGetCIRCFArray {
     var language: UInt8
     var unit: UInt8
@@ -29,13 +21,14 @@ struct PacketBolusGetCIRCFArray {
     var nightCF: Float
 }
 
-let CommandBolusGetCIRCFArray: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xff) << 8) + UInt16(DanaPacketType.OPCODE_BOLUS__GET_CIR_CF_ARRAY & 0xff)
+let CommandBolusGetCIRCFArray: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
+    UInt16(DanaPacketType.OPCODE_BOLUS__GET_CIR_CF_ARRAY & 0xFF)
 
 func generatePacketBolusGetCIRCFArray() -> DanaGeneratePacket {
-    return DanaGeneratePacket(opCode: DanaPacketType.OPCODE_BOLUS__GET_CIR_CF_ARRAY, data: nil)
+    DanaGeneratePacket(opCode: DanaPacketType.OPCODE_BOLUS__GET_CIR_CF_ARRAY, data: nil)
 }
 
-func parsePacketBolusGetCIRCFArray(data: Data, usingUtc: Bool?) -> DanaParsePacket<PacketBolusGetCIRCFArray> {
+func parsePacketBolusGetCIRCFArray(data: Data, usingUtc _: Bool?) -> DanaParsePacket<PacketBolusGetCIRCFArray> {
     let language = data[DataStart]
     let unit = data[DataStart + 1]
     let morningCIR = data.uint16(at: DataStart + 2)
