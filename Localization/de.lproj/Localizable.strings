@@ -579,3 +579,9 @@
 
 /* Label for error second step refill */
 "Failed to prime the tube. Please try again later" = "Die Entlüftung der Röhre ist fehlgeschlagen. Bitte versuchen Sie es später erneut";
+
+/* Battery age */
+"Battery age" = "Alter der Batterie";
+
+/* advertise contact DanaRS v1 */
+"NOTE: The DanaRS v1 is not supported (yet). If you have a DanaRS v1 pump available for testing, please contact Bastiaan Verhaar!" = "HINWEIS: Die DanaRS v1 wird (noch) nicht unterstützt. Wenn Sie eine DanaRS v1 Pumpe zum Testen zur Verfügung haben, kontaktieren Sie bitte Bastiaan Verhaar!";

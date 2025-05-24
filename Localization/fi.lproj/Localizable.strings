@@ -579,3 +579,9 @@
 
 /* Label for error second step refill */
 "Failed to prime the tube. Please try again later" = "Putki ei ole alustettu. Yritä myöhemmin uudelleen";
+
+/* Battery age */
+"Battery age" = "Akun ikä";
+
+/* advertise contact DanaRS v1 */
+"NOTE: The DanaRS v1 is not supported (yet). If you have a DanaRS v1 pump available for testing, please contact Bastiaan Verhaar!" = "HUOMAUTUS: DanaRS v1 ei ole tuettu (vielä). Jos sinulla on DanaRS v1 -pumppu testattavana, ota yhteyttä Bastiaan Verhaariin!";

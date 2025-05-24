@@ -304,7 +304,7 @@
 "sec" = "sec";
 
 /* backlightOnTimeInSec */
-"Backlight on time" = "Verificação do tempo";
+"Backlight on time" = "Tempo de ativação da luz de fundo";
 
 /* lcdOnTimeInSec */
 "Lcd on time" = "Tempo de funcionamento do Lcd";
@@ -579,3 +579,9 @@
 
 /* Label for error second step refill */
 "Failed to prime the tube. Please try again later" = "Falha ao preparar o tubo. Tente novamente mais tarde";
+
+/* Battery age */
+"Battery age" = "Idade da bateria";
+
+/* advertise contact DanaRS v1 */
+"NOTE: The DanaRS v1 is not supported (yet). If you have a DanaRS v1 pump available for testing, please contact Bastiaan Verhaar!" = "OBSERVAÇÃO: o DanaRS v1 não é compatível (ainda). Se você tiver uma bomba DanaRS v1 disponível para teste, entre em contato com Bastiaan Verhaar!";
