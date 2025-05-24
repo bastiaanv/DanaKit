@@ -14,6 +14,11 @@ struct DanaRSv1Explaination: View {
             ScrollView {
                 VStack(alignment: .leading) {
                     Text(LocalizedString(
+                        "NOTE: The DanaRS v1 is not supported (yet). If you have a DanaRS v1 pump available for testing, please contact Bastiaan Verhaar!",
+                        comment: "advertise contact DanaRS v1"
+                    ))
+                        .fontWeight(.bold)
+                    Text(LocalizedString(
                         "Before starting with the pairing process, it is recommended to check, and if needed update, the pump password. You can do this by going to the pump settings -> user settings -> password. The default password is 1234, if this is your password, please consider changing it",
                         comment: "check password text for danars v1"
                     ))
@@ -39,7 +44,7 @@ struct DanaRSv1Explaination: View {
 
                     Text(String(
                         format: LocalizedString(
-                            "During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, %1$@ is ready to communicate with your DanaRS v1",
+                            "During the pairing process, your DanaRS v1 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, %1$@ is ready to communicate with your DanaRS v1",
                             comment: "Subtext for danars v1 (1: appName)"
                         ),
                         appName
@@ -50,7 +55,7 @@ struct DanaRSv1Explaination: View {
                 .padding(.horizontal)
             }
 
-            ContinueButton(action: nextAction)
+            ContinueButton(disabled: .constant(true), action: nextAction)
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarHidden(false)
@@ -63,7 +68,7 @@ struct DanaRSv1Explaination: View {
         }
     }
 
-    @ViewBuilder private var title: some View {
+    @ViewBuilder  private var title: some View {
         Text(LocalizedString("Setting up DanaRS v1", comment: "Title for danars v1 explaination"))
             .font(.title)
             .bold()

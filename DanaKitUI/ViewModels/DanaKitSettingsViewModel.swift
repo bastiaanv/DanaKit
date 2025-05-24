@@ -310,6 +310,8 @@ class DanaKitSettingsViewModel: ObservableObject {
 
     func stopTempBasal() {
         if isTempBasal {
+            isUpdatingPumpState = true
+
             // Stop temp basal
             pumpManager?.enactTempBasal(unitsPerHour: 0, for: 0, completion: { error in
                 DispatchQueue.main.async {
