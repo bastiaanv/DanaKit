@@ -141,7 +141,12 @@ public class DanaKitPumpManager: DeviceManager {
     private func issueHeartbeatIfNeeded() {
         if provideHeartbeat, Date().timeIntervalSince(lastHeartbeat) > 2 * 60 {
             pumpDelegate.notify { delegate in
-                delegate?.pumpManagerBLEHeartbeatDidFire(self)
+                guard let delegate = delegate else {
+                    self.log.error("Heartbeat fire could not be reported -> Missing delegate")
+                    return
+                }
+
+                delegate.pumpManagerBLEHeartbeatDidFire(self)
             }
             lastHeartbeat = Date()
         }
@@ -349,20 +354,25 @@ extension DanaKitPumpManager: PumpManager {
                 self.notifyStateDidChange()
 
                 self.pumpDelegate.notify { delegate in
-                    delegate?.pumpManager(
+                    guard let delegate = delegate else {
+                        self.log.error("Reservoir level & last check could not be reported -> Missing delegate")
+                        return
+                    }
+
+                    delegate.pumpManager(
                         self,
                         hasNewPumpEvents: events,
                         lastReconciliation: self.state.lastStatusDate,
                         replacePendingEvents: true,
                         completion: { _ in }
                     )
-                    delegate?.pumpManager(
+                    delegate.pumpManager(
                         self,
                         didReadReservoirValue: self.state.reservoirLevel,
                         at: Date.now,
                         completion: { _ in }
                     )
-                    delegate?.pumpManagerDidUpdateState(self)
+                    delegate.pumpManagerDidUpdateState(self)
                 }
 
                 self.log.info("Sync successful!")
@@ -651,37 +661,43 @@ extension DanaKitPumpManager: PumpManager {
                         self.state.lastStatusPumpDateTime = await self.fetchPumpTime() ?? Date.now
                         self.state.lastStatusDate = Date.now
 
-                        self.doseEntry = UnfinalizedDose(
+                        let doseEntry = UnfinalizedDose(
                             units: units,
                             duration: duration,
                             activationType: activationType,
                             insulinType: insulinType
                         )
+
+                        self.doseEntry = doseEntry
                         self.doseReporter = DanaKitDoseProgressReporter(total: units)
                         self.state.bolusState = .inProgress
 
                         if !self.isPriming {
-                            let dose = self.doseEntry?.toDoseEntry(isMutable: true)
-                            if let dose = dose {
-                                await withCheckedContinuation { continuation in
-                                    self.pumpDelegate.notify { delegate in
-                                        delegate?.pumpManager(
-                                            self,
-                                            hasNewPumpEvents: [
-                                                NewPumpEvent
-                                                    .bolus(
-                                                        dose: dose,
-                                                        units: dose.programmedUnits,
-                                                        date: dose.startDate
-                                                    )
-                                            ],
-                                            lastReconciliation: Date.now,
-                                            replacePendingEvents: false,
-                                            completion: { _ in
-                                                continuation.resume()
-                                            }
-                                        )
+                            let dose = doseEntry.toDoseEntry(isMutable: true)
+                            await withCheckedContinuation { continuation in
+                                self.pumpDelegate.notify { delegate in
+                                    guard let delegate = delegate else {
+                                        self.log.error("Dose could not be reported -> Missing delegate")
+                                        continuation.resume()
+                                        return
                                     }
+
+                                    delegate.pumpManager(
+                                        self,
+                                        hasNewPumpEvents: [
+                                            NewPumpEvent
+                                                .bolus(
+                                                    dose: dose,
+                                                    units: dose.programmedUnits,
+                                                    date: dose.startDate
+                                                )
+                                        ],
+                                        lastReconciliation: Date.now,
+                                        replacePendingEvents: false,
+                                        completion: { _ in
+                                            continuation.resume()
+                                        }
+                                    )
                                 }
                             }
                         }
@@ -795,11 +811,6 @@ extension DanaKitPumpManager: PumpManager {
             self.doseEntry = nil
             doseReporter = nil
 
-            guard let dose = dose else {
-                completion(.success(nil))
-                return
-            }
-
             sendCancelEvent(dose)
             completion(.success(nil))
         } catch {
@@ -815,7 +826,12 @@ extension DanaKitPumpManager: PumpManager {
     private func sendCancelEvent(_ dose: DoseEntry) {
         DispatchQueue.main.async {
             self.pumpDelegate.notify { delegate in
-                delegate?.pumpManager(
+                guard let delegate = delegate else {
+                    self.log.error("Dose could not be reported -> Missing delegate")
+                    return
+                }
+
+                delegate.pumpManager(
                     self,
                     hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: dose.deliveredUnits ?? 0, date: dose.startDate)],
                     lastReconciliation: Date.now,
@@ -945,7 +961,12 @@ extension DanaKitPumpManager: PumpManager {
 
                             let dose = DoseEntry.basal(rate: self.currentBaseBasalRate, insulinType: self.state.insulinType!)
                             self.pumpDelegate.notify { delegate in
-                                delegate?.pumpManager(
+                                guard let delegate = delegate else {
+                                    self.log.error("Basal reset could not be reported -> Missing delegate")
+                                    return
+                                }
+
+                                delegate.pumpManager(
                                     self,
                                     hasNewPumpEvents: [NewPumpEvent.basal(dose: dose)],
                                     lastReconciliation: Date.now,
@@ -990,7 +1011,12 @@ extension DanaKitPumpManager: PumpManager {
                             self.notifyStateDidChange()
 
                             self.pumpDelegate.notify { delegate in
-                                delegate?.pumpManager(
+                                guard let delegate = delegate else {
+                                    self.log.error("Temp basal could not be reported -> Missing delegate")
+                                    return
+                                }
+
+                                delegate.pumpManager(
                                     self,
                                     hasNewPumpEvents: [
                                         NewPumpEvent
@@ -1038,7 +1064,12 @@ extension DanaKitPumpManager: PumpManager {
                             self.notifyStateDidChange()
 
                             self.pumpDelegate.notify { delegate in
-                                delegate?.pumpManager(
+                                guard let delegate = delegate else {
+                                    self.log.error("Temp basal could not be reported -> Missing delegate")
+                                    return
+                                }
+
+                                delegate.pumpManager(
                                     self,
                                     hasNewPumpEvents: [
                                         NewPumpEvent
@@ -1090,7 +1121,12 @@ extension DanaKitPumpManager: PumpManager {
                             self.notifyStateDidChange()
 
                             self.pumpDelegate.notify { delegate in
-                                delegate?.pumpManager(
+                                guard let delegate = delegate else {
+                                    self.log.error("Temp basal could not be reported -> Missing delegate")
+                                    return
+                                }
+
+                                delegate.pumpManager(
                                     self,
                                     hasNewPumpEvents: [
                                         NewPumpEvent
@@ -1158,7 +1194,12 @@ extension DanaKitPumpManager: PumpManager {
 
                         let dose = DoseEntry.suspend()
                         self.pumpDelegate.notify { delegate in
-                            delegate?.pumpManager(
+                            guard let delegate = delegate else {
+                                self.log.error("Suspend could not be reported -> Missing delegate")
+                                return
+                            }
+
+                            delegate.pumpManager(
                                 self,
                                 hasNewPumpEvents: [NewPumpEvent.suspend(dose: dose)],
                                 lastReconciliation: self.state.lastStatusDate,
@@ -1218,7 +1259,8 @@ extension DanaKitPumpManager: PumpManager {
                         let dose = DoseEntry.resume(insulinType: self.state.insulinType!)
                         self.pumpDelegate.notify { delegate in
                             guard let delegate = delegate else {
-                                preconditionFailure("pumpManagerDelegate cannot be nil")
+                                self.log.error("Resume could not be reported -> Missing delegate")
+                                return
                             }
 
                             delegate.pumpManager(
@@ -1302,7 +1344,8 @@ extension DanaKitPumpManager: PumpManager {
                         let dose = DoseEntry.basal(rate: self.currentBaseBasalRate, insulinType: self.state.insulinType!)
                         self.pumpDelegate.notify { delegate in
                             guard let delegate = delegate else {
-                                preconditionFailure("pumpManagerDelegate cannot be nil")
+                                self.log.error("Basal could not be reported -> Missing delegate")
+                                return
                             }
 
                             delegate.pumpManager(
@@ -1466,7 +1509,12 @@ extension DanaKitPumpManager: PumpManager {
                         }
 
                         self.pumpDelegate.notify { delegate in
-                            delegate?.pumpManager(self, didAdjustPumpClockBy: offset)
+                            guard let delegate = delegate else {
+                                self.log.error("Clock offset could not be reported -> Missing delegate")
+                                return
+                            }
+
+                            delegate.pumpManager(self, didAdjustPumpClockBy: offset)
                         }
                         completion(nil)
                     } catch {
@@ -1562,8 +1610,13 @@ public extension DanaKitPumpManager {
             }
 
             self.pumpDelegate.notify { delegate in
-                delegate?.pumpManagerDidUpdateState(self)
-                delegate?.pumpManager(self, didUpdate: status, oldStatus: oldStatus)
+                guard let delegate = delegate else {
+                    self.log.error("State update could not be reported -> Missing delegate")
+                    return
+                }
+
+                delegate.pumpManagerDidUpdateState(self)
+                delegate.pumpManager(self, didUpdate: status, oldStatus: oldStatus)
             }
 
             self.statusObservers.forEach { observer in
@@ -1601,8 +1654,13 @@ public extension DanaKitPumpManager {
         )
 
         pumpDelegate.notify { delegate in
-            delegate?.issueAlert(loopAlert)
-            delegate?.pumpManager(
+            guard let delegate = delegate else {
+                self.log.error("Alarm could not be reported -> Missing delegate")
+                return
+            }
+
+            delegate.issueAlert(loopAlert)
+            delegate.pumpManager(
                 self,
                 hasNewPumpEvents: [event],
                 lastReconciliation: Date.now,
@@ -1686,10 +1744,11 @@ public extension DanaKitPumpManager {
             self.state.lastStatusDate = Date.now
             self.notifyStateDidChange()
 
-            delegateQueue.asyncAfter(deadline: .now() + 1) {
-                // Always try to disconnect when this event happens
-                self.disconnect()
+            let work = DispatchWorkItem { [weak self] in
+                self?.disconnect()
             }
+
+            delegateQueue.asyncAfter(deadline: .now() + 1, execute: work)
 
             if let bolusCallback = self.bolusCallback {
                 bolusCallback.resume()
@@ -1706,12 +1765,17 @@ public extension DanaKitPumpManager {
             self.doseEntry = nil
             self.doseReporter = nil
 
-            guard let dose = dose, !self.isPriming else {
+            guard !self.isPriming else {
                 return
             }
 
             self.pumpDelegate.notify { delegate in
-                delegate?.pumpManager(
+                guard let delegate = delegate else {
+                    self.log.error("Dose could not be reported -> Missing delegate")
+                    return
+                }
+
+                delegate.pumpManager(
                     self,
                     hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: deliveredUnits, date: dose.startDate)],
                     lastReconciliation: Date.now,
@@ -1744,7 +1808,12 @@ public extension DanaKitPumpManager {
         notifyStateDidChange()
 
         pumpDelegate.notify { delegate in
-            delegate?.pumpManager(self, didError: .uncertainDelivery)
+            guard let delegate = delegate else {
+                self.log.error("Uncertain delivery could not be reported -> Missing delegate")
+                return
+            }
+
+            delegate.pumpManager(self, didError: .uncertainDelivery)
         }
     }
 }
