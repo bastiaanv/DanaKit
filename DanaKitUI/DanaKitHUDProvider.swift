@@ -91,7 +91,7 @@ internal class DanaKitHUDProvider: NSObject, HUDProvider {
             return
         }
 
-        reservoirView.update(level: pumpManager.rawState["reservoirLevel"] as! Double, at: lastStatusDate)
+        reservoirView.update(level: pumpManager.rawState["reservoirLevel"] as? Double, at: lastStatusDate)
     }
 }
 
