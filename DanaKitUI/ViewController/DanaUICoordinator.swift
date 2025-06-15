@@ -197,7 +197,9 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
         if let nextStep = currentScreen.next() {
             navigateTo(nextStep)
         } else {
-            completionDelegate?.completionNotifyingDidComplete(self)
+            pumpManager?.notifyDelegateOfDeactivation {
+                self.completionDelegate?.completionNotifyingDidComplete(self)
+            }
         }
     }
 
