@@ -488,26 +488,26 @@ extension DanaKitPumpManager: PumpManager {
                 generatePacketGeneralSetHistoryUploadMode(options: PacketGeneralSetHistoryUploadMode(mode: 0))
             _ = try await bluetooth.writeMessage(deactivateHistoryModePacket)
 
-            return (fetchHistoryResult.data as! [HistoryItem]).map({ item in
+            return (fetchHistoryResult.data as! [HistoryItem]).compactMap({ item in
                 switch item.code {
                 case HistoryCode.RECORD_TYPE_ALARM:
-                    return NewPumpEvent(
+                    return [NewPumpEvent(
                         date: item.timestamp,
                         dose: nil,
                         raw: item.raw,
                         title: "Alarm: \(getAlarmMessage(param8: item.alarm))",
                         type: .alarm,
                         alarmType: PumpAlarmType.fromParam8(item.alarm)
-                    )
+                    )]
 
                 case HistoryCode.RECORD_TYPE_BOLUS:
                     // Skip bolus syncing if enabled by user
                     if self.state.isBolusSyncDisabled {
-                        return nil
+                        return []
                     }
 
                     // If we find a bolus here, we assume that is hasnt been synced to Loop
-                    return NewPumpEvent.bolus(
+                    return [NewPumpEvent.bolus(
                         dose: DoseEntry.bolus(
                             units: item.value!,
                             deliveredUnits: item.value!,
@@ -518,57 +518,81 @@ extension DanaKitPumpManager: PumpManager {
                         ),
                         units: item.value!,
                         date: item.timestamp
-                    )
+                    )]
 
                 case HistoryCode.RECORD_TYPE_SUSPEND:
                     if item.value! == 1 {
-                        return NewPumpEvent.suspend(dose: DoseEntry.suspend(suspendDate: item.timestamp))
+                        return [NewPumpEvent.suspend(dose: DoseEntry.suspend(suspendDate: item.timestamp))]
                     } else {
-                        return NewPumpEvent.resume(
+                        return [NewPumpEvent.resume(
                             dose: DoseEntry.resume(insulinType: self.state.insulinType!, resumeDate: item.timestamp),
                             date: item.timestamp
-                        )
+                        )]
                     }
 
                 case HistoryCode.RECORD_TYPE_PRIME:
-                    if item.value! >= 1 {
+                    guard let value = item.value, value < 1 else {
                         // This is a tube refill, not a canulla refill
-                        return nil
+                        return []
                     }
 
-                    if self.state.cannulaDate == nil || item.timestamp > self.state.cannulaDate! {
+                    if self.state.cannulaDate == nil {
+                        self.state.cannulaDate = item.timestamp
+                    } else if let cannulaDate = self.state.cannulaDate,  item.timestamp > cannulaDate  {
                         self.state.cannulaDate = item.timestamp
                     }
 
-                    return NewPumpEvent(
-                        date: item.timestamp,
-                        dose: nil,
-                        raw: item.raw,
-                        title: "Prime \(item.value!)U",
-                        type: .prime,
-                        alarmType: nil
-                    )
+                    return [
+                        NewPumpEvent(
+                            date: item.timestamp,
+                            dose: nil,
+                            raw: item.raw,
+                            title: "Prime \(value)U",
+                            type: .prime,
+                            alarmType: nil
+                        ),
+                        NewPumpEvent(
+                            date: item.timestamp,
+                            dose: nil,
+                            raw: item.raw,
+                            title: "Prime \(value)U",
+                            type: .replaceComponent(componentType: .infusionSet),
+                            alarmType: nil
+                        )
+                    ]
 
                 case HistoryCode.RECORD_TYPE_REFILL:
-                    if self.state.reservoirDate == nil || item.timestamp > self.state.reservoirDate! {
+                    if self.state.reservoirDate == nil {
+                        self.state.reservoirDate = item.timestamp
+                    } else if let reservoirDate = self.state.reservoirDate, item.timestamp > reservoirDate {
                         self.state.reservoirDate = item.timestamp
                     }
 
-                    return NewPumpEvent(
-                        date: item.timestamp,
-                        dose: nil,
-                        raw: item.raw,
-                        title: "Rewind \(item.value!)U",
-                        type: .rewind,
-                        alarmType: nil
-                    )
+                    return [
+                        NewPumpEvent(
+                            date: item.timestamp,
+                            dose: nil,
+                            raw: item.raw,
+                            title: "Rewind \(item.value ?? 0)U",
+                            type: .rewind,
+                            alarmType: nil
+                        ),
+                        NewPumpEvent(
+                            date: item.timestamp,
+                            dose: nil,
+                            raw: item.raw,
+                            title: "Rewind \(item.value ?? 0)U",
+                            type: .replaceComponent(componentType: .reservoir),
+                            alarmType: nil
+                        )
+                    ]
 
                 default:
-                    return nil
+                    return []
                 }
             })
-                // Filter nil values
-                .compactMap { $0 }
+                // Transform array from 2d to 1d array
+                .flatMap { $0 }
 
         } catch {
             log.error("Failed to sync history. Error: \(error.localizedDescription)")
