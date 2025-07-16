@@ -538,7 +538,7 @@ extension DanaKitPumpManager: PumpManager {
 
                     if self.state.cannulaDate == nil {
                         self.state.cannulaDate = item.timestamp
-                    } else if let cannulaDate = self.state.cannulaDate,  item.timestamp > cannulaDate  {
+                    } else if let cannulaDate = self.state.cannulaDate, item.timestamp > cannulaDate {
                         self.state.cannulaDate = item.timestamp
                     }
 
