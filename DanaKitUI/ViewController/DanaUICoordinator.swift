@@ -174,7 +174,7 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
         case .setupComplete:
             let nextStep: () -> Void = {
                 self.pumpManagerOnboardingDelegate?.pumpManagerOnboarding(didCreatePumpManager: self.pumpManager!)
-                self.stepFinished()
+                self.completionDelegate?.completionNotifyingDidComplete(self)
             }
 
             let view = DanaKitSetupCompleteView(
