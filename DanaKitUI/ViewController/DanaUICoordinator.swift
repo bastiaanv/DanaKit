@@ -198,7 +198,9 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
             navigateTo(nextStep)
         } else {
             pumpManager?.notifyDelegateOfDeactivation {
-                self.completionDelegate?.completionNotifyingDidComplete(self)
+                DispatchQueue.main.async {
+                    self.completionDelegate?.completionNotifyingDidComplete(self)
+                }
             }
         }
     }
