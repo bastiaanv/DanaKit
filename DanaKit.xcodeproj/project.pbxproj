@@ -16,6 +16,7 @@
 		847530F826ED65DD009FD801 /* LoopKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847530F526ED65DD009FD801 /* LoopKitUI.framework */; };
 		A91B2DEC276E1E5E001B0E95 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A91B2DEB276E1E5E001B0E95 /* README.md */; };
 		B62557432BF65396006C4517 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62557422BF65396006C4517 /* Bundle.swift */; };
+		B66A6B7A2E6B988400F1641B /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B66A6B792E6B988400F1641B /* Localizable.xcstrings */; };
 		B802D5062C1F674600B92C35 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B802D5052C1F674600B92C35 /* NotificationHelper.swift */; };
 		B802D5092C1F675600B92C35 /* InteractiveBluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B802D5072C1F675600B92C35 /* InteractiveBluetoothManager.swift */; };
 		B802D50A2C1F675600B92C35 /* ContinousBluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B802D5082C1F675600B92C35 /* ContinousBluetoothManager.swift */; };
@@ -170,6 +171,7 @@
 		847530F526ED65DD009FD801 /* LoopKitUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LoopKitUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A91B2DEB276E1E5E001B0E95 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B62557422BF65396006C4517 /* Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
+		B66A6B792E6B988400F1641B /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		B802D5052C1F674600B92C35 /* NotificationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
 		B802D5072C1F675600B92C35 /* InteractiveBluetoothManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractiveBluetoothManager.swift; sourceTree = "<group>"; };
 		B802D5082C1F675600B92C35 /* ContinousBluetoothManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContinousBluetoothManager.swift; sourceTree = "<group>"; };
@@ -372,6 +374,7 @@
 				84752E8426ED0FFE009FD801 /* DanaKit */,
 				B88516882B305D3F0063402A /* DanaKitUI */,
 				C187C198279086A8006E3557 /* DanaKitPlugin */,
+				B66A6B772E6B985D00F1641B /* Localization */,
 				84752E8326ED0FFE009FD801 /* Products */,
 				84752E9C26ED10A0009FD801 /* Frameworks */,
 				3E6007AA2D0C5DF200B186D1 /* Recovered References */,
@@ -445,6 +448,14 @@
 				B8F4E1A72B83D28A000F4AE1 /* BackgroundTask.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		B66A6B772E6B985D00F1641B /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				B66A6B792E6B988400F1641B /* Localizable.xcstrings */,
+			);
+			path = Localization;
 			sourceTree = "<group>";
 		};
 		B85418B12B20F90200C3B4D0 /* Packets */ = {
@@ -767,6 +778,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A91B2DEC276E1E5E001B0E95 /* README.md in Resources */,
+				B66A6B7A2E6B988400F1641B /* Localizable.xcstrings in Resources */,
 				B8F4E1AA2B83D4F1000F4AE1 /* blank.wav in Resources */,
 				B88516932B30C6DA0063402A /* DanaKitReservoirView.xib in Resources */,
 				B871156F2B4C8419004B4A98 /* DanaKitUI.xcassets in Resources */,
@@ -1094,6 +1106,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				LOCALIZED_STRING_MACRO_NAMES = (
 					NSLocalizedString,
 					CFCopyLocalizedString,
@@ -1105,6 +1118,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1160,6 +1174,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				LOCALIZED_STRING_MACRO_NAMES = (
 					NSLocalizedString,
 					CFCopyLocalizedString,
@@ -1170,6 +1185,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
