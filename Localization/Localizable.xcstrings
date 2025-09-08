@@ -3383,10 +3383,16 @@
             "value" : "Cancel"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "निरस्त"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Annullamento"
+            "value" : "Annulla"
           }
         },
         "ja" : {
@@ -3398,7 +3404,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cancel"
+            "value" : "Avbryt"
           }
         },
         "nl" : {
@@ -3419,10 +3425,16 @@
             "value" : "Cancelar"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
+        },
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Anulează"
+            "value" : "Renunță"
           }
         },
         "ru" : {
@@ -3452,7 +3464,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cancel"
+            "value" : "Hủy bỏ"
           }
         },
         "zh-Hans" : {
@@ -9708,7 +9720,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Insulina\nSospesa"
+            "value" : "Insulina \nSospesa"
           }
         },
         "ja" : {
@@ -9720,7 +9732,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Insulin\nSuspended"
+            "value" : "Insulin\n Suspendert"
           }
         },
         "nl" : {
@@ -9732,7 +9744,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Insulina\nzawieszona"
+            "value" : "Podawanie\nzawieszone"
           }
         },
         "pt_BR" : {
@@ -9750,7 +9762,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Инсулин\nприостановлен"
+            "value" : "Подача инсулина приостановлена"
           }
         },
         "sk" : {
@@ -11535,7 +11547,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sin insulina"
+            "value" : "No hay insulina"
           }
         },
         "fi" : {
@@ -11559,7 +11571,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nessuna insulina"
+            "value" : "Insulina esaurita"
           }
         },
         "ja" : {
@@ -11571,7 +11583,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Insulin"
+            "value" : "Ingen insulin"
           }
         },
         "nl" : {
@@ -11601,7 +11613,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Без инсулина"
+            "value" : "Нет инсулина"
           }
         },
         "sk" : {
@@ -11619,7 +11631,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "İnsülin Yok"
+            "value" : "İnsülin yok"
           }
         },
         "vi" : {
@@ -12622,6 +12634,12 @@
             "value" : "OK"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12649,7 +12667,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "TAMAM."
+            "value" : "Tamam"
           }
         },
         "vi" : {
@@ -16531,7 +16549,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Currículum"
+            "value" : "Reanudar"
           }
         },
         "fi" : {
@@ -16555,7 +16573,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Il curriculum"
+            "value" : "Riprendi"
           }
         },
         "ja" : {
@@ -16567,7 +16585,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Resume"
+            "value" : "Gjenoppta"
           }
         },
         "nl" : {
@@ -16579,7 +16597,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wznowienie"
+            "value" : "Wznowiono"
           }
         },
         "pt_BR" : {
@@ -16591,13 +16609,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "CV"
+            "value" : "Reluați"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Резюме"
+            "value" : "Возобновление"
           }
         },
         "sk" : {
@@ -16615,7 +16633,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Özgeçmiş"
+            "value" : "Devam et"
           }
         },
         "vi" : {
@@ -18946,7 +18964,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Perdita di segnale"
+            "value" : "Perdita segnale"
           }
         },
         "ja" : {
@@ -18958,7 +18976,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Signal Loss"
+            "value" : "Signal Tap"
           }
         },
         "nl" : {
@@ -18982,13 +19000,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pierderea semnalului"
+            "value" : "Pierdere de semnal"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Потеря сигнала"
+            "value" : "Сигнал потерян"
           }
         },
         "sk" : {
@@ -19241,10 +19259,16 @@
             "value" : "Status"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estado"
+          }
+        },
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Statut"
+            "value" : "Stare"
           }
         },
         "ru" : {
@@ -19274,7 +19298,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Status"
+            "value" : "Tình trạng"
           }
         },
         "zh-Hans" : {
@@ -19819,7 +19843,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sospendere"
+            "value" : "Sospendi"
           }
         },
         "ja" : {
@@ -19831,7 +19855,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Suspend"
+            "value" : "Suspendere"
           }
         },
         "nl" : {
@@ -19843,7 +19867,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zawieszenie"
+            "value" : "Wstrzymano"
           }
         },
         "pt_BR" : {
@@ -19861,13 +19885,13 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Приостановить"
+            "value" : "Приостановка"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pozastaviť"
+            "value" : "Pozastavenie"
           }
         },
         "sv" : {
@@ -21135,7 +21159,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "L'ora sul microinfusore è diversa dall'ora corrente. Si desidera aggiornare l'ora del microinfusore all'ora corrente?"
+            "value" : "L'orario indicato sulla pompa è diverso dall'orario attuale. Vuoi aggiornare l'orario indicato sulla pompa con l'orario attuale?"
           }
         },
         "ja" : {
@@ -21147,7 +21171,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The time on your pump is different from the current time. Do you want to update the time on your pump to the current time?"
+            "value" : "Klokken på pumpen er forskjellig fra gjeldende tid. Vil du oppdatere tiden på pumpen til gjeldende tid?"
           }
         },
         "nl" : {
@@ -21159,7 +21183,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Godzina na pompie różni się od aktualnej godziny. Czy chcesz zaktualizować czas na pompie do aktualnego czasu?"
+            "value" : "Czas na pompie różni się od aktualnego. Czy chcesz zaktualizować czas na pompie?"
           }
         },
         "pt_BR" : {
@@ -21171,13 +21195,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ora de pe pompa dvs. este diferită de ora curentă. Doriți să actualizați ora de pe pompa dvs. la ora curentă?"
+            "value" : "Ora de pe pompă este diferită de ora curentă. Puteți revizui ora pompei și să o sincronizați cu ora curentă în meniul setări."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Время на вашем насосе отличается от текущего времени. Вы хотите обновить время на вашем насосе до текущего времени?"
+            "value" : "Время на вашей помпе отличается от текущего времени. Вы хотите обновить время на вашей помпе на текущее?"
           }
         },
         "sk" : {
@@ -21641,7 +21665,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Variazione di tempo rilevata"
+            "value" : "Rilevato cambio di orario"
           }
         },
         "ja" : {
@@ -21653,7 +21677,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Time Change Detected"
+            "value" : "Tidsendring oppdaget"
           }
         },
         "nl" : {
@@ -21665,7 +21689,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wykryta zmiana czasu"
+            "value" : "Wykryto zmianę czasu"
           }
         },
         "pt_BR" : {
@@ -21677,7 +21701,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Schimbare de timp detectată"
+            "value" : "S-a detectat schimbarea orei"
           }
         },
         "ru" : {
@@ -21689,7 +21713,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zistená zmena času"
+            "value" : "Zistila sa zmena času"
           }
         },
         "sv" : {
@@ -21701,7 +21725,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zaman Değişikliği Tespit Edildi"
+            "value" : "Zaman Değişikliği Algılandı"
           }
         },
         "vi" : {
@@ -23258,7 +23282,86 @@
       }
     },
     "Yes" : {
-
+      "localizations" : {
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ja"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ja"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sí"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oui"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "כן"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SÌ"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ja"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ja"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tak"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Da"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Да"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Áno"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Evet"
+          }
+        }
+      }
     },
     "Yes, 1 hour" : {
       "comment" : "Button text to 1h",
@@ -24600,7 +24703,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sí, sincronización con la hora actual"
+            "value" : "Sí, sincronizar con la hora actual"
           }
         },
         "fi" : {
@@ -24624,7 +24727,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sì, sincronizzazione con l'ora corrente"
+            "value" : "Sì, sincronizza con l'orario corrente"
           }
         },
         "ja" : {
@@ -24636,7 +24739,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yes, Sync to Current Time"
+            "value" : "Ja, Synkroniser til gjeldende tid"
           }
         },
         "nl" : {
@@ -24648,7 +24751,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tak, synchronizacja z bieżącym czasem"
+            "value" : "Tak, zsynchronizuj z bieżącym czasem"
           }
         },
         "pt_BR" : {
@@ -24660,13 +24763,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Da, sincronizare cu ora curentă"
+            "value" : "Da, sincronizați cu ora curentă"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Да, синхронизация с текущим временем"
+            "value" : "Да, синхронизировать с текущим временем"
           }
         },
         "sk" : {
