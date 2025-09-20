@@ -22,5 +22,6 @@ export_languages:
   - vi
   - hu
 files:
-  - source: /Localization/en.lproj/Localizable.strings
-    translation: /Localization/%osx_locale%.lproj/Localizable.strings
+  - source: /Localization/Localizable.xcstrings
+    translation: /Localization/Localizable.xcstrings
+    multilingual: true
