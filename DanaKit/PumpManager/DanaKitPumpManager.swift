@@ -952,7 +952,7 @@ extension DanaKitPumpManager: PumpManager {
                         if percentage > 200, duration != .minutes(15) {
                             duration = .minutes(15)
                         }
-                        
+
                         var unitsPerHour = unitsPerHour
                         if percentage > 500 {
                             // The pump does not support temp basals over 500%
