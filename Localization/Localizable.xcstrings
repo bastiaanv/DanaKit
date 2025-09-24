@@ -67,7 +67,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " is ready to be used!"
+            "value" : "er klar til bruk!"
           }
         },
         "nl" : {
@@ -133,7 +133,21 @@
       }
     },
     ". Please go to your bluetooth settings, forget this device, and try again" : {
-      "comment" : "Dana-i failed to pair p2"
+      "comment" : "Dana-i failed to pair p2",
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gå til Bluetooth-innstillingene, glem denne enheten og prøv på nytt."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请前往您的蓝牙设置，忽略此设备，然后重试"
+          }
+        }
+      }
     },
     "%@%@ / %@%@" : {
       "localizations" : {
@@ -142,14 +156,36 @@
             "state" : "new",
             "value" : "%1$@%2$@ / %3$@%4$@"
           }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@%2$@ / %3$@%4$@"
+          }
         }
       }
     },
     "%@U" : {
-      "comment" : "Format string for reservoir volume. (1: The localized volume)"
+      "comment" : "Format string for reservoir volume. (1: The localized volume)",
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@E"
+          }
+        }
+      }
     },
     "%1$@ units remaining at %2$@" : {
-      "comment" : "Accessibility format string for (1: localized volume)(2: time)"
+      "comment" : "Accessibility format string for (1: localized volume)(2: time)",
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ enheter gjenstår ved %2$@"
+          }
+        }
+      }
     },
     "%u %@" : {
       "localizations" : {
@@ -158,11 +194,25 @@
             "state" : "new",
             "value" : "%1$u %2$@"
           }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$u %2$@"
+          }
         }
       }
     },
     "12 sec/E" : {
-      "comment" : "Dana bolus speed 12u per min"
+      "comment" : "Dana bolus speed 12u per min",
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "12 sek/E"
+          }
+        }
+      }
     },
     "12 sec/U" : {
       "comment" : "Dana bolus speed 12u per min",
@@ -237,7 +287,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "12 sec/U"
+            "value" : "12 sek/u"
           }
         },
         "nl" : {
@@ -368,7 +418,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "12h notation"
+            "value" : "12 timers notasjon"
           }
         },
         "nl" : {
@@ -499,7 +549,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "24h display"
+            "value" : "24 timers visning"
           }
         },
         "nl" : {
@@ -630,7 +680,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "24h notation"
+            "value" : "24-timers notasjon"
           }
         },
         "nl" : {
@@ -696,7 +746,15 @@
       }
     },
     "30 sec/E" : {
-      "comment" : "Dana bolus speed 30u per min"
+      "comment" : "Dana bolus speed 30u per min",
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "30 sek/E"
+          }
+        }
+      }
     },
     "30 sec/U" : {
       "comment" : "Dana bolus speed 30u per min",
@@ -771,7 +829,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "30 sec/U"
+            "value" : "30 sek/u"
           }
         },
         "nl" : {
@@ -837,7 +895,15 @@
       }
     },
     "60 sec/E" : {
-      "comment" : "Dana bolus speed 60u per min"
+      "comment" : "Dana bolus speed 60u per min",
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "60 sek/E"
+          }
+        }
+      }
     },
     "60 sec/U" : {
       "comment" : "Dana bolus speed 60u per min",
@@ -912,7 +978,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "60 sec/U"
+            "value" : "60 sek/E"
           }
         },
         "nl" : {
@@ -1043,7 +1109,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "A blood glucose check reminder has been setup in your pump and is triggered. Please remove it or give your glucose level to the pump"
+            "value" : "En påminnelse om blodsukkerkontroll er satt opp i pumpen og utløses. Fjern den eller gi glukosenivået til pumpen"
           }
         },
         "nl" : {
@@ -1174,7 +1240,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "A bolus timeout is active. The loop cycle cannot be completed till the timeout is inactive"
+            "value" : "Bolus-timeout er aktiv. Sløyfen kan ikke fullføres før timeouten er over."
           }
         },
         "nl" : {
@@ -1305,7 +1371,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Action has been canceled, because the pump is busy"
+            "value" : "Handlingen er avbrutt fordi pumpen er opptatt"
           }
         },
         "nl" : {
@@ -1442,7 +1508,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "After setting up the insulin type and bolus speed, you will see a screen with all found Dana pumps. Select the pump you want to link with %1$@."
+            "value" : "Etter at du har konfigurert insulintype og bolushastighet, vil du se en skjerm med alle funnet Dana-pumper. Velg pumpen du vil koble til %1$@."
           }
         },
         "nl" : {
@@ -1573,7 +1639,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Alarm beeps"
+            "value" : "Alarmen piper"
           }
         },
         "nl" : {
@@ -1704,7 +1770,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "An unknown error has occurred during processing the alert from the pump. Please report this"
+            "value" : "Det har oppstått en ukjent feil under behandlingen av varselet fra pumpen. Vennligst rapporter dette"
           }
         },
         "nl" : {
@@ -1770,10 +1836,36 @@
       }
     },
     "Are you sure you want to bolus 5E?" : {
-
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Er du sikker på at du vil gi bolus 5E?"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "您确定要注射 5 单位追加胰岛素吗？"
+          }
+        }
+      }
     },
     "Are you sure you want to set the temp basal to 200% for 1 hour?" : {
-
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Er du sikker på at du vil sette temp basal til 200 % i 1 time?"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "您确定要将温度基础设置为 200% 并持续 1 小时吗？"
+          }
+        }
+      }
     },
     "Are you sure you want to stop using Dana-i/RS?" : {
       "comment" : "Message for Dana-i/RS PumpManager deletion action sheet",
@@ -1841,7 +1933,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Are you sure you want to stop using Dana-i/RS?"
+            "value" : "Er du sikker på at du vil slutte å bruke Dana-i/RS?"
           }
         },
         "nl" : {
@@ -2675,7 +2767,15 @@
       }
     },
     "Battery is empty. Replace it now!" : {
-      "comment" : "Alert body for batteryZeroPercent"
+      "comment" : "Alert body for batteryZeroPercent",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "电池没电了。请立即更换！"
+          }
+        }
+      }
     },
     "Battery level" : {
       "comment" : "Text for Battery level",
@@ -3196,7 +3296,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "玻流体"
+            "value" : "追加胰岛素"
           }
         }
       }
@@ -4662,7 +4762,14 @@
       }
     },
     "Connect" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "连接"
+          }
+        }
+      }
     },
     "Connected" : {
       "comment" : "DanaKit connected",
@@ -4861,7 +4968,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Connecting"
+            "value" : "Tilkobling"
           }
         },
         "nl" : {
@@ -4992,7 +5099,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Continue"
+            "value" : "Fortsett"
           }
         },
         "nl" : {
@@ -5123,7 +5230,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Daily limit reached"
+            "value" : "Daglig grense nådd"
           }
         },
         "nl" : {
@@ -5385,7 +5492,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dana-i/RS Setup"
+            "value" : "Dana-i/RS-oppsett"
           }
         },
         "nl" : {
@@ -5516,7 +5623,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dana-RS v3 found!"
+            "value" : "Dana-RS v3 funnet!"
           }
         },
         "nl" : {
@@ -5904,7 +6011,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "giorno/i"
+            "value" : "U/giorno"
           }
         },
         "ja" : {
@@ -5916,7 +6023,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "day(s)"
+            "value" : "dag(er)"
           }
         },
         "nl" : {
@@ -5982,10 +6089,30 @@
       }
     },
     "DEBUG: Bolus action" : {
-
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DEBUG: Bolus-handling"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "调试：追加胰岛素操作"
+          }
+        }
+      }
     },
     "DEBUG: Temp basal action" : {
-
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DEBUG: Midlertidig basal handling"
+          }
+        }
+      }
     },
     "Delete pump" : {
       "comment" : "Button text to confirm Dana-i/RS PumpManager deletion",
@@ -6053,7 +6180,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Delete pump"
+            "value" : "Slett pumpe"
           }
         },
         "nl" : {
@@ -6184,7 +6311,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Delete Pump"
+            "value" : "Slette pumpe"
           }
         },
         "nl" : {
@@ -6315,7 +6442,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Delivery speed"
+            "value" : "Leveringshastighet"
           }
         },
         "nl" : {
@@ -6381,7 +6508,20 @@
       }
     },
     "Device found!" : {
-
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enhet funnet!"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "发现设备！"
+          }
+        }
+      }
     },
     "Disable bolus syncing?" : {
       "comment" : "Title for bolus syncing disable action sheet",
@@ -6456,7 +6596,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Disable bolus syncing?"
+            "value" : "Deaktiver bolussynkronisering?"
           }
         },
         "nl" : {
@@ -6516,13 +6656,26 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "禁用栓剂同步？"
+            "value" : "禁用追加胰岛素同步？"
           }
         }
       }
     },
     "Disconnect" : {
-
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Koble fra"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "断开连接"
+          }
+        }
+      }
     },
     "Disconnect from pump" : {
       "comment" : "DanaKit disconnect",
@@ -6590,7 +6743,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Disconnect from pump"
+            "value" : "Koble fra pumpen"
           }
         },
         "nl" : {
@@ -6721,7 +6874,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Disconnected"
+            "value" : "Frakoblet"
           }
         },
         "nl" : {
@@ -6852,7 +7005,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Disconnecting..."
+            "value" : "Kobler fra..."
           }
         },
         "nl" : {
@@ -6918,7 +7071,20 @@
       }
     },
     "Do bolus" : {
-
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gjør bolus"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "执行追加胰岛素"
+          }
+        }
+      }
     },
     "Do you wish to receive a notification when the pump is longer disconnected for a specific time?" : {
       "comment" : "body disconnect reminder sheet",
@@ -6986,7 +7152,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Do you wish to receive a notification when the pump is longer disconnected for a specific time?"
+            "value" : "Ønsker du å motta et varsel når pumpen ikke lenger er koblet fra i en bestemt periode?"
           }
         },
         "nl" : {
@@ -7052,7 +7218,20 @@
       }
     },
     "Done" : {
-
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ferdig"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "完成"
+          }
+        }
+      }
     },
     "During the pairing process, your Dana-i will show a pairing prompt while your iPhone will show a prompt for a pairing code. On you pump, select OK and type the 6-digit code in screen on your iPhone. After that, %1$@ is ready to communicate with your Dana-i" : {
       "comment" : "Subtext for dana-i (1: appName)",
@@ -7120,7 +7299,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "During the pairing process, your Dana-i will show a pairing prompt while your iPhone will show a prompt for a pairing code. On you pump, select OK and type the 6-digit code in screen on your iPhone. After that, %1$@ is ready to communicate with your Dana-i"
+            "value" : "Under sammenkoblingsprosessen vil Dana-i vise en sammenkoblingsmelding mens iPhone vil vise en melding om en sammenkoblingskode. På pumpen velger du OK og skriver inn den 6-sifrede koden på skjermen på iPhone. Deretter %1$@ er klar til å kommunisere med din Dana-i"
           }
         },
         "nl" : {
@@ -7186,7 +7365,21 @@
       }
     },
     "During the pairing process, your DanaRS v1 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, %1$@ is ready to communicate with your DanaRS v1" : {
-      "comment" : "Subtext for danars v1 (1: appName)"
+      "comment" : "Subtext for danars v1 (1: appName)",
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Under sammenkoblingsprosessen vil DanaRS v1 vise en sammenkoblingsmelding, mens iPhone vil vise en melding om en sammenkoblingskode. Velg OK på pumpen, og skriv inn koden på iPhone. Etter dette er %1$@ klar til å kommunisere med DanaRS v1"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在配对过程中，你的 DanaRS v1 胰岛素泵会显示一个配对提示，而你的 iPhone 会弹出输入配对码的提示。在胰岛素泵上选择“确定”，然后在 iPhone 上输入该配对码。完成后，%1$@ 将准备好与 DanaRS v1 通讯。"
+          }
+        }
+      }
     },
     "During the pairing process, your DanaRS v1 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, Loop is ready to communicate with your DanaRS v1" : {
       "comment" : "Subtext for danars v1",
@@ -7249,7 +7442,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Under sammenkoblingsprosessen, vil DanaRS v1 vise en tilkoblingsforespørsel mens du iPhone viser en ledetekst for en paringskode. På din pumpe, velg OK og skriv inn koden på din iPhone. Etter det, er Loop klar til å kommunisere med din DanaRS v1"
+            "value" : "Under sammenkoblingsprosessen vil DanaRS v1 vise en sammenkoblingsmelding, mens iPhone vil vise en melding om en sammenkoblingskode. Velg OK på pumpen, og skriv inn koden på iPhone. Etter dette er Loop klar til å kommunisere med DanaRS v1"
           }
         },
         "nl" : {
@@ -7324,16 +7517,42 @@
             "value" : "ペアリング中、DanaRS v3にはペアリングのプロンプトが表示され、iPhoneにはペアリングコードのプロンプトが表示されます。ポンプでOKを選択し、iPhoneにコードを入力します。その後、LoopはDanaRS v1と通信できます。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Under sammenkoblingsprosessen vil DanaRS v3 vise en sammenkoblingsmelding, mens iPhone vil vise en melding om en sammenkoblingskode. Velg OK på pumpen, og skriv inn koden på iPhone. Etter dette er Loop klar til å kommunisere med DanaRS v1"
+          }
+        },
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "În timpul procesului de împerechere, DanaRS v3 va afișa o solicitare de împerechere, în timp ce iPhone-ul va afișa o solicitare pentru un cod de împerechere. Pe pompă, selectați OK și tastați codul de pe iPhone. După aceea, Loop este gata să comunice cu DanaRS v1"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在配对过程中，你的 DanaRS v3 胰岛素泵会显示一个配对提示，而你的 iPhone 会显示输入配对码的提示。在胰岛素泵上选择“确定”，然后在 iPhone 上输入该配对码。完成后，Loop 将准备好与 DanaRS v1 通讯。"
+          }
         }
       }
     },
     "During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for two pairing codes. On your pump, select OK and type the two codes on your iPhone. After that, %1$@ is ready to communicate with your DanaRS v3" : {
-      "comment" : "Subtext for danars v3 (1: appName)"
+      "comment" : "Subtext for danars v3 (1: appName)",
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Under sammenkoblingsprosessen vil DanaRS v3 vise en sammenkoblingsmelding, mens iPhone vil vise en melding om to sammenkoblingskoder. Velg OK på pumpen, og skriv inn de to kodene på iPhone. Etter dette er %1$@ klar til å kommunisere med DanaRS v3"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在配对过程中，你的 DanaRS v3 胰岛素泵会显示一个配对提示，而你的 iPhone 会显示两个配对码的输入框。在胰岛素泵上选择“确定”，然后在 iPhone 上输入这两个配对码。完成后，%1$@ 将准备好与 DanaRS v3 通讯。"
+          }
+        }
+      }
     },
     "During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for two pairing codes. On your pump, select OK and type the two codes on your iPhone. After that, Loop is ready to communicate with your DanaRS v3" : {
       "comment" : "Subtext for danars v3",
@@ -7408,7 +7627,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for two pairing codes. On your pump, select OK and type the two codes on your iPhone. After that, Loop is ready to communicate with your DanaRS v3"
+            "value" : "Under sammenkoblingsprosessen vil DanaRS v3 vise en sammenkoblingsmelding, mens iPhone vil vise en melding om to sammenkoblingskoder. Velg OK på pumpen, og skriv inn de to kodene på iPhone. Etter dette er Loop klar til å kommunisere med DanaRS v3"
           }
         },
         "nl" : {
@@ -7736,7 +7955,14 @@
       }
     },
     "Error while starting scanning for devices..." : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "开始扫描设备时出错..."
+          }
+        }
+      }
     },
     "ERROR: Failed to pair device" : {
       "comment" : "Dana-i invalid ble5 keys",
@@ -7804,7 +8030,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ERROR: Failed to pair device"
+            "value" : "FEIL: Kunne ikke koble sammen enheten"
           }
         },
         "nl" : {
@@ -8670,7 +8896,15 @@
       }
     },
     "Failed to pair to " : {
-      "comment" : "Dana-i failed to pair p1"
+      "comment" : "Dana-i failed to pair p1",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "配对失败 "
+          }
+        }
+      }
     },
     "Failed to prime the cannula. Please try again later" : {
       "comment" : "Label for error third step refill",
@@ -10644,7 +10878,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "caricamento"
+            "value" : "Caricamento..."
           }
         },
         "ja" : {
@@ -10656,7 +10890,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "loading"
+            "value" : "Laster"
           }
         },
         "nl" : {
@@ -10716,7 +10950,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "装载量"
+            "value" : "加载中"
           }
         }
       }
@@ -10794,7 +11028,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Loading"
+            "value" : "Laster"
           }
         },
         "nl" : {
@@ -10925,7 +11159,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Low pump battery"
+            "value" : "Lavt batteri i pumpen"
           }
         },
         "nl" : {
@@ -11056,7 +11290,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Low reservoir reminder"
+            "value" : "Påminnelse om lavt reservoar"
           }
         },
         "nl" : {
@@ -11187,7 +11421,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Manually sync Pump time"
+            "value" : "Synkroniser pumpetiden manuelt"
           }
         },
         "nl" : {
@@ -11318,7 +11552,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Missed Blood glucose check"
+            "value" : "Mistet blodsukkermåling"
           }
         },
         "nl" : {
@@ -11449,7 +11683,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nightly pump time sync"
+            "value" : "Synkronisering av pumpetid om natten"
           }
         },
         "nl" : {
@@ -11515,7 +11749,20 @@
       }
     },
     "No" : {
-
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nei"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "不"
+          }
+        }
+      }
     },
     "No Insulin" : {
       "comment" : "Status highlight that a pump is out of insulin.",
@@ -11714,7 +11961,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No, just disconnect"
+            "value" : "Nei, bare koble fra"
           }
         },
         "nl" : {
@@ -11845,7 +12092,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No, Keep as is"
+            "value" : "Nei, behold som det er"
           }
         },
         "nl" : {
@@ -11976,7 +12223,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No, Keep Pump As Is"
+            "value" : "Nei, behold pumpen som den er"
           }
         },
         "nl" : {
@@ -12220,7 +12467,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Note: You Dana pump has a special setting which allows you to silence your Dana pump beeps. To enable this, please contact your Dana distributor"
+            "value" : "Merk: Dana-pumpen har en spesiell innstilling som gjør at du kan dempe pipelyden i Dana-pumpen. Kontakt Dana-distributøren din for å aktivere dette"
           }
         },
         "nl" : {
@@ -12351,7 +12598,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Occlusion"
+            "value" : "Okklusjon"
           }
         },
         "nl" : {
@@ -12482,7 +12729,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Off"
+            "value" : "Av"
           }
         },
         "nl" : {
@@ -12951,7 +13198,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "仅支持自动注射"
+            "value" : "仅支持自动追加胰岛素"
           }
         }
       }
@@ -13620,13 +13867,21 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "请考虑在设置菜单中更改配料策略"
+            "value" : "请考虑在设置菜单中更改您的给药策略。"
           }
         }
       }
     },
     "Prime amount" : {
-      "comment" : "Label for tube refilled amount"
+      "comment" : "Label for tube refilled amount",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "预注剂量"
+          }
+        }
+      }
     },
     "Pump battery 0%" : {
       "comment" : "Alert title for batteryZeroPercent",
@@ -14291,7 +14546,15 @@
       }
     },
     "Pump is disconnected" : {
-      "comment" : "Title disconnect warning notification"
+      "comment" : "Title disconnect warning notification",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "泵已断开"
+          }
+        }
+      }
     },
     "Pump is still disconnected" : {
       "comment" : "Title disconnect reminder notification",
@@ -14950,7 +15213,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "重新启用栓剂同步？"
+            "value" : "重新启用追加胰岛素同步？"
           }
         }
       }
@@ -15021,7 +15284,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Received invalid hex strings. Try again"
+            "value" : "Mottok ugyldige hex-strenger. Prøv igjen"
           }
         },
         "nl" : {
@@ -15152,7 +15415,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Received invalid pincode lengths. Try again"
+            "value" : "Mottatt ugyldige pinkodelengder. Prøv igjen"
           }
         },
         "nl" : {
@@ -15218,7 +15481,21 @@
       }
     },
     "Reconnect to pump" : {
-      "comment" : "DanaKit reconnect"
+      "comment" : "DanaKit reconnect",
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Koble til pumpen igjen"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重新连接到泵"
+          }
+        }
+      }
     },
     "Reconnect tp pump" : {
       "comment" : "DanaKit connect",
@@ -15293,7 +15570,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reconnect tp pump"
+            "value" : "Koble til tp-pumpen igjen"
           }
         },
         "nl" : {
@@ -15424,7 +15701,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reconnecting..."
+            "value" : "Kobler til igjen..."
           }
         },
         "nl" : {
@@ -15555,7 +15832,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Refill amount"
+            "value" : "Påfyllingsmengde"
           }
         },
         "nl" : {
@@ -15686,7 +15963,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Remaining insulin level"
+            "value" : "Gjenværende insulinnivå"
           }
         },
         "nl" : {
@@ -15817,7 +16094,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Remove Pump"
+            "value" : "Fjern pumpen"
           }
         },
         "nl" : {
@@ -15948,7 +16225,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reservoir age"
+            "value" : "Reservoarets alder"
           }
         },
         "nl" : {
@@ -16067,7 +16344,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reservoar^beløp"
+            "value" : "Reservoarmengde"
           }
         },
         "nl" : {
@@ -16192,7 +16469,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reservoir and cannula"
+            "value" : "Reservoar og kanyle"
           }
         },
         "nl" : {
@@ -16323,7 +16600,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reservoir is empty. Replace it now!"
+            "value" : "Reservoaret er tomt. Bytt det ut nå!"
           }
         },
         "nl" : {
@@ -16454,7 +16731,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reservoir/cannula refill"
+            "value" : "Påfylling av reservoar/kanyle"
           }
         },
         "nl" : {
@@ -16716,7 +16993,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Resume delivery"
+            "value" : "Gjenoppta levering"
           }
         },
         "nl" : {
@@ -16847,7 +17124,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Save"
+            "value" : "Lagre"
           }
         },
         "nl" : {
@@ -16913,7 +17190,20 @@
       }
     },
     "Scan" : {
-
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Søk"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "扫描"
+          }
+        }
+      }
     },
     "Scanning" : {
       "comment" : "Scanning text",
@@ -16981,7 +17271,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scanning"
+            "value" : "Søker"
           }
         },
         "nl" : {
@@ -17112,7 +17402,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scheduled Basal"
+            "value" : "Planlagt basal"
           }
         },
         "nl" : {
@@ -17243,7 +17533,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scroll function"
+            "value" : "Rulle funksjon"
           }
         },
         "nl" : {
@@ -17440,7 +17730,21 @@
       }
     },
     "Select insulin type" : {
-      "comment" : "Title for insulin type"
+      "comment" : "Title for insulin type",
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Velg insulintype"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "选择胰岛素类型"
+          }
+        }
+      }
     },
     "Select insulin Type" : {
       "comment" : "Title for insulin type",
@@ -17515,7 +17819,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select insulin Type"
+            "value" : "Velg insulintype"
           }
         },
         "nl" : {
@@ -17646,7 +17950,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select the type of insulin that you will be using in this pump"
+            "value" : "Velg insulintypen du vil bruke i denne pumpen"
           }
         },
         "nl" : {
@@ -17712,7 +18016,21 @@
       }
     },
     "Select the type of insulin that you will be using in this pump." : {
-      "comment" : "Title text for insulin type confirmation page"
+      "comment" : "Title text for insulin type confirmation page",
+      "localizations" : {
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Velg insulintypen du vil bruke i denne pumpen."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "选择您将在此泵中使用的胰岛素类型。"
+          }
+        }
+      }
     },
     "Select your pump" : {
       "comment" : "Subtitle for DanaKitSetupView",
@@ -17780,7 +18098,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select your pump"
+            "value" : "Velg din pumpe"
           }
         },
         "nl" : {
@@ -17911,7 +18229,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Set reminder for disconnect"
+            "value" : "Angi påminnelse for frakobling"
           }
         },
         "nl" : {
@@ -18049,7 +18367,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Set the basal profile the pump should use. Note, that it will overwrite the profile that is in the pump, with the one in %1$@"
+            "value" : "Angi basalprofilen pumpen skal bruke. Merk at den vil overskrive profilen som er i pumpen, med profilen i %1$@"
           }
         },
         "nl" : {
@@ -18187,7 +18505,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Setting temp basal is not supported at this time"
+            "value" : "Innstilling av temp basal støttes ikke for øyeblikket"
           }
         },
         "nl" : {
@@ -18646,7 +18964,15 @@
       }
     },
     "Setup Complete" : {
-      "comment" : "Title for setup complete"
+      "comment" : "Title for setup complete",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设置完成"
+          }
+        }
+      }
     },
     "Share Dana pump logs" : {
       "comment" : "DanaKit share logs",
@@ -18702,7 +19028,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Condividi i registri delle pompe Dana"
+            "value" : "Condividi i registri della pompa Dana"
           }
         },
         "ja" : {
@@ -18833,7 +19159,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "L'ora deve essere visualizzata in 12 o 24 ore"
+            "value" : "L'orario dovrebbe essere visualizzato in 12 o 24 ore?"
           }
         },
         "ja" : {
@@ -19304,7 +19630,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "现状"
+            "value" : "状态"
           }
         }
       }
@@ -19656,7 +19982,14 @@
       }
     },
     "Stop bolus" : {
-
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "停止追加胰岛素注射"
+          }
+        }
+      }
     },
     "Stop temp basal" : {
       "comment" : "Dana settings stop temp basal",
@@ -20183,7 +20516,20 @@
       }
     },
     "temp basal" : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Basale temporanea"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "临时基础率"
+          }
+        }
+      }
     },
     "Temp Basal" : {
       "comment" : "Pump Event title for UnfinalizedDose with doseType of .tempBasal",
@@ -21103,7 +21449,15 @@
       }
     },
     "The pump reminds you when the amount of insulin in the pump reaches this level" : {
-      "comment" : "Description for low reservoir reminder"
+      "comment" : "Description for low reservoir reminder",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "当泵中的胰岛素量达到此水平时，泵会提醒您"
+          }
+        }
+      }
     },
     "The time on your pump is different from the current time. Do you want to update the time on your pump to the current time?" : {
       "comment" : "Message for pod sync time action sheet",
@@ -21493,7 +21847,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "太久没有与泵进行任何交互。要么禁用泵中的这一功能，要么与泵进行交互"
+            "value" : "长时间未与胰岛素泵进行交互。请在胰岛素泵中禁用此功能，或进行一次操作以恢复交互。"
           }
         }
       }
@@ -21737,7 +22091,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "检测到的时间变化"
+            "value" : "检测到时间变更"
           }
         }
       }
@@ -21999,7 +22353,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "切换无声音调？"
+            "value" : "切换静音提示音？"
           }
         }
       }
@@ -22112,7 +22466,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "软管填充量"
+            "value" : "输注管补药剂量"
           }
         }
       }
@@ -22243,7 +22597,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "笔芯类型"
+            "value" : "补药类型"
           }
         }
       }
@@ -22314,7 +22668,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "U"
+            "value" : "E"
           }
         },
         "nl" : {
@@ -22445,7 +22799,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "U/hr"
+            "value" : "E/t"
           }
         },
         "nl" : {
@@ -22576,7 +22930,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Unknown"
+            "value" : "Ukjent"
           }
         },
         "nl" : {
@@ -22707,7 +23061,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Unknown error"
+            "value" : "Ukjent feil"
           }
         },
         "nl" : {
@@ -22838,7 +23192,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "User options"
+            "value" : "Brukeralternativer"
           }
         },
         "nl" : {
@@ -22957,7 +23311,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vibrazioni"
+            "value" : "Vibrazione"
           }
         },
         "ja" : {
@@ -22969,7 +23323,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vibration"
+            "value" : "Vibrasjon"
           }
         },
         "nl" : {
@@ -23035,7 +23389,27 @@
       }
     },
     "WARNING: Please don't use this until you've read the documentation" : {
-      "comment" : "Warning message continuous mode"
+      "comment" : "Warning message continuous mode",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ATTENZIONE: non utilizzare questo strumento prima di aver letto la documentazione"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ADVARSEL: Ikke bruk dette før du har lest dokumentasjonen"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "警告：在充分阅读文档之前请不要使用此功能"
+          }
+        }
+      }
     },
     "WARNING: USE WITH CAUTION!" : {
       "comment" : "Title for warning refill",
@@ -23091,7 +23465,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ADVARSEL: BRUK MED ADVARSEL!"
+            "value" : "ADVARSEL: BRUK MED FORSIKTIGHET!"
           }
         },
         "nl" : {
@@ -23204,7 +23578,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Che cos'è questo?"
+            "value" : "Cos'è questo?"
           }
         },
         "ja" : {
@@ -23216,7 +23590,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "What is this?"
+            "value" : "Hva er dette?"
           }
         },
         "nl" : {
@@ -23360,6 +23734,12 @@
             "state" : "translated",
             "value" : "Evet"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "是"
+          }
         }
       }
     },
@@ -23429,7 +23809,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yes, 1 hour"
+            "value" : "Ja, 1 time"
           }
         },
         "nl" : {
@@ -23560,7 +23940,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yes, 5 minutes"
+            "value" : "Ja, 5 minutter"
           }
         },
         "nl" : {
@@ -23691,7 +24071,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yes, 15 minutes"
+            "value" : "Ja, 15 minutter"
           }
         },
         "nl" : {
@@ -23822,7 +24202,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yes, 30 minutes"
+            "value" : "Ja, 30 minutter"
           }
         },
         "nl" : {
@@ -23941,7 +24321,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sì, disabilitare la sincronizzazione del bolo"
+            "value" : "Sì, disattiva la sincronizzazione del bolo"
           }
         },
         "ja" : {
@@ -23953,7 +24333,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yes, disable bolus syncing"
+            "value" : "Ja, deaktiver bolussynkronisering"
           }
         },
         "nl" : {
@@ -24013,7 +24393,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "是，禁用栓剂同步"
+            "value" : "好的，已禁用追加胰岛素同步。"
           }
         }
       }
@@ -24084,7 +24464,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yes, Disable silent tones"
+            "value" : "Ja, Deaktiver lydløse toner"
           }
         },
         "nl" : {
@@ -24203,7 +24583,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sì, abilita i toni silenziosi"
+            "value" : "Sì, attiva i toni silenziosi"
           }
         },
         "ja" : {
@@ -24215,7 +24595,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yes, Enable silent tones"
+            "value" : "Ja, aktiver lydløse toner"
           }
         },
         "nl" : {
@@ -24334,7 +24714,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sì, riattivare la sincronizzazione del bolo"
+            "value" : "Sì, riattiva la sincronizzazione del bolo"
           }
         },
         "ja" : {
@@ -24346,7 +24726,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yes, re-enable bolus syncing"
+            "value" : "Ja, aktiver bolussynkronisering på nytt"
           }
         },
         "nl" : {
@@ -24406,7 +24786,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "是，重新启用药量同步"
+            "value" : "好的，已重新启用追加胰岛素同步。"
           }
         }
       }
@@ -24477,7 +24857,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yes, Switch to continuous mode"
+            "value" : "Ja, bytt til kontinuerlig modus"
           }
         },
         "nl" : {
@@ -24608,7 +24988,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yes, Switch to interactive mode"
+            "value" : "Ja, bytt til interaktiv modus"
           }
         },
         "nl" : {
@@ -24870,7 +25250,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your "
+            "value" : "Din"
           }
         },
         "nl" : {
@@ -24989,7 +25369,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Il limite giornaliero di basale è stato raggiunto. Contattare il distributore Dana per aumentare il limite."
+            "value" : "Il tuo limite giornaliero di basale è stato raggiunto. Contatta il tuo fornitore Dana per aumentare il limite."
           }
         },
         "ja" : {
@@ -25001,7 +25381,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your daily basal limit has been reached. Please contact your Dana distributer to increase the limit"
+            "value" : "Din daglige basalgrense er nådd. Ta kontakt med Dana-distributøren din for å øke grensen"
           }
         },
         "nl" : {
@@ -25120,7 +25500,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Il limite giornaliero di insulina è stato raggiunto. Contattare il distributore Dana per aumentare il limite."
+            "value" : "Il tuo limite giornaliero d'insulina è stato raggiunto. Contatta il tuo fornitore Dana per aumentare il limite."
           }
         },
         "ja" : {
@@ -25132,7 +25512,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your daily insulin limit has been reached. Please contact your Dana distributer to increase the limit"
+            "value" : "Din daglige insulingrense er nådd. Kontakt Dana-distributøren din for å øke grensen"
           }
         },
         "nl" : {
@@ -25198,7 +25578,27 @@
       }
     },
     "Your pump is disconnected longer than 5 minutes!" : {
-      "comment" : "Body disconnect warning notification"
+      "comment" : "Body disconnect warning notification",
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Il tuo microinfusore è disconnesso da più di 5 minuti!"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pumpen din har vært frakoblet i mer enn 5 minutter!"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "您的泵断开连接的时间已超过 5 分钟！"
+          }
+        }
+      }
     },
     "Your pump is still disconnected after the set period!" : {
       "comment" : "Body disconnect reminder notification",
@@ -25254,7 +25654,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "La pompa è ancora scollegata dopo il periodo impostato!"
+            "value" : "Il tuo microinfusore è ancora disconnesso dopo il periodo di configurazione!"
           }
         },
         "ja" : {
@@ -25266,7 +25666,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your pump is still disconnected after the set period!"
+            "value" : "Pumpen din er fortsatt frakoblet etter den angitte perioden!"
           }
         },
         "nl" : {
