@@ -203,8 +203,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : ". Please go to your bluetooth settings, forget this device, and try again"
+            "state" : "translated",
+            "value" : ". Ga naar de bluetooth instellingen, vergeet dit apparaat en probeer het opnieuw"
           }
         },
         "pl" : {
@@ -233,8 +233,8 @@
         },
         "sk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : ". Please go to your bluetooth settings, forget this device, and try again"
+            "state" : "translated",
+            "value" : ". Prejdi do nastavení bluetooth, odstráň toto zariadenie a skús to znova"
           }
         },
         "sv" : {
@@ -257,8 +257,8 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : ". Please go to your bluetooth settings, forget this device, and try again"
+            "state" : "translated",
+            "value" : ". Vui lòng vào cài đặt Bluetooth, quên thiết bị này rồi thử lại"
           }
         },
         "yy-YY" : {
@@ -345,7 +345,7 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "%1$@%2$@ / %3$@%4$@"
           }
         },
@@ -375,7 +375,7 @@
         },
         "sk" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "%1$@%2$@ / %3$@%4$@"
           }
         },
@@ -399,7 +399,7 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "%1$@%2$@ / %3$@%4$@"
           }
         },
@@ -761,7 +761,7 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "%1$u %2$@"
           }
         },
@@ -791,7 +791,7 @@
         },
         "sk" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "%1$u %2$@"
           }
         },
@@ -815,7 +815,7 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "%1$u %2$@"
           }
         },
@@ -898,7 +898,7 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "12 sec/E"
           }
         },
@@ -928,8 +928,8 @@
         },
         "sk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "12 sec/E"
+            "state" : "translated",
+            "value" : "12 sek/U"
           }
         },
         "sv" : {
@@ -952,7 +952,7 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "12 sec/E"
           }
         },
@@ -1590,7 +1590,7 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "30 sec/E"
           }
         },
@@ -1620,8 +1620,8 @@
         },
         "sk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "30 sec/E"
+            "state" : "translated",
+            "value" : "30 sek/U"
           }
         },
         "sv" : {
@@ -1644,7 +1644,7 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "30 sec/E"
           }
         },
@@ -1871,7 +1871,7 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "60 sec/E"
           }
         },
@@ -1901,8 +1901,8 @@
         },
         "sk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "60 sec/E"
+            "state" : "translated",
+            "value" : "60 sek/U"
           }
         },
         "sv" : {
@@ -1925,7 +1925,7 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "60 sec/E"
           }
         },
@@ -2979,8 +2979,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Are you sure you want to bolus 5E?"
+            "state" : "translated",
+            "value" : "Weet je zeker dat je 5E wilt bolussen?"
           }
         },
         "pl" : {
@@ -3009,8 +3009,8 @@
         },
         "sk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Are you sure you want to bolus 5E?"
+            "state" : "translated",
+            "value" : "Si si istý, že chceš podať bolus 5U?"
           }
         },
         "sv" : {
@@ -3033,8 +3033,8 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Are you sure you want to bolus 5E?"
+            "state" : "translated",
+            "value" : "Bạn có chắc chắn muốn bolus 5E không?"
           }
         },
         "yy-YY" : {
@@ -3115,8 +3115,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Are you sure you want to set the temp basal to 200% for 1 hour?"
+            "state" : "translated",
+            "value" : "Weet je zeker dat je het tijdelijk basaal wilt instellen op 200% gedurende 1 uur?"
           }
         },
         "pl" : {
@@ -3145,8 +3145,8 @@
         },
         "sk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Are you sure you want to set the temp basal to 200% for 1 hour?"
+            "state" : "translated",
+            "value" : "Si si istý, že chceš nastaviť dočasný bazál na 200 % na 1 hodinu?"
           }
         },
         "sv" : {
@@ -3169,8 +3169,8 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Are you sure you want to set the temp basal to 200% for 1 hour?"
+            "state" : "translated",
+            "value" : "Bạn có chắc chắn muốn đặt basal tạm thời 200% trong 1 giờ không?"
           }
         },
         "yy-YY" : {
@@ -4211,8 +4211,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Battery is empty. Replace it now!"
+            "state" : "translated",
+            "value" : "Batterij is leeg. Vervang hem nu!"
           }
         },
         "pl" : {
@@ -4241,8 +4241,8 @@
         },
         "sk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Battery is empty. Replace it now!"
+            "state" : "translated",
+            "value" : "Batéria je vybitá. Vymeň ju teraz!"
           }
         },
         "sv" : {
@@ -4265,8 +4265,8 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Battery is empty. Replace it now!"
+            "state" : "translated",
+            "value" : "Pin đã hết. Hãy thay ngay!"
           }
         },
         "yy-YY" : {
@@ -7922,8 +7922,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "DEBUG: Bolus action"
+            "state" : "translated",
+            "value" : "DEBUG: Bolus actie"
           }
         },
         "pl" : {
@@ -7952,8 +7952,8 @@
         },
         "sk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "DEBUG: Bolus action"
+            "state" : "translated",
+            "value" : "DEBUG: Akcia bolusu"
           }
         },
         "sv" : {
@@ -7976,8 +7976,8 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "DEBUG: Bolus action"
+            "state" : "translated",
+            "value" : "GỠ LỖI: Thao tác bolus"
           }
         },
         "yy-YY" : {
@@ -8058,8 +8058,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "DEBUG: Temp basal action"
+            "state" : "translated",
+            "value" : "DEBUG: tijdelijke basaal actie"
           }
         },
         "pl" : {
@@ -8088,8 +8088,8 @@
         },
         "sk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "DEBUG: Temp basal action"
+            "state" : "translated",
+            "value" : "DEBUG: Akcia dočasného bazálu"
           }
         },
         "sv" : {
@@ -8112,8 +8112,8 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "DEBUG: Temp basal action"
+            "state" : "translated",
+            "value" : "GỠ LỖI: Thao tác basal tạm thời"
           }
         },
         "yy-YY" : {
@@ -8605,8 +8605,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Device found!"
+            "state" : "translated",
+            "value" : "Apparaat gevonden!"
           }
         },
         "pl" : {
@@ -8635,8 +8635,8 @@
         },
         "sk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Device found!"
+            "state" : "translated",
+            "value" : "Zariadenie nájdené!"
           }
         },
         "sv" : {
@@ -8659,8 +8659,8 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Device found!"
+            "state" : "translated",
+            "value" : "Đã tìm thấy thiết bị!"
           }
         },
         "yy-YY" : {
@@ -9432,8 +9432,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Do bolus"
+            "state" : "translated",
+            "value" : "Bolus uitvoeren"
           }
         },
         "pl" : {
@@ -9462,8 +9462,8 @@
         },
         "sk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Do bolus"
+            "state" : "translated",
+            "value" : "Podaj bolus"
           }
         },
         "sv" : {
@@ -9486,8 +9486,8 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Do bolus"
+            "state" : "translated",
+            "value" : "Thực hiện bolus"
           }
         },
         "yy-YY" : {
@@ -10177,8 +10177,8 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "During the pairing process, your DanaRS v1 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, Loop is ready to communicate with your DanaRS v1"
+            "state" : "translated",
+            "value" : "Trong quá trình ghép đôi, DanaRS v1 của bạn sẽ hiển thị một thông báo ghép đôi, trong khi iPhone sẽ hiển thị thông báo nhập mã ghép đôi. Trên bơm, hãy chọn OK và nhập mã đó trên iPhone của bạn. Sau đó, Loop sẽ sẵn sàng giao tiếp với DanaRS v1"
           }
         },
         "yy-YY" : {
@@ -10261,8 +10261,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, Loop is ready to communicate with your DanaRS v1"
+            "state" : "translated",
+            "value" : "Tijdens het koppelingsproces toont je DanaRS v1 een koppelingsverzoek, terwijl je iPhone om een koppelingscode vraagt. Selecteer 'OK' op je pomp en voer de code in op je iPhone. Daarna is %1$@ klaar om te communiceren met je DanaRS v1"
           }
         },
         "pl" : {
@@ -10315,8 +10315,8 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, Loop is ready to communicate with your DanaRS v1"
+            "state" : "translated",
+            "value" : "Trong quá trình ghép đôi, DanaRS v3 của bạn sẽ hiển thị một thông báo ghép đôi, trong khi iPhone sẽ hiển thị thông báo nhập mã ghép đôi. Trên bơm, hãy chọn OK và nhập mã đó trên iPhone của bạn. Sau đó, Loop sẽ sẵn sàng giao tiếp với DanaRS v1"
           }
         },
         "yy-YY" : {
@@ -10596,8 +10596,8 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for two pairing codes. On your pump, select OK and type the two codes on your iPhone. After that, Loop is ready to communicate with your DanaRS v3"
+            "state" : "translated",
+            "value" : "Trong quá trình ghép đôi, DanaRS v3 của bạn sẽ hiển thị một thông báo ghép đôi, trong khi iPhone sẽ hiển thị thông báo nhập hai mã ghép đôi. Trên bơm, hãy chọn OK và nhập hai mã đó trên iPhone của bạn. Sau đó, Loop sẽ sẵn sàng giao tiếp với DanaRS v3"
           }
         },
         "yy-YY" : {
@@ -10952,8 +10952,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Error while starting scanning for devices..."
+            "state" : "translated",
+            "value" : "Fout bij het scannen naar apparaten..."
           }
         },
         "pl" : {
@@ -11006,8 +11006,8 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Error while starting scanning for devices..."
+            "state" : "translated",
+            "value" : "Lỗi khi bắt đầu quét thiết bị..."
           }
         },
         "yy-YY" : {
@@ -12062,8 +12062,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Failed to pair to "
+            "state" : "translated",
+            "value" : "Kan niet koppelen aan "
           }
         },
         "pl" : {
@@ -12116,8 +12116,8 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Failed to pair to "
+            "state" : "translated",
+            "value" : "Ghép đôi thất bại với "
           }
         },
         "yy-YY" : {
@@ -13349,8 +13349,8 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Insulin\nSuspended"
+            "state" : "translated",
+            "value" : "Insulin\n Đã tạm ngưng"
           }
         },
         "yy-YY" : {
@@ -16596,7 +16596,7 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "Oke"
           }
         },
@@ -16650,7 +16650,7 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "Oke"
           }
         },
@@ -17713,8 +17713,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Prime amount"
+            "state" : "translated",
+            "value" : "Prime hoeveelheid"
           }
         },
         "pl" : {
@@ -17743,8 +17743,8 @@
         },
         "sk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Prime amount"
+            "state" : "translated",
+            "value" : "Množstvo naplnenia"
           }
         },
         "sv" : {
@@ -17767,8 +17767,8 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Prime amount"
+            "state" : "translated",
+            "value" : "Lượng insulin mồi"
           }
         },
         "yy-YY" : {
@@ -18542,8 +18542,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Pump is disconnected"
+            "state" : "translated",
+            "value" : "Pomp is ontkoppeld"
           }
         },
         "pl" : {
@@ -18572,8 +18572,8 @@
         },
         "sk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Pump is disconnected"
+            "state" : "translated",
+            "value" : "Pumpa je odpojená"
           }
         },
         "sv" : {
@@ -18596,8 +18596,8 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Pump is disconnected"
+            "state" : "translated",
+            "value" : "Bơm đã ngắt kết nối"
           }
         },
         "yy-YY" : {
@@ -19645,8 +19645,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Reconnect to pump"
+            "state" : "translated",
+            "value" : "Opnieuw verbinden met pomp"
           }
         },
         "pl" : {
@@ -19675,8 +19675,8 @@
         },
         "sk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Reconnect to pump"
+            "state" : "translated",
+            "value" : "Znovu pripojiť pumpu"
           }
         },
         "sv" : {
@@ -19699,8 +19699,8 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Reconnect to pump"
+            "state" : "translated",
+            "value" : "Kết nối lại máy bơm"
           }
         },
         "yy-YY" : {
@@ -21569,7 +21569,7 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "Scan"
           }
         },
@@ -21599,8 +21599,8 @@
         },
         "sk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Scan"
+            "state" : "translated",
+            "value" : "Skenovať"
           }
         },
         "sv" : {
@@ -21623,8 +21623,8 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Scan"
+            "state" : "translated",
+            "value" : "Quét"
           }
         },
         "yy-YY" : {
@@ -25021,7 +25021,7 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "Stop bolus"
           }
         },
@@ -25051,8 +25051,8 @@
         },
         "sk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Stop bolus"
+            "state" : "translated",
+            "value" : "Zastaviť bolus"
           }
         },
         "sv" : {
@@ -25075,8 +25075,8 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Stop bolus"
+            "state" : "translated",
+            "value" : "Dừng bolus"
           }
         },
         "yy-YY" : {
@@ -25705,8 +25705,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "temp basal"
+            "state" : "translated",
+            "value" : "tijdelijke basaal"
           }
         },
         "pl" : {
@@ -25735,8 +25735,8 @@
         },
         "sk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "temp basal"
+            "state" : "translated",
+            "value" : "dočasný bazál"
           }
         },
         "sv" : {
@@ -25759,8 +25759,8 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "temp basal"
+            "state" : "translated",
+            "value" : "basal tạm thời"
           }
         },
         "yy-YY" : {
@@ -26801,8 +26801,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "The pump reminds you when the amount of insulin in the pump reaches this level"
+            "state" : "translated",
+            "value" : "De pomp herinnert je wanneer de hoeveelheid insuline in de pomp dit niveau bereikt"
           }
         },
         "pl" : {
@@ -26831,8 +26831,8 @@
         },
         "sk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "The pump reminds you when the amount of insulin in the pump reaches this level"
+            "state" : "translated",
+            "value" : "Pumpa ťa upozorní, keď množstvo inzulínu v pumpe dosiahne túto úroveň"
           }
         },
         "sv" : {
@@ -26855,8 +26855,8 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "The pump reminds you when the amount of insulin in the pump reaches this level"
+            "state" : "translated",
+            "value" : "Bơm sẽ nhắc bạn khi lượng insulin trong bơm đạt đến mức này"
           }
         },
         "yy-YY" : {
@@ -28993,8 +28993,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "WARNING: Please don't use this until you've read the documentation"
+            "state" : "translated",
+            "value" : "WAARSCHUWING: Gebruik dit niet totdat je de documentatie hebt gelezen"
           }
         },
         "pl" : {
@@ -29023,8 +29023,8 @@
         },
         "sk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "WARNING: Please don't use this until you've read the documentation"
+            "state" : "translated",
+            "value" : "UPOZORNENIE: Nepoužívaj to, kým si neprečítaš dokumentáciu"
           }
         },
         "sv" : {
@@ -29047,8 +29047,8 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "WARNING: Please don't use this until you've read the documentation"
+            "state" : "translated",
+            "value" : "CẢNH BÁO: Vui lòng không sử dụng tính năng này cho đến khi bạn đã đọc tài liệu hướng dẫn"
           }
         },
         "yy-YY" : {
@@ -31458,8 +31458,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Your pump is disconnected longer than 5 minutes!"
+            "state" : "translated",
+            "value" : "Je pomp is langer dan 5 minuten niet meer verbonden!"
           }
         },
         "pl" : {
@@ -31488,8 +31488,8 @@
         },
         "sk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Your pump is disconnected longer than 5 minutes!"
+            "state" : "translated",
+            "value" : "Tvoja pumpa je odpojená dlhšie ako 5 minút!"
           }
         },
         "sv" : {
@@ -31512,8 +31512,8 @@
         },
         "vi" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Your pump is disconnected longer than 5 minutes!"
+            "state" : "translated",
+            "value" : "Bơm của bạn đã bị ngắt kết nối hơn 5 phút!"
           }
         },
         "yy-YY" : {
