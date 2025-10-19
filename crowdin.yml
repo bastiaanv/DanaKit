@@ -24,4 +24,4 @@ export_languages:
 files:
   - source: /Localization/Localizable.xcstrings
     translation: /Localization/Localizable.xcstrings
-    multilingual: true
+    multilingual: 1
