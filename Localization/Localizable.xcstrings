@@ -245,8 +245,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : ". Please go to your bluetooth settings, forget this device, and try again"
+            "state" : "translated",
+            "value" : ". Будь ласка, перейдіть до налаштувань Bluetooth, забудьте про цей пристрій і спробуйте ще раз."
           }
         },
         "vi" : {
@@ -381,7 +381,7 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "%1$@%2$@ / %3$@%4$@"
           }
         },
@@ -495,7 +495,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ j"
+            "value" : "%@ J"
           }
         },
         "sv" : {
@@ -779,7 +779,7 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
+            "state" : "translated",
             "value" : "%1$u %2$@"
           }
         },
@@ -910,8 +910,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "12 sec/E"
+            "state" : "translated",
+            "value" : "12 секунд/E"
           }
         },
         "vi" : {
@@ -1031,7 +1031,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "12 sek/U"
+            "value" : "12 sek/J"
           }
         },
         "sv" : {
@@ -1572,8 +1572,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "30 sec/E"
+            "state" : "translated",
+            "value" : "30 секунд/E"
           }
         },
         "vi" : {
@@ -1693,7 +1693,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "30 sek/U"
+            "value" : "30 sek/J"
           }
         },
         "sv" : {
@@ -1841,8 +1841,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "60 sec/E"
+            "state" : "translated",
+            "value" : "60 секунд/E"
           }
         },
         "vi" : {
@@ -1962,7 +1962,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "60 sek/U"
+            "value" : "60 sek/J"
           }
         },
         "sv" : {
@@ -2093,7 +2093,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vo vašej pumpe bola nastavená pripomienka kontroly hladiny glukózy v krvi, ktorá sa spúšťa. Odstráňte ju alebo dajte do pumpy zistiť hladinu glukózy"
+            "value" : "Pripomienka kontroly glykémie bola vo vašej pumpe nastavená a práve sa spustila. Prosím, odstráňte ju alebo zadajte do pumpy svoju hodnotu glykémie"
           }
         },
         "sv" : {
@@ -2754,7 +2754,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Počas spracovania upozornenia z čerpadla došlo k neznámej chybe. Nahláste to, prosím"
+            "value" : "Počas spracovania upozornenia z pumpy došlo k neznámej chybe. Prosím, nahláste to"
           }
         },
         "sv" : {
@@ -2901,8 +2901,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Are you sure you want to bolus 5E?"
+            "state" : "translated",
+            "value" : "Ви впевнені, що хочете отримати болюс 5Е?"
           }
         },
         "vi" : {
@@ -3031,8 +3031,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Are you sure you want to set the temp basal to 200% for 1 hour?"
+            "state" : "translated",
+            "value" : "Ви впевнені, що хочете встановити тимчасову базальну швидкість (ТБШ) на 200% на 1 годину?"
           }
         },
         "vi" : {
@@ -4079,8 +4079,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Battery is empty. Replace it now!"
+            "state" : "translated",
+            "value" : "Батарейка розряджена. Замініть її негайно!"
           }
         },
         "vi" : {
@@ -4324,7 +4324,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pred začatím procesu párovania sa odporúča skontrolovať a v prípade potreby aktualizovať heslo čerpadla. Môžete to urobiť v nastaveniach čerpadla -> nastavenia používateľa -> heslo. Predvolené heslo je 1234, ak je to vaše heslo, zvážte jeho zmenu"
+            "value" : "Pred začatím procesu párovania sa odporúča skontrolovať a v prípade potreby aktualizovať heslo pumpy. Môžete tak urobiť v nastaveniach pumpy -> nastavenia používateľa -> heslo. Predvolené heslo je 1234, ak je to vaše heslo, zvážte jeho zmenu"
           }
         },
         "sv" : {
@@ -4455,7 +4455,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Meranie glukózy v krvi"
+            "value" : "Meranie glykémie z krvi"
           }
         },
         "sv" : {
@@ -5510,7 +5510,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Skontrolujte čerpadlo a skúste to znova"
+            "value" : "Skontrolujte pumpu a skúste to znova"
           }
         },
         "sv" : {
@@ -7628,8 +7628,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "DEBUG: Bolus action"
+            "state" : "translated",
+            "value" : "НАЛАГОДЖЕННЯ: Дія болюса"
           }
         },
         "vi" : {
@@ -7758,8 +7758,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "DEBUG: Temp basal action"
+            "state" : "translated",
+            "value" : "НАЛАГОДЖЕННЯ: Тимчасова базальна швидкість (ТБШ)"
           }
         },
         "vi" : {
@@ -8281,8 +8281,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Device found!"
+            "state" : "translated",
+            "value" : "Пристрій знайдено!"
           }
         },
         "vi" : {
@@ -8663,7 +8663,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Odpojenie od čerpadla"
+            "value" : "Odpojiť od pumpy"
           }
         },
         "sv" : {
@@ -9072,8 +9072,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Do bolus"
+            "state" : "translated",
+            "value" : "Зробіть болюс"
           }
         },
         "vi" : {
@@ -9186,7 +9186,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Chcete dostávať upozornenia, keď je čerpadlo dlhšie odpojené na určitý čas?"
+            "value" : "Chcete dostávať upozornenie, keď je pumpa odpojená dlhšie ako určitý čas?"
           }
         },
         "sv" : {
@@ -9447,7 +9447,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Počas procesu párovania sa na zariadení Dana-i zobrazí výzva na spárovanie, zatiaľ čo na iPhone sa zobrazí výzva na zadanie párovacieho kódu. Na čerpadle vyberte OK a zadajte 6-miestny kód na obrazovke iPhonu. Potom je stránka %1$@ pripravená na komunikáciu s vaším zariadením Dana-i."
+            "value" : "Počas procesu párovania sa na zariadení Dana-i zobrazí výzva na spárovanie, zatiaľ čo na iPhone sa zobrazí výzva na zadanie párovacieho kódu. Na pumpe vyberte OK a zadajte 6-miestny kód na obrazovke iPhonu. Potom je stránka %1$@ pripravená na komunikáciu s vašou pumpou DANA-i"
           }
         },
         "sv" : {
@@ -9733,8 +9733,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "During the pairing process, your DanaRS v1 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, Loop is ready to communicate with your DanaRS v1"
+            "state" : "translated",
+            "value" : "Під час процесу сполучення ваш DanaRS v1 відображатиме запит на сполучення, а ваш iPhone – запит на код сполучення. На помпі виберіть OK та введіть код на iPhone. Після цього Loop буде готовий до зв’язку з вашим DanaRS v1."
           }
         },
         "vi" : {
@@ -9847,8 +9847,8 @@
         },
         "sk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, Loop is ready to communicate with your DanaRS v1"
+            "state" : "translated",
+            "value" : "Počas procesu párovania sa na vašom zariadení DanaRS v3 zobrazí výzva na párovanie, zatiaľ čo na vašom iPhone sa zobrazí výzva na zadanie párovacieho kódu. Na pumpe vyberte OK a zadajte kód do Vášho iPhonu. Potom je iAPS pripravený komunikovať s vaším zariadením DanaRS v1"
           }
         },
         "sv" : {
@@ -9865,8 +9865,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, Loop is ready to communicate with your DanaRS v1"
+            "state" : "translated",
+            "value" : "Під час процесу сполучення ваш DanaRS v3 відображатиме запит на сполучення, а ваш iPhone – запит на код сполучення. На помпі виберіть OK та введіть код на iPhone. Після цього Loop буде готовий до зв’язку з вашим DanaRS v1."
           }
         },
         "vi" : {
@@ -10134,8 +10134,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for two pairing codes. On your pump, select OK and type the two codes on your iPhone. After that, Loop is ready to communicate with your DanaRS v3"
+            "state" : "translated",
+            "value" : "Під час процесу сполучення ваш DanaRS v3 відобразить запит на сполучення, а ваш iPhone – запит на два коди сполучення. На помпі виберіть OK та введіть два коди на iPhone. Після цього Loop буде готовий до зв’язку з вашим DanaRS v3."
           }
         },
         "vi" : {
@@ -10508,8 +10508,8 @@
         },
         "sk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Error while starting scanning for devices..."
+            "state" : "translated",
+            "value" : "Chyba pri spúšťaní skenovania zariadení..."
           }
         },
         "sv" : {
@@ -10526,8 +10526,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Error while starting scanning for devices..."
+            "state" : "translated",
+            "value" : "Помилка під час початку сканування пристроїв..."
           }
         },
         "vi" : {
@@ -11570,8 +11570,8 @@
         },
         "sk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Failed to pair to "
+            "state" : "translated",
+            "value" : "Nepodarilo sa spárovať s "
           }
         },
         "sv" : {
@@ -11588,8 +11588,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Failed to pair to "
+            "state" : "translated",
+            "value" : "Не вдалося підключитися до"
           }
         },
         "vi" : {
@@ -11964,7 +11964,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nepodarilo sa nastaviť množstvo zásobníka. Znovu synchronizujte údaje čerpadla a skúste to prosím znova"
+            "value" : "Nepodarilo sa nastaviť množstvo zásobníka. Znovu synchronizujte údaje pumpy a skúste to znova, prosím"
           }
         },
         "sv" : {
@@ -12767,8 +12767,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Insulin\nSuspended"
+            "state" : "translated",
+            "value" : "Інсулін\nПризупинено"
           }
         },
         "vi" : {
@@ -13143,7 +13143,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Inzulín Suspendovaný"
+            "value" : "Inzulín pozastavený"
           }
         },
         "sv" : {
@@ -13943,7 +13943,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Slabá batéria čerpadla"
+            "value" : "Slabá batéria pumpy"
           }
         },
         "sv" : {
@@ -14336,7 +14336,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zmeškaná kontrola glukózy v krvi"
+            "value" : "Chybajúca kontrola glykémie v krvi"
           }
         },
         "sv" : {
@@ -15906,8 +15906,8 @@
         },
         "sk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Oke"
+            "state" : "translated",
+            "value" : "Dobre"
           }
         },
         "sv" : {
@@ -15924,8 +15924,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Oke"
+            "state" : "translated",
+            "value" : "Добренько"
           }
         },
         "vi" : {
@@ -16993,8 +16993,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Prime amount"
+            "state" : "translated",
+            "value" : "Основна сума"
           }
         },
         "vi" : {
@@ -17107,7 +17107,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Batéria čerpadla 0%"
+            "value" : "Batéria pumpy 0%"
           }
         },
         "sv" : {
@@ -17245,7 +17245,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Batéria čerpadla je vybitá. Vymeňte ju teraz!"
+            "value" : "Batéria pumpy je vybitá. Vymeňte ju teraz!"
           }
         },
         "sv" : {
@@ -17507,7 +17507,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Chyba čerpadla"
+            "value" : "Chyba pumpy"
           }
         },
         "sv" : {
@@ -17786,8 +17786,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Pump is disconnected"
+            "state" : "translated",
+            "value" : "Помпа відключена"
           }
         },
         "vi" : {
@@ -17900,7 +17900,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Čerpadlo je stále odpojené"
+            "value" : "Pumpa je stále odpojená"
           }
         },
         "sv" : {
@@ -18162,7 +18162,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vypnutie čerpadla"
+            "value" : "Vypnúť pumpu"
           }
         },
         "sv" : {
@@ -18841,8 +18841,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Reconnect to pump"
+            "state" : "translated",
+            "value" : "Знову підключіть до помпи"
           }
         },
         "vi" : {
@@ -18962,7 +18962,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Opätovné pripojenie čerpadla tp"
+            "value" : "Opätovné pripojenie pumpy tp"
           }
         },
         "sv" : {
@@ -20681,8 +20681,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Scan"
+            "state" : "translated",
+            "value" : "Сканувати"
           }
         },
         "vi" : {
@@ -22119,7 +22119,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nastavte základný profil, ktorý má čerpadlo používať. Všimnite si, že sa prepíše profil, ktorý je v čerpadle, profilom na stránke %1$@."
+            "value" : "Nastavte bazálny profil, ktorý má pumpa používať. Upozorňujeme, že tým sa prepíše profil v pumpe profilom z %1$@"
           }
         },
         "sv" : {
@@ -22912,7 +22912,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zdielať logy pumpy Dana"
+            "value" : "Zdielať záznamy pumpy Dana"
           }
         },
         "sv" : {
@@ -23983,8 +23983,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Stop bolus"
+            "state" : "translated",
+            "value" : "Зупинити болюс"
           }
         },
         "vi" : {
@@ -24637,8 +24637,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "temp basal"
+            "state" : "translated",
+            "value" : "тимчасова  Базальна Швидкість (ТБШ)"
           }
         },
         "vi" : {
@@ -25013,7 +25013,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pumpy Dana podporujú rôzne rýchlosti podania dávky 1 jednotky inzulínu. Môžete ju nastaviť tu, ale aj v ponuke nastavení pumpy"
+            "value" : "Pumpy Dana podporujú rôzne rýchlosti dávkovania. Môžete to nastaviť tu alebo aj v ponuke nastavení"
           }
         },
         "sv" : {
@@ -25537,7 +25537,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Čerpadlo zistilo problém so svojou reťazou. Vyberte nádrž, skontrolujte všetko a skúste to znova"
+            "value" : "Pumpa zistila problém so svojím piestom. Odstráňte zásobník, všetko skontrolujte a skúste to znova"
           }
         },
         "sv" : {
@@ -25685,8 +25685,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "The pump reminds you when the amount of insulin in the pump reaches this level"
+            "state" : "translated",
+            "value" : "Помпа нагадує вам, коли кількість інсуліну в ній досягає цього рівня"
           }
         },
         "vi" : {
@@ -25799,7 +25799,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Čas na Vašej pumpe sa líši od aktuálneho času. Chcete aktualizovať čas na vašej pumpe na aktuálny čas?"
+            "value" : "Čas na vašej pumpe sa líši od aktuálneho času. Chcete aktualizovať čas na vašej pumpe s aktuálnym čas?"
           }
         },
         "sv" : {
@@ -26061,7 +26061,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Príliš dlho nedochádzalo k žiadnym interakciám s čerpadlom. Buď túto funkciu v čerpadle vypnite, alebo s čerpadlom interagujte"
+            "value" : "Príliš dlho nedochádzalo k žiadnym interakciám s pumpou. Buď túto funkciu v pumpe vypnite, alebo s pumpou interagujte"
           }
         },
         "sv" : {
@@ -26192,7 +26192,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tento spôsob dopĺňania je určený len vtedy, keď čerpadlo nemôže poskytnúť spôsob, ako doplniť zásobník alebo naplniť kanylu."
+            "value" : "Táto metóda dopĺňania je určená len v prípade, že pumpa nemá možnosť doplniť zásobník alebo naplniť kanylu"
           }
         },
         "sv" : {
@@ -27781,8 +27781,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "WARNING: Please don't use this until you've read the documentation"
+            "state" : "translated",
+            "value" : "ПОПЕРЕДЖЕННЯ: Будь ласка, не використовуйте це, доки не прочитаєте документацію"
           }
         },
         "vi" : {
@@ -30138,8 +30138,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "Your pump is disconnected longer than 5 minutes!"
+            "state" : "translated",
+            "value" : "Ваша помпа відключена довше ніж на 5 хвилин!"
           }
         },
         "vi" : {
@@ -30252,7 +30252,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vaše čerpadlo je po uplynutí nastavenej doby stále odpojené!"
+            "value" : "Vaša pumpa je po uplynutí nastaveného času stále odpojená!"
           }
         },
         "sv" : {
