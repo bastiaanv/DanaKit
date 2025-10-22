@@ -698,31 +698,24 @@ extension DanaKitPumpManager: PumpManager {
 
                         if !self.isPriming {
                             let dose = doseEntry.toDoseEntry(isMutable: true)
-                            await withCheckedContinuation { continuation in
-                                self.pumpDelegate.notify { delegate in
-                                    guard let delegate = delegate else {
-                                        self.log.error("Dose could not be reported -> Missing delegate")
-                                        continuation.resume()
-                                        return
-                                    }
-
-                                    delegate.pumpManager(
-                                        self,
-                                        hasNewPumpEvents: [
-                                            NewPumpEvent
-                                                .bolus(
-                                                    dose: dose,
-                                                    units: dose.programmedUnits,
-                                                    date: dose.startDate
-                                                )
-                                        ],
-                                        lastReconciliation: Date.now,
-                                        replacePendingEvents: false,
-                                        completion: { _ in
-                                            continuation.resume()
-                                        }
-                                    )
+                            self.pumpDelegate.notify { delegate in
+                                guard let delegate = delegate else {
+                                    self.log.error("Dose could not be reported -> Missing delegate")
+                                    return
                                 }
+
+                                let event = NewPumpEvent.bolus(
+                                    dose: dose,
+                                    units: dose.programmedUnits,
+                                    date: dose.startDate
+                                )
+                                delegate.pumpManager(
+                                    self,
+                                    hasNewPumpEvents: [event],
+                                    lastReconciliation: Date.now,
+                                    replacePendingEvents: false,
+                                    completion: { _ in }
+                                )
                             }
                         }
 
@@ -758,8 +751,9 @@ extension DanaKitPumpManager: PumpManager {
     public func enactPrime(unit: Double, completion: @escaping (PumpManagerError?) -> Void) {
         isPriming = true
         enactBolus(units: unit, activationType: .manualNoRecommendation) { error in
+            self.isPriming = false
+
             if let error = error {
-                self.isPriming = false
                 completion(error)
                 return
             }
@@ -1770,6 +1764,7 @@ public extension DanaKitPumpManager {
 
     internal func notifyBolusDone(deliveredUnits: Double) {
         Task {
+            self.log.info("Bolus completed - \(deliveredUnits)U")
             self.state.bolusState = .noBolus
 
             self.state.lastStatusPumpDateTime = await self.fetchPumpTime() ?? Date.now
@@ -1788,6 +1783,7 @@ public extension DanaKitPumpManager {
             }
 
             guard let doseEntry = self.doseEntry else {
+                self.log.error("No doseEntry available...")
                 return
             }
 
@@ -1798,6 +1794,7 @@ public extension DanaKitPumpManager {
             self.doseReporter = nil
 
             guard !self.isPriming else {
+                self.log.debug("PumpManager is in priming mode -> Skip reporting dose")
                 return
             }
 
@@ -1834,6 +1831,7 @@ public extension DanaKitPumpManager {
         log.warning("Bolus was not completed... \(doseEntry.deliveredUnits)U of the \(doseEntry.value)U")
 
         // There was a bolus going on, unsure if the bolus is completed...
+        let dose = doseEntry.toDoseEntry()
         state.bolusState = .noBolus
         state.lastStatusDate = Date.now
         self.doseEntry = nil
@@ -1846,6 +1844,13 @@ public extension DanaKitPumpManager {
             }
 
             delegate.pumpManager(self, didError: .uncertainDelivery)
+            delegate.pumpManager(
+                self,
+                hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: dose.programmedUnits)],
+                lastReconciliation: Date(),
+                replacePendingEvents: true,
+                completion: { _ in }
+            )
         }
     }
 }
