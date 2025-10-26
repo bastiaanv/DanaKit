@@ -1,4 +1,4 @@
-struct PacketBasalGetRate {
+struct PacketBasalGetRate: Codable {
     let maxBasal: Double
     let basalStep: Double
     let basalProfile: [Double]
@@ -8,7 +8,7 @@ let CommandBasalGetRate: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) <
     UInt16(DanaPacketType.OPCODE_BASAL__GET_BASAL_RATE & 0xFF)
 
 func generatePacketBasalGetRate() -> DanaGeneratePacket {
-    DanaGeneratePacket(opCode: DanaPacketType.OPCODE_BASAL__GET_BASAL_RATE, data: nil)
+    DanaGeneratePacket(name: "Basal_GetRate", opCode: DanaPacketType.OPCODE_BASAL__GET_BASAL_RATE, data: nil)
 }
 
 func parsePacketBasalGetRate(data: Data, usingUtc _: Bool?) -> DanaParsePacket<PacketBasalGetRate> {

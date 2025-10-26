@@ -1,4 +1,4 @@
-struct PacketGeneralGetPumpTimeUtcWithTimezone {
+struct PacketGeneralGetPumpTimeUtcWithTimezone: Codable {
     var time: Date
     var timezoneOffset: Int
 }
@@ -8,6 +8,7 @@ let CommandGeneralGetPumpTimeUtcWithTimezone: UInt16 = (UInt16(DanaPacketType.TY
 
 func generatePacketGeneralGetPumpTimeUtcWithTimezone() -> DanaGeneratePacket {
     DanaGeneratePacket(
+        name: "General_GetPumpTimeUtcWithTimezone",
         opCode: DanaPacketType.OPCODE_OPTION__GET_PUMP_UTC_AND_TIME_ZONE,
         data: nil
     )

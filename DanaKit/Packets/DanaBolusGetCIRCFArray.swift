@@ -1,4 +1,4 @@
-struct PacketBolusGetCIRCFArray {
+struct PacketBolusGetCIRCFArray: Codable {
     var language: UInt8
     var unit: UInt8
 
@@ -25,7 +25,7 @@ let CommandBolusGetCIRCFArray: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0
     UInt16(DanaPacketType.OPCODE_BOLUS__GET_CIR_CF_ARRAY & 0xFF)
 
 func generatePacketBolusGetCIRCFArray() -> DanaGeneratePacket {
-    DanaGeneratePacket(opCode: DanaPacketType.OPCODE_BOLUS__GET_CIR_CF_ARRAY, data: nil)
+    DanaGeneratePacket(name: "Bolus_GetCIRCFArray", opCode: DanaPacketType.OPCODE_BOLUS__GET_CIR_CF_ARRAY, data: nil)
 }
 
 func parsePacketBolusGetCIRCFArray(data: Data, usingUtc _: Bool?) -> DanaParsePacket<PacketBolusGetCIRCFArray> {

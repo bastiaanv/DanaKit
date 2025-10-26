@@ -1,4 +1,4 @@
-struct PacketNotifyAlarm {
+struct PacketNotifyAlarm: Codable {
     var code: UInt8
     var alert: PumpManagerAlert
 }

@@ -10,12 +10,13 @@ func generatePacketGeneralSetPumpTime(options: PacketGeneralSetPumpTime) -> Dana
     data.addDate(at: 0, date: options.time, utc: false)
 
     return DanaGeneratePacket(
+        name: "General_SetPumpTime",
         opCode: DanaPacketType.OPCODE_OPTION__SET_PUMP_TIME,
         data: data
     )
 }
 
-func parsePacketGeneralSetPumpTime(data: Data, usingUtc _: Bool?) -> DanaParsePacket<Any> {
+func parsePacketGeneralSetPumpTime(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
     DanaParsePacket(
         success: data[DataStart] == 0,
         rawData: data,

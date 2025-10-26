@@ -16,6 +16,11 @@ extension Data {
         self = data
     }
 
+    func hexString() -> String {
+        let format = "%02hhx"
+        return map { String(format: format, $0) }.joined()
+    }
+
     func uint16(at index: Int) -> UInt16 {
         var value: UInt16 = 0
         (self as NSData).getBytes(&value, range: NSRange(location: index, length: MemoryLayout<UInt16>.size))

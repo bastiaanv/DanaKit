@@ -3,6 +3,7 @@ let CommandHistoryCarbohydrates: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE &
 
 func generatePacketHistoryCarbohydrates(options: PacketHistoryBase) -> DanaGeneratePacket {
     DanaGeneratePacket(
+        name: "Review_Carbohydrates",
         opCode: DanaPacketType.OPCODE_REVIEW__CARBOHYDRATE,
         data: generatePacketHistoryData(options: options)
     )

@@ -1,4 +1,4 @@
-struct PacketGeneralAvgBolus {
+struct PacketGeneralAvgBolus: Codable {
     var bolusAvg03days: Double
     var bolusAvg07days: Double
     var bolusAvg14days: Double
@@ -10,7 +10,7 @@ let CommandGeneralAvgBolus: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF
     UInt16(DanaPacketType.OPCODE_REVIEW__BOLUS_AVG & 0xFF)
 
 func generatePacketGeneralAvgBolus() -> DanaGeneratePacket {
-    DanaGeneratePacket(opCode: DanaPacketType.OPCODE_REVIEW__BOLUS_AVG, data: nil)
+    DanaGeneratePacket(name: "General_GetAvgBolus", opCode: DanaPacketType.OPCODE_REVIEW__BOLUS_AVG, data: nil)
 }
 
 func parsePacketGeneralAvgBolus(data: Data, usingUtc _: Bool?) -> DanaParsePacket<PacketGeneralAvgBolus> {

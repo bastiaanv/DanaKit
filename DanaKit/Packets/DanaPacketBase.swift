@@ -1,10 +1,11 @@
 struct DanaGeneratePacket {
+    let name: String
     let type: UInt8? = nil
     let opCode: UInt8
     let data: Data?
 }
 
-protocol DanaParsePacketProtocol {
+protocol DanaParsePacketProtocol: Codable {
     var success: Bool { get }
     var command: UInt16? { get set }
     var opCode: UInt8? { get set }
@@ -14,7 +15,7 @@ protocol DanaParsePacketProtocol {
     var data: PayloadType? { get }
 }
 
-struct DanaParsePacket<T>: DanaParsePacketProtocol {
+struct DanaParsePacket<T: Codable>: DanaParsePacketProtocol {
     let success: Bool
     var command: UInt16? = nil
     var opCode: UInt8? = nil

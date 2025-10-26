@@ -14,12 +14,13 @@ func generatePacketGeneralSetHistoryUploadMode(options: PacketGeneralSetHistoryU
     let data = Data([options.mode])
 
     return DanaGeneratePacket(
+        name: "General_SetHistoryUploadMode",
         opCode: DanaPacketType.OPCODE_REVIEW__SET_HISTORY_UPLOAD_MODE,
         data: data
     )
 }
 
-func parsePacketGeneralSetHistoryUploadMode(data: Data, usingUtc _: Bool?) -> DanaParsePacket<Any> {
+func parsePacketGeneralSetHistoryUploadMode(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
     DanaParsePacket(
         success: data[DataStart] == 0,
         rawData: data,

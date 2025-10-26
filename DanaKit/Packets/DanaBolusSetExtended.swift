@@ -12,9 +12,9 @@ func generatePacketBolusSetExtended(options: PacketBolusSetExtended) -> DanaGene
     data[1] = UInt8((options.extendedAmount >> 8) & 0xFF)
     data[2] = options.extendedDurationInHalfHours
 
-    return DanaGeneratePacket(opCode: DanaPacketType.OPCODE_BOLUS__SET_EXTENDED_BOLUS, data: data)
+    return DanaGeneratePacket(name: "Bolus_SetExtended", opCode: DanaPacketType.OPCODE_BOLUS__SET_EXTENDED_BOLUS, data: data)
 }
 
-func parsePacketBolusSetExtended(data: Data, usingUtc _: Bool?) -> DanaParsePacket<Any> {
+func parsePacketBolusSetExtended(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
     DanaParsePacket(success: data[DataStart] == 0, rawData: data, data: nil)
 }

@@ -1,4 +1,4 @@
-struct PacketGeneralGetShippingInformation {
+struct PacketGeneralGetShippingInformation: Codable {
     var serialNumber: String
     var shippingCountry: String
     var shippingDate: Date
@@ -9,6 +9,7 @@ let CommandGeneralGetShippingInformation: UInt16 = (UInt16(DanaPacketType.TYPE_R
 
 func generatePacketGeneralGetShippingInformation() -> DanaGeneratePacket {
     DanaGeneratePacket(
+        name: "General_GetShippingInformation",
         opCode: DanaPacketType.OPCODE_REVIEW__GET_SHIPPING_INFORMATION,
         data: nil
     )

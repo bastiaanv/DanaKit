@@ -1,4 +1,4 @@
-struct PacketGeneralGetUserTimeChangeFlag {
+struct PacketGeneralGetUserTimeChangeFlag: Codable {
     var userTimeChangeFlag: UInt8
 }
 
@@ -7,6 +7,7 @@ let CommandGeneralGetUserTimeChangeFlag: UInt16 = (UInt16(DanaPacketType.TYPE_RE
 
 func generatePacketGeneralGetUserTimeChangeFlag() -> DanaGeneratePacket {
     DanaGeneratePacket(
+        name: "General_GetUserTimeChangeFlag",
         opCode: DanaPacketType.OPCODE_REVIEW__GET_USER_TIME_CHANGE_FLAG,
         data: nil
     )

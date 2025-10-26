@@ -1,4 +1,4 @@
-struct PacketNotifyMissedBolus {
+struct PacketNotifyMissedBolus: Codable {
     var startTime: Date
     var endTime: Date
 }

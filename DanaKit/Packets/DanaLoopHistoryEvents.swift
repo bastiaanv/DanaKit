@@ -20,12 +20,17 @@ func generatePacketLoopHistoryEvents(options: PacketLoopHistoryEvents) -> DanaGe
     }
 
     return DanaGeneratePacket(
+        name: "Review_ApsEvents",
         opCode: DanaPacketType.OPCODE__APS_HISTORY_EVENTS,
         data: data
     )
 }
 
-func parsePacketLoopHistoryEvents(data _: Data, usingUtc _: Bool?) -> DanaParsePacket<Any> {
+func parsePacketLoopHistoryEvents(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
     // Implement the parse logic as needed
-    fatalError("Not implemented")
+    DanaParsePacket(
+        success: data[DataStart] == 0,
+        rawData: data,
+        data: nil
+    )
 }

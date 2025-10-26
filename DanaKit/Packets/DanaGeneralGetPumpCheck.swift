@@ -1,4 +1,4 @@
-struct PacketGeneralGetPumpCheck {
+struct PacketGeneralGetPumpCheck: Codable {
     let hwModel: UInt8
     let protocolCode: UInt8
     let productCode: UInt8
@@ -8,7 +8,7 @@ let CommandGeneralGetPumpCheck: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 
     UInt16(DanaPacketType.OPCODE_REVIEW__GET_PUMP_CHECK & 0xFF)
 
 func generatePacketGeneralGetPumpCheck() -> DanaGeneratePacket {
-    DanaGeneratePacket(opCode: DanaPacketType.OPCODE_REVIEW__GET_PUMP_CHECK, data: nil)
+    DanaGeneratePacket(name: "General_GetPumpCheck", opCode: DanaPacketType.OPCODE_REVIEW__GET_PUMP_CHECK, data: nil)
 }
 
 func parsePacketGeneralGetPumpCheck(data: Data, usingUtc _: Bool?) -> DanaParsePacket<PacketGeneralGetPumpCheck> {

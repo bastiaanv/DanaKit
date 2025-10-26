@@ -24,9 +24,9 @@ func generatePacketBasalSetProfileRate(options: PacketBasalSetProfileRate) throw
         dataArray[2 + i * 2] = UInt8((rate >> 8) & 0xFF)
     }
 
-    return DanaGeneratePacket(opCode: DanaPacketType.OPCODE_BASAL__SET_PROFILE_BASAL_RATE, data: Data(dataArray))
+    return DanaGeneratePacket(name: "Basal_SetRate", opCode: DanaPacketType.OPCODE_BASAL__SET_PROFILE_BASAL_RATE, data: Data(dataArray))
 }
 
-func parsePacketBasalSetProfileRate(data: Data, usingUtc _: Bool?) -> DanaParsePacket<Any> {
+func parsePacketBasalSetProfileRate(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
     DanaParsePacket(success: data[DataStart] == 0, rawData: data, data: nil)
 }

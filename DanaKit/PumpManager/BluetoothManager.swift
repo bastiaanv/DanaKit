@@ -33,7 +33,7 @@ protocol BluetoothManager: AnyObject, CBCentralManagerDelegate {
 
     var manager: CBCentralManager! { get }
     var managerQueue: DispatchQueue { get }
-    var pumpManagerDelegate: DanaKitPumpManager? { get set }
+    var pumpManager: DanaKitPumpManager? { get set }
 
     var isConnected: Bool { get }
     var autoConnectUUID: String? { get set }
@@ -84,7 +84,7 @@ extension BluetoothManager {
         if let peripheral = peripherals.first {
             DispatchQueue.main.async {
                 self.peripheral = peripheral
-                self.peripheralManager = PeripheralManager(peripheral, self, self.pumpManagerDelegate!, completion)
+                self.peripheralManager = PeripheralManager(peripheral, self, self.pumpManager!, completion)
 
                 self.manager.connect(peripheral, options: nil)
             }
@@ -137,7 +137,7 @@ extension BluetoothManager {
                     return
                 }
 
-                self.logDeviceCommunication("Dana - Failed to connect: Timeout reached...", type: .connection)
+                pumpManager?.logDeviceCommunication("Dana - Failed to connect: Timeout reached...", type: .connection)
                 self.log.error("Failed to connect: Timeout reached...")
 
                 connectionCallback(.timeout)
@@ -146,20 +146,8 @@ extension BluetoothManager {
         }
     }
 
-    func logDeviceCommunication(_ message: String, type: DeviceLogEntryType = .send) {
-        let address = String(format: "%04X", pumpManagerDelegate?.state.bleIdentifier ?? "")
-        // Not dispatching here; if delegate queue is blocked, timestamps will be delayed
-        pumpManagerDelegate?.pumpDelegate.delegate?.deviceManager(
-            pumpManagerDelegate!,
-            logEventForDeviceIdentifier: address,
-            type: type,
-            message: message,
-            completion: nil
-        )
-    }
-
     func updateInitialState() async {
-        guard let pumpManagerDelegate = self.pumpManagerDelegate else {
+        guard let pumpManagerDelegate = pumpManager else {
             log.error("No pumpManager available...")
             return
         }
@@ -250,7 +238,7 @@ extension BluetoothManager {
 
         let result = DanaPumpScan(bleIdentifier: peripheral.identifier.uuidString, name: peripheral.name!, peripheral: peripheral)
         devices.append(result)
-        pumpManagerDelegate?.notifyScanDeviceDidChange(result)
+        pumpManager?.notifyScanDeviceDidChange(result)
     }
 
     func bleCentralManager(_: CBCentralManager, didConnect peripheral: CBPeripheral) {
@@ -265,11 +253,11 @@ extension BluetoothManager {
 
         log.info("Connected to pump!")
         self.peripheral = peripheral
-        peripheralManager = PeripheralManager(peripheral, self, pumpManagerDelegate!, connectionCompletion)
+        peripheralManager = PeripheralManager(peripheral, self, pumpManager!, connectionCompletion)
 
-        pumpManagerDelegate?.state.deviceName = peripheral.name
-        pumpManagerDelegate?.state.bleIdentifier = peripheral.identifier.uuidString
-        pumpManagerDelegate?.notifyStateDidChange()
+        pumpManager?.state.deviceName = peripheral.name
+        pumpManager?.state.bleIdentifier = peripheral.identifier.uuidString
+        pumpManager?.notifyStateDidChange()
 
         peripheral.discoverServices([PeripheralManager.SERVICE_UUID])
     }
@@ -277,19 +265,19 @@ extension BluetoothManager {
     func bleCentralManager(_: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         if let error = error {
             log.error("Failed to disconnect: \(error.localizedDescription)")
-            logDeviceCommunication("Dana - FAILED TO DISCONNECT: \(error.localizedDescription)", type: .connection)
+            pumpManager?.logDeviceCommunication("Dana - FAILED TO DISCONNECT: \(error.localizedDescription)", type: .connection)
         } else {
-            logDeviceCommunication("Dana - Disconnected", type: .connection)
             log.info("Device disconnected, name: \(peripheral.name ?? "<NO_NAME>")")
+            pumpManager?.logDeviceCommunication("Dana - Disconnected", type: .connection)
         }
 
-        pumpManagerDelegate?.state.isConnected = false
-        pumpManagerDelegate?.notifyStateDidChange()
+        pumpManager?.state.isConnected = false
+        pumpManager?.notifyStateDidChange()
 
         self.peripheral = nil
         peripheralManager = nil
 
-        pumpManagerDelegate?.checkBolusDone()
+        pumpManager?.checkBolusDone()
     }
 
     func bleCentralManager(_: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {

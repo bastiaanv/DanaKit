@@ -12,12 +12,13 @@ func generatePacketGeneralSetPumpTimeUtcWithTimezone(options: PacketGeneralSetPu
     data[6] = options.zoneOffset
 
     return DanaGeneratePacket(
+        name: "General_SetPumpTimeUtcWithTimezone",
         opCode: DanaPacketType.OPCODE_OPTION__SET_PUMP_UTC_AND_TIME_ZONE,
         data: data
     )
 }
 
-func parsePacketGeneralSetPumpTimeUtcWithTimezone(data: Data, usingUtc _: Bool?) -> DanaParsePacket<Any> {
+func parsePacketGeneralSetPumpTimeUtcWithTimezone(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
     DanaParsePacket(
         success: data[DataStart] == 0,
         rawData: data,

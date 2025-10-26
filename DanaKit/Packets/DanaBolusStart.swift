@@ -34,10 +34,10 @@ func generatePacketBolusStart(options: PacketBolusStart) -> DanaGeneratePacket {
     data[1] = UInt8((bolusRate >> 8) & 0xFF)
     data[2] = options.speed.rawValue
 
-    return DanaGeneratePacket(opCode: DanaPacketType.OPCODE_BOLUS__SET_STEP_BOLUS_START, data: data)
+    return DanaGeneratePacket(name: "Bolus_Start", opCode: DanaPacketType.OPCODE_BOLUS__SET_STEP_BOLUS_START, data: data)
 }
 
-func parsePacketBolusStart(data: Data, usingUtc _: Bool?) -> DanaParsePacket<Any> {
+func parsePacketBolusStart(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
     DanaParsePacket(success: data[DataStart] == 0, rawData: data, data: nil)
 }
 

@@ -1,4 +1,4 @@
-struct PacketGeneralGetShippingVersion {
+struct PacketGeneralGetShippingVersion: Codable {
     var bleModel: String
 }
 
@@ -7,6 +7,7 @@ let CommandGeneralGetShippingVersion: UInt16 = (UInt16(DanaPacketType.TYPE_RESPO
 
 func generatePacketGeneralGetShippingVersion() -> DanaGeneratePacket {
     DanaGeneratePacket(
+        name: "General_GetShippingVersion",
         opCode: DanaPacketType.OPCODE_GENERAL__GET_SHIPPING_VERSION,
         data: nil
     )
