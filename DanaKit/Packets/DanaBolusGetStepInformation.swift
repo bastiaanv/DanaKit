@@ -11,7 +11,11 @@ let CommandBolusGetStepInformation: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONS
     UInt16(DanaPacketType.OPCODE_BOLUS__GET_STEP_BOLUS_INFORMATION & 0xFF)
 
 func generatePacketBolusGetStepInformation() -> DanaGeneratePacket {
-    DanaGeneratePacket(name: "Bolus_GetStepInformation", opCode: DanaPacketType.OPCODE_BOLUS__GET_STEP_BOLUS_INFORMATION, data: nil)
+    DanaGeneratePacket(
+        name: "Bolus_GetStepInformation",
+        opCode: DanaPacketType.OPCODE_BOLUS__GET_STEP_BOLUS_INFORMATION,
+        data: nil
+    )
 }
 
 func parsePacketBolusGetStepInformation(data: Data, usingUtc _: Bool?) -> DanaParsePacket<PacketBolusGetStepInformation> {

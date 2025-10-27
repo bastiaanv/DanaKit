@@ -18,7 +18,11 @@ let CommandGeneralGetInitialScreenInformation: UInt16 = (UInt16(DanaPacketType.T
     UInt16(DanaPacketType.OPCODE_REVIEW__INITIAL_SCREEN_INFORMATION & 0xFF)
 
 func generatePacketGeneralGetInitialScreenInformation() -> DanaGeneratePacket {
-    DanaGeneratePacket(name: "General_GetInitialScreenInformation", opCode: DanaPacketType.OPCODE_REVIEW__INITIAL_SCREEN_INFORMATION, data: nil)
+    DanaGeneratePacket(
+        name: "General_GetInitialScreenInformation",
+        opCode: DanaPacketType.OPCODE_REVIEW__INITIAL_SCREEN_INFORMATION,
+        data: nil
+    )
 }
 
 func parsePacketGeneralGetInitialScreenInformation(
