@@ -236,8 +236,7 @@ extension DanaKitPumpManager: PumpManager {
     }
 
     public var minimumBasalScheduleEntryDuration: TimeInterval {
-        // One per hour
-        TimeInterval(60 * 60)
+        .hours(1)
     }
 
     public func roundToSupportedBolusVolume(units: Double) -> Double {
@@ -713,13 +712,13 @@ extension DanaKitPumpManager: PumpManager {
                                 delegate.pumpManager(
                                     self,
                                     hasNewPumpEvents: [event],
-                                    lastReconciliation: Date.now,
+                                    lastReconciliation: self.state.lastStatusDate,
                                     replacePendingEvents: false,
                                     completion: { _ in }
                                 )
                             }
                         }
-                        
+
                         self.log.info("Successfully started bolus!")
                         self.logDeviceCommunication("Successfully started bolus!", type: .delegateResponse)
 
@@ -819,9 +818,12 @@ extension DanaKitPumpManager: PumpManager {
                 completion(.success(nil))
                 return
             }
-            
-            self.log.info("Successfully cancelled bolus - \(doseEntry.deliveredUnits)U of \(doseEntry.value)U")
-            self.logDeviceCommunication("Successfully cancelled bolus - \(doseEntry.deliveredUnits)U of \(doseEntry.value)U", type: .delegateResponse)
+
+            log.info("Successfully cancelled bolus - \(doseEntry.deliveredUnits)U of \(doseEntry.value)U")
+            logDeviceCommunication(
+                "Successfully cancelled bolus - \(doseEntry.deliveredUnits)U of \(doseEntry.value)U",
+                type: .delegateResponse
+            )
 
             let dose = doseEntry.toDoseEntry()
             self.doseEntry = nil
@@ -850,7 +852,7 @@ extension DanaKitPumpManager: PumpManager {
                 delegate.pumpManager(
                     self,
                     hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: dose.deliveredUnits ?? 0, date: dose.startDate)],
-                    lastReconciliation: Date.now,
+                    lastReconciliation: self.state.lastStatusDate,
                     replacePendingEvents: true,
                     completion: { _ in }
                 )
@@ -872,7 +874,10 @@ extension DanaKitPumpManager: PumpManager {
     ) {
         delegateQueue.async {
             self.log.info("Enact temp basal. Value: \(unitsPerHour) U/hr, duration: \(duration) sec")
-            self.logDeviceCommunication("Enact temp basal. Value: \(unitsPerHour) U/hr, duration: \(duration) sec", type: .delegate)
+            self.logDeviceCommunication(
+                "Enact temp basal. Value: \(unitsPerHour) U/hr, duration: \(duration) sec",
+                type: .delegate
+            )
 
             self.bluetooth.ensureConnected { result in
                 switch result {
@@ -994,7 +999,7 @@ extension DanaKitPumpManager: PumpManager {
                                 delegate.pumpManager(
                                     self,
                                     hasNewPumpEvents: [NewPumpEvent.basal(dose: dose)],
-                                    lastReconciliation: Date.now,
+                                    lastReconciliation: self.state.lastStatusDate,
                                     replacePendingEvents: true,
                                     completion: { _ in }
                                 )
@@ -1048,7 +1053,7 @@ extension DanaKitPumpManager: PumpManager {
                                         NewPumpEvent
                                             .tempBasal(dose: dose, units: unitsPerHour, duration: duration)
                                     ],
-                                    lastReconciliation: Date.now,
+                                    lastReconciliation: self.state.lastStatusDate,
                                     replacePendingEvents: true,
                                     completion: { _ in }
                                 )
@@ -1102,7 +1107,7 @@ extension DanaKitPumpManager: PumpManager {
                                         NewPumpEvent
                                             .tempBasal(dose: dose, units: unitsPerHour, duration: duration)
                                     ],
-                                    lastReconciliation: Date.now,
+                                    lastReconciliation: self.state.lastStatusDate,
                                     replacePendingEvents: true,
                                     completion: { _ in }
                                 )
@@ -1160,14 +1165,17 @@ extension DanaKitPumpManager: PumpManager {
                                         NewPumpEvent
                                             .tempBasal(dose: dose, units: unitsPerHour, duration: duration)
                                     ],
-                                    lastReconciliation: Date.now,
+                                    lastReconciliation: self.state.lastStatusDate,
                                     replacePendingEvents: true,
                                     completion: { _ in }
                                 )
                             }
 
                             self.log.info("Successfully started \(durationInHours)h temp basal")
-                            self.logDeviceCommunication("Successfully started \(durationInHours)h temp basal", type: .delegateResponse)
+                            self.logDeviceCommunication(
+                                "Successfully started \(durationInHours)h temp basal",
+                                type: .delegateResponse
+                            )
                             completion(nil)
                         }
                     } catch {
@@ -1260,7 +1268,7 @@ extension DanaKitPumpManager: PumpManager {
         delegateQueue.async {
             self.log.info("Resume delivery")
             self.logDeviceCommunication("Resume delivery", type: .delegate)
-            
+
             self.bluetooth.ensureConnected { result in
                 switch result {
                 case .success:
@@ -1387,7 +1395,7 @@ extension DanaKitPumpManager: PumpManager {
                             delegate.pumpManager(
                                 self,
                                 hasNewPumpEvents: [NewPumpEvent.basal(dose: dose)],
-                                lastReconciliation: Date.now,
+                                lastReconciliation: self.state.lastStatusDate,
                                 replacePendingEvents: true,
                                 completion: { _ in }
                             )
@@ -1432,7 +1440,7 @@ extension DanaKitPumpManager: PumpManager {
                             completion(false)
                             return
                         }
-                        
+
                         self.log.info("User settings synced!")
                         self.logDeviceCommunication("User settings synced!", type: .delegateResponse)
                         completion(true)
@@ -1454,7 +1462,10 @@ extension DanaKitPumpManager: PumpManager {
         delegateQueue.async {
             // Dana does not allow the max basal and max bolus to be set
             self.log.info("Skipping sync delivery limits (not supported by dana). Fetching current settings")
-            self.logDeviceCommunication("Skipping sync delivery limits (not supported by dana). Fetching current settings", type: .delegate)
+            self.logDeviceCommunication(
+                "Skipping sync delivery limits (not supported by dana). Fetching current settings",
+                type: .delegate
+            )
 
             self.bluetooth.ensureConnected { result in
                 switch result {
@@ -1488,7 +1499,7 @@ extension DanaKitPumpManager: PumpManager {
 
                         self.log.info("Delivery settings received!")
                         self.logDeviceCommunication("Delivery settings received!", type: .delegateResponse)
-                        
+
                         completion(.success(DeliveryLimits(
                             maximumBasalRate: HKQuantity(
                                 unit: HKUnit.internationalUnit().unitDivided(by: .hour()),
@@ -1520,7 +1531,7 @@ extension DanaKitPumpManager: PumpManager {
         delegateQueue.async {
             self.log.info("Syncing pump time...")
             self.logDeviceCommunication("Syncing pump time...", type: .delegate)
-            
+
             self.bluetooth.ensureConnected { result in
                 switch result {
                 case .success:
@@ -1564,10 +1575,10 @@ extension DanaKitPumpManager: PumpManager {
 
                             delegate.pumpManager(self, didAdjustPumpClockBy: offset)
                         }
-                        
+
                         self.log.info("Pump time synced!")
                         self.logDeviceCommunication("Pump time synced!", type: .delegateResponse)
-                        
+
                         completion(nil)
                     } catch {
                         self.disconnect()
@@ -1715,7 +1726,7 @@ public extension DanaKitPumpManager {
             delegate.pumpManager(
                 self,
                 hasNewPumpEvents: [event],
-                lastReconciliation: Date.now,
+                lastReconciliation: self.state.lastStatusDate,
                 replacePendingEvents: true,
                 completion: { _ in }
             )
@@ -1735,8 +1746,8 @@ public extension DanaKitPumpManager {
             // Ignore if no bolus is going
             return
         }
-        
-        self.logDeviceCommunication("Error during bolus - \(doseEntry.deliveredUnits)U of \(doseEntry.value)U", type: .error)
+
+        logDeviceCommunication("Error during bolus - \(doseEntry.deliveredUnits)U of \(doseEntry.value)U", type: .error)
 
         self.doseEntry = nil
         doseReporter = nil
@@ -1790,6 +1801,12 @@ public extension DanaKitPumpManager {
             self.log.info("Bolus completed - \(deliveredUnits)U")
             self.logDeviceCommunication("Bolus completed - \(deliveredUnits)U", type: .delegateResponse)
 
+            let initialScreenPacket = generatePacketGeneralGetInitialScreenInformation()
+            let resultInitialScreenInformation = try await bluetooth.writeMessage(initialScreenPacket)
+            if resultInitialScreenInformation.success, let data = resultInitialScreenInformation.data as? PacketGeneralGetInitialScreenInformation {
+                self.state.reservoirLevel = data.reservoirRemainingUnits
+            }
+            
             self.state.lastStatusPumpDateTime = await self.fetchPumpTime() ?? Date.now
             self.state.lastStatusDate = Date.now
             self.state.bolusState = .noBolus
@@ -1825,8 +1842,14 @@ public extension DanaKitPumpManager {
 
                 delegate.pumpManager(
                     self,
+                    didReadReservoirValue: self.state.reservoirLevel,
+                    at: Date.now,
+                    completion: { _ in }
+                )
+                delegate.pumpManager(
+                    self,
                     hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: deliveredUnits, date: dose.startDate)],
-                    lastReconciliation: Date.now,
+                    lastReconciliation: self.state.lastStatusDate,
                     replacePendingEvents: true,
                     completion: { _ in }
                 )
@@ -1843,7 +1866,10 @@ public extension DanaKitPumpManager {
         }
 
         log.warning("Disconnected from pump while ongoing bolus - \(doseEntry.deliveredUnits)U of \(doseEntry.value)U")
-        self.logDeviceCommunication("Disconnected from pump while ongoing bolus - \(doseEntry.deliveredUnits)U of \(doseEntry.value)U", type: .error)
+        logDeviceCommunication(
+            "Disconnected from pump while ongoing bolus - \(doseEntry.deliveredUnits)U of \(doseEntry.value)U",
+            type: .error
+        )
 
         // There was a bolus going on, unsure if the bolus is completed...
         let dose = doseEntry.toDoseEntry()
