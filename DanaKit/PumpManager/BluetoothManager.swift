@@ -39,7 +39,6 @@ protocol BluetoothManager: AnyObject, CBCentralManagerDelegate {
     var autoConnectUUID: String? { get set }
 
     var connectionCompletion: ((ConnectionResult) -> Void)? { get set }
-    var connectionCallback: [String: (ConnectionResult) -> Void] { get set }
 
     var devices: [DanaPumpScan] { get set }
 
@@ -126,24 +125,6 @@ extension BluetoothManager {
         }
 
         peripheralManager.finishV3Pairing(pairingKey, randomPairingKey)
-    }
-
-    func startTimeout(seconds: TimeInterval, _ identifier: String) {
-        Task {
-            do {
-                try await Task.sleep(nanoseconds: UInt64(seconds) * 1_000_000_000)
-                guard let connectionCallback = self.connectionCallback[identifier] else {
-                    // This is amazing, we've done what we must and continue our live :)
-                    return
-                }
-
-                pumpManager?.logDeviceCommunication("Dana - Failed to connect: Timeout reached...", type: .connection)
-                self.log.error("Failed to connect: Timeout reached...")
-
-                connectionCallback(.timeout)
-                self.connectionCallback[identifier] = nil
-            } catch {}
-        }
     }
 
     func updateInitialState() async {

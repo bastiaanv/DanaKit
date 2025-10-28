@@ -12,7 +12,6 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
 
     var autoConnectUUID: String?
     var connectionCompletion: ((ConnectionResult) -> Void)?
-    var connectionCallback: [String: (ConnectionResult) -> Void] = [:]
     var devices: [DanaPumpScan] = []
 
     let log = DanaLogger(category: "ContinousBluetoothManager")
