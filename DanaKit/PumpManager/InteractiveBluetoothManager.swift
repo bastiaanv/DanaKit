@@ -7,7 +7,7 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
 
     var autoConnectUUID: String?
     var connectionCompletion: ((ConnectionResult) -> Void)?
-    var connectionCallback: [String: (ConnectionResult) -> Void] = [:]
+    var connectionCallback: ((ConnectionResult) -> Void)?
     var devices: [DanaPumpScan] = []
     var isBusy: Bool = false
 
@@ -35,11 +35,11 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
     }
 
     func ensureConnected(_ completion: @escaping (ConnectionResult) async -> Void, _ identifier: String = #function) {
-        connectionCallback[identifier] = { result in
+        self.connectionCallback = { result in
             Task {
                 self.isBusy = true
                 self.resetConnectionCompletion()
-                self.connectionCallback[identifier] = nil
+                self.connectionCallback = nil
 
                 if case .success = result {
                     do {
@@ -64,19 +64,19 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
             if isBusy {
                 log.error("Failed to connect: Already connected")
                 pumpManager?.logDeviceCommunication("Dana - Failed to connect: Already connected", type: .connection)
-                connectionCallback[identifier]!(.alreadyConnectedAndBusy)
+                self.connectionCallback?(.alreadyConnectedAndBusy)
                 return
             }
 
             // We can re-use the current connection. YEAH!!
-            connectionCallback[identifier]!(.success)
+            self.connectionCallback?(.success)
 
             // We stored the peripheral. We can quickly reconnect
         } else if peripheral != nil {
-            startTimeout(seconds: TimeInterval.seconds(15), identifier)
+            startTimeout(seconds: TimeInterval.seconds(15))
 
             connect(peripheral!) { result in
-                guard let connectionCallback = self.connectionCallback[identifier] else {
+                guard let connectionCallback = self.connectionCallback else {
                     // We've already hit the timeout function above
                     // Exit if we every hit this...
                     return
@@ -108,10 +108,10 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
             // No active connection and no stored peripheral. We have to scan for device before being able to send command
         } else if pumpManager?.state.bleIdentifier != nil {
             do {
-                startTimeout(seconds: TimeInterval.seconds(30), identifier)
+                startTimeout(seconds: TimeInterval.seconds(30))
 
                 try connect(pumpManager!.state.bleIdentifier!) { result in
-                    guard let connectionCallback = self.connectionCallback[identifier] else {
+                    guard let connectionCallback = self.connectionCallback else {
                         // We've already hit the timeout function above
                         // Exit if we every hit this...
                         return
@@ -143,14 +143,32 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
             } catch {
                 log.error("Failed to connect: " + error.localizedDescription)
                 pumpManager?.logDeviceCommunication("Dana - Failed to connect: " + error.localizedDescription, type: .connection)
-                connectionCallback[identifier]?(.failure(error))
+                self.connectionCallback?(.failure(error))
             }
 
         } else {
             // Should never reach, but is only possible if device is not onboard (we have no ble identifier to connect to)
             log.error("Pump is not onboarded")
             pumpManager?.logDeviceCommunication("Dana - Pump is not onboarded", type: .connection)
-            connectionCallback[identifier]!(.failure(NSError(domain: "Pump is not onboarded", code: -1)))
+            self.connectionCallback?(.failure(NSError(domain: "Pump is not onboarded", code: -1)))
+        }
+    }
+    
+    private func startTimeout(seconds: TimeInterval) {
+        Task {
+            do {
+                try await Task.sleep(nanoseconds: UInt64(seconds) * 1_000_000_000)
+                guard let connectionCallback = self.connectionCallback else {
+                    // This is amazing, we've done what we must and continue our live :)
+                    return
+                }
+
+                pumpManager?.logDeviceCommunication("Dana - Failed to connect: Timeout reached...", type: .connection)
+                self.log.error("Failed to connect: Timeout reached...")
+
+                connectionCallback(.timeout)
+                self.connectionCallback = nil
+            } catch {}
         }
     }
 

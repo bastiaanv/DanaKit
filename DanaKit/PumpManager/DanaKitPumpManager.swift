@@ -368,7 +368,7 @@ extension DanaKitPumpManager: PumpManager {
                     delegate.pumpManager(
                         self,
                         didReadReservoirValue: self.state.reservoirLevel,
-                        at: Date.now,
+                        at: self.state.lastStatusDate,
                         completion: { _ in }
                     )
                     delegate.pumpManagerDidUpdateState(self)
@@ -1845,7 +1845,7 @@ public extension DanaKitPumpManager {
                 delegate.pumpManager(
                     self,
                     didReadReservoirValue: self.state.reservoirLevel,
-                    at: Date.now,
+                    at: self.state.lastStatusDate,
                     completion: { _ in }
                 )
                 delegate.pumpManager(
