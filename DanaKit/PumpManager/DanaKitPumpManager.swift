@@ -1803,10 +1803,12 @@ public extension DanaKitPumpManager {
 
             let initialScreenPacket = generatePacketGeneralGetInitialScreenInformation()
             let resultInitialScreenInformation = try await bluetooth.writeMessage(initialScreenPacket)
-            if resultInitialScreenInformation.success, let data = resultInitialScreenInformation.data as? PacketGeneralGetInitialScreenInformation {
+            if resultInitialScreenInformation.success,
+               let data = resultInitialScreenInformation.data as? PacketGeneralGetInitialScreenInformation
+            {
                 self.state.reservoirLevel = data.reservoirRemainingUnits
             }
-            
+
             self.state.lastStatusPumpDateTime = await self.fetchPumpTime() ?? Date.now
             self.state.lastStatusDate = Date.now
             self.state.bolusState = .noBolus
