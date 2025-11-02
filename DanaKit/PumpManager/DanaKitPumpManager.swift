@@ -363,14 +363,23 @@ extension DanaKitPumpManager: PumpManager {
                         hasNewPumpEvents: events,
                         lastReconciliation: self.state.lastStatusDate,
                         replacePendingEvents: true,
-                        completion: { _ in }
-                    )
+                    ) { error in
+                        if let error = error {
+                            self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
+                        }
+                    }
                     delegate.pumpManager(
                         self,
                         didReadReservoirValue: self.state.reservoirLevel,
                         at: self.state.lastStatusDate,
-                        completion: { _ in }
-                    )
+                    ) { result in
+                        switch result {
+                        case .failure(let error):
+                            self.handlePumpDelegateError(method: "didReadReservoirValue", error)
+                        case .success(_):
+                            break
+                        }
+                    }
                     delegate.pumpManagerDidUpdateState(self)
                 }
 
@@ -714,8 +723,11 @@ extension DanaKitPumpManager: PumpManager {
                                     hasNewPumpEvents: [event],
                                     lastReconciliation: self.state.lastStatusDate,
                                     replacePendingEvents: false,
-                                    completion: { _ in }
-                                )
+                                ) { error in
+                                    if let error = error {
+                                        self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
+                                    }
+                                }
                             }
                         }
 
@@ -854,8 +866,11 @@ extension DanaKitPumpManager: PumpManager {
                     hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: dose.deliveredUnits ?? 0, date: dose.startDate)],
                     lastReconciliation: self.state.lastStatusDate,
                     replacePendingEvents: true,
-                    completion: { _ in }
-                )
+                ) { error in
+                    if let error = error {
+                        self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
+                    }
+                }
             }
 
             self.notifyStateDidChange()
@@ -1001,8 +1016,11 @@ extension DanaKitPumpManager: PumpManager {
                                     hasNewPumpEvents: [NewPumpEvent.basal(dose: dose)],
                                     lastReconciliation: self.state.lastStatusDate,
                                     replacePendingEvents: true,
-                                    completion: { _ in }
-                                )
+                                ) { error in
+                                    if let error = error {
+                                        self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
+                                    }
+                                }
                             }
 
                             self.log.info("Successfully cancelled temp basal")
@@ -1055,8 +1073,11 @@ extension DanaKitPumpManager: PumpManager {
                                     ],
                                     lastReconciliation: self.state.lastStatusDate,
                                     replacePendingEvents: true,
-                                    completion: { _ in }
-                                )
+                                ) { error in
+                                    if let error = error {
+                                        self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
+                                    }
+                                }
                             }
 
                             self.log.info("Successfully started 15 min temp basal")
@@ -1109,8 +1130,11 @@ extension DanaKitPumpManager: PumpManager {
                                     ],
                                     lastReconciliation: self.state.lastStatusDate,
                                     replacePendingEvents: true,
-                                    completion: { _ in }
-                                )
+                                ) { error in
+                                    if let error = error {
+                                        self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
+                                    }
+                                }
                             }
 
                             self.log.info("Successfully started 30 min temp basal")
@@ -1167,8 +1191,11 @@ extension DanaKitPumpManager: PumpManager {
                                     ],
                                     lastReconciliation: self.state.lastStatusDate,
                                     replacePendingEvents: true,
-                                    completion: { _ in }
-                                )
+                                ) { error in
+                                    if let error = error {
+                                        self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
+                                    }
+                                }
                             }
 
                             self.log.info("Successfully started \(durationInHours)h temp basal")
@@ -1242,8 +1269,11 @@ extension DanaKitPumpManager: PumpManager {
                                 hasNewPumpEvents: [NewPumpEvent.suspend(dose: dose)],
                                 lastReconciliation: self.state.lastStatusDate,
                                 replacePendingEvents: true,
-                                completion: { _ in }
-                            )
+                            ) { error in
+                                if let error = error {
+                                    self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
+                                }
+                            }
                         }
 
                         self.log.info("Insulin delivery suspended!")
@@ -1309,8 +1339,11 @@ extension DanaKitPumpManager: PumpManager {
                                 hasNewPumpEvents: [NewPumpEvent.resume(dose: dose)],
                                 lastReconciliation: self.state.lastStatusDate,
                                 replacePendingEvents: true,
-                                completion: { _ in }
-                            )
+                            ) { error in
+                                if let error = error {
+                                    self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
+                                }
+                            }
                         }
 
                         self.log.info("Insulin delivery resumed!")
@@ -1397,8 +1430,11 @@ extension DanaKitPumpManager: PumpManager {
                                 hasNewPumpEvents: [NewPumpEvent.basal(dose: dose)],
                                 lastReconciliation: self.state.lastStatusDate,
                                 replacePendingEvents: true,
-                                completion: { _ in }
-                            )
+                            ) { error in
+                                if let error = error {
+                                    self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
+                                }
+                            }
                         }
 
                         self.log.info("Basal schedule synced!")
@@ -1728,8 +1764,11 @@ public extension DanaKitPumpManager {
                 hasNewPumpEvents: [event],
                 lastReconciliation: self.state.lastStatusDate,
                 replacePendingEvents: true,
-                completion: { _ in }
-            )
+            ) { error in
+                if let error = error {
+                    self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
+                }
+            }
         }
     }
 
@@ -1846,15 +1885,24 @@ public extension DanaKitPumpManager {
                     self,
                     didReadReservoirValue: self.state.reservoirLevel,
                     at: self.state.lastStatusDate,
-                    completion: { _ in }
-                )
+                ) { result in
+                    switch result {
+                    case .failure(let error):
+                        self.handlePumpDelegateError(method: "didReadReservoirValue", error)
+                    case .success(_):
+                        break
+                    }
+                }
                 delegate.pumpManager(
                     self,
                     hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: deliveredUnits, date: dose.startDate)],
                     lastReconciliation: self.state.lastStatusDate,
                     replacePendingEvents: true,
-                    completion: { _ in }
-                )
+                ) { error in
+                    if let error = error {
+                        self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
+                    }
+                }
             }
 
             self.notifyStateDidChange()
@@ -1893,10 +1941,13 @@ public extension DanaKitPumpManager {
             delegate.pumpManager(
                 self,
                 hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: dose.programmedUnits, date: dose.startDate)],
-                lastReconciliation: Date(),
+                lastReconciliation: self.state.lastStatusDate,
                 replacePendingEvents: true,
-                completion: { _ in }
-            )
+            ) { error in
+                if let error = error {
+                    self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
+                }
+            }
         }
     }
 
@@ -1910,5 +1961,11 @@ public extension DanaKitPumpManager {
             message: message,
             completion: nil
         )
+    }
+    
+    private func handlePumpDelegateError(method: String, _ error: Error, _ function: String = #function, _ line: Int = #line) {
+        let logLine = "Received pump delegate error in \(method): \(error) at \(function):\(line)"
+        log.error(logLine)
+        logDeviceCommunication(logLine, type: .error)
     }
 }
