@@ -1867,14 +1867,17 @@ public extension DanaKitPumpManager {
             return
         }
 
+        // There was a bolus going on, unsure if the bolus is completed...
         log.warning("Disconnected from pump while ongoing bolus - \(doseEntry.deliveredUnits)U of \(doseEntry.value)U")
         logDeviceCommunication(
             "Disconnected from pump while ongoing bolus - \(doseEntry.deliveredUnits)U of \(doseEntry.value)U",
             type: .error
         )
 
-        // There was a bolus going on, unsure if the bolus is completed...
+        // We assume the bolus will be completed
+        doseEntry.deliveredUnits = doseEntry.value
         let dose = doseEntry.toDoseEntry()
+        
         state.bolusState = .noBolus
         state.lastStatusDate = Date.now
         self.doseEntry = nil
@@ -1889,7 +1892,7 @@ public extension DanaKitPumpManager {
             delegate.pumpManager(self, didError: .uncertainDelivery)
             delegate.pumpManager(
                 self,
-                hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: dose.programmedUnits)],
+                hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: dose.programmedUnits, date: dose.startDate)],
                 lastReconciliation: Date(),
                 replacePendingEvents: true,
                 completion: { _ in }
