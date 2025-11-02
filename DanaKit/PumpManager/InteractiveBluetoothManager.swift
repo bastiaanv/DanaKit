@@ -34,8 +34,8 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
         self.manager = nil
     }
 
-    func ensureConnected(_ completion: @escaping (ConnectionResult) async -> Void, _ identifier: String = #function) {
-        self.connectionCallback = { result in
+    func ensureConnected(_ completion: @escaping (ConnectionResult) async -> Void, _: String = #function) {
+        connectionCallback = { result in
             Task {
                 self.isBusy = true
                 self.resetConnectionCompletion()
@@ -64,12 +64,12 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
             if isBusy {
                 log.error("Failed to connect: Already connected")
                 pumpManager?.logDeviceCommunication("Dana - Failed to connect: Already connected", type: .connection)
-                self.connectionCallback?(.alreadyConnectedAndBusy)
+                connectionCallback?(.alreadyConnectedAndBusy)
                 return
             }
 
             // We can re-use the current connection. YEAH!!
-            self.connectionCallback?(.success)
+            connectionCallback?(.success)
 
             // We stored the peripheral. We can quickly reconnect
         } else if peripheral != nil {
@@ -143,17 +143,17 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
             } catch {
                 log.error("Failed to connect: " + error.localizedDescription)
                 pumpManager?.logDeviceCommunication("Dana - Failed to connect: " + error.localizedDescription, type: .connection)
-                self.connectionCallback?(.failure(error))
+                connectionCallback?(.failure(error))
             }
 
         } else {
             // Should never reach, but is only possible if device is not onboard (we have no ble identifier to connect to)
             log.error("Pump is not onboarded")
             pumpManager?.logDeviceCommunication("Dana - Pump is not onboarded", type: .connection)
-            self.connectionCallback?(.failure(NSError(domain: "Pump is not onboarded", code: -1)))
+            connectionCallback?(.failure(NSError(domain: "Pump is not onboarded", code: -1)))
         }
     }
-    
+
     private func startTimeout(seconds: TimeInterval) {
         Task {
             do {

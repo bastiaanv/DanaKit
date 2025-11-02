@@ -374,9 +374,9 @@ extension DanaKitPumpManager: PumpManager {
                         at: self.state.lastStatusDate,
                     ) { result in
                         switch result {
-                        case .failure(let error):
+                        case let .failure(error):
                             self.handlePumpDelegateError(method: "didReadReservoirValue", error)
-                        case .success(_):
+                        case .success:
                             break
                         }
                     }
@@ -1887,9 +1887,9 @@ public extension DanaKitPumpManager {
                     at: self.state.lastStatusDate,
                 ) { result in
                     switch result {
-                    case .failure(let error):
+                    case let .failure(error):
                         self.handlePumpDelegateError(method: "didReadReservoirValue", error)
-                    case .success(_):
+                    case .success:
                         break
                     }
                 }
@@ -1925,7 +1925,7 @@ public extension DanaKitPumpManager {
         // We assume the bolus will be completed
         doseEntry.deliveredUnits = doseEntry.value
         let dose = doseEntry.toDoseEntry()
-        
+
         state.bolusState = .noBolus
         state.lastStatusDate = Date.now
         self.doseEntry = nil
@@ -1962,7 +1962,7 @@ public extension DanaKitPumpManager {
             completion: nil
         )
     }
-    
+
     private func handlePumpDelegateError(method: String, _ error: Error, _ function: String = #function, _ line: Int = #line) {
         let logLine = "Received pump delegate error in \(method): \(error) at \(function):\(line)"
         log.error(logLine)
