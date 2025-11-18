@@ -51,7 +51,7 @@ protocol BluetoothManager: AnyObject, CBCentralManagerDelegate {
 extension BluetoothManager {
     func startScan() throws {
         guard manager.state == .poweredOn else {
-            throw NSError(domain: "Invalid bluetooth state. State: " + String(manager.state.rawValue), code: 0, userInfo: nil)
+            throw NSError(domain: "Invalid bluetooth state - state: \(manager.state.rawValue)", code: 0, userInfo: nil)
         }
 
         guard !manager.isScanning else {
@@ -227,10 +227,9 @@ extension BluetoothManager {
         advertisementData: [String: Any],
         rssi _: NSNumber
     ) {
-        if peripheral.name == nil || deviceNameRegex.firstMatch(
-            in: peripheral.name!,
-            range: NSMakeRange(0, peripheral.name!.count)
-        ) == nil {
+        guard let name = advertisementData[CBAdvertisementDataLocalNameKey] as? String,
+              deviceNameRegex.firstMatch(in: name, range: NSMakeRange(0, name.count)) != nil
+        else {
             return
         }
 
@@ -248,7 +247,7 @@ extension BluetoothManager {
             return
         }
 
-        let result = DanaPumpScan(bleIdentifier: peripheral.identifier.uuidString, name: peripheral.name!, peripheral: peripheral)
+        let result = DanaPumpScan(bleIdentifier: peripheral.identifier.uuidString, name: name, peripheral: peripheral)
         devices.append(result)
         pumpManagerDelegate?.notifyScanDeviceDidChange(result)
     }

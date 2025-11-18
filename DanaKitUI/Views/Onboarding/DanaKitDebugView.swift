@@ -70,7 +70,7 @@ struct DanaKitDebugView: View {
             isPresented: $viewModel.isPresentingScanningErrorAlert,
             presenting: viewModel.scanningErrorMessage,
             actions: { _ in
-                Button("Oke", action: {})
+                Button(LocalizedString("Okay", comment: "label Okay"), action: {})
             },
             message: { detail in Text(detail) }
         )
@@ -79,7 +79,7 @@ struct DanaKitDebugView: View {
             isPresented: $viewModel.isConnectionError,
             presenting: $viewModel.connectionErrorMessage,
             actions: { _ in
-                Button("Oke", action: {})
+                Button(LocalizedString("Okay", comment: "label Okay"), action: {})
             },
             message: { detail in Text(detail.wrappedValue ?? "") }
         )
@@ -108,7 +108,7 @@ struct DanaKitDebugView: View {
             Button(LocalizedString("Cancel", comment: "Cancel button title"), role: .cancel) {
                 viewModel.cancelPinPrompt()
             }
-            Button(LocalizedString("Oke", comment: "Dana-RS v3 pincode prompt oke"), action: {
+            Button(LocalizedString("Okay", comment: "label Okay"), action: {
                 viewModel.processPinPrompt()
             })
 
