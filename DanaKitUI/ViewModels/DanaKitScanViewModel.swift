@@ -42,20 +42,23 @@ class DanaKitScanViewModel: ObservableObject {
     }
 
     func connect(_ item: ScanResultItem) {
-        guard let device = foundDevices[item.bleIdentifier] else {
+        guard let pumpManager = pumpManager, let device = foundDevices[item.bleIdentifier] else {
             log.error("No view or device...")
             return
         }
 
         stopScan()
-        connectingTo = item.name
 
-        pumpManager?.connect(device) { result in
+        isConnecting = true
+        connectingTo = item.name
+        pumpManager.state.deviceName = item.name
+        pumpManager.state.bleIdentifier = item.bleIdentifier
+
+        pumpManager.connect(device) { result in
             DispatchQueue.main.async {
                 self.connectComplete(result, device)
             }
         }
-        isConnecting = true
     }
 
     func connectComplete(_ result: ConnectionResult, _ peripheral: CBPeripheral) {

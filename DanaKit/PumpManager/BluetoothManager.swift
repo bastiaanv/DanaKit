@@ -95,7 +95,7 @@ extension BluetoothManager {
 
         // throw error if device could not be found after 10 sec
         Task {
-            try? await Task.sleep(nanoseconds: 10_000_000_000)
+            try await Task.sleep(nanoseconds: 10_000_000_000)
             guard self.peripheral != nil else {
                 throw NSError(domain: "Device is not findable", code: -1)
             }
@@ -103,8 +103,8 @@ extension BluetoothManager {
     }
 
     func connect(_ peripheral: CBPeripheral, _ completion: @escaping (ConnectionResult) -> Void) {
-        if self.peripheral?.state == .connected {
-            disconnect(self.peripheral!, force: true)
+        if let peripheral = self.peripheral, peripheral.state == .connected {
+            disconnect(peripheral, force: true)
         }
 
         manager.connect(peripheral, options: nil)
@@ -231,13 +231,18 @@ extension BluetoothManager {
             return
         }
 
-        log.info("Connected to pump!")
-        self.peripheral = peripheral
-        peripheralManager = PeripheralManager(peripheral, self, pumpManager!, connectionCompletion)
+        guard let pumpManager = pumpManager else {
+            log.error("No pumpManager available...")
+            disconnect(peripheral, force: false)
+            connectionCompletion(.failure(NSError(domain: "No pumpManager", code: -1)))
 
-        pumpManager?.state.deviceName = peripheral.name
-        pumpManager?.state.bleIdentifier = peripheral.identifier.uuidString
-        pumpManager?.notifyStateDidChange()
+            return
+        }
+
+        log.info("Connected to pump!")
+
+        self.peripheral = peripheral
+        peripheralManager = PeripheralManager(peripheral, self, pumpManager, connectionCompletion)
 
         peripheral.discoverServices([PeripheralManager.SERVICE_UUID])
     }
