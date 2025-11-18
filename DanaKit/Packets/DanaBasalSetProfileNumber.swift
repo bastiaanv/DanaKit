@@ -7,9 +7,9 @@ let CommandBasalSetProfileNumber: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE 
 func generatePacketBasalSetProfileNumber(options: PacketBasalSetProfileNumber) -> DanaGeneratePacket {
     let data = Data([options.profileNumber & 0xFF])
 
-    return DanaGeneratePacket(opCode: DanaPacketType.OPCODE_BASAL__SET_PROFILE_NUMBER, data: data)
+    return DanaGeneratePacket(name: "Basal_SetProfileNumber", opCode: DanaPacketType.OPCODE_BASAL__SET_PROFILE_NUMBER, data: data)
 }
 
-func parsePacketBasalSetProfileNumber(data: Data, usingUtc _: Bool?) -> DanaParsePacket<Any> {
+func parsePacketBasalSetProfileNumber(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
     DanaParsePacket(success: data[DataStart] == 0, rawData: data, data: nil)
 }

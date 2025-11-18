@@ -1,4 +1,4 @@
-struct PacketNotifyDeliveryRateDisplay {
+struct PacketNotifyDeliveryRateDisplay: Codable {
     var deliveredInsulin: Double
 }
 

@@ -12,9 +12,9 @@ let CommandBasalSetTemporary: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0x
 func generatePacketBasalSetTemporary(options: PacketBasalSetTemporary) -> DanaGeneratePacket {
     let data = Data([options.temporaryBasalRatio, options.temporaryBasalDuration])
 
-    return DanaGeneratePacket(opCode: DanaPacketType.OPCODE_BASAL__SET_TEMPORARY_BASAL, data: data)
+    return DanaGeneratePacket(name: "Basal_SetTemporary", opCode: DanaPacketType.OPCODE_BASAL__SET_TEMPORARY_BASAL, data: data)
 }
 
-func parsePacketBasalSetTemporary(data: Data, usingUtc _: Bool?) -> DanaParsePacket<Any> {
+func parsePacketBasalSetTemporary(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
     DanaParsePacket(success: data[DataStart] == 0, rawData: data, data: nil)
 }

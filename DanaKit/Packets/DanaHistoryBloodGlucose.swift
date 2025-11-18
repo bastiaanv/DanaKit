@@ -3,6 +3,7 @@ let CommandHistoryBloodGlucose: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 
 
 func generatePacketHistoryBloodGlucose(options: PacketHistoryBase) -> DanaGeneratePacket {
     DanaGeneratePacket(
+        name: "Review_BloodGlucose",
         opCode: DanaPacketType.OPCODE_REVIEW__BLOOD_GLUCOSE,
         data: generatePacketHistoryData(options: options)
     )

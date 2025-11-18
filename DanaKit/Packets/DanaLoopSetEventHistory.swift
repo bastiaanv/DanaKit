@@ -31,10 +31,10 @@ func generatePacketLoopSetEventHistory(options: PacketLoopSetEventHistory) -> Da
     var data = Data(count: 11)
     var param1 = options.param1
 
-    if options.packetType == LoopHistoryEvents.carbs || options.packetType == LoopHistoryEvents.bolus, param1 < 0 {
-        // Assuming LoopHistoryEvents is an enum with associated values, you may need to adjust this condition
-        param1 = 0
-    }
+//    if options.packetType == LoopHistoryEvents.carbs || options.packetType == LoopHistoryEvents.bolus, param1 < 0 {
+//        // Assuming LoopHistoryEvents is an enum with associated values, you may need to adjust this condition
+//        param1 = 0
+//    }
 
     data[0] = options.packetType
     data.addDate(at: 1, date: options.time)
@@ -45,12 +45,13 @@ func generatePacketLoopSetEventHistory(options: PacketLoopSetEventHistory) -> Da
     data[10] = UInt8(options.param2 & 0xFF)
 
     return DanaGeneratePacket(
+        name: "Review_SetApsEvent",
         opCode: DanaPacketType.OPCODE__APS_SET_EVENT_HISTORY,
         data: data
     )
 }
 
-func parsePacketLoopSetEventHistory(data: Data, usingUtc _: Bool?) -> DanaParsePacket<Any> {
+func parsePacketLoopSetEventHistory(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
     DanaParsePacket(
         success: data[DataStart] == 0,
         rawData: data,

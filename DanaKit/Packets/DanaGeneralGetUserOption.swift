@@ -1,4 +1,4 @@
-public enum BeepAlarmType: UInt8 {
+public enum BeepAlarmType: UInt8, Codable {
     case sound = 1
     case vibration = 2
     case both = 3
@@ -8,7 +8,7 @@ public enum BeepAlarmType: UInt8 {
     }
 }
 
-public struct PacketGeneralGetUserOption {
+public struct PacketGeneralGetUserOption: Codable {
     var isTimeDisplay24H: Bool
     var isButtonScrollOnOff: Bool
     var beepAndAlarm: BeepAlarmType
@@ -36,6 +36,7 @@ let CommandGeneralGetUserOption: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE &
 
 func generatePacketGeneralGetUserOption() -> DanaGeneratePacket {
     DanaGeneratePacket(
+        name: "General_GetUserOption",
         opCode: DanaPacketType.OPCODE_OPTION__GET_USER_OPTION,
         data: nil
     )

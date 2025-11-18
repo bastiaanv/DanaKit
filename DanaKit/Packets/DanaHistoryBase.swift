@@ -18,7 +18,7 @@ struct PacketHistoryBase {
     var usingUtc: Bool
 }
 
-struct HistoryItem {
+struct HistoryItem: Codable {
     var code: Int
     var raw: Data
     var timestamp: Date

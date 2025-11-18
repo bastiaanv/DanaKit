@@ -1,7 +1,7 @@
 import Foundation
 import LoopKit
 
-public enum PumpManagerAlert: Hashable {
+public enum PumpManagerAlert: Hashable, Codable {
     case batteryZeroPercent(_ raw: Data)
     case pumpError(_ raw: Data)
     case occlusion(_ raw: Data)

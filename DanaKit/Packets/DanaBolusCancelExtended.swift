@@ -2,9 +2,9 @@ let CommandBolusCancelExtended: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 
     UInt16(DanaPacketType.OPCODE_BOLUS__SET_EXTENDED_BOLUS_CANCEL & 0xFF)
 
 func generatePacketBolusCancelExtended() -> DanaGeneratePacket {
-    DanaGeneratePacket(opCode: DanaPacketType.OPCODE_BOLUS__SET_EXTENDED_BOLUS_CANCEL, data: nil)
+    DanaGeneratePacket(name: "Bolus_CancelExtended", opCode: DanaPacketType.OPCODE_BOLUS__SET_EXTENDED_BOLUS_CANCEL, data: nil)
 }
 
-func parsePacketBolusCancelExtended(data: Data, usingUtc _: Bool?) -> DanaParsePacket<Any> {
+func parsePacketBolusCancelExtended(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
     DanaParsePacket(success: data[DataStart] == 0, rawData: data, data: nil)
 }

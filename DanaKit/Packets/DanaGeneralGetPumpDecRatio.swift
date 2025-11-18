@@ -1,4 +1,4 @@
-struct PacketGeneralGetPumpDecRatio {
+struct PacketGeneralGetPumpDecRatio: Codable {
     var decRatio: UInt8
 }
 
@@ -7,6 +7,7 @@ let CommandGeneralGetPumpDecRatio: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE
 
 func generatePacketGeneralGetPumpDecRatio() -> DanaGeneratePacket {
     DanaGeneratePacket(
+        name: "General_GetPumpDecRatio",
         opCode: DanaPacketType.OPCODE_REVIEW__GET_PUMP_DEC_RATIO,
         data: nil
     )

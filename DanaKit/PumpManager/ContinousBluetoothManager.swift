@@ -4,15 +4,14 @@ import Foundation
 import UserNotifications
 
 class ContinousBluetoothManager: NSObject, BluetoothManager {
-    var pumpManagerDelegate: DanaKitPumpManager? {
+    var pumpManager: DanaKitPumpManager? {
         didSet {
-            autoConnectUUID = pumpManagerDelegate?.state.bleIdentifier
+            autoConnectUUID = pumpManager?.state.bleIdentifier
         }
     }
 
     var autoConnectUUID: String?
     var connectionCompletion: ((ConnectionResult) -> Void)?
-    var connectionCallback: [String: (ConnectionResult) -> Void] = [:]
     var devices: [DanaPumpScan] = []
 
     let log = DanaLogger(category: "ContinousBluetoothManager")
@@ -24,7 +23,7 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
     var forcedDisconnect = false
 
     public var isConnected: Bool {
-        self.manager.state == .poweredOn && self.peripheral?.state == .connected && self.pumpManagerDelegate?.state
+        self.manager.state == .poweredOn && self.peripheral?.state == .connected && self.pumpManager?.state
             .isConnected ?? false
     }
 
@@ -53,7 +52,7 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
 
     private func keepConnectionAlive() async {
         do {
-            if pumpManagerDelegate?.status.bolusState == .noBolus {
+            if pumpManager?.status.bolusState == .noBolus {
                 log.info("Sending keep alive message")
                 let keepAlivePacket = generatePacketGeneralKeepConnection()
                 let result = try await writeMessage(keepAlivePacket)
@@ -85,7 +84,7 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
 
         NotificationHelper.setDisconnectWarning()
         if autoConnectUUID == nil {
-            autoConnectUUID = pumpManagerDelegate?.state.bleIdentifier
+            autoConnectUUID = pumpManager?.state.bleIdentifier
         }
 
         if peripheral != nil {
@@ -136,7 +135,7 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
     func ensureConnected(_ completion: @escaping (ConnectionResult) async -> Void, _: String = #function) {
         if isConnected {
             resetConnectionCompletion()
-            logDeviceCommunication("Dana - Connection is ok!", type: .connection)
+            pumpManager?.logDeviceCommunication("Dana - Connection is ok!", type: .connection)
             Task {
                 await self.updateInitialState()
                 await completion(.success)
@@ -146,7 +145,7 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
             reconnect { result in
                 guard result else {
                     self.log.error("Failed to reconnect")
-                    self.logDeviceCommunication("Dana - Couldn't reconnect", type: .connection)
+                    self.pumpManager?.logDeviceCommunication("Dana - Couldn't reconnect", type: .connection)
 
                     self.resetConnectionCompletion()
                     Task {
@@ -156,7 +155,7 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
                 }
 
                 self.resetConnectionCompletion()
-                self.logDeviceCommunication("Dana - Reconnected!", type: .connection)
+                self.pumpManager?.logDeviceCommunication("Dana - Reconnected!", type: .connection)
                 Task {
                     await self.updateInitialState()
                     await completion(.success)
@@ -165,7 +164,7 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
         } else {
             // We aren't connected, the user has disconnected the pump by hand
             log.warning("Device is forced disconnected...")
-            logDeviceCommunication(
+            pumpManager?.logDeviceCommunication(
                 "Dana - Pump is not connected. Please reconnect to pump before doing any operations",
                 type: .connection
             )
@@ -185,7 +184,7 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
         autoConnectUUID = nil
         forcedDisconnect = true
 
-        logDeviceCommunication("Dana - Disconnected", type: .connection)
+        pumpManager?.logDeviceCommunication("Dana - Disconnected", type: .connection)
         manager.cancelPeripheralConnection(peripheral)
     }
 
@@ -200,7 +199,7 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
                     }
 
                     self.log.info("Reconnected and sync pump data!")
-                    self.pumpManagerDelegate?.syncPump { _ in }
+                    self.pumpManager?.syncPump { _ in }
                 }
             }
         }
@@ -236,7 +235,7 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
             }
 
             self.log.info("Reconnected and sync pump data!")
-            self.pumpManagerDelegate?.syncPump { _ in }
+            self.pumpManager?.syncPump { _ in }
         }
     }
 

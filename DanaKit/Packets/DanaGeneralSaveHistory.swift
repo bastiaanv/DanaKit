@@ -18,12 +18,13 @@ func generatePacketGeneralSaveHistory(options: PacketGeneralSaveHistory) -> Dana
     data[9] = UInt8((options.historyValue >> 8) & 0xFF)
 
     return DanaGeneratePacket(
+        name: "General_SetHistory",
         opCode: DanaPacketType.OPCODE_ETC__SET_HISTORY_SAVE,
         data: data
     )
 }
 
-func parsePacketGeneralSaveHistory(data: Data, usingUtc _: Bool?) -> DanaParsePacket<Any> {
+func parsePacketGeneralSaveHistory(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
     DanaParsePacket(
         success: data[DataStart] == 0,
         rawData: data,

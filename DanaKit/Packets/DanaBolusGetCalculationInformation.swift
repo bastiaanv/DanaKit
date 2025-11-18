@@ -1,4 +1,4 @@
-struct PacketBolusGetCalculationInformation {
+struct PacketBolusGetCalculationInformation: Codable {
     var currentBg: UInt16
     var carbohydrate: UInt16
     var currentTarget: UInt16
@@ -13,7 +13,11 @@ let CommandBolusGetCalculationInformation: UInt16 = (UInt16(DanaPacketType.TYPE_
     UInt16(DanaPacketType.OPCODE_BOLUS__GET_CALCULATION_INFORMATION & 0xFF)
 
 func generatePacketBolusGetCalculationInformation() -> DanaGeneratePacket {
-    DanaGeneratePacket(opCode: DanaPacketType.OPCODE_BOLUS__GET_CALCULATION_INFORMATION, data: nil)
+    DanaGeneratePacket(
+        name: "Bolus_GetCalculationInformation",
+        opCode: DanaPacketType.OPCODE_BOLUS__GET_CALCULATION_INFORMATION,
+        data: nil
+    )
 }
 
 func parsePacketBolusGetCalculationInformation(

@@ -3,6 +3,7 @@ let CommandHistoryRefill: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) 
 
 func generatePacketHistoryRefill(options: PacketHistoryBase) -> DanaGeneratePacket {
     DanaGeneratePacket(
+        name: "Review_Refill",
         opCode: DanaPacketType.OPCODE_REVIEW__REFILL,
         data: generatePacketHistoryData(options: options)
     )

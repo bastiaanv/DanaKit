@@ -1,4 +1,4 @@
-struct PacketBolusGetOption {
+struct PacketBolusGetOption: Codable {
     var isExtendedBolusEnabled: Bool
     var bolusCalculationOption: UInt8
     var missedBolusConfig: UInt8
@@ -24,7 +24,7 @@ let CommandBolusGetOption: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF)
     UInt16(DanaPacketType.OPCODE_BOLUS__GET_BOLUS_OPTION & 0xFF)
 
 func generatePacketBolusGetOption() -> DanaGeneratePacket {
-    DanaGeneratePacket(opCode: DanaPacketType.OPCODE_BOLUS__GET_BOLUS_OPTION, data: nil)
+    DanaGeneratePacket(name: "Bolus_GetOption", opCode: DanaPacketType.OPCODE_BOLUS__GET_BOLUS_OPTION, data: nil)
 }
 
 func parsePacketBolusGetOption(data: Data, usingUtc _: Bool?) -> DanaParsePacket<PacketBolusGetOption> {

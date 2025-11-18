@@ -3,6 +3,7 @@ let CommandHistoryAlarm: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) <
 
 func generatePacketHistoryAlarm(options: PacketHistoryBase) -> DanaGeneratePacket {
     DanaGeneratePacket(
+        name: "Review_Alarm",
         opCode: DanaPacketType.OPCODE_REVIEW__ALARM,
         data: generatePacketHistoryData(options: options)
     )

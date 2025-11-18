@@ -30,7 +30,7 @@ public class UnfinalizedDose {
         DoseEntry(
             type: .bolus,
             startDate: startDate,
-            endDate: endDate,
+            endDate: isMutable ? endDate : Date(),
             value: value,
             unit: .units,
             deliveredUnits: isMutable ? value : deliveredUnits,

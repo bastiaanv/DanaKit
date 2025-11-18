@@ -3,6 +3,7 @@ let CommandHistoryPrime: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) <
 
 func generatePacketHistoryPrime(options: PacketHistoryBase) -> DanaGeneratePacket {
     DanaGeneratePacket(
+        name: "Review_Prime",
         opCode: DanaPacketType.OPCODE_REVIEW__PRIME,
         data: generatePacketHistoryData(options: options)
     )

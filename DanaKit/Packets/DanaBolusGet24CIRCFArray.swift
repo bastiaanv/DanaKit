@@ -1,4 +1,4 @@
-struct PacketBolusGet24CIRCFArray {
+struct PacketBolusGet24CIRCFArray: Codable {
     var unit: UInt8 // Change to the appropriate data type in Swift
 
     /** Length: 24, value per hour. insulin to carbohydrate ratio */
@@ -12,7 +12,7 @@ let CommandBolusGet24CIRCFArray: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE &
     UInt16(DanaPacketType.OPCODE_BOLUS__GET_24_CIR_CF_ARRAY & 0xFF)
 
 func generatePacketBolusGet24CIRCFArray() -> DanaGeneratePacket {
-    DanaGeneratePacket(opCode: DanaPacketType.OPCODE_BOLUS__GET_24_CIR_CF_ARRAY, data: nil)
+    DanaGeneratePacket(name: "Bolus_Get24CIRCFArray", opCode: DanaPacketType.OPCODE_BOLUS__GET_24_CIR_CF_ARRAY, data: nil)
 }
 
 func parsePacketBolusGet24CIRCFArray(data: Data, usingUtc _: Bool?) -> DanaParsePacket<PacketBolusGet24CIRCFArray> {

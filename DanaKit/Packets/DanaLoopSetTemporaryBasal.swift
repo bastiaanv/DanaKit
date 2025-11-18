@@ -30,12 +30,13 @@ func generatePacketLoopSetTemporaryBasal(options: PacketLoopSetTemporaryBasal) -
     ])
 
     return DanaGeneratePacket(
+        name: "LoopSpecific_SetShortTempBasal",
         opCode: DanaPacketType.OPCODE_BASAL__APS_SET_TEMPORARY_BASAL,
         data: data
     )
 }
 
-func parsePacketLoopSetTemporaryBasal(data: Data, usingUtc _: Bool?) -> DanaParsePacket<Any> {
+func parsePacketLoopSetTemporaryBasal(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
     DanaParsePacket(
         success: data[DataStart] == 0,
         rawData: data,

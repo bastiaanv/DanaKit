@@ -45,9 +45,9 @@ func generatePacketBolusSetOption(options: PacketBolusSetOption) -> DanaGenerate
     data[17] = options.missedBolus04EndHour
     data[18] = options.missedBolus04EndMin
 
-    return DanaGeneratePacket(opCode: DanaPacketType.OPCODE_BOLUS__SET_BOLUS_OPTION, data: data)
+    return DanaGeneratePacket(name: "Bolus_SetOption", opCode: DanaPacketType.OPCODE_BOLUS__SET_BOLUS_OPTION, data: data)
 }
 
-func parsePacketBolusSetOption(data: Data, usingUtc _: Bool?) -> DanaParsePacket<Any> {
+func parsePacketBolusSetOption(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
     DanaParsePacket(success: data[DataStart] == 0, rawData: data, data: nil)
 }

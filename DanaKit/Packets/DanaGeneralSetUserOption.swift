@@ -40,12 +40,13 @@ func generatePacketGeneralSetUserOption(options: PacketGeneralSetUserOption) -> 
     }
 
     return DanaGeneratePacket(
+        name: "General_SetUserOption",
         opCode: DanaPacketType.OPCODE_OPTION__SET_USER_OPTION,
         data: data
     )
 }
 
-func parsePacketGeneralSetUserOption(data: Data, usingUtc _: Bool?) -> DanaParsePacket<Any> {
+func parsePacketGeneralSetUserOption(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
     DanaParsePacket(
         success: data[DataStart] == 0,
         rawData: data,

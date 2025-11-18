@@ -30,9 +30,9 @@ func generatePacketBolusSet24CIRCFArray(options: PacketBolusSet24CIRCFArray) thr
         data[i * 2 + 49] = UInt8((roundedISF >> 8) & 0xFF)
     }
 
-    return DanaGeneratePacket(opCode: DanaPacketType.OPCODE_BOLUS__SET_24_CIR_CF_ARRAY, data: data)
+    return DanaGeneratePacket(name: "Bolus_Set24CIRCFArray", opCode: DanaPacketType.OPCODE_BOLUS__SET_24_CIR_CF_ARRAY, data: data)
 }
 
-func parsePacketBolusSet24CIRCFArray(data: Data, usingUtc _: Bool?) -> DanaParsePacket<Any> {
+func parsePacketBolusSet24CIRCFArray(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
     DanaParsePacket(success: data[DataStart] == 0, rawData: data, data: nil)
 }

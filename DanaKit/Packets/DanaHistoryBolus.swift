@@ -3,6 +3,7 @@ let CommandHistoryBolus: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) <
 
 func generatePacketHistoryBolus(options: PacketHistoryBase) -> DanaGeneratePacket {
     DanaGeneratePacket(
+        name: "Review_Bolus",
         opCode: DanaPacketType.OPCODE_REVIEW__BOLUS,
         data: generatePacketHistoryData(options: options)
     )
