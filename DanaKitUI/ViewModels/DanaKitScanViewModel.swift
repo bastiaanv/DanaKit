@@ -106,12 +106,28 @@ class DanaKitScanViewModel: ObservableObject {
     }
 
     func syncTime(_ peripheral: CBPeripheral) {
-        pumpManager?.syncPumpTime { error in
+        guard let pumpManager = pumpManager else {
+            nextStep()
+            return
+        }
+        
+        pumpManager.syncPumpTime { error in
             if let error = error {
                 self.log.error("Failed to sync pump time: \(error)")
             }
 
-            self.pumpManager?.disconnect(peripheral)
+            self.syncData(peripheral)
+        }
+    }
+    
+    func syncData(_ peripheral: CBPeripheral) {
+        guard let pumpManager = pumpManager else {
+            nextStep()
+            return
+        }
+        
+        pumpManager.ensureCurrentPumpData { _ in
+            pumpManager.disconnect(peripheral)
             DispatchQueue.main.async {
                 self.nextStep()
             }

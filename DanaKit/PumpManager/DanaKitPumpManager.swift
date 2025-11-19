@@ -706,7 +706,7 @@ extension DanaKitPumpManager: PumpManager {
                         self.state.bolusState = .inProgress
 
                         if !self.isPriming {
-                            let dose = doseEntry.toDoseEntry(isMutable: true)
+                            let dose = doseEntry.toDoseEntry(endDate: nil)
                             self.pumpDelegate.notify { delegate in
                                 guard let delegate = delegate else {
                                     self.log.error("Dose could not be reported -> Missing delegate")
@@ -817,6 +817,8 @@ extension DanaKitPumpManager: PumpManager {
                 completion(.failure(PumpManagerError.communication(nil)))
                 return
             }
+            
+            let bolusCancelledAt = Date.now
 
             // Sync the pump time
             state.lastStatusPumpDateTime = await fetchPumpTime() ?? Date.now
@@ -837,7 +839,7 @@ extension DanaKitPumpManager: PumpManager {
                 type: .delegateResponse
             )
 
-            let dose = doseEntry.toDoseEntry()
+            let dose = doseEntry.toDoseEntry(endDate: bolusCancelledAt)
             self.doseEntry = nil
             doseReporter = nil
 
@@ -1743,15 +1745,6 @@ public extension DanaKitPumpManager {
             trigger: .immediate
         )
 
-        let event = NewPumpEvent(
-            date: Date.now,
-            dose: nil,
-            raw: alert.raw,
-            title: "Alarm: \(alert.foregroundContent.title)",
-            type: .alarm,
-            alarmType: alert.type
-        )
-
         pumpDelegate.notify { delegate in
             guard let delegate = delegate else {
                 self.log.error("Alarm could not be reported -> Missing delegate")
@@ -1761,7 +1754,14 @@ public extension DanaKitPumpManager {
             delegate.issueAlert(loopAlert)
             delegate.pumpManager(
                 self,
-                hasNewPumpEvents: [event],
+                hasNewPumpEvents: [NewPumpEvent(
+                    date: Date.now,
+                    dose: nil,
+                    raw: alert.raw,
+                    title: "Alarm: \(alert.foregroundContent.title)",
+                    type: .alarm,
+                    alarmType: alert.type
+                )],
                 lastReconciliation: self.state.lastStatusDate,
                 replacePendingEvents: true,
             ) { error in
@@ -1839,6 +1839,8 @@ public extension DanaKitPumpManager {
         Task {
             self.log.info("Bolus completed - \(deliveredUnits)U")
             self.logDeviceCommunication("Bolus completed - \(deliveredUnits)U", type: .delegateResponse)
+            
+            let bolusCompletedAt = Date.now
 
             let initialScreenPacket = generatePacketGeneralGetInitialScreenInformation()
             let resultInitialScreenInformation = try await bluetooth.writeMessage(initialScreenPacket)
@@ -1865,8 +1867,8 @@ public extension DanaKitPumpManager {
             }
 
             doseEntry.deliveredUnits = deliveredUnits
-
-            let dose = doseEntry.toDoseEntry()
+            let dose = doseEntry.toDoseEntry(endDate: bolusCompletedAt)
+            
             self.doseEntry = nil
             self.doseReporter = nil
 
@@ -1924,7 +1926,7 @@ public extension DanaKitPumpManager {
 
         // We assume the bolus will be completed
         doseEntry.deliveredUnits = doseEntry.value
-        let dose = doseEntry.toDoseEntry()
+        let dose = doseEntry.toDoseEntry(endDate: Date.now)
 
         state.bolusState = .noBolus
         state.lastStatusDate = Date.now
