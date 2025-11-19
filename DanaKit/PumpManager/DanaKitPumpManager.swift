@@ -297,7 +297,7 @@ extension DanaKitPumpManager: PumpManager {
         case .canceling:
             return .canceling
         case .inProgress:
-            if let dose = doseEntry?.toDoseEntry(isMutable: true) {
+            if let dose = doseEntry?.toDoseEntry(endDate: nil) {
                 return .inProgress(dose)
             }
 
