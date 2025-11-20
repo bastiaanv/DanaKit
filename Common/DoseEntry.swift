@@ -7,7 +7,7 @@ public extension DoseEntry {
         deliveredUnits: Double,
         duration: TimeInterval,
         activationType: BolusActivationType,
-        insulinType: InsulinType,
+        insulinType: InsulinType?,
         startDate: Date = Date.now
     ) -> DoseEntry {
         var endTime = Date.now
@@ -30,20 +30,34 @@ public extension DoseEntry {
     static func tempBasal(
         absoluteUnit: Double,
         duration: TimeInterval,
-        insulinType: InsulinType,
-        startDate: Date = Date.now
+        insulinType: InsulinType?,
+        startDate: Date = Date.now,
+        endDate: Date? = nil
     ) -> DoseEntry {
-        DoseEntry(
+        if let endDate = endDate {
+            return DoseEntry(
+                type: .tempBasal,
+                startDate: startDate,
+                endDate: endDate,
+                value: absoluteUnit,
+                unit: .unitsPerHour,
+                insulinType: insulinType,
+                isMutable: false
+            )
+        }
+        
+        return DoseEntry(
             type: .tempBasal,
             startDate: startDate,
             endDate: startDate + duration,
             value: absoluteUnit,
             unit: .unitsPerHour,
-            insulinType: insulinType
+            insulinType: insulinType,
+            isMutable: true
         )
     }
 
-    static func basal(rate: Double, insulinType: InsulinType, startDate: Date = Date.now) -> DoseEntry {
+    static func basal(rate: Double, insulinType: InsulinType?, startDate: Date = Date.now) -> DoseEntry {
         DoseEntry(
             type: .basal,
             startDate: startDate,
@@ -53,7 +67,7 @@ public extension DoseEntry {
         )
     }
 
-    static func resume(insulinType: InsulinType, resumeDate: Date = Date.now) -> DoseEntry {
+    static func resume(insulinType: InsulinType?, resumeDate: Date = Date.now) -> DoseEntry {
         DoseEntry(
             resumeDate: resumeDate,
             insulinType: insulinType

@@ -100,14 +100,14 @@ class PeripheralManager: NSObject {
             pumpManager.state.isInFetchHistoryMode = false
         }
 
-        var data = DanaRSEncryption.encodePacket(operationCode: packet.opCode, buffer: packet.data, deviceName: deviceName)
+        var data = DanaKitEncryption.encodePacket(operationCode: packet.opCode, buffer: packet.data, deviceName: deviceName)
         log
             .debug(
-                "Sending opCode: \(packet.opCode), encrypted data: \(data.hexString()), randomSyncKey: \(DanaRSEncryption.randomSyncKey)"
+                "Sending opCode: \(packet.opCode), encrypted data: \(data.hexString()), randomSyncKey: \(DanaKitEncryption.randomSyncKey)"
             )
 
-        if DanaRSEncryption.enhancedEncryption != EncryptionType.DEFAULT.rawValue {
-            data = DanaRSEncryption.encodeSecondLevel(data: data)
+        if DanaKitEncryption.enhancedEncryption != EncryptionType.DEFAULT.rawValue {
+            data = DanaKitEncryption.encodeSecondLevel(data: data)
             log.debug("Second level encrypted data: \(data.hexString())")
         }
 
@@ -240,7 +240,7 @@ extension PeripheralManager: CBPeripheralDelegate {
 
 extension PeripheralManager {
     private func sendFirstMessageEncryption() {
-        let data = DanaRSEncryption.encodePacket(
+        let data = DanaKitEncryption.encodePacket(
             operationCode: DanaPacketType.OPCODE_ENCRYPTION__PUMP_CHECK,
             buffer: nil,
             deviceName: deviceName
@@ -251,7 +251,7 @@ extension PeripheralManager {
     }
 
     private func sendTimeInfo() {
-        let data = DanaRSEncryption.encodePacket(
+        let data = DanaKitEncryption.encodePacket(
             operationCode: DanaPacketType.OPCODE_ENCRYPTION__TIME_INFORMATION,
             buffer: nil,
             deviceName: deviceName
@@ -262,7 +262,7 @@ extension PeripheralManager {
     }
 
     private func sendV3PairingInformation(_ requestNewPairing: UInt8) {
-        let data = DanaRSEncryption.encodePacket(
+        let data = DanaKitEncryption.encodePacket(
             operationCode: DanaPacketType.OPCODE_ENCRYPTION__TIME_INFORMATION,
             buffer: Data([requestNewPairing]),
             deviceName: deviceName
@@ -274,7 +274,7 @@ extension PeripheralManager {
 
     // 0x00 Start encryption, 0x01 Request pairing
     private func sendV3PairingInformationEmpty() {
-        var (pairingKey, randomPairingKey) = DanaRSEncryption.getPairingKeys()
+        var (pairingKey, randomPairingKey) = DanaKitEncryption.getPairingKeys()
         if pairingKey.filter({ $0 != 0 }).isEmpty || randomPairingKey.filter({ $0 != 0 }).isEmpty {
             pairingKey = pumpManager.state.pairingKey
             randomPairingKey = pumpManager.state.randomPairingKey
@@ -290,13 +290,13 @@ extension PeripheralManager {
             .debug(
                 "Setting encryption keys. Pairing key: \(pairingKey.hexString()), random pairing key: \(randomPairingKey.hexString()), random sync key: \(randomSyncKey)"
             )
-        DanaRSEncryption.setPairingKeys(pairingKey: pairingKey, randomPairingKey: randomPairingKey, randomSyncKey: randomSyncKey)
+        DanaKitEncryption.setPairingKeys(pairingKey: pairingKey, randomPairingKey: randomPairingKey, randomSyncKey: randomSyncKey)
 
         sendV3PairingInformation(0)
     }
 
     private func sendPairingRequest() {
-        let data = DanaRSEncryption.encodePacket(
+        let data = DanaKitEncryption.encodePacket(
             operationCode: DanaPacketType.OPCODE_ENCRYPTION__PASSKEY_REQUEST,
             buffer: nil,
             deviceName: deviceName
@@ -307,7 +307,7 @@ extension PeripheralManager {
     }
 
     private func sendEasyMenuCheck() {
-        let data = DanaRSEncryption.encodePacket(
+        let data = DanaKitEncryption.encodePacket(
             operationCode: DanaPacketType.OPCODE_ENCRYPTION__GET_EASYMENU_CHECK,
             buffer: nil,
             deviceName: deviceName
@@ -318,7 +318,7 @@ extension PeripheralManager {
     }
 
     private func sendBLE5PairingInformation() {
-        let data = DanaRSEncryption.encodePacket(
+        let data = DanaKitEncryption.encodePacket(
             operationCode: DanaPacketType.OPCODE_ENCRYPTION__TIME_INFORMATION,
             buffer: Data([0, 0, 0, 0]),
             deviceName: deviceName
@@ -329,7 +329,7 @@ extension PeripheralManager {
     }
 
     private func sendPassKeyCheck(_ pairingKey: Data) {
-        let data = DanaRSEncryption.encodePacket(
+        let data = DanaKitEncryption.encodePacket(
             operationCode: DanaPacketType.OPCODE_ENCRYPTION__CHECK_PASSKEY,
             buffer: pairingKey,
             deviceName: deviceName
@@ -346,7 +346,7 @@ extension PeripheralManager {
                 "Storing security keys: Pairing key: \(pairingKey.hexString()), random pairing key: \(randomPairingKey.hexString())"
             )
 
-        DanaRSEncryption.setPairingKeys(pairingKey: pairingKey, randomPairingKey: randomPairingKey, randomSyncKey: nil)
+        DanaKitEncryption.setPairingKeys(pairingKey: pairingKey, randomPairingKey: randomPairingKey, randomSyncKey: nil)
         pumpManager.state.pairingKey = pairingKey
         pumpManager.state.randomPairingKey = randomPairingKey
 
@@ -354,7 +354,7 @@ extension PeripheralManager {
     }
 
     private func processEasyMenuCheck(_: Data) {
-        if DanaRSEncryption.enhancedEncryption == EncryptionType.RSv3.rawValue {
+        if DanaKitEncryption.enhancedEncryption == EncryptionType.RSv3.rawValue {
             sendV3PairingInformationEmpty()
         } else {
             sendTimeInfo()
@@ -375,18 +375,18 @@ extension PeripheralManager {
         sendTimeInfo()
 
         let pairingKey = data.subdata(in: 2 ..< 4)
-        DanaRSEncryption.setPairingKeys(pairingKey: pairingKey, randomPairingKey: Data(), randomSyncKey: 0)
+        DanaKitEncryption.setPairingKeys(pairingKey: pairingKey, randomPairingKey: Data(), randomSyncKey: 0)
     }
 
     private func processConnectResponse(_ data: Data) {
         if data.count == 4, isOk(data) {
             // response OK v1
             log.info("Setting encryption mode to DEFAULT")
-            DanaRSEncryption.setEnhancedEncryption(EncryptionType.DEFAULT.rawValue)
+            DanaKitEncryption.setEnhancedEncryption(EncryptionType.DEFAULT.rawValue)
 
             pumpManager.state.ignorePassword = false
 
-            let (pairingKey, _) = DanaRSEncryption.getPairingKeys()
+            let (pairingKey, _) = DanaKitEncryption.getPairingKeys()
             if !pairingKey.isEmpty {
                 sendPassKeyCheck(pairingKey)
             } else {
@@ -395,7 +395,7 @@ extension PeripheralManager {
         } else if data.count == 9, isOk(data) {
             // response OK v3, 2nd layer encryption
             log.info("Setting encryption mode to RSv3")
-            DanaRSEncryption.setEnhancedEncryption(EncryptionType.RSv3.rawValue)
+            DanaKitEncryption.setEnhancedEncryption(EncryptionType.RSv3.rawValue)
 
             pumpManager.state.ignorePassword = true
 
@@ -415,7 +415,7 @@ extension PeripheralManager {
             }
         } else if data.count == 14, isOk(data) {
             log.info("Setting encryption mode to BLE5")
-            DanaRSEncryption.setEnhancedEncryption(EncryptionType.BLE_5.rawValue)
+            DanaKitEncryption.setEnhancedEncryption(EncryptionType.BLE_5.rawValue)
 
             pumpManager.state.hwModel = data[5]
             pumpManager.state.pumpProtocol = data[7]
@@ -444,7 +444,7 @@ extension PeripheralManager {
                 return
             }
 
-            DanaRSEncryption.setBle5Key(ble5Key: ble5Keys)
+            DanaKitEncryption.setBle5Key(ble5Key: ble5Keys)
             pumpManager.state.ble5Keys = ble5Keys
             sendBLE5PairingInformation()
         } else if data.count == 6, isPump(data) {
@@ -460,13 +460,13 @@ extension PeripheralManager {
     }
 
     private func processEncryptionResponse(_ data: Data) {
-        if DanaRSEncryption.enhancedEncryption == EncryptionType.BLE_5.rawValue {
+        if DanaKitEncryption.enhancedEncryption == EncryptionType.BLE_5.rawValue {
             finishConnection()
 
-        } else if DanaRSEncryption.enhancedEncryption == EncryptionType.RSv3.rawValue {
+        } else if DanaKitEncryption.enhancedEncryption == EncryptionType.RSv3.rawValue {
             // data[2] : 0x00 OK  0x01 Error, No pairing
             if data[2] == 0x00 {
-                let (pairingKey, randomPairingKey) = DanaRSEncryption.getPairingKeys()
+                let (pairingKey, randomPairingKey) = DanaKitEncryption.getPairingKeys()
                 if pairingKey.isEmpty || randomPairingKey.isEmpty {
                     log.debug("Device is requesting pincode")
                     promptPincode(nil)
@@ -527,11 +527,11 @@ extension PeripheralManager {
 extension PeripheralManager {
     private func parseReceivedValue(_ receievedData: Data) {
         var data = receievedData
-        if !data.isEmpty && pumpManager.state.isConnected && DanaRSEncryption.enhancedEncryption != EncryptionType.DEFAULT
+        if !data.isEmpty && pumpManager.state.isConnected && DanaKitEncryption.enhancedEncryption != EncryptionType.DEFAULT
             .rawValue
         {
             log.debug("Second lvl decryption")
-            data = DanaRSEncryption.decodeSecondLevel(data: data)
+            data = DanaKitEncryption.decodeSecondLevel(data: data)
         }
 
         readBuffer.append(data)
@@ -578,7 +578,7 @@ extension PeripheralManager {
         }
 
         log.debug("Received message! Starting to decrypt data: \(readBuffer.hexString())")
-        let decryptedData = DanaRSEncryption.decodePacket(buffer: readBuffer, deviceName: deviceName)
+        let decryptedData = DanaKitEncryption.decodePacket(buffer: readBuffer, deviceName: deviceName)
         readBuffer = Data([])
 
         guard !decryptedData.isEmpty else {

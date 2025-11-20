@@ -16206,6 +16206,18 @@
         }
       }
     },
+    "No insulin type available. Please configure this in the Dana menu" : {
+      "comment" : "Error description when no insulin type is available",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No insulin type available. Please configure this in the Dana menu"
+          }
+        }
+      }
+    },
     "No, just disconnect" : {
       "comment" : "Button text to just disconnect",
       "localizations" : {
@@ -17407,12 +17419,6 @@
     "Okay" : {
       "comment" : "label Okay",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Okay"
-          }
-        },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
@@ -17423,6 +17429,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Oke"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Okay"
           }
         },
         "es" : {

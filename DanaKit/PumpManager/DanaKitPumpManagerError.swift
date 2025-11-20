@@ -20,7 +20,7 @@ extension DanaKitPumpManagerError: LocalizedError {
         case let .noConnection(result):
             return LocalizedString(
                 "Failed to make a connection: " + connectionDescription(result),
-                comment: "Error description when no rileylink connected"
+                comment: "Error description when no dana pump connected"
             )
         case let .failedTempBasalAdjustment(reason):
             return LocalizedString(
