@@ -215,7 +215,7 @@ public enum PumpManagerAlert: Hashable, Codable {
     }
 
     var actionButtonLabel: String {
-        LocalizedString("OK", comment: "Ok")
+        LocalizedString("Okay", comment: "Ok")
     }
 
     var foregroundContent: Alert.Content {

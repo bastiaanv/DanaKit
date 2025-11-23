@@ -1,4 +1,4 @@
-enum DanaRSEncryption {
+enum DanaKitEncryption {
     public private(set) static var enhancedEncryption: UInt8 = 0
     private static var isEncryptionMode: Bool = true
 

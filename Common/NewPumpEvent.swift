@@ -12,12 +12,12 @@ public extension NewPumpEvent {
         )
     }
 
-    static func tempBasal(dose: DoseEntry, units: Double, duration: TimeInterval, date: Date = Date.now) -> NewPumpEvent {
+    static func tempBasal(dose: DoseEntry, date: Date = Date.now) -> NewPumpEvent {
         let dateFormatter = ISO8601DateFormatter()
         return NewPumpEvent(
             date: date,
             dose: dose,
-            raw: "\(DoseType.tempBasal.rawValue) \(units) \(duration) \(dateFormatter.string(from: date))"
+            raw: "\(DoseType.tempBasal.rawValue) \(dose.programmedUnits) \(dateFormatter.string(from: date))"
                 .data(using: .utf8) ?? Data([]),
             title: LocalizedString("Temp Basal", comment: "Pump Event title for UnfinalizedDose with doseType of .tempBasal")
         )

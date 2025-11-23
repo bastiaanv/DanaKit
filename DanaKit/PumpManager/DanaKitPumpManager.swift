@@ -28,7 +28,7 @@ public class DanaKitPumpManager: DeviceManager {
     init(state: DanaKitPumpManagerState, dateGenerator _: @escaping () -> Date = Date.init) {
         self.state = state
         oldState = DanaKitPumpManagerState(rawValue: state.rawValue)
-        DanaRSEncryption.setEnhancedEncryption(self.state.encryptionMode)
+        DanaKitEncryption.setEnhancedEncryption(state.encryptionMode)
 
         bluetooth = self.state.isUsingContinuousMode ? ContinousBluetoothManager() : InteractiveBluetoothManager()
         bluetooth.pumpManager = self
@@ -495,8 +495,12 @@ extension DanaKitPumpManager: PumpManager {
             let deactivateHistoryModePacket =
                 generatePacketGeneralSetHistoryUploadMode(options: PacketGeneralSetHistoryUploadMode(mode: 0))
             _ = try await bluetooth.writeMessage(deactivateHistoryModePacket)
+            
+            guard let list = fetchHistoryResult.data as? [HistoryItem] else {
+                return []
+            }
 
-            return (fetchHistoryResult.data as! [HistoryItem]).compactMap({ item in
+            return list.compactMap({ item in
                 switch item.code {
                 case HistoryCode.RECORD_TYPE_ALARM:
                     return [NewPumpEvent(
@@ -521,7 +525,7 @@ extension DanaKitPumpManager: PumpManager {
                             deliveredUnits: item.value!,
                             duration: item.durationInMin! * 60,
                             activationType: .manualNoRecommendation,
-                            insulinType: self.state.insulinType!,
+                            insulinType: self.state.insulinType,
                             startDate: item.timestamp
                         ),
                         units: item.value!,
@@ -533,7 +537,7 @@ extension DanaKitPumpManager: PumpManager {
                         return [NewPumpEvent.suspend(dose: DoseEntry.suspend(suspendDate: item.timestamp))]
                     } else {
                         return [NewPumpEvent.resume(
-                            dose: DoseEntry.resume(insulinType: self.state.insulinType!, resumeDate: item.timestamp),
+                            dose: DoseEntry.resume(insulinType: self.state.insulinType, resumeDate: item.timestamp),
                             date: item.timestamp
                         )]
                     }
@@ -598,9 +602,7 @@ extension DanaKitPumpManager: PumpManager {
                 default:
                     return []
                 }
-            })
-                // Transform array from 2d to 1d array
-                .flatMap { $0 }
+            }).flatMap { $0 }
 
         } catch {
             log.error("Failed to sync history. Error: \(error.localizedDescription)")
@@ -638,12 +640,6 @@ extension DanaKitPumpManager: PumpManager {
         guard state.bolusState == .noBolus else {
             log.error("Pump already busy bolussing")
             completion(.deviceState(DanaKitPumpManagerError.pumpIsBusy))
-            return
-        }
-
-        guard let insulinType = state.insulinType else {
-            log.error("Insulin type is nil...")
-            completion(.configuration(DanaKitPumpManagerError.unknown("Missing insulin type")))
             return
         }
 
@@ -698,7 +694,7 @@ extension DanaKitPumpManager: PumpManager {
                             units: units,
                             duration: duration,
                             activationType: activationType,
-                            insulinType: insulinType
+                            insulinType: self.state.insulinType
                         )
 
                         self.doseEntry = doseEntry
@@ -881,7 +877,7 @@ extension DanaKitPumpManager: PumpManager {
 
     /// NOTE: There are 2 ways to set a temp basal:
     /// - The normal way (which only accepts full hours and percentages)
-    /// - A short APS-special temp basal command (which only accepts 15 min or 30 min
+    /// - A short APS-special temp basal command (which only accepts 15 min or 30 min)
     /// Currently, this is implemented with a simpel U/hr -> % calculator
     /// NOTE: A temp basal >200% for 30 min (or full hour) is rescheduled to 15min
     public func enactTempBasal(
@@ -1000,30 +996,7 @@ extension DanaKitPumpManager: PumpManager {
                             // Temp basal is already canceled (if deem needed)
                             self.disconnect()
 
-                            self.state.basalDeliveryOrdinal = .active
-                            self.state.basalDeliveryDate = Date.now
-                            self.state.tempBasalUnits = nil
-                            self.state.tempBasalDuration = nil
-                            self.notifyStateDidChange()
-
-                            let dose = DoseEntry.basal(rate: self.currentBaseBasalRate, insulinType: self.state.insulinType!)
-                            self.pumpDelegate.notify { delegate in
-                                guard let delegate = delegate else {
-                                    self.log.error("Basal reset could not be reported -> Missing delegate")
-                                    return
-                                }
-
-                                delegate.pumpManager(
-                                    self,
-                                    hasNewPumpEvents: [NewPumpEvent.basal(dose: dose)],
-                                    lastReconciliation: self.state.lastStatusDate,
-                                    replacePendingEvents: true,
-                                ) { error in
-                                    if let error = error {
-                                        self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
-                                    }
-                                }
-                            }
+                            self.reportBasal(unitsPerHour: unitsPerHour, duration: duration, isTempBasal: false)
 
                             self.log.info("Successfully cancelled temp basal")
                             self.logDeviceCommunication("Successfully cancelled temp basal", type: .delegateResponse)
@@ -1050,37 +1023,7 @@ extension DanaKitPumpManager: PumpManager {
                                 return
                             }
 
-                            let dose = DoseEntry.tempBasal(
-                                absoluteUnit: unitsPerHour,
-                                duration: duration,
-                                insulinType: self.state.insulinType!
-                            )
-                            self.state.basalDeliveryOrdinal = .tempBasal
-                            self.state.basalDeliveryDate = Date.now
-                            self.state.tempBasalUnits = unitsPerHour
-                            self.state.tempBasalDuration = duration
-                            self.notifyStateDidChange()
-
-                            self.pumpDelegate.notify { delegate in
-                                guard let delegate = delegate else {
-                                    self.log.error("Temp basal could not be reported -> Missing delegate")
-                                    return
-                                }
-
-                                delegate.pumpManager(
-                                    self,
-                                    hasNewPumpEvents: [
-                                        NewPumpEvent
-                                            .tempBasal(dose: dose, units: unitsPerHour, duration: duration)
-                                    ],
-                                    lastReconciliation: self.state.lastStatusDate,
-                                    replacePendingEvents: true,
-                                ) { error in
-                                    if let error = error {
-                                        self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
-                                    }
-                                }
-                            }
+                            self.reportBasal(unitsPerHour: unitsPerHour, duration: duration, isTempBasal: true)
 
                             self.log.info("Successfully started 15 min temp basal")
                             self.logDeviceCommunication("Successfully started 15 min temp basal", type: .delegateResponse)
@@ -1107,44 +1050,15 @@ extension DanaKitPumpManager: PumpManager {
                                 return
                             }
 
-                            let dose = DoseEntry.tempBasal(
-                                absoluteUnit: unitsPerHour,
-                                duration: duration,
-                                insulinType: self.state.insulinType!
-                            )
-                            self.state.basalDeliveryOrdinal = .tempBasal
-                            self.state.basalDeliveryDate = Date.now
-                            self.state.tempBasalUnits = unitsPerHour
-                            self.state.tempBasalDuration = duration
-                            self.notifyStateDidChange()
-
-                            self.pumpDelegate.notify { delegate in
-                                guard let delegate = delegate else {
-                                    self.log.error("Temp basal could not be reported -> Missing delegate")
-                                    return
-                                }
-
-                                delegate.pumpManager(
-                                    self,
-                                    hasNewPumpEvents: [
-                                        NewPumpEvent
-                                            .tempBasal(dose: dose, units: unitsPerHour, duration: duration)
-                                    ],
-                                    lastReconciliation: self.state.lastStatusDate,
-                                    replacePendingEvents: true,
-                                ) { error in
-                                    if let error = error {
-                                        self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
-                                    }
-                                }
-                            }
+                            self.reportBasal(unitsPerHour: unitsPerHour, duration: duration, isTempBasal: true)
 
                             self.log.info("Successfully started 30 min temp basal")
                             self.logDeviceCommunication("Successfully started 30 min temp basal", type: .delegateResponse)
+                            
                             completion(nil)
 
-                            // Full hour
                         } else {
+                            // Full hour
                             let durationInHours = UInt8(floor(duration / .hours(1)))
                             let packet =
                                 generatePacketBasalSetTemporary(
@@ -1168,43 +1082,12 @@ extension DanaKitPumpManager: PumpManager {
                                 return
                             }
 
-                            let dose = DoseEntry.tempBasal(
-                                absoluteUnit: unitsPerHour,
-                                duration: duration,
-                                insulinType: self.state.insulinType!
-                            )
-                            self.state.basalDeliveryOrdinal = .tempBasal
-                            self.state.basalDeliveryDate = Date.now
-                            self.state.tempBasalUnits = unitsPerHour
-                            self.state.tempBasalDuration = duration
-                            self.notifyStateDidChange()
-
-                            self.pumpDelegate.notify { delegate in
-                                guard let delegate = delegate else {
-                                    self.log.error("Temp basal could not be reported -> Missing delegate")
-                                    return
-                                }
-
-                                delegate.pumpManager(
-                                    self,
-                                    hasNewPumpEvents: [
-                                        NewPumpEvent
-                                            .tempBasal(dose: dose, units: unitsPerHour, duration: duration)
-                                    ],
-                                    lastReconciliation: self.state.lastStatusDate,
-                                    replacePendingEvents: true,
-                                ) { error in
-                                    if let error = error {
-                                        self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
-                                    }
-                                }
-                            }
-
-                            self.log.info("Successfully started \(durationInHours)h temp basal")
-                            self.logDeviceCommunication(
-                                "Successfully started \(durationInHours)h temp basal",
-                                type: .delegateResponse
-                            )
+                            self.reportBasal(unitsPerHour: unitsPerHour, duration: duration, isTempBasal: true)
+                            
+                            let log = "Successfully started \(durationInHours)h temp basal"
+                            self.log.info(log)
+                            self.logDeviceCommunication(log, type: .delegateResponse)
+                            
                             completion(nil)
                         }
                     } catch {
@@ -1217,6 +1100,60 @@ extension DanaKitPumpManager: PumpManager {
                     self.log.error("Connection error")
                     completion(PumpManagerError.connection(DanaKitPumpManagerError.noConnection(result)))
                     return
+                }
+            }
+        }
+    }
+    
+    private func reportBasal(unitsPerHour: Double, duration: Double, isTempBasal: Bool) {
+        var events: [NewPumpEvent] = []
+        
+        if isTempBasal {
+            events.append(NewPumpEvent.tempBasal(dose:
+                DoseEntry.tempBasal(
+                    absoluteUnit: unitsPerHour,
+                    duration: duration,
+                    insulinType: state.insulinType
+                )
+            ))
+        } else {
+            events.append(NewPumpEvent.basal(dose: DoseEntry.basal(rate: self.currentBaseBasalRate, insulinType: state.insulinType)))
+        }
+        
+        if state.tempBasalEndsAt > Date.now {
+            // Report cancelled temp basal
+            events.append(NewPumpEvent.tempBasal(dose:
+                DoseEntry.tempBasal(
+                    absoluteUnit: unitsPerHour,
+                    duration: duration,
+                    insulinType: state.insulinType,
+                    startDate: state.basalDeliveryDate,
+                    endDate: Date.now
+                )
+            ))
+        }
+        
+        state.basalDeliveryOrdinal = isTempBasal ? .tempBasal : .active
+        state.basalDeliveryDate = Date.now
+        state.tempBasalUnits = unitsPerHour
+        state.tempBasalDuration = duration
+        state.lastStatusDate = Date.now
+        self.notifyStateDidChange()
+
+        self.pumpDelegate.notify { delegate in
+            guard let delegate = delegate else {
+                self.log.error("Temp basal could not be reported -> Missing delegate")
+                return
+            }
+            
+            delegate.pumpManager(
+                self,
+                hasNewPumpEvents: events,
+                lastReconciliation: self.state.lastStatusDate,
+                replacePendingEvents: true,
+            ) { error in
+                if let error = error {
+                    self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
                 }
             }
         }
@@ -1251,6 +1188,11 @@ extension DanaKitPumpManager: PumpManager {
                             completion(PumpManagerError.configuration(DanaKitPumpManagerError.failedSuspensionAdjustment))
                             return
                         }
+                        
+                        var events = [NewPumpEvent.suspend(dose: DoseEntry.suspend())]
+                        if let tempBasalEvent = self.getTempBasalEvent(endDate: Date.now) {
+                            events.append(tempBasalEvent)
+                        }
 
                         self.state.lastStatusPumpDateTime = pumpTime ?? Date.now
                         self.state.lastStatusDate = Date.now
@@ -1259,7 +1201,6 @@ extension DanaKitPumpManager: PumpManager {
                         self.state.basalDeliveryDate = Date.now
                         self.notifyStateDidChange()
 
-                        let dose = DoseEntry.suspend()
                         self.pumpDelegate.notify { delegate in
                             guard let delegate = delegate else {
                                 self.log.error("Suspend could not be reported -> Missing delegate")
@@ -1268,7 +1209,7 @@ extension DanaKitPumpManager: PumpManager {
 
                             delegate.pumpManager(
                                 self,
-                                hasNewPumpEvents: [NewPumpEvent.suspend(dose: dose)],
+                                hasNewPumpEvents: events,
                                 lastReconciliation: self.state.lastStatusDate,
                                 replacePendingEvents: true,
                             ) { error in
@@ -1381,8 +1322,7 @@ extension DanaKitPumpManager: PumpManager {
                         let basal = DanaKitPumpManagerState.convertBasal(scheduleItems)
                         let packet =
                             try generatePacketBasalSetProfileRate(options: PacketBasalSetProfileRate(
-                                profileNumber: self.state
-                                    .basalProfileNumber,
+                                profileNumber: self.state.basalProfileNumber,
                                 profileBasalRate: basal
                             ))
                         let result = try await self.bluetooth.writeMessage(packet)
@@ -1396,8 +1336,7 @@ extension DanaKitPumpManager: PumpManager {
 
                         let activatePacket =
                             generatePacketBasalSetProfileNumber(options: PacketBasalSetProfileNumber(
-                                profileNumber: self.state
-                                    .basalProfileNumber
+                                profileNumber: self.state.basalProfileNumber
                             ))
                         let activateResult = try await self.bluetooth.writeMessage(activatePacket)
 
@@ -1415,12 +1354,18 @@ extension DanaKitPumpManager: PumpManager {
                             return
                         }
 
+                        let dose = DoseEntry.basal(rate: self.currentBaseBasalRate, insulinType: self.state.insulinType)
+                        var events = [NewPumpEvent.basal(dose: dose)]
+                        if let tempBasalEvent = self.getTempBasalEvent() {
+                            events.append(tempBasalEvent)
+                        }
+                        
                         self.state.basalDeliveryOrdinal = .active
                         self.state.basalDeliveryDate = Date.now
                         self.state.basalSchedule = basal
+                        self.state.lastStatusDate = Date.now
                         self.notifyStateDidChange()
-
-                        let dose = DoseEntry.basal(rate: self.currentBaseBasalRate, insulinType: self.state.insulinType!)
+                        
                         self.pumpDelegate.notify { delegate in
                             guard let delegate = delegate else {
                                 self.log.error("Basal could not be reported -> Missing delegate")
@@ -1429,7 +1374,7 @@ extension DanaKitPumpManager: PumpManager {
 
                             delegate.pumpManager(
                                 self,
-                                hasNewPumpEvents: [NewPumpEvent.basal(dose: dose)],
+                                hasNewPumpEvents: events,
                                 lastReconciliation: self.state.lastStatusDate,
                                 replacePendingEvents: true,
                             ) { error in
@@ -1744,6 +1689,18 @@ public extension DanaKitPumpManager {
             backgroundContent: alert.backgroundContent,
             trigger: .immediate
         )
+        
+        var events = [NewPumpEvent(
+            date: Date.now,
+            dose: nil,
+            raw: alert.raw,
+            title: "Alarm: \(alert.foregroundContent.title)",
+            type: .alarm,
+            alarmType: alert.type
+        )]
+        if let tempBasalEvent = getTempBasalEvent() {
+            events.append(tempBasalEvent)
+        }
 
         pumpDelegate.notify { delegate in
             guard let delegate = delegate else {
@@ -1754,14 +1711,7 @@ public extension DanaKitPumpManager {
             delegate.issueAlert(loopAlert)
             delegate.pumpManager(
                 self,
-                hasNewPumpEvents: [NewPumpEvent(
-                    date: Date.now,
-                    dose: nil,
-                    raw: alert.raw,
-                    title: "Alarm: \(alert.foregroundContent.title)",
-                    type: .alarm,
-                    alarmType: alert.type
-                )],
+                hasNewPumpEvents: events,
                 lastReconciliation: self.state.lastStatusDate,
                 replacePendingEvents: true,
             ) { error in
@@ -1876,6 +1826,11 @@ public extension DanaKitPumpManager {
                 self.log.debug("PumpManager is in priming mode -> Skip reporting dose")
                 return
             }
+            
+            var events = [NewPumpEvent.bolus(dose: dose, units: deliveredUnits, date: dose.startDate)]
+            if let tempBasalEvent = getTempBasalEvent() {
+                events.append(tempBasalEvent)
+            }
 
             self.pumpDelegate.notify { delegate in
                 guard let delegate = delegate else {
@@ -1897,7 +1852,7 @@ public extension DanaKitPumpManager {
                 }
                 delegate.pumpManager(
                     self,
-                    hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: deliveredUnits, date: dose.startDate)],
+                    hasNewPumpEvents: events,
                     lastReconciliation: self.state.lastStatusDate,
                     replacePendingEvents: true,
                 ) { error in
@@ -1927,6 +1882,21 @@ public extension DanaKitPumpManager {
         // We assume the bolus will be completed
         doseEntry.deliveredUnits = doseEntry.value
         let dose = doseEntry.toDoseEntry(endDate: Date.now)
+        
+        var events = [NewPumpEvent.bolus(dose: dose, units: doseEntry.value, date: dose.startDate)]
+        if self.state.basalDeliveryOrdinal == .tempBasal,
+           let unitsPerHour = state.tempBasalUnits,
+           let duration = state.tempBasalDuration
+        {
+            events.append(NewPumpEvent.tempBasal(dose:
+                DoseEntry.tempBasal(
+                    absoluteUnit: unitsPerHour,
+                    duration: duration,
+                    insulinType: state.insulinType,
+                    startDate: state.basalDeliveryDate,
+                )
+            ))
+        }
 
         state.bolusState = .noBolus
         state.lastStatusDate = Date.now
@@ -1942,7 +1912,7 @@ public extension DanaKitPumpManager {
             delegate.pumpManager(self, didError: .uncertainDelivery)
             delegate.pumpManager(
                 self,
-                hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: dose.programmedUnits, date: dose.startDate)],
+                hasNewPumpEvents: events,
                 lastReconciliation: self.state.lastStatusDate,
                 replacePendingEvents: true,
             ) { error in
@@ -1969,5 +1939,24 @@ public extension DanaKitPumpManager {
         let logLine = "Received pump delegate error in \(method): \(error) at \(function):\(line)"
         log.error(logLine)
         logDeviceCommunication(logLine, type: .error)
+    }
+    
+    private func getTempBasalEvent(endDate: Date? = nil) -> NewPumpEvent? {
+        guard self.state.basalDeliveryOrdinal == .tempBasal,
+           let unitsPerHour = state.tempBasalUnits,
+           let duration = state.tempBasalDuration
+        else {
+            return nil
+        }
+        
+        return NewPumpEvent.tempBasal(dose:
+            DoseEntry.tempBasal(
+                absoluteUnit: unitsPerHour,
+                duration: duration,
+                insulinType: state.insulinType,
+                startDate: state.basalDeliveryDate,
+                endDate: endDate
+            )
+        )
     }
 }

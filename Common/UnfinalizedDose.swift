@@ -13,7 +13,7 @@ public class UnfinalizedDose {
     public let insulinType: InsulinType?
     public let automatic: Bool?
 
-    public init(units: Double, duration: TimeInterval, activationType: BolusActivationType, insulinType: InsulinType) {
+    public init(units: Double, duration: TimeInterval, activationType: BolusActivationType, insulinType: InsulinType?) {
         type = .bolus
         unit = .units
         value = units
