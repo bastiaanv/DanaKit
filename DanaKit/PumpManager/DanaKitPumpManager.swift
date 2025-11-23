@@ -817,7 +817,7 @@ extension DanaKitPumpManager: PumpManager {
                 completion(.failure(PumpManagerError.communication(nil)))
                 return
             }
-            
+
             let bolusCancelledAt = Date.now
 
             // Sync the pump time
@@ -1839,7 +1839,7 @@ public extension DanaKitPumpManager {
         Task {
             self.log.info("Bolus completed - \(deliveredUnits)U")
             self.logDeviceCommunication("Bolus completed - \(deliveredUnits)U", type: .delegateResponse)
-            
+
             let bolusCompletedAt = Date.now
 
             let initialScreenPacket = generatePacketGeneralGetInitialScreenInformation()
@@ -1868,7 +1868,7 @@ public extension DanaKitPumpManager {
 
             doseEntry.deliveredUnits = deliveredUnits
             let dose = doseEntry.toDoseEntry(endDate: bolusCompletedAt)
-            
+
             self.doseEntry = nil
             self.doseReporter = nil
 

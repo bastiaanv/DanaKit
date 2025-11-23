@@ -37,7 +37,7 @@ public class UnfinalizedDose {
                 isMutable: false
             )
         }
-        
+
         return DoseEntry(
             type: .bolus,
             startDate: startDate,
