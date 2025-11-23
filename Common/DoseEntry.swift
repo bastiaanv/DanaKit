@@ -45,7 +45,7 @@ public extension DoseEntry {
                 isMutable: false
             )
         }
-        
+
         return DoseEntry(
             type: .tempBasal,
             startDate: startDate,
