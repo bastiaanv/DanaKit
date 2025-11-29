@@ -1953,14 +1953,14 @@ public extension DanaKitPumpManager {
         }
 
         return NewPumpEvent.tempBasal(
-            dose:
-            DoseEntry.tempBasal(
+            dose: DoseEntry.tempBasal(
                 absoluteUnit: unitsPerHour,
                 duration: duration,
                 insulinType: state.insulinType,
                 startDate: state.basalDeliveryDate,
                 endDate: endDate
-            )
+            ),
+            date: state.basalDeliveryDate
         )
     }
 }
