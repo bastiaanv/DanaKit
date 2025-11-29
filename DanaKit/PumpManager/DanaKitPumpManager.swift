@@ -1108,35 +1108,44 @@ extension DanaKitPumpManager: PumpManager {
     private func reportBasal(unitsPerHour: Double, duration: Double, isTempBasal: Bool) {
         var events: [NewPumpEvent] = []
 
+        let startDate = Date.now
         if isTempBasal {
             events.append(NewPumpEvent.tempBasal(
-                dose:
-                DoseEntry.tempBasal(
+                dose: DoseEntry.tempBasal(
                     absoluteUnit: unitsPerHour,
                     duration: duration,
-                    insulinType: state.insulinType
-                )
+                    insulinType: state.insulinType,
+                    startDate: startDate
+                ),
+                date: startDate
             ))
         } else {
-            events.append(NewPumpEvent.basal(dose: DoseEntry.basal(rate: currentBaseBasalRate, insulinType: state.insulinType)))
+            events.append(NewPumpEvent.basal(
+                dose: DoseEntry.basal(
+                    rate: currentBaseBasalRate,
+                    insulinType: state.insulinType,
+                    startDate: startDate
+                ),
+                date: startDate
+            ))
         }
 
         if state.tempBasalEndsAt > Date.now {
             // Report cancelled temp basal
             events.append(NewPumpEvent.tempBasal(
-                dose:
-                DoseEntry.tempBasal(
+                dose: DoseEntry.tempBasal(
                     absoluteUnit: unitsPerHour,
                     duration: duration,
                     insulinType: state.insulinType,
                     startDate: state.basalDeliveryDate,
                     endDate: Date.now
-                )
+                ),
+                date: state.basalDeliveryDate
             ))
         }
 
         state.basalDeliveryOrdinal = isTempBasal ? .tempBasal : .active
-        state.basalDeliveryDate = Date.now
+        state.basalDeliveryDate = startDate
         state.tempBasalUnits = unitsPerHour
         state.tempBasalDuration = duration
         state.lastStatusDate = Date.now
