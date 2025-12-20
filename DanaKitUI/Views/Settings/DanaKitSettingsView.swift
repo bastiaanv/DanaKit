@@ -292,7 +292,7 @@ struct DanaKitSettingsView: View {
 
                 if let reservoirAge = viewModel.reservoirAge {
                     HStack {
-                        Text(LocalizedString("Reservoir age", comment: "Text for reservoir age")).foregroundColor(Color.primary)
+                        Text(LocalizedString("Insulin age", comment: "Text for reservoir age")).foregroundColor(Color.primary)
                         Spacer()
                         Text(String(reservoirAge))
                             .foregroundColor(.secondary)
