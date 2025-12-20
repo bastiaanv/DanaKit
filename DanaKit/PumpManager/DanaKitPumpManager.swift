@@ -326,68 +326,71 @@ extension DanaKitPumpManager: PumpManager {
 
     /// Extention from ensureCurrentPumpData, but overrides the stale data check
     public func syncPump(_ completion: ((Date?) -> Void)?) {
-        log.info("Syncing pump data")
-        logDeviceCommunication("Syncing pump data", type: .delegate)
+        delegateQueue.async {
+            let this = self
+            self.log.info("Syncing pump data")
+            self.logDeviceCommunication("Syncing pump data", type: .delegate)
 
-        bluetooth.ensureConnected { result in
-            switch result {
-            case .success:
-                await self.syncUserOptions()
-                let events = await self.syncHistory()
+            self.bluetooth.ensureConnected { result in
+                switch result {
+                case .success:
+                    await self.syncUserOptions()
+                    let events = await self.syncHistory()
 
-                if self.shouldSyncTime() {
-                    await self.syncTime()
-                }
-
-                let pumpTime = await self.fetchPumpTime()
-                if let pumpTime = pumpTime {
-                    self.state.pumpTimeSyncedAt = Date.now
-                    self.state.pumpTime = pumpTime
-                }
-
-                self.state.lastStatusPumpDateTime = pumpTime ?? Date.now
-                self.state.lastStatusDate = Date.now
-                self.disconnect()
-
-                self.issueHeartbeatIfNeeded()
-                self.notifyStateDidChange()
-
-                self.pumpDelegate.notify { delegate in
-                    guard let delegate = delegate else {
-                        self.log.error("Reservoir level & last check could not be reported -> Missing delegate")
-                        return
+                    if self.shouldSyncTime() {
+                        await self.syncTime()
                     }
 
-                    delegate.pumpManager(
-                        self,
-                        hasNewPumpEvents: events,
-                        lastReconciliation: self.state.lastStatusDate,
-                        replacePendingEvents: true,
-                    ) { error in
-                        if let error = error {
-                            self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
+                    let pumpTime = await self.fetchPumpTime()
+                    if let pumpTime = pumpTime {
+                        self.state.pumpTimeSyncedAt = Date.now
+                        self.state.pumpTime = pumpTime
+                    }
+
+                    self.state.lastStatusPumpDateTime = pumpTime ?? Date.now
+                    self.state.lastStatusDate = Date.now
+                    self.disconnect()
+
+                    self.issueHeartbeatIfNeeded()
+                    self.notifyStateDidChange()
+
+                    self.pumpDelegate.notify { delegate in
+                        guard let delegate = delegate else {
+                            this.log.error("Reservoir level & last check could not be reported -> Missing delegate")
+                            return
                         }
-                    }
-                    delegate.pumpManager(
-                        self,
-                        didReadReservoirValue: self.state.reservoirLevel,
-                        at: self.state.lastStatusDate,
-                    ) { result in
-                        switch result {
-                        case let .failure(error):
-                            self.handlePumpDelegateError(method: "didReadReservoirValue", error)
-                        case .success:
-                            break
-                        }
-                    }
-                    delegate.pumpManagerDidUpdateState(self)
-                }
 
-                self.log.info("Sync successful!")
-                completion?(Date.now)
-            default:
-                completion?(nil)
-                return
+                        delegate.pumpManager(
+                            this,
+                            hasNewPumpEvents: events,
+                            lastReconciliation: this.state.lastStatusDate,
+                            replacePendingEvents: true,
+                        ) { error in
+                            if let error = error {
+                                this.handlePumpDelegateError(method: "hasNewPumpEvents", error)
+                            }
+                        }
+                        delegate.pumpManager(
+                            this,
+                            didReadReservoirValue: this.state.reservoirLevel,
+                            at: this.state.lastStatusDate,
+                        ) { result in
+                            switch result {
+                            case let .failure(error):
+                                this.handlePumpDelegateError(method: "didReadReservoirValue", error)
+                            case .success:
+                                break
+                            }
+                        }
+                        delegate.pumpManagerDidUpdateState(this)
+                    }
+
+                    self.log.info("Sync successful!")
+                    completion?(Date.now)
+                default:
+                    completion?(nil)
+                    return
+                }
             }
         }
     }
@@ -644,6 +647,7 @@ extension DanaKitPumpManager: PumpManager {
         }
 
         delegateQueue.async {
+            let this = self
             let duration = self.estimatedDuration(toBolus: units)
             self.log.info("Enact bolus, units: \(units)U, duration: \(duration)sec")
             self.logDeviceCommunication("Enact bolus, units: \(units)U, duration: \(duration)sec", type: .delegate)
@@ -705,7 +709,7 @@ extension DanaKitPumpManager: PumpManager {
                             let dose = doseEntry.toDoseEntry(endDate: nil)
                             self.pumpDelegate.notify { delegate in
                                 guard let delegate = delegate else {
-                                    self.log.error("Dose could not be reported -> Missing delegate")
+                                    this.log.error("Dose could not be reported -> Missing delegate")
                                     return
                                 }
 
@@ -715,13 +719,13 @@ extension DanaKitPumpManager: PumpManager {
                                     date: dose.startDate
                                 )
                                 delegate.pumpManager(
-                                    self,
+                                    this,
                                     hasNewPumpEvents: [event],
-                                    lastReconciliation: self.state.lastStatusDate,
+                                    lastReconciliation: this.state.lastStatusDate,
                                     replacePendingEvents: false,
                                 ) { error in
                                     if let error = error {
-                                        self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
+                                        this.handlePumpDelegateError(method: "hasNewPumpEvents", error)
                                     }
                                 }
                             }
@@ -1176,6 +1180,7 @@ extension DanaKitPumpManager: PumpManager {
 
     public func suspendDelivery(completion: @escaping (Error?) -> Void) {
         delegateQueue.async {
+            let this = self
             self.log.info("Suspend delivery")
             self.logDeviceCommunication("Suspend delivery", type: .delegate)
 
@@ -1214,18 +1219,18 @@ extension DanaKitPumpManager: PumpManager {
 
                         self.pumpDelegate.notify { delegate in
                             guard let delegate = delegate else {
-                                self.log.error("Suspend could not be reported -> Missing delegate")
+                                this.log.error("Suspend could not be reported -> Missing delegate")
                                 return
                             }
 
                             delegate.pumpManager(
-                                self,
+                                this,
                                 hasNewPumpEvents: events,
-                                lastReconciliation: self.state.lastStatusDate,
+                                lastReconciliation: this.state.lastStatusDate,
                                 replacePendingEvents: true,
                             ) { error in
                                 if let error = error {
-                                    self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
+                                    this.handlePumpDelegateError(method: "hasNewPumpEvents", error)
                                 }
                             }
                         }
@@ -1250,6 +1255,7 @@ extension DanaKitPumpManager: PumpManager {
 
     public func resumeDelivery(completion: @escaping (Error?) -> Void) {
         delegateQueue.async {
+            let this = self
             self.log.info("Resume delivery")
             self.logDeviceCommunication("Resume delivery", type: .delegate)
 
@@ -1284,18 +1290,18 @@ extension DanaKitPumpManager: PumpManager {
                         let dose = DoseEntry.resume(insulinType: self.state.insulinType!)
                         self.pumpDelegate.notify { delegate in
                             guard let delegate = delegate else {
-                                self.log.error("Resume could not be reported -> Missing delegate")
+                                this.log.error("Resume could not be reported -> Missing delegate")
                                 return
                             }
 
                             delegate.pumpManager(
-                                self,
+                                this,
                                 hasNewPumpEvents: [NewPumpEvent.resume(dose: dose)],
-                                lastReconciliation: self.state.lastStatusDate,
+                                lastReconciliation: this.state.lastStatusDate,
                                 replacePendingEvents: true,
                             ) { error in
                                 if let error = error {
-                                    self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
+                                    this.handlePumpDelegateError(method: "hasNewPumpEvents", error)
                                 }
                             }
                         }
@@ -1323,6 +1329,7 @@ extension DanaKitPumpManager: PumpManager {
         completion: @escaping (Result<BasalRateSchedule, Error>) -> Void
     ) {
         delegateQueue.async {
+            let this = self
             self.log.info("Syncing basal schedule...")
             self.logDeviceCommunication("Syncing basal schedule...", type: .delegate)
 
@@ -1379,18 +1386,18 @@ extension DanaKitPumpManager: PumpManager {
 
                         self.pumpDelegate.notify { delegate in
                             guard let delegate = delegate else {
-                                self.log.error("Basal could not be reported -> Missing delegate")
+                                this.log.error("Basal could not be reported -> Missing delegate")
                                 return
                             }
 
                             delegate.pumpManager(
-                                self,
+                                this,
                                 hasNewPumpEvents: events,
-                                lastReconciliation: self.state.lastStatusDate,
+                                lastReconciliation: this.state.lastStatusDate,
                                 replacePendingEvents: true,
                             ) { error in
                                 if let error = error {
-                                    self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
+                                    this.handlePumpDelegateError(method: "hasNewPumpEvents", error)
                                 }
                             }
                         }
@@ -1523,6 +1530,7 @@ extension DanaKitPumpManager: PumpManager {
 
     public func syncPumpTime(completion: @escaping (Error?) -> Void) {
         delegateQueue.async {
+            let this = self
             self.log.info("Syncing pump time...")
             self.logDeviceCommunication("Syncing pump time...", type: .delegate)
 
@@ -1563,11 +1571,11 @@ extension DanaKitPumpManager: PumpManager {
 
                         self.pumpDelegate.notify { delegate in
                             guard let delegate = delegate else {
-                                self.log.error("Clock offset could not be reported -> Missing delegate")
+                                this.log.error("Clock offset could not be reported -> Missing delegate")
                                 return
                             }
 
-                            delegate.pumpManager(self, didAdjustPumpClockBy: offset)
+                            delegate.pumpManager(this, didAdjustPumpClockBy: offset)
                         }
 
                         self.log.info("Pump time synced!")
