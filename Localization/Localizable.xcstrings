@@ -4992,7 +4992,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kontrola reťaze"
+            "value" : "Skontrolujte piest"
           }
         },
         "sv" : {
@@ -14747,7 +14747,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nie, len sa odpojte"
+            "value" : "Nie, stačí odpojiť"
           }
         },
         "sv" : {
@@ -15009,7 +15009,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nie, nechajte pumpu tak, ako je"
+            "value" : "Nie, ponechať pumpu tak, ako je"
           }
         },
         "sv" : {
