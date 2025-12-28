@@ -73,8 +73,9 @@ class PeripheralManager: NSObject {
 
         let writeQ = DispatchSemaphore(value: 1)
         writeQueue = writeQ
-
         write(packet)
+        
+        // Wait for response or timeout timer...
         writeQ.wait()
 
         writeTimeoutTask?.cancel()
@@ -85,6 +86,7 @@ class PeripheralManager: NSObject {
             throw NSError(domain: "Timeout has been hit...", code: 0, userInfo: nil)
         }
 
+        self.writeResponse = nil
         return response
     }
 
@@ -123,7 +125,7 @@ class PeripheralManager: NSObject {
 
         writeTimeoutTask = Task {
             do {
-                try await Task.sleep(nanoseconds: UInt64(!isHistoryPacket ? .seconds(10) : .seconds(21)) * 1_000_000_000)
+                try await Task.sleep(nanoseconds: UInt64(!isHistoryPacket ? .seconds(4) : .seconds(21)) * 1_000_000_000)
                 guard let semaphore = self.writeQueue else {
                     // We did what we must, so exist and be happy :)
                     return
@@ -283,12 +285,10 @@ extension PeripheralManager {
         }
 
         let randomSyncKey = pumpManager.state.randomSyncKey
-        log
-            .debug(
-                "Setting encryption keys. Pairing key: \(pairingKey.hexString()), random pairing key: \(randomPairingKey.hexString()), random sync key: \(randomSyncKey)"
-            )
+        let message = "Setting encryption keys. Pairing key: \(pairingKey.hexString()), random pairing key: \(randomPairingKey.hexString()), random sync key: \(randomSyncKey)"
+        log.debug(message)
+        
         DanaKitEncryption.setPairingKeys(pairingKey: pairingKey, randomPairingKey: randomPairingKey, randomSyncKey: randomSyncKey)
-
         sendV3PairingInformation(0)
     }
 

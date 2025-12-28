@@ -53,9 +53,8 @@ class DanaKitScanViewModel: ObservableObject {
         connectingTo = item.name
         pumpManager.state.deviceName = item.name
         pumpManager.state.bleIdentifier = item.bleIdentifier
-        pumpManager.bluetooth.peripheral = device
 
-        pumpManager.bluetooth.ensureConnected { result in
+        pumpManager.connect(device) { result in
             DispatchQueue.main.async {
                 self.connectComplete(result, device)
             }

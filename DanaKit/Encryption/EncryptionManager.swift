@@ -49,6 +49,8 @@ enum DanaKitEncryption {
             randomSyncKey: randomSyncKey,
             bleRandomKeys: ble5RandomKeys
         )
+        DanaLogger(category: "secondEncryption")
+            .info("level: \(enhancedEncryption), pairingKey: \(pairingKey.hexString()), randomSyncKey: \(randomSyncKey)")
         let result = encryptSecondLevel(&params)
 
         randomSyncKey = result.randomSyncKey
@@ -109,11 +111,11 @@ enum DanaKitEncryption {
     static func setPairingKeys(pairingKey: Data, randomPairingKey: Data, randomSyncKey: UInt8?) {
         self.pairingKey = pairingKey
         self.randomPairingKey = randomPairingKey
-
-        if randomSyncKey == nil || randomSyncKey == 0 {
-            self.randomSyncKey = initialRandomSyncKey(pairingKey: pairingKey)
+        
+        if let randomSyncKey = randomSyncKey {
+            self.randomSyncKey = decryptionRandomSyncKey(randomSyncKey: randomSyncKey, randomPairingKey: randomPairingKey)
         } else {
-            self.randomSyncKey = decryptionRandomSyncKey(randomSyncKey: randomSyncKey!, randomPairingKey: randomPairingKey)
+            self.randomSyncKey = initialRandomSyncKey(pairingKey: pairingKey)
         }
     }
 

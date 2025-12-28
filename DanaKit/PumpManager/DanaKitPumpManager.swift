@@ -120,6 +120,10 @@ public class DanaKitPumpManager: DeviceManager {
         bluetooth.stopScan()
     }
 
+    public func connect(_ peripheral: CBPeripheral, _ completion: @escaping (ConnectionResult) -> Void) {
+        bluetooth.connect(peripheral, completion)
+    }
+
     func finishV3Pairing(_ pairingKey: Data, _ randomPairingKey: Data) throws {
         try bluetooth.finishV3Pairing(pairingKey, randomPairingKey)
     }
