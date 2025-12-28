@@ -41,14 +41,20 @@ class DanaKitDebugViewModel: ObservableObject {
     }
 
     func connect() {
-        guard let device = scannedDevices.last else {
+        guard let device = scannedDevices.last, let pumpManager = pumpManager else {
             log.error("No view or device...")
             return
         }
 
-        pumpManager?.stopScan()
-        pumpManager?.connect(device.peripheral, connectCompletion)
-        connectedDevice = device
+        pumpManager.stopScan()
+        pumpManager.bluetooth.peripheral = device.peripheral
+
+        pumpManager.bluetooth.ensureConnected { result in
+            DispatchQueue.main.async {
+                self.connectedDevice = device
+                self.connectCompletion(result)
+            }
+        }
     }
 
     func connectCompletion(_ result: ConnectionResult) {
