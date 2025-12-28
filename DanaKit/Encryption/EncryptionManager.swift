@@ -111,8 +111,8 @@ enum DanaKitEncryption {
     static func setPairingKeys(pairingKey: Data, randomPairingKey: Data, randomSyncKey: UInt8?) {
         self.pairingKey = pairingKey
         self.randomPairingKey = randomPairingKey
-        
-        if let randomSyncKey = randomSyncKey {
+
+        if let randomSyncKey = randomSyncKey, randomSyncKey != 0 {
             self.randomSyncKey = decryptionRandomSyncKey(randomSyncKey: randomSyncKey, randomPairingKey: randomPairingKey)
         } else {
             self.randomSyncKey = initialRandomSyncKey(pairingKey: pairingKey)

@@ -74,7 +74,7 @@ class PeripheralManager: NSObject {
         let writeQ = DispatchSemaphore(value: 1)
         writeQueue = writeQ
         write(packet)
-        
+
         // Wait for response or timeout timer...
         writeQ.wait()
 
@@ -86,7 +86,7 @@ class PeripheralManager: NSObject {
             throw NSError(domain: "Timeout has been hit...", code: 0, userInfo: nil)
         }
 
-        self.writeResponse = nil
+        writeResponse = nil
         return response
     }
 
@@ -285,9 +285,10 @@ extension PeripheralManager {
         }
 
         let randomSyncKey = pumpManager.state.randomSyncKey
-        let message = "Setting encryption keys. Pairing key: \(pairingKey.hexString()), random pairing key: \(randomPairingKey.hexString()), random sync key: \(randomSyncKey)"
+        let message =
+            "Setting encryption keys. Pairing key: \(pairingKey.hexString()), random pairing key: \(randomPairingKey.hexString()), random sync key: \(randomSyncKey)"
         log.debug(message)
-        
+
         DanaKitEncryption.setPairingKeys(pairingKey: pairingKey, randomPairingKey: randomPairingKey, randomSyncKey: randomSyncKey)
         sendV3PairingInformation(0)
     }
@@ -371,6 +372,7 @@ extension PeripheralManager {
     private func processPairingRequest2(_ data: Data) {
         sendTimeInfo()
 
+        log.info("processPairingRequest2 -> pairingKey: \(data.subdata(in: 2 ..< 4).hexString())")
         let pairingKey = data.subdata(in: 2 ..< 4)
         DanaKitEncryption.setPairingKeys(pairingKey: pairingKey, randomPairingKey: Data(), randomSyncKey: 0)
     }
@@ -401,6 +403,8 @@ extension PeripheralManager {
 
             // Grab syncKey
             pumpManager.state.randomSyncKey = data[data.count - 1]
+            pumpManager.notifyStateDidChange()
+            log.info("RandomSyncKey: \(pumpManager.state.randomSyncKey)")
 
             if pumpManager.state.hwModel == 0x05 {
                 sendV3PairingInformationEmpty()
