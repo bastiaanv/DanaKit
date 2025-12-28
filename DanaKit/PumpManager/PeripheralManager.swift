@@ -27,7 +27,7 @@ class PeripheralManager: NSObject {
     private let WRITE_CHAR_UUID = CBUUID(string: "FFF2")
     private var writeCharacteristic: CBCharacteristic?
 
-    private var writeQueue: DispatchSemaphore?
+    private var writeQueue: NSCondition?
     private var writeTimeoutTask: Task<Void, Never>?
     private var writeResponse: (any DanaParsePacketProtocol)?
 
@@ -71,12 +71,18 @@ class PeripheralManager: NSObject {
             type: .send
         )
 
-        let writeQ = DispatchSemaphore(value: 1)
+        let writeQ = NSCondition()
         writeQueue = writeQ
         write(packet)
 
+        writeQ.lock()
+        defer { writeQ.unlock() }
+
+        log.info("Waiting for response...")
         // Wait for response or timeout timer...
         writeQ.wait()
+
+        log.info("Waiting done!")
 
         writeTimeoutTask?.cancel()
         writeTimeoutTask = nil

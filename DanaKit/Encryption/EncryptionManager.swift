@@ -49,8 +49,6 @@ enum DanaKitEncryption {
             randomSyncKey: randomSyncKey,
             bleRandomKeys: ble5RandomKeys
         )
-        DanaLogger(category: "secondEncryption")
-            .info("level: \(enhancedEncryption), pairingKey: \(pairingKey.hexString()), randomSyncKey: \(randomSyncKey)")
         let result = encryptSecondLevel(&params)
 
         randomSyncKey = result.randomSyncKey
