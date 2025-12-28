@@ -94,8 +94,8 @@ class PeripheralManager: NSObject {
         let command = (UInt16(packet.type ?? DanaPacketType.TYPE_RESPONSE) << 8) + UInt16(packet.opCode)
 
         // Make sure we have the correct state
-        if packet.opCode == CommandGeneralSetHistoryUploadMode, packet.data != nil {
-            pumpManager.state.isInFetchHistoryMode = packet.data![0] == 0x01
+        if packet.opCode == CommandGeneralSetHistoryUploadMode, let data = packet.data {
+            pumpManager.state.isInFetchHistoryMode = data[0] == 0x01
         } else {
             pumpManager.state.isInFetchHistoryMode = false
         }
@@ -374,7 +374,7 @@ extension PeripheralManager {
 
         log.info("processPairingRequest2 -> pairingKey: \(data.subdata(in: 2 ..< 4).hexString())")
         let pairingKey = data.subdata(in: 2 ..< 4)
-        DanaKitEncryption.setPairingKeys(pairingKey: pairingKey, randomPairingKey: Data(), randomSyncKey: 0)
+        DanaKitEncryption.setPairingKeys(pairingKey: pairingKey, randomPairingKey: Data(), randomSyncKey: nil)
     }
 
     private func processConnectResponse(_ data: Data) {
@@ -403,8 +403,6 @@ extension PeripheralManager {
 
             // Grab syncKey
             pumpManager.state.randomSyncKey = data[data.count - 1]
-            pumpManager.notifyStateDidChange()
-            log.info("RandomSyncKey: \(pumpManager.state.randomSyncKey)")
 
             if pumpManager.state.hwModel == 0x05 {
                 sendV3PairingInformationEmpty()

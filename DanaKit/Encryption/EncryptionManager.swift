@@ -112,7 +112,7 @@ enum DanaKitEncryption {
         self.pairingKey = pairingKey
         self.randomPairingKey = randomPairingKey
 
-        if let randomSyncKey = randomSyncKey, randomSyncKey != 0 {
+        if let randomSyncKey = randomSyncKey {
             self.randomSyncKey = decryptionRandomSyncKey(randomSyncKey: randomSyncKey, randomPairingKey: randomPairingKey)
         } else {
             self.randomSyncKey = initialRandomSyncKey(pairingKey: pairingKey)
