@@ -42,7 +42,7 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
     private func handleBackgroundTask() {
         Task {
             while isConnected {
-                await keepConnectionAlive()
+                keepConnectionAlive()
                 try await Task.sleep(nanoseconds: 60_000_000_000) // 60 seconds
             }
 
@@ -50,12 +50,12 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
         }
     }
 
-    private func keepConnectionAlive() async {
+    private func keepConnectionAlive() {
         do {
             if pumpManager?.status.bolusState == .noBolus {
                 log.info("Sending keep alive message")
                 let keepAlivePacket = generatePacketGeneralKeepConnection()
-                let result = try await writeMessage(keepAlivePacket)
+                let result = try writeMessage(keepAlivePacket)
                 guard result.success else {
                     log.error("Pump rejected keepAlive request: \(result.rawData.base64EncodedString())")
                     return
@@ -68,12 +68,12 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
         }
     }
 
-    func writeMessage(_ packet: DanaGeneratePacket) async throws -> (any DanaParsePacketProtocol) {
+    func writeMessage(_ packet: DanaGeneratePacket) throws -> (any DanaParsePacketProtocol) {
         guard let peripheralManager = self.peripheralManager, isConnected else {
             throw NSError(domain: "No connected device", code: 0, userInfo: nil)
         }
 
-        return try await peripheralManager.writeMessage(packet)
+        return try peripheralManager.writeMessage(packet)
     }
 
     public func reconnect(_ callback: @escaping (Bool) -> Void) {
@@ -92,11 +92,10 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
                 switch result {
                 case .success:
                     self.forcedDisconnect = false
-                    Task {
-                        await self.updateInitialState()
-                        self.handleBackgroundTask()
-                        callback(true)
-                    }
+                    self.updateInitialState()
+                    self.handleBackgroundTask()
+                    callback(true)
+
                 default:
                     self.log.error("Failed to reconnect: \(result)")
                     callback(false)
@@ -116,11 +115,10 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
                 switch result {
                 case .success:
                     self.forcedDisconnect = false
-                    Task {
-                        await self.updateInitialState()
-                        self.handleBackgroundTask()
-                        callback(true)
-                    }
+                    self.updateInitialState()
+                    self.handleBackgroundTask()
+                    callback(true)
+
                 default:
                     self.log.error("Failed to do auto connection: \(result)")
                     callback(false)
@@ -132,14 +130,12 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
         }
     }
 
-    func ensureConnected(_ completion: @escaping (ConnectionResult) async -> Void, _: String = #function) {
+    func ensureConnected(_ completion: @escaping (ConnectionResult) -> Void, _: String = #function) {
         if isConnected {
             resetConnectionCompletion()
             pumpManager?.logDeviceCommunication("Dana - Connection is ok!", type: .connection)
-            Task {
-                await self.updateInitialState()
-                await completion(.success)
-            }
+            updateInitialState()
+            completion(.success)
 
         } else if !forcedDisconnect {
             reconnect { result in
@@ -148,18 +144,14 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
                     self.pumpManager?.logDeviceCommunication("Dana - Couldn't reconnect", type: .connection)
 
                     self.resetConnectionCompletion()
-                    Task {
-                        await completion(.failure(NSError(domain: "Couldn't reconnect", code: -1)))
-                    }
+                    completion(.failure(NSError(domain: "Couldn't reconnect", code: -1)))
                     return
                 }
 
                 self.resetConnectionCompletion()
                 self.pumpManager?.logDeviceCommunication("Dana - Reconnected!", type: .connection)
-                Task {
-                    await self.updateInitialState()
-                    await completion(.success)
-                }
+                self.updateInitialState()
+                completion(.success)
             }
         } else {
             // We aren't connected, the user has disconnected the pump by hand
@@ -170,9 +162,7 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
             )
 
             resetConnectionCompletion()
-            Task {
-                await completion(.failure(NSError(domain: "Device is forced disconnected...", code: -1)))
-            }
+            completion(.failure(NSError(domain: "Device is forced disconnected...", code: -1)))
         }
     }
 

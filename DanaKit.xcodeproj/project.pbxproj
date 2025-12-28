@@ -134,7 +134,6 @@
 		B8FB5F172B5D91A6001C88BA /* NewPumpEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FB5F162B5D91A6001C88BA /* NewPumpEvent.swift */; };
 		B8FDA0DE2B77D037007004A5 /* PumpManagerAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FDA0DD2B77D037007004A5 /* PumpManagerAlert.swift */; };
 		B8FF961A2B4305A300C14280 /* NavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FF96192B4305A300C14280 /* NavigationLink.swift */; };
-		C1C001C127A2349D00533D35 /* DanaKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C001C027A2349D00533D35 /* DanaKit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -294,7 +293,6 @@
 		C187C199279086A8006E3557 /* DanaKitPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DanaKitPlugin.h; sourceTree = "<group>"; };
 		C187C1A2279087A4006E3557 /* OSLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSLog.swift; sourceTree = "<group>"; };
 		C187C1A427908B1C006E3557 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C1C001C027A2349D00533D35 /* DanaKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DanaKit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -393,7 +391,6 @@
 			children = (
 				B802D5082C1F675600B92C35 /* ContinousBluetoothManager.swift */,
 				B802D5072C1F675600B92C35 /* InteractiveBluetoothManager.swift */,
-				C1C001C027A2349D00533D35 /* DanaKit.swift */,
 				1029AE4627094D0E00B7F5B6 /* DanaKitPumpManager.swift */,
 				1029AE4727094D0E00B7F5B6 /* DanaKitPumpManagerState.swift */,
 				B8360AE82B2B954700152188 /* BluetoothManager.swift */,
@@ -890,7 +887,6 @@
 				B8360AAB2B2A290900152188 /* DanaGeneralGetShippingInformation.swift in Sources */,
 				B8360AE12B2A3C3C00152188 /* DanaNotifyAlarm.swift in Sources */,
 				B8360ABF2B2A2D6C00152188 /* DanaHistoryAlarm.swift in Sources */,
-				C1C001C127A2349D00533D35 /* DanaKit.swift in Sources */,
 				B83815C82B322B0800627125 /* DanaKitDebugViewModel.swift in Sources */,
 				B8360AC52B2A2DF100152188 /* DanaHistoryBase.swift in Sources */,
 				1029AE4827094D0E00B7F5B6 /* DanaKitPumpManager.swift in Sources */,
@@ -1173,6 +1169,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG DANAKIT_DEBUG_LOGGING";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_VERSION = 5.0;
