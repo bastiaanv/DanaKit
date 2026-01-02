@@ -40,8 +40,13 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
         connectionCallback = { result in
             self.isBusy = true
             self.timoutCallback?.cancel()
+            self.timoutCallback = nil
+            
+            if case .timeout = result {
+                self.resetConnectionCompletion()
+                self.connectionCallback = nil
 
-            if case .success = result {
+            } else if case .success = result {
                 self.resetConnectionCompletion()
                 self.connectionCallback = nil
 
