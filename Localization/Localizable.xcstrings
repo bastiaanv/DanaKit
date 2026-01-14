@@ -49,7 +49,7 @@
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " is ready to be used!"
+            "value" : " מוכנה לשימוש!"
           }
         },
         "it" : {
@@ -2497,7 +2497,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Are you sure you want to bolus 5J?"
+            "value" : "Ste si istí, že chcete podať bolus 5J?"
           }
         },
         "sv" : {
@@ -4330,7 +4330,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Obe stránky"
+            "value" : "Zvuk a vibrácie"
           }
         },
         "sv" : {
@@ -4992,7 +4992,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kontrola reťaze"
+            "value" : "Skontrolujte piest"
           }
         },
         "sv" : {
@@ -10646,7 +10646,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nepodarilo sa pozastavenie"
+            "value" : "Neúspešné pozastavenie"
           }
         },
         "sv" : {
@@ -14217,7 +14217,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nočná synchronizácia času pumpy"
+            "value" : "Synchronizovať čas pumpy v noci"
           }
         },
         "sv" : {
@@ -14747,7 +14747,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nie, len sa odpojte"
+            "value" : "Nie, stačí odpojiť"
           }
         },
         "sv" : {
@@ -14878,7 +14878,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nie, nechajte tak, ako je"
+            "value" : "Nie, nechať tak, ako je"
           }
         },
         "sv" : {
@@ -15009,7 +15009,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nie, nechajte pumpu tak, ako je"
+            "value" : "Nie, nechať pumpu tak, ako je"
           }
         },
         "sv" : {
@@ -19905,7 +19905,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Plnenie zásobníka/kanyly"
+            "value" : "Naplnenie zásobníka/kanyly"
           }
         },
         "sv" : {
@@ -21614,7 +21614,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vyberte si svoje čerpadlo"
+            "value" : "Vyberte si pumpu"
           }
         },
         "sv" : {
@@ -23861,7 +23861,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zastaviť dočasnú dávku bazálu"
+            "value" : "Zastaviť dočasnú bazálnu dávku"
           }
         },
         "sv" : {
@@ -26611,7 +26611,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Typ náplne"
+            "value" : "Typ plnenia"
           }
         },
         "sv" : {
@@ -27266,7 +27266,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Možnosti používateľa"
+            "value" : "Používateľské nastavenia"
           }
         },
         "sv" : {
@@ -28575,7 +28575,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Áno, vypnite synchronizáciu bolusu"
+            "value" : "Áno, vypnúť synchronizáciu bolusu"
           }
         },
         "sv" : {
@@ -28706,7 +28706,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Áno, Zakázať tiché tóny"
+            "value" : "Áno, zakázať tiché tóny"
           }
         },
         "sv" : {
@@ -28837,7 +28837,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Áno, Povolenie tichých tónov"
+            "value" : "Áno, povoliť tiché tóny"
           }
         },
         "sv" : {
@@ -28968,7 +28968,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Áno, znovu zapnite synchronizáciu bolusu"
+            "value" : "Áno, znovu zapnúť synchronizáciu bolusu"
           }
         },
         "sv" : {
@@ -29099,7 +29099,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Áno, prepnite na nepretržitý režim"
+            "value" : "Áno, prepnúť na nepretržitý režim"
           }
         },
         "sv" : {
@@ -29230,7 +29230,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Áno, prepnite na interaktívny režim"
+            "value" : "Áno, prepnúť na interaktívny režim"
           }
         },
         "sv" : {
@@ -29361,7 +29361,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Áno, synchronizácia s aktuálnym časom"
+            "value" : "Áno, zosynchronizovať s aktuálnym časom"
           }
         },
         "sv" : {
@@ -29885,7 +29885,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your pump is disconnected longer than 5 minutes!"
+            "value" : "Vaša pumpa je odpojená dlhšie ako 5 minút!"
           }
         },
         "sv" : {
@@ -30016,7 +30016,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vaše čerpadlo je po uplynutí nastavenej doby stále odpojené!"
+            "value" : "Vaša pumpa je po uplynutí nastaveného času stále odpojená!"
           }
         },
         "sv" : {
