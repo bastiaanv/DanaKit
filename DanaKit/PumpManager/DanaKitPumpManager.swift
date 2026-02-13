@@ -1215,6 +1215,8 @@ extension DanaKitPumpManager: PumpManager {
                         self.state.isPumpSuspended = true
                         self.state.basalDeliveryOrdinal = .suspended
                         self.state.basalDeliveryDate = Date.now
+                        self.state.tempBasalUnits = nil
+                        self.state.tempBasalDuration = nil
                         self.notifyStateDidChange()
 
                         self.pumpDelegate.notify { delegate in
