@@ -35,13 +35,16 @@ public extension DoseEntry {
         endDate: Date? = nil
     ) -> DoseEntry {
         if let endDate = endDate {
+            let duration = endDate.timeIntervalSince(startDate)
             return DoseEntry(
                 type: .tempBasal,
                 startDate: startDate,
                 endDate: endDate,
                 value: absoluteUnit,
                 unit: .unitsPerHour,
+                deliveredUnits: absoluteUnit * (duration / .hours(1)),
                 insulinType: insulinType,
+                automatic: true,
                 isMutable: false
             )
         }
@@ -53,6 +56,7 @@ public extension DoseEntry {
             value: absoluteUnit,
             unit: .unitsPerHour,
             insulinType: insulinType,
+            automatic: true,
             isMutable: true
         )
     }
