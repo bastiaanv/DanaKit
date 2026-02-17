@@ -64,6 +64,12 @@
             "value" : " が使えるようになった！"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "er klar til bruk!"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -116,6 +122,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : " kullanılmaya hazır!"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "готовий до використання!"
           }
         },
         "vi" : {
@@ -195,6 +207,12 @@
             "value" : ". Please go to your bluetooth settings, forget this device, and try again"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gå til Bluetooth-innstillingene, glem denne enheten og prøv på nytt."
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -247,6 +265,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : ". Please go to your bluetooth settings, forget this device, and try again"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ". Будь ласка, перейдіть до налаштувань Bluetooth, забудьте про цей пристрій і спробуйте ще раз."
           }
         },
         "vi" : {
@@ -331,6 +355,12 @@
             "value" : "%1$@%2$@ / %3$@%4$@"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@%2$@ / %3$@%4$@"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -380,6 +410,12 @@
           }
         },
         "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@%2$@ / %3$@%4$@"
+          }
+        },
+        "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%1$@%2$@ / %3$@%4$@"
@@ -462,6 +498,12 @@
             "value" : "%@U"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@E"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -514,6 +556,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@Ü"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@U"
           }
         },
         "vi" : {
@@ -593,6 +641,12 @@
             "value" : "%1$@ units remaining at %2$@"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ enheter gjenstår ved %2$@"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -645,6 +699,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%1$@ ünite kaldı %2$@"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ одиниць залишилося на %2$@"
           }
         },
         "vi" : {
@@ -729,6 +789,12 @@
             "value" : "%1$u %2$@"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$u %2$@"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -778,6 +844,12 @@
           }
         },
         "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$u %2$@"
+          }
+        },
+        "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%1$u %2$@"
@@ -867,6 +939,12 @@
             "value" : "12秒/U"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "12 sek/u"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -919,6 +997,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "12 saniye/U"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "12 секунд/U"
           }
         },
         "vi" : {
@@ -998,6 +1082,12 @@
             "value" : "12h表記"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "12 timers notasjon"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1050,6 +1140,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "12h notasyonu"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "12-годинна нотація"
           }
         },
         "vi" : {
@@ -1129,6 +1225,12 @@
             "value" : "24時間表示"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "24 timers visning"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1181,6 +1283,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "24 saat gösterge"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "24-годинний дисплей"
           }
         },
         "vi" : {
@@ -1260,6 +1368,12 @@
             "value" : "24時間表記"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "24-timers notasjon"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1312,6 +1426,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "24 saat gösterimi"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "12-годинна нотація"
           }
         },
         "vi" : {
@@ -1398,6 +1518,12 @@
             "value" : "30秒/U"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "30 sek/u"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1450,6 +1576,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "30 saniye/U"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "30 секунд/U"
           }
         },
         "vi" : {
@@ -1536,6 +1668,12 @@
             "value" : "60秒/U"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "60 sek/E"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1588,6 +1726,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "60 saniye/U"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "60 секунд/U"
           }
         },
         "vi" : {
@@ -1667,6 +1811,12 @@
             "value" : "血糖値チェックリマインダーがポンプに設定され、作動しています。リマインダーを外すか、血糖値をポンプに知らせてください。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "En påminnelse om blodsukkerkontroll er satt opp i pumpen og utløses. Fjern den eller gi glukosenivået til pumpen"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1719,6 +1869,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pompanızda bir kan şekeri kontrolü hatırlatıcısı ayarlanmıştır ve tetiklenmiştir. Lütfen bunu kaldırın veya glikoz seviyenizi pompaya verin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нагадування про перевірку рівня глюкози в крові було налаштовано у вашій Помпі та спрацьовує. Будь ласка, видаліть його або дайте свій рівень глюкози на помпі"
           }
         },
         "vi" : {
@@ -1798,6 +1954,12 @@
             "value" : "ボーラスタイムアウトが有効である。ループサイクルはタイムアウトが解除されるまで完了しない。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bolus-timeout er aktiv. Sløyfen kan ikke fullføres før timeouten er over."
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1850,6 +2012,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bir bolus zaman aşımı etkindir. Zaman aşımı devre dışı kalana kadar döngü döngüsü tamamlanamaz"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тайм-аут болюсу активний. Цикл loop не може бути завершений, доки тайм-аут не буде неактивним"
           }
         },
         "vi" : {
@@ -1929,6 +2097,12 @@
             "value" : "ポンプがビジー状態のため、アクションはキャンセルされました。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Handlingen er avbrutt fordi pumpen er opptatt"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1981,6 +2155,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pompa meşgul olduğu için işlem iptal edildi"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дія скасована, оскільки Помпа зайнята"
           }
         },
         "vi" : {
@@ -2066,6 +2246,12 @@
             "value" : "インスリンの種類とボーラス速度を設定した後、見つかったすべての Dana ポンプの画面が表示されます。 %1$@とリンクさせたいポンプを選択してください。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Etter at du har konfigurert insulintype og bolushastighet, vil du se en skjerm med alle funnet Dana-pumper. Velg pumpen du vil koble til %1$@."
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2118,6 +2304,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "İnsülin tipini ve bolus hızını ayarladıktan sonra, bulunan tüm Dana pompalarını içeren bir ekran göreceksiniz. %1$@ile bağlamak istediğiniz pompayı seçin."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Після налаштування типу інсуліну та швидкості болюса ви побачите екран із усіма знайденими помпами Dana. Виберіть помпу, яку потрібно зв'язати з %1$@."
           }
         },
         "vi" : {
@@ -2197,6 +2389,12 @@
             "value" : "アラームビープ音"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alarmen piper"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2249,6 +2447,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Alarm bip sesi"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Звукові сигнали"
           }
         },
         "vi" : {
@@ -2328,6 +2532,12 @@
             "value" : "ポンプからのアラート処理中に不明なエラーが発生しました。このエラーを報告してください。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Det har oppstått en ukjent feil under behandlingen av varselet fra pumpen. Vennligst rapporter dette"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2380,6 +2590,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pompadan gelen uyarının işlenmesi sırasında bilinmeyen bir hata oluştu. Lütfen bunu rapor edin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Під час обробки сповіщення від Помпи сталася невідома помилка. Будь ласка, повідомте про це"
           }
         },
         "vi" : {
@@ -2458,6 +2674,12 @@
             "value" : "Are you sure you want to bolus 5E?"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Er du sikker på at du vil gi bolus 5E?"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2510,6 +2732,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Are you sure you want to bolus 5E?"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ви впевнені, що хочете отримати болюс 5Е?"
           }
         },
         "vi" : {
@@ -2588,6 +2816,12 @@
             "value" : "Are you sure you want to set the temp basal to 200% for 1 hour?"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Er du sikker på at du vil sette temp basal til 200 % i 1 time?"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2640,6 +2874,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Are you sure you want to set the temp basal to 200% for 1 hour?"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ви впевнені, що хочете встановити тимчасову базальну швидкість (ТБШ) на 200% на 1 годину?"
           }
         },
         "vi" : {
@@ -2719,6 +2959,12 @@
             "value" : "本当にDana-i/RSをやめたいのですか？"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Er du sikker på at du vil slutte å bruke Dana-i/RS?"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2771,6 +3017,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dana-i/RS kullanmayı bırakmak istediğinizden emin misiniz?"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ви впевнені, що хочете припинити використання Dana-i/RS?"
           }
         },
         "vi" : {
@@ -2850,6 +3102,12 @@
             "value" : "世界へ"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bakgrunnsbelysning på tid"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2902,6 +3160,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Arka ışık açma süresi"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Час увімкнення Підсвічування "
           }
         },
         "vi" : {
@@ -2981,6 +3245,12 @@
             "value" : "ベーサル"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Basal"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3033,6 +3303,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bazal"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Базал"
           }
         },
         "vi" : {
@@ -3112,6 +3388,12 @@
             "value" : "ベース比較"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Basal sammenligning"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3164,6 +3446,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bazal Karşılaştırma"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Базальне порівняння"
           }
         },
         "vi" : {
@@ -3243,6 +3531,12 @@
             "value" : "基礎限界に到達"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Basalgrense nådd"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3295,6 +3589,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bazal sınıra ulaşıldı"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Базальний ліміт досягнуто"
           }
         },
         "vi" : {
@@ -3374,6 +3674,12 @@
             "value" : "基本プロファイル"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Basalprofil"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3426,6 +3732,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bazal profil"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Базальний профіль"
           }
         },
         "vi" : {
@@ -3505,6 +3817,12 @@
             "value" : "Battery age"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Batteri alder"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3557,6 +3875,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Battery age"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Час використовування батареї"
           }
         },
         "vi" : {
@@ -3636,6 +3960,12 @@
             "value" : "Battery is empty. Replace it now!"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Batteriet er tomt. Bytt nå!"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3688,6 +4018,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Battery is empty. Replace it now!"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Батарейка розряджена. Замініть її негайно!"
           }
         },
         "vi" : {
@@ -3767,6 +4103,12 @@
             "value" : "バッテリー残量"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Batterinivå"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3819,6 +4161,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pil seviyesi"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Рівень заряду"
           }
         },
         "vi" : {
@@ -3898,6 +4246,12 @@
             "value" : "ペアリングを開始する前に、ポンプのパスワードを確認し、必要に応じて更新することをお勧めします。これはポンプ設定→ユーザー設定→パスワードで行うことができます。デフォルトのパスワードは1234です。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Før du starter paringsprosessen, anbefales det å sjekke og om nødvendig oppdatere pumpens passord. Du kan gjøre dette ved å gå til pumpeinnstillinger -> brukerinnstillinger -> passord. Standardpassordet er 1234. Hvis dette er passordet ditt, bør du vurdere å endre det."
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3950,6 +4304,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Eşleştirme işlemine başlamadan önce, pompa şifresini kontrol etmeniz ve gerekirse güncellemeniz önerilir. Bunu pompa ayarları -> kullanıcı ayarları -> şifre bölümüne giderek yapabilirsiniz. Varsayılan şifre 1234'tür, şifreniz buysa lütfen değiştirmeyi düşünün"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Перед початком процесу сполучення рекомендується перевірити та за необхідності оновити пароль Помпи. Це можна зробити, перейшовши в налаштування помпи -> налаштування користувача -> пароль. За промовчанням використовується пароль 1234, якщо це ваш пароль, будь ласка, змініть його."
           }
         },
         "vi" : {
@@ -4029,6 +4389,12 @@
             "value" : "血糖測定"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blodsukkermåling"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4081,6 +4447,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kan şekeri ölçümü"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вимірювання Рівня Глюкози в Крові"
           }
         },
         "vi" : {
@@ -4160,6 +4532,12 @@
             "value" : "ボーラス"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bolus"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4212,6 +4590,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bolus"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Болюс"
           }
         },
         "vi" : {
@@ -4291,6 +4675,12 @@
             "value" : "両方"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Begge"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4343,6 +4733,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Her ikisi de"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обидва"
           }
         },
         "vi" : {
@@ -4410,6 +4806,12 @@
             "value" : "Cancel"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "निरस्त"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4420,6 +4822,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "キャンセル"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt"
           }
         },
         "nb-NO" : {
@@ -4441,6 +4849,12 @@
           }
         },
         "pt_BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
+        },
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancelar"
@@ -4474,6 +4888,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "İptal"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відмінити"
           }
         },
         "vi" : {
@@ -4553,6 +4973,12 @@
             "value" : "カニューレ年齢"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kanyle-alder"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4605,6 +5031,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kanül yaşı"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "термін використовування Канюлі"
           }
         },
         "vi" : {
@@ -4684,6 +5116,12 @@
             "value" : "カニューレのみ"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kun kanyle"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4736,6 +5174,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sadece kanül"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "тільки Канюля"
           }
         },
         "vi" : {
@@ -4822,6 +5266,12 @@
             "value" : "カニューレ再充填"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Påfyll av kanyle"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4874,6 +5324,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kanül dolumu"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "заправка Канюлі"
           }
         },
         "vi" : {
@@ -4953,6 +5409,12 @@
             "value" : "シャフトのチェック"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sjekk skaft"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5005,6 +5467,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Şaftı kontrol edin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Перевірте вал"
           }
         },
         "vi" : {
@@ -5084,6 +5552,12 @@
             "value" : "ポンプをチェックし、もう一度試す"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kontroller pumpen og prøv igjen"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5136,6 +5610,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pompayı kontrol edin ve tekrar deneyin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Перевірте Помпу та повторіть спробу"
           }
         },
         "vi" : {
@@ -5215,6 +5695,12 @@
             "value" : "リザーバーと輸液を確認し、もう一度試してください。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kontroller reservoaret og infusjonen, og prøv igjen"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5267,6 +5753,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hazneyi ve infüzyonu kontrol edin ve tekrar deneyin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Перевірте Резервуар і інфузійний набір та повторіть спробу"
           }
         },
         "vi" : {
@@ -5346,6 +5838,12 @@
             "value" : "でチェックした。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sjekket på"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5398,6 +5896,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kontrol edildi"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Перевірено в"
           }
         },
         "vi" : {
@@ -5477,6 +5981,12 @@
             "value" : "チェックサムに失敗しました。再試行してください。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kontrollsum mislyktes. Prøv igjen"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5529,6 +6039,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Checksum başarısız oldu. Tekrar deneyin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Помилка контрольної суми. Спробуйте знову"
           }
         },
         "vi" : {
@@ -5608,6 +6124,12 @@
             "value" : "構成"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konfigurasjon"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5660,6 +6182,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Yapılandırma"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Налаштування"
           }
         },
         "vi" : {
@@ -5738,6 +6266,12 @@
             "value" : "Connect"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Koble til"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5790,6 +6324,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bağlan"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Підключити"
           }
         },
         "vi" : {
@@ -5869,6 +6409,12 @@
             "value" : "接続済み"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tilkoblet"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5921,6 +6467,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bağlandı"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Під'єднаний"
           }
         },
         "vi" : {
@@ -6000,6 +6552,12 @@
             "value" : "接続"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tilkobling"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6052,6 +6610,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bağlanıyor"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Під'єднання"
           }
         },
         "vi" : {
@@ -6131,6 +6695,12 @@
             "value" : "続ける"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fortsett"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6183,6 +6753,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Devam et"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Продовжити"
           }
         },
         "vi" : {
@@ -6262,6 +6838,12 @@
             "value" : "1日の制限に達した"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daglig grense nådd"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6314,6 +6896,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Günlük limite ulaşıldı"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Денний ліміт досягнуто"
           }
         },
         "vi" : {
@@ -6393,6 +6981,12 @@
             "value" : "ダナアイ"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dana-i"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6442,6 +7036,12 @@
           }
         },
         "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dana-i"
+          }
+        },
+        "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dana-i"
@@ -6524,6 +7124,12 @@
             "value" : "Dana-i/RSセットアップ"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dana-i/RS-oppsett"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6576,6 +7182,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dana-i/RS Kurulumu"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Налаштування Dana-i/RS"
           }
         },
         "vi" : {
@@ -6655,6 +7267,12 @@
             "value" : "Dana-RS v3が見つかった！"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dana-RS v3 funnet!"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6707,6 +7325,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dana-RS v3 bulundu!"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dana-RS v3 знайдено!"
           }
         },
         "vi" : {
@@ -6786,6 +7410,12 @@
             "value" : "ダナRS-v1"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DanaRS-v1"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6835,6 +7465,12 @@
           }
         },
         "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DanaRS-v1"
+          }
+        },
+        "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "DanaRS-v1"
@@ -6917,6 +7553,12 @@
             "value" : "ダナRS-v3"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DanaRS-v3"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6966,6 +7608,12 @@
           }
         },
         "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DanaRS-v3"
+          }
+        },
+        "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "DanaRS-v3"
@@ -7055,6 +7703,12 @@
             "value" : "日"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "dag(er)"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7107,6 +7761,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "gün(ler)"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "день(-ів)"
           }
         },
         "vi" : {
@@ -7185,6 +7845,12 @@
             "value" : "DEBUG: Bolus action"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DEBUG: Bolus-handling"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7237,6 +7903,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "DEBUG: Bolus action"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "НАЛАГОДЖЕННЯ: Дія болюса"
           }
         },
         "vi" : {
@@ -7315,6 +7987,12 @@
             "value" : "DEBUG: Temp basal action"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DEBUG: Midlertidig basal handling"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7367,6 +8045,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "DEBUG: Temp basal action"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "НАЛАГОДЖЕННЯ: Тимчасова базальна швидкість (ТБШ)"
           }
         },
         "vi" : {
@@ -7446,6 +8130,12 @@
             "value" : "ポンプの削除"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Slett pumpe"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7498,6 +8188,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pompayı sil"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Видалити помпу"
           }
         },
         "vi" : {
@@ -7577,6 +8273,12 @@
             "value" : "ポンプの削除"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Slette pumpe"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7629,6 +8331,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pompayı Sil"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Видалити помпу"
           }
         },
         "vi" : {
@@ -7708,6 +8416,12 @@
             "value" : "配送スピード"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leveringshastighet"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7760,6 +8474,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Teslimat hızı"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Швидкість доставки"
           }
         },
         "vi" : {
@@ -7838,6 +8558,12 @@
             "value" : "Device found!"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enhet funnet!"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7890,6 +8616,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Device found!"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пристрій знайдено!"
           }
         },
         "vi" : {
@@ -7976,6 +8708,12 @@
             "value" : "ボーラスの同期を無効にしますか？"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deaktiver bolussynkronisering?"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8028,6 +8766,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bolus senkronizasyonunu devre dışı mı bırakayım?"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вимкнути синхронізацію болюсу?"
           }
         },
         "vi" : {
@@ -8106,6 +8850,12 @@
             "value" : "Disconnect"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Koble fra"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8158,6 +8908,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Disconnect"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Роз'єднати"
           }
         },
         "vi" : {
@@ -8237,6 +8993,12 @@
             "value" : "ポンプから切り離す"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Koble fra pumpen"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8289,6 +9051,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pompa bağlantısını kesin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Від'єднати від помпи"
           }
         },
         "vi" : {
@@ -8368,6 +9136,12 @@
             "value" : "切断"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Frakoblet"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8420,6 +9194,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bağlantı kesildi"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Від’єднано"
           }
         },
         "vi" : {
@@ -8499,6 +9279,12 @@
             "value" : "切断..."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kobler fra..."
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8551,6 +9337,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bağlantı kesiliyor."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відключення..."
           }
         },
         "vi" : {
@@ -8629,6 +9421,12 @@
             "value" : "Do bolus"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gjør bolus"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8681,6 +9479,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Do bolus"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зробіть болюс"
           }
         },
         "vi" : {
@@ -8760,6 +9564,12 @@
             "value" : "ポンプが特定の時間切断された場合に通知を受け取りたいですか？"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ønsker du å motta et varsel når pumpen ikke lenger er koblet fra i en bestemt periode?"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8812,6 +9622,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pompanın bağlantısı belirli bir süre için kesildiğinde bir bildirim almak istiyor musunuz?"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Чи бажаєте ви отримувати сповіщення, коли Помпу буде відключено на певний час?"
           }
         },
         "vi" : {
@@ -8890,6 +9706,12 @@
             "value" : "Done"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ferdig"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8942,6 +9764,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tamam"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Готово"
           }
         },
         "vi" : {
@@ -9021,6 +9849,12 @@
             "value" : "ペアリング中、Dana-iにはペアリングのプロンプトが表示され、iPhoneにはペアリングコードのプロンプトが表示されます。あなたのポンプでOKを選択し、iPhoneの画面に6桁のコードを入力します。その後、 %1$@ 、Dana-iと通信する準備が整います。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Under sammenkoblingsprosessen vil Dana-i vise en sammenkoblingsmelding mens iPhone vil vise en melding om en sammenkoblingskode. På pumpen velger du OK og skriver inn den 6-sifrede koden på skjermen på iPhone. Deretter %1$@ er klar til å kommunisere med din Dana-i"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9073,6 +9907,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Eşleştirme işlemi sırasında Dana-i cihazınız bir eşleştirme istemi gösterirken iPhone'unuz bir eşleştirme kodu istemi gösterecektir. Pompanızda Tamam'ı seçin ve 6 haneli kodu iPhone'unuzdaki ekrana yazın. Bundan sonra, %1$@ Dana-i'niz ile iletişim kurmaya hazırdır"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Під час сполучення на екрані Dana-i з'явиться запит на пару, а на екрані iPhone - запит на код сполучення. Виберіть OK та введіть 6-значний код на екрані iPhone. Після цього %1$@ буде готовий до роботи з Dana-i."
           }
         },
         "vi" : {
@@ -9152,6 +9992,12 @@
             "value" : "During the pairing process, your DanaRS v1 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, %1$@ is ready to communicate with your DanaRS v1"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Under sammenkoblingsprosessen vil DanaRS v1 vise en sammenkoblingsmelding, mens iPhone vil vise en melding om en sammenkoblingskode. Velg OK på pumpen, og skriv inn koden på iPhone. Etter dette er %1$@ klar til å kommunisere med DanaRS v1"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9204,6 +10050,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "During the pairing process, your DanaRS v1 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, %1$@ is ready to communicate with your DanaRS v1"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Під час процесу створення пари на вашому DanaRS v1 відображатиметься запит на створення пари, а на вашому iPhone – код сполучення. На помпі виберіть OK і введіть код на своєму iPhone. Після цього %1$@ готовий до зв’язку з DanaRS v1"
           }
         },
         "vi" : {
@@ -9290,6 +10142,12 @@
             "value" : "During the pairing process, your DanaRS v1 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, Loop is ready to communicate with your DanaRS v1"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Under sammenkoblingsprosessen vil DanaRS v1 vise en sammenkoblingsmelding, mens iPhone vil vise en melding om en sammenkoblingskode. Velg OK på pumpen, og skriv inn koden på iPhone. Etter dette er Loop klar til å kommunisere med DanaRS v1"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9342,6 +10200,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Eşleştirme işlemi sırasında DanaRS v1 cihazınız bir eşleştirme istemi gösterirken iPhone cihazınız bir eşleştirme kodu istemi gösterecektir. Pompanızda Tamam'ı seçin ve kodu iPhone'unuza yazın. Bundan sonra Loop, DanaRS v1 cihazınızla iletişim kurmaya hazırdır"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Під час процесу сполучення ваш DanaRS v1 відображатиме запит на сполучення, а ваш iPhone – запит на код сполучення. На помпі виберіть OK та введіть код на iPhone. Після цього Loop буде готовий до зв’язку з вашим DanaRS v1."
           }
         },
         "vi" : {
@@ -9422,6 +10286,12 @@
             "value" : "ペアリング中、DanaRS v3にはペアリングのプロンプトが表示され、iPhoneにはペアリングコードのプロンプトが表示されます。ポンプでOKを選択し、iPhoneにコードを入力します。その後、LoopはDanaRS v1と通信できます。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Under sammenkoblingsprosessen vil DanaRS v3 vise en sammenkoblingsmelding, mens iPhone vil vise en melding om en sammenkoblingskode. Velg OK på pumpen, og skriv inn koden på iPhone. Etter dette er Loop klar til å kommunisere med DanaRS v1"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9474,6 +10344,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, Loop is ready to communicate with your DanaRS v1"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Під час процесу сполучення ваш DanaRS v3 відображатиме запит на сполучення, а ваш iPhone – запит на код сполучення. На помпі виберіть OK та введіть код на iPhone. Після цього Loop буде готовий до зв’язку з вашим DanaRS v1."
           }
         },
         "vi" : {
@@ -9553,6 +10429,12 @@
             "value" : "During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for two pairing codes. On your pump, select OK and type the two codes on your iPhone. After that, %1$@ is ready to communicate with your DanaRS v3"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Under sammenkoblingsprosessen vil DanaRS v3 vise en sammenkoblingsmelding, mens iPhone vil vise en melding om to sammenkoblingskoder. Velg OK på pumpen, og skriv inn de to kodene på iPhone. Etter dette er %1$@ klar til å kommunisere med DanaRS v3"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9605,6 +10487,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for two pairing codes. On your pump, select OK and type the two codes on your iPhone. After that, %1$@ is ready to communicate with your DanaRS v3"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Під час процесу створення пари на вашому DanaRS v3 відображатиметься запит на створення пари, а на вашому iPhone – два коди сполучення. На помпі виберіть OK і введіть два коди на своєму iPhone. Після цього %1$@ готовий до зв’язку з DanaRS v3"
           }
         },
         "vi" : {
@@ -9691,6 +10579,12 @@
             "value" : "ペアリング中、DanaRS v3にはペアリングのプロンプトが表示され、iPhoneには2つのペアリングコードを入力するプロンプトが表示されます。ポンプでOKを選択し、iPhoneに2つのコードを入力します。その後、LoopはDanaRS v3と通信できるようになります。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Under sammenkoblingsprosessen vil DanaRS v3 vise en sammenkoblingsmelding, mens iPhone vil vise en melding om to sammenkoblingskoder. Velg OK på pumpen, og skriv inn de to kodene på iPhone. Etter dette er Loop klar til å kommunisere med DanaRS v3"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9743,6 +10637,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Eşleştirme işlemi sırasında DanaRS v3 cihazınız bir eşleştirme istemi gösterirken iPhone'unuz iki eşleştirme kodu istemi gösterecektir. Pompanızda Tamam'ı seçin ve iPhone'unuza iki kodu yazın. Bundan sonra Loop, DanaRS v3 cihazınızla iletişim kurmaya hazırdır"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Під час процесу сполучення ваш DanaRS v3 відобразить запит на сполучення, а ваш iPhone – запит на два коди сполучення. На помпі виберіть OK та введіть два коди на iPhone. Після цього Loop буде готовий до зв’язку з вашим DanaRS v3."
           }
         },
         "vi" : {
@@ -9822,6 +10722,12 @@
             "value" : "空のリザーバー"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tomt reservoar"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9874,6 +10780,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Boş rezervuar"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Порожній резервуар"
           }
         },
         "vi" : {
@@ -9953,6 +10865,12 @@
             "value" : "デバイス接続時のエラー"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feil under tilkobling til enheten"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10005,6 +10923,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cihaza bağlanırken hata oluştu"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Помилка під час підключення до пристрою"
           }
         },
         "vi" : {
@@ -10083,6 +11007,12 @@
             "value" : "Error while starting scanning for devices..."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feil under start av skanning etter enheter..."
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10135,6 +11065,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Error while starting scanning for devices..."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Помилка під час початку сканування пристроїв..."
           }
         },
         "vi" : {
@@ -10214,6 +11150,12 @@
             "value" : "ERROR：デバイスのペアリングに失敗しました"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FEIL: Kunne ikke koble sammen enheten"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10266,6 +11208,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "HATA: Cihaz eşleştirilemedi"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ПОМИЛКА: не вдалося підключити пристрій"
           }
         },
         "vi" : {
@@ -10345,6 +11293,12 @@
             "value" : "基礎体温の調整に失敗"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunne ikke justere basal"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10397,6 +11351,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bazal ayarlama yapılamadı"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не вдалося відкоригувати Базал"
           }
         },
         "vi" : {
@@ -10476,6 +11436,12 @@
             "value" : "ポンプ時間の調整に失敗"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunne ikke justere pumpetiden"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10528,6 +11494,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pompa süresi ayarlanamadı"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не вдалося налаштувати час помпи"
           }
         },
         "vi" : {
@@ -10607,6 +11579,12 @@
             "value" : "サスペンションの調整に失敗"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klarte ikke å justere suspensjonen"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10659,6 +11637,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Süspansiyon ayarlanamadı"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не вдалося налаштувати призупинення"
           }
         },
         "vi" : {
@@ -10745,6 +11729,12 @@
             "value" : "基礎体温の調整に失敗"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunne ikke justere midlertidig basal"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10797,6 +11787,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bazal sıcaklık ayarlanamadı"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не вдалося налаштувати темп Базалу"
           }
         },
         "vi" : {
@@ -10876,6 +11872,12 @@
             "value" : "ダナ・ベーサル・プログラムの生成に失敗"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunne ikke generere Dana basalprogram"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10928,6 +11930,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dana bazal programı oluşturulamadı"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не вдалося створити  програму Базалу Dana"
           }
         },
         "vi" : {
@@ -11014,6 +12022,12 @@
             "value" : "接続に失敗しました"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunne ikke opprette en tilkobling"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11066,6 +12080,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bağlantı kurulamadı"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не вдалося встановити з'єднання"
           }
         },
         "vi" : {
@@ -11145,6 +12165,12 @@
             "value" : "Failed to pair to "
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunne ikke koble til "
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11197,6 +12223,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Failed to pair to "
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не вдалося підключитися до"
           }
         },
         "vi" : {
@@ -11276,6 +12308,12 @@
             "value" : "Failed to prime the cannula. Please try again later"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunne ikke klargjøre kanylen. Prøv igjen senere."
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11328,6 +12366,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kanül prime edilemedi. Lütfen daha sonra tekrar deneyin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не вдалося заповнити Канюлю. Спробуйте пізніше"
           }
         },
         "vi" : {
@@ -11407,6 +12451,12 @@
             "value" : "Failed to prime the tube. Please try again later"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunne ikke klargjøre slangen. Vennligst prøv igjen senere"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11459,6 +12509,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tüp doldurulamadı. Lütfen daha sonra tekrar deneyin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не вдалося заправити трубку. Спробуйте пізніше"
           }
         },
         "vi" : {
@@ -11538,6 +12594,12 @@
             "value" : "Failed to set reservoir amount. Re-sync pump data and try again please"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kunne ikke angi reservoarmengde. Synkroniser pumpedataene på nytt og prøv igjen."
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11590,6 +12652,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rezervuar miktarı ayarlanamadı. Pompa verilerini yeniden senkronize edin ve tekrar deneyin lütfen"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не вдалося встановити обсяг Резервуара. Повторно синхронізуйте дані насоса та повторіть спробу"
           }
         },
         "vi" : {
@@ -11669,6 +12737,12 @@
             "value" : "パスワードを入力"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fyll inn passord"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11721,6 +12795,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Şifreyi girin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пароль DanaRS v1"
           }
         },
         "vi" : {
@@ -11800,6 +12880,12 @@
             "value" : "終了"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fullfør"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11852,6 +12938,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bitiş"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Готово"
           }
         },
         "vi" : {
@@ -11931,6 +13023,12 @@
             "value" : "ファームウェアバージョン"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fastvareversjon"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11983,6 +13081,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ürün yazılımı sürümü"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Версія прошивки"
           }
         },
         "vi" : {
@@ -12062,6 +13166,12 @@
             "value" : "Dana-i/RSポンプを発見"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fant Dana-i/RS-pumper"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12114,6 +13224,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dana-i/RS pompaları bulundu"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Знайшлися помпи Dana-i/RS"
           }
         },
         "vi" : {
@@ -12193,6 +13309,12 @@
             "value" : "ハードウェア・モデル"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maskinvaremodell"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12245,6 +13367,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Donanım modeli"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Модель обладнання"
           }
         },
         "vi" : {
@@ -12324,6 +13452,12 @@
             "value" : "インスリン\n停止"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Insulin\n Suspendert"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12376,6 +13510,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "İnsülin\nAskıya Alındı"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Інсулін\nПризупинено"
           }
         },
         "vi" : {
@@ -12592,6 +13732,12 @@
             "value" : "インスリンデリバリー"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Insulintilførsel"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12644,6 +13790,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "İnsülin İletimi"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подання Інсуліну"
           }
         },
         "vi" : {
@@ -12723,6 +13875,12 @@
             "value" : "インスリン残量"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gjenværende insulin"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12775,6 +13933,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kalan İnsülin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Залишок Інсуліну"
           }
         },
         "vi" : {
@@ -12854,6 +14018,12 @@
             "value" : "インスリン中断"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Insulin suspendert"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12906,6 +14076,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "İnsülin Durduldu"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подання Припинено"
           }
         },
         "vi" : {
@@ -12985,6 +14161,12 @@
             "value" : "インスリンの種類"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Insulintype"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13037,6 +14219,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "İnsülin Tipi"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тип Інсуліну"
           }
         },
         "vi" : {
@@ -13116,6 +14304,12 @@
             "value" : "最後の同期"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Siste synkronisering"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13168,6 +14362,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Son senkronizasyon"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Остання синхронізація"
           }
         },
         "vi" : {
@@ -13247,6 +14447,12 @@
             "value" : "液晶点灯時間"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lcd på tid"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13299,6 +14505,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lcd açık kalma süresi"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Час увімкнення РК-дисплея"
           }
         },
         "vi" : {
@@ -13385,6 +14597,12 @@
             "value" : "ローディング"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laster"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13437,6 +14655,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "yükleme"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "завантаження"
           }
         },
         "vi" : {
@@ -13523,6 +14747,12 @@
             "value" : "ローディング"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laster"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13575,6 +14805,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Yükleniyor"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Завантаження"
           }
         },
         "vi" : {
@@ -13654,6 +14890,12 @@
             "value" : "ポンプ電池残量低下"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lavt batteri i pumpen"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13706,6 +14948,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Düşük pompa pili"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Розряджений акумулятор Помпи"
           }
         },
         "vi" : {
@@ -13785,6 +15033,12 @@
             "value" : "リザーバー残量警告"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Påminnelse om lavt reservoar"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13837,6 +15091,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Düşük rezervuar hatırlatıcısı"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нагадування про низький рівень Резервуару"
           }
         },
         "vi" : {
@@ -13916,6 +15176,12 @@
             "value" : "ポンプ時間を手動で同期"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Synkroniser pumpetiden manuelt"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13968,6 +15234,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pompa zamanını manuel olarak senkronize edin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ручна синхронізація часу Помпи"
           }
         },
         "vi" : {
@@ -14047,6 +15319,12 @@
             "value" : "血糖値チェックの見落とし"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mistet blodsukkermåling"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14099,6 +15377,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kaçırılan Kan şekeri kontrolü"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пропущена перевірка рівня глюкози в крові"
           }
         },
         "vi" : {
@@ -14178,6 +15462,12 @@
             "value" : "夜間ポンプ時刻同期"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Synkronisering av pumpetid om natten"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14230,6 +15520,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gece pompa zamanı senkronizasyonu"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нічна синхронізація часу Помпи"
           }
         },
         "vi" : {
@@ -14308,6 +15604,12 @@
             "value" : "No"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nei"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14360,6 +15662,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "No"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ні"
           }
         },
         "vi" : {
@@ -14439,6 +15747,12 @@
             "value" : "インスリンなし"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ingen insulin"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14458,6 +15772,12 @@
           }
         },
         "pt_BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sem insulina"
+          }
+        },
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "No Insulin"
@@ -14491,6 +15811,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "İnsülin yok"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нема Інсуліну"
           }
         },
         "vi" : {
@@ -14708,6 +16034,12 @@
             "value" : "いいえ、切断するだけです"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nei, bare koble fra"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14760,6 +16092,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hayır, sadece bağlantıyı kes"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ні, просто відключити"
           }
         },
         "vi" : {
@@ -14839,6 +16177,12 @@
             "value" : "いいえ、そのままで"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nei, behold som det er"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14891,6 +16235,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hayır, olduğu gibi kalsın"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ні, залишити як є"
           }
         },
         "vi" : {
@@ -14970,6 +16320,12 @@
             "value" : "いいえ、ポンプはそのままで"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nei, behold pumpen som den er"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15022,6 +16378,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hayır güncelleme"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ні, залишити  як є"
           }
         },
         "vi" : {
@@ -15101,6 +16463,12 @@
             "value" : "NOTE: The DanaRS v1 is not supported (yet). If you have a DanaRS v1 pump available for testing, please contact Bastiaan Verhaar!"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MERK: DanaRS v1 støttes ikke (ennå). Hvis du har en DanaRS v1-pumpe tilgjengelig for testing, vennligst kontakt Bastiaan Verhaar!"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15153,6 +16521,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "NOTE: The DanaRS v1 is not supported (yet). If you have a DanaRS v1 pump available for testing, please contact Bastiaan Verhaar!"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ПРИМІТКА: DanaRS v1 (поки що) не підтримується. Якщо у вас є помпа DanaRS v1 для тестування, зверніться до Бастіана Верхаара!"
           }
         },
         "vi" : {
@@ -15232,6 +16606,12 @@
             "value" : "注：Danaポンプには、Danaポンプのビープ音を無音にする特別な設定があります。これを有効にするには、Danaの販売代理店にお問い合わせください。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Merk: Dana-pumpen har en spesiell innstilling som gjør at du kan dempe pipelyden i Dana-pumpen. Kontakt Dana-distributøren din for å aktivere dette"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15284,6 +16664,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Not: Dana pompanız, Dana pompa bip seslerini susturmanızı sağlayan özel bir ayara sahiptir. Bunu etkinleştirmek için lütfen Dana distribütörünüzle iletişime geçin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Примітка. Ваша помпа Dana має спеціальне налаштування, яке дозволяє вимкнути звукові сигнали помпи Dana. Щоб увімкнути це, зверніться до свого дистриб’ютора Dana"
           }
         },
         "vi" : {
@@ -15363,6 +16749,12 @@
             "value" : "咬合"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Okklusjon"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15415,6 +16807,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Oklüzyon"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Закупорка"
           }
         },
         "vi" : {
@@ -15494,6 +16892,12 @@
             "value" : "オフ"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Av"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15546,6 +16950,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kapalı"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вимкнути"
           }
         },
         "vi" : {
@@ -15626,6 +17036,12 @@
             "value" : "OK"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15645,6 +17061,12 @@
           }
         },
         "pt_BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
@@ -15678,6 +17100,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tamam"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ОК"
           }
         },
         "vi" : {
@@ -15763,6 +17191,12 @@
             "value" : "OK"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oke"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15812,6 +17246,12 @@
           }
         },
         "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oke"
+          }
+        },
+        "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Oke"
@@ -15894,6 +17334,12 @@
             "value" : "オン"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "På"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15946,6 +17392,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Açık"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Увімкнути"
           }
         },
         "vi" : {
@@ -16032,6 +17484,12 @@
             "value" : "自動ボーラスのみ対応"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bare automatisk bolus støttes"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -16084,6 +17542,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Yalnızca Otomatik Bolus desteklenir"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Підтримується лише Автоматичний Болюс"
           }
         },
         "vi" : {
@@ -16163,6 +17627,12 @@
             "value" : "パスワード DanaRS v1"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Passord DanaRS v1"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -16215,6 +17685,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Şifre DanaRS v1"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пароль DanaRS v1"
           }
         },
         "vi" : {
@@ -16294,6 +17770,12 @@
             "value" : "ピン 1"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pin 1"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -16343,6 +17825,12 @@
           }
         },
         "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pin 1"
+          }
+        },
+        "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pin 1"
@@ -16425,6 +17913,12 @@
             "value" : "ピン 2"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pin 2"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -16474,6 +17968,12 @@
           }
         },
         "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pin 2"
+          }
+        },
+        "uk" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pin 2"
@@ -16563,6 +18063,12 @@
             "value" : "ピンコード必須"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pin-kode kreves"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -16615,6 +18121,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pin kodu gerekli"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Потрібен PIN-код"
           }
         },
         "vi" : {
@@ -16701,6 +18213,12 @@
             "value" : "設定メニューで投与戦略の変更を検討してください。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vennligst vurder å endre doseringsstrategien din i innstillingsmenyen"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -16753,6 +18271,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lütfen ayar menüsünden dozaj stratejinizi değiştirmeyi düşünün"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Розгляньте можливість зміни стратегії дозування в меню налаштувань"
           }
         },
         "vi" : {
@@ -16832,6 +18356,12 @@
             "value" : "Prime amount"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prim mengde"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -16884,6 +18414,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prime amount"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Основна сума"
           }
         },
         "vi" : {
@@ -16963,6 +18499,12 @@
             "value" : "ポンプ電池 0"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pumpebatteri 0 %"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -17015,6 +18557,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pompa aküsü %0"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Акумулятор Помпи 0%"
           }
         },
         "vi" : {
@@ -17101,6 +18649,12 @@
             "value" : "ポンプのバッテリーが空です。すぐに交換してください！"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pumpebatteriet er tomt. Bytt den ut nå!"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -17153,6 +18707,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pompa pili boşalmış. Hemen değiştirin!"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Батарея Помпи розряджена. Замініть його зараз!"
           }
         },
         "vi" : {
@@ -17232,6 +18792,12 @@
             "value" : "ポンプのバッテリーはすぐに交換が必要"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pumpebatteriet må skiftes snart"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -17284,6 +18850,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pompa aküsünün yakında değiştirilmesi gerekiyor"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Необхідно найближчим часом замінити акумулятор Помпи"
           }
         },
         "vi" : {
@@ -17363,6 +18935,12 @@
             "value" : "ポンプエラー"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pumpefeil"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -17415,6 +18993,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pompa hatası"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Помилка Помпи"
           }
         },
         "vi" : {
@@ -17494,6 +19078,12 @@
             "value" : "ポンプ情報"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pumpeinformasjon"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -17546,6 +19136,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pompa bilgileri"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Інформація про Помпу"
           }
         },
         "vi" : {
@@ -17625,6 +19221,12 @@
             "value" : "Pump is disconnected"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pumpen er frakoblet"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -17677,6 +19279,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pump is disconnected"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Помпа відключена"
           }
         },
         "vi" : {
@@ -17756,6 +19364,12 @@
             "value" : "ポンプはまだ接続されていない"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pumpen er fortsatt frakoblet"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -17808,6 +19422,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pompanın bağlantısı hala kesik"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Помпа все ще відключена"
           }
         },
         "vi" : {
@@ -17887,6 +19507,12 @@
             "value" : "ポンプ名"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Navn på pumpen"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -17939,6 +19565,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pompa adı"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Назва Помпи"
           }
         },
         "vi" : {
@@ -18018,6 +19650,12 @@
             "value" : "ポンプ停止"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avstengning av pumpe"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -18070,6 +19708,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pompa kapatma"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відключення Помпи"
           }
         },
         "vi" : {
@@ -18149,6 +19793,12 @@
             "value" : "ポンプ時間"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pumpetid"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -18201,6 +19851,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pompa süresi"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Час Помпи"
           }
         },
         "vi" : {
@@ -18287,6 +19943,12 @@
             "value" : "ボーラス同期を再度有効にするか？"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktivere bolussynkronisering på nytt?"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -18339,6 +20001,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bolus senkronizasyonunu yeniden etkinleştirin mi?"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Повторно ввімкнути синхронізацію болюсу?"
           }
         },
         "vi" : {
@@ -18418,6 +20086,12 @@
             "value" : "無効な16進文字列を受信しました。再試行してください。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mottok ugyldige hex-strenger. Prøv igjen"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -18470,6 +20144,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geçersiz hex dizeleri alındı. Tekrar deneyin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отримано недійсні шістнадцяткові рядки. Спробуйте знову"
           }
         },
         "vi" : {
@@ -18549,6 +20229,12 @@
             "value" : "無効なピンコード長を受信しました。再試行してください。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mottatt ugyldige pinkodelengder. Prøv igjen"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -18601,6 +20287,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geçersiz pin kodu uzunlukları alındı. Tekrar deneyin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отримано неправильну довжину пін-коду. Спробуйте знову"
           }
         },
         "vi" : {
@@ -18680,6 +20372,12 @@
             "value" : "Reconnect to pump"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Koble til pumpen igjen"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -18732,6 +20430,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reconnect to pump"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Знову підключіть до помпи"
           }
         },
         "vi" : {
@@ -18818,6 +20522,12 @@
             "value" : "ポンプを再接続する"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Koble til tp-pumpen igjen"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -18870,6 +20580,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tp pompasını yeniden bağlayın"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Підключіть помпу tp"
           }
         },
         "vi" : {
@@ -18949,6 +20665,12 @@
             "value" : "再接続..."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kobler til igjen..."
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19001,6 +20723,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Yeniden bağlanıyor..."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Повторне підключення..."
           }
         },
         "vi" : {
@@ -19080,6 +20808,12 @@
             "value" : "補充量"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Påfyllingsmengde"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19132,6 +20866,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dolum miktarı"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "кількість заправок"
           }
         },
         "vi" : {
@@ -19211,6 +20951,12 @@
             "value" : "インスリン残量"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gjenværende insulinnivå"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19263,6 +21009,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kalan insülin seviyesi"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Залишковий рівень інсуліну"
           }
         },
         "vi" : {
@@ -19342,6 +21094,12 @@
             "value" : "ポンプの取り外し"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fjern pumpen"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19394,6 +21152,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pompayı Çıkart"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зніміть Pod"
           }
         },
         "vi" : {
@@ -19473,6 +21237,12 @@
             "value" : "Reservoir amount"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reservoarmengde"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19525,6 +21295,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rezervuar miktarı"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Объем Резервуара"
           }
         },
         "vi" : {
@@ -19604,6 +21380,12 @@
             "value" : "リザーバーとカニューレ"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reservoar og kanyle"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19656,6 +21438,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rezervuar ve kanül"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Резервуара та Канюля"
           }
         },
         "vi" : {
@@ -19735,6 +21523,12 @@
             "value" : "リザーバーが空です。すぐに交換してください！"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reservoaret er tomt. Bytt det ut nå!"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19787,6 +21581,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rezervuar boşalmış. Hemen değiştirin!"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Резервуар порожній. Замініть його зараз!"
           }
         },
         "vi" : {
@@ -19866,6 +21666,12 @@
             "value" : "リザーバー／カニューレ再充填"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Påfylling av reservoar/kanyle"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19918,6 +21724,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rezervuar/kanül dolumu"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "заправка Резервуару/Канюлі"
           }
         },
         "vi" : {
@@ -19997,6 +21809,12 @@
             "value" : "履歴書"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gjenoppta"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20016,6 +21834,12 @@
           }
         },
         "pt_BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Currículo"
+          }
+        },
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Resume"
@@ -20049,6 +21873,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Devam et"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відновити"
           }
         },
         "vi" : {
@@ -20128,6 +21958,12 @@
             "value" : "履歴書の送付"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gjenoppta levering"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20180,6 +22016,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "İletimi Devam Ettir"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відновити доставку"
           }
         },
         "vi" : {
@@ -20259,6 +22101,12 @@
             "value" : "セーブ"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lagre"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20311,6 +22159,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kaydet"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зберегти"
           }
         },
         "vi" : {
@@ -20389,6 +22243,12 @@
             "value" : "Scan"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Søk"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20441,6 +22301,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Scan"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сканувати"
           }
         },
         "vi" : {
@@ -20520,6 +22386,12 @@
             "value" : "スキャニング"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Søker"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20572,6 +22444,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Taranıyor"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сканування"
           }
         },
         "vi" : {
@@ -20651,6 +22529,12 @@
             "value" : "予定ベース"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Planlagt basal"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20703,6 +22587,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Programlanmış Bazal"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Запланований Базал"
           }
         },
         "vi" : {
@@ -20782,6 +22672,12 @@
             "value" : "スクロール機能"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rulle funksjon"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20834,6 +22730,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kaydırma işlevi"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Функція прокрутки"
           }
         },
         "vi" : {
@@ -20913,6 +22815,12 @@
             "value" : "秒"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "sek"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20965,6 +22873,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "sn"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "секунд"
           }
         },
         "vi" : {
@@ -21044,6 +22958,12 @@
             "value" : "Select insulin type"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Velg insulintype"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21096,6 +23016,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Select insulin type"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Виберіть тип Інсуліну"
           }
         },
         "vi" : {
@@ -21182,6 +23108,12 @@
             "value" : "インスリンタイプを選択"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Velg insulintype"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21234,6 +23166,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "İnsülin Tipini Seçin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Виберіть тип інсуліну"
           }
         },
         "vi" : {
@@ -21313,6 +23251,12 @@
             "value" : "このポンプで使用するインスリンの種類を選択してください。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Velg insulintypen du vil bruke i denne pumpen"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21365,6 +23309,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bu pompada kullanacağınız insülin türünü seçin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Виберіть тип інсуліну, який ви будете використовувати в цій помпі"
           }
         },
         "vi" : {
@@ -21444,6 +23394,12 @@
             "value" : "Select the type of insulin that you will be using in this pump."
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Velg insulintypen du vil bruke i denne pumpen."
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21496,6 +23452,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bu pompada kullanacağınız insülin tipini seçin."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Виберіть тип інсуліну, який ви будете використовувати у цій поспі."
           }
         },
         "vi" : {
@@ -21575,6 +23537,12 @@
             "value" : "ポンプの選択"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Velg din pumpe"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21627,6 +23595,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pompanızı seçin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Виберіть свою Помпу"
           }
         },
         "vi" : {
@@ -21706,6 +23680,12 @@
             "value" : "切断のリマインダーを設定する"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Angi påminnelse for frakobling"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21758,6 +23738,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bağlantıyı kesmek için hatırlatıcı ayarlayın"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Встановити нагадування про відключення"
           }
         },
         "vi" : {
@@ -21844,6 +23830,12 @@
             "value" : "ポンプが使用する基礎プロフィールを設定する。ポンプに内蔵されているプロファイルを、 %1$@のプロファイルで上書きすることに注意してください。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Angi basalprofilen pumpen skal bruke. Merk at den vil overskrive profilen som er i pumpen, med profilen i %1$@"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21896,6 +23888,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pompanın kullanması gereken bazal profili ayarlayın. Pompada bulunan profilin üzerine %1$@adresinde bulunan profilin yazılacağını unutmayın."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Встановіть базальний профіль, який повинен використовувати помпа. Зауважте, що це перезапише профіль, який знаходиться в помпі, на профілю у %1$@"
           }
         },
         "vi" : {
@@ -21982,6 +23980,12 @@
             "value" : "基礎体温の設定は現在サポートされていません。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Innstilling av temp basal støttes ikke for øyeblikket"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -22034,6 +24038,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geçici bazal ayarı şu anda desteklenmemektedir"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Встановлення тимчасового базалу наразі не підтримується"
           }
         },
         "vi" : {
@@ -22113,6 +24123,12 @@
             "value" : "ダナアイの設定"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sette opp Dana-i"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -22165,6 +24181,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dana-i'nin Kurulumu"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Налаштування Dana-i"
           }
         },
         "vi" : {
@@ -22244,6 +24266,12 @@
             "value" : "DanaRS v1のセットアップ"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sette opp DanaRS v1"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -22296,6 +24324,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "DanaRS v1'in Kurulumu"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Налаштування DanaRS v1"
           }
         },
         "vi" : {
@@ -22375,6 +24409,12 @@
             "value" : "DanaRS v3のセットアップ"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sette opp DanaRS v3"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -22427,6 +24467,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "DanaRS v3'ün Kurulumu"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Налаштування DanaRS v3"
           }
         },
         "vi" : {
@@ -22506,6 +24552,12 @@
             "value" : "Setup Complete"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oppsettet er fullført"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -22558,6 +24610,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kurulum tamamlandı"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Налаштування Завершено"
           }
         },
         "vi" : {
@@ -22637,6 +24695,12 @@
             "value" : "ダナ・ポンプの記録を共有する"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Del Dana-pumpelogger"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -22689,6 +24753,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dana pompa kayıtlarını paylaşın"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поділіться журналом помпи Dana"
           }
         },
         "vi" : {
@@ -22768,6 +24838,12 @@
             "value" : "時刻は12時間表示か24時間表示か"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skal tiden vises om 12 timer eller 24 timer"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -22820,6 +24896,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zaman 12 saat mi yoksa 24 saat olarak mı gösterilmeli"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Час має відображатися через 12 або 24 години"
           }
         },
         "vi" : {
@@ -22899,6 +24981,12 @@
             "value" : "信号損失"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Signal Tap"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -22918,6 +25006,12 @@
           }
         },
         "pt_BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perda de sinal"
+          }
+        },
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Signal Loss"
@@ -22951,6 +25045,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sinyal Kaybı"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Втрата сигналу"
           }
         },
         "vi" : {
@@ -23030,6 +25130,12 @@
             "value" : "サウンド"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lyd"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23082,6 +25188,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ses"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Звук"
           }
         },
         "vi" : {
@@ -23161,6 +25273,12 @@
             "value" : "ステータス"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Status"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23180,6 +25298,12 @@
           }
         },
         "pt_BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estado"
+          }
+        },
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Estado"
@@ -23213,6 +25337,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Durum"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Статус"
           }
         },
         "vi" : {
@@ -23299,6 +25429,12 @@
             "value" : "Step 1: Prime cannula"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trinn 1: Prime-kanyle"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23351,6 +25487,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Adım 1: Kanülü hazırlayın"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Крок 1: Заправте Канюлю"
           }
         },
         "vi" : {
@@ -23430,6 +25572,12 @@
             "value" : "Step 1: Set reservoir level"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trinn 1: Still inn reservoarnivået"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23482,6 +25630,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Adım 1: Rezervuar seviyesini ayarlayın"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Крок 1: Встановіть рівень у Резервуарі"
           }
         },
         "vi" : {
@@ -23561,6 +25715,12 @@
             "value" : "Step 2: Set tube refill amount"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trinn 2: Still inn påfyllingsmengde for tube"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23613,6 +25773,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Adım 2: Tüp dolum miktarını ayarlayın"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Крок 2: Встановіть кількість поповнення тюбика"
           }
         },
         "vi" : {
@@ -23691,6 +25857,12 @@
             "value" : "Stop bolus"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stopp bolus"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23743,6 +25915,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Stop bolus"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зупинити болюс"
           }
         },
         "vi" : {
@@ -23822,6 +26000,12 @@
             "value" : "基礎体温停止"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stopp midlertidig basal"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23874,6 +26058,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bazal sıcaklığı durdur"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зупинити тимчасову базу"
           }
         },
         "vi" : {
@@ -23953,6 +26143,12 @@
             "value" : "サスペンド"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suspendere"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23972,6 +26168,12 @@
           }
         },
         "pt_BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suspender"
+          }
+        },
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Suspend"
@@ -24005,6 +26207,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Askıya al"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Призупинити"
           }
         },
         "vi" : {
@@ -24084,6 +26292,12 @@
             "value" : "配送の一時停止"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt levering"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -24136,6 +26350,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Teslimatı askıya alın"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Призупинити подачу"
           }
         },
         "vi" : {
@@ -24215,6 +26435,12 @@
             "value" : "ポンプデータの同期"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Synkroniser pumpedata"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -24267,6 +26493,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pompa verilerini senkronize et"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Синхронізація даних Помпи"
           }
         },
         "vi" : {
@@ -24345,6 +26577,12 @@
             "value" : "temp basal"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "midlertidig basal"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -24397,6 +26635,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "temp basal"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "тимчасова  Базальна Швидкість (ТБШ)"
           }
         },
         "vi" : {
@@ -24476,6 +26720,12 @@
             "value" : "基礎温度"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Midlertidig basal"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -24528,6 +26778,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geçici Bazal Oranı"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тимчасовий  Базал"
           }
         },
         "vi" : {
@@ -24607,6 +26863,12 @@
             "value" : "Danaポンプは、異なる吐出速度に対応しています。ここで設定できる"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dana-pumpene støtter forskjellige leveringshastigheter. Du kan sette den opp her"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -24659,6 +26921,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dana pompaları farklı dağıtım hızlarını destekler. Buradan ayarlayabilirsiniz"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Помпи Dana підтримують різні швидкості подачи. Ви можете налаштувати їх тут"
           }
         },
         "vi" : {
@@ -24738,6 +27006,12 @@
             "value" : "Danaポンプは異なる吐出速度に対応しています。ここで設定できますが、設定メニューでも設定できます。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dana-pumpene støtter forskjellige leveringshastigheter. Du kan konfigurere det her, men også i innstillingsmenyen"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -24790,6 +27064,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dana pompaları farklı dağıtım hızlarını destekler. Bunu buradan ve aynı zamanda ayarlar menüsünden ayarlayabilirsiniz"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Помпи Dana підтримують різні швидкості доставки. Ви можете налаштувати це тут, а також у меню налаштувань"
           }
         },
         "vi" : {
@@ -24869,6 +27149,12 @@
             "value" : "インスリン投与が中断されました。処置失敗"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Insulintilførselen har blitt avbrutt. Handling mislyktes"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -24921,6 +27207,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "İnsülin teslimatı askıya alındı. Eylem başarısız"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подачу інсуліну призупинено. Не вдалося виконати дію"
           }
         },
         "vi" : {
@@ -25000,6 +27292,12 @@
             "value" : "ボーラスの上限値に達しています。量を減らすか、上限を増やしてください。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maksimal bolusgrense er nådd. Prøv en lavere mengde eller øk grensen."
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -25052,6 +27350,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Maksimum bolus limitine ulaşıldı. Lütfen daha düşük bir miktar deneyin veya limiti artırın"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Досягнуто максимального ліміту болюсу. Спробуйте зменшити суму або збільште ліміт"
           }
         },
         "vi" : {
@@ -25131,6 +27435,12 @@
             "value" : "1日のインスリン量が上限に達しています。もう少し量を減らすか、上限を増やしてください。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Den maksimale daglige grensen for insulin er nådd. Prøv en lavere mengde eller øk grensen"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -25183,6 +27493,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Maksimum günlük insülin limitine ulaşıldı. Lütfen daha düşük bir miktar deneyin veya limiti artırın"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Досягнуто максимального добового ліміту інсуліну. Спробуйте зменшити суму або збільште ліміт"
           }
         },
         "vi" : {
@@ -25262,6 +27578,12 @@
             "value" : "ポンプがシャフトの問題を検出しました。リザーバを取り外し、すべてを確認してから再度お試しください。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pumpen har oppdaget et problem med skaftet. Fjern reservoaret, sjekk alt og prøv på nytt."
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -25314,6 +27636,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pompa, şaftında bir sorun tespit etti. Lütfen rezervuarı çıkarın, her şeyi kontrol edin ve tekrar deneyin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Помпа виявивла проблему з валом. Вийміть резервуар, перевірте все та повторіть спробу"
           }
         },
         "vi" : {
@@ -25393,6 +27721,12 @@
             "value" : "The pump reminds you when the amount of insulin in the pump reaches this level"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pumpen minner deg på når mengden insulin i pumpen når dette nivået"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -25445,6 +27779,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "The pump reminds you when the amount of insulin in the pump reaches this level"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Помпа нагадує вам, коли кількість інсуліну в ній досягає цього рівня"
           }
         },
         "vi" : {
@@ -25524,6 +27864,12 @@
             "value" : "ポンプの時刻が現在時刻と異なっています。ポンプの時刻を現在時刻に更新しますか？"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klokken på pumpen er forskjellig fra gjeldende tid. Vil du oppdatere tiden på pumpen til gjeldende tid?"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -25543,6 +27889,12 @@
           }
         },
         "pt_BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A hora em sua bomba é diferente da hora atual. Deseja atualizar a hora em sua bomba para a hora atual?"
+          }
+        },
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "The time on your pump is different from the current time. Do you want to update the time on your pump to the current time?"
@@ -25576,6 +27928,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pompanızdaki saat geçerli saatten farklı. Pompanızdaki saati geçerli saate güncellemek istiyor musunuz?"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Час на вашій помпі відрізняється від поточного часу. Хочете оновити час на помпі до поточного?"
           }
         },
         "vi" : {
@@ -25655,6 +28013,12 @@
             "value" : "ポンプの時刻は現在時刻とは異なります。ポンプの時刻はスケジュールされた治療設定を制御します。ポンプ時刻の行までスクロールして、時差を確認し、ポンプを設定してください。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klokken på pumpen er forskjellig fra gjeldende tid. Pumpens tid styrer dine planlagte behandlingsinnstillinger. Rull ned til Pumpetid-raden for å se tidsforskjellen og konfigurere pumpen."
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -25707,6 +28071,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pompanızdaki saat, geçerli saatten farklı. Pompanızın zamanı, planlanmış tedavi ayarlarınızı kontrol eder. Saat farkını gözden geçirmek ve pompanızı yapılandırmak için Pompa Saati satırına ilerleyin."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Час на вашому Pod'i відрізняється від поточного часу. Час вашого Podʼу контролює налаштування запланованої терапії. Прокрутіть униз до рядка Час Podʼу, щоб переглянути різницю в часі та налаштувати Pod."
           }
         },
         "vi" : {
@@ -25786,6 +28156,12 @@
             "value" : "あまりにも長い間、ポンプとの相互作用がありません。ポンプのこの機能を無効にするか、ポンプと対話するかしてください。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Det har ikke vært noen interaksjon med pumpen på for lang tid. Deaktiver enten denne funksjonen i pumpen, eller samhandle med pumpen"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -25838,6 +28214,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Çok uzun süredir pompa ile herhangi bir etkileşim olmamıştır. Ya pompadaki bu işlevi devre dışı bırakın ya da pompa ile etkileşime geçin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Занадто довго не було жодної взаємодії з Помпою. Або вимкніть цю функцію в помпі, або взаємодійте з помпою"
           }
         },
         "vi" : {
@@ -25917,6 +28299,12 @@
             "value" : "This method of refilling is only intended for when the pump cannot provide a way to refill the reservoir or prime the cannula"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Denne påfyllingsmetoden er kun beregnet for tilfeller der pumpen ikke kan fylle opp reservoaret eller kanylen"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -25969,6 +28357,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bu yeniden doldurma yöntemi yalnızca pompanın rezervuarı yeniden doldurmak veya kanülü prime etmek için bir yol sağlayamadığı durumlar için tasarlanmıştır"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Цей спосіб заправлення призначений тільки для тих випадків, коли Помпа не може забезпечити поповнення Резервуара або заправки Канюлі."
           }
         },
         "vi" : {
@@ -26048,6 +28442,12 @@
             "value" : "検出された時間変化"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tidsendring oppdaget"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -26067,6 +28467,12 @@
           }
         },
         "pt_BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mudança de horário detectada"
+          }
+        },
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Time Change Detected"
@@ -26100,6 +28506,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zaman Değişikliği Algılandı"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Виявлено Зміну Часу"
           }
         },
         "vi" : {
@@ -26179,6 +28591,12 @@
             "value" : "ブルートゥース・モデル"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Slå av/på Bluetooth-modus"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -26231,6 +28649,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bluetooth modunu aç / kapat"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Перемкнути режим Bluetooth"
           }
         },
         "vi" : {
@@ -26310,6 +28734,12 @@
             "value" : "トグル・サイレント・トーン？"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Slå av/på stille tone?"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -26362,6 +28792,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sessiz tonu değiştirelim mi?"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Увімкнути беззвучний сигнал?"
           }
         },
         "vi" : {
@@ -26441,6 +28877,12 @@
             "value" : "Tube refill amount"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mengde påfylling av rør"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -26493,6 +28935,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tüp dolum miktarı"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кількість поповнень у тюбику"
           }
         },
         "vi" : {
@@ -26572,6 +29020,12 @@
             "value" : "詰め替えタイプ"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Type påfyll"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -26624,6 +29078,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dolum türü"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тип заправки"
           }
         },
         "vi" : {
@@ -26703,6 +29163,12 @@
             "value" : "U"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "E"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -26755,6 +29221,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ü"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "U"
           }
         },
         "vi" : {
@@ -26834,6 +29306,12 @@
             "value" : "U/時"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "E/t"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -26886,6 +29364,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ü/Sa"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "U/год"
           }
         },
         "vi" : {
@@ -26965,6 +29449,12 @@
             "value" : "不明"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ukjent"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -27017,6 +29507,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bilinmiyor"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Невідомий"
           }
         },
         "vi" : {
@@ -27096,6 +29592,12 @@
             "value" : "不明なエラー"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ukjent feil"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -27148,6 +29650,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bilinmeyen hata"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Невідома помилка"
           }
         },
         "vi" : {
@@ -27227,6 +29735,12 @@
             "value" : "ユーザーオプション"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brukeralternativer"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -27279,6 +29793,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kullanıcı seçenekleri"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Опції користувача"
           }
         },
         "vi" : {
@@ -27358,6 +29878,12 @@
             "value" : "振動"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vibrasjon"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -27410,6 +29936,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Titreşim"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вібрація"
           }
         },
         "vi" : {
@@ -27489,6 +30021,12 @@
             "value" : "WARNING: Please don't use this until you've read the documentation"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ADVARSEL: Ikke bruk dette før du har lest dokumentasjonen"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -27541,6 +30079,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "WARNING: Please don't use this until you've read the documentation"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ПОПЕРЕДЖЕННЯ: Будь ласка, не використовуйте це, доки не прочитаєте документацію"
           }
         },
         "vi" : {
@@ -27620,6 +30164,12 @@
             "value" : "WARNING: USE WITH CAUTION!"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ADVARSEL: BRUK MED FORSIKTIGHET!"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -27672,6 +30222,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "UYARI: DİKKATLİ KULLANIN!"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "УВАГА: ВИКОРИСТОВУЙТЕ ОБЕРЕЖНО!"
           }
         },
         "vi" : {
@@ -27751,6 +30307,12 @@
             "value" : "これは何だ？"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hva er dette?"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -27803,6 +30365,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bu da ne?"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Що це?"
           }
         },
         "vi" : {
@@ -27881,6 +30449,12 @@
             "value" : "Yes"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ja"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -27933,6 +30507,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Evet"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Так"
           }
         },
         "vi" : {
@@ -28012,6 +30592,12 @@
             "value" : "はい、1時間"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ja, 1 time"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28064,6 +30650,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Evet, 1 saat"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Так, 1 година"
           }
         },
         "vi" : {
@@ -28143,6 +30735,12 @@
             "value" : "はい、5分"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ja, 5 minutter"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28195,6 +30793,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Evet, 5 dakika"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Так, 5 хвилин"
           }
         },
         "vi" : {
@@ -28274,6 +30878,12 @@
             "value" : "はい、15分"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ja, 15 minutter"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28326,6 +30936,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Evet, 15 dakika"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Так, 15 хвилин"
           }
         },
         "vi" : {
@@ -28405,6 +31021,12 @@
             "value" : "はい、30分"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ja, 30 minutter"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28457,6 +31079,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Evet, 30 dakika"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Так, 30 хвилин"
           }
         },
         "vi" : {
@@ -28536,6 +31164,12 @@
             "value" : "はい、ボーラス同期を無効にします"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ja, deaktiver bolussynkronisering"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28588,6 +31222,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Evet, bolus senkronizasyonunu devre dışı bırakın"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Так, вимкнути болюсну синхронізацію"
           }
         },
         "vi" : {
@@ -28667,6 +31307,12 @@
             "value" : "はい、サイレントトーンを無効にする"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ja, Deaktiver lydløse toner"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28719,6 +31365,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Evet, Sessiz tonları devre dışı bırak"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Так, Вимкнути беззвучні сигнали"
           }
         },
         "vi" : {
@@ -28798,6 +31450,12 @@
             "value" : "はい、サイレントトーンを有効にする"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ja, aktiver lydløse toner"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28850,6 +31508,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Evet, Sessiz tonları etkinleştir"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Так, увімкнути беззвучні сигнали"
           }
         },
         "vi" : {
@@ -28929,6 +31593,12 @@
             "value" : "はい、ボーラス同期を再度有効にしてください"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ja, aktiver bolussynkronisering på nytt"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28981,6 +31651,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Evet, bolus senkronizasyonunu yeniden etkinleştirin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Так, повторно ввімкнути болюсну синхронізацію"
           }
         },
         "vi" : {
@@ -29060,6 +31736,12 @@
             "value" : "はい、連続モードに切り替える"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ja, bytt til kontinuerlig modus"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29112,6 +31794,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Evet, Sürekli moda geç"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Так, перейти в безперервний режим"
           }
         },
         "vi" : {
@@ -29191,6 +31879,12 @@
             "value" : "はい、対話モードに切り替える"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ja, bytt til interaktiv modus"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29243,6 +31937,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Evet, Etkileşimli moda geç"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Так, перейти в інтерактивний режим"
           }
         },
         "vi" : {
@@ -29322,6 +32022,12 @@
             "value" : "はい、現在時刻に同期"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ja, Synkroniser til gjeldende tid"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29341,6 +32047,12 @@
           }
         },
         "pt_BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sim, sincronização com a hora atual"
+          }
+        },
+        "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Yes, Sync to Current Time"
@@ -29374,6 +32086,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Evet, Geçerli Saatle Senkronize Et"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Так, синхронізувати з поточним часом"
           }
         },
         "vi" : {
@@ -29453,6 +32171,12 @@
             "value" : "あなたの "
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Din"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29505,6 +32229,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Senin "
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ваша "
           }
         },
         "vi" : {
@@ -29584,6 +32314,12 @@
             "value" : "1日の基礎摂取量の上限に達しました。制限を増やすには、Danaの販売代理店にご連絡ください。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Din daglige basalgrense er nådd. Ta kontakt med Dana-distributøren din for å øke grensen"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29636,6 +32372,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Günlük bazal limitinize ulaşıldı. Limiti artırmak için lütfen Dana distribütörünüzle iletişime geçin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ваш добовий базальний ліміт досягнуто. Щоб збільшити ліміт, зверніться до свого дистриб’ютора Dana"
           }
         },
         "vi" : {
@@ -29715,6 +32457,12 @@
             "value" : "インスリンの1日あたりの摂取量が上限に達しました。限度額を増やすには、ダナ販売店にご連絡ください。"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Din daglige insulingrense er nådd. Kontakt Dana-distributøren din for å øke grensen"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29767,6 +32515,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Günlük insülin limitinize ulaşıldı. Limiti artırmak için lütfen Dana distribütörünüzle iletişime geçin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ваш добовий ліміт інсуліну досягнуто. Щоб збільшити ліміт, зверніться до свого дистриб’ютора Dana"
           }
         },
         "vi" : {
@@ -29846,6 +32600,12 @@
             "value" : "Your pump is disconnected longer than 5 minutes!"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pumpen din har vært frakoblet i mer enn 5 minutter!"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29898,6 +32658,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Your pump is disconnected longer than 5 minutes!"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ваша помпа відключена довше ніж на 5 хвилин!"
           }
         },
         "vi" : {
@@ -29977,6 +32743,12 @@
             "value" : "設定時間経過後もポンプは切断されたままです！"
           }
         },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pumpen din er fortsatt frakoblet etter den angitte perioden!"
+          }
+        },
         "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
@@ -30029,6 +32801,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ayarlanan süreden sonra pompanızın bağlantısı hala kesik!"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ваша помпа все ще відключена після встановленого періоду!"
           }
         },
         "vi" : {
