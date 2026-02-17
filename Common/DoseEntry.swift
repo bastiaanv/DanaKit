@@ -35,14 +35,13 @@ public extension DoseEntry {
         endDate: Date? = nil
     ) -> DoseEntry {
         if let endDate = endDate {
-            let duration = endDate.timeIntervalSince(startDate)
             return DoseEntry(
                 type: .tempBasal,
                 startDate: startDate,
                 endDate: endDate,
-                value: absoluteUnit * (duration / .hours(1)),
+                value: absoluteUnit,
                 unit: .unitsPerHour,
-                deliveredUnits: absoluteUnit * (duration / .hours(1)),
+                deliveredUnits: roundBasalRate(absoluteUnit * (duration / .hours(1))),
                 insulinType: insulinType,
                 automatic: true,
                 isMutable: false
@@ -80,5 +79,9 @@ public extension DoseEntry {
 
     static func suspend(suspendDate: Date = Date.now) -> DoseEntry {
         DoseEntry(suspendDate: suspendDate)
+    }
+    
+    private static func roundBasalRate(_ rate: Double) -> Double {
+        DanaKitPumpManager.onboardingSupportedBasalRates.last(where: { $0 <= rate }) ?? 0
     }
 }
