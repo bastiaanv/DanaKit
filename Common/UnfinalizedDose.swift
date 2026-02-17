@@ -44,7 +44,7 @@ public class UnfinalizedDose {
             endDate: expectedEndDate,
             value: value,
             unit: .units,
-            deliveredUnits: value,
+            deliveredUnits: nil,
             insulinType: insulinType,
             automatic: automatic,
             isMutable: true
