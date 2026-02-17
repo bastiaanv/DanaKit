@@ -11,6 +11,8 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
     var devices: [DanaPumpScan] = []
     var isBusy: Bool = false
 
+    var timoutCallback: Task<Void, Never>?
+
     let log = DanaLogger(category: "InteractiveBluetoothManager")
     var manager: CBCentralManager!
     let managerQueue = DispatchQueue(label: "com.DanaKit.bluetoothManagerQueue", qos: .unspecified)
@@ -34,29 +36,32 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
         self.manager = nil
     }
 
-    func ensureConnected(_ completion: @escaping (ConnectionResult) async -> Void, _: String = #function) {
+    func ensureConnected(_ completion: @escaping (ConnectionResult) -> Void, _: String = #function) {
         connectionCallback = { result in
-            Task {
-                self.isBusy = true
+            self.isBusy = true
+            self.timoutCallback?.cancel()
+            self.timoutCallback = nil
+
+            if case .timeout = result {
                 self.resetConnectionCompletion()
                 self.connectionCallback = nil
 
-                if case .success = result {
-                    do {
-                        self.log.info("Sending keep alive message")
+            } else if case .success = result {
+                self.resetConnectionCompletion()
+                self.connectionCallback = nil
 
-                        let keepAlivePacket = generatePacketGeneralKeepConnection()
-                        _ = try await self.writeMessage(keepAlivePacket)
-                    } catch {
-                        self.log.error("Failed to send Keep alive message: \(error.localizedDescription)")
-                    }
-
-                    await self.updateInitialState()
+                do {
+                    self.log.info("Sending keep alive message")
+                    _ = try self.writeMessage(generatePacketGeneralKeepConnection())
+                } catch {
+                    self.log.error("Failed to send Keep alive message: \(error.localizedDescription)")
                 }
 
-                await completion(result)
-                self.isBusy = false
+                self.updateInitialState()
             }
+
+            completion(result)
+            self.isBusy = false
         }
 
         // Device still has an active connection with pump and is probably busy with something
@@ -72,10 +77,10 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
             connectionCallback?(.success)
 
             // We stored the peripheral. We can quickly reconnect
-        } else if peripheral != nil {
+        } else if let peripheral = peripheral {
             startTimeout(seconds: TimeInterval.seconds(15))
 
-            connect(peripheral!) { result in
+            connect(peripheral) { result in
                 guard let connectionCallback = self.connectionCallback else {
                     // We've already hit the timeout function above
                     // Exit if we every hit this...
@@ -155,7 +160,7 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
     }
 
     private func startTimeout(seconds: TimeInterval) {
-        Task {
+        timoutCallback = Task {
             do {
                 try await Task.sleep(nanoseconds: UInt64(seconds) * 1_000_000_000)
                 guard let connectionCallback = self.connectionCallback else {
@@ -172,12 +177,12 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
         }
     }
 
-    func writeMessage(_ packet: DanaGeneratePacket) async throws -> (any DanaParsePacketProtocol) {
+    func writeMessage(_ packet: DanaGeneratePacket) throws -> (any DanaParsePacketProtocol) {
         guard let peripheralManager = self.peripheralManager else {
             throw NSError(domain: "No connected device", code: 0, userInfo: nil)
         }
 
-        return try await peripheralManager.writeMessage(packet)
+        return try peripheralManager.writeMessage(packet)
     }
 
     func disconnect(_ peripheral: CBPeripheral, force _: Bool) {

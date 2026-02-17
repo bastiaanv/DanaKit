@@ -42,9 +42,9 @@ protocol BluetoothManager: AnyObject, CBCentralManagerDelegate {
 
     var devices: [DanaPumpScan] { get set }
 
-    func writeMessage(_ packet: DanaGeneratePacket) async throws -> (any DanaParsePacketProtocol)
+    func writeMessage(_ packet: DanaGeneratePacket) throws -> (any DanaParsePacketProtocol)
     func disconnect(_ peripheral: CBPeripheral, force: Bool) -> Void
-    func ensureConnected(_ completion: @escaping (ConnectionResult) async -> Void, _ identifier: String) -> Void
+    func ensureConnected(_ completion: @escaping (ConnectionResult) -> Void, _ identifier: String) -> Void
 }
 
 extension BluetoothManager {
@@ -111,7 +111,7 @@ extension BluetoothManager {
         connectionCompletion = completion
     }
 
-    func ensureConnected(_ completion: @escaping (ConnectionResult) async -> Void, _ identifier: String = #function) {
+    func ensureConnected(_ completion: @escaping (ConnectionResult) -> Void, _ identifier: String = #function) {
         ensureConnected(completion, identifier)
     }
 
@@ -127,7 +127,7 @@ extension BluetoothManager {
         peripheralManager.finishV3Pairing(pairingKey, randomPairingKey)
     }
 
-    func updateInitialState() async {
+    func updateInitialState() {
         guard let pumpManagerDelegate = pumpManager else {
             log.error("No pumpManager available...")
             return
@@ -141,7 +141,7 @@ extension BluetoothManager {
         do {
             log.info("Sending getInitialScreenInformation")
             let initialScreenPacket = generatePacketGeneralGetInitialScreenInformation()
-            let resultInitialScreenInformation = try await writeMessage(initialScreenPacket)
+            let resultInitialScreenInformation = try writeMessage(initialScreenPacket)
 
             guard resultInitialScreenInformation.success else {
                 log.error("Failed to fetch Initial screen...")

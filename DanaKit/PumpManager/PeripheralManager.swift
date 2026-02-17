@@ -27,9 +27,8 @@ class PeripheralManager: NSObject {
     private let WRITE_CHAR_UUID = CBUUID(string: "FFF2")
     private var writeCharacteristic: CBCharacteristic?
 
-    private var writeQueue: (AsyncThrowingStream<any DanaParsePacketProtocol, Error>.Continuation)?
-    private var writeTimeoutTask: Task<Void, Never>?
-    private let writeSemaphore = DispatchSemaphore(value: 1)
+    private var writeQueue: DanaKitDispatchGroup?
+    private var writeResponse: (any DanaParsePacketProtocol)?
 
     private var historyLog: [HistoryItem] = []
 
@@ -54,14 +53,12 @@ class PeripheralManager: NSObject {
     }
 
     deinit {
-        self.writeTimeoutTask?.cancel()
-
-        if let stream = self.writeQueue {
-            stream.finish()
+        if let semaphore = self.writeQueue {
+            semaphore.leave()
         }
     }
 
-    func writeMessage(_ packet: DanaGeneratePacket) async throws -> (any DanaParsePacketProtocol) {
+    func writeMessage(_ packet: DanaGeneratePacket) throws -> (any DanaParsePacketProtocol) {
         guard writeQueue == nil else {
             throw NSError(domain: "A command is already running", code: 0, userInfo: nil)
         }
@@ -71,79 +68,49 @@ class PeripheralManager: NSObject {
             type: .send
         )
 
-        let stream = AsyncThrowingStream<any DanaParsePacketProtocol, Error> { continuation in
-            self.writeQueue = continuation
-            self.write(packet)
-        }
-
-        return try await firstValue(from: stream)
-    }
-
-    private func firstValue(from stream: AsyncThrowingStream<any DanaParsePacketProtocol, Error>) async throws
-        -> (any DanaParsePacketProtocol)
-    {
-        for try await value in stream {
-            return value
-        }
-        throw NSError(domain: "Got no response. Most likely an encryption issue", code: 0, userInfo: nil)
-    }
-
-    private func write(_ packet: DanaGeneratePacket) {
-        writeSemaphore.wait()
-
+        let writeQ = DanaKitDispatchGroup()
+        writeQ.enter()
+        writeQueue = writeQ
+        
         let command = (UInt16(packet.type ?? DanaPacketType.TYPE_RESPONSE) << 8) + UInt16(packet.opCode)
 
         // Make sure we have the correct state
-        if packet.opCode == CommandGeneralSetHistoryUploadMode, packet.data != nil {
-            pumpManager.state.isInFetchHistoryMode = packet.data![0] == 0x01
+        if packet.opCode == CommandGeneralSetHistoryUploadMode, let data = packet.data {
+            pumpManager.state.isInFetchHistoryMode = data[0] == 0x01
         } else {
             pumpManager.state.isInFetchHistoryMode = false
         }
 
         var data = DanaKitEncryption.encodePacket(operationCode: packet.opCode, buffer: packet.data, deviceName: deviceName)
-        log
-            .debug(
-                "Sending opCode: \(packet.opCode), encrypted data: \(data.hexString()), randomSyncKey: \(DanaKitEncryption.randomSyncKey)"
-            )
+        log.debug("Sending opCode: \(packet.opCode), encrypted data: \(data.hexString())")
 
         if DanaKitEncryption.enhancedEncryption != EncryptionType.DEFAULT.rawValue {
             data = DanaKitEncryption.encodeSecondLevel(data: data)
             log.debug("Second level encrypted data: \(data.hexString())")
         }
-
-        // Now schedule a 6 sec timeout (or 21 when in fetchHistoryMode) for the pump to send its message back
-        // This timeout will be cancelled by `processMessage` once it received the message
-        // If this timeout expired, disconnect from the pump and prompt an error...
+        
         let isHistoryPacket = self.isHistoryPacket(opCode: command)
+        let timeout = !isHistoryPacket ? TimeInterval.seconds(4) : TimeInterval.seconds(21)
+
         while !data.isEmpty {
             let end = min(20, data.count)
             let message = data.subdata(in: 0 ..< end)
 
-            writeQ(message)
+            writeValue(message)
             data = data.subdata(in: end ..< data.count)
         }
 
-        writeTimeoutTask = Task {
-            do {
-                try await Task.sleep(nanoseconds: UInt64(!isHistoryPacket ? .seconds(4) : .seconds(21)) * 1_000_000_000)
-                guard let stream = self.writeQueue else {
-                    // We did what we must, so exist and be happy :)
-                    return
-                }
+        // Wait for response or timeout timer...
+        let _ = writeQ.wait(timeout: .now() + timeout)
 
-                // We hit a timeout
-                // This means the pump received the message but could decrypt it
-                // We need to reconnect in order to fix the encryption keys
-                self.bluetoothManager.manager.cancelPeripheralConnection(self.connectedDevice)
-                stream.finish()
+        writeQueue = nil
 
-                self.writeQueue = nil
-                self.writeTimeoutTask = nil
-                self.writeSemaphore.signal()
-            } catch {
-                // Task was cancelled because message has been received
-            }
+        guard let response = writeResponse else {
+            throw NSError(domain: "Timeout has been hit...", code: 0, userInfo: nil)
         }
+
+        writeResponse = nil
+        return response
     }
 
     private func connectionFailure(_ error: any Error) {
@@ -225,7 +192,7 @@ extension PeripheralManager: CBPeripheralDelegate {
         parseReceivedValue(data)
     }
 
-    private func writeQ(_ data: Data) {
+    private func writeValue(_ data: Data) {
         guard let writeCharacteristic = writeCharacteristic else {
             log.error("No write characteristic available. Device might be disconnected...")
             return
@@ -247,7 +214,7 @@ extension PeripheralManager {
         )
 
         log.debug("Sending Initial encryption request. Data: \(data.hexString())")
-        writeQ(data)
+        writeValue(data)
     }
 
     private func sendTimeInfo() {
@@ -258,7 +225,7 @@ extension PeripheralManager {
         )
 
         log.debug("Sending normal time information. Data: \(data.hexString())")
-        writeQ(data)
+        writeValue(data)
     }
 
     private func sendV3PairingInformation(_ requestNewPairing: UInt8) {
@@ -269,7 +236,7 @@ extension PeripheralManager {
         )
 
         log.debug("Sending RSv3 time information. Data: \(data.hexString())")
-        writeQ(data)
+        writeValue(data)
     }
 
     // 0x00 Start encryption, 0x01 Request pairing
@@ -286,12 +253,11 @@ extension PeripheralManager {
         }
 
         let randomSyncKey = pumpManager.state.randomSyncKey
-        log
-            .debug(
-                "Setting encryption keys. Pairing key: \(pairingKey.hexString()), random pairing key: \(randomPairingKey.hexString()), random sync key: \(randomSyncKey)"
-            )
-        DanaKitEncryption.setPairingKeys(pairingKey: pairingKey, randomPairingKey: randomPairingKey, randomSyncKey: randomSyncKey)
+        let message =
+            "Setting encryption keys. Pairing key: \(pairingKey.hexString()), random pairing key: \(randomPairingKey.hexString()), random sync key: \(randomSyncKey)"
+        log.debug(message)
 
+        DanaKitEncryption.setPairingKeys(pairingKey: pairingKey, randomPairingKey: randomPairingKey, randomSyncKey: randomSyncKey)
         sendV3PairingInformation(0)
     }
 
@@ -303,7 +269,7 @@ extension PeripheralManager {
         )
 
         log.debug("Sending pairing request. Data: \(data.hexString())")
-        writeQ(data)
+        writeValue(data)
     }
 
     private func sendEasyMenuCheck() {
@@ -314,7 +280,7 @@ extension PeripheralManager {
         )
 
         log.debug("Sending easy menu check. Data: \(data.hexString())")
-        writeQ(data)
+        writeValue(data)
     }
 
     private func sendBLE5PairingInformation() {
@@ -325,7 +291,7 @@ extension PeripheralManager {
         )
 
         log.debug("Sending BLE5 time information. Data: \(Data([0, 0, 0, 0]).hexString())")
-        writeQ(data)
+        writeValue(data)
     }
 
     private func sendPassKeyCheck(_ pairingKey: Data) {
@@ -336,7 +302,7 @@ extension PeripheralManager {
         )
 
         log.debug("Sending Passkey check. Data: \(data.hexString())")
-        writeQ(data)
+        writeValue(data)
     }
 
     /// Used after entering PIN codes (only for DanaRS v3)
@@ -374,8 +340,9 @@ extension PeripheralManager {
     private func processPairingRequest2(_ data: Data) {
         sendTimeInfo()
 
+        log.info("processPairingRequest2 -> pairingKey: \(data.subdata(in: 2 ..< 4).hexString())")
         let pairingKey = data.subdata(in: 2 ..< 4)
-        DanaKitEncryption.setPairingKeys(pairingKey: pairingKey, randomPairingKey: Data(), randomSyncKey: 0)
+        DanaKitEncryption.setPairingKeys(pairingKey: pairingKey, randomPairingKey: Data(), randomSyncKey: nil)
     }
 
     private func processConnectResponse(_ data: Data) {
@@ -495,14 +462,20 @@ extension PeripheralManager {
         pumpManager.state.isConnected = true
         log.info("Connection and encryption successful!")
 
+        guard let completion = self.completion else {
+            log.error("No completion available...")
+            return
+        }
+
         DispatchQueue.main.async {
-            self.completion?(.success)
+            completion(.success)
             self.completion = nil
         }
     }
 
     private func promptPincode(_ errorMessage: String?) {
         guard let completion = self.completion else {
+            log.error("No completion callback...")
             return
         }
 
@@ -669,26 +642,21 @@ extension PeripheralManager {
         }
 
         // Message received and dequeueing timeout
-        guard let stream = writeQueue else {
+        guard let semaphore = writeQueue else {
             log.error("No stream found to send this message back...")
-            writeSemaphore.signal()
             return
         }
 
         if let data = message.data as? HistoryItem {
             if data.code == HistoryCode.RECORD_TYPE_DONE_UPLOAD {
-                stream.yield(DanaParsePacket<[HistoryItem]>(
+                writeResponse = DanaParsePacket<[HistoryItem]>(
                     success: true,
                     rawData: Data([]),
                     data: historyLog.map({ $0 })
-                ))
-                stream.finish()
+                )
 
-                writeQueue = nil
-                writeTimeoutTask?.cancel()
-                writeTimeoutTask = nil
                 historyLog = []
-                writeSemaphore.signal()
+                semaphore.leave()
             } else {
                 historyLog.append(data)
             }
@@ -696,13 +664,8 @@ extension PeripheralManager {
             return
         }
 
-        stream.yield(message)
-        stream.finish()
-
-        writeQueue = nil
-        writeTimeoutTask?.cancel()
-        writeTimeoutTask = nil
-        writeSemaphore.signal()
+        writeResponse = message
+        semaphore.leave()
     }
 
     private func isHistoryPacket(opCode: UInt16) -> Bool {

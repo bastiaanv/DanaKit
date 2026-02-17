@@ -5454,7 +5454,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kontrola reťaze"
+            "value" : "Skontrolujte piest"
           }
         },
         "sv" : {
@@ -15507,7 +15507,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nočná synchronizácia času pumpy"
+            "value" : "Synchronizovať čas pumpy v noci"
           }
         },
         "sv" : {
@@ -16079,7 +16079,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nie, len sa odpojte"
+            "value" : "Nie, stačí odpojiť"
           }
         },
         "sv" : {
@@ -16222,7 +16222,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nie, nechajte tak, ako je"
+            "value" : "Nie, nechať tak, ako je"
           }
         },
         "sv" : {
@@ -16365,7 +16365,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nie, nechajte pumpu tak, ako je"
+            "value" : "Nie, nechať pumpu tak, ako je"
           }
         },
         "sv" : {
@@ -21711,7 +21711,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Plnenie zásobníka/kanyly"
+            "value" : "Naplnenie zásobníka/kanyly"
           }
         },
         "sv" : {
@@ -26045,7 +26045,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zastaviť dočasnú dávku bazálu"
+            "value" : "Zastaviť dočasnú bazálnu dávku"
           }
         },
         "sv" : {
@@ -29065,7 +29065,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Typ náplne"
+            "value" : "Typ plnenia"
           }
         },
         "sv" : {
@@ -31209,7 +31209,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Áno, vypnite synchronizáciu bolusu"
+            "value" : "Áno, vypnúť synchronizáciu bolusu"
           }
         },
         "sv" : {
@@ -31352,7 +31352,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Áno, Zakázať tiché tóny"
+            "value" : "Áno, zakázať tiché tóny"
           }
         },
         "sv" : {
@@ -31495,7 +31495,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Áno, Povolenie tichých tónov"
+            "value" : "Áno, povoliť tiché tóny"
           }
         },
         "sv" : {
@@ -31638,7 +31638,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Áno, znovu zapnite synchronizáciu bolusu"
+            "value" : "Áno, znovu zapnúť synchronizáciu bolusu"
           }
         },
         "sv" : {
@@ -31781,7 +31781,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Áno, prepnite na nepretržitý režim"
+            "value" : "Áno, prepnúť na nepretržitý režim"
           }
         },
         "sv" : {
@@ -31924,7 +31924,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Áno, prepnite na interaktívny režim"
+            "value" : "Áno, prepnúť na interaktívny režim"
           }
         },
         "sv" : {
