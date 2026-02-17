@@ -39,7 +39,7 @@ public extension DoseEntry {
                 type: .tempBasal,
                 startDate: startDate,
                 endDate: endDate,
-                value: absoluteUnit,
+                value: absoluteUnit * (duration / .hours(1)),
                 unit: .unitsPerHour,
                 insulinType: insulinType,
                 isMutable: false
