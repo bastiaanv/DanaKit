@@ -35,6 +35,7 @@ public extension DoseEntry {
         endDate: Date? = nil
     ) -> DoseEntry {
         if let endDate = endDate {
+            let duration = endDate.timeIntervalSince(startDate)
             return DoseEntry(
                 type: .tempBasal,
                 startDate: startDate,
