@@ -9,10 +9,8 @@ struct DanaIExplainationView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            title
-
-            ScrollView {
-                VStack(alignment: .leading) {
+            List {
+                Section {
                     Text(String(
                         format: LocalizedString(
                             "After setting up the insulin type and bolus speed, you will see all the found Dana pumps. Select the pump you want to link with %1$@.",
@@ -38,16 +36,16 @@ struct DanaIExplainationView: View {
                         ),
                         appName
                     ))
-
-                    Spacer()
                 }
-                .padding(.horizontal)
             }
+
+            Spacer()
 
             ContinueButton(action: nextAction)
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarHidden(false)
+        .navigationTitle(LocalizedString("Setting up Dana-i", comment: "Title for dana-i explaination"))
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(LocalizedString("Cancel", comment: "Cancel button title"), action: {
@@ -55,15 +53,6 @@ struct DanaIExplainationView: View {
                 })
             }
         }
-    }
-
-    @ViewBuilder private var title: some View {
-        Text(LocalizedString("Setting up Dana-i", comment: "Title for dana-i explaination"))
-            .font(.title)
-            .bold()
-            .padding(.horizontal)
-        Divider()
-            .padding(.bottom)
     }
 }
 

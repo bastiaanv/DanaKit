@@ -9,27 +9,32 @@ struct DanaKitScanView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(LocalizedString("Found Dana-i/RS pumps", comment: "Title for DanaKitScanView"))
-                .font(.title)
-                .bold()
-                .padding(.horizontal)
-
-            HStack(alignment: .center, spacing: 0) {
-                Text(
-                    !$viewModel.isConnecting.wrappedValue ?
-                        LocalizedString("Scanning", comment: "Scanning text") :
-                        LocalizedString("Connecting", comment: "Connecting text")
-                )
-                Spacer()
-                ActivityIndicator(isAnimating: .constant(true), style: .medium)
+            List {
+                Section(header: SectionHeader(label: !$viewModel.isConnecting.wrappedValue ?
+                                              LocalizedString("Scanning", comment: "Scanning text") :
+                                                LocalizedString("Connecting", comment: "Connecting text"))) {
+                    
+                    ForEach($viewModel.scannedDevices) { $result in
+                        Button(action: { viewModel.connect($result.wrappedValue) }) {
+                            HStack {
+                                Text($result.name.wrappedValue)
+                                Spacer()
+                                if !$viewModel.isConnecting.wrappedValue {
+                                    NavigationLink.empty
+                                } else if $result.name.wrappedValue == viewModel.connectingTo {
+                                    ActivityIndicator(isAnimating: .constant(true), style: .medium)
+                                }
+                            }
+                            .padding(.horizontal)
+                        }
+                        .disabled($viewModel.isConnecting.wrappedValue)
+                        .buttonStyle(.plain)
+                    }
+                }
             }
-            .padding(.horizontal)
-
-            Divider()
-            content
         }
-
         .navigationBarHidden(false)
+        .navigationTitle(LocalizedString("Pairing", comment: "Title for DanaKitScanView"))
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(LocalizedString("Cancel", comment: "Cancel button title"), action: {
@@ -70,26 +75,6 @@ struct DanaKitScanView: View {
                 Text(message)
             }
         }
-    }
-
-    @ViewBuilder private var content: some View {
-        List($viewModel.scannedDevices) { $result in
-            Button(action: { viewModel.connect($result.wrappedValue) }) {
-                HStack {
-                    Text($result.name.wrappedValue)
-                    Spacer()
-                    if !$viewModel.isConnecting.wrappedValue {
-                        NavigationLink.empty
-                    } else if $result.name.wrappedValue == viewModel.connectingTo {
-                        ActivityIndicator(isAnimating: .constant(true), style: .medium)
-                    }
-                }
-                .padding(.horizontal)
-            }
-            .disabled($viewModel.isConnecting.wrappedValue)
-            .buttonStyle(.plain)
-        }
-        .listStyle(.plain)
     }
 }
 

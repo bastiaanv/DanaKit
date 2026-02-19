@@ -7,37 +7,57 @@ struct DanaKitSettingsPumpSpeed: View {
     let speedsAllowed = BolusSpeed.all()
     @State var value: Int
 
-    private var currentValue: Binding<Int> {
-        Binding(
-            get: { value },
-            set: { newValue in
-                self.value = newValue
-            }
-        )
-    }
-
     var didChange: ((BolusSpeed) -> Void)?
 
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
-                title
-                Text(LocalizedString(
-                    "The Dana pumps support different delivery speeds. You can set it up here",
-                    comment: "Dana delivery speed body"
-                )).fixedSize(horizontal: false, vertical: true)
-
-                Divider()
-                Spacer()
-                ResizeablePicker(
-                    selection: currentValue,
-                    data: self.speedsAllowed,
-                    formatter: { BolusSpeed.init(rawValue: UInt8($0))!.format() }
-                )
-
-                Spacer()
+                List {
+                    Section(header: SectionHeader(label: LocalizedString(
+                        "Select the bolus delivery speed",
+                        comment: "Dana delivery speed body"
+                    ))) {
+                        CheckmarkListItem(
+                            title: Text(BolusSpeed.speed12.format()),
+                            description: Text(""),
+                            isSelected: Binding(
+                                get: { self.value == 0 },
+                                set: { isSelected in
+                                    if isSelected {
+                                        self.value = 0
+                                    }
+                                }
+                            )
+                        )
+                        CheckmarkListItem(
+                            title: Text(BolusSpeed.speed30.format()),
+                            description: Text(""),
+                            isSelected: Binding(
+                                get: { self.value == 1 },
+                                set: { isSelected in
+                                    if isSelected {
+                                        self.value = 1
+                                    }
+                                }
+                            )
+                        )
+                        CheckmarkListItem(
+                            title: Text(BolusSpeed.speed60.format()),
+                            description: Text(""),
+                            isSelected: Binding(
+                                get: { self.value == 2 },
+                                set: { isSelected in
+                                    if isSelected {
+                                        self.value = 2
+                                    }
+                                }
+                            )
+                        )
+                    }
+                }
             }
-            .padding(.horizontal)
+            
+            Spacer()
 
             ContinueButton(action: {
                 didChange?(BolusSpeed(rawValue: UInt8(value))!)
@@ -48,12 +68,7 @@ struct DanaKitSettingsPumpSpeed: View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarHidden(false)
-    }
-
-    @ViewBuilder private var title: some View {
-        Text(LocalizedString("Delivery speed", comment: "Title for delivery speed"))
-            .font(.title)
-            .bold()
+        .navigationTitle(LocalizedString("Delivery speed", comment: "Title for delivery speed"))
     }
 }
 

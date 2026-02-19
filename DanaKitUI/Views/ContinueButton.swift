@@ -21,10 +21,6 @@ struct ContinueButton: View {
             .disabled(loading.wrappedValue || disabled.wrappedValue)
         }
         .padding(.vertical, 10)
-        .background(
-            Color(.secondarySystemGroupedBackground)
-                .shadow(radius: 5)
-        )
     }
 }
 

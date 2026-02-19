@@ -11,18 +11,53 @@ struct DanaKitPumpSpeed: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            title
-
             VStack(alignment: .leading) {
-                Spacer()
-                ResizeablePicker(
-                    selection: $speedDefault,
-                    data: self.speedsAllowed,
-                    formatter: { BolusSpeed.init(rawValue: UInt8($0))!.format() }
-                )
-                Spacer()
+                List {
+                    Section(header: SectionHeader(label: LocalizedString(
+                        "Select the bolus delivery speed",
+                        comment: "Dana delivery speed body"
+                    ))) {
+                        CheckmarkListItem(
+                            title: Text(BolusSpeed.speed12.format()),
+                            description: Text(""),
+                            isSelected: Binding(
+                                get: { self.speedDefault == 0 },
+                                set: { isSelected in
+                                    if isSelected {
+                                        self.speedDefault = 0
+                                    }
+                                }
+                            )
+                        )
+                        CheckmarkListItem(
+                            title: Text(BolusSpeed.speed30.format()),
+                            description: Text(""),
+                            isSelected: Binding(
+                                get: { self.speedDefault == 1 },
+                                set: { isSelected in
+                                    if isSelected {
+                                        self.speedDefault = 1
+                                    }
+                                }
+                            )
+                        )
+                        CheckmarkListItem(
+                            title: Text(BolusSpeed.speed60.format()),
+                            description: Text(""),
+                            isSelected: Binding(
+                                get: { self.speedDefault == 2 },
+                                set: { isSelected in
+                                    if isSelected {
+                                        self.speedDefault = 2
+                                    }
+                                }
+                            )
+                        )
+                    }
+                }
             }
-            .padding(.horizontal)
+            
+            Spacer()
 
             ContinueButton(action: {
                 guard let speed = BolusSpeed(rawValue: UInt8($speedDefault.wrappedValue)) else {
@@ -34,6 +69,7 @@ struct DanaKitPumpSpeed: View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarHidden(false)
+        .navigationTitle(LocalizedString("Delivery speed", comment: "Title for delivery speed"))
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(LocalizedString("Cancel", comment: "Cancel button title"), action: {
@@ -41,21 +77,6 @@ struct DanaKitPumpSpeed: View {
                 })
             }
         }
-    }
-
-    @ViewBuilder private var title: some View {
-        Text(LocalizedString("Delivery speed", comment: "Title for delivery speed"))
-            .font(.title)
-            .bold()
-            .padding(.horizontal)
-        Text(LocalizedString(
-            "The Dana pumps support different delivery speeds. You can set it up here, but also in the settings menu",
-            comment: "Dana delivery speed body"
-        ))
-            .fixedSize(horizontal: false, vertical: true)
-            .padding(.horizontal)
-
-        Divider()
     }
 }
 

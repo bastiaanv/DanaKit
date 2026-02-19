@@ -17,11 +17,13 @@ struct InsulinTypeConfirmation: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            title
-
-            ScrollView {
-                InsulinTypeChooser(insulinType: $insulinType, supportedInsulinTypes: supportedInsulinTypes)
-                    .padding(.horizontal)
+            List {
+                Section(header: SectionHeader(label: LocalizedString(
+                    "Select the type of insulin that you will be using in this pump",
+                    comment: "Title text for insulin type confirmation page"
+                ))) {
+                    InsulinTypeChooser(insulinType: $insulinType, supportedInsulinTypes: supportedInsulinTypes)
+                }
             }
 
             Spacer()
@@ -35,13 +37,7 @@ struct InsulinTypeConfirmation: View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarHidden(false)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(LocalizedString("Cancel", comment: "Cancel button title"), action: {
-                    self.dismiss()
-                })
-            }
-        }
+        .navigationTitle(LocalizedString("Insulin type", comment: "Title for insulin type"))
     }
 
     @ViewBuilder private var title: some View {

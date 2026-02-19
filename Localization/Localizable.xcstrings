@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
     " is ready to be used!" : {
       "comment" : "Dana setup complete p2",
       "localizations" : {
@@ -2397,6 +2400,7 @@
       }
     },
     "Are you sure you want to bolus 5E?" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -2527,6 +2531,7 @@
       }
     },
     "Are you sure you want to set the temp basal to 200% for 1 hour?" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -3837,6 +3842,7 @@
     },
     "Before starting with the pairing process, it is recommended to check, and if needed update, the pump password. You can do this by going to the pump settings -> user settings -> password. The default password is 1234, if this is your password, please consider changing it" : {
       "comment" : "check password text for danars v1",
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -5545,6 +5551,18 @@
         }
       }
     },
+    "Choose your Dana pump" : {
+      "comment" : "Onboarding subheader",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose your Dana pump"
+          }
+        }
+      }
+    },
     "Configuration" : {
       "comment" : "The title of the configuration section in DanaKit settings",
       "localizations" : {
@@ -5672,136 +5690,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "配置"
-          }
-        }
-      }
-    },
-    "Connect" : {
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connect"
-          }
-        },
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connect"
-          }
-        },
-        "da" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connect"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connect"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connect"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connect"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connect"
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connect"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connect"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connect"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connect"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connect"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connect"
-          }
-        },
-        "pt_BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connect"
-          }
-        },
-        "ro" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connect"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connect"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connect"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connect"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connect"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connect"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connect"
           }
         }
       }
@@ -6461,137 +6349,6 @@
         }
       }
     },
-    "Dana-i/RS Setup" : {
-      "comment" : "Title for DanaKitSetupView",
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "إعداد Dana-i/RS"
-          }
-        },
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nastavení systému Dana-i/RS"
-          }
-        },
-        "da" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Opsætning af Dana-i/RS"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dana-i/RS-Einrichtung"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Configuración de Dana-i/RS"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dana-i/RS-asetukset"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Configuration Dana-i/RS"
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dana-i/RS Setup"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Configurazione di Dana-i/RS"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dana-i/RSセットアップ"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dana-i/RS Setup"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dana-i/RS-instelling"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Konfiguracja Dana-i/RS"
-          }
-        },
-        "pt_BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Configuração de Dana-i/RS"
-          }
-        },
-        "ro" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Configurarea Dana-i/RS"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Настройка Dana-i/RS"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nastavenie Dana-i/RS"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dana-i/RS-inställning"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dana-i/RS Kurulumu"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dana-i/RS Setup"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dana-i/RS 设置"
-          }
-        }
-      }
-    },
     "Dana-RS v3 found!" : {
       "comment" : "Dana-RS v3 found",
       "localizations" : {
@@ -6719,137 +6476,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "发现 Dana-RS v3！"
-          }
-        }
-      }
-    },
-    "DanaRS-v1" : {
-      "comment" : "danaRS v1 option text for DanaKitSetupView",
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DanaRS-v1"
-          }
-        },
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DanaRS-v1"
-          }
-        },
-        "da" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DanaRS-v1"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DanaRS-v1"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DanaRS-v1"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DanaRS-v1"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DanaRS-v1"
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DanaRS-v1"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DanaRS-v1"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ダナRS-v1"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DanaRS-v1"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DanaRS-v1"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DanaRS-v1"
-          }
-        },
-        "pt_BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DanaRS-v1"
-          }
-        },
-        "ro" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DanaRS-v1"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DanaRS-v1"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DanaRS-v1"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DanaRS-v1"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DanaRS-v1"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DanaRS-v1"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DanaRS-v1"
           }
         }
       }
@@ -7119,266 +6745,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "天数"
-          }
-        }
-      }
-    },
-    "DEBUG: Bolus action" : {
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Bolus action"
-          }
-        },
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Bolus action"
-          }
-        },
-        "da" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Bolus action"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Bolus action"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Bolus action"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Bolus action"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Bolus action"
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Bolus action"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Bolus action"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Bolus action"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Bolus action"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Bolus action"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Bolus action"
-          }
-        },
-        "pt_BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Bolus action"
-          }
-        },
-        "ro" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Bolus action"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Bolus action"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Akcia bolusu"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Bolus action"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Bolus action"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Bolus action"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Bolus action"
-          }
-        }
-      }
-    },
-    "DEBUG: Temp basal action" : {
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Temp basal action"
-          }
-        },
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Temp basal action"
-          }
-        },
-        "da" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Temp basal action"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Temp basal action"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Temp basal action"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Temp basal action"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Temp basal action"
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Temp basal action"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Temp basal action"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Temp basal action"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Temp basal action"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Temp basal action"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Temp basal action"
-          }
-        },
-        "pt_BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Temp basal action"
-          }
-        },
-        "ro" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Temp basal action"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Temp basal action"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Akcia dočasného bazálu"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Temp basal action"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Temp basal action"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Temp basal action"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DEBUG: Temp basal action"
           }
         }
       }
@@ -7776,136 +7142,6 @@
         }
       }
     },
-    "Device found!" : {
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Device found!"
-          }
-        },
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Device found!"
-          }
-        },
-        "da" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Device found!"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Device found!"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Device found!"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Device found!"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Device found!"
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Device found!"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Device found!"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Device found!"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Device found!"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Device found!"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Device found!"
-          }
-        },
-        "pt_BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Device found!"
-          }
-        },
-        "ro" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Device found!"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Device found!"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zariadenie nájdené!"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Device found!"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Device found!"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Device found!"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Device found!"
-          }
-        }
-      }
-    },
     "Disable bolus syncing?" : {
       "comment" : "Title for bolus syncing disable action sheet",
       "extractionState" : "manual",
@@ -8040,136 +7276,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "禁用栓剂同步？"
-          }
-        }
-      }
-    },
-    "Disconnect" : {
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disconnect"
-          }
-        },
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disconnect"
-          }
-        },
-        "da" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disconnect"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disconnect"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disconnect"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disconnect"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disconnect"
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disconnect"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disconnect"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disconnect"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disconnect"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disconnect"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disconnect"
-          }
-        },
-        "pt_BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disconnect"
-          }
-        },
-        "ro" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disconnect"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disconnect"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Odpojiť"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disconnect"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disconnect"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disconnect"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disconnect"
           }
         }
       }
@@ -8563,136 +7669,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "断开..."
-          }
-        }
-      }
-    },
-    "Do bolus" : {
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do bolus"
-          }
-        },
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do bolus"
-          }
-        },
-        "da" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do bolus"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do bolus"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do bolus"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do bolus"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do bolus"
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do bolus"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do bolus"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do bolus"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do bolus"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do bolus"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do bolus"
-          }
-        },
-        "pt_BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do bolus"
-          }
-        },
-        "ro" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do bolus"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do bolus"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Podaj bolus"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do bolus"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do bolus"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do bolus"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Do bolus"
           }
         }
       }
@@ -9091,6 +8067,7 @@
     },
     "During the pairing process, your DanaRS v1 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, %1$@ is ready to communicate with your DanaRS v1" : {
       "comment" : "Subtext for danars v1 (1: appName)",
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -10022,6 +8999,7 @@
       }
     },
     "Error while starting scanning for devices..." : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -11608,6 +10586,7 @@
     },
     "Fill in password" : {
       "comment" : "password placeholder danars v1",
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -12001,6 +10980,7 @@
     },
     "Found Dana-i/RS pumps" : {
       "comment" : "Title for DanaKitScanView",
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -12922,6 +11902,9 @@
         }
       }
     },
+    "Insulin type" : {
+      "comment" : "Title for insulin type"
+    },
     "Insulin Type" : {
       "comment" : "Text for confidence reminders navigation link",
       "localizations" : {
@@ -12947,6 +11930,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Insulin Typ"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Insulin Type"
           }
         },
         "es" : {
@@ -14246,136 +13235,6 @@
         }
       }
     },
-    "No" : {
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No"
-          }
-        },
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No"
-          }
-        },
-        "da" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No"
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No"
-          }
-        },
-        "pt_BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No"
-          }
-        },
-        "ro" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nie"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No"
-          }
-        }
-      }
-    },
     "No Insulin" : {
       "comment" : "Status highlight that a pump is out of insulin.",
       "localizations" : {
@@ -15040,6 +13899,7 @@
     },
     "NOTE: The DanaRS v1 is not supported (yet). If you have a DanaRS v1 pump available for testing, please contact Bastiaan Verhaar!" : {
       "comment" : "advertise contact DanaRS v1",
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -15562,138 +14422,6 @@
         }
       }
     },
-    "OK" : {
-      "comment" : "Ok",
-      "extractionState" : "stale",
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "حسناً"
-          }
-        },
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
-          }
-        },
-        "da" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
-          }
-        },
-        "pt_BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
-          }
-        },
-        "ro" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tamam"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "好的"
-          }
-        }
-      }
-    },
     "Okay" : {
       "comment" : "Ok\nlabel Okay",
       "localizations" : {
@@ -16100,8 +14828,20 @@
         }
       }
     },
+    "Pairing" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pairing"
+          }
+        }
+      }
+    },
     "Password DanaRS v1" : {
       "comment" : "Title for danars v1 password",
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -20328,6 +19068,7 @@
       }
     },
     "Scan" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -21112,143 +19853,8 @@
         }
       }
     },
-    "Select insulin Type" : {
-      "comment" : "Title for insulin type",
-      "extractionState" : "manual",
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "اختر نوع الأنسولين"
-          }
-        },
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vyberte typ inzulínu"
-          }
-        },
-        "da" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vælg insulintype"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Insulintyp auswählen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select insulin Type"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Seleccione el tipo de insulina"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Valitse insuliinityyppi"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sélectionner le type d'insuline"
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select insulin Type"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Selezionare il tipo di insulina"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "インスリンタイプを選択"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select insulin Type"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Selecteer type insuline"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wybierz typ insuliny"
-          }
-        },
-        "pt_BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Selecione o tipo de insulina"
-          }
-        },
-        "ro" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Selectați tipul de insulină"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Выберите тип инсулина"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vyberte typ inzulínu"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Välj insulintyp"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "İnsülin Tipini Seçin"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select insulin Type"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "选择胰岛素类型"
-          }
-        }
-      }
+    "Select the bolus delivery speed" : {
+      "comment" : "Dana delivery speed body"
     },
     "Select the type of insulin that you will be using in this pump" : {
       "comment" : "Title text for insulin type confirmation page",
@@ -21514,6 +20120,7 @@
     },
     "Select your pump" : {
       "comment" : "Subtitle for DanaKitSetupView",
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -22183,6 +20790,7 @@
     },
     "Setting up DanaRS v1" : {
       "comment" : "Title for danars v1 explaination",
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -23629,136 +22237,6 @@
         }
       }
     },
-    "Stop bolus" : {
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop bolus"
-          }
-        },
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop bolus"
-          }
-        },
-        "da" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop bolus"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop bolus"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop bolus"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop bolus"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop bolus"
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop bolus"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop bolus"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop bolus"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop bolus"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop bolus"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop bolus"
-          }
-        },
-        "pt_BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop bolus"
-          }
-        },
-        "ro" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop bolus"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop bolus"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zastaviť bolus"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop bolus"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop bolus"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop bolus"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop bolus"
-          }
-        }
-      }
-    },
     "Stop temp basal" : {
       "comment" : "Dana settings stop temp basal",
       "localizations" : {
@@ -24283,136 +22761,6 @@
         }
       }
     },
-    "temp basal" : {
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "temp basal"
-          }
-        },
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "temp basal"
-          }
-        },
-        "da" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "temp basal"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "temp basal"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "temp basal"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "temp basal"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "temp basal"
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "temp basal"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "temp basal"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "temp basal"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "temp basal"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "temp basal"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "temp basal"
-          }
-        },
-        "pt_BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "temp basal"
-          }
-        },
-        "ro" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "temp basal"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "temp basal"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dočasný bazál"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "temp basal"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "temp basal"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "temp basal"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "temp basal"
-          }
-        }
-      }
-    },
     "Temp Basal" : {
       "comment" : "Pump Event title for UnfinalizedDose with doseType of .tempBasal",
       "localizations" : {
@@ -24544,264 +22892,26 @@
         }
       }
     },
-    "The Dana pumps support different delivery speeds. You can set it up here" : {
-      "comment" : "Dana delivery speed body",
+    "The Dana-I insulin pump was first release in 2020 by manufacturer Sooil and is the latest in the series" : {
+      "comment" : "dana-i description",
+      "extractionState" : "manual",
       "localizations" : {
-        "ar" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "تدعم مضخات دانا سرعات توصيل مختلفة. يمكنك إعدادها هنا"
-          }
-        },
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Čerpadla Dana podporují různé rychlosti dodávky. Nastavit je můžete zde"
-          }
-        },
-        "da" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dana-pumperne understøtter forskellige leveringshastigheder. Du kan sætte det op her"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Die Dana-Pumpen unterstützen unterschiedliche Fördergeschwindigkeiten. Sie können sie hier einrichten"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Las bombas Dana admiten diferentes velocidades de suministro. Puede configurarlo aquí"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dana-pumput tukevat eri toimitusnopeuksia. Voit määrittää sen täältä"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Les pompes Dana prennent en charge différentes vitesses de distribution. Vous pouvez les configurer ici"
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The Dana pumps support different delivery speeds. You can set it up here"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le pompe Dana supportano diverse velocità di erogazione. È possibile impostarle qui"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Danaポンプは、異なる吐出速度に対応しています。ここで設定できる"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The Dana pumps support different delivery speeds. You can set it up here"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "De Dana-pompen ondersteunen verschillende toedieningssnelheden. Je kunt het hier instellen"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pompy Dana obsługują różne prędkości podawania. Można je skonfigurować tutaj"
-          }
-        },
-        "pt_BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "As bombas Dana suportam diferentes velocidades de entrega. Você pode configurá-la aqui"
-          }
-        },
-        "ro" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pompele Dana suportă diferite viteze de livrare. O puteți configura aici"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Насосы Dana поддерживают разные скорости подачи. Вы можете настроить его здесь"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pumpy Dana podporujú rôzne rýchlosti podania dávky 1 jednotky inzulínu. Môžete si ich nastaviť tu"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dana-pumparna har stöd för olika leveranshastigheter. Du kan ställa in det här"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dana pompaları farklı dağıtım hızlarını destekler. Buradan ayarlayabilirsiniz"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The Dana pumps support different delivery speeds. You can set it up here"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dana 泵支持不同的输送速度。您可以在这里进行设置"
+            "value" : "The Dana-I insulin pump was first release in 2020 by manufacturer Sooil and is the latest in the series"
           }
         }
       }
     },
-    "The Dana pumps support different delivery speeds. You can set it up here, but also in the settings menu" : {
-      "comment" : "Dana delivery speed body",
+    "The DanaRS insulin pump was first released in 2002. NOTE: only DanaRS pumps with firmware version 3 are supported" : {
+      "comment" : "danars-v3 description",
+      "extractionState" : "manual",
       "localizations" : {
-        "ar" : {
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "تدعم مضخات دانا سرعات توصيل مختلفة. يمكنك إعدادها هنا، ولكن أيضاً في قائمة الإعدادات"
-          }
-        },
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Čerpadla Dana podporují různé rychlosti dodávky. Můžete je nastavit zde, ale také v nabídce nastavení."
-          }
-        },
-        "da" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dana-pumperne understøtter forskellige leveringshastigheder. Du kan indstille det her, men også i indstillingsmenuen"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Die Dana-Pumpen unterstützen unterschiedliche Fördergeschwindigkeiten. Sie können sie hier einstellen, aber auch im Einstellungsmenü"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Las bombas Dana admiten diferentes velocidades de suministro. Puede configurarlo aquí, pero también en el menú de ajustes"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dana-pumput tukevat eri toimitusnopeuksia. Voit määrittää sen täältä, mutta myös asetusvalikosta."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Les pompes Dana prennent en charge différentes vitesses de distribution. Vous pouvez les configurer ici, mais aussi dans le menu des réglages."
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The Dana pumps support different delivery speeds. You can set it up here, but also in the settings menu"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le pompe Dana supportano diverse velocità di erogazione. È possibile impostarla qui, ma anche nel menu delle impostazioni."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Danaポンプは異なる吐出速度に対応しています。ここで設定できますが、設定メニューでも設定できます。"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The Dana pumps support different delivery speeds. You can set it up here, but also in the settings menu"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "De Dana-pompen ondersteunen verschillende afgiftesnelheden. Je kunt het hier instellen, maar ook in het instellingenmenu"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pompy Dana obsługują różne prędkości podawania. Można je skonfigurować tutaj, ale także w menu ustawień"
-          }
-        },
-        "pt_BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "As bombas Dana suportam diferentes velocidades de entrega. Você pode configurá-las aqui, mas também no menu de configurações"
-          }
-        },
-        "ro" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pompele Dana acceptă diferite viteze de livrare. Puteți să le configurați aici, dar și în meniul de setări"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Насосы Dana поддерживают разные скорости подачи. Настроить их можно здесь, а также в меню настроек"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pumpy Dana podporujú rôzne rýchlosti dávkovania. Môžete to nastaviť tu alebo aj v ponuke nastavení"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dana-pumparna har stöd för olika leveranshastigheter. Du kan ställa in det här, men också i inställningsmenyn"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dana pompaları farklı dağıtım hızlarını destekler. Bunu buradan ve aynı zamanda ayarlar menüsünden ayarlayabilirsiniz"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The Dana pumps support different delivery speeds. You can set it up here, but also in the settings menu"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dana 泵支持不同的输送速度。您可以在这里进行设置，也可以在设置菜单中进行设置"
+            "value" : "The DanaRS insulin pump was first released in 2002. NOTE: only DanaRS pumps with firmware version 3 are supported"
           }
         }
       }
@@ -27688,6 +25798,9 @@
         }
       }
     },
+    "Welcome!" : {
+      "comment" : "Onboarding Header"
+    },
     "What is this?" : {
       "comment" : "Button text to get help about Continuous mode",
       "localizations" : {
@@ -27815,136 +25928,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "这是什么？"
-          }
-        }
-      }
-    },
-    "Yes" : {
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Yes"
-          }
-        },
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Yes"
-          }
-        },
-        "da" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ja"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ja"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sí"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Yes"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Oui"
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "כן"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "SÌ"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Yes"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ja"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ja"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tak"
-          }
-        },
-        "pt_BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Yes"
-          }
-        },
-        "ro" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Da"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Да"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Áno"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Yes"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Evet"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Yes"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Yes"
           }
         }
       }
