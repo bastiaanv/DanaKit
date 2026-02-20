@@ -1134,12 +1134,12 @@ extension DanaKitPumpManager: PumpManager {
             ))
         }
 
-        if state.tempBasalEndsAt > Date.now {
+        if let units = state.tempBasalUnits {
             // Report cancelled temp basal
             events.append(NewPumpEvent.tempBasal(
                 dose: DoseEntry.tempBasal(
-                    absoluteUnit: unitsPerHour,
-                    duration: duration,
+                    absoluteUnit: units,
+                    duration: 0, // Ignored
                     insulinType: state.insulinType,
                     startDate: state.basalDeliveryDate,
                     endDate: Date.now
@@ -1150,8 +1150,8 @@ extension DanaKitPumpManager: PumpManager {
 
         state.basalDeliveryOrdinal = isTempBasal ? .tempBasal : .active
         state.basalDeliveryDate = startDate
-        state.tempBasalUnits = unitsPerHour
-        state.tempBasalDuration = duration
+        state.tempBasalUnits = isTempBasal ? unitsPerHour : nil
+        state.tempBasalDuration = isTempBasal ? duration : nil
         state.lastStatusDate = Date.now
         notifyStateDidChange()
 
