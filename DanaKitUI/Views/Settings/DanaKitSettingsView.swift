@@ -513,7 +513,7 @@ struct DanaKitSettingsView: View {
     }
 
     var reservoirStatus: some View {
-        VStack(alignment: .leading, spacing: 5) {
+        VStack(alignment: .trailing, spacing: 5) {
             Text(LocalizedString("Insulin Remaining", comment: "Header for insulin remaining on pod settings screen"))
                 .foregroundColor(Color(UIColor.secondaryLabel))
             if let reservoirLevel = viewModel.reservoirLevel {

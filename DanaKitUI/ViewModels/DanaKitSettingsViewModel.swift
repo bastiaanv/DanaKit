@@ -76,9 +76,9 @@ class DanaKitSettingsViewModel: ObservableObject {
         return numberFormatter
     }()
 
-    let reservoirVolumeFormatter: QuantityFormatter = {
-        let formatter = QuantityFormatter(for: .internationalUnit())
-        formatter.numberFormatter.maximumFractionDigits = 1
+    let reservoirVolumeFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 1
         return formatter
     }()
 
@@ -274,8 +274,7 @@ class DanaKitSettingsViewModel: ObservableObject {
     }
 
     func reservoirText(for units: Double) -> String {
-        let quantity = HKQuantity(unit: .internationalUnit(), doubleValue: units)
-        return reservoirVolumeFormatter.string(from: quantity) ?? ""
+        return reservoirVolumeFormatter.string(from: units) ?? ""
     }
 
     func toggleSilentTone() {
