@@ -517,13 +517,19 @@ struct DanaKitSettingsView: View {
             Text(LocalizedString("Insulin Remaining", comment: "Header for insulin remaining on pod settings screen"))
                 .foregroundColor(Color(UIColor.secondaryLabel))
             if let reservoirLevel = viewModel.reservoirLevel {
-                HStack {
+                HStack(alignment: .center, spacing: 5) {
                     ReservoirView(reservoirLevel: reservoirLevel, fillColor: reservoirColor(reservoirLevel))
-                        .frame(width: 23, height: 32)
-                    Text(viewModel.reservoirText(for: reservoirLevel))
-                        .font(.system(size: 28))
-                        .fontWeight(.heavy)
-                        .fixedSize()
+                        .frame(width: 19, height: 26)
+                    
+                    HStack(alignment: .firstTextBaseline, spacing: 3) {
+                        Text(viewModel.reservoirText(for: reservoirLevel))
+                            .font(.system(size: 28))
+                            .fontWeight(.heavy)
+                            .fixedSize()
+                        
+                        Text(LocalizedString("U", comment: "Insulin unit"))
+                            .foregroundStyle(.secondary)
+                    }
                 }
             }
         }
