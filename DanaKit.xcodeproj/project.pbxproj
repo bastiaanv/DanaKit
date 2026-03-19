@@ -715,8 +715,7 @@
 				cs,
 				hi,
 				sk,
-				pt_BR,
-				ce,
+				pt-BR,
 				hu,
 				uk,
 			);
