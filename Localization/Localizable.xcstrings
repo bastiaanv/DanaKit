@@ -101,7 +101,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " este gata să fie utilizat!"
+            "value" : " este gata de utilizare!"
           }
         },
         "ru" : {
@@ -113,7 +113,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " je pripravená na použitie!"
+            "value" : " je pripravená na používanie!"
           }
         },
         "sv" : {
@@ -173,7 +173,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ". Please go to your bluetooth settings, forget this device, and try again"
+            "value" : ". Bitte gehe in deine Bluetooth-Einstellungen, entferne dieses Gerät und versuche es erneut."
           }
         },
         "en" : {
@@ -227,7 +227,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ". Please go to your bluetooth settings, forget this device, and try again"
+            "value" : ". Ga naar de bluetooth instellingen, vergeet dit apparaat en probeer het opnieuw"
           }
         },
         "pl" : {
@@ -245,7 +245,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ". Vă rog mergeți la setările Bluetooth, uitați dispozitivul, și încercați din nou"
+            "value" : ". Vă rugăm să accesați setările bluetooth, să uitați acest dispozitiv și să încercați din nou"
           }
         },
         "ru" : {
@@ -257,13 +257,13 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ". Prosím, prejdite do nastavení Bluetooth, odstráňte toto zariadenie a skúste to znova"
+            "value" : ". Prejdi do nastavení bluetooth, odstráň toto zariadenie a skús to znova"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ". Please go to your bluetooth settings, forget this device, and try again"
+            "value" : ". Gå till inställningarna för Bluetooth och glöm den här enheten och försök sedan igen"
           }
         },
         "tr" : {
@@ -281,13 +281,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ". Please go to your bluetooth settings, forget this device, and try again"
+            "value" : ". Vui lòng vào cài đặt Bluetooth, quên thiết bị này rồi thử lại"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ". Please go to your bluetooth settings, forget this device, and try again"
+            "value" : "请前往您的蓝牙设置，忽略此设备，然后重试"
           }
         }
       }
@@ -453,7 +453,7 @@
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@U"
+            "value" : "%@E"
           }
         },
         "de" : {
@@ -477,7 +477,7 @@
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@U"
+            "value" : "%@ U"
           }
         },
         "fr" : {
@@ -513,13 +513,13 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@U"
+            "value" : "%@E"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@U"
+            "value" : "%@J"
           }
         },
         "pt-BR" : {
@@ -537,7 +537,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@U"
+            "value" : "%@Ед"
           }
         },
         "sk" : {
@@ -549,13 +549,13 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@U"
+            "value" : "%@E"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@U"
+            "value" : "%@Ü"
           }
         },
         "uk" : {
@@ -967,7 +967,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "12 сек/U"
+            "value" : "12 сек/ед"
           }
         },
         "sk" : {
@@ -1105,13 +1105,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notație 12h"
+            "value" : "Notație de 12 ore"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "12-часовая нотация"
+            "value" : "12ч формат"
           }
         },
         "sk" : {
@@ -1123,7 +1123,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "12h notation"
+            "value" : "12-timmarsvisning"
           }
         },
         "tr" : {
@@ -1141,13 +1141,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "12h notation"
+            "value" : "Ký hiệu 12h"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "12h 符号"
+            "value" : "12 小时制"
           }
         }
       }
@@ -1249,7 +1249,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Afișaj 24h"
+            "value" : "Afișaj 24 de ore"
           }
         },
         "ru" : {
@@ -1393,13 +1393,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notație 24h"
+            "value" : "Notație de 24 de ore"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "24-часовая нотация"
+            "value" : "24ч формат"
           }
         },
         "sk" : {
@@ -1411,7 +1411,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "24h notation"
+            "value" : "24-timmarsvisning"
           }
         },
         "tr" : {
@@ -1429,13 +1429,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "24h notation"
+            "value" : "Ký hiệu 24h"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "24 小时符号"
+            "value" : "24 小时制"
           }
         }
       }
@@ -1543,7 +1543,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "30 сек/U"
+            "value" : "30 сек/ед"
           }
         },
         "sk" : {
@@ -1687,7 +1687,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "60 сек/U"
+            "value" : "60 сек/ед"
           }
         },
         "sk" : {
@@ -1825,7 +1825,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Un memento de verificare a glicemiei a fost configurat în pompa dumneavoastră și este declanșat. Vă rugăm să îl eliminați sau să introduceți nivelul glicemiei în pompă."
+            "value" : "O reamintire pentru verificarea glicemiei a fost configurată în pompă și este declanșată. Vă rugăm să o eliminați sau să transmiteți nivelul glicemiei pompei."
           }
         },
         "ru" : {
@@ -1837,7 +1837,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pripomienka kontroly hladiny glykémie v krvi bola nastavená vo vašej pumpe a bola aktivovaná. Prosím, odstráňte ju alebo zadajte svoju hladinu glukózy do pumpy"
+            "value" : "Pripomienka kontroly glykémie bola vo vašej pumpe nastavená a práve sa spustila. Prosím, odstráňte ju alebo zadajte do pumpy svoju hodnotu glykémie"
           }
         },
         "sv" : {
@@ -1861,7 +1861,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "A blood glucose check reminder has been setup in your pump and is triggered. Please remove it or give your glucose level to the pump"
+            "value" : "Lời nhắc kiểm tra lượng đường trong máu đã được thiết lập trong máy bơm của bạn và được kích hoạt. Vui lòng tháo nó ra hoặc đưa mức đường huyết của bạn vào máy bơm"
           }
         },
         "zh-Hans" : {
@@ -1969,19 +1969,19 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Un timp de așteptare pentru bolus este activ. Ciclul de buclă nu poate fi finalizat până când timpul de așteptare nu este inactiv"
+            "value" : "O expirare a bolusului este activă. Ciclul de buclă nu poate fi finalizat până când expirarea nu este inactivă."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Тайм-аут болюса активен. Цикл цикла не может быть завершен до тех пор, пока таймаут не станет неактивным"
+            "value" : "Тайм-аут болюса активен. Цикл петли не может быть завершен пока тайм-аут активен"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Časový limit bolusu je aktívny. Cyklus slučky nemôže byť dokončený, kým nebude časový limit neaktívny"
+            "value" : "Časový limit pre podanie bolusu je aktívny. Cyklus slučky sa nemôže dokončiť, kým nie je časový limit neaktívny"
           }
         },
         "sv" : {
@@ -2005,13 +2005,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "A bolus timeout is active. The loop cycle cannot be completed till the timeout is inactive"
+            "value" : "Thời gian chờ bolus đang hoạt động. Chu kỳ vòng lặp không thể hoàn tất cho đến khi thời gian chờ không hoạt động"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "栓剂超时激活。在超时未激活之前，循环周期无法完成"
+            "value" : "大剂量推注超时，Loop 将在该超时状态解除后恢复正常工作。"
           }
         }
       }
@@ -2119,7 +2119,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Действие было отменено, так как насос занят"
+            "value" : "Действие было отменено, так как помпа занята"
           }
         },
         "sk" : {
@@ -2149,7 +2149,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Action has been canceled, because the pump is busy"
+            "value" : "Hành động đã bị hủy, vì máy bơm đang bận"
           }
         },
         "zh-Hans" : {
@@ -2407,13 +2407,13 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Звуковые сигналы тревоги"
+            "value" : "Сигналы тревоги"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pípanie alarmu"
+            "value" : "Upozornenia"
           }
         },
         "sv" : {
@@ -2437,7 +2437,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Alarm beeps"
+            "value" : "Báo động tiếp beeps"
           }
         },
         "zh-Hans" : {
@@ -2545,13 +2545,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "O eroare necunoscută a apărut în timpul procesării alertei de la pompă. Vă rugăm să raportați acest lucru"
+            "value" : "A apărut o eroare necunoscută în timpul procesării alertei de la pompă. Vă rugăm să raportați acest lucru."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "При обработке оповещения от насоса произошла неизвестная ошибка. Пожалуйста, сообщите об этом"
+            "value" : "При обработке сигнала от помпы произошла неизвестная ошибка. Пожалуйста, сообщите об этом"
           }
         },
         "sk" : {
@@ -2581,7 +2581,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "An unknown error has occurred during processing the alert from the pump. Please report this"
+            "value" : "Đã xảy ra lỗi không xác định trong quá trình xử lý cảnh báo từ máy bơm. Vui lòng báo cáo lỗi này"
           }
         },
         "zh-Hans" : {
@@ -2689,7 +2689,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sunteți sigur că doriți să nu mai folosiți Dana-i/RS?"
+            "value" : "Sunteți sigur că nu mai doriți să utilizați pompa Dana-i/RS?"
           }
         },
         "ru" : {
@@ -2701,7 +2701,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Naozaj chcete prestať používať Dana-i/RS?"
+            "value" : "Ste si istí, že chcete prestať používať Dana-i/RS?"
           }
         },
         "sv" : {
@@ -2725,7 +2725,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Are you sure you want to stop using Dana-i/RS?"
+            "value" : "Bạn có chắc chắn muốn ngừng sử dụng Dana-i không?"
           }
         },
         "zh-Hans" : {
@@ -2773,7 +2773,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tiempo de encendido de la retroiluminación"
+            "value" : "Tiempo de retroiluminación"
           }
         },
         "fi" : {
@@ -2797,7 +2797,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tempo di accensione della retroilluminazione"
+            "value" : "Verifica del periodo"
           }
         },
         "ja" : {
@@ -2833,13 +2833,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Timp de aprindere a luminii de fundal"
+            "value" : "Iluminare de fundal la timp"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Время включения подсветки"
+            "value" : "Время подсветки экрана"
           }
         },
         "sk" : {
@@ -2857,7 +2857,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Arka ışık açık kalma süresi"
+            "value" : "Arka ışık açma süresi"
           }
         },
         "uk" : {
@@ -2869,7 +2869,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Backlight on time"
+            "value" : "Đèn nền theo thời gian"
           }
         },
         "zh-Hans" : {
@@ -2983,13 +2983,13 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Базальный"
+            "value" : "Базал"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bazál"
+            "value" : "Bazálna"
           }
         },
         "sv" : {
@@ -3019,7 +3019,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "基础"
+            "value" : "基础率"
           }
         }
       }
@@ -3121,19 +3121,19 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Comparația bazalelor"
+            "value" : "Comparație bazală"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Базальное сравнение"
+            "value" : "Сравнение Базала"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Porovnanie bazálu"
+            "value" : "Základné porovnanie"
           }
         },
         "sv" : {
@@ -3163,7 +3163,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "基准比较"
+            "value" : "基础率比较"
           }
         }
       }
@@ -3271,13 +3271,13 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Базовый предел достигнут"
+            "value" : "Достигнут лимит Базала"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dosiahnutý limit bazálu"
+            "value" : "Dosiahnutý základný limit"
           }
         },
         "sv" : {
@@ -3301,13 +3301,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Basal limit reached"
+            "value" : "Đã đạt đến giới hạn liều cơ bản"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "达到基本极限"
+            "value" : "达到基本基础率上限"
           }
         }
       }
@@ -3349,7 +3349,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Perfil basal"
+            "value" : "Perfil de basal"
           }
         },
         "fi" : {
@@ -3397,7 +3397,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Profil podstawowy"
+            "value" : "Profil bazy"
           }
         },
         "pt-BR" : {
@@ -3427,7 +3427,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Basal profil"
+            "value" : "Basalinställningar"
           }
         },
         "tr" : {
@@ -3445,13 +3445,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Basal profile"
+            "value" : "Phác đồ liều nền"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "基本概况"
+            "value" : "基础率配置"
           }
         }
       }
@@ -3493,7 +3493,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Edad de la batería"
+            "value" : "Battery age"
           }
         },
         "fi" : {
@@ -3517,7 +3517,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Età della batteria"
+            "value" : "Durata Batteria"
           }
         },
         "ja" : {
@@ -3541,7 +3541,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wiek baterii"
+            "value" : "Battery age"
           }
         },
         "pt-BR" : {
@@ -3571,13 +3571,13 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Batteriets ålder"
+            "value" : "Batteriålder"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pil yaşı"
+            "value" : "Battery age"
           }
         },
         "uk" : {
@@ -3679,7 +3679,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Battery is empty. Replace it now!"
+            "value" : "Batterij is leeg. Vervang hem nu!"
           }
         },
         "pl" : {
@@ -3709,13 +3709,13 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Batéria je vybitá. Vymeňte ju teraz!"
+            "value" : "Batéria je vybitá. Vymeň ju teraz!"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Battery is empty. Replace it now!"
+            "value" : "Pumpens batteri är tomt. Byt ut det nu!"
           }
         },
         "tr" : {
@@ -3733,13 +3733,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Battery is empty. Replace it now!"
+            "value" : "Pin đã hết. Hãy thay ngay!"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Battery is empty. Replace it now!"
+            "value" : "电池没电了。请立即更换！"
           }
         }
       }
@@ -3781,7 +3781,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nivel de batería"
+            "value" : "Nivel de bateria"
           }
         },
         "fi" : {
@@ -3805,7 +3805,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Livello della batteria"
+            "value" : "Livello Batteria"
           }
         },
         "ja" : {
@@ -3847,7 +3847,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Уровень заряда батареи"
+            "value" : "Уровень заряда"
           }
         },
         "sk" : {
@@ -3877,7 +3877,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Battery level"
+            "value" : "Mức pin"
           }
         },
         "zh-Hans" : {
@@ -4021,7 +4021,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Blood glucose Measure"
+            "value" : "Kiểm tra đường huyết"
           }
         },
         "zh-Hans" : {
@@ -4165,13 +4165,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bolus"
+            "value" : "Liều bolus"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "玻流体"
+            "value" : "大剂量"
           }
         }
       }
@@ -4309,7 +4309,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Both"
+            "value" : "Cả hai"
           }
         },
         "zh-Hans" : {
@@ -4603,7 +4603,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "插管年龄"
+            "value" : "套管使用时长"
           }
         }
       }
@@ -4705,7 +4705,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Numai canulă"
+            "value" : "Doar canula"
           }
         },
         "ru" : {
@@ -4741,13 +4741,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cannula only"
+            "value" : "Chỉ Cannula"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "仅插管"
+            "value" : "仅套管"
           }
         }
       }
@@ -4849,7 +4849,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reîncărcare canulă"
+            "value" : "Reumplere canulă"
           }
         },
         "ru" : {
@@ -4885,13 +4885,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cannula refill"
+            "value" : "Nạp Cannula"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "补充插管"
+            "value" : "填充套管"
           }
         }
       }
@@ -4993,7 +4993,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Verificați șaiba"
+            "value" : "Veficați axul"
           }
         },
         "ru" : {
@@ -5035,7 +5035,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "检查软轴"
+            "value" : "检查推杆"
           }
         }
       }
@@ -5143,7 +5143,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Проверьте насос и повторите попытку."
+            "value" : "Проверьте помпу и повторите попытку"
           }
         },
         "sk" : {
@@ -5173,7 +5173,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Check the pump and try again"
+            "value" : "Kiểm tra máy bơm và thử lại"
           }
         },
         "zh-Hans" : {
@@ -5281,13 +5281,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Verificați rezervorul și infuzați și încercați din nou"
+            "value" : "Verificați rezervorul și infuzorul și încercați din nou."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Проверьте резервуар, влейте воду и повторите попытку."
+            "value" : "Проверьте резервуар, заполните и повторите попытку"
           }
         },
         "sk" : {
@@ -5317,7 +5317,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Check the reservoir and infus and try again"
+            "value" : "Hãy Kiểm tra bình chứa và dây truyền và thử lại"
           }
         },
         "zh-Hans" : {
@@ -5461,13 +5461,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Checked at"
+            "value" : "Đã kiểm tra tại"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在"
+            "value" : "同步于"
           }
         }
       }
@@ -5575,7 +5575,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Не удалось получить контрольную сумму. Попробуйте еще раз"
+            "value" : "Ошибка контрольной суммы. Попробуйте еще раз"
           }
         },
         "sk" : {
@@ -5605,7 +5605,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Checksum failed. Try again"
+            "value" : "Kiểm tra tổng không thành công. Hãy thử lại"
           }
         },
         "zh-Hans" : {
@@ -5797,7 +5797,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Configuración"
+            "value" : "Configuracion"
           }
         },
         "fi" : {
@@ -5821,7 +5821,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Configurazione"
+            "value" : "Impostazioni"
           }
         },
         "ja" : {
@@ -5857,7 +5857,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Configurație"
+            "value" : "Configurare"
           }
         },
         "ru" : {
@@ -5869,7 +5869,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Konfigurácia"
+            "value" : "Nastavenie"
           }
         },
         "sv" : {
@@ -5881,7 +5881,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Konfigürasyon"
+            "value" : "Yapılandırma"
           }
         },
         "uk" : {
@@ -5893,7 +5893,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Configuration"
+            "value" : "Cấu hình"
           }
         },
         "zh-Hans" : {
@@ -5965,7 +5965,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Collegato"
+            "value" : "Connesso"
           }
         },
         "ja" : {
@@ -5989,7 +5989,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Połączony"
+            "value" : "Połączono"
           }
         },
         "pt-BR" : {
@@ -6025,7 +6025,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bağlı"
+            "value" : "Bağlandı"
           }
         },
         "uk" : {
@@ -6037,7 +6037,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Connected"
+            "value" : "Đã kết nối"
           }
         },
         "zh-Hans" : {
@@ -6085,7 +6085,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Conexión"
+            "value" : "Conectando"
           }
         },
         "fi" : {
@@ -6109,7 +6109,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Collegamento"
+            "value" : "In fase di Connessione"
           }
         },
         "ja" : {
@@ -6145,7 +6145,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Conectarea"
+            "value" : "Conectare"
           }
         },
         "ru" : {
@@ -6157,19 +6157,19 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pripájanie"
+            "value" : "Pripája sa"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Anslutning"
+            "value" : "Ansluter"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bağlantı"
+            "value" : "Bağlanıyor"
           }
         },
         "uk" : {
@@ -6181,7 +6181,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Connecting"
+            "value" : "Đang kết nối"
           }
         },
         "zh-Hans" : {
@@ -6229,7 +6229,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Continúe en"
+            "value" : "Continuar"
           }
         },
         "fi" : {
@@ -6325,7 +6325,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Continue"
+            "value" : "Tiếp tục"
           }
         },
         "zh-Hans" : {
@@ -6433,7 +6433,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Limita zilnică atinsă"
+            "value" : "Limita zilnică a fost atinsă"
           }
         },
         "ru" : {
@@ -6469,7 +6469,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Daily limit reached"
+            "value" : "Đạt giới hạn hàng ngày"
           }
         },
         "zh-Hans" : {
@@ -6583,7 +6583,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Дана-и"
+            "value" : "Dana-i"
           }
         },
         "sk" : {
@@ -6619,7 +6619,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "达娜伊"
+            "value" : "Dana-i"
           }
         }
       }
@@ -6721,13 +6721,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dana-RS v3 găsit!"
+            "value" : "Dana-RS v3 găsită!"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dana-RS v3 найден!"
+            "value" : "Dana-RS v3 найдена!"
           }
         },
         "sk" : {
@@ -6757,7 +6757,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dana-RS v3 found!"
+            "value" : "Đã tìm thấy Dana-RS v3!"
           }
         },
         "zh-Hans" : {
@@ -6973,7 +6973,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "giorno/i"
+            "value" : "U/giorno"
           }
         },
         "ja" : {
@@ -7015,13 +7015,13 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "день(ы)"
+            "value" : "день(и)"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "deň/dni"
+            "value" : "deň(y)"
           }
         },
         "sv" : {
@@ -7159,7 +7159,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Удалить насос"
+            "value" : "Удалить помпу"
           }
         },
         "sk" : {
@@ -7189,7 +7189,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Delete pump"
+            "value" : "Xóa bơm"
           }
         },
         "zh-Hans" : {
@@ -7237,7 +7237,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Borrar bomba"
+            "value" : "Eliminar Microinfusora"
           }
         },
         "fi" : {
@@ -7261,7 +7261,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eliminare la pompa"
+            "value" : "Cancella Microinfusore"
           }
         },
         "ja" : {
@@ -7303,7 +7303,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Удалить насос"
+            "value" : "Удалить помпу"
           }
         },
         "sk" : {
@@ -7315,7 +7315,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ta bort pump"
+            "value" : "Radera pump"
           }
         },
         "tr" : {
@@ -7333,7 +7333,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Delete Pump"
+            "value" : "Xóa bơm"
           }
         },
         "zh-Hans" : {
@@ -7441,13 +7441,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Viteza de livrare"
+            "value" : "Viteză de livrare"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Скорость доставки"
+            "value" : "Скорость подачи"
           }
         },
         "sk" : {
@@ -7483,7 +7483,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "交付速度"
+            "value" : "推注速率"
           }
         }
       }
@@ -7585,7 +7585,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dezactivați sincronizarea bolusurilor?"
+            "value" : "Dezactivați sincronizarea bolusului?"
           }
         },
         "ru" : {
@@ -7621,13 +7621,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Disable bolus syncing?"
+            "value" : "Tắt đồng bộ bolus?"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "禁用栓剂同步？"
+            "value" : "禁用追加胰岛素同步？"
           }
         }
       }
@@ -7729,13 +7729,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Deconectați de la pompă"
+            "value" : "Deconectare pompă"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Отсоедините от насоса"
+            "value" : "Отключить от помпы"
           }
         },
         "sk" : {
@@ -7765,7 +7765,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Disconnect from pump"
+            "value" : "Ngắt kết nối từ máy bơm"
           }
         },
         "zh-Hans" : {
@@ -7861,7 +7861,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Odłączony"
+            "value" : "Rozłączony"
           }
         },
         "pt-BR" : {
@@ -7879,7 +7879,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Отключено"
+            "value" : "Разъединено"
           }
         },
         "sk" : {
@@ -7909,7 +7909,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Disconnected"
+            "value" : "Đã ngắt kết nối"
           }
         },
         "zh-Hans" : {
@@ -8017,7 +8017,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Deconectarea..."
+            "value" : "Se deconectează..."
           }
         },
         "ru" : {
@@ -8029,7 +8029,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Odpájanie..."
+            "value" : "Odpojenie..."
           }
         },
         "sv" : {
@@ -8053,7 +8053,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Disconnecting..."
+            "value" : "Đang ngắt kết nối..."
           }
         },
         "zh-Hans" : {
@@ -8161,13 +8161,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Doriți să primiți o notificare atunci când pompa este deconectată pentru o anumită perioadă de timp?"
+            "value" : "Doriți să primiți o notificare atunci când pompa este deconectată pentru o perioadă mai lungă de timp?"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Хотите ли вы получать уведомление, когда насос отключается на определенное время?"
+            "value" : "Хотите ли вы получать уведомление, когда помпа отключена в течение определенного времени?"
           }
         },
         "sk" : {
@@ -8197,7 +8197,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Do you wish to receive a notification when the pump is longer disconnected for a specific time?"
+            "value" : "Bạn có muốn nhận thông báo khi máy bơm không được ngắt kết nối trong một khoảng thời gian cụ thể không?"
           }
         },
         "zh-Hans" : {
@@ -8213,7 +8213,7 @@
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Done"
+            "value" : "تمّ"
           }
         },
         "cs" : {
@@ -8225,13 +8225,13 @@
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Done"
+            "value" : "OK"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Done"
+            "value" : "Fertig"
           }
         },
         "en" : {
@@ -8243,19 +8243,19 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Done"
+            "value" : "Hecho"
           }
         },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Done"
+            "value" : "Valmis"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Done"
+            "value" : "Terminé"
           }
         },
         "he" : {
@@ -8267,7 +8267,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Done"
+            "value" : "Fine"
           }
         },
         "ja" : {
@@ -8285,7 +8285,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Done"
+            "value" : "OK"
           }
         },
         "pl" : {
@@ -8303,13 +8303,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gata"
+            "value" : "OK"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Done"
+            "value" : "Готово"
           }
         },
         "sk" : {
@@ -8321,13 +8321,13 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Done"
+            "value" : "Klar"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Done"
+            "value" : "Tamam"
           }
         },
         "uk" : {
@@ -8339,13 +8339,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Done"
+            "value" : "Xong"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Done"
+            "value" : "完成"
           }
         }
       }
@@ -8591,7 +8591,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "În timpul procesului de asociere, DanaRS v3 va afișa o solicitare de asociere, în timp ce iPhone-ul va afișa o solicitare pentru un cod de asociere. Pe pompă, selectați OK și tastați codul de pe iPhone. După aceea, Loop este gata să comunice cu DanaRS v1"
+            "value" : "În timpul procesului de asociere, DanaRS v1 va afișa o solicitare de asociere, în timp ce iPhone-ul va afișa o solicitare pentru un cod de asociere. Pe pompă, selectați OK și introduceți codul pe iPhone. După aceea, Loop este gata să comunice cu DanaRS v1."
           }
         },
         "ru" : {
@@ -8603,7 +8603,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Počas procesu párovania sa na vašej pumpe DanaRS v1 zobrazí výzva na párovanie, zatiaľ čo na vašom iPhone sa zobrazí výzva na zadanie párovacieho kódu. Na pumpe vyberte OK a zadajte kód na vašom iPhone. Potom je Loop pripravený komunikovať s vašou pumpou DanaRS v1"
+            "value" : "Počas procesu párovania sa na displeji DanaRS v1 zobrazí výzva na spárovanie, zatiaľ čo na displeji iPhone sa zobrazí výzva na zadanie párovacieho kódu. Na čerpadle vyberte OK a zadajte kód na iPhone. Potom je zariadenie Loop pripravené na komunikáciu s vaším zariadením DanaRS v1"
           }
         },
         "sv" : {
@@ -8627,7 +8627,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "During the pairing process, your DanaRS v1 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, Loop is ready to communicate with your DanaRS v1"
+            "value" : "Trong quá trình ghép đôi, DanaRS v1 của bạn sẽ hiển thị một thông báo ghép đôi, trong khi iPhone sẽ hiển thị thông báo nhập mã ghép đôi. Trên bơm, hãy chọn OK và nhập mã đó trên iPhone của bạn. Sau đó, Loop sẽ sẵn sàng giao tiếp với DanaRS v1"
           }
         },
         "zh-Hans" : {
@@ -8717,7 +8717,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, Loop is ready to communicate with your DanaRS v1"
+            "value" : "Tijdens het koppelingsproces toont je DanaRS v1 een koppelingsverzoek, terwijl je iPhone om een koppelingscode vraagt. Selecteer 'OK' op je pomp en voer de code in op je iPhone. Daarna is %@ klaar om te communiceren met je DanaRS v1"
           }
         },
         "pl" : {
@@ -8735,7 +8735,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "În timpul procesului de asociere, DanaRS v3 va afișa o solicitare de asociere, în timp ce iPhone-ul va afișa o solicitare pentru un cod de asociere. Pe pompă, selectați OK și tastați codul de pe iPhone. După aceea, Loop este gata să comunice cu DanaRS v1"
+            "value" : "În timpul procesului de asociere, DanaRS v3 va afișa o solicitare de asociere, în timp ce iPhone-ul va afișa o solicitare pentru un cod de asociere. Pe pompă, selectați OK și introduceți codul pe iPhone. După aceea, Loop este gata să comunice cu DanaRS v1."
           }
         },
         "ru" : {
@@ -8747,13 +8747,13 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Počas procesu párovania sa na vašej pumpe DanaRS v3 zobrazí výzva na párovanie, zatiaľ čo na vašom iPhone sa zobrazí výzva na zadanie párovacieho kódu. Na pumpe vyberte OK a zadajte kód na vašom iPhone. Potom je Loop pripravený komunikovať s vašou pumpou DanaRS v1"
+            "value" : "Počas procesu párovania sa na vašom zariadení DanaRS v3 zobrazí výzva na párovanie, zatiaľ čo na vašom iPhone sa zobrazí výzva na zadanie párovacieho kódu. Na pumpe vyberte OK a zadajte kód do Vášho iPhonu. Potom je iAPS pripravený komunikovať s vaším zariadením DanaRS v1"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, Loop is ready to communicate with your DanaRS v1"
+            "value" : "Under parkopplingsprocessen kommer DanaRS v3 att visa en parkopplingsförfrågan medan din iPhone kommer att visa en fråga om en parkopplingskod. Välj OK på din pump och skriv in koden på din iPhone. Efter det är Loop redo att kommunicera med din DanaRS v1"
           }
         },
         "tr" : {
@@ -8771,13 +8771,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, Loop is ready to communicate with your DanaRS v1"
+            "value" : "Trong quá trình ghép đôi, DanaRS v3 của bạn sẽ hiển thị một thông báo ghép đôi, trong khi iPhone sẽ hiển thị thông báo nhập mã ghép đôi. Trên bơm, hãy chọn OK và nhập mã đó trên iPhone của bạn. Sau đó, Loop sẽ sẵn sàng giao tiếp với DanaRS v1"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, Loop is ready to communicate with your DanaRS v1"
+            "value" : "在配对过程中，你的 DanaRS v3 胰岛素泵会显示一个配对提示，而你的 iPhone 会显示输入配对码的提示。在胰岛素泵上选择“确定”，然后在 iPhone 上输入该配对码。完成后，Loop 将准备好与 DanaRS v1 通讯。"
           }
         }
       }
@@ -9023,7 +9023,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "În timpul procesului de asociere, DanaRS v3 va afișa o solicitare de asociere, în timp ce iPhone-ul va afișa o solicitare pentru două coduri de asociere. Pe pompă, selectați OK și tastați cele două coduri pe iPhone. După aceea, Loop este gata să comunice cu DanaRS v3"
+            "value" : "În timpul procesului de asociere, DanaRS v3 va afișa o solicitare de asociere, în timp ce iPhone-ul va afișa o solicitare pentru două coduri de asociere. Pe pompă, selectați OK și introduceți cele două coduri pe iPhone. După aceea, Loop este gata să comunice cu DanaRS v3."
           }
         },
         "ru" : {
@@ -9035,7 +9035,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Počas procesu párovania sa na vašej pumpe DanaRS v3 zobrazí výzva na párovanie, zatiaľ čo na vašom iPhone sa zobrazí výzva na zadanie dvoch párovacích kódov. Na pumpe vyberte OK a zadajte oba kódy na vašom iPhone. Potom je Loop pripravený komunikovať s vašou pumpou DanaRS v3"
+            "value" : "Počas procesu párovania sa na displeji DanaRS v3 zobrazí výzva na spárovanie, zatiaľ čo na displeji iPhonu sa zobrazí výzva na zadanie dvoch párovacích kódov. Na čerpadle vyberte OK a zadajte dva kódy na iPhone. Potom je zariadenie Loop pripravené na komunikáciu s vaším zariadením DanaRS v3"
           }
         },
         "sv" : {
@@ -9059,7 +9059,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for two pairing codes. On your pump, select OK and type the two codes on your iPhone. After that, Loop is ready to communicate with your DanaRS v3"
+            "value" : "Trong quá trình ghép đôi, DanaRS v3 của bạn sẽ hiển thị một thông báo ghép đôi, trong khi iPhone sẽ hiển thị thông báo nhập hai mã ghép đôi. Trên bơm, hãy chọn OK và nhập hai mã đó trên iPhone của bạn. Sau đó, Loop sẽ sẵn sàng giao tiếp với DanaRS v3"
           }
         },
         "zh-Hans" : {
@@ -9107,7 +9107,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Depósito vacío"
+            "value" : "Reservorio vacío"
           }
         },
         "fi" : {
@@ -9173,7 +9173,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Пустой резервуар"
+            "value" : "Резервуар пуст"
           }
         },
         "sk" : {
@@ -9185,7 +9185,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Töm behållaren"
+            "value" : "Poddfel; tom reservoar"
           }
         },
         "tr" : {
@@ -9203,13 +9203,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Empty reservoir"
+            "value" : "Hết insulin"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "空水库"
+            "value" : "药筒为空"
           }
         }
       }
@@ -9347,7 +9347,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Error while connecting to device"
+            "value" : "Lỗi khi kết nối với thiết bị"
           }
         },
         "zh-Hans" : {
@@ -9436,7 +9436,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Error while starting scanning for devices..."
+            "value" : "Fout bij het scannen naar apparaten..."
           }
         },
         "pl" : {
@@ -9454,7 +9454,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eroare la începerea scanării pentru dispozitive..."
+            "value" : "Eroare la pornirea scanării dispozitivelor..."
           }
         },
         "ru" : {
@@ -9472,7 +9472,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Error while starting scanning for devices..."
+            "value" : "Fel vid skanning efter enheter..."
           }
         },
         "tr" : {
@@ -9490,13 +9490,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Error while starting scanning for devices..."
+            "value" : "Lỗi khi bắt đầu quét thiết bị..."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Error while starting scanning for devices..."
+            "value" : "开始扫描设备时出错..."
           }
         }
       }
@@ -9598,7 +9598,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "EROARE: Eșec la asocierea dispozitivului"
+            "value" : "EROARE: Nu s-a reușit asocierea dispozitivului"
           }
         },
         "ru" : {
@@ -9634,7 +9634,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ERROR: Failed to pair device"
+            "value" : "LỖI: Không ghép nối được thiết bị"
           }
         },
         "zh-Hans" : {
@@ -9742,13 +9742,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nu a reușit să se ajusteze bazala"
+            "value" : "Nu s-a putut ajusta bazala"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Не удалось скорректировать базальный уровень"
+            "value" : "Не удалось установить базальную скорость"
           }
         },
         "sk" : {
@@ -9778,13 +9778,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Failed to adjust basal"
+            "value" : "Không thể điều chỉnh liều basal"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "未能调整基础代谢率"
+            "value" : "调整基础率失败"
           }
         }
       }
@@ -9886,13 +9886,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nu a reușit să se regleze timpul de pompare"
+            "value" : "Nu s-a reușit setarei timpului de pe pompă"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Не удалось отрегулировать время работы насоса"
+            "value" : "Не удалось установить время на помпе"
           }
         },
         "sk" : {
@@ -9922,7 +9922,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Failed to adjust pump time"
+            "value" : "Không điều chỉnh được thời gian bơm"
           }
         },
         "zh-Hans" : {
@@ -10030,19 +10030,19 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nu a reușit să se regleze suspensia"
+            "value" : "Nu s-a putut ajusta suspendarea"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Не удалось отрегулировать подвеску"
+            "value" : "Не удалось приостановить подачу инсулина"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Neúspešné pozastavenie"
+            "value" : "Nepodarilo sa nastaviť odpruženie"
           }
         },
         "sv" : {
@@ -10066,13 +10066,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Failed to adjust suspension"
+            "value" : "Không thể điều chỉnh bởi hệ thống treo"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "未能调整悬挂系统"
+            "value" : "暂停调整失败"
           }
         }
       }
@@ -10174,13 +10174,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nu a reușit să se ajusteze bazala temporară"
+            "value" : "Nu s-a putut ajusta valoarea bazală temporară"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Не удалось отрегулировать базальную температуру"
+            "value" : "Не удалось установить временную базальную скорость"
           }
         },
         "sk" : {
@@ -10210,13 +10210,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Failed to adjust temp basal"
+            "value" : "Không thể điều chỉnh liều temp basal"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "未能调整基础温度"
+            "value" : "调整临时基础率失败"
           }
         }
       }
@@ -10318,13 +10318,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nu a reușit să se genereze programul bazal Dana"
+            "value" : "Nu s-a putut genera programul bazal Dana"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Не удалось сгенерировать программу Dana basal"
+            "value" : "Не удалось сгенерировать базальную программу Dana"
           }
         },
         "sk" : {
@@ -10354,13 +10354,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Failed to generate Dana basal program"
+            "value" : "Không tạo được liều basal Dana"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "生成达纳基础程序失败"
+            "value" : "生成 Dana 基础率程序失败"
           }
         }
       }
@@ -10498,7 +10498,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Failed to make a connection"
+            "value" : "Không thể kết nối"
           }
         },
         "zh-Hans" : {
@@ -10588,7 +10588,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Failed to pair to "
+            "value" : "Kan niet koppelen aan "
           }
         },
         "pl" : {
@@ -10606,7 +10606,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nu s-a putut conecta la "
+            "value" : "Nu s-a putut asocia cu "
           }
         },
         "ru" : {
@@ -10624,7 +10624,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Failed to pair to "
+            "value" : "Kunde inte parkoppla med "
           }
         },
         "tr" : {
@@ -10642,13 +10642,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Failed to pair to "
+            "value" : "Ghép đôi thất bại với "
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Failed to pair to "
+            "value" : "配对失败 "
           }
         }
       }
@@ -10762,7 +10762,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nepodarilo sa naplniť kanylu. Skúste to, prosím, neskôr"
+            "value" : "Nepodarilo sa naplniť kanylu. Skúste to prosím neskôr"
           }
         },
         "sv" : {
@@ -10792,7 +10792,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "插管填料失败。请稍后再试"
+            "value" : "排空套管失败，请稍后再试。"
           }
         }
       }
@@ -10906,7 +10906,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nepodarilo sa naplniť hadičku. Skúste to, prosím, neskôr"
+            "value" : "Nepodarilo sa naplniť trubicu. Skúste to prosím neskôr"
           }
         },
         "sv" : {
@@ -10930,13 +10930,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Failed to prime the tube. Please try again later"
+            "value" : "Failed to prime the cannula. Please try again later"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "管道填料失败。请稍后再试"
+            "value" : "排空管路失败，请稍后再试。"
           }
         }
       }
@@ -11044,7 +11044,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Не удалось установить объем резервуара. Пересинхронизируйте данные насоса и повторите попытку, пожалуйста"
+            "value" : "Не удалось установить объем инсулина в резервуаре. Пересинхронизируйте данные помпы и повторите попытку"
           }
         },
         "sk" : {
@@ -11074,13 +11074,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Failed to set reservoir amount. Re-sync pump data and try again please"
+            "value" : "Không thể thiết lập reservoir. Đồng bộ lại dữ liệu bơm và vui lòng thử lại"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "设置储液器容量失败。请重新同步泵数据并重试"
+            "value" : "设置药筒容量失败。请重新同步泵数据并重试"
           }
         }
       }
@@ -11182,7 +11182,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Introduceți parola"
+            "value" : "Completați parola"
           }
         },
         "ru" : {
@@ -11194,7 +11194,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zadajte heslo"
+            "value" : "Vyplňte heslo"
           }
         },
         "sv" : {
@@ -11218,7 +11218,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fill in password"
+            "value" : "Điền mật khẩu"
           }
         },
         "zh-Hans" : {
@@ -11326,13 +11326,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Terminare"
+            "value" : "Finalizare"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Отделка"
+            "value" : "Завершить"
           }
         },
         "sk" : {
@@ -11362,7 +11362,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Finish"
+            "value" : "Hoàn thành"
           }
         },
         "zh-Hans" : {
@@ -11470,7 +11470,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Versiunea firmware"
+            "value" : "Versiune firmware"
           }
         },
         "ru" : {
@@ -11506,7 +11506,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Firmware version"
+            "value" : "Phiên bản phần mềm"
           }
         },
         "zh-Hans" : {
@@ -11614,13 +11614,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Model hardware"
+            "value" : "Modelul hardware"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Аппаратная модель"
+            "value" : "Модель устройства"
           }
         },
         "sk" : {
@@ -11650,13 +11650,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hardware model"
+            "value" : "Mô hình phần cứng"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "硬件模型"
+            "value" : "硬件型号"
           }
         }
       }
@@ -11686,7 +11686,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Insulin\nAusgesetzt"
+            "value" : "Insulin\nUnterbrochen"
           }
         },
         "en" : {
@@ -11758,7 +11758,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Insulină\nSuspendată"
+            "value" : "Insulină \nSuspendată"
           }
         },
         "ru" : {
@@ -11794,7 +11794,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Insulin\nSuspended"
+            "value" : "Insulin\n Đã tạm ngưng"
           }
         },
         "zh-Hans" : {
@@ -12010,7 +12010,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Consegna dell'insulina"
+            "value" : "Insulina Somministrata"
           }
         },
         "ja" : {
@@ -12034,7 +12034,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dostarczanie insuliny"
+            "value" : "Insulin Delivery"
           }
         },
         "pt-BR" : {
@@ -12052,13 +12052,13 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Доставка инсулина"
+            "value" : "Подача инсулина"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dodávka inzulínu"
+            "value" : "Podávanie inzulínu"
           }
         },
         "sv" : {
@@ -12070,7 +12070,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "İnsülin Dağıtımı"
+            "value" : "İnsülin İletimi"
           }
         },
         "uk" : {
@@ -12082,13 +12082,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Insulin Delivery"
+            "value" : "Khối lượng tiêm insulin"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "胰岛素输送"
+            "value" : "胰岛素推注"
           }
         }
       }
@@ -12154,7 +12154,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Insulina rimanente"
+            "value" : "Insulina Rimanente"
           }
         },
         "ja" : {
@@ -12178,7 +12178,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pozostała insulina"
+            "value" : "Insulin Remaining"
           }
         },
         "pt-BR" : {
@@ -12196,7 +12196,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Остаток инсулина"
+            "value" : "Осталось инсулина"
           }
         },
         "sk" : {
@@ -12208,7 +12208,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kvarvarande insulin"
+            "value" : "Insulin kvar"
           }
         },
         "tr" : {
@@ -12226,7 +12226,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Insulin Remaining"
+            "value" : "Insulin còn lại"
           }
         },
         "zh-Hans" : {
@@ -12274,7 +12274,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Insulina Suspendida"
+            "value" : "Insulina suspendida"
           }
         },
         "fi" : {
@@ -12298,7 +12298,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Insulina sospesa"
+            "value" : "Insulina Sospesa"
           }
         },
         "ja" : {
@@ -12322,7 +12322,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Insulina zawieszona"
+            "value" : "Insulin Suspended"
           }
         },
         "pt-BR" : {
@@ -12334,13 +12334,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Insulină suspendată"
+            "value" : "Administrarea insulinei suspendată"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Инсулин приостановлен"
+            "value" : "Подача приостановлена"
           }
         },
         "sk" : {
@@ -12352,13 +12352,13 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Insulin suspenderat"
+            "value" : "Pump pausad"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "İnsülin Askıya Alındı"
+            "value" : "İnsülin Durduldu"
           }
         },
         "uk" : {
@@ -12370,7 +12370,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Insulin Suspended"
+            "value" : "Đã tạm dừng cấp liều Insulin"
           }
         },
         "zh-Hans" : {
@@ -12429,7 +12429,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tipo de insulina"
+            "value" : "Tipo de Insulina"
           }
         },
         "fi" : {
@@ -12453,7 +12453,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tipo di insulina"
+            "value" : "Tipo di Insulina"
           }
         },
         "ja" : {
@@ -12477,7 +12477,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Typ insuliny"
+            "value" : "Insulin Type"
           }
         },
         "pt-BR" : {
@@ -12501,13 +12501,13 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Typ inzulínu"
+            "value" : "Typ Inzulínu"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Insulin typ"
+            "value" : "Typ av insulin"
           }
         },
         "tr" : {
@@ -12525,7 +12525,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Insulin Type"
+            "value" : "Loại Insulin"
           }
         },
         "zh-Hans" : {
@@ -12669,7 +12669,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Last sync"
+            "value" : "Lần đồng bộ gần đây nhất"
           }
         },
         "zh-Hans" : {
@@ -12777,13 +12777,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Durata de iluminare a ecranului"
+            "value" : "LCD la timp"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Время включения ЖК-дисплея"
+            "value" : "Время отображения экрана"
           }
         },
         "sk" : {
@@ -12813,7 +12813,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lcd on time"
+            "value" : "Màn hình Lcd time"
           }
         },
         "zh-Hans" : {
@@ -12879,13 +12879,13 @@
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "loading"
+            "value" : "טוען"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "caricamento"
+            "value" : "Caricamento..."
           }
         },
         "ja" : {
@@ -12921,7 +12921,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "încărcare"
+            "value" : "Se încarcă..."
           }
         },
         "ru" : {
@@ -12957,13 +12957,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "loading"
+            "value" : "đang tải"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "装载量"
+            "value" : "加载中"
           }
         }
       }
@@ -13065,7 +13065,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Încărcare"
+            "value" : "Se încarcă..."
           }
         },
         "ru" : {
@@ -13209,13 +13209,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Baterie slabă a pompei"
+            "value" : "Baterie pompă descărcată"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Разряженная батарея насоса"
+            "value" : "Низкий заряд батареи помпы"
           }
         },
         "sk" : {
@@ -13245,7 +13245,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Low pump battery"
+            "value" : "Pin của bơm yếu"
           }
         },
         "zh-Hans" : {
@@ -13353,13 +13353,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Memento rezervor scăzut"
+            "value" : "Notificare rezervor scăzut"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Напоминание о низком уровне воды в резервуаре"
+            "value" : "Уведомление о низком уровне инсулина в резервуаре"
           }
         },
         "sk" : {
@@ -13389,13 +13389,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Low reservoir reminder"
+            "value" : "Báo nhắc gần hết thuốc"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "低水位提醒"
+            "value" : "低药量提醒"
           }
         }
       }
@@ -13503,7 +13503,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ручная синхронизация времени работы насоса"
+            "value" : "Ручная синхронизация времени на помпе"
           }
         },
         "sk" : {
@@ -13533,7 +13533,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Manually sync Pump time"
+            "value" : "Đồng bộ thời gian bơm thủ công"
           }
         },
         "zh-Hans" : {
@@ -13641,13 +13641,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Verificare omisă a glicemiei"
+            "value" : "Verificarea glicemiei ratată"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Пропущенный контроль уровня глюкозы в крови"
+            "value" : "Пропущен контроль уровня глюкозы в крови"
           }
         },
         "sk" : {
@@ -13677,7 +13677,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Missed Blood glucose check"
+            "value" : "Không thấy kiểm tra đường huyết"
           }
         },
         "zh-Hans" : {
@@ -13785,13 +13785,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sincronizarea nocturnă a timpului de pompare"
+            "value" : "Sincronizare nocturnă a orei pompei"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ночная синхронизация времени работы насоса"
+            "value" : "Ночная синхронизация времени на помпе"
           }
         },
         "sk" : {
@@ -13827,7 +13827,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "夜间泵时间同步"
+            "value" : "夜间同步泵时间"
           }
         }
       }
@@ -13887,7 +13887,7 @@
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Insulin"
+            "value" : "אין אינסולין"
           }
         },
         "it" : {
@@ -13965,7 +13965,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Insulin"
+            "value" : "Hết Insulin"
           }
         },
         "zh-Hans" : {
@@ -14217,13 +14217,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nu, doar deconectați"
+            "value" : "Nu, doar deconectează-te"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Нет, просто отсоедините"
+            "value" : "Нет, просто отсоединить"
           }
         },
         "sk" : {
@@ -14253,7 +14253,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No, just disconnect"
+            "value" : "Không, chỉ cần ngắt kết nối"
           }
         },
         "zh-Hans" : {
@@ -14397,7 +14397,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No, Keep as is"
+            "value" : "Không, giữ nguyên như vậy"
           }
         },
         "zh-Hans" : {
@@ -14469,7 +14469,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No, conservare la pompa così com'è"
+            "value" : "No, Tieni microinfusore Come È"
           }
         },
         "ja" : {
@@ -14493,7 +14493,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nie, zachowaj pompę w stanie, w jakim jest"
+            "value" : "No, Keep Pump As Is"
           }
         },
         "pt-BR" : {
@@ -14511,7 +14511,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Нет, храните насос как есть"
+            "value" : "Нет, оставить как есть"
           }
         },
         "sk" : {
@@ -14523,13 +14523,13 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nej, behåll pumpen i befintligt skick"
+            "value" : "Nej, behåll pumptid"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hayır, Pompayı Olduğu Gibi Saklayın"
+            "value" : "Hayır güncelleme"
           }
         },
         "uk" : {
@@ -14541,7 +14541,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No, Keep Pump As Is"
+            "value" : "Không, Giữ nguyên"
           }
         },
         "zh-Hans" : {
@@ -14649,13 +14649,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notă: Pompa dumneavoastră Dana are o setare specială care vă permite să reduceți la tăcere semnalele sonore ale pompei Dana. Pentru a activa acest lucru, vă rugăm să contactați distribuitorul Dana"
+            "value" : "Notă: Pompa dumneavoastră Dana are o setare specială care vă permite să dezactivați semnalele sonore ale pompei Dana. Pentru a activa această opțiune, vă rugăm să contactați distribuitorul Dana."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Примечание: Насос Dana имеет специальную настройку, которая позволяет отключить звуковые сигналы насоса Dana. Чтобы включить эту функцию, обратитесь к дистрибьютору Dana."
+            "value" : "Примечание: Помпа Dana имеет специальную настройку, которая позволяет отключить звуковые сигналы. Чтобы включить эту функцию, обратитесь к дистрибьютору Dana"
           }
         },
         "sk" : {
@@ -14685,13 +14685,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Note: You Dana pump has a special setting which allows you to silence your Dana pump beeps. To enable this, please contact your Dana distributor"
+            "value" : "Lưu ý: Máy bơm Dana của bạn có một cài đặt đặc biệt cho phép bạn tắt tiếng bíp của máy bơm Dana. Để bật chức năng này, vui lòng liên hệ với nhà phân phối Dana của bạn"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "注：您的德纳泵有一个特殊设置，允许您将德纳泵的蜂鸣声静音。要启用此功能，请联系您的德纳经销商。"
+            "value" : "注：您的 Dana 泵有一个特殊设置，允许您将德纳泵的蜂鸣声静音。要启用此功能，请联系您的 Dana 经销商。"
           }
         }
       }
@@ -14799,7 +14799,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Окклюзия"
+            "value" : "Закупорка"
           }
         },
         "sk" : {
@@ -14877,7 +14877,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fuera de"
+            "value" : "Apagado"
           }
         },
         "fi" : {
@@ -14925,7 +14925,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wył."
+            "value" : "Wyłącz"
           }
         },
         "pt-BR" : {
@@ -14943,7 +14943,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "С сайта"
+            "value" : "Выключено"
           }
         },
         "sk" : {
@@ -14973,7 +14973,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Off"
+            "value" : "Tắt"
           }
         },
         "zh-Hans" : {
@@ -15003,13 +15003,13 @@
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "OK"
+            "value" : "Oke"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "OK"
+            "value" : "Oke"
           }
         },
         "en" : {
@@ -15021,7 +15021,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "OK"
+            "value" : "Oke"
           }
         },
         "fi" : {
@@ -15033,7 +15033,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "OK"
+            "value" : "Oke"
           }
         },
         "he" : {
@@ -15081,7 +15081,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "OK"
+            "value" : "Ok"
           }
         },
         "ru" : {
@@ -15093,7 +15093,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "OK"
+            "value" : "Oke"
           }
         },
         "sv" : {
@@ -15165,7 +15165,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "En"
+            "value" : "Encendido"
           }
         },
         "fi" : {
@@ -15189,7 +15189,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Su"
+            "value" : "Acceso"
           }
         },
         "ja" : {
@@ -15213,7 +15213,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Na"
+            "value" : "Włącz"
           }
         },
         "pt-BR" : {
@@ -15225,13 +15225,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pe"
+            "value" : "Pornit"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "На сайте"
+            "value" : "Включено"
           }
         },
         "sk" : {
@@ -15261,13 +15261,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "On"
+            "value" : "Bật"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "关于"
+            "value" : "打开"
           }
         }
       }
@@ -15405,13 +15405,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Only Automatic Bolus is supported"
+            "value" : "Chỉ hỗ trợ liều Bolus tự động"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "仅支持自动注射"
+            "value" : "仅支持自动推注大剂量"
           }
         }
       }
@@ -15656,13 +15656,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pin 1"
+            "value" : "Pinul 1"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Контакт 1"
+            "value" : "ПИН 1"
           }
         },
         "sk" : {
@@ -15698,7 +15698,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "引脚 1"
+            "value" : "Pin 1"
           }
         }
       }
@@ -15800,13 +15800,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pin 2"
+            "value" : "Pinul 2"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Контакт 2"
+            "value" : "ПИН 2"
           }
         },
         "sk" : {
@@ -15842,7 +15842,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "引脚 2"
+            "value" : "Pin 2"
           }
         }
       }
@@ -15944,13 +15944,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cod pin necesar"
+            "value" : "Cod PIN necesar"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Требуется пинкод"
+            "value" : "Требуется ПИН-код"
           }
         },
         "sk" : {
@@ -15980,13 +15980,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pincode required"
+            "value" : "Yêu cầu mã Pin"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "需要邮政编码"
+            "value" : "需要 Pin 码"
           }
         }
       }
@@ -16088,13 +16088,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vă rugăm să luați în considerare schimbarea strategiei de dozare în meniul de setare"
+            "value" : "Vă rugăm să luați în considerare schimbarea strategiei de dozare în meniul de setări."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Пожалуйста, рассмотрите возможность изменения стратегии дозирования в меню настроек"
+            "value" : "Пожалуйста, измените стратегию дозирования в меню настроек"
           }
         },
         "sk" : {
@@ -16124,13 +16124,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Please consider changing your dosing strategy in the setting menu"
+            "value" : "Vui lòng cân nhắc thay đổi liều lượng của bạn trong menu cài đặt"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "请考虑在设置菜单中更改配料策略"
+            "value" : "请考虑在设置菜单中更改您的给药策略。"
           }
         }
       }
@@ -16160,7 +16160,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Prime amount"
+            "value" : "Füllmenge"
           }
         },
         "en" : {
@@ -16214,7 +16214,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Prime amount"
+            "value" : "Prime hoeveelheid"
           }
         },
         "pl" : {
@@ -16232,7 +16232,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cantitate amorsare"
+            "value" : "Cantitate de amorsare"
           }
         },
         "ru" : {
@@ -16250,7 +16250,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Prime amount"
+            "value" : "Prime-mängd"
           }
         },
         "tr" : {
@@ -16268,13 +16268,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Prime amount"
+            "value" : "Lượng insulin mồi"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Prime amount"
+            "value" : "预注剂量"
           }
         }
       }
@@ -16526,7 +16526,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Батарея насоса разряжена. Замените его немедленно!"
+            "value" : "Батарея помпы разряжена. Замените ее немедленно!"
           }
         },
         "sk" : {
@@ -16556,7 +16556,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pump battery is empty. Replace it now!"
+            "value" : "Pin của máy bơm đã hết. Hãy thay ngay!"
           }
         },
         "zh-Hans" : {
@@ -16664,13 +16664,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bateria pompei trebuie să fie înlocuită în curând"
+            "value" : "Bateria pompei trebuie înlocuită în curând"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Аккумулятор насоса необходимо заменить в ближайшее время"
+            "value" : "Батарею помпы необходимо заменить в ближайшее время"
           }
         },
         "sk" : {
@@ -16700,7 +16700,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pump battery needs to be replaced soon"
+            "value" : "Pin máy bơm cần được thay thế sớm"
           }
         },
         "zh-Hans" : {
@@ -16814,7 +16814,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ошибка насоса"
+            "value" : "Ошибка помпы"
           }
         },
         "sk" : {
@@ -16958,7 +16958,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Информация о насосе"
+            "value" : "Информация о помпе"
           }
         },
         "sk" : {
@@ -16988,7 +16988,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pump information"
+            "value" : "Thông tin máy bơm"
           }
         },
         "zh-Hans" : {
@@ -17024,7 +17024,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pump is disconnected"
+            "value" : "Pumpe ist getrennt"
           }
         },
         "en" : {
@@ -17078,7 +17078,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pump is disconnected"
+            "value" : "Pomp is ontkoppeld"
           }
         },
         "pl" : {
@@ -17114,7 +17114,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pump is disconnected"
+            "value" : "Pump är frånkopplad"
           }
         },
         "tr" : {
@@ -17132,13 +17132,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pump is disconnected"
+            "value" : "Bơm đã ngắt kết nối"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pump is disconnected"
+            "value" : "泵已断开"
           }
         }
       }
@@ -17246,7 +17246,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Насос по-прежнему отключен"
+            "value" : "Помпа по-прежнему отключена"
           }
         },
         "sk" : {
@@ -17276,7 +17276,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pump is still disconnected"
+            "value" : "Máy bơm vẫn chưa được ngắt kết nối"
           }
         },
         "zh-Hans" : {
@@ -17384,13 +17384,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Denumirea pompei"
+            "value" : "Numele pompei"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Название насоса"
+            "value" : "Название помпы"
           }
         },
         "sk" : {
@@ -17420,7 +17420,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pump name"
+            "value" : "Tên máy bơm"
           }
         },
         "zh-Hans" : {
@@ -17534,7 +17534,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Отключение насоса"
+            "value" : "Отключение помпы"
           }
         },
         "sk" : {
@@ -17672,13 +17672,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Timp de pompare"
+            "value" : "Ora pompei"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Время работы насоса"
+            "value" : "Время на помпе"
           }
         },
         "sk" : {
@@ -17708,7 +17708,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pump time"
+            "value" : "Thời gian của Bơm"
           }
         },
         "zh-Hans" : {
@@ -17816,7 +17816,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reactivarea sincronizării bolusurilor?"
+            "value" : "Reactivați sincronizarea bolusului?"
           }
         },
         "ru" : {
@@ -17852,13 +17852,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Re-enable bolus syncing?"
+            "value" : "Bật lại tính năng đồng bộ bolus không?"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "重新启用栓剂同步？"
+            "value" : "重新启用大剂量同步？"
           }
         }
       }
@@ -17960,19 +17960,19 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Am primit șiruri hexagonale invalide. Încercați din nou"
+            "value" : "Am primit șiruri hexadecimale nevalide. Încercați din nou."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Получены недопустимые шестнадцатеричные строки. Попробуйте еще раз"
+            "value" : "Заданы недопустимые символы. Попробуйте еще раз"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Prijaté neplatné hexadecimálne reťazce. Skúste to znova"
+            "value" : "Prijaté neplatné hexadecimálné reťazce. Skúste to znova"
           }
         },
         "sv" : {
@@ -17996,7 +17996,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Received invalid hex strings. Try again"
+            "value" : "Chuỗi hex không hợp lệ. Hãy thử lại"
           }
         },
         "zh-Hans" : {
@@ -18104,13 +18104,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "S-au primit lungimi ale codului PIN invalide. Încercați din nou"
+            "value" : "Am primit lungimi de cod PIN nevalide. Încercați din nou."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Получена неверная длина пинкода. Попробуйте еще раз"
+            "value" : "Неверная длина ПИН-кода. Попробуйте еще раз"
           }
         },
         "sk" : {
@@ -18140,7 +18140,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Received invalid pincode lengths. Try again"
+            "value" : "Độ dài mã pin không hợp lệ. Hãy thử lại"
           }
         },
         "zh-Hans" : {
@@ -18176,7 +18176,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reconnect to pump"
+            "value" : "Erneut mit der Pumpe verbinden"
           }
         },
         "en" : {
@@ -18230,7 +18230,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reconnect to pump"
+            "value" : "Opnieuw verbinden met pomp"
           }
         },
         "pl" : {
@@ -18248,7 +18248,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reconectați la pompă"
+            "value" : "Reconectare la pompă"
           }
         },
         "ru" : {
@@ -18266,7 +18266,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reconnect to pump"
+            "value" : "Återanslut till pump"
           }
         },
         "tr" : {
@@ -18284,13 +18284,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reconnect to pump"
+            "value" : "Kết nối lại máy bơm"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reconnect to pump"
+            "value" : "重新连接到泵"
           }
         }
       }
@@ -18392,13 +18392,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reconectați la pompa"
+            "value" : "Reconectare la pompă"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Снова подключите насос ТП"
+            "value" : "Переподключиться к помпе"
           }
         },
         "sk" : {
@@ -18428,13 +18428,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reconnect tp pump"
+            "value" : "Kết nối lại máy bơm"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "重新连接 TP 泵"
+            "value" : "重新连接到泵"
           }
         }
       }
@@ -18536,13 +18536,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reconectarea..."
+            "value" : "Reconectare..."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Воссоединение..."
+            "value" : "Переподключение..."
           }
         },
         "sk" : {
@@ -18572,7 +18572,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reconnecting..."
+            "value" : "Đang kết nối lại..."
           }
         },
         "zh-Hans" : {
@@ -18680,13 +18680,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cantitatea de reumplere"
+            "value" : "Cantitate de reumplere"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Количество заправок"
+            "value" : "Остаток в резервуаре"
           }
         },
         "sk" : {
@@ -18716,7 +18716,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Refill amount"
+            "value" : "Số lượng nạp lại"
           }
         },
         "zh-Hans" : {
@@ -18824,13 +18824,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nivelul rămas de insulină"
+            "value" : "Nivelul de insulină rămas"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Остаточный уровень инсулина"
+            "value" : "Количество оставшегося инсулина"
           }
         },
         "sk" : {
@@ -18860,13 +18860,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Remaining insulin level"
+            "value" : "Mức insulin còn lại"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "胰岛素剩余水平"
+            "value" : "胰岛素余量"
           }
         }
       }
@@ -18908,7 +18908,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quitar la bomba"
+            "value" : "Retire la bomba"
           }
         },
         "fi" : {
@@ -18932,7 +18932,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Rimuovere la pompa"
+            "value" : "Rimuovi microinfusore"
           }
         },
         "ja" : {
@@ -18956,7 +18956,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Usuń pompę"
+            "value" : "Remove Pump"
           }
         },
         "pt-BR" : {
@@ -18968,31 +18968,31 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Îndepărtați pompa"
+            "value" : "Ștergeți pompa"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Снимите насос"
+            "value" : "Снимите Под"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Odstrániť pumpu"
+            "value" : "Odstrániť Pod"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ta bort pumpen"
+            "value" : "Ta bort podd"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pompayı Çıkarın"
+            "value" : "Pompayı Çıkart"
           }
         },
         "uk" : {
@@ -19004,13 +19004,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Remove Pump"
+            "value" : "Thay bơm"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "卸下泵"
+            "value" : "移除泵"
           }
         }
       }
@@ -19112,7 +19112,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cantitate rezervor"
+            "value" : "Cantitatea rezervorului"
           }
         },
         "ru" : {
@@ -19124,7 +19124,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Množstvo v zásobníku"
+            "value" : "Množstvo zásobníka"
           }
         },
         "sv" : {
@@ -19148,13 +19148,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reservoir amount"
+            "value" : "Lượng bình chứa"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "水库容量"
+            "value" : "药筒容量"
           }
         }
       }
@@ -19292,13 +19292,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reservoir and cannula"
+            "value" : "Reservoir và cannula"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "蓄水池和插管"
+            "value" : "药筒和套管"
           }
         }
       }
@@ -19412,7 +19412,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zásobník je prázdny. Vymeňte ho teraz!"
+            "value" : "Zásobník je prázdna. Teraz ho vymeňte!"
           }
         },
         "sv" : {
@@ -19436,13 +19436,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reservoir is empty. Replace it now!"
+            "value" : "Bình chứa đã cạn. Hãy thay thế ngay!"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "蓄水池已空。立即更换！"
+            "value" : "药筒已空。请立即更换！"
           }
         }
       }
@@ -19580,13 +19580,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reservoir/cannula refill"
+            "value" : "Nạp lại Reservoir/cannula"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "储液器/管筒注水"
+            "value" : "更换药筒和套管"
           }
         }
       }
@@ -19616,7 +19616,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lebenslauf"
+            "value" : "fortsetzen"
           }
         },
         "en" : {
@@ -19706,7 +19706,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Meritförteckning"
+            "value" : "Återuppta"
           }
         },
         "tr" : {
@@ -19724,13 +19724,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Resume"
+            "value" : "Tiếp tục"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "简历"
+            "value" : "恢复"
           }
         }
       }
@@ -19772,7 +19772,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Entrega de currículum"
+            "value" : "Reanudar la entrega de insulina"
           }
         },
         "fi" : {
@@ -19796,7 +19796,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Consegna del curriculum"
+            "value" : "Riprendi erogazione"
           }
         },
         "ja" : {
@@ -19820,7 +19820,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wznowienie dostawy"
+            "value" : "Wznów podawanie"
           }
         },
         "pt-BR" : {
@@ -19838,7 +19838,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Доставка резюме"
+            "value" : "Возобновить подачу"
           }
         },
         "sk" : {
@@ -19850,13 +19850,13 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Leverans av CV"
+            "value" : "Återuppta insulintillförsel"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Özgeçmiş teslimatı"
+            "value" : "İletimi Devam Ettir"
           }
         },
         "uk" : {
@@ -19868,13 +19868,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Resume delivery"
+            "value" : "Tiếp tục lại việc tiêm insulin"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "简历交付"
+            "value" : "恢复推注"
           }
         }
       }
@@ -19940,7 +19940,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Risparmiare"
+            "value" : "Salva"
           }
         },
         "ja" : {
@@ -19976,7 +19976,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Salvați"
+            "value" : "Salvează"
           }
         },
         "ru" : {
@@ -20012,13 +20012,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Save"
+            "value" : "Lưu"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "节省"
+            "value" : "保存"
           }
         }
       }
@@ -20060,7 +20060,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Escaneado"
+            "value" : "Buscando"
           }
         },
         "fi" : {
@@ -20084,7 +20084,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scansione"
+            "value" : "Lettura"
           }
         },
         "ja" : {
@@ -20108,7 +20108,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Skanowanie"
+            "value" : "Scanning"
           }
         },
         "pt-BR" : {
@@ -20132,19 +20132,19 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Skenovanie"
+            "value" : "Skenuje sa"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Skanning"
+            "value" : "Skannar"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tarama"
+            "value" : "Taranıyor"
           }
         },
         "uk" : {
@@ -20156,13 +20156,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scanning"
+            "value" : "Đang quét"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "扫描"
+            "value" : "扫描中"
           }
         }
       }
@@ -20204,7 +20204,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Basal programado"
+            "value" : "Basal programada"
           }
         },
         "fi" : {
@@ -20228,7 +20228,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Basale programmato"
+            "value" : "Basale programmata"
           }
         },
         "ja" : {
@@ -20252,7 +20252,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zaplanowane podstawowe"
+            "value" : "Scheduled Basal"
           }
         },
         "pt-BR" : {
@@ -20264,13 +20264,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bazala programată"
+            "value" : "Bazală programată"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Плановая базальная"
+            "value" : "Запланированный Базал"
           }
         },
         "sk" : {
@@ -20282,13 +20282,13 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Schemalagd Basal"
+            "value" : "Schemalagd basal"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Planlanmış Bazal"
+            "value" : "Programlanmış Bazal"
           }
         },
         "uk" : {
@@ -20300,13 +20300,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scheduled Basal"
+            "value" : "Đã lên chương trình cho liều Basal"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "预定的基质"
+            "value" : "预设基础率"
           }
         }
       }
@@ -20444,7 +20444,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scroll function"
+            "value" : "Chức năng cuộn"
           }
         },
         "zh-Hans" : {
@@ -20510,7 +20510,7 @@
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "sec"
+            "value" : "שניה"
           }
         },
         "it" : {
@@ -20624,7 +20624,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select insulin type"
+            "value" : "Insulinart auswählen"
           }
         },
         "en" : {
@@ -20678,7 +20678,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select insulin type"
+            "value" : "Selecteer type insuline"
           }
         },
         "pl" : {
@@ -20702,7 +20702,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select insulin type"
+            "value" : "Выбрать тип инсулина"
           }
         },
         "sk" : {
@@ -20714,7 +20714,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select insulin type"
+            "value" : "Välj insulintyp"
           }
         },
         "tr" : {
@@ -20732,13 +20732,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select insulin type"
+            "value" : "Chọn loại insulin"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select insulin type"
+            "value" : "选择胰岛素类型"
           }
         }
       }
@@ -20851,7 +20851,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Selectați tipul de insulină pe care îl veți utiliza în această pompă"
+            "value" : "Selectați tipul de insulină pe care îl veți utiliza în această pompă."
           }
         },
         "ru" : {
@@ -20887,7 +20887,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select the type of insulin that you will be using in this pump"
+            "value" : "Chọn loại insulin mà bạn sẽ sử dụng trong máy bơm này"
           }
         },
         "zh-Hans" : {
@@ -20905,7 +20905,7 @@
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select the type of insulin that you will be using in this pump."
+            "value" : "حدد نوع الأنسولين الذي ستستخدمه في هذه المضخة."
           }
         },
         "cs" : {
@@ -20917,13 +20917,13 @@
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select the type of insulin that you will be using in this pump."
+            "value" : "Vælg den type insulin, du skal bruge i denne pumpe."
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select the type of insulin that you will be using in this pump."
+            "value" : "Wählen Sie die Art des Insulins aus, die Sie in dieser Pumpe verwenden möchten."
           }
         },
         "en" : {
@@ -20935,19 +20935,19 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select the type of insulin that you will be using in this pump."
+            "value" : "Seleccione el tipo de insulina que utilizará en esta bomba."
           }
         },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select the type of insulin that you will be using in this pump."
+            "value" : "Valitse insuliinin tyyppi, jota käytät tässä pumpussa."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select the type of insulin that you will be using in this pump."
+            "value" : "Sélectionnez le type d'insuline que vous utiliserez dans cette pompe."
           }
         },
         "he" : {
@@ -20959,7 +20959,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select the type of insulin that you will be using in this pump."
+            "value" : "Seleziona il tipo di insulina che utilizzerai in questo microinfusore."
           }
         },
         "ja" : {
@@ -20977,13 +20977,13 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select the type of insulin that you will be using in this pump."
+            "value" : "Selecteer het type insuline dat je in deze pomp gaat gebruiken."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select the type of insulin that you will be using in this pump."
+            "value" : "Wybierz rodzaj insuliny, której będziesz używać w pompie."
           }
         },
         "pt-BR" : {
@@ -20995,13 +20995,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Selectați tipul de insulină pe care o veţi utiliza în această pompă."
+            "value" : "Selectați tipul de insulină pe care îl veți utiliza în această pompă."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select the type of insulin that you will be using in this pump."
+            "value" : "Выберите тип инсулина, который вы будете использовать в этой помпе."
           }
         },
         "sk" : {
@@ -21013,13 +21013,13 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select the type of insulin that you will be using in this pump."
+            "value" : "Välj vilken typ av insulin du kommer att använda."
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select the type of insulin that you will be using in this pump."
+            "value" : "Bu pompada kullanacağınız insülin tipini seçin."
           }
         },
         "uk" : {
@@ -21031,13 +21031,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select the type of insulin that you will be using in this pump."
+            "value" : "Chọn loại insulin bạn sẽ sử dụng trong máy bơm này."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select the type of insulin that you will be using in this pump."
+            "value" : "选择您将在此泵中使用的胰岛素类型。"
           }
         }
       }
@@ -21145,7 +21145,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Установите напоминание об отключении"
+            "value" : "Установить напоминание при отключении"
           }
         },
         "sk" : {
@@ -21175,7 +21175,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Set reminder for disconnect"
+            "value" : "Đặt lời nhắc ngắt kết nối"
           }
         },
         "zh-Hans" : {
@@ -21433,7 +21433,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Установка базальной температуры на данный момент не поддерживается"
+            "value" : "Установка временной базальной скорости на данный момент не поддерживается"
           }
         },
         "sk" : {
@@ -21463,13 +21463,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Setting temp basal is not supported at this time"
+            "value" : "Cài đặt liều temp basal không được hỗ trợ tại thời điểm này"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "目前不支持设置基础温度"
+            "value" : "目前不支持设置临时基础率"
           }
         }
       }
@@ -21607,7 +21607,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Setting up Dana-i"
+            "value" : "Thiết lập Dana-i"
           }
         },
         "zh-Hans" : {
@@ -21751,7 +21751,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Setting up DanaRS v3"
+            "value" : "Thiết lập DanaRS v3"
           }
         },
         "zh-Hans" : {
@@ -21781,13 +21781,13 @@
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Setup Complete"
+            "value" : "Opsætning fuldført"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Setup Complete"
+            "value" : "Einrichtung fertig"
           }
         },
         "en" : {
@@ -21799,7 +21799,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Setup Complete"
+            "value" : "Configuración completada"
           }
         },
         "fi" : {
@@ -21811,7 +21811,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Setup Complete"
+            "value" : "Mise en place terminée"
           }
         },
         "he" : {
@@ -21823,7 +21823,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Setup Complete"
+            "value" : "Installazione Completata"
           }
         },
         "ja" : {
@@ -21841,7 +21841,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Setup Complete"
+            "value" : "Setup voltooid"
           }
         },
         "pl" : {
@@ -21859,13 +21859,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Setup Complete"
+            "value" : "Configurare finalizată"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Setup Complete"
+            "value" : "Настройка завершена"
           }
         },
         "sk" : {
@@ -21877,13 +21877,13 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Setup Complete"
+            "value" : "Inställning färdig"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Setup Complete"
+            "value" : "Kurulum tamamlandı"
           }
         },
         "uk" : {
@@ -21895,13 +21895,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Setup Complete"
+            "value" : "Cài đặt hoàn thành"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Setup Complete"
+            "value" : "设置完成"
           }
         }
       }
@@ -21967,7 +21967,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Condividi i registri delle pompe Dana"
+            "value" : "Condividi i registri della pompa Dana"
           }
         },
         "ja" : {
@@ -22003,13 +22003,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Partajează jurnalele pompei Dana"
+            "value" : "Partajați jurnalele pompei Dana"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Поделитесь журналом Насос Dana"
+            "value" : "Поделиться логами Dana"
           }
         },
         "sk" : {
@@ -22039,13 +22039,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Share Dana pump logs"
+            "value" : "Chia sẻ nhật ký bơm Dana"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "分享德纳泵日志"
+            "value" : "分享 Dana 泵日志"
           }
         }
       }
@@ -22111,7 +22111,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "L'ora deve essere visualizzata in 12 o 24 ore"
+            "value" : "L'orario dovrebbe essere visualizzato in 12 o 24 ore?"
           }
         },
         "ja" : {
@@ -22153,7 +22153,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Время должно отображаться в 12 или 24 часах"
+            "value" : "Показывать время в 12ч или 24ч формате"
           }
         },
         "sk" : {
@@ -22183,7 +22183,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Should time be display in 12h or 24h"
+            "value" : "Thời gian được hiển thị 12h hoặc 24h"
           }
         },
         "zh-Hans" : {
@@ -22327,7 +22327,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Signal Loss"
+            "value" : "Mất tín hiệu"
           }
         },
         "zh-Hans" : {
@@ -22471,7 +22471,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sound"
+            "value" : "Âm thanh"
           }
         },
         "zh-Hans" : {
@@ -22621,7 +22621,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "现状"
+            "value" : "状态"
           }
         }
       }
@@ -22729,7 +22729,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Шаг 1: заправка канюли"
+            "value" : "Шаг 1: Заправка канюли"
           }
         },
         "sk" : {
@@ -22759,13 +22759,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Step 1: Prime cannula"
+            "value" : "Bước 1: Prime cannula"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "步骤 1：插管填料"
+            "value" : "步骤 1：排空套管"
           }
         }
       }
@@ -22873,7 +22873,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Шаг 1: Установите уровень резервуара"
+            "value" : "Шаг 1: Задайте уровень в резервуаре"
           }
         },
         "sk" : {
@@ -22903,13 +22903,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Step 1: Set reservoir level"
+            "value" : "Bước 1: Đặt mức Reservoir"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "步骤 1：设置蓄水池水位"
+            "value" : "步骤 1：设置药筒药量"
           }
         }
       }
@@ -23011,19 +23011,19 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pasul 2: Setați cantitatea de reumplere a cateterului"
+            "value" : "Pasul 2: Setați cantitatea de reumplere a tubului"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Шаг 2: Установите количество пополнения тюбика"
+            "value" : "Шаг 2: Задайте объем заполнения трубки"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Krok 2: Nastavenie množstva náplne do hadičky"
+            "value" : "Krok 2: Nastavenie množstva náplne do tuby"
           }
         },
         "sv" : {
@@ -23047,13 +23047,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Step 2: Set tube refill amount"
+            "value" : "Bước 2: Đặt lượng ống nạp lại"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "步骤 2：设置软管填充量"
+            "value" : "步骤 2：设置导管充注量"
           }
         }
       }
@@ -23161,7 +23161,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Прекратите базальную температуру"
+            "value" : "Остановить временную базальную скорость"
           }
         },
         "sk" : {
@@ -23191,13 +23191,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stop temp basal"
+            "value" : "Tạm dừng liều temp basal"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "停止基础温度"
+            "value" : "停止临时基础率"
           }
         }
       }
@@ -23227,7 +23227,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "aussetzen."
+            "value" : "unterbrechen"
           }
         },
         "en" : {
@@ -23311,13 +23311,13 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pozastaviť"
+            "value" : "Pozastavenie"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avvakta"
+            "value" : "Pausa"
           }
         },
         "tr" : {
@@ -23335,7 +23335,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Suspend"
+            "value" : "Đã tạm dừng"
           }
         },
         "zh-Hans" : {
@@ -23443,13 +23443,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Suspendarea livrării"
+            "value" : "Suspendați livrarea"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Приостановить доставку"
+            "value" : "Приостановить подачу"
           }
         },
         "sk" : {
@@ -23479,13 +23479,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Suspend delivery"
+            "value" : "Tạm ngưng liều insulin"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "暂停交付"
+            "value" : "暂停推注"
           }
         }
       }
@@ -23587,13 +23587,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sincronizarea datelor pompei"
+            "value" : "Sincronizați datele pompei"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Синхронизация данных насоса"
+            "value" : "Синхронизация данных помпы"
           }
         },
         "sk" : {
@@ -23623,7 +23623,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sync pump data"
+            "value" : "Đồng bộ dữ liệu bơm"
           }
         },
         "zh-Hans" : {
@@ -23671,7 +23671,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Temp Basal"
+            "value" : "Insulina basal temporal"
           }
         },
         "fi" : {
@@ -23695,7 +23695,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Temperatura basale"
+            "value" : "Basale temporanea"
           }
         },
         "ja" : {
@@ -23719,7 +23719,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Temp. podstawowa"
+            "value" : "Temp Basal"
           }
         },
         "pt-BR" : {
@@ -23731,13 +23731,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Temperatură bazală"
+            "value" : "Bazală temporară"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Базальная температура"
+            "value" : "Врем. базал"
           }
         },
         "sk" : {
@@ -23749,13 +23749,13 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Temp Basal"
+            "value" : "Temporär basal"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sıcaklık Bazal"
+            "value" : "Geçici Bazal Oranı"
           }
         },
         "uk" : {
@@ -23773,7 +23773,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "基础温度"
+            "value" : "临时基础率"
           }
         }
       }
@@ -24163,13 +24163,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Administrarea insulinei a fost suspendată. Acțiune eșuată"
+            "value" : "Administrarea insulinei a fost suspendată. Acțiunea a eșuat."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Доставка инсулина была приостановлена. Действие не удалось"
+            "value" : "Подача инсулина была приостановлена. Действие не удалось"
           }
         },
         "sk" : {
@@ -24199,7 +24199,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The insulin delivery has been suspend. Action failed"
+            "value" : "Việc cung cấp insulin đã bị tạm dừng. Hành động không thành công"
           }
         },
         "zh-Hans" : {
@@ -24307,13 +24307,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Limita maximă de bolus a fost atinsă. Vă rugăm să încercați o cantitate mai mică sau să măriți limita"
+            "value" : "Limita maximă de bolus a fost atinsă. Vă rugăm să încercați o cantitate mai mică sau să măriți limita."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Максимальный лимит болюса достигнут. Пожалуйста, попробуйте меньшее количество или увеличьте лимит"
+            "value" : "Лимит болюса достигнут. Попробуйте задать меньшее количество или увеличьте лимит"
           }
         },
         "sk" : {
@@ -24343,13 +24343,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The max bolus limit is reached. Please try a lower amount or increase the limit"
+            "value" : "Đã đạt đến giới hạn bolus tối đa. Vui lòng thử lượng thấp hơn hoặc tăng giới hạn"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "已达到最大药量限制。请尝试更低的量或增加限制"
+            "value" : "已达到最大剂量上限。请尝试更低的大剂量或提高上限"
           }
         }
       }
@@ -24451,13 +24451,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Limita maximă zilnică de insulină a fost atinsă. Vă rugăm să încercați o cantitate mai mică sau să măriți limita"
+            "value" : "Limita maximă zilnică de insulină a fost atinsă. Vă rugăm să încercați o cantitate mai mică sau să creșteți limita."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Максимальный суточный лимит инсулина достигнут. Пожалуйста, попробуйте использовать меньшее количество или увеличьте лимит"
+            "value" : "Суточный лимит инсулина достигнут. Попробуйте задать меньшее количество или увеличьте лимит"
           }
         },
         "sk" : {
@@ -24487,7 +24487,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The max daily insulin limit is reached. Please try a lower amount or increase the limit"
+            "value" : "Đã đạt đến giới hạn insulin tối đa hàng ngày. Vui lòng thử lượng thấp hơn hoặc tăng giới hạn"
           }
         },
         "zh-Hans" : {
@@ -24595,13 +24595,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pompa a detectat o problemă cu șaiba sa. Vă rugăm să scoateți rezervorul, să verificați totul și să încercați din nou"
+            "value" : "Pompa a detectat o problemă cu axul. Vă rugăm să scoateți rezervorul, să verificați totul și să încercați din nou."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Насос обнаружил проблему с валом. Пожалуйста, снимите резервуар, проверьте все и повторите попытку"
+            "value" : "Помпа обнаружила проблему с валом. Пожалуйста, снимите резервуар, проверьте все и повторите попытку"
           }
         },
         "sk" : {
@@ -24631,7 +24631,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The pump has detected an issue with its chaft. Please remove the reservoir, check everything and try again"
+            "value" : "Máy bơm đã phát hiện ra sự cố với chaft của nó. Vui lòng tháo bình chứa, kiểm tra mọi thứ và thử lại"
           }
         },
         "zh-Hans" : {
@@ -24667,7 +24667,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The pump reminds you when the amount of insulin in the pump reaches this level"
+            "value" : "Die Pumpe erinnert dich, wenn die Insulinmenge in der Pumpe diesen Wert erreicht."
           }
         },
         "en" : {
@@ -24721,7 +24721,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The pump reminds you when the amount of insulin in the pump reaches this level"
+            "value" : "De pomp herinnert je wanneer de hoeveelheid insuline in de pomp dit niveau bereikt"
           }
         },
         "pl" : {
@@ -24739,7 +24739,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pompa vă va reaminti când cantitatea de insulină din pompă atinge acest nivel"
+            "value" : "Pompa vă reamintește când cantitatea de insulină din pompă atinge acest nivel"
           }
         },
         "ru" : {
@@ -24751,13 +24751,13 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pumpa vám pripomenie, keď množstvo inzulínu v pumpe dosiahne túto úroveň."
+            "value" : "Pumpa ťa upozorní, keď množstvo inzulínu v pumpe dosiahne túto úroveň"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The pump reminds you when the amount of insulin in the pump reaches this level"
+            "value" : "Pumpen kommer att påminna dig när mängd insulin i pumpen når denna nivå"
           }
         },
         "tr" : {
@@ -24775,13 +24775,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The pump reminds you when the amount of insulin in the pump reaches this level"
+            "value" : "Bơm sẽ nhắc bạn khi lượng insulin trong bơm đạt đến mức này"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The pump reminds you when the amount of insulin in the pump reaches this level"
+            "value" : "当泵中的胰岛素量达到此水平时，泵会提醒您"
           }
         }
       }
@@ -24811,7 +24811,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Die Zeit auf Ihrer Pumpe weicht von der aktuellen Zeit ab. Möchten Sie die Zeit auf Ihrer Pumpe auf die aktuelle Zeit aktualisieren?"
+            "value" : "Die Zeit Ihrer Pumpe weicht ab. Jetzt auf aktuelle Zeit stellen?"
           }
         },
         "en" : {
@@ -24919,7 +24919,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The time on your pump is different from the current time. Do you want to update the time on your pump to the current time?"
+            "value" : "Thời gian trên máy bơm của bạn khác với thời gian hiện tại. Bạn có muốn cập nhật thời gian trên máy bơm của mình đến thời điểm hiện tại không?"
           }
         },
         "zh-Hans" : {
@@ -24967,7 +24967,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "La hora de su bomba es diferente de la hora actual. La hora de su bomba controla los ajustes programados de su terapia. Desplácese hacia abajo hasta la fila Hora de la bomba para revisar la diferencia horaria y configurar su bomba."
+            "value" : "La hora de su bomba es diferente de la hora actual. La hora de su bomba controla los ajustes programados de su terapia. Desplácese hacia abajo hasta la fila que muestra la Hora de la Bomba para revisar la diferencia horaria y configurar su bomba."
           }
         },
         "fi" : {
@@ -24991,7 +24991,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "L'ora del microinfusore è diversa dall'ora corrente. L'ora del microinfusore controlla le impostazioni della terapia programmata. Scorrere la riga dell'ora del microinfusore per verificare la differenza di orario e configurare il microinfusore."
+            "value" : "L'orario impostato nel microinfusore è diverso dall'orario corrente. L'orario del microinfusore detta e controlla le impostazioni della terapia programmata e va corretto: Nella lista degli 'orari del microinfusore verificare la differenza di orario e configurare correttamente il microinfusore."
           }
         },
         "ja" : {
@@ -25015,7 +25015,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Godzina na pompie różni się od aktualnej godziny. Czas pompy steruje ustawieniami zaplanowanej terapii. Przewiń w dół do wiersza Pump Time (Czas pompy), aby sprawdzić różnicę czasu i skonfigurować pompę."
+            "value" : "Czas na pompie różni się od aktualnego czasu. Czas pompy steruje ustawieniami zaplanowanej terapii. Przewiń w dół do wiersza Czas pompy, aby przejrzeć różnicę czasu i skonfigurować pompę."
           }
         },
         "pt-BR" : {
@@ -25027,13 +25027,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ora de pe pompă este diferită de ora curentă. Ora pompei controlează setările terapiei programate. Derulați în jos până la rândul Ora pompei pentru a verifica diferența de oră și pentru a configura pompa."
+            "value" : "Ora pompei este diferită de ora curentă. Ora pompei dvs. controlează setările de terapie programate. Derulați în jos la rândul Ora pompei pentru a revizui diferența de oră și a configura pompa dvs."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Время на вашей помпе отличается от текущего времени. Время на помпе контролирует настройки запланированной терапии. Прокрутите вниз до строки \"Время на помпе\", чтобы просмотреть разницу во времени и настроить свою помпу."
+            "value" : "Время на помпе отличается от текущего времени. Время вашей помпы контролирует ваши запланированные настройки терапии. Прокрутите вниз до строки времени помпы, чтобы просмотреть разницу во времени и настроить помпу."
           }
         },
         "sk" : {
@@ -25045,13 +25045,13 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tiden på din pump skiljer sig från aktuell tid. Pumpens tid styr dina schemalagda behandlingsinställningar. Scrolla ner till raden Pumptid för att granska tidsskillnaden och konfigurera din pump."
+            "value" : "Tiden på din pump skiljer sig från verklig tid. Pumpens tid styr dina schemalagda terapiinställningar. Bläddra ner till raden Pump Tid för att ändra."
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pompanızdaki saat, geçerli saatten farklıdır. Pompanızın saati programlanmış terapi ayarlarınızı kontrol eder. Saat farkını incelemek ve pompanızı yapılandırmak için Pompa Saati satırına ilerleyin."
+            "value" : "Pompanızdaki saat, geçerli saatten farklı. Pompanızın zamanı, planlanmış tedavi ayarlarınızı kontrol eder. Saat farkını gözden geçirmek ve pompanızı yapılandırmak için Pompa Saati satırına ilerleyin."
           }
         },
         "uk" : {
@@ -25063,7 +25063,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The time on your pump is different from the current time. Your pump’s time controls your scheduled therapy settings. Scroll down to Pump Time row to review the time difference and configure your pump."
+            "value" : "Thời gian trên máy bơm của bạn khác với thời gian hiện tại. Thời gian của máy bơm sẽ kiểm soát cài đặt trị liệu theo lịch trình của bạn. Cuộn xuống đến Pump Time để xem lại chênh lệch thời gian và cấu hình bơm của bạn."
           }
         },
         "zh-Hans" : {
@@ -25171,13 +25171,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nu a existat nicio interacțiune cu pompa de prea mult timp. Fie dezactivați această funcție în pompă, fie interacționați cu pompa"
+            "value" : "Nu au existat interacțiuni cu pompa de prea mult timp. Fie dezactivați această funcție în pompă, fie interacționați cu pompa."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Слишком долго не было никаких взаимодействий с насосом. Либо отключите эту функцию в насосе, либо взаимодействуйте с насосом"
+            "value" : "Слишком долго не было никаких взаимодействий с помпой. Либо отключите эту функцию в помпе, либо взаимодействуйте с помпой"
           }
         },
         "sk" : {
@@ -25207,13 +25207,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "There has not been any interactions with the pump for too long. Either disable this function in the pump or interact with the pump"
+            "value" : "Đã không có bất kỳ tương tác nào với máy bơm trong thời gian quá dài. Hãy vô hiệu hóa chức năng này trong máy bơm hoặc tương tác với máy bơm"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "太久没有与泵进行任何交互。要么禁用泵中的这一功能，要么与泵进行交互"
+            "value" : "长时间未与胰岛素泵进行交互。请在胰岛素泵中禁用此功能，或进行一次操作以恢复交互。"
           }
         }
       }
@@ -25303,7 +25303,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ta metoda napełniania jest używana wyłącznie w sytuacji, gdy pompa nie jest w stanie zapewnić możliwości ponownego napełnienia zbiornika lub zalania kaniuli."
+            "value" : "Ta metoda uzupełniania jest przeznaczona tylko wtedy, gdy pompa nie może zapewnić możliwości uzupełnienia zbiornika lub zalania kaniuli"
           }
         },
         "pt-BR" : {
@@ -25315,13 +25315,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Această metodă de reumplere este destinată doar cazurilor în care pompa nu poate oferi o modalitate de reumplere a rezervorului sau de amorsare a canulei"
+            "value" : "Această metodă de reumplere este destinată numai atunci când pompa nu poate oferi o modalitate de a umple rezervorul sau de a amorsa canula"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Этот способ заправки предназначен только для тех случаев, когда насос не может обеспечить пополнение резервуара или заправки канюли"
+            "value" : "Этот способ заправки предназначен только для тех случаев, когда помпа не может обеспечить заполнение резервуара или заправку канюли"
           }
         },
         "sk" : {
@@ -25351,7 +25351,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "This method of refilling is only intended for when the pump cannot provide a way to refill the reservoir or prime the cannula"
+            "value" : "Phương pháp nạp lại này chỉ dành cho trường hợp máy bơm không thể nạp lại bình chứa hoặc mồi ống thông"
           }
         },
         "zh-Hans" : {
@@ -25387,7 +25387,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erkannte Zeitänderung"
+            "value" : "Zeitänderung erkannt"
           }
         },
         "en" : {
@@ -25477,7 +25477,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tidsändring detekterad"
+            "value" : "Tidsjustering upptäckt"
           }
         },
         "tr" : {
@@ -25495,13 +25495,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Time Change Detected"
+            "value" : "Đã phát hiện thay đổi thời gian"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "检测到的时间变化"
+            "value" : "检测到时间变更"
           }
         }
       }
@@ -25609,13 +25609,13 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bluetooth modus schakelen"
+            "value" : "Переключить режим Bluetooth"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Prepínanie režimu Bluetooth"
+            "value" : "Bluetooth modus schakelen"
           }
         },
         "sv" : {
@@ -25639,7 +25639,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Toggle Bluetooth mode"
+            "value" : "Chuyển đổi chế độ Bluetooth"
           }
         },
         "zh-Hans" : {
@@ -25753,7 +25753,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Тумблер без звука?"
+            "value" : "Включить фоновый звук?"
           }
         },
         "sk" : {
@@ -25783,13 +25783,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Toggle silent tone?"
+            "value" : "Chuyển đổi chế độ im lặng không?"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "切换无声音调？"
+            "value" : "切换静音提示音？"
           }
         }
       }
@@ -25891,13 +25891,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cantitate umplere cateter"
+            "value" : "Cantitate de reumplere a tubului"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Количество пополнений в тюбике"
+            "value" : "Объем заполнения трубки"
           }
         },
         "sk" : {
@@ -25927,13 +25927,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tube refill amount"
+            "value" : "Lượng ống nạp lại"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "软管填充量"
+            "value" : "输注管补药剂量"
           }
         }
       }
@@ -26035,13 +26035,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tip de reumplere"
+            "value" : "Tipul de reumplere"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Тип пополнения"
+            "value" : "Тип заправки"
           }
         },
         "sk" : {
@@ -26071,13 +26071,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Type of refill"
+            "value" : "Kiểu nạp lại"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "笔芯类型"
+            "value" : "补充方式"
           }
         }
       }
@@ -26185,25 +26185,25 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "U"
+            "value" : "Ед"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "U"
+            "value" : "J"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "U"
+            "value" : "E"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "U"
+            "value" : "Ü"
           }
         },
         "uk" : {
@@ -26311,7 +26311,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "U/godz."
+            "value" : "U/hr"
           }
         },
         "pt-BR" : {
@@ -26329,25 +26329,25 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "у/час"
+            "value" : "Ед/ч"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "U/hod"
+            "value" : "J/hod"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "U/timme"
+            "value" : "IE/h"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "U/saat"
+            "value" : "Ü/Sa"
           }
         },
         "uk" : {
@@ -26455,7 +26455,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nieznany"
+            "value" : "Nieznana"
           }
         },
         "pt-BR" : {
@@ -26473,7 +26473,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Неизвестный"
+            "value" : "Неизвестно"
           }
         },
         "sk" : {
@@ -26503,7 +26503,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Unknown"
+            "value" : "Không xác định"
           }
         },
         "zh-Hans" : {
@@ -26647,7 +26647,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Unknown error"
+            "value" : "Lỗi không xác định"
           }
         },
         "zh-Hans" : {
@@ -26761,7 +26761,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Пользовательские опции"
+            "value" : "Настройки пользователя"
           }
         },
         "sk" : {
@@ -26863,7 +26863,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vibrazioni"
+            "value" : "Vibrazione"
           }
         },
         "ja" : {
@@ -26899,7 +26899,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vibrații"
+            "value" : "Vibrație"
           }
         },
         "ru" : {
@@ -26935,7 +26935,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vibration"
+            "value" : "Chế độ rung"
           }
         },
         "zh-Hans" : {
@@ -26971,7 +26971,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "WARNING: Please don't use this until you've read the documentation"
+            "value" : "ACHTUNG: Bitte nutze diese Funktion nicht bevor du die Dokumentation gelesen hast."
           }
         },
         "en" : {
@@ -27001,13 +27001,13 @@
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "WARNING: Please don't use this until you've read the documentation"
+            "value" : "אזהרה: אנא אל תשתמשו באפשרות זו עד שתקראו את התיעוד"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "WARNING: Please don't use this until you've read the documentation"
+            "value" : "ATTENZIONE: non utilizzare questo strumento prima di aver letto la documentazione"
           }
         },
         "ja" : {
@@ -27025,7 +27025,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "WARNING: Please don't use this until you've read the documentation"
+            "value" : "WAARSCHUWING: Gebruik dit niet totdat je de documentatie hebt gelezen"
           }
         },
         "pl" : {
@@ -27055,13 +27055,13 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "WARNING: Please don't use this until you've read the documentation"
+            "value" : "UPOZORNENIE: Nepoužívaj to, kým si neprečítaš dokumentáciu"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "WARNING: Please don't use this until you've read the documentation"
+            "value" : "VARNING: Använd inte denna förrän du läst dokumentationen"
           }
         },
         "tr" : {
@@ -27079,13 +27079,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "WARNING: Please don't use this until you've read the documentation"
+            "value" : "CẢNH BÁO: Vui lòng không sử dụng tính năng này cho đến khi bạn đã đọc tài liệu hướng dẫn"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "WARNING: Please don't use this until you've read the documentation"
+            "value" : "警告：在充分阅读文档之前请不要使用此功能"
           }
         }
       }
@@ -27193,7 +27193,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ПРЕДУПРЕЖДЕНИЕ: ИСПОЛЬЗОВАТЬ С ОСТОРОЖНОСТЬЮ!"
+            "value" : "ВНИМАНИЕ: ИСПОЛЬЗОВАТЬ С ОСТОРОЖНОСТЬЮ!"
           }
         },
         "sk" : {
@@ -27223,7 +27223,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "WARNING: USE WITH CAUTION!"
+            "value" : "CẢNH BÁO: SỬ DỤNG THẬN TRỌNG!"
           }
         },
         "zh-Hans" : {
@@ -27306,7 +27306,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Che cos'è questo?"
+            "value" : "Cos'è questo?"
           }
         },
         "ja" : {
@@ -27378,7 +27378,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "What is this?"
+            "value" : "Đây là gì?"
           }
         },
         "zh-Hans" : {
@@ -27522,7 +27522,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yes, 1 hour"
+            "value" : "Có, 1 giờ"
           }
         },
         "zh-Hans" : {
@@ -27666,7 +27666,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yes, 5 minutes"
+            "value" : "Có, 5 phút"
           }
         },
         "zh-Hans" : {
@@ -27810,7 +27810,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yes, 15 minutes"
+            "value" : "Có, 15 phút"
           }
         },
         "zh-Hans" : {
@@ -27954,7 +27954,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yes, 30 minutes"
+            "value" : "Có, 30 phút"
           }
         },
         "zh-Hans" : {
@@ -28026,7 +28026,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sì, disabilitare la sincronizzazione del bolo"
+            "value" : "Sì, disattiva la sincronizzazione del bolo"
           }
         },
         "ja" : {
@@ -28068,7 +28068,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Да, отключите синхронизацию болюсов"
+            "value" : "Да, отключить синхронизацию болюсов"
           }
         },
         "sk" : {
@@ -28098,13 +28098,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yes, disable bolus syncing"
+            "value" : "Có, tắt đồng bộ bolus"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "是，禁用栓剂同步"
+            "value" : "是的，禁用大剂量同步。"
           }
         }
       }
@@ -28206,13 +28206,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Da, Dezactivați tonurile silențioase"
+            "value" : "Da, dezactivează tonurile silențioase"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Да, отключение беззвучных сигналов"
+            "value" : "Да, отключить фоновый звук"
           }
         },
         "sk" : {
@@ -28242,7 +28242,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yes, Disable silent tones"
+            "value" : "Có, Tắt âm báo im lặng"
           }
         },
         "zh-Hans" : {
@@ -28314,7 +28314,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sì, abilita i toni silenziosi"
+            "value" : "Sì, attiva i toni silenziosi"
           }
         },
         "ja" : {
@@ -28350,13 +28350,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Da, Activare tonuri silențioase"
+            "value" : "Da, Activează tonurile silențioase"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Да, включение беззвучных сигналов"
+            "value" : "Да, включить фоновый звук"
           }
         },
         "sk" : {
@@ -28386,7 +28386,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yes, Enable silent tones"
+            "value" : "Có, Bật âm báo im lặng"
           }
         },
         "zh-Hans" : {
@@ -28458,7 +28458,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sì, riattivare la sincronizzazione del bolo"
+            "value" : "Sì, riattiva la sincronizzazione del bolo"
           }
         },
         "ja" : {
@@ -28500,7 +28500,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Да, снова включите синхронизацию болюсов"
+            "value" : "Да, включить синхронизацию болюсов"
           }
         },
         "sk" : {
@@ -28530,13 +28530,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yes, re-enable bolus syncing"
+            "value" : "Có, bật lại đồng bộ bolus"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "是，重新启用药量同步"
+            "value" : "是的，重新启用大剂量同步"
           }
         }
       }
@@ -28638,13 +28638,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Da, Comutare la modul continuu"
+            "value" : "Da, treceți la modul continuu"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Да, переключение в непрерывный режим"
+            "value" : "Да, переключить в непрерывный режим"
           }
         },
         "sk" : {
@@ -28674,7 +28674,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yes, Switch to continuous mode"
+            "value" : "Có, chuyển sang chế độ liên tục"
           }
         },
         "zh-Hans" : {
@@ -28782,13 +28782,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Da, Treceți la modul interactiv"
+            "value" : "Da, treceți la modul interactiv"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Да, переключение в интерактивный режим"
+            "value" : "Да, переключить в интерактивный режим"
           }
         },
         "sk" : {
@@ -28818,7 +28818,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yes, Switch to interactive mode"
+            "value" : "Có, chuyển sang chế độ tương tác"
           }
         },
         "zh-Hans" : {
@@ -28854,7 +28854,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ja, Synchronisierung mit der aktuellen Zeit"
+            "value" : "Ja, mit der aktuellen Zeit synchronisieren"
           }
         },
         "en" : {
@@ -28926,7 +28926,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Da, Sincronizați cu ora curentă"
+            "value" : "Da, sincronizați cu ora curentă"
           }
         },
         "ru" : {
@@ -28944,7 +28944,7 @@
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ja, synkroniseras med aktuell tid"
+            "value" : "Ja, synkronisera med aktuell tid"
           }
         },
         "tr" : {
@@ -28962,7 +28962,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yes, Sync to Current Time"
+            "value" : "Có, đồng bộ với thời gian hiện tại"
           }
         },
         "zh-Hans" : {
@@ -29028,7 +29028,7 @@
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your "
+            "value" : "שלך "
           }
         },
         "it" : {
@@ -29070,7 +29070,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Al dumneavoastră"
+            "value" : "Al tău "
           }
         },
         "ru" : {
@@ -29082,7 +29082,7 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vaša stránka "
+            "value" : "Vaša "
           }
         },
         "sv" : {
@@ -29178,7 +29178,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Il limite giornaliero di basale è stato raggiunto. Contattare il distributore Dana per aumentare il limite."
+            "value" : "Il tuo limite giornaliero di basale è stato raggiunto. Contatta il tuo fornitore Dana per aumentare il limite."
           }
         },
         "ja" : {
@@ -29214,13 +29214,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Limita dumneavoastră zilnică de bazală a fost atinsă. Vă rugăm să contactați distribuitorul Dana pentru a crește limita"
+            "value" : "Limita zilnică bazală a fost atinsă. Vă rugăm să contactați distribuitorul Dana pentru a crește limita."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ваш суточный лимит базала достигнут. Обратитесь к дистрибьютору Dana, чтобы увеличить лимит."
+            "value" : "Ваш суточный лимит Базала достигнут. Обратитесь к дистрибьютору Dana, чтобы увеличить лимит"
           }
         },
         "sk" : {
@@ -29250,13 +29250,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your daily basal limit has been reached. Please contact your Dana distributer to increase the limit"
+            "value" : "Đã đạt đến giới hạn bolus tối đa. Vui lòng thử lượng thấp hơn hoặc tăng giới hạn"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "您的每日基础量已达上限。请联系您的德纳经销商以增加上限"
+            "value" : "您的每日基础量已达上限。请联系您的 Dana 经销商以增加上限"
           }
         }
       }
@@ -29322,7 +29322,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Il limite giornaliero di insulina è stato raggiunto. Contattare il distributore Dana per aumentare il limite."
+            "value" : "Il tuo limite giornaliero d'insulina è stato raggiunto. Contatta il tuo fornitore Dana per aumentare il limite."
           }
         },
         "ja" : {
@@ -29358,13 +29358,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Limita dumneavoastră zilnică de insulină a fost atinsă. Vă rugăm să contactați distribuitorul Dana pentru a crește limita"
+            "value" : "Limita zilnică de insulină a fost atinsă. Vă rugăm să contactați distribuitorul Dana pentru a crește limita."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ваш ежедневный лимит инсулина исчерпан. Обратитесь к дистрибьютору компании \"Дана\", чтобы увеличить лимит."
+            "value" : "Ваш суточный лимит инсулина достигнут. Обратитесь к дистрибьютору Dana, чтобы увеличить лимит"
           }
         },
         "sk" : {
@@ -29394,7 +29394,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your daily insulin limit has been reached. Please contact your Dana distributer to increase the limit"
+            "value" : "Đã đạt giới hạn insulin hàng ngày của bạn. Vui lòng liên hệ với nhà phân phối Dana của bạn để tăng giới hạn"
           }
         },
         "zh-Hans" : {
@@ -29430,7 +29430,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your pump is disconnected longer than 5 minutes!"
+            "value" : "Deine Pumpe ist seit mehr als 5 Minuten getrennt!"
           }
         },
         "en" : {
@@ -29454,19 +29454,19 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your pump is disconnected longer than 5 minutes!"
+            "value" : "Votre pompe est déconnectée depuis plus de 5 minutes !"
           }
         },
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your pump is disconnected longer than 5 minutes!"
+            "value" : "המשאבה שלך מנותקת יותר מ-5 דקות!"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your pump is disconnected longer than 5 minutes!"
+            "value" : "Il tuo microinfusore è disconnesso da più di 5 minuti!"
           }
         },
         "ja" : {
@@ -29484,7 +29484,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your pump is disconnected longer than 5 minutes!"
+            "value" : "Je pomp is langer dan 5 minuten niet meer verbonden!"
           }
         },
         "pl" : {
@@ -29502,7 +29502,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pompa dumneavoastră este deconectată de mai mult de 5 minute!"
+            "value" : "Pompa dumneavoastră este deconectată mai mult de 5 minute!"
           }
         },
         "ru" : {
@@ -29514,13 +29514,13 @@
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vaša pumpa je odpojená dlhšie ako 5 minút!"
+            "value" : "Tvoja pumpa je odpojená dlhšie ako 5 minút!"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your pump is disconnected longer than 5 minutes!"
+            "value" : "Din pump är frånkopplad längre än 5 minuter!"
           }
         },
         "tr" : {
@@ -29538,13 +29538,13 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your pump is disconnected longer than 5 minutes!"
+            "value" : "Bơm của bạn đã bị ngắt kết nối hơn 5 phút!"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your pump is disconnected longer than 5 minutes!"
+            "value" : "您的泵断开连接的时间已超过 5 分钟！"
           }
         }
       }
@@ -29610,7 +29610,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "La pompa è ancora scollegata dopo il periodo impostato!"
+            "value" : "Il tuo microinfusore è ancora disconnesso dopo il periodo di configurazione!"
           }
         },
         "ja" : {
@@ -29646,13 +29646,13 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pompa dumneavoastră este încă deconectată după perioada stabilită!"
+            "value" : "Pompa dumneavoastră este încă deconectată după perioada setată!"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ваш насос по-прежнему отключен по истечении заданного периода!"
+            "value" : "Ваша помпа по-прежнему отключена по истечении заданного периода!"
           }
         },
         "sk" : {
@@ -29682,7 +29682,7 @@
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your pump is still disconnected after the set period!"
+            "value" : "Máy bơm của bạn vẫn bị ngắt kết nối sau thời gian đã đặt!"
           }
         },
         "zh-Hans" : {
