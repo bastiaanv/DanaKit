@@ -12383,6 +12383,7 @@
     },
     "Insulin type" : {
       "comment" : "Title for insulin type",
+      "extractionState" : "stale",
       "localizations" : {
         "ro" : {
           "stringUnit" : {
