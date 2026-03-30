@@ -40,7 +40,7 @@ struct InsulinTypeView: View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarHidden(false)
-        .navigationTitle(LocalizedString("Insulin type", comment: "Title for insulin type"))
+        .navigationTitle(LocalizedString("Insulin Type", comment: "Title for insulin type"))
     }
 }
 
