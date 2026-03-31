@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
     " is ready to be used!" : {
       "comment" : "Dana setup complete p2",
       "extractionState" : "manual",
@@ -9356,6 +9359,7 @@
       }
     },
     "Error while starting scanning for devices..." : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -12373,6 +12377,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "胰岛素停用"
+          }
+        }
+      }
+    },
+    "Insulin type" : {
+      "comment" : "Title for insulin type",
+      "extractionState" : "stale",
+      "localizations" : {
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tipul de insulină"
           }
         }
       }
@@ -15402,6 +15418,7 @@
       }
     },
     "Pairing" : {
+      "comment" : "Title for DanaKitScanView",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
@@ -20723,6 +20740,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "选择胰岛素类型"
+          }
+        }
+      }
+    },
+    "Select the bolus delivery speed" : {
+      "comment" : "Dana delivery speed body",
+      "localizations" : {
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selectați viteza de administrare a bolusului"
           }
         }
       }
@@ -27203,6 +27231,132 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "警告：慎用！"
+          }
+        }
+      }
+    },
+    "Welcome!" : {
+      "comment" : "Onboarding header",
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "أهلاً وسهلاً بك!"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vítejte!"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Velkommen!"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Herzlich willkommen!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welcome!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bienvenido."
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tervetuloa!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bienvenue !"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Benvenuti!"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ようこそ！"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Velkommen!"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welkom!"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Witamy!"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bem-vindo!"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bine ați venit!"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добро пожаловать!"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vitajte!"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Välkommen!"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hoş geldiniz!"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "欢迎光临"
           }
         }
       }
