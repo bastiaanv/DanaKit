@@ -559,7 +559,7 @@ extension DanaKitPumpManager: PumpManager {
                             dose: nil,
                             raw: item.raw,
                             title: "Prime \(value)U",
-                            type: .prime,
+                            type: .replaceComponent(componentType: .infusionSet),
                             alarmType: nil
                         ),
                         NewPumpEvent(
@@ -567,7 +567,7 @@ extension DanaKitPumpManager: PumpManager {
                             dose: nil,
                             raw: item.raw,
                             title: "Prime \(value)U",
-                            type: .replaceComponent(componentType: .infusionSet),
+                            type: .prime,
                             alarmType: nil
                         )
                     ]
