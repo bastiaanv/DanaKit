@@ -47,12 +47,12 @@ public final class DanaKitReservoirView: LevelHUDView, NibLoadable {
 
             volumeLabel.isHidden = false
             volumeLabel.text = String(
-                format: LocalizedString("%@U", comment: "Format string for reservoir volume. (1: The localized volume)"),
+                format: String(localized: "%@U", comment: "Format string for reservoir volume. (1: The localized volume)"),
                 units
             )
 
             accessibilityValue = String(
-                format: LocalizedString(
+                format: String(localized: 
                     "%1$@ units remaining at %2$@",
                     comment: "Accessibility format string for (1: localized volume)(2: time)"
                 ),

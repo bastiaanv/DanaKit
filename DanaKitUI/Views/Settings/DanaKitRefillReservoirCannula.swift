@@ -9,18 +9,18 @@ struct DanaKitRefillReservoirAndCannulaView: View {
     @State var isEditingTubeRefillAmount = false
     @State var isEditingPrimeRefillAmount = false
 
-    let unitText = LocalizedString("U", comment: "Insulin unit")
+    let unitText = String(localized: "U", comment: "Insulin unit")
 
     var body: some View {
         List {
             Section {
-                Text(LocalizedString(
+                Text(String(localized:
                     "This method of refilling is only intended for when the pump cannot provide a way to refill the reservoir or prime the cannula",
                     comment: "Label for warning refill"
                 ))
             } header: {
                 Label(
-                    LocalizedString("WARNING: USE WITH CAUTION!", comment: "Title for warning refill"),
+                    String(localized: "WARNING: USE WITH CAUTION!", comment: "Title for warning refill"),
                     systemImage: "exclamationmark.triangle.fill"
                 )
             }
@@ -28,7 +28,7 @@ struct DanaKitRefillReservoirAndCannulaView: View {
             if !viewModel.cannulaOnly {
                 Section {
                     HStack {
-                        Text(LocalizedString("Reservoir amount", comment: "Label for reservoir refilled amount"))
+                        Text("Reservoir amount", comment: "Label for reservoir refilled amount")
                         Spacer()
                         Text(String(viewModel.reservoirAmount) + self.unitText)
                     }
@@ -50,7 +50,7 @@ struct DanaKitRefillReservoirAndCannulaView: View {
 
                     if viewModel.failedReservoirAmount {
                         Label(
-                            LocalizedString(
+                            String(localized:
                                 "Failed to set reservoir amount. Re-sync pump data and try again please",
                                 comment: "Label for error first step refill"
                             ),
@@ -64,14 +64,14 @@ struct DanaKitRefillReservoirAndCannulaView: View {
                         viewModel.setReservoirAmount()
                     }
                 } header: {
-                    Text(LocalizedString("Step 1: Set reservoir level", comment: "Label for first step refill"))
+                    Text("Step 1: Set reservoir level", comment: "Label for first step refill")
                 }
             }
 
             if $viewModel.currentStep.wrappedValue.rawValue >= RefillSteps.tube.rawValue && !viewModel.cannulaOnly {
                 Section {
                     HStack {
-                        Text(LocalizedString("Tube refill amount", comment: "Label for tube refilled amount"))
+                        Text("Tube refill amount", comment: "Label for tube refilled amount")
                             .foregroundColor(Color.primary)
                         Spacer()
                         Text(String(viewModel.tubeAmount) + self.unitText)
@@ -93,7 +93,7 @@ struct DanaKitRefillReservoirAndCannulaView: View {
 
                     if viewModel.failedTubeAmount {
                         Label(
-                            LocalizedString(
+                            String(localized:
                                 "Failed to prime the tube. Please try again later",
                                 comment: "Label for error second step refill"
                             ),
@@ -115,7 +115,7 @@ struct DanaKitRefillReservoirAndCannulaView: View {
                         viewModel.primeTube()
                     }
                 } header: {
-                    Text(LocalizedString("Step 2: Set tube refill amount", comment: "Label for second step refill"))
+                    Text("Step 2: Set tube refill amount", comment: "Label for second step refill")
                 }
                 .transition(.move(edge: .top))
             }
@@ -123,7 +123,7 @@ struct DanaKitRefillReservoirAndCannulaView: View {
             if $viewModel.currentStep.wrappedValue.rawValue >= RefillSteps.prime.rawValue || viewModel.cannulaOnly {
                 Section {
                     HStack {
-                        Text(LocalizedString("Prime amount", comment: "Label for tube refilled amount"))
+                        Text("Prime amount", comment: "Label for tube refilled amount")
                             .foregroundColor(Color.primary)
                         Spacer()
                         Text(String(viewModel.primeAmount) + self.unitText)
@@ -145,7 +145,7 @@ struct DanaKitRefillReservoirAndCannulaView: View {
 
                     if viewModel.failedPrimeAmount {
                         Label(
-                            LocalizedString(
+                            String(localized:
                                 "Failed to prime the cannula. Please try again later",
                                 comment: "Label for error third step refill"
                             ),
@@ -167,17 +167,17 @@ struct DanaKitRefillReservoirAndCannulaView: View {
                         viewModel.primeCannula()
                     }
                 } header: {
-                    Text(LocalizedString(
+                    Text(
                         viewModel.cannulaOnly ? "Step 1: Prime cannula" : "Step 3: Prime cannula",
                         comment: "Label for third step refill"
-                    ))
+                    )
                 }
                 .transition(.move(edge: .top))
             }
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarHidden(false)
-        .navigationBarTitle(LocalizedString(
+        .navigationBarTitle(String(localized:
             viewModel.cannulaOnly ? "Cannula refill" : "Reservoir/cannula refill",
             comment: "Title for reservoir/cannula refill"
         ))
@@ -185,7 +185,7 @@ struct DanaKitRefillReservoirAndCannulaView: View {
 }
 
 struct SaveButton: View {
-    var text = LocalizedString("Save", comment: "Text for continue button")
+    var text = String(localized: "Save", comment: "Text for continue button")
     var loading: Binding<Bool> = .constant(false)
     var disabled: Binding<Bool> = .constant(false)
     let action: () -> Void

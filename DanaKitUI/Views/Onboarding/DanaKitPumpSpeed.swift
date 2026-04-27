@@ -13,13 +13,13 @@ struct DanaKitPumpSpeed: View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
                 List {
-                    Section(header: SectionHeader(label: LocalizedString(
+                    Section(header: SectionHeader(label: String(localized:
                         "Select the bolus delivery speed",
                         comment: "Dana delivery speed body"
                     ))) {
                         CheckmarkListItem(
                             title: Text(BolusSpeed.speed12.format()),
-                            description: Text(""),
+                            description: Text("The fastest bolus speed option", comment: "bolusSpeed 12s/u"),
                             isSelected: Binding(
                                 get: { self.speedDefault == 0 },
                                 set: { isSelected in
@@ -31,7 +31,7 @@ struct DanaKitPumpSpeed: View {
                         )
                         CheckmarkListItem(
                             title: Text(BolusSpeed.speed30.format()),
-                            description: Text(""),
+                            description: Text("The middle bolus speed option", comment: "bolusSpeed 30s/u"),
                             isSelected: Binding(
                                 get: { self.speedDefault == 1 },
                                 set: { isSelected in
@@ -43,7 +43,7 @@ struct DanaKitPumpSpeed: View {
                         )
                         CheckmarkListItem(
                             title: Text(BolusSpeed.speed60.format()),
-                            description: Text(""),
+                            description: Text("The slowest bolus speed option", comment: "bolusSpeed 60s/u"),
                             isSelected: Binding(
                                 get: { self.speedDefault == 2 },
                                 set: { isSelected in
@@ -69,17 +69,13 @@ struct DanaKitPumpSpeed: View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarHidden(false)
-        .navigationTitle(LocalizedString("Delivery speed", comment: "Title for delivery speed"))
+        .navigationTitle(String(localized: "Delivery speed", comment: "Title for delivery speed"))
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(LocalizedString("Cancel", comment: "Cancel button title"), action: {
-                    self.dismiss()
-                })
+                Button(action: self.dismiss) {
+                    Text("Cancel", comment: "Cancel button title")
+                }
             }
         }
     }
-}
-
-#Preview {
-    DanaKitPumpSpeed()
 }

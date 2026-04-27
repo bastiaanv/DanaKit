@@ -10,11 +10,11 @@ public enum BolusSpeed: UInt8 {
     func format() -> String {
         switch self {
         case .speed12:
-            return LocalizedString("12 sec/U", comment: "Dana bolus speed 12u per min")
+            return String(localized: "12 sec/U", comment: "Dana bolus speed 12u per min")
         case .speed30:
-            return LocalizedString("30 sec/U", comment: "Dana bolus speed 30u per min")
+            return String(localized: "30 sec/U", comment: "Dana bolus speed 30u per min")
         case .speed60:
-            return LocalizedString("60 sec/U", comment: "Dana bolus speed 60u per min")
+            return String(localized: "60 sec/U", comment: "Dana bolus speed 60u per min")
         }
     }
 }
