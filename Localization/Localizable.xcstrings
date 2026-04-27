@@ -53,6 +53,18 @@
             "value" : " est prêt à être utilisé !"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " उपयोग करने के लिए तैयार है!"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " készen áll a használatra!"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -69,12 +81,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "er klar til bruk!"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : " er klar til å bli brukt!"
           }
         },
         "nl" : {
@@ -203,6 +209,18 @@
             "value" : ". Please go to your bluetooth settings, forget this device, and try again"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "। कृपया अपनी Bluetooth सेटिंग पर जाएं, इस डिवाइस को भूल जाएं, और फिर से कोशिश करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ". Kérjük, lépjen be a bluetooth beállításokba, felejtse el ezt az eszközt, és próbálja meg újra."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -219,12 +237,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gå til Bluetooth-innstillingene, glem denne enheten og prøv på nytt."
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ". Gå til Bluetooth-innstillingene, glem denne enheten, og prøv på nytt"
           }
         },
         "nl" : {
@@ -351,6 +363,18 @@
             "value" : "%@%@ / %@%@"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ %@/%@ %@"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@%@ / %@%@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -364,12 +388,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@%@ / %@%@"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@%@ / %@%@"
@@ -501,6 +519,18 @@
             "value" : "%@U"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ यू"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@U"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -517,12 +547,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@E"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@U"
           }
         },
         "nl" : {
@@ -651,6 +675,18 @@
             "value" : "%@ unités restantes à %@"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ %@ पर शेष इकाइयां"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ egység maradt %@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -667,12 +703,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ enheter gjenstår ved %@"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ gjenværende enheter på %@."
           }
         },
         "nl" : {
@@ -799,6 +829,18 @@
             "value" : "%%1$u %2$@"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%%1$u %2$@"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%%1$u %2$@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -812,12 +854,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%%1$u %2$@"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%%1$u %2$@"
@@ -949,6 +985,18 @@
             "value" : "12 sec/U"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "12 सेकंड/यू"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "12 sec/U"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -965,12 +1013,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "12 sek/u"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "12 sek/U"
           }
         },
         "nl" : {
@@ -1099,6 +1141,18 @@
             "value" : "Notation 12h"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "12h नोटेशन"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "12h jelölés"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1115,12 +1169,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "12 timers notasjon"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "12h-notasjon"
           }
         },
         "nl" : {
@@ -1249,6 +1297,18 @@
             "value" : "Affichage sur 24 heures"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "24h डिस्प्ले"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "24 órás kijelző"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1262,12 +1322,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "24 timers visning"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "24 timers visning"
@@ -1399,6 +1453,18 @@
             "value" : "Notation sur 24 heures"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "24h नोटेशन"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "24 órás jelölés"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1415,12 +1481,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "24-timers notasjon"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "24 timers notasjon"
           }
         },
         "nl" : {
@@ -1549,6 +1609,18 @@
             "value" : "30 sec/U"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "30 सेकंड/यू"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "30 sec/U"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1565,12 +1637,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "30 sek/u"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "30 sek/U"
           }
         },
         "nl" : {
@@ -1699,6 +1765,18 @@
             "value" : "60 sec/U"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "60 सेकंड/यू"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "60 sec/U"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1715,12 +1793,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "60 sek/E"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "60 sek/U"
           }
         },
         "nl" : {
@@ -1849,6 +1921,18 @@
             "value" : "Un rappel de vérification de la glycémie a été configuré dans votre pompe et est déclenché. Veuillez l'enlever ou donner votre taux de glucose à la pompe."
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "आपके पंप में एक ब्लड ग्लूकोज़ चेक रिमाइंडर सेट किया गया है और ट्रिगर किया गया है। कृपया इसे हटा दें या पंप को अपना ग्लूकोज़ स्तर दें।"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A vércukorszint-ellenőrzésre emlékeztető emlékeztetőt állítottak be a pumpában, és az elindult. Kérjük, távolítsa el, vagy adja meg a vércukorszintjét a pumpának."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1865,12 +1949,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "En påminnelse om blodsukkerkontroll er satt opp i pumpen og utløses. Fjern den eller gi glukosenivået til pumpen"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "En påminnelse om blodsukkerkontroll er satt inn i pumpen din og utløses. Vennligst fjern den eller oppgi glukosenivået ditt til pumpen."
           }
         },
         "nl" : {
@@ -1999,6 +2077,18 @@
             "value" : "Un délai d'attente pour le bolus est actif. Le cycle de la boucle ne peut être achevé tant que le délai d'attente n'est pas inactif."
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "एक बोलस टाइमआउट सक्रिय है। लूप चक्र तब तक पूरा नहीं किया जा सकता जब तक कि टाइमआउट निष्क्रिय न हो जाए।"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A bolus timeout aktív. A ciklus nem fejezhető be, amíg az időkorlát nem inaktív."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2015,12 +2105,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bolus-timeout er aktiv. Sløyfen kan ikke fullføres før timeouten er over."
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "En tidsavbrudd for bolus er aktiv. Sløyfesyklusen kan ikke fullføres før tidsavbruddet er inaktivt."
           }
         },
         "nl" : {
@@ -2149,6 +2233,18 @@
             "value" : "L'action a été annulée, car la pompe est occupée."
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "कार्रवाई रद्द कर दी गई है, क्योंकि पंप व्यस्त है"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A művelet törlésre került, mert a szivattyú foglalt."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2162,12 +2258,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Handlingen er avbrutt fordi pumpen er opptatt"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Handlingen er avbrutt fordi pumpen er opptatt"
@@ -2299,6 +2389,18 @@
             "value" : "Après avoir configuré le type d'insuline et la vitesse du bolus, vous verrez un écran avec toutes les pompes Dana trouvées. Sélectionnez la pompe que vous souhaitez relier à %@."
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "इंसुलिन टाइप और बोलस स्पीड सेट करने के बाद, आपको सभी पाए गए दाना पंपों वाली एक स्क्रीन दिखाई देगी। उस पंप का चयन करें जिसे आप %@ से लिंक करना चाहते हैं।"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Az inzulin típusának és a bolus sebességének beállítása után megjelenik egy képernyő az összes megtalált Dana pumpával. Válassza ki azt a pumpát, amelyet össze szeretne kapcsolni a %@-vel."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2315,12 +2417,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Etter at du har konfigurert insulintype og bolushastighet, vil du se en skjerm med alle funnet Dana-pumper. Velg pumpen du vil koble til %@."
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Etter at du har stilt inn insulintype og bolushastighet, vises et skjermbilde med alle Dana-pumper du har funnet. Velg pumpen du ønsker å koble til %@."
           }
         },
         "nl" : {
@@ -2449,6 +2545,18 @@
             "value" : "Bips d'alarme"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "अलार्म बीप्स"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Riasztás hangjelzés"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2462,12 +2570,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Alarmen piper"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Alarmen piper"
@@ -2599,6 +2701,18 @@
             "value" : "Une erreur inconnue s'est produite lors du traitement de l'alerte provenant de la pompe. Veuillez signaler cette"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पंप से अलर्ट को प्रोसेस करने के दौरान एक अज्ञात त्रुटि हुई है। कृपया इसकी रिपोर्ट करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A szivattyú riasztásának feldolgozása során ismeretlen hiba történt. Kérjük, jelentse ezt"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2612,12 +2726,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Det har oppstått en ukjent feil under behandlingen av varselet fra pumpen. Vennligst rapporter dette"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Det har oppstått en ukjent feil under behandlingen av varselet fra pumpen. Vennligst rapporter dette"
@@ -2749,6 +2857,18 @@
             "value" : "Êtes-vous sûr de vouloir cesser d'utiliser Dana-i/RS ?"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "क्या आप वाकई Dana-i/RS का उपयोग बंद करना चाहते हैं?"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Biztos, hogy nem akarja tovább használni a Dana-i/RS-t?"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2762,12 +2882,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Er du sikker på at du vil slutte å bruke Dana-i/RS?"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Er du sikker på at du vil slutte å bruke Dana-i/RS?"
@@ -2899,6 +3013,18 @@
             "value" : "Durée d'allumage du rétroéclairage"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "बैकलाइट ऑन टाइम"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A háttérvilágítás bekapcsolási ideje"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2915,12 +3041,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bakgrunnsbelysning på tid"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tid for påslått bakgrunnsbelysning"
           }
         },
         "nl" : {
@@ -3049,6 +3169,18 @@
             "value" : "Basal"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "बेसल"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bazális"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3062,12 +3194,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Basal"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Basal"
@@ -3199,6 +3325,18 @@
             "value" : "Comparaison de base"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "बेसल कम्पेयर"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bazális összehasonlítás"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3212,12 +3350,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Basal sammenligning"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Basal sammenligning"
@@ -3349,6 +3481,18 @@
             "value" : "Limite de base atteinte"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "मूल सीमा तक पहुँच गया"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elérte az alaphatárt"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3365,12 +3509,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Basalgrense nådd"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Basal grense nådd"
           }
         },
         "nl" : {
@@ -3499,6 +3637,18 @@
             "value" : "Profil de base"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "बेसल प्रोफ़ाइल"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alapprofil"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3515,12 +3665,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Basalprofil"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Basal profil"
           }
         },
         "nl" : {
@@ -3649,6 +3793,18 @@
             "value" : "Âge de la batterie"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "बैटरी की उम्र"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Az akkumulátor kora"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3665,12 +3821,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Batteri alder"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Batteriets alder"
           }
         },
         "nl" : {
@@ -3799,6 +3949,18 @@
             "value" : "Battery is empty. Replace it now!"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "बैटरी खाली है। इसे अभी बदलें!"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Az akkumulátor lemerült. Cserélje ki most!"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3815,12 +3977,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Batteriet er tomt. Bytt nå!"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Batteriet er tomt. Skift det ut nå!"
           }
         },
         "nl" : {
@@ -3949,6 +4105,18 @@
             "value" : "Niveau de la batterie"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "बैटरी स्तर"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Az akkumulátor szintje"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3962,12 +4130,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Batterinivå"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Batterinivå"
@@ -4099,6 +4261,18 @@
             "value" : "Mesure de la glycémie"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "रक्त शर्करा का माप"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vércukorszint mérés"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4112,12 +4286,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Blodsukkermåling"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Blodsukkermåling"
@@ -4249,6 +4417,18 @@
             "value" : "Bolus"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "बोलस"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bolus"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4262,12 +4442,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bolus"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bolus"
@@ -4399,6 +4573,18 @@
             "value" : "Les deux"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "दोनों"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mindkettő"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4412,12 +4598,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Begge"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Begge"
@@ -4549,6 +4729,18 @@
             "value" : "Annuler"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "कैंसिल करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Törölje"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4562,12 +4754,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avbryt"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Avbryt"
@@ -4699,6 +4885,18 @@
             "value" : "Âge de la canule"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "कैनुला उम्र"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kanül kora"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4715,12 +4913,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kanyle-alder"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Alder på kanylen"
           }
         },
         "nl" : {
@@ -4849,6 +5041,18 @@
             "value" : "Canule uniquement"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "केवल कैनुला"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Csak kanül"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4862,12 +5066,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kun kanyle"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kun kanyle"
@@ -4999,6 +5197,18 @@
             "value" : "Recharge de la canule"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "कैनुला रिफिल"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kanül újratöltés"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5012,12 +5222,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Påfyll av kanyle"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Påfyll av kanyle"
@@ -5149,6 +5353,18 @@
             "value" : "Vérifier l'arbre"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "चैफ़्ट चेक करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ellenőrizze az alvázat"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5165,12 +5381,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sjekk skaft"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sjekk skaftet"
           }
         },
         "nl" : {
@@ -5299,6 +5509,18 @@
             "value" : "Vérifier la pompe et réessayer"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पंप की जांच करें और फिर से कोशिश करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ellenőrizze a szivattyút, és próbálja újra"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5312,12 +5534,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kontroller pumpen og prøv igjen"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kontroller pumpen og prøv igjen"
@@ -5449,6 +5665,18 @@
             "value" : "Vérifier le réservoir et l'infusion et réessayer."
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "जलाशय और इन्फ़स की जाँच करें और फिर से कोशिश करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ellenőrizze a tartályt és az infúziót, majd próbálja meg újra."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5462,12 +5690,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kontroller reservoaret og infusjonen, og prøv igjen"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kontroller reservoaret og infusjonen, og prøv igjen"
@@ -5599,6 +5821,18 @@
             "value" : "Vérifié à"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पर चेक किया गया"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ellenőrizve"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5612,12 +5846,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sjekket på"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sjekket på"
@@ -5749,6 +5977,18 @@
             "value" : "La somme de contrôle a échoué. Réessayez"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "चेकसम असफल। फिर से कोशिश करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Az ellenőrző összegzés sikertelen. Próbálja újra"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5765,12 +6005,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kontrollsum mislyktes. Prøv igjen"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kontrollsummen mislyktes. Prøv igjen"
           }
         },
         "nl" : {
@@ -5899,6 +6133,18 @@
             "value" : "Choisissez votre pompe Dana"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "अपना दाना पंप चुनें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Válassza ki a Dana szivattyút"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5912,12 +6158,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Velg din Dana-pumpe"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Velg din Dana-pumpe"
@@ -6049,6 +6289,18 @@
             "value" : "Configuration"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "कॉन्फ़िगरेशन"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konfiguráció"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6062,12 +6314,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Konfigurasjon"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Konfigurasjon"
@@ -6199,6 +6445,18 @@
             "value" : "Connecté"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "कनेक्टेड"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Csatlakoztatva"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6212,12 +6470,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tilkoblet"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tilkoblet"
@@ -6349,6 +6601,18 @@
             "value" : "Connexion"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "कनेक्टिंग"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A  csatlakoztatása"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6362,12 +6626,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tilkobling"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tilkobling"
@@ -6499,6 +6757,18 @@
             "value" : "Continuer"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "जारी रखें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folytatás"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6512,12 +6782,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fortsett"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fortsett"
@@ -6649,6 +6913,18 @@
             "value" : "Limite journalière atteinte"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "दैनिक सीमा तक पहुँच गया"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Napi limit elérve"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6662,12 +6938,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Daglig grense nådd"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Daglig grense nådd"
@@ -6799,6 +7069,18 @@
             "value" : "Dana-i"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "दाना-आई"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dana-i"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6812,12 +7094,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dana-i"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dana-i"
@@ -6949,6 +7225,18 @@
             "value" : "Dana-RS v3 trouvée !"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "दाना-आरएस v3 मिला!"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dana-RS v3 talált!"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6962,12 +7250,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dana-RS v3 funnet!"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dana-RS v3 funnet!"
@@ -7099,6 +7381,18 @@
             "value" : "DanaRS-v3"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "दानर-v3"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DanaRS-v3"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7112,12 +7406,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DanaRS-v3"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "DanaRS-v3"
@@ -7249,6 +7537,18 @@
             "value" : "jour(s)"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "दिन (s)"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "nap(ok)"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7262,12 +7562,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "dag(er)"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "dag(er)"
@@ -7399,6 +7693,18 @@
             "value" : "Supprimer la pompe"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पंप डिलीट करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Szivattyú törlése"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7412,12 +7718,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Slett pumpe"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Slett pumpe"
@@ -7549,6 +7849,18 @@
             "value" : "Supprimer la pompe"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पंप डिलीट करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Szivattyú törlése"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7565,12 +7877,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Slette pumpe"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Slett pumpe"
           }
         },
         "nl" : {
@@ -7699,6 +8005,18 @@
             "value" : "Vitesse de livraison"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "डिलीवरी की गति"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Szállítási sebesség"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7712,12 +8030,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Leveringshastighet"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Leveringshastighet"
@@ -7849,6 +8161,18 @@
             "value" : "Désactiver la synchronisation des bolus ?"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "बोलस सिंकिंग अक्षम करें?"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bolus szinkronizálás letiltása?"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7865,12 +8189,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Deaktiver bolussynkronisering?"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Deaktivere bolussynkronisering?"
           }
         },
         "nl" : {
@@ -7999,6 +8317,18 @@
             "value" : "Déconnecter la pompe"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पंप से डिस्कनेक्ट करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A szivattyúról való leválasztás"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8012,12 +8342,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Koble fra pumpen"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Koble fra pumpen"
@@ -8149,6 +8473,18 @@
             "value" : "Déconnecté"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "डिस्कनेक्टेड"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kikapcsolt"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8162,12 +8498,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Frakoblet"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Frakoblet"
@@ -8299,6 +8629,18 @@
             "value" : "Déconnexion..."
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "डिस्कनेक्ट हो रहा है..."
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kikapcsolás..."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8315,12 +8657,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kobler fra..."
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Koble fra..."
           }
         },
         "nl" : {
@@ -8449,6 +8785,18 @@
             "value" : "Souhaitez-vous recevoir une notification lorsque la pompe est déconnectée pour une durée déterminée ?"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "क्या आप एक सूचना प्राप्त करना चाहते हैं जब पंप एक विशिष्ट समय के लिए लंबे समय तक डिस्कनेक्ट हो जाता है?"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Szeretne értesítést kapni, ha a szivattyú egy bizonyos időre hosszabb időre kikapcsol?"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8465,12 +8813,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ønsker du å motta et varsel når pumpen ikke lenger er koblet fra i en bestemt periode?"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ønsker du å motta et varsel når pumpen er frakoblet i en bestemt tidsperiode?"
           }
         },
         "nl" : {
@@ -8597,6 +8939,18 @@
             "value" : "Terminé"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "हो गया"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kész"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8610,12 +8964,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ferdig"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ferdig"
@@ -8747,6 +9095,18 @@
             "value" : "Pendant le processus d'appairage, votre Dana-i affichera une invite d'appairage tandis que votre iPhone affichera une invite pour un code d'appairage. Sur votre pompe, sélectionnez OK et tapez le code à 6 chiffres sur l'écran de votre iPhone. Après cela, %@ est prêt à communiquer avec votre Dana-i."
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पेयरिंग प्रक्रिया के दौरान, आपका Dana-i एक पेयरिंग प्रॉम्प्ट दिखाएगा जबकि आपका iPhone एक पेयरिंग कोड के लिए एक प्रॉम्प्ट दिखाएगा। पंप करने पर, OK का चयन करें और अपने iPhone पर स्क्रीन में 6-अंकीय कोड टाइप करें। उसके बाद, %@ आपके Dana-i के साथ संवाद करने के लिए तैयार है"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A párosítási folyamat során a Dana-i egy párosítási felszólítást, míg az iPhone egy párosítási kódkérést fog megjeleníteni. Az Ön pumpáján válassza az OK lehetőséget, és írja be a 6 számjegyű kódot az iPhone képernyőjén. Ezt követően a %@ készen áll a kommunikációra a Dana-i készülékkel."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8763,12 +9123,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Under sammenkoblingsprosessen vil Dana-i vise en sammenkoblingsmelding mens iPhone vil vise en melding om en sammenkoblingskode. På pumpen velger du OK og skriver inn den 6-sifrede koden på skjermen på iPhone. Deretter %@ er klar til å kommunisere med din Dana-i"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Under sammenkoblingsprosessen vil Dana-i vise en sammenkoblingsmelding, mens iPhone vil vise en melding om en sammenkoblingskode. Velg OK på pumpen, og skriv inn den 6-sifrede koden på skjermen på iPhone. Etter dette er %@ klar til å kommunisere med din Dana-i."
           }
         },
         "nl" : {
@@ -8897,6 +9251,18 @@
             "value" : "Pendant le processus de couplage, votre DanaRS v1 affichera une invite de couplage tandis que votre iPhone affichera une invitation à saisir un code de couplage. Sur votre pompe, sélectionnez OK et tapez le code sur votre iPhone. Après cela, Loop est prêt à communiquer avec votre DanaRS v1."
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पेयरिंग प्रक्रिया के दौरान, आपका DanARS v1 एक पेयरिंग प्रॉम्प्ट दिखाएगा, जबकि आपका iPhone एक पेयरिंग कोड के लिए एक प्रॉम्प्ट दिखाएगा। अपने पंप पर, OK का चयन करें और अपने iPhone पर कोड टाइप करें। उसके बाद, लूप आपके DanARS v1 के साथ संवाद करने के लिए तैयार है।"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A párosítási folyamat során a DanaRS v1 készülékén megjelenik egy párosítási felszólítás, míg az iPhone-on egy párosítási kódkérés jelenik meg. A szivattyún válassza az OK lehetőséget, és írja be a kódot az iPhone-on. Ezt követően a Loop készen áll a kommunikációra a DanaRS v1 készülékkel."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8913,12 +9279,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Under sammenkoblingsprosessen vil DanaRS v1 vise en sammenkoblingsmelding, mens iPhone vil vise en melding om en sammenkoblingskode. Velg OK på pumpen, og skriv inn koden på iPhone. Etter dette er Loop klar til å kommunisere med DanaRS v1"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Under sammenkoblingsprosessen vil DanaRS v1 vise en sammenkoblingsmelding, mens iPhone vil vise en melding om en sammenkoblingskode. Velg OK på pumpen, og skriv inn koden på iPhone. Etter dette er Loop klar til å kommunisere med DanaRS v1."
           }
         },
         "nl" : {
@@ -9047,6 +9407,18 @@
             "value" : "During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, Loop is ready to communicate with your DanaRS v1"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पेयरिंग प्रक्रिया के दौरान, आपका DanARS v3 एक पेयरिंग प्रॉम्प्ट दिखाएगा, जबकि आपका iPhone एक पेयरिंग कोड के लिए एक प्रॉम्प्ट दिखाएगा। अपने पंप पर, OK का चयन करें और अपने iPhone पर कोड टाइप करें। उसके बाद, लूप आपके DanARS v1 के साथ संवाद करने के लिए तैयार है।"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A párosítási folyamat során a DanaRS v3 készülékén megjelenik egy párosítási felszólítás, míg az iPhone-on megjelenik egy párosítási kódkérés. A szivattyúján válassza az OK lehetőséget, és írja be a kódot az iPhone-on. Ezt követően a Loop készen áll a kommunikációra a DanaRS v1 készülékkel."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9060,12 +9432,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Under sammenkoblingsprosessen vil DanaRS v3 vise en sammenkoblingsmelding, mens iPhone vil vise en melding om en sammenkoblingskode. Velg OK på pumpen, og skriv inn koden på iPhone. Etter dette er Loop klar til å kommunisere med DanaRS v1"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Under sammenkoblingsprosessen vil DanaRS v3 vise en sammenkoblingsmelding, mens iPhone vil vise en melding om en sammenkoblingskode. Velg OK på pumpen, og skriv inn koden på iPhone. Etter dette er Loop klar til å kommunisere med DanaRS v1"
@@ -9197,6 +9563,18 @@
             "value" : "During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for two pairing codes. On your pump, select OK and type the two codes on your iPhone. After that, %@ is ready to communicate with your DanaRS v3"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पेयरिंग प्रक्रिया के दौरान, आपका DanARS v3 एक पेयरिंग प्रॉम्प्ट दिखाएगा, जबकि आपका iPhone दो पेयरिंग कोड के लिए एक प्रॉम्प्ट दिखाएगा। अपने पंप पर, OK का चयन करें और अपने iPhone पर दो कोड टाइप करें। उसके बाद, %@ आपके DaNARS v3 के साथ संवाद करने के लिए तैयार है"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A párosítási folyamat során a DanaRS v3 egy párosítási felszólítást fog mutatni, míg az iPhone két párosítási kódot fog kérni. A szivattyún válassza az OK lehetőséget, és írja be a két kódot az iPhone-on. Ezt követően a %@ készen áll a kommunikációra a DanaRS v3 készülékkel."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9213,12 +9591,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Under sammenkoblingsprosessen vil DanaRS v3 vise en sammenkoblingsmelding, mens iPhone vil vise en melding om to sammenkoblingskoder. Velg OK på pumpen, og skriv inn de to kodene på iPhone. Etter dette er %@ klar til å kommunisere med DanaRS v3"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Under sammenkoblingsprosessen vil DanaRS v3 vise en sammenkoblingsmelding, mens iPhone vil vise en melding om to sammenkoblingskoder. Velg OK på pumpen, og skriv inn de to kodene på iPhone. Etter dette er %@ klar til å kommunisere med DanaRS v3."
           }
         },
         "nl" : {
@@ -9347,6 +9719,18 @@
             "value" : "Pendant le processus d'appairage, votre DanaRS v3 affichera une invite d'appairage tandis que votre iPhone affichera une invitation à saisir deux codes d'appairage. Sur votre pompe, sélectionnez OK et tapez les deux codes sur votre iPhone. Après cela, Loop est prêt à communiquer avec votre DanaRS v3."
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पेयरिंग प्रक्रिया के दौरान, आपका DanARS v3 एक पेयरिंग प्रॉम्प्ट दिखाएगा, जबकि आपका iPhone दो पेयरिंग कोड के लिए एक प्रॉम्प्ट दिखाएगा। अपने पंप पर, OK का चयन करें और अपने iPhone पर दो कोड टाइप करें। उसके बाद, लूप आपके DanARS v3 के साथ संवाद करने के लिए तैयार है।"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A párosítási folyamat során a DanaRS v3 egy párosítási felszólítást fog mutatni, míg az iPhone két párosítási kódot fog kérni. A szivattyún válassza az OK lehetőséget, és írja be a két kódot az iPhone-on. Ezt követően a Loop készen áll a kommunikációra a DanaRS v3 készülékkel."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9363,12 +9747,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Under sammenkoblingsprosessen vil DanaRS v3 vise en sammenkoblingsmelding, mens iPhone vil vise en melding om to sammenkoblingskoder. Velg OK på pumpen, og skriv inn de to kodene på iPhone. Etter dette er Loop klar til å kommunisere med DanaRS v3"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Under sammenkoblingsprosessen vil DanaRS v3 vise en sammenkoblingsmelding, mens iPhone vil vise en melding om to sammenkoblingskoder. Velg OK på pumpen, og skriv inn de to kodene på iPhone. Etter dette er Loop klar til å kommunisere med DanaRS v3."
           }
         },
         "nl" : {
@@ -9497,6 +9875,18 @@
             "value" : "Réservoir vide"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "खाली जलाशय"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Üres tartály"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9513,12 +9903,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tomt reservoar"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tøm reservoaret"
           }
         },
         "nl" : {
@@ -9647,6 +10031,18 @@
             "value" : "Erreur lors de la connexion à l'appareil"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "डिवाइस से कनेक्ट करते समय त्रुटि"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hiba a készülékhez való csatlakozás közben"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9660,12 +10056,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Feil under tilkobling til enheten"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Feil under tilkobling til enheten"
@@ -9797,6 +10187,18 @@
             "value" : "ERREUR : Échec de l'appariement de l'appareil"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "त्रुटि: डिवाइस को पेयर करने में विफल"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HIBA: Nem sikerült párosítani az eszközt"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9810,12 +10212,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "FEIL: Kunne ikke koble sammen enheten"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "FEIL: Kunne ikke koble sammen enheten"
@@ -9947,6 +10343,18 @@
             "value" : "N'a pas ajusté la dose de base"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "बेसल को समायोजित करने में विफल"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem sikerült beállítani a bazális"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9960,12 +10368,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kunne ikke justere basal"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kunne ikke justere basal"
@@ -10097,6 +10499,18 @@
             "value" : "Le temps de pompage n'a pas été ajusté"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पंप समय समायोजित करने में विफल"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem sikerült beállítani a szivattyú idejét"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10110,12 +10524,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kunne ikke justere pumpetiden"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kunne ikke justere pumpetiden"
@@ -10247,6 +10655,18 @@
             "value" : "Absence de réglage de la suspension"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "निलंबन समायोजित करने में विफल"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem sikerült beállítani a felfüggesztést"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10263,12 +10683,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Klarte ikke å justere suspensjonen"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unnlot å justere fjæringen"
           }
         },
         "nl" : {
@@ -10397,6 +10811,18 @@
             "value" : "N'a pas ajusté la température basale"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "अस्थायी बेसल को समायोजित करने में विफल"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem sikerült beállítani a temp basal-t"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10413,12 +10839,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kunne ikke justere midlertidig basal"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kunne ikke justere temp basal"
           }
         },
         "nl" : {
@@ -10547,6 +10967,18 @@
             "value" : "N'a pas ajusté la température basale. %@"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "अस्थायी बेसल को समायोजित करने में विफल। %@"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem sikerült beállítani az alaptempót. %@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10560,12 +10992,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kunne ikke justere basaltemperatur. %@"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kunne ikke justere basaltemperatur. %@"
@@ -10697,6 +11123,18 @@
             "value" : "Échec de la génération du programme de base de Dana"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "दाना बेसल प्रोग्राम जनरेट करने में विफल"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem sikerült létrehozni a Dana alapprogramot"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10710,12 +11148,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kunne ikke generere Dana basalprogram"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kunne ikke generere Dana basalprogram"
@@ -10847,6 +11279,18 @@
             "value" : "Échec de la connexion"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "कनेक्शन बनाने में असफल"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem sikerült kapcsolatot létesíteni"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10863,12 +11307,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kunne ikke opprette en tilkobling"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kunne ikke opprette forbindelse"
           }
         },
         "nl" : {
@@ -10997,6 +11435,18 @@
             "value" : "La connexion n'a pas été établie :"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "कनेक्शन बनाने में असफल: "
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem sikerült kapcsolatot létesíteni:"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11010,12 +11460,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kunne ikke opprette forbindelse:"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kunne ikke opprette forbindelse:"
@@ -11147,6 +11591,18 @@
             "value" : "Failed to pair to "
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "जोड़ी बनाने में असफल "
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem sikerült párosítani a"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11163,12 +11619,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kunne ikke koble til "
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kunne ikke kobles til"
           }
         },
         "nl" : {
@@ -11297,6 +11747,18 @@
             "value" : "La canule n'a pas été amorcée. Veuillez réessayer plus tard"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "कैनुला को प्राइम करने में विफल। कृपया बाद में फिर से कोशिश करें।"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem sikerült a kanült feltölteni. Kérjük, próbálja meg később újra."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11313,12 +11775,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kunne ikke klargjøre kanylen. Prøv igjen senere."
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kanylen ble ikke klargjort. Vennligst prøv igjen senere"
           }
         },
         "nl" : {
@@ -11447,6 +11903,18 @@
             "value" : "Le tube n'a pas été amorcé. Veuillez réessayer plus tard"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ट्यूब प्राइम करने में असफल। कृपया बाद में फिर से कोशिश करें।"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem sikerült a csövet alapozni. Kérjük, próbálja meg később újra"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11460,12 +11928,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kunne ikke klargjøre slangen. Vennligst prøv igjen senere"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kunne ikke klargjøre slangen. Vennligst prøv igjen senere"
@@ -11597,6 +12059,18 @@
             "value" : "Échec du réglage du volume du réservoir. Resynchronisez les données de la pompe et réessayez s'il vous plaît."
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "जलाशय राशि सेट करने में विफल। पंप डेटा को फिर से सिंक करें और फिर से कोशिश करें, कृपया"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem sikerült beállítani a tározó összegét. Szinkronizálja újra a szivattyú adatait, és próbálja meg újra."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11610,12 +12084,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kunne ikke angi reservoarmengde. Synkroniser pumpedataene på nytt og prøv igjen."
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kunne ikke angi reservoarmengde. Synkroniser pumpedataene på nytt og prøv igjen."
@@ -11747,6 +12215,18 @@
             "value" : "Remplir le mot de passe"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पासवर्ड भरें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jelszó megadása"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11760,12 +12240,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fyll inn passord"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fyll inn passord"
@@ -11897,6 +12371,18 @@
             "value" : "Finition"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "फ़िनिश"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Befejezés"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11913,12 +12399,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fullfør"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avslutt"
           }
         },
         "nl" : {
@@ -12047,6 +12527,18 @@
             "value" : "Version du micrologiciel"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "फ़र्मवेयर संस्करण"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Firmware verzió"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12060,12 +12552,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fastvareversjon"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fastvareversjon"
@@ -12197,6 +12683,18 @@
             "value" : "Modèle de matériel"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "हार्डवेयर मॉडल"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hardveres modell"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12210,12 +12708,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Maskinvaremodell"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Maskinvaremodell"
@@ -12347,6 +12839,18 @@
             "value" : "Suspension de l'insuline\n"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "इंसुलिन\nसस्पेंडेड"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inzulin\nFelfüggesztett"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12363,12 +12867,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Insulin\n Suspendert"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Insulin\nSuspendert"
           }
         },
         "nl" : {
@@ -12497,6 +12995,18 @@
             "value" : "Âge de l'insuline"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "इंसुलिन की उम्र"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inzulin kora"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12510,12 +13020,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Insulinets alder"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Insulinets alder"
@@ -12647,6 +13151,18 @@
             "value" : "Administration d'insuline"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "इंसुलिन डिलीवरी"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inzulin adagolás"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12663,12 +13179,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Insulintilførsel"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Levering av insulin"
           }
         },
         "nl" : {
@@ -12797,6 +13307,18 @@
             "value" : "Insuline restante"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "इंसुलिन शेष"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maradék inzulin"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12810,12 +13332,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gjenværende insulin"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gjenværende insulin"
@@ -12947,6 +13463,18 @@
             "value" : "Suspension de l'insuline"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "इंसुलिन सस्पेंडेड"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inzulin felfüggesztve"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12960,12 +13488,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Insulin suspendert"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Insulin suspendert"
@@ -13097,6 +13619,18 @@
             "value" : "Type d'insuline"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "इंसुलिन टाइप"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inzulin típusa"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13110,12 +13644,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Insulintype"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Insulintype"
@@ -13247,6 +13775,18 @@
             "value" : "Dernière synchronisation"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पिछला सिंक"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utolsó szinkronizálás"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13260,12 +13800,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Siste synkronisering"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Siste synkronisering"
@@ -13397,6 +13931,18 @@
             "value" : "Lcd on time"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "समय पर एलसीडी"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lcd időben"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13410,12 +13956,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lcd på tid"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lcd på tid"
@@ -13547,6 +14087,18 @@
             "value" : "chargement"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "लोड हो रहा है"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "betöltés"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13563,12 +14115,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Laster"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "lasting"
           }
         },
         "nl" : {
@@ -13697,6 +14243,18 @@
             "value" : "Chargement"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "लोड हो रहा"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Betöltés"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13713,12 +14271,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Laster"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lasting"
           }
         },
         "nl" : {
@@ -13847,6 +14399,18 @@
             "value" : "Batterie de la pompe faible"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "लो पंप बैटरी"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alacsony szivattyú akkumulátor"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13863,12 +14427,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lavt batteri i pumpen"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lavt pumpebatteri"
           }
         },
         "nl" : {
@@ -13997,6 +14555,18 @@
             "value" : "Rappel de niveau de réservoir bas"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "लो रिजर्वायर रिमाइंडर"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emlékeztető az alacsony tartályszintre"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14010,12 +14580,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Påminnelse om lavt reservoar"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Påminnelse om lavt reservoar"
@@ -14147,6 +14711,18 @@
             "value" : "Synchronisation manuelle de l'heure de la pompe"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पंप समय को मैन्युअल रूप से सिंक करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Szivattyúidő kézi szinkronizálása"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14160,12 +14736,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Synkroniser pumpetiden manuelt"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Synkroniser pumpetiden manuelt"
@@ -14297,6 +14867,18 @@
             "value" : "Contrôle de la glycémie manqué"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "मिस्ड ब्लड ग्लूकोज चेक"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elmulasztott vércukorszint-ellenőrzés"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14313,12 +14895,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mistet blodsukkermåling"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uteblitt blodsukkerkontroll"
           }
         },
         "nl" : {
@@ -14447,6 +15023,18 @@
             "value" : "Synchronisation nocturne de l'heure de la pompe"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "नाइटली पंप टाइम सिंक"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Éjszakai szivattyúidő szinkronizálás"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14463,12 +15051,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Synkronisering av pumpetid om natten"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nattlig synkronisering av pumpetid"
           }
         },
         "nl" : {
@@ -14597,6 +15179,18 @@
             "value" : "Pas d'insuline"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "इंसुलिन नहीं"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nincs inzulin"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14610,12 +15204,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ingen insulin"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ingen insulin"
@@ -14747,6 +15335,18 @@
             "value" : "Aucun type d'insuline n'est disponible. Veuillez le configurer dans le menu Dana"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "इंसुलिन का कोई प्रकार उपलब्ध नहीं है। कृपया इसे दाना मेनू में कॉन्फ़िगर करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem áll rendelkezésre inzulin típus. Kérjük, állítsa be ezt a Dana menüben"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14760,12 +15360,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ingen insulintype tilgjengelig. Vennligst konfigurer dette i Dana-menyen"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ingen insulintype tilgjengelig. Vennligst konfigurer dette i Dana-menyen"
@@ -14897,6 +15491,18 @@
             "value" : "Non, il suffit de déconnecter"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "नहीं, बस डिस्कनेक्ट करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem, csak szétkapcsolni"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14910,12 +15516,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nei, bare koble fra"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nei, bare koble fra"
@@ -15047,6 +15647,18 @@
             "value" : "Non, conserver en l'état"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "नहीं, जैसा है वैसा ही रखें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem, maradjon úgy, ahogy van"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15063,12 +15675,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nei, behold som det er"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nei, behold som den er"
           }
         },
         "nl" : {
@@ -15197,6 +15803,18 @@
             "value" : "Non, conserver la pompe en l'état"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "नहीं, पंप को वैसे ही रखें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nem, tartsa a szivattyút úgy, ahogy van"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15210,12 +15828,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nei, behold pumpen som den er"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nei, behold pumpen som den er"
@@ -15347,6 +15959,18 @@
             "value" : "Remarque : Votre pompe Dana dispose d'un réglage spécial qui vous permet de faire taire les signaux sonores de votre pompe Dana. Pour l'activer, veuillez contacter votre distributeur Dana."
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "नोट: आपके दाना पंप में एक विशेष सेटिंग है जिससे आप अपने दाना पंप बीप को शांत कर सकते हैं। इसे सक्षम करने के लिए, कृपया अपने दाना वितरक से संपर्क करें।"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Megjegyzés: A Dana szivattyú rendelkezik egy speciális beállítással, amely lehetővé teszi a Dana szivattyú hangjelzéseinek elnémítását. Ennek engedélyezéséhez forduljon a Dana forgalmazójához."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15363,12 +15987,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Merk: Dana-pumpen har en spesiell innstilling som gjør at du kan dempe pipelyden i Dana-pumpen. Kontakt Dana-distributøren din for å aktivere dette"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Merk: Dana-pumpen har en spesiell innstilling som gjør at du kan dempe pipelyden i Dana-pumpen. Kontakt Dana-distributøren din for å aktivere dette."
           }
         },
         "nl" : {
@@ -15497,6 +16115,18 @@
             "value" : "Occlusion"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "रुकावट"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Occlusion"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15510,12 +16140,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Okklusjon"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Okklusjon"
@@ -15647,6 +16271,18 @@
             "value" : "Arrêt"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ऑफ"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Off"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15660,12 +16296,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Av"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Av"
@@ -15797,6 +16427,18 @@
             "value" : "Oke"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ठीक है"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15813,12 +16455,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Oke"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "OK"
           }
         },
         "nl" : {
@@ -15947,6 +16583,18 @@
             "value" : "Sur"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ऑन"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A  oldalon."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15960,12 +16608,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "På"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "På"
@@ -16097,6 +16739,18 @@
             "value" : "Seul le bolus automatique est pris en charge"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "केवल स्वचालित बोलस समर्थित है"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Csak az Automatikus Bolus támogatott"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -16113,12 +16767,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bare automatisk bolus støttes"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kun automatisk bolus støttes"
           }
         },
         "nl" : {
@@ -16247,6 +16895,18 @@
             "value" : "Couplage"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पेयरिंग"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Párosítás"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -16260,12 +16920,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sammenkobling"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sammenkobling"
@@ -16397,6 +17051,18 @@
             "value" : "Broche 1"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पिन 1"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pin 1"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -16410,12 +17076,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pin 1"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pin 1"
@@ -16547,6 +17207,18 @@
             "value" : "Broche 2"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पिन 2"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pin 2"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -16560,12 +17232,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pin 2"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pin 2"
@@ -16697,6 +17363,18 @@
             "value" : "Code postal requis"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पिनकोड आवश्यक है"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pincekód szükséges"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -16710,12 +17388,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pin-kode kreves"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pin-kode kreves"
@@ -16847,6 +17519,18 @@
             "value" : "Veuillez envisager de modifier votre stratégie de dosage dans le menu de réglage."
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "कृपया सेटिंग मेनू में अपनी खुराक की रणनीति बदलने पर विचार करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kérjük, fontolja meg az adagolási stratégia módosítását a beállítási menüben."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -16863,12 +17547,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vennligst vurder å endre doseringsstrategien din i innstillingsmenyen"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vennligst vurder å endre doseringsstrategi i innstillingsmenyen"
           }
         },
         "nl" : {
@@ -16997,6 +17675,18 @@
             "value" : "Prime amount"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "प्राइम अमाउंट"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elsődleges összeg"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -17013,12 +17703,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prim mengde"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Førsteklasses beløp"
           }
         },
         "nl" : {
@@ -17147,6 +17831,18 @@
             "value" : "Batterie de la pompe 0%%"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पंप बैटरी 0%%"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Szivattyú akkumulátor 0%%"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -17163,12 +17859,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pumpebatteri 0 %%"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pumpebatteri 0"
           }
         },
         "nl" : {
@@ -17297,6 +17987,18 @@
             "value" : "La batterie de la pompe est vide. Remplacez-la maintenant !"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पंप की बैटरी खाली है। इसे अभी बदलें!"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A szivattyú akkumulátora lemerült. Cserélje ki most!"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -17313,12 +18015,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pumpebatteriet er tomt. Bytt den ut nå!"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pumpebatteriet er tomt. Skift det ut nå!"
           }
         },
         "nl" : {
@@ -17447,6 +18143,18 @@
             "value" : "La batterie de la pompe doit être remplacée prochainement"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पंप बैटरी को जल्द ही बदलना होगा"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A szivattyú akkumulátora hamarosan cserére szorul"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -17463,12 +18171,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pumpebatteriet må skiftes snart"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pumpebatteriet må snart skiftes ut"
           }
         },
         "nl" : {
@@ -17597,6 +18299,18 @@
             "value" : "Erreur de pompe"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पंप त्रुटि"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Szivattyú hiba"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -17610,12 +18324,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pumpefeil"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pumpefeil"
@@ -17747,6 +18455,18 @@
             "value" : "Informations sur la pompe"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पंप की जानकारी"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Szivattyú információ"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -17763,12 +18483,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pumpeinformasjon"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Informasjon om pumpen"
           }
         },
         "nl" : {
@@ -17897,6 +18611,18 @@
             "value" : "Pump is disconnected"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पंप डिस्कनेक्ट हो गया है"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A szivattyú ki van kapcsolva"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -17910,12 +18636,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pumpen er frakoblet"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pumpen er frakoblet"
@@ -18047,6 +18767,18 @@
             "value" : "La pompe est toujours déconnectée"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पंप अभी भी डिस्कनेक्ट हो गया है"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A szivattyú még mindig ki van kapcsolva"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -18060,12 +18792,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pumpen er fortsatt frakoblet"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pumpen er fortsatt frakoblet"
@@ -18197,6 +18923,18 @@
             "value" : "Nom de la pompe"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पंप का नाम"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Szivattyú neve"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -18210,12 +18948,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Navn på pumpen"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Navn på pumpen"
@@ -18347,6 +19079,18 @@
             "value" : "Arrêt de la pompe"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पंप शटडाउन"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Szivattyú leállítása"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -18360,12 +19104,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avstengning av pumpe"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Avstengning av pumpe"
@@ -18497,6 +19235,18 @@
             "value" : "Durée de la pompe"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पंप का समय"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Szivattyúzási idő"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -18510,12 +19260,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pumpetid"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pumpetid"
@@ -18647,6 +19391,18 @@
             "value" : "Réactiver la synchronisation des bolus ?"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "बोलस सिंकिंग को फिर से सक्षम करें?"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bolus szinkronizálás újra engedélyezése?"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -18660,12 +19416,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktivere bolussynkronisering på nytt?"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aktivere bolussynkronisering på nytt?"
@@ -18797,6 +19547,18 @@
             "value" : "Réception de chaînes hexagonales non valides. Réessayez"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "अमान्य हेक्स स्ट्रिंग्स प्राप्त हुए। फिर से कोशिश करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Érvénytelen hexa karakterláncok fogadása. Próbáld újra"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -18810,12 +19572,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mottok ugyldige hex-strenger. Prøv igjen"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mottok ugyldige hex-strenger. Prøv igjen"
@@ -18947,6 +19703,18 @@
             "value" : "Réception de longueurs de codes d'identification non valides. Réessayez"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "अमान्य पिनकोड लंबाई प्राप्त हुई। फिर से कोशिश करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Érvénytelen pincódhosszúságok fogadása. Próbálja újra"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -18960,12 +19728,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mottatt ugyldige pinkodelengder. Prøv igjen"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mottatt ugyldige pinkodelengder. Prøv igjen"
@@ -19097,6 +19859,18 @@
             "value" : "Reconnect to pump"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पंप से फिर से कनेक्ट करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Csatlakoztassa újra a szivattyúhoz"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19110,12 +19884,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Koble til pumpen igjen"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Koble til pumpen igjen"
@@ -19247,6 +20015,18 @@
             "value" : "Reconnecter la pompe tp"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "tp पंप को फिर से कनेक्ट करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Csatlakoztassa újra a tp szivattyút"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19260,12 +20040,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Koble til tp-pumpen igjen"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Koble til tp-pumpen igjen"
@@ -19397,6 +20171,18 @@
             "value" : "Se reconnecter..."
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पुन: कनेक्ट हो रहा है..."
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Újrakapcsolódás..."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19413,12 +20199,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kobler til igjen..."
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gjenopprette forbindelsen..."
           }
         },
         "nl" : {
@@ -19547,6 +20327,18 @@
             "value" : "Quantité de recharge"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "रिफिल राशि"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Újratöltési mennyiség"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19560,12 +20352,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Påfyllingsmengde"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Påfyllingsmengde"
@@ -19697,6 +20483,18 @@
             "value" : "Taux d'insuline restant"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "इंसुलिन का स्तर बना रहना"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maradék inzulinszint"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19710,12 +20508,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gjenværende insulinnivå"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gjenværende insulinnivå"
@@ -19847,6 +20639,18 @@
             "value" : "Retirer la pompe"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पंप निकालें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Szivattyú eltávolítása"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19860,12 +20664,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fjern pumpen"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fjern pumpen"
@@ -19997,6 +20795,18 @@
             "value" : "Montant du réservoir"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "जलाशयों की मात्रा"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tározó mennyisége"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20010,12 +20820,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reservoarmengde"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reservoarmengde"
@@ -20147,6 +20951,18 @@
             "value" : "Réservoir et canule"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "जलाशय और कैनुला"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tartály és kanül"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20160,12 +20976,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reservoar og kanyle"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reservoar og kanyle"
@@ -20297,6 +21107,18 @@
             "value" : "Le réservoir est vide. Remplacez-le maintenant !"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "जलाशय खाली है। इसे अभी बदलें!"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A tartály üres. Cserélje ki most!"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20313,12 +21135,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reservoaret er tomt. Bytt det ut nå!"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reservoaret er tomt. Skift det ut nå!"
           }
         },
         "nl" : {
@@ -20447,6 +21263,18 @@
             "value" : "Remplissage du réservoir/de la canule"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "जलाशय/कैनुला रिफिल"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tartály/kanül feltöltése"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20460,12 +21288,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Påfylling av reservoar/kanyle"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Påfylling av reservoar/kanyle"
@@ -20597,6 +21419,18 @@
             "value" : "Curriculum vitae"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "रिज्यूमे"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Önéletrajz"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20613,12 +21447,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gjenoppta"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CV"
           }
         },
         "nl" : {
@@ -20747,6 +21575,18 @@
             "value" : "Remise de curriculum vitae"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "डिलीवरी फिर से शुरू करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Összefoglaló kézbesítése"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20763,12 +21603,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gjenoppta levering"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CV-levering"
           }
         },
         "nl" : {
@@ -20897,6 +21731,18 @@
             "value" : "Reprise de l'administration d'insuline"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "इंसुलिन डिलीवरी फिर से शुरू करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folytassa az inzulinszállítást"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20910,12 +21756,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gjenoppta insulintilførsel"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gjenoppta insulintilførsel"
@@ -21047,6 +21887,18 @@
             "value" : "Économiser"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "सेव करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mentés"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21063,12 +21915,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lagre"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Spar"
           }
         },
         "nl" : {
@@ -21197,6 +22043,18 @@
             "value" : "Numérisation"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "स्कैन किया जा रहा है"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Szkennelés"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21213,12 +22071,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Søker"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Skanning"
           }
         },
         "nl" : {
@@ -21347,6 +22199,18 @@
             "value" : "Basale programmée"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "शेड्यूल्ड बेसल"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Menetrend szerinti bazális"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21363,12 +22227,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Planlagt basal"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Planlagt Basal"
           }
         },
         "nl" : {
@@ -21497,6 +22355,18 @@
             "value" : "Fonction de défilement"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "स्क्रॉल फ़ंक्शन"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Görgetés funkció"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21513,12 +22383,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rulle funksjon"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Scroll-funksjon"
           }
         },
         "nl" : {
@@ -21647,6 +22511,18 @@
             "value" : "sec"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "सेकंड"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "sec"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21660,12 +22536,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "sek"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "sek"
@@ -21797,6 +22667,18 @@
             "value" : "Select insulin type"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "इंसुलिन के प्रकार का चयन करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Válassza ki az inzulin típusát"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21810,12 +22692,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Velg insulintype"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Velg insulintype"
@@ -21947,6 +22823,18 @@
             "value" : "Sélectionner la vitesse d'administration du bolus"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "बोलस डिलीवरी स्पीड का चयन करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Válassza ki a bolus beadási sebességét"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21960,12 +22848,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Velg bolusleveringshastighet"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Velg bolusleveringshastighet"
@@ -22097,6 +22979,18 @@
             "value" : "Sélectionnez le type d'insuline que vous utiliserez dans cette pompe."
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "इंसुलिन के प्रकार का चयन करें जिसे आप इस पंप में उपयोग कर रहे हैं"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Válassza ki az inzulin típusát, amelyet ebben a pumpában fog használni."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -22110,12 +23004,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Velg insulintypen du vil bruke i denne pumpen"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Velg insulintypen du vil bruke i denne pumpen"
@@ -22247,6 +23135,18 @@
             "value" : "Sélectionnez le type d'insuline que vous utiliserez dans cette pompe."
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "इस पंप में आप जिस प्रकार के इंसुलिन का उपयोग कर रहे हैं, उसका चयन करें।"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Válassza ki az inzulin típusát, amelyet ebben a pumpában használni fog."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -22260,12 +23160,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Velg insulintypen du vil bruke i denne pumpen."
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Velg insulintypen du vil bruke i denne pumpen."
@@ -22397,6 +23291,18 @@
             "value" : "Fixer un rappel pour la déconnexion"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "डिस्कनेक्ट करने के लिए रिमाइंडर सेट करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Emlékeztető beállítása a leválasztáshoz"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -22410,12 +23316,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Angi påminnelse for frakobling"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Angi påminnelse for frakobling"
@@ -22547,6 +23447,18 @@
             "value" : "Définit le profil basal que la pompe doit utiliser. Notez que cela remplacera le profil qui se trouve dans la pompe par celui qui se trouve dans %@."
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पंप द्वारा उपयोग किए जाने वाले बेसल प्रोफाइल को सेट करें। ध्यान दें, यह पंप में मौजूद प्रोफ़ाइल को %@ में से एक के साथ अधिलेखित कर देगा"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Állítsa be a szivattyú által használandó bazális profilt. Vegye figyelembe, hogy ez felülírja a szivattyúban lévő profilt a %@ alatt lévővel."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -22563,12 +23475,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Angi basalprofilen pumpen skal bruke. Merk at den vil overskrive profilen som er i pumpen, med profilen i %@"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Angi basalprofilen pumpen skal bruke. Merk at den vil overskrive profilen som er i pumpen, med den i %@."
           }
         },
         "nl" : {
@@ -22697,6 +23603,18 @@
             "value" : "Le réglage de la température de base n'est pas pris en charge pour l'instant."
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "अस्थायी बेसल सेट करना इस समय समर्थित नहीं है"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A temp basal beállítása jelenleg nem támogatott."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -22710,12 +23628,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Innstilling av temp basal støttes ikke for øyeblikket"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Innstilling av temp basal støttes ikke for øyeblikket"
@@ -22847,6 +23759,18 @@
             "value" : "Le réglage de la température de base n'est pas pris en charge pour le moment. Durée : %lld sec"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "अस्थायी बेसल सेट करना इस समय समर्थित नहीं है। अवधि: %lld सेकंड"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A temp basal beállítása jelenleg nem támogatott. Időtartam: {másodperc"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -22860,12 +23784,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Innstilling av basaltemperatur støttes ikke for øyeblikket. Varighet: %lld sek"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Innstilling av basaltemperatur støttes ikke for øyeblikket. Varighet: %lld sek"
@@ -22997,6 +23915,18 @@
             "value" : "Mise en place de Dana-i"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "दाना-आई की स्थापना"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A Dana-i beállítása"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23010,12 +23940,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sette opp Dana-i"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sette opp Dana-i"
@@ -23147,6 +24071,18 @@
             "value" : "Mise en place de DanaRS v3"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DanARS v3 सेट अप करना"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A DanaRS v3 beállítása"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23160,12 +24096,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sette opp DanaRS v3"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sette opp DanaRS v3"
@@ -23297,6 +24227,18 @@
             "value" : "Mise en place terminée"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "सेटअप पूरा हुआ"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beállítás befejezve"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23313,12 +24255,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Oppsettet er fullført"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Oppsett fullført"
           }
         },
         "nl" : {
@@ -23447,6 +24383,18 @@
             "value" : "Partager les journaux des pompes Dana"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "दाना पंप लॉग साझा करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dana szivattyú naplók megosztása"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23463,12 +24411,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Del Dana-pumpelogger"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Del Dana pumpelogger"
           }
         },
         "nl" : {
@@ -23597,6 +24539,18 @@
             "value" : "L'heure doit-elle être affichée en 12 heures ou en 24 heures ?"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "समय 12h या 24h में प्रदर्शित होना चाहिए"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Az időt 12 vagy 24 órában kell megjeleníteni"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23613,12 +24567,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Skal tiden vises om 12 timer eller 24 timer"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Skal tiden vises i 12h eller 24h"
           }
         },
         "nl" : {
@@ -23747,6 +24695,18 @@
             "value" : "Perte de signal"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "सिग्नल लॉस"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jelveszteség"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23763,12 +24723,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Signal Tap"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Signaltap"
           }
         },
         "nl" : {
@@ -23897,6 +24851,18 @@
             "value" : "Son"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "साउंड"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hang"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23910,12 +24876,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Lyd"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lyd"
@@ -24047,6 +25007,18 @@
             "value" : "Statut"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "स्टेटस"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Állapot"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -24060,12 +25032,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Status"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Status"
@@ -24197,6 +25163,18 @@
             "value" : "Étape 1 : Amorcer la canule"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "चरण 1: प्राइम कैनुला"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1. lépés: A kanül előkészítése"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -24213,12 +25191,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Trinn 1: Prime-kanyle"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trinn 1: Klargjør kanylen"
           }
         },
         "nl" : {
@@ -24347,6 +25319,18 @@
             "value" : "Étape 1 : Définir le niveau du réservoir"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "चरण 1: जलाशय स्तर सेट करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1. lépés: A tartály szintjének beállítása"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -24360,12 +25344,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trinn 1: Still inn reservoarnivået"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Trinn 1: Still inn reservoarnivået"
@@ -24497,6 +25475,18 @@
             "value" : "Étape 2 : Définir la quantité de remplissage du tube"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "चरण 2: ट्यूब रिफिल राशि सेट करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2. lépés: A cső utántöltési mennyiségének beállítása"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -24510,12 +25500,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trinn 2: Still inn påfyllingsmengde for tube"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Trinn 2: Still inn påfyllingsmengde for tube"
@@ -24645,6 +25629,18 @@
             "value" : "Étape 3 : Amorcer la canule"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "चरण 3: प्राइम कैनुला"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3. lépés: A kanül előkészítése"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -24658,12 +25654,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trinn 3: Klargjør kanylen"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Trinn 3: Klargjør kanylen"
@@ -24795,6 +25785,18 @@
             "value" : "Arrêt de la température basale"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "टेम्प बेसल बंद करो"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stop temp basal"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -24811,12 +25813,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Stopp midlertidig basal"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stopp temp basal"
           }
         },
         "nl" : {
@@ -24945,6 +25941,18 @@
             "value" : "Suspendre"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "सस्पेंड"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Felfüggeszteni"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -24958,12 +25966,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Suspendere"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Suspendere"
@@ -25095,6 +26097,18 @@
             "value" : "Suspendre la livraison"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "डिलीवरी निलंबित करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Szállítás felfüggesztése"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -25108,12 +26122,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avbryt levering"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Avbryt levering"
@@ -25245,6 +26253,18 @@
             "value" : "Suspendre l'administration d'insuline"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "इंसुलिन डिलीवरी को निलंबित करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Az inzulinszállítás felfüggesztése"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -25258,12 +26278,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avbryt insulintilførselen"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Avbryt insulintilførselen"
@@ -25395,6 +26409,18 @@
             "value" : "Synchronisation des données de la pompe"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पंप डेटा सिंक करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Szinkronizálja a szivattyú adatait"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -25408,12 +26434,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Synkroniser pumpedata"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Synkroniser pumpedata"
@@ -25545,6 +26565,18 @@
             "value" : "Temp Basal"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "टेम्प बेसल"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temp Basális"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -25561,12 +26593,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Midlertidig basal"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Temp Basal"
           }
         },
         "nl" : {
@@ -25695,6 +26721,18 @@
             "value" : "La pompe à insuline Dana-I a été lancée pour la première fois en 2020 par le fabricant Sooil et est la dernière de la série."
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "दाना-आई इंसुलिन पंप को पहली बार 2020 में निर्माता सॉइल द्वारा रिलीज़ किया गया था और यह श्रृंखला में नवीनतम है"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A Dana-I inzulinpumpát először 2020-ban adta ki a gyártó Sooil, és ez a legújabb a sorozatban."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -25708,12 +26746,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dana-I insulinpumpe ble lansert første gang i 2020 av produsenten Sooil og er den nyeste i serien"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dana-I insulinpumpe ble lansert første gang i 2020 av produsenten Sooil og er den nyeste i serien"
@@ -25845,6 +26877,18 @@
             "value" : "La pompe à insuline DanaRS a été lancée en 2002. REMARQUE : seules les pompes DanaRS dotées de la version 3 du micrologiciel sont prises en charge."
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DaNARS इंसुलिन पंप पहली बार 2002 में जारी किया गया था। नोट: फ़र्मवेयर संस्करण 3 वाले केवल DanARS पंप समर्थित हैं।"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A DanaRS inzulinpumpát először 2002-ben hozták forgalomba. MEGJEGYZÉS: csak a 3. firmware verziójú DanaRS pumpák támogatottak."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -25858,12 +26902,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DanaRS-insulinpumpen ble lansert første gang i 2002. MERK: Kun DanaRS-pumper med fastvareversjon 3 støttes"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "DanaRS-insulinpumpen ble lansert første gang i 2002. MERK: Kun DanaRS-pumper med fastvareversjon 3 støttes"
@@ -25995,6 +27033,18 @@
             "value" : "L'option de vitesse de bolus la plus rapide"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "सबसे तेज़ बोलस स्पीड विकल्प"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A leggyorsabb bolus sebesség opció"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -26008,12 +27058,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Det raskeste alternativet for bolushastighet"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Det raskeste alternativet for bolushastighet"
@@ -26145,6 +27189,18 @@
             "value" : "L'administration d'insuline a été suspendue. Action échouée"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "इंसुलिन डिलीवरी को निलंबित कर दिया गया है। कार्रवाई विफल हुई।"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Az inzulinszállítást felfüggesztették. A művelet sikertelen"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -26158,12 +27214,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Insulintilførselen har blitt avbrutt. Handling mislyktes"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Insulintilførselen har blitt avbrutt. Handling mislyktes"
@@ -26295,6 +27345,18 @@
             "value" : "La limite maximale de bolus est atteinte. Veuillez essayer une quantité inférieure ou augmenter la limite"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "अधिकतम बोलस सीमा समाप्त हो गई है। कृपया कम राशि आज़माएँ या सीमा बढ़ाएँ"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elérte a maximális bolus limitet. Kérjük, próbálkozzon alacsonyabb mennyiséggel vagy növelje a limitet"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -26311,12 +27373,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Maksimal bolusgrense er nådd. Prøv en lavere mengde eller øk grensen."
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Maks bolusgrense er nådd. Prøv en lavere mengde eller øk grensen"
           }
         },
         "nl" : {
@@ -26445,6 +27501,18 @@
             "value" : "La limite maximale d'insuline par jour est atteinte. Veuillez essayer une quantité plus faible ou augmenter la limite"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "अधिकतम दैनिक इंसुलिन सीमा पूरी हो गई है। कृपया कम मात्रा आज़माएँ या सीमा बढ़ाएँ"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elérte a napi maximális inzulinmennyiséget. Kérjük, próbálkozzon alacsonyabb mennyiséggel, vagy növelje a limitet."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -26461,12 +27529,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Den maksimale daglige grensen for insulin er nådd. Prøv en lavere mengde eller øk grensen"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Den maksimale daglige grensen for insulin er nådd. Prøv en lavere mengde eller øk grensen."
           }
         },
         "nl" : {
@@ -26595,6 +27657,18 @@
             "value" : "L'option de vitesse du bolus moyen"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "मिडिल बोलस स्पीड विकल्प"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A középső bolus sebesség opció"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -26608,12 +27682,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Alternativet for midtre bolushastighet"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Alternativet for midtre bolushastighet"
@@ -26745,6 +27813,18 @@
             "value" : "La pompe a détecté un problème avec son arbre. Retirez le réservoir, vérifiez tout et réessayez."
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पंप ने अपने चाफ्ट के साथ एक समस्या का पता लगाया है। कृपया जलाशय को हटा दें, सबकुछ जांचें और फिर से कोशिश करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A szivattyú problémát észlelt a tengelyével. Kérjük, vegye ki a tartályt, ellenőrizzen mindent, és próbálja meg újra."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -26761,12 +27841,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pumpen har oppdaget et problem med skaftet. Fjern reservoaret, sjekk alt og prøv på nytt."
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pumpen har oppdaget et problem med sjakten. Fjern reservoaret, sjekk alt og prøv igjen."
           }
         },
         "nl" : {
@@ -26895,6 +27969,18 @@
             "value" : "The pump reminds you when the amount of insulin in the pump reaches this level"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पंप आपको याद दिलाता है कि पंप में इंसुलिन की मात्रा इस स्तर तक कब पहुंचती है"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A pumpa emlékezteti Önt, amikor a pumpában lévő inzulin mennyisége eléri ezt a szintet."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -26911,12 +27997,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pumpen minner deg på når mengden insulin i pumpen når dette nivået"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pumpen minner deg på når insulinmengden i pumpen når dette nivået"
           }
         },
         "nl" : {
@@ -27045,6 +28125,18 @@
             "value" : "Option de vitesse de bolus la plus lente"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "सबसे धीमा बोलस स्पीड विकल्प"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A leglassabb bolus sebesség opció"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -27058,12 +28150,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Det tregeste alternativet for bolushastighet"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Det tregeste alternativet for bolushastighet"
@@ -27195,6 +28281,18 @@
             "value" : "L'heure de votre pompe est différente de l'heure actuelle. Voulez-vous mettre à jour l'heure de votre pompe pour qu'elle corresponde à l'heure actuelle ?"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "आपके पंप का समय वर्तमान समय से अलग है। क्या आप अपने पंप के समय को मौजूदा समय में अपडेट करना चाहते हैं?"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A szivattyún lévő idő eltér az aktuális időtől. Szeretné frissíteni a szivattyún lévő időt az aktuális időre?"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -27211,12 +28309,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Klokken på pumpen er forskjellig fra gjeldende tid. Vil du oppdatere tiden på pumpen til gjeldende tid?"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Klokkeslettet på pumpen din er forskjellig fra gjeldende klokkeslett. Vil du oppdatere klokkeslettet på pumpen din til gjeldende klokkeslett?"
           }
         },
         "nl" : {
@@ -27345,6 +28437,18 @@
             "value" : "L'heure de votre pompe est différente de l'heure actuelle. L'heure de votre pompe contrôle les paramètres de votre thérapie programmée. Faites défiler vers le bas jusqu'à la ligne Heure de la pompe pour consulter le décalage horaire et configurer votre pompe."
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "आपके पंप का समय वर्तमान समय से अलग है। आपके पंप का समय आपकी निर्धारित थेरेपी सेटिंग्स को नियंत्रित करता है। समय के अंतर की समीक्षा करने और अपने पंप को कॉन्फ़िगर करने के लिए पंप टाइम पंक्ति तक नीचे स्क्रॉल करें।"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A szivattyún lévő idő eltér az aktuális időtől. A pumpa ideje szabályozza az ütemezett terápiás beállításokat. Az időeltolódás áttekintéséhez és a szivattyú beállításához görgessen lefelé a Pump Time (Szivattyú ideje) sorba."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -27361,12 +28465,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Klokken på pumpen er forskjellig fra gjeldende tid. Pumpens tid styrer dine planlagte behandlingsinnstillinger. Rull ned til Pumpetid-raden for å se tidsforskjellen og konfigurere pumpen."
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Klokkeslettet på pumpen din er forskjellig fra gjeldende klokkeslett. Pumpens klokkeslett styrer innstillingene for planlagt behandling. Bla ned til Pumpetid-raden for å se tidsforskjellen og konfigurere pumpen."
           }
         },
         "nl" : {
@@ -27495,6 +28593,18 @@
             "value" : "Il n'y a pas eu d'interactions avec la pompe depuis trop longtemps. Désactivez cette fonction dans la pompe ou interagissez avec la pompe."
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "पंप के साथ बहुत लंबे समय से कोई इंटरैक्शन नहीं हुआ है। या तो पंप में इस फ़ंक्शन को अक्षम करें या पंप के साथ इंटरैक्ट करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Túl sokáig nem volt semmilyen kölcsönhatás a szivattyúval. Vagy tiltsa le ezt a funkciót a szivattyúban, vagy lépjen kapcsolatba a szivattyúval."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -27508,12 +28618,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Det har ikke vært noen interaksjon med pumpen på for lang tid. Deaktiver enten denne funksjonen i pumpen, eller samhandle med pumpen"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Det har ikke vært noen interaksjon med pumpen på for lang tid. Deaktiver enten denne funksjonen i pumpen, eller samhandle med pumpen"
@@ -27645,6 +28749,18 @@
             "value" : "Cette méthode de remplissage n'est prévue que lorsque la pompe ne permet pas de remplir le réservoir ou d'amorcer la canule."
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "रिफिलिंग की यह विधि केवल तभी अभिप्रेत है जब पंप जलाशय को फिर से भरने या कैनुला को प्राइम करने का कोई तरीका प्रदान नहीं कर सकता है"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ez az utántöltési módszer csak akkor alkalmazható, ha a szivattyú nem képes a tartály újratöltésére vagy a kanül feltöltésére."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -27661,12 +28777,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Denne påfyllingsmetoden er kun beregnet for tilfeller der pumpen ikke kan fylle opp reservoaret eller kanylen"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Denne påfyllingsmetoden er kun beregnet for tilfeller der pumpen ikke kan fylle opp reservoaret eller kanylen."
           }
         },
         "nl" : {
@@ -27795,6 +28905,18 @@
             "value" : "Changement d'heure détecté"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "समय परिवर्तन का पता चला"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Érzékelt időváltozás"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -27808,12 +28930,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tidsendring oppdaget"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tidsendring oppdaget"
@@ -27945,6 +29061,18 @@
             "value" : "Mode d'emploi du Bluetooth"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ब्लूटूथ मोड टॉगल करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bluetooth üzemmód váltása"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -27961,12 +29089,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Slå av/på Bluetooth-modus"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Veksle mellom Bluetooth-modus"
           }
         },
         "nl" : {
@@ -28095,6 +29217,18 @@
             "value" : "Tonalité silencieuse à bascule ?"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "टॉगल साइलेंट टोन?"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Csendes hangjelzés kapcsolása?"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28111,12 +29245,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Slå av/på stille tone?"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Veksle stille tone?"
           }
         },
         "nl" : {
@@ -28245,6 +29373,18 @@
             "value" : "Quantité de remplissage du tube"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ट्यूब रिफिल राशि"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tubus utántöltés mennyisége"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28261,12 +29401,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mengde påfylling av rør"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Påfyllingsmengde på tube"
           }
         },
         "nl" : {
@@ -28395,6 +29529,18 @@
             "value" : "Type de recharge"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "रिफिल का प्रकार"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Az utántöltés típusa"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28411,12 +29557,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Type påfyll"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Type refill"
           }
         },
         "nl" : {
@@ -28545,6 +29685,18 @@
             "value" : "U"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "यू"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "U"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28561,12 +29713,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "E"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "U"
           }
         },
         "nl" : {
@@ -28695,6 +29841,18 @@
             "value" : "U/h"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "यू/घंटा"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "U/óra"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28711,12 +29869,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "E/t"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "U/time"
           }
         },
         "nl" : {
@@ -28845,6 +29997,18 @@
             "value" : "Inconnu"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "अनजान"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ismeretlen"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28858,12 +30022,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ukjent"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ukjent"
@@ -28995,6 +30153,18 @@
             "value" : "Erreur inconnue"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "अज्ञात त्रुटि"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ismeretlen hiba"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29008,12 +30178,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ukjent feil"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ukjent feil"
@@ -29145,6 +30309,18 @@
             "value" : "Options pour l'utilisateur"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "उपयोगकर्ता के विकल्प"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Felhasználói beállítások"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29158,12 +30334,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Brukeralternativer"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Brukeralternativer"
@@ -29295,6 +30465,18 @@
             "value" : "Vibrations"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "वाइब्रेशन"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rezgés"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29308,12 +30490,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vibrasjon"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vibrasjon"
@@ -29445,6 +30621,18 @@
             "value" : "WARNING: Please don't use this until you've read the documentation"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "चेतावनी: कृपया इसका उपयोग तब तक न करें जब तक आप दस्तावेज़ीकरण नहीं पढ़ लेते"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FIGYELMEZTETÉS: Kérjük, ne használja ezt, amíg el nem olvasta a dokumentációt."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29458,12 +30646,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ADVARSEL: Ikke bruk dette før du har lest dokumentasjonen"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "ADVARSEL: Ikke bruk dette før du har lest dokumentasjonen"
@@ -29595,6 +30777,18 @@
             "value" : "AVERTISSEMENT : A UTILISER AVEC PRUDENCE !"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "चेतावनी: सावधानी के साथ प्रयोग करें!"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "FIGYELMEZTETÉS: ÓVATOSAN HASZNÁLD!"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29608,12 +30802,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ADVARSEL: BRUK MED FORSIKTIGHET!"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "ADVARSEL: BRUK MED FORSIKTIGHET!"
@@ -29745,6 +30933,18 @@
             "value" : "Bienvenue !"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "आपका स्वागत है!"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Üdvözöljük!"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29758,12 +30958,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Velkommen!"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Velkommen!"
@@ -29895,6 +31089,18 @@
             "value" : "Qu'est-ce que c'est ?"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "यह क्या है?"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mi ez?"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29908,12 +31114,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hva er dette?"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hva er dette?"
@@ -30045,6 +31245,18 @@
             "value" : "Oui, 1 heure"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "हां, 1 घंटा"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Igen, 1 óra"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -30058,12 +31270,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ja, 1 time"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ja, 1 time"
@@ -30195,6 +31401,18 @@
             "value" : "Oui, 5 minutes"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "हां, 5 मिनट"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Igen, 5 perc"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -30208,12 +31426,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ja, 5 minutter"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ja, 5 minutter"
@@ -30345,6 +31557,18 @@
             "value" : "Oui, 15 minutes"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "हां, 15 मिनट"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Igen, 15 perc"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -30358,12 +31582,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ja, 15 minutter"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ja, 15 minutter"
@@ -30495,6 +31713,18 @@
             "value" : "Oui, 30 minutes"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "हां, 30 मिनट"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Igen, 30 perc"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -30508,12 +31738,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ja, 30 minutter"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ja, 30 minutter"
@@ -30645,6 +31869,18 @@
             "value" : "Oui, désactiver la synchronisation des bolus"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "हां, बोलस सिंकिंग को अक्षम करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Igen, a bolus szinkronizálás letiltása"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -30658,12 +31894,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ja, deaktiver bolussynkronisering"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ja, deaktiver bolussynkronisering"
@@ -30795,6 +32025,18 @@
             "value" : "Oui, désactiver les tonalités silencieuses"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "हां, साइलेंट टोन को डिसेबल करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Igen, csendes hangok kikapcsolása"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -30808,12 +32050,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ja, Deaktiver lydløse toner"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ja, Deaktiver lydløse toner"
@@ -30945,6 +32181,18 @@
             "value" : "Oui, activer les tonalités silencieuses"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "हां, साइलेंट टोन सक्षम करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Igen, csendes hangok engedélyezése"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -30958,12 +32206,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ja, aktiver lydløse toner"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ja, aktiver lydløse toner"
@@ -31095,6 +32337,18 @@
             "value" : "Oui, réactiver la synchronisation des bolus"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "हां, बोलस सिंकिंग को फिर से सक्षम करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Igen, engedélyezze újra a bolus szinkronizálást"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -31108,12 +32362,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ja, aktiver bolussynkronisering på nytt"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ja, aktiver bolussynkronisering på nytt"
@@ -31245,6 +32493,18 @@
             "value" : "Oui, passage en mode continu"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "हां, निरंतर मोड पर स्विच करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Igen, folyamatos üzemmódra váltás"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -31258,12 +32518,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ja, bytt til kontinuerlig modus"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ja, bytt til kontinuerlig modus"
@@ -31395,6 +32649,18 @@
             "value" : "Oui, passer en mode interactif"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "हां, इंटरैक्टिव मोड पर स्विच करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Igen, interaktív üzemmódra váltás"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -31408,12 +32674,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ja, bytt til interaktiv modus"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ja, bytt til interaktiv modus"
@@ -31545,6 +32805,18 @@
             "value" : "Oui, synchronisation avec l'heure actuelle"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "हां, मौजूदा समय में सिंक करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Igen, szinkronizálás az aktuális idővel"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -31561,12 +32833,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ja, Synkroniser til gjeldende tid"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ja, synkroniseres med gjeldende tid"
           }
         },
         "nl" : {
@@ -31695,6 +32961,18 @@
             "value" : "Votre "
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "आपका "
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Az Ön"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -31708,12 +32986,6 @@
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Din"
-          }
-        },
-        "nb-NO" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Din"
@@ -31845,6 +33117,18 @@
             "value" : "Votre limite journalière de base a été atteinte. Veuillez contacter votre distributeur Dana pour augmenter la limite."
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "आपकी दैनिक मूलभूत सीमा समाप्त हो गई है। लिमिट बढ़ाने के लिए कृपया अपने दाना डिस्ट्रीब्यूटर से संपर्क करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A napi bazális határértéket elértük. Kérjük, lépjen kapcsolatba a Dana forgalmazójával a limit emelése érdekében."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -31861,12 +33145,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Din daglige basalgrense er nådd. Ta kontakt med Dana-distributøren din for å øke grensen"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Din daglige basalgrense er nådd. Kontakt Dana-distributøren din for å øke grensen"
           }
         },
         "nl" : {
@@ -31995,6 +33273,18 @@
             "value" : "Votre limite quotidienne d'insuline a été atteinte. Veuillez contacter votre distributeur Dana pour augmenter la limite."
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "आपकी दैनिक इंसुलिन की सीमा पूरी हो गई है। लिमिट बढ़ाने के लिए कृपया अपने दाना डिस्ट्रीब्यूटर से संपर्क करें"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A napi inzulinkorlátot elértük. Kérjük, lépjen kapcsolatba a Dana forgalmazójával a limit emelése érdekében."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32011,12 +33301,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Din daglige insulingrense er nådd. Kontakt Dana-distributøren din for å øke grensen"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Din daglige insulingrense er nådd. Ta kontakt med din Dana-distributør for å øke grensen."
           }
         },
         "nl" : {
@@ -32145,6 +33429,18 @@
             "value" : "Votre pompe est déconnectée depuis plus de 5 minutes !"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "आपका पंप 5 मिनट से अधिक समय तक डिस्कनेक्ट हो जाता है!"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A szivattyú 5 percnél tovább van kikapcsolva!"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32161,12 +33457,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pumpen din har vært frakoblet i mer enn 5 minutter!"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pumpen er frakoblet i mer enn 5 minutter!"
           }
         },
         "nl" : {
@@ -32295,6 +33585,18 @@
             "value" : "Votre pompe est toujours déconnectée après la période définie !"
           }
         },
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "निर्धारित अवधि के बाद भी आपका पंप डिस्कनेक्ट हो गया है!"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A szivattyú a beállított időtartam után is le van kapcsolva!"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32311,12 +33613,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pumpen din er fortsatt frakoblet etter den angitte perioden!"
-          }
-        },
-        "nb-NO" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pumpen er fortsatt frakoblet etter den innstilte perioden!"
           }
         },
         "nl" : {
