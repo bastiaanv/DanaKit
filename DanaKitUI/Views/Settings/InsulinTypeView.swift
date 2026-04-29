@@ -26,7 +26,7 @@ struct InsulinTypeView: View {
     var body: some View {
         VStack(alignment: .leading) {
             List {
-                Section(header: SectionHeader(label: LocalizedString(
+                Section(header: SectionHeader(label: String(localized:
                     "Select the type of insulin that you will be using in this pump",
                     comment: "Title text for insulin type confirmation page"
                 ))) {
@@ -40,7 +40,7 @@ struct InsulinTypeView: View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarHidden(false)
-        .navigationTitle(LocalizedString("Insulin Type", comment: "Title for insulin type"))
+        .navigationTitle(String(localized: "Insulin Type", comment: "Title for insulin type"))
     }
 }
 

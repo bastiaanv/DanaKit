@@ -12,13 +12,13 @@ struct DanaKitSetupView: View {
     var body: some View {
         VStack(alignment: .leading) {
             List {
-                Section(header: SectionHeader(label: LocalizedString("Choose your Dana pump", comment: "Onboarding subheader"))) {
+                Section(header: SectionHeader(label: String(localized: "Choose your Dana pump", comment: "Onboarding subheader"))) {
                     CheckmarkListItem(
-                        title: Text(LocalizedString("Dana-i", comment: "dana-i option text for DanaKitSetupView")),
-                        description: Text(LocalizedString(
+                        title: Text("Dana-i", comment: "dana-i option text for DanaKitSetupView"),
+                        description: Text(
                             "The Dana-I insulin pump was first release in 2020 by manufacturer Sooil and is the latest in the series",
                             comment: "dana-i description"
-                        )),
+                        ),
                         isSelected: Binding(
                             get: { self.value == 2 },
                             set: { isSelected in
@@ -30,11 +30,11 @@ struct DanaKitSetupView: View {
                     )
                     
                     CheckmarkListItem(
-                        title: Text(LocalizedString("DanaRS-v3", comment: "danaRS v3 option text for DanaKitSetupView")),
-                        description: Text(LocalizedString(
+                        title: Text("DanaRS-v3", comment: "danaRS v3 option text for DanaKitSetupView"),
+                        description: Text(
                             "The DanaRS insulin pump was first released in 2002. NOTE: only DanaRS pumps with firmware version 3 are supported",
                             comment: "danaRS v3 description"
-                        )),
+                        ),
                         isSelected: Binding(
                             get: { self.value == 1 },
                             set: { isSelected in
@@ -56,17 +56,13 @@ struct DanaKitSetupView: View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarHidden(false)
-        .navigationTitle(LocalizedString("Welcome!", comment: "Onboarding Header"))
+        .navigationTitle(String(localized: "Welcome!", comment: "Onboarding Header"))
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(LocalizedString("Cancel", comment: "Cancel button title"), action: {
-                    self.dismiss()
-                })
+                Button(action: self.dismiss) {
+                    Text("Cancel", comment: "Cancel button title")
+                }
             }
         }
     }
-}
-
-#Preview {
-    DanaKitSetupView(nextAction: { _ in })
 }

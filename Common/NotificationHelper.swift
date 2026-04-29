@@ -12,8 +12,8 @@ public enum NotificationHelper {
     public static func setDisconnectReminder(_ after: TimeInterval) {
         ensureCanSendNotification {
             let content = UNMutableNotificationContent()
-            content.title = LocalizedString("Pump is still disconnected", comment: "Title disconnect reminder notification")
-            content.body = LocalizedString(
+            content.title = String(localized: "Pump is still disconnected", comment: "Title disconnect reminder notification")
+            content.body = String(localized:
                 "Your pump is still disconnected after the set period!",
                 comment: "Body disconnect reminder notification"
             )
@@ -31,8 +31,8 @@ public enum NotificationHelper {
     public static func setDisconnectWarning() {
         ensureCanSendNotification {
             let content = UNMutableNotificationContent()
-            content.title = LocalizedString("Pump is disconnected", comment: "Title disconnect warning notification")
-            content.body = LocalizedString(
+            content.title = String(localized: "Pump is disconnected", comment: "Title disconnect warning notification")
+            content.body = String(localized: 
                 "Your pump is disconnected longer than 5 minutes!",
                 comment: "Body disconnect warning notification"
             )

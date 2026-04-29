@@ -18,7 +18,7 @@ struct InsulinTypeConfirmation: View {
     var body: some View {
         VStack(alignment: .leading) {
             List {
-                Section(header: SectionHeader(label: LocalizedString(
+                Section(header: SectionHeader(label: String(localized:
                     "Select the type of insulin that you will be using in this pump",
                     comment: "Title text for insulin type confirmation page"
                 ))) {
@@ -37,12 +37,6 @@ struct InsulinTypeConfirmation: View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarHidden(false)
-        .navigationTitle(LocalizedString("Insulin Type", comment: "Title for insulin type"))
-    }
-}
-
-struct InsulinTypeConfirmation_Previews: PreviewProvider {
-    static var previews: some View {
-        InsulinTypeConfirmation(initialValue: .novolog, supportedInsulinTypes: InsulinType.allCases, didConfirm: { _ in })
+        .navigationTitle(String(localized: "Insulin Type", comment: "Title for insulin type"))
     }
 }

@@ -369,14 +369,14 @@ class DanaKitSettingsViewModel: ObservableObject {
 
     private func updateBasalButtonText() -> String {
         guard let pumpManager = self.pumpManager else {
-            return LocalizedString("Suspend delivery", comment: "Dana settings suspend delivery")
+            return String(localized: "Suspend Insulin Delivery", comment: "Dana settings suspend delivery")
         }
 
         if pumpManager.state.isPumpSuspended {
-            return LocalizedString("Resume delivery", comment: "Dana settings resume delivery")
+            return String(localized: "Resume Insulin Delivery", comment: "Dana settings resume delivery")
         }
 
-        return LocalizedString("Suspend delivery", comment: "Dana settings suspend delivery")
+        return String(localized: "Suspend Insulin Delivery", comment: "Dana settings suspend delivery")
     }
 
     private func updateBasalRate() {

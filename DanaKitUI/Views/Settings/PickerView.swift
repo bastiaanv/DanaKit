@@ -19,15 +19,19 @@ struct PickerView: View {
     var formatter: (Int) -> String
     var didChange: ((Int) -> Void)?
 
-    var title: String
-    var description: String?
+    var title: Text
+    var description: Text?
 
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
-                titleView
-                if description != nil {
-                    Text(description!).fixedSize(horizontal: false, vertical: true)
+                title
+                    .font(.title)
+                    .bold()
+                
+                if let description {
+                    description
+                        .fixedSize(horizontal: false, vertical: true)
                 }
 
                 Divider()
@@ -54,21 +58,4 @@ struct PickerView: View {
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarHidden(false)
     }
-
-    @ViewBuilder private var titleView: some View {
-        Text(title)
-            .font(.title)
-            .bold()
-    }
-}
-
-#Preview {
-    PickerView(
-        value: 0,
-        allowedOptions: [0, 1, 2, 3],
-        formatter: { _ in "" },
-        didChange: { _ in },
-        title: "Preview Title",
-        description: "Preview description"
-    )
 }

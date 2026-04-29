@@ -2,7 +2,7 @@ import LoopKitUI
 import SwiftUI
 
 struct ContinueButton: View {
-    var text = LocalizedString("Continue", comment: "Text for continue button")
+    var text = String(localized: "Continue", comment: "Text for continue button")
     var loading: Binding<Bool> = .constant(false)
     var disabled: Binding<Bool> = .constant(false)
     let action: () -> Void
