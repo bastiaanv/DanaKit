@@ -53,10 +53,10 @@
             "value" : " est prêt à être utilisé !"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " उपयोग करने के लिए तैयार है!"
+            "value" : " מוכן לשימוש!"
           }
         },
         "hu" : {
@@ -75,6 +75,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : " が使えるようになった！"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " 를 사용할 준비가 되었습니다!"
           }
         },
         "nb" : {
@@ -209,10 +215,10 @@
             "value" : ". Please go to your bluetooth settings, forget this device, and try again"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "। कृपया अपनी Bluetooth सेटिंग पर जाएं, इस डिवाइस को भूल जाएं, और फिर से कोशिश करें"
+            "value" : ". אנא עבור אל הגדרות ה- Bluetooth שלך, שכח את המכשיר הזה ונסה שוב"
           }
         },
         "hu" : {
@@ -231,6 +237,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : ". Please go to your bluetooth settings, forget this device, and try again"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ". 블루투스 설정으로 이동하여 이 장치를 잊어버리고 다시 시도하세요."
           }
         },
         "nb" : {
@@ -313,6 +325,168 @@
         }
       }
     },
+    "%@ units remaining at %@" : {
+      "comment" : "Accessibility format string for (1: localized volume)(2: time)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ units remaining at %@"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ units remaining at %@"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ enheder tilbage på %@"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ IE verbleibend bei %@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ units remaining at %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "quedan %@ unidades a las %@"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ yksikköä jäljellä klo %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ unités restantes à %@"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ יחידות שנותרו ב %@"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ egység maradt %@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ unità rimanenti alle ore %@"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ units remaining at %@"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 유닛이 %@에 남아 있습니다."
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ enheter gjenstår ved %@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ eenheden over om %@"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ jednostek pozostaje w %@"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ units remaining at %@"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ unități rămase la %@"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ ед остается в %@"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ jednotiek zostávajúcich na %@"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ enot, ki ostajajo pri %@"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ enheter återstår kl. %@"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ ünite kaldı %@"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ одиниць залишилося на %@"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ units vẫn đang còn lúc %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ units remaining at %@"
+          }
+        }
+      }
+    },
     "%@%@ / %@%@" : {
       "localizations" : {
         "ar" : {
@@ -363,7 +537,7 @@
             "value" : "%@%@ / %@%@"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ %@/%@ %@"
@@ -382,6 +556,12 @@
           }
         },
         "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@%@ / %@%@"
+          }
+        },
+        "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@%@ / %@%@"
@@ -519,10 +699,10 @@
             "value" : "%@U"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ यू"
+            "value" : "%@ U"
           }
         },
         "hu" : {
@@ -538,6 +718,12 @@
           }
         },
         "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@U"
+          }
+        },
+        "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@U"
@@ -623,162 +809,6 @@
         }
       }
     },
-    "%1$@ units remaining at %2$@" : {
-      "comment" : "Accessibility format string for (1: localized volume)(2: time)",
-      "extractionState" : "manual",
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ units remaining at %@"
-          }
-        },
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ units remaining at %@"
-          }
-        },
-        "da" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ enheder tilbage på %@"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ IE verbleibend bei %@"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ units remaining at %@"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "quedan %@ unidades a las %@"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ yksikköä jäljellä klo %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ unités restantes à %@"
-          }
-        },
-        "hi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ %@ पर शेष इकाइयां"
-          }
-        },
-        "hu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ egység maradt %@"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ unità rimanenti alle ore %@"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ units remaining at %@"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ enheter gjenstår ved %@"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ eenheden over om %@"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ jednostek pozostaje w %@"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ units remaining at %@"
-          }
-        },
-        "ro" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ unități rămase la %@"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ ед остается в %@"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ jednotiek zostávajúcich na %@"
-          }
-        },
-        "sl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ enot, ki ostajajo pri %@"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ enheter återstår kl. %@"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ ünite kaldı %@"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ одиниць залишилося на %@"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ units vẫn đang còn lúc %@"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ units remaining at %@"
-          }
-        }
-      }
-    },
     "%u %@" : {
       "localizations" : {
         "ar" : {
@@ -829,7 +859,7 @@
             "value" : "%%1$u %2$@"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%%1$u %2$@"
@@ -851,6 +881,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%%1$u %2$@"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1$u %2$@"
           }
         },
         "nb" : {
@@ -985,10 +1021,10 @@
             "value" : "12 sec/U"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "12 सेकंड/यू"
+            "value" : "12 שניות/שניות"
           }
         },
         "hu" : {
@@ -1007,6 +1043,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "12秒/U"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "12초/U"
           }
         },
         "nb" : {
@@ -1141,10 +1183,10 @@
             "value" : "Notation 12h"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "12h नोटेशन"
+            "value" : "סימון 12 שעות"
           }
         },
         "hu" : {
@@ -1163,6 +1205,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "12h表記"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "12시간 표기법"
           }
         },
         "nb" : {
@@ -1297,10 +1345,10 @@
             "value" : "Affichage sur 24 heures"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "24h डिस्प्ले"
+            "value" : "תצוגה 24 שעות"
           }
         },
         "hu" : {
@@ -1319,6 +1367,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "24時間表示"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "24시간 디스플레이"
           }
         },
         "nb" : {
@@ -1453,10 +1507,10 @@
             "value" : "Notation sur 24 heures"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "24h नोटेशन"
+            "value" : "סימון 24 שעות"
           }
         },
         "hu" : {
@@ -1475,6 +1529,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "24時間表記"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "24시간 표기법"
           }
         },
         "nb" : {
@@ -1609,10 +1669,10 @@
             "value" : "30 sec/U"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "30 सेकंड/यू"
+            "value" : "30 שניות/שניות"
           }
         },
         "hu" : {
@@ -1631,6 +1691,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "30秒/U"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "30초/U"
           }
         },
         "nb" : {
@@ -1765,10 +1831,10 @@
             "value" : "60 sec/U"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "60 सेकंड/यू"
+            "value" : "60 שניות/שניות"
           }
         },
         "hu" : {
@@ -1787,6 +1853,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "60秒/U"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "60초/U"
           }
         },
         "nb" : {
@@ -1921,10 +1993,10 @@
             "value" : "Un rappel de vérification de la glycémie a été configuré dans votre pompe et est déclenché. Veuillez l'enlever ou donner votre taux de glucose à la pompe."
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "आपके पंप में एक ब्लड ग्लूकोज़ चेक रिमाइंडर सेट किया गया है और ट्रिगर किया गया है। कृपया इसे हटा दें या पंप को अपना ग्लूकोज़ स्तर दें।"
+            "value" : "תזכורת לבדיקת גלוקוז בדם הוקמה במשאבה שלך ומופעלת. אנא הסר אותו או תן את רמת הגלוקוז שלך למשאבה"
           }
         },
         "hu" : {
@@ -1943,6 +2015,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "血糖値チェックリマインダーがポンプに設定され、作動しています。リマインダーを外すか、血糖値をポンプに知らせてください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프에 혈당 확인 알림이 설정되어 있으며 트리거됩니다. 알림을 제거하거나 펌프에 혈당 수치를 알려주세요."
           }
         },
         "nb" : {
@@ -2077,16 +2155,16 @@
             "value" : "Un délai d'attente pour le bolus est actif. Le cycle de la boucle ne peut être achevé tant que le délai d'attente n'est pas inactif."
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "एक बोलस टाइमआउट सक्रिय है। लूप चक्र तब तक पूरा नहीं किया जा सकता जब तक कि टाइमआउट निष्क्रिय न हो जाए।"
+            "value" : "פסק זמן בולוס פעיל. לא ניתן להשלים את מחזור הלולאה עד שפסק הזמן אינו פעיל"
           }
         },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "A bolus timeout aktív. A ciklus nem fejezhető be, amíg az időkorlát nem inaktív."
+            "value" : "A bolus timeout aktív. A hurokciklus nem fejezhető be, amíg az időkorlát nem inaktív."
           }
         },
         "it" : {
@@ -2099,6 +2177,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ボーラスタイムアウトが有効である。ループサイクルはタイムアウトが解除されるまで完了しない。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "볼러스 타임아웃이 활성화되었습니다. 타임아웃이 비활성화될 때까지 루프 사이클을 완료할 수 없습니다."
           }
         },
         "nb" : {
@@ -2233,10 +2317,10 @@
             "value" : "L'action a été annulée, car la pompe est occupée."
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "कार्रवाई रद्द कर दी गई है, क्योंकि पंप व्यस्त है"
+            "value" : "הפעולה בוטלה, כי המשאבה עמוסה"
           }
         },
         "hu" : {
@@ -2255,6 +2339,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ポンプがビジー状態のため、アクションはキャンセルされました。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프가 사용 중이므로 작업이 취소되었습니다."
           }
         },
         "nb" : {
@@ -2389,10 +2479,10 @@
             "value" : "Après avoir configuré le type d'insuline et la vitesse du bolus, vous verrez un écran avec toutes les pompes Dana trouvées. Sélectionnez la pompe que vous souhaitez relier à %@."
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "इंसुलिन टाइप और बोलस स्पीड सेट करने के बाद, आपको सभी पाए गए दाना पंपों वाली एक स्क्रीन दिखाई देगी। उस पंप का चयन करें जिसे आप %@ से लिंक करना चाहते हैं।"
+            "value" : "לאחר הגדרת סוג האינסולין ומהירות הבולוס, תראה מסך עם כל משאבות דנה שנמצאו. בחר את המשאבה שברצונך לקשר אליה %@."
           }
         },
         "hu" : {
@@ -2411,6 +2501,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "インスリンの種類とボーラス速度を設定した後、見つかったすべての Dana ポンプの画面が表示されます。 %@とリンクさせたいポンプを選択してください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "인슐린 유형과 볼루스 속도를 설정하면 검색된 모든 다나 펌프가 표시된 화면이 나타납니다. XX0XX}와 연결하려는 펌프를 선택합니다."
           }
         },
         "nb" : {
@@ -2545,10 +2641,10 @@
             "value" : "Bips d'alarme"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "अलार्म बीप्स"
+            "value" : "צפצופי אזעקה"
           }
         },
         "hu" : {
@@ -2567,6 +2663,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "アラームビープ音"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "알람 신호음"
           }
         },
         "nb" : {
@@ -2701,10 +2803,10 @@
             "value" : "Une erreur inconnue s'est produite lors du traitement de l'alerte provenant de la pompe. Veuillez signaler cette"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पंप से अलर्ट को प्रोसेस करने के दौरान एक अज्ञात त्रुटि हुई है। कृपया इसकी रिपोर्ट करें"
+            "value" : "שגיאה לא ידועה אירעה במהלך עיבוד ההתראה מהמשאבה. אנא דווח על כך"
           }
         },
         "hu" : {
@@ -2723,6 +2825,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ポンプからのアラート処理中に不明なエラーが発生しました。このエラーを報告してください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프에서 경고를 처리하는 동안 알 수 없는 오류가 발생했습니다. 이 문제를 신고해 주세요."
           }
         },
         "nb" : {
@@ -2857,10 +2965,10 @@
             "value" : "Êtes-vous sûr de vouloir cesser d'utiliser Dana-i/RS ?"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "क्या आप वाकई Dana-i/RS का उपयोग बंद करना चाहते हैं?"
+            "value" : "האם אתה בטוח שאתה רוצה להפסיק להשתמש ב- Dana-i/RS?"
           }
         },
         "hu" : {
@@ -2879,6 +2987,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "本当にDana-i/RSをやめたいのですか？"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dana-i/RS 사용을 중단하시겠습니까?"
           }
         },
         "nb" : {
@@ -3013,10 +3127,10 @@
             "value" : "Durée d'allumage du rétroéclairage"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "बैकलाइट ऑन टाइम"
+            "value" : "תאורה אחורית בזמן"
           }
         },
         "hu" : {
@@ -3035,6 +3149,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "世界へ"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "백라이트 켜짐 시간"
           }
         },
         "nb" : {
@@ -3169,10 +3289,10 @@
             "value" : "Basal"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "बेसल"
+            "value" : "בסיסי"
           }
         },
         "hu" : {
@@ -3191,6 +3311,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ベーサル"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "기초"
           }
         },
         "nb" : {
@@ -3325,10 +3451,10 @@
             "value" : "Comparaison de base"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "बेसल कम्पेयर"
+            "value" : "השוואת בסיסית"
           }
         },
         "hu" : {
@@ -3347,6 +3473,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ベース比較"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "기초 비교"
           }
         },
         "nb" : {
@@ -3481,10 +3613,10 @@
             "value" : "Limite de base atteinte"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "मूल सीमा तक पहुँच गया"
+            "value" : "הגבול הבסיסי הושג"
           }
         },
         "hu" : {
@@ -3503,6 +3635,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "基礎限界に到達"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "기본 한도 도달"
           }
         },
         "nb" : {
@@ -3637,10 +3775,10 @@
             "value" : "Profil de base"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "बेसल प्रोफ़ाइल"
+            "value" : "פרופיל בסיסי"
           }
         },
         "hu" : {
@@ -3659,6 +3797,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "基本プロファイル"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "기본 프로필"
           }
         },
         "nb" : {
@@ -3793,10 +3937,10 @@
             "value" : "Âge de la batterie"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "बैटरी की उम्र"
+            "value" : "גיל הסוללה"
           }
         },
         "hu" : {
@@ -3815,6 +3959,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Battery age"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "배터리 수명"
           }
         },
         "nb" : {
@@ -3949,10 +4099,10 @@
             "value" : "Battery is empty. Replace it now!"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "बैटरी खाली है। इसे अभी बदलें!"
+            "value" : "הסוללה ריקה. החלף אותו עכשיו!"
           }
         },
         "hu" : {
@@ -3971,6 +4121,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Battery is empty. Replace it now!"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "배터리가 비어 있습니다. 지금 교체하세요!"
           }
         },
         "nb" : {
@@ -4105,10 +4261,10 @@
             "value" : "Niveau de la batterie"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "बैटरी स्तर"
+            "value" : "רמת הסוללה"
           }
         },
         "hu" : {
@@ -4127,6 +4283,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "バッテリー残量"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "배터리 잔량"
           }
         },
         "nb" : {
@@ -4261,10 +4423,10 @@
             "value" : "Mesure de la glycémie"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "रक्त शर्करा का माप"
+            "value" : "מדידת גלוקוז בדם"
           }
         },
         "hu" : {
@@ -4283,6 +4445,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "血糖測定"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "혈당 측정"
           }
         },
         "nb" : {
@@ -4417,10 +4585,10 @@
             "value" : "Bolus"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "बोलस"
+            "value" : "בולוס"
           }
         },
         "hu" : {
@@ -4439,6 +4607,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ボーラス"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "볼러스"
           }
         },
         "nb" : {
@@ -4573,10 +4747,10 @@
             "value" : "Les deux"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "दोनों"
+            "value" : "שניהם"
           }
         },
         "hu" : {
@@ -4595,6 +4769,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "両方"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "둘 다"
           }
         },
         "nb" : {
@@ -4729,10 +4909,10 @@
             "value" : "Annuler"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "कैंसिल करें"
+            "value" : "בטל"
           }
         },
         "hu" : {
@@ -4751,6 +4931,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "キャンセル"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "취소"
           }
         },
         "nb" : {
@@ -4885,10 +5071,10 @@
             "value" : "Âge de la canule"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "कैनुला उम्र"
+            "value" : "גיל הצינורית"
           }
         },
         "hu" : {
@@ -4907,6 +5093,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "カニューレ年齢"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "캐뉼라 나이"
           }
         },
         "nb" : {
@@ -5041,10 +5233,10 @@
             "value" : "Canule uniquement"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "केवल कैनुला"
+            "value" : "קנולה בלבד"
           }
         },
         "hu" : {
@@ -5063,6 +5255,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "カニューレのみ"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "캐뉼라 전용"
           }
         },
         "nb" : {
@@ -5197,10 +5395,10 @@
             "value" : "Recharge de la canule"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "कैनुला रिफिल"
+            "value" : "מילוי צינורית"
           }
         },
         "hu" : {
@@ -5219,6 +5417,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "カニューレ再充填"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "캐뉼라 리필"
           }
         },
         "nb" : {
@@ -5353,10 +5557,10 @@
             "value" : "Vérifier l'arbre"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "चैफ़्ट चेक करें"
+            "value" : "בדוק את האפט"
           }
         },
         "hu" : {
@@ -5375,6 +5579,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "シャフトのチェック"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "샤프트 확인"
           }
         },
         "nb" : {
@@ -5509,10 +5719,10 @@
             "value" : "Vérifier la pompe et réessayer"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पंप की जांच करें और फिर से कोशिश करें"
+            "value" : "בדוק את המשאבה ונסה שוב"
           }
         },
         "hu" : {
@@ -5531,6 +5741,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ポンプをチェックし、もう一度試す"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프를 점검하고 다시 시도하세요."
           }
         },
         "nb" : {
@@ -5665,10 +5881,10 @@
             "value" : "Vérifier le réservoir et l'infusion et réessayer."
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "जलाशय और इन्फ़स की जाँच करें और फिर से कोशिश करें"
+            "value" : "בדוק את המאגר ואת האינפוס ונסה שוב"
           }
         },
         "hu" : {
@@ -5687,6 +5903,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "リザーバーと輸液を確認し、もう一度試してください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "저장소를 확인하고 주입한 후 다시 시도하세요."
           }
         },
         "nb" : {
@@ -5821,10 +6043,10 @@
             "value" : "Vérifié à"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पर चेक किया गया"
+            "value" : "נבדק ב"
           }
         },
         "hu" : {
@@ -5843,6 +6065,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "でチェックした。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다음에서 확인"
           }
         },
         "nb" : {
@@ -5977,10 +6205,10 @@
             "value" : "La somme de contrôle a échoué. Réessayez"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "चेकसम असफल। फिर से कोशिश करें"
+            "value" : "סיכום הבדיקה נכשל. נסה שוב"
           }
         },
         "hu" : {
@@ -5999,6 +6227,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "チェックサムに失敗しました。再試行してください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "체크섬이 실패했습니다. 다시 시도하세요."
           }
         },
         "nb" : {
@@ -6133,10 +6367,10 @@
             "value" : "Choisissez votre pompe Dana"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "अपना दाना पंप चुनें"
+            "value" : "בחר את משאבת דנה שלך"
           }
         },
         "hu" : {
@@ -6155,6 +6389,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Danaポンプをお選びください"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dana 펌프 선택"
           }
         },
         "nb" : {
@@ -6289,10 +6529,10 @@
             "value" : "Configuration"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "कॉन्फ़िगरेशन"
+            "value" : "תצורה"
           }
         },
         "hu" : {
@@ -6311,6 +6551,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "構成"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "구성"
           }
         },
         "nb" : {
@@ -6445,10 +6691,10 @@
             "value" : "Connecté"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "कनेक्टेड"
+            "value" : "מחובר"
           }
         },
         "hu" : {
@@ -6467,6 +6713,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "接続済み"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "연결됨"
           }
         },
         "nb" : {
@@ -6601,10 +6853,10 @@
             "value" : "Connexion"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "कनेक्टिंग"
+            "value" : "מתחבר"
           }
         },
         "hu" : {
@@ -6623,6 +6875,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "接続"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "연결"
           }
         },
         "nb" : {
@@ -6757,10 +7015,10 @@
             "value" : "Continuer"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "जारी रखें"
+            "value" : "המשך"
           }
         },
         "hu" : {
@@ -6779,6 +7037,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "続ける"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "계속하기"
           }
         },
         "nb" : {
@@ -6913,10 +7177,10 @@
             "value" : "Limite journalière atteinte"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "दैनिक सीमा तक पहुँच गया"
+            "value" : "הגבלה היומית הושגה"
           }
         },
         "hu" : {
@@ -6935,6 +7199,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "1日の制限に達した"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "일일 한도 도달"
           }
         },
         "nb" : {
@@ -7069,10 +7339,10 @@
             "value" : "Dana-i"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "दाना-आई"
+            "value" : "דניה-אי"
           }
         },
         "hu" : {
@@ -7091,6 +7361,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ダナアイ"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다나-아이"
           }
         },
         "nb" : {
@@ -7225,10 +7501,10 @@
             "value" : "Dana-RS v3 trouvée !"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "दाना-आरएस v3 मिला!"
+            "value" : "דנה-RS v3 נמצא!"
           }
         },
         "hu" : {
@@ -7247,6 +7523,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dana-RS v3が見つかった！"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dana-RS v3가 발견되었습니다!"
           }
         },
         "nb" : {
@@ -7381,10 +7663,10 @@
             "value" : "DanaRS-v3"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "दानर-v3"
+            "value" : "דנארס-v3"
           }
         },
         "hu" : {
@@ -7403,6 +7685,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ダナRS-v3"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DanaRS-v3"
           }
         },
         "nb" : {
@@ -7537,10 +7825,10 @@
             "value" : "jour(s)"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "दिन (s)"
+            "value" : "יום (ים)"
           }
         },
         "hu" : {
@@ -7559,6 +7847,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "日"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "일(일)"
           }
         },
         "nb" : {
@@ -7693,10 +7987,10 @@
             "value" : "Supprimer la pompe"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पंप डिलीट करें"
+            "value" : "מחק משאבה"
           }
         },
         "hu" : {
@@ -7715,6 +8009,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ポンプの削除"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프 삭제"
           }
         },
         "nb" : {
@@ -7849,10 +8149,10 @@
             "value" : "Supprimer la pompe"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पंप डिलीट करें"
+            "value" : "מחק משאבה"
           }
         },
         "hu" : {
@@ -7871,6 +8171,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ポンプの削除"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프 삭제"
           }
         },
         "nb" : {
@@ -8005,10 +8311,10 @@
             "value" : "Vitesse de livraison"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "डिलीवरी की गति"
+            "value" : "מהירות משלוח"
           }
         },
         "hu" : {
@@ -8027,6 +8333,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "配送スピード"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "배송 속도"
           }
         },
         "nb" : {
@@ -8161,10 +8473,10 @@
             "value" : "Désactiver la synchronisation des bolus ?"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "बोलस सिंकिंग अक्षम करें?"
+            "value" : "להשבית את סנכרון הבולוס?"
           }
         },
         "hu" : {
@@ -8183,6 +8495,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ボーラスの同期を無効にしますか？"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "볼러스 동기화를 비활성화하시겠습니까?"
           }
         },
         "nb" : {
@@ -8317,10 +8635,10 @@
             "value" : "Déconnecter la pompe"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पंप से डिस्कनेक्ट करें"
+            "value" : "נתק מהמשאבה"
           }
         },
         "hu" : {
@@ -8339,6 +8657,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ポンプから切り離す"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프에서 연결 해제"
           }
         },
         "nb" : {
@@ -8473,10 +8797,10 @@
             "value" : "Déconnecté"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "डिस्कनेक्टेड"
+            "value" : "מנותק"
           }
         },
         "hu" : {
@@ -8495,6 +8819,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "切断"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "연결 해제"
           }
         },
         "nb" : {
@@ -8629,10 +8959,10 @@
             "value" : "Déconnexion..."
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "डिस्कनेक्ट हो रहा है..."
+            "value" : "ניתוק..."
           }
         },
         "hu" : {
@@ -8651,6 +8981,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "切断..."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "연결 해제..."
           }
         },
         "nb" : {
@@ -8785,10 +9121,10 @@
             "value" : "Souhaitez-vous recevoir une notification lorsque la pompe est déconnectée pour une durée déterminée ?"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "क्या आप एक सूचना प्राप्त करना चाहते हैं जब पंप एक विशिष्ट समय के लिए लंबे समय तक डिस्कनेक्ट हो जाता है?"
+            "value" : "האם ברצונך לקבל הודעה כאשר המשאבה מנותקת זמן רב יותר לזמן מסוים?"
           }
         },
         "hu" : {
@@ -8807,6 +9143,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ポンプが特定の時間切断された場合に通知を受け取りたいですか？"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프가 특정 시간 동안 연결이 끊어지면 알림을 받기를 원하시나요?"
           }
         },
         "nb" : {
@@ -8939,10 +9281,10 @@
             "value" : "Terminé"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "हो गया"
+            "value" : "בוצע"
           }
         },
         "hu" : {
@@ -8961,6 +9303,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Done"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "완료"
           }
         },
         "nb" : {
@@ -9095,10 +9443,10 @@
             "value" : "Pendant le processus d'appairage, votre Dana-i affichera une invite d'appairage tandis que votre iPhone affichera une invite pour un code d'appairage. Sur votre pompe, sélectionnez OK et tapez le code à 6 chiffres sur l'écran de votre iPhone. Après cela, %@ est prêt à communiquer avec votre Dana-i."
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पेयरिंग प्रक्रिया के दौरान, आपका Dana-i एक पेयरिंग प्रॉम्प्ट दिखाएगा जबकि आपका iPhone एक पेयरिंग कोड के लिए एक प्रॉम्प्ट दिखाएगा। पंप करने पर, OK का चयन करें और अपने iPhone पर स्क्रीन में 6-अंकीय कोड टाइप करें। उसके बाद, %@ आपके Dana-i के साथ संवाद करने के लिए तैयार है"
+            "value" : "במהלך תהליך ההתאמה, ה- Dana-i שלך יציג הנחת זיווג ואילו האייפון שלך יציג הנחיה לקוד זיווג. בעת המשאבה, בחר אישור והקלד את הקוד בן 6 הספרות במסך באייפון שלך. לאחר מכן, %@ מוכן לתקשר עם הדנה-אי שלך"
           }
         },
         "hu" : {
@@ -9117,6 +9465,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ペアリング中、Dana-iにはペアリングのプロンプトが表示され、iPhoneにはペアリングコードのプロンプトが表示されます。あなたのポンプでOKを選択し、iPhoneの画面に6桁のコードを入力します。その後、 %@ 、Dana-iと通信する準備が整います。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "페어링하는 동안 Dana-i에는 페어링 메시지가 표시되고 iPhone에는 페어링 코드를 입력하라는 메시지가 표시됩니다. 펌프에서 확인을 선택하고 iPhone의 화면에 6자리 코드를 입력합니다. 그러면 %@가 Dana-i와 통신할 준비가 완료됩니다."
           }
         },
         "nb" : {
@@ -9251,10 +9605,10 @@
             "value" : "Pendant le processus de couplage, votre DanaRS v1 affichera une invite de couplage tandis que votre iPhone affichera une invitation à saisir un code de couplage. Sur votre pompe, sélectionnez OK et tapez le code sur votre iPhone. Après cela, Loop est prêt à communiquer avec votre DanaRS v1."
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पेयरिंग प्रक्रिया के दौरान, आपका DanARS v1 एक पेयरिंग प्रॉम्प्ट दिखाएगा, जबकि आपका iPhone एक पेयरिंग कोड के लिए एक प्रॉम्प्ट दिखाएगा। अपने पंप पर, OK का चयन करें और अपने iPhone पर कोड टाइप करें। उसके बाद, लूप आपके DanARS v1 के साथ संवाद करने के लिए तैयार है।"
+            "value" : "במהלך תהליך ההתאמה, DanaRS v1 שלך יציג הנחת זיווג ואילו ה- iPhone שלך יציג הנחיה לקוד זיווג. במשאבה שלך, בחר אישור והקלד את הקוד ב- iPhone שלך. לאחר מכן, Loop מוכן לתקשר עם DanaRS v1 שלך"
           }
         },
         "hu" : {
@@ -9273,6 +9627,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "During the pairing process, your DanaRS v1 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, Loop is ready to communicate with your DanaRS v1"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "페어링 프로세스 중에 DanaRS v1에는 페어링 메시지가 표시되고 iPhone에는 페어링 코드를 입력하라는 메시지가 표시됩니다. 펌프에서 확인을 선택하고 iPhone에 코드를 입력합니다. 그러면 Loop가 DanaRS v1과 통신할 준비가 완료됩니다."
           }
         },
         "nb" : {
@@ -9407,10 +9767,10 @@
             "value" : "During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, Loop is ready to communicate with your DanaRS v1"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पेयरिंग प्रक्रिया के दौरान, आपका DanARS v3 एक पेयरिंग प्रॉम्प्ट दिखाएगा, जबकि आपका iPhone एक पेयरिंग कोड के लिए एक प्रॉम्प्ट दिखाएगा। अपने पंप पर, OK का चयन करें और अपने iPhone पर कोड टाइप करें। उसके बाद, लूप आपके DanARS v1 के साथ संवाद करने के लिए तैयार है।"
+            "value" : "במהלך תהליך ההתאמה, DanaRS v3 שלך יציג הנחת זיווג ואילו ה- iPhone שלך יציג הנחיה לקוד זיווג. במשאבה שלך, בחר אישור והקלד את הקוד ב- iPhone שלך. לאחר מכן, Loop מוכן לתקשר עם DanaRS v1 שלך"
           }
         },
         "hu" : {
@@ -9429,6 +9789,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ペアリング中、DanaRS v3にはペアリングのプロンプトが表示され、iPhoneにはペアリングコードのプロンプトが表示されます。ポンプでOKを選択し、iPhoneにコードを入力します。その後、LoopはDanaRS v1と通信できます。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "페어링 프로세스 중에 DanaRS v3에는 페어링 프롬프트가 표시되고 iPhone에는 페어링 코드를 입력하라는 메시지가 표시됩니다. 펌프에서 확인을 선택하고 iPhone에 코드를 입력합니다. 그러면 Loop가 DanaRS v1과 통신할 준비가 완료됩니다."
           }
         },
         "nb" : {
@@ -9563,10 +9929,10 @@
             "value" : "During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for two pairing codes. On your pump, select OK and type the two codes on your iPhone. After that, %@ is ready to communicate with your DanaRS v3"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पेयरिंग प्रक्रिया के दौरान, आपका DanARS v3 एक पेयरिंग प्रॉम्प्ट दिखाएगा, जबकि आपका iPhone दो पेयरिंग कोड के लिए एक प्रॉम्प्ट दिखाएगा। अपने पंप पर, OK का चयन करें और अपने iPhone पर दो कोड टाइप करें। उसके बाद, %@ आपके DaNARS v3 के साथ संवाद करने के लिए तैयार है"
+            "value" : "במהלך תהליך ההתאמה, DanaRS v3 שלך יציג הנחת זיווג ואילו ה- iPhone שלך יציג הנחיה לשני קודי זיווג. במשאבה שלך, בחר אישור והקלד את שני הקודים באייפון שלך. לאחר מכן, %@ מוכן לתקשר עם DanaRS v3 שלך"
           }
         },
         "hu" : {
@@ -9585,6 +9951,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for two pairing codes. On your pump, select OK and type the two codes on your iPhone. After that, %@ is ready to communicate with your DanaRS v3"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "페어링 프로세스 중에 DanaRS v3에는 페어링 메시지가 표시되고 iPhone에는 두 개의 페어링 코드를 입력하라는 메시지가 표시됩니다. 펌프에서 확인을 선택하고 iPhone에 두 개의 코드를 입력합니다. 그러면 %@가 DanaRS v3와 통신할 준비가 완료됩니다."
           }
         },
         "nb" : {
@@ -9719,10 +10091,10 @@
             "value" : "Pendant le processus d'appairage, votre DanaRS v3 affichera une invite d'appairage tandis que votre iPhone affichera une invitation à saisir deux codes d'appairage. Sur votre pompe, sélectionnez OK et tapez les deux codes sur votre iPhone. Après cela, Loop est prêt à communiquer avec votre DanaRS v3."
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पेयरिंग प्रक्रिया के दौरान, आपका DanARS v3 एक पेयरिंग प्रॉम्प्ट दिखाएगा, जबकि आपका iPhone दो पेयरिंग कोड के लिए एक प्रॉम्प्ट दिखाएगा। अपने पंप पर, OK का चयन करें और अपने iPhone पर दो कोड टाइप करें। उसके बाद, लूप आपके DanARS v3 के साथ संवाद करने के लिए तैयार है।"
+            "value" : "במהלך תהליך ההתאמה, DanaRS v3 שלך יציג הנחת זיווג ואילו ה- iPhone שלך יציג הנחיה לשני קודי זיווג. במשאבה שלך, בחר אישור והקלד את שני הקודים באייפון שלך. לאחר מכן, Loop מוכן לתקשר עם DanaRS v3 שלך"
           }
         },
         "hu" : {
@@ -9741,6 +10113,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ペアリング中、DanaRS v3にはペアリングのプロンプトが表示され、iPhoneには2つのペアリングコードを入力するプロンプトが表示されます。ポンプでOKを選択し、iPhoneに2つのコードを入力します。その後、LoopはDanaRS v3と通信できるようになります。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "페어링 프로세스 중에 DanaRS v3에는 페어링 메시지가 표시되고 iPhone에는 두 개의 페어링 코드를 입력하라는 메시지가 표시됩니다. 펌프에서 확인을 선택하고 iPhone에 두 코드를 입력합니다. 그러면 Loop가 DanaRS v3와 통신할 준비가 완료됩니다."
           }
         },
         "nb" : {
@@ -9875,10 +10253,10 @@
             "value" : "Réservoir vide"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "खाली जलाशय"
+            "value" : "מאגר ריק"
           }
         },
         "hu" : {
@@ -9897,6 +10275,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "空のリザーバー"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "빈 저장소"
           }
         },
         "nb" : {
@@ -10031,10 +10415,10 @@
             "value" : "Erreur lors de la connexion à l'appareil"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "डिवाइस से कनेक्ट करते समय त्रुटि"
+            "value" : "שגיאה בעת התחברות למכשיר"
           }
         },
         "hu" : {
@@ -10053,6 +10437,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "デバイス接続時のエラー"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "장치에 연결하는 동안 오류가 발생했습니다."
           }
         },
         "nb" : {
@@ -10187,10 +10577,10 @@
             "value" : "ERREUR : Échec de l'appariement de l'appareil"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "त्रुटि: डिवाइस को पेयर करने में विफल"
+            "value" : "שגיאה: לא הצליח להתאים את ההתקן"
           }
         },
         "hu" : {
@@ -10209,6 +10599,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ERROR：デバイスのペアリングに失敗しました"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오류: 장치를 페어링하지 못했습니다."
           }
         },
         "nb" : {
@@ -10343,10 +10739,10 @@
             "value" : "N'a pas ajusté la dose de base"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "बेसल को समायोजित करने में विफल"
+            "value" : "לא הצליח להתאים את הבסיס"
           }
         },
         "hu" : {
@@ -10365,6 +10761,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "基礎体温の調整に失敗"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "기본값을 조정하지 못했습니다."
           }
         },
         "nb" : {
@@ -10499,10 +10901,10 @@
             "value" : "Le temps de pompage n'a pas été ajusté"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पंप समय समायोजित करने में विफल"
+            "value" : "לא הצליח להתאים את זמן המשאבה"
           }
         },
         "hu" : {
@@ -10521,6 +10923,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ポンプ時間の調整に失敗"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프 시간을 조정하지 못했습니다."
           }
         },
         "nb" : {
@@ -10655,10 +11063,10 @@
             "value" : "Absence de réglage de la suspension"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "निलंबन समायोजित करने में विफल"
+            "value" : "כושל בכוונון ההשעיה"
           }
         },
         "hu" : {
@@ -10677,6 +11085,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "サスペンションの調整に失敗"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "일시 정지 조정에 실패했습니다."
           }
         },
         "nb" : {
@@ -10811,10 +11225,10 @@
             "value" : "N'a pas ajusté la température basale"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "अस्थायी बेसल को समायोजित करने में विफल"
+            "value" : "לא הצליח להתאים את הטמפרטורה הבסיסית"
           }
         },
         "hu" : {
@@ -10833,6 +11247,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "基礎体温の調整に失敗"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "기본 온도 조정에 실패했습니다."
           }
         },
         "nb" : {
@@ -10967,10 +11387,10 @@
             "value" : "N'a pas ajusté la température basale. %@"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "अस्थायी बेसल को समायोजित करने में विफल। %@"
+            "value" : "לא הצליח להתאים את הטמפרטורה הבסיסית. %@"
           }
         },
         "hu" : {
@@ -10989,6 +11409,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "基礎体温の調整に失敗しました。%@。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "기본 온도를 조정하지 못했습니다. %@"
           }
         },
         "nb" : {
@@ -11123,10 +11549,10 @@
             "value" : "Échec de la génération du programme de base de Dana"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "दाना बेसल प्रोग्राम जनरेट करने में विफल"
+            "value" : "לא הצליחה ליצור תוכנית Dana Basal"
           }
         },
         "hu" : {
@@ -11145,6 +11571,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ダナ・ベーサル・プログラムの生成に失敗"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dana 기본 프로그램을 생성하지 못했습니다."
           }
         },
         "nb" : {
@@ -11279,10 +11711,10 @@
             "value" : "Échec de la connexion"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "कनेक्शन बनाने में असफल"
+            "value" : "יצירת חיבור נכשלה"
           }
         },
         "hu" : {
@@ -11301,6 +11733,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "接続に失敗しました"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "연결에 실패했습니다."
           }
         },
         "nb" : {
@@ -11435,10 +11873,10 @@
             "value" : "La connexion n'a pas été établie :"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "कनेक्शन बनाने में असफल: "
+            "value" : "יצירת חיבור נכשלה: "
           }
         },
         "hu" : {
@@ -11457,6 +11895,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "接続に失敗しました："
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "연결에 실패했습니다:"
           }
         },
         "nb" : {
@@ -11591,10 +12035,10 @@
             "value" : "Failed to pair to "
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "जोड़ी बनाने में असफल "
+            "value" : "לא הצליחה להתאים ל "
           }
         },
         "hu" : {
@@ -11613,6 +12057,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Failed to pair to "
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "페어링에 실패했습니다."
           }
         },
         "nb" : {
@@ -11747,10 +12197,10 @@
             "value" : "La canule n'a pas été amorcée. Veuillez réessayer plus tard"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "कैनुला को प्राइम करने में विफल। कृपया बाद में फिर से कोशिश करें।"
+            "value" : "נכשל בהפעלת הצינורית. אנא נסה שוב מאוחר יותר"
           }
         },
         "hu" : {
@@ -11769,6 +12219,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Failed to prime the cannula. Please try again later"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "캐뉼라를 프라이밍하지 못했습니다. 나중에 다시 시도하세요."
           }
         },
         "nb" : {
@@ -11903,10 +12359,10 @@
             "value" : "Le tube n'a pas été amorcé. Veuillez réessayer plus tard"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ट्यूब प्राइम करने में असफल। कृपया बाद में फिर से कोशिश करें।"
+            "value" : "לא הצליח למלא את הצינור. אנא נסה שוב מאוחר יותר"
           }
         },
         "hu" : {
@@ -11925,6 +12381,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Failed to prime the tube. Please try again later"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "튜브를 프라이밍하지 못했습니다. 나중에 다시 시도하세요."
           }
         },
         "nb" : {
@@ -12059,10 +12521,10 @@
             "value" : "Échec du réglage du volume du réservoir. Resynchronisez les données de la pompe et réessayez s'il vous plaît."
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "जलाशय राशि सेट करने में विफल। पंप डेटा को फिर से सिंक करें और फिर से कोशिश करें, कृपया"
+            "value" : "נכשלה בהגדרת כמות המאגר. סנכרן מחדש את נתוני המשאבה ונסה שוב בבקשה"
           }
         },
         "hu" : {
@@ -12081,6 +12543,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Failed to set reservoir amount. Re-sync pump data and try again please"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "저장소 양을 설정하지 못했습니다. 펌프 데이터를 다시 동기화하고 다시 시도하세요."
           }
         },
         "nb" : {
@@ -12215,10 +12683,10 @@
             "value" : "Remplir le mot de passe"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पासवर्ड भरें"
+            "value" : "מלאו סיסמא"
           }
         },
         "hu" : {
@@ -12237,6 +12705,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "パスワードを入力"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "비밀번호 입력"
           }
         },
         "nb" : {
@@ -12371,10 +12845,10 @@
             "value" : "Finition"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "फ़िनिश"
+            "value" : "לסיים"
           }
         },
         "hu" : {
@@ -12393,6 +12867,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "終了"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "완료"
           }
         },
         "nb" : {
@@ -12527,10 +13007,10 @@
             "value" : "Version du micrologiciel"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "फ़र्मवेयर संस्करण"
+            "value" : "גרסת קושחה"
           }
         },
         "hu" : {
@@ -12549,6 +13029,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ファームウェアバージョン"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌웨어 버전"
           }
         },
         "nb" : {
@@ -12683,10 +13169,10 @@
             "value" : "Modèle de matériel"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "हार्डवेयर मॉडल"
+            "value" : "מודל חומרה"
           }
         },
         "hu" : {
@@ -12705,6 +13191,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ハードウェア・モデル"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "하드웨어 모델"
           }
         },
         "nb" : {
@@ -12839,10 +13331,10 @@
             "value" : "Suspension de l'insuline\n"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "इंसुलिन\nसस्पेंडेड"
+            "value" : "אינסולין\nמושעה"
           }
         },
         "hu" : {
@@ -12861,6 +13353,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "インスリン\n停止"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "인슐린\n일시 중단됨"
           }
         },
         "nb" : {
@@ -12995,10 +13493,10 @@
             "value" : "Âge de l'insuline"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "इंसुलिन की उम्र"
+            "value" : "גיל האינסולין"
           }
         },
         "hu" : {
@@ -13017,6 +13515,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "インスリン年齢"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "인슐린 나이"
           }
         },
         "nb" : {
@@ -13151,10 +13655,10 @@
             "value" : "Administration d'insuline"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "इंसुलिन डिलीवरी"
+            "value" : "משלוח אינסולין"
           }
         },
         "hu" : {
@@ -13173,6 +13677,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "インスリンデリバリー"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "인슐린 배달"
           }
         },
         "nb" : {
@@ -13307,10 +13817,10 @@
             "value" : "Insuline restante"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "इंसुलिन शेष"
+            "value" : "אינסולין נשאר"
           }
         },
         "hu" : {
@@ -13329,6 +13839,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "インスリン残量"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "인슐린 잔량"
           }
         },
         "nb" : {
@@ -13463,10 +13979,10 @@
             "value" : "Suspension de l'insuline"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "इंसुलिन सस्पेंडेड"
+            "value" : "אינסולין מושעה"
           }
         },
         "hu" : {
@@ -13485,6 +14001,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "インスリン中断"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "인슐린 일시 중단"
           }
         },
         "nb" : {
@@ -13619,10 +14141,10 @@
             "value" : "Type d'insuline"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "इंसुलिन टाइप"
+            "value" : "סוג אינסולין"
           }
         },
         "hu" : {
@@ -13641,6 +14163,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "インスリンの種類"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "인슐린 유형"
           }
         },
         "nb" : {
@@ -13775,10 +14303,10 @@
             "value" : "Dernière synchronisation"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पिछला सिंक"
+            "value" : "סנכרון אחרון"
           }
         },
         "hu" : {
@@ -13797,6 +14325,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "最後の同期"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "마지막 동기화"
           }
         },
         "nb" : {
@@ -13931,10 +14465,10 @@
             "value" : "Lcd on time"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "समय पर एलसीडी"
+            "value" : "LCD בזמן"
           }
         },
         "hu" : {
@@ -13953,6 +14487,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "液晶点灯時間"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "정시에 액정 켜짐"
           }
         },
         "nb" : {
@@ -14087,10 +14627,10 @@
             "value" : "chargement"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "लोड हो रहा है"
+            "value" : "העמסה"
           }
         },
         "hu" : {
@@ -14109,6 +14649,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ローディング"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "로딩 중"
           }
         },
         "nb" : {
@@ -14243,10 +14789,10 @@
             "value" : "Chargement"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "लोड हो रहा"
+            "value" : "טוען"
           }
         },
         "hu" : {
@@ -14265,6 +14811,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ローディング"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "로드 중"
           }
         },
         "nb" : {
@@ -14399,10 +14951,10 @@
             "value" : "Batterie de la pompe faible"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "लो पंप बैटरी"
+            "value" : "סוללת משאבה נמוכה"
           }
         },
         "hu" : {
@@ -14421,6 +14973,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ポンプ電池残量低下"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프 배터리 부족"
           }
         },
         "nb" : {
@@ -14555,10 +15113,10 @@
             "value" : "Rappel de niveau de réservoir bas"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "लो रिजर्वायर रिमाइंडर"
+            "value" : "תזכורת למאגר נמוך"
           }
         },
         "hu" : {
@@ -14577,6 +15135,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "リザーバー残量警告"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "저장 용량 부족 알림"
           }
         },
         "nb" : {
@@ -14711,10 +15275,10 @@
             "value" : "Synchronisation manuelle de l'heure de la pompe"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पंप समय को मैन्युअल रूप से सिंक करें"
+            "value" : "סנכרון ידני זמן משאבה"
           }
         },
         "hu" : {
@@ -14733,6 +15297,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ポンプ時間を手動で同期"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프 시간 수동 동기화"
           }
         },
         "nb" : {
@@ -14867,10 +15437,10 @@
             "value" : "Contrôle de la glycémie manqué"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "मिस्ड ब्लड ग्लूकोज चेक"
+            "value" : "בדיקת גלוקוז בדם החמצה"
           }
         },
         "hu" : {
@@ -14889,6 +15459,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "血糖値チェックの見落とし"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "누락된 혈당 검사"
           }
         },
         "nb" : {
@@ -15023,10 +15599,10 @@
             "value" : "Synchronisation nocturne de l'heure de la pompe"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "नाइटली पंप टाइम सिंक"
+            "value" : "סנכרון זמן משאבה לילי"
           }
         },
         "hu" : {
@@ -15045,6 +15621,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "夜間ポンプ時刻同期"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "야간 펌프 시간 동기화"
           }
         },
         "nb" : {
@@ -15179,10 +15761,10 @@
             "value" : "Pas d'insuline"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "इंसुलिन नहीं"
+            "value" : "אין אינסולין"
           }
         },
         "hu" : {
@@ -15201,6 +15783,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "インスリンなし"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "인슐린 없음"
           }
         },
         "nb" : {
@@ -15335,10 +15923,10 @@
             "value" : "Aucun type d'insuline n'est disponible. Veuillez le configurer dans le menu Dana"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "इंसुलिन का कोई प्रकार उपलब्ध नहीं है। कृपया इसे दाना मेनू में कॉन्फ़िगर करें"
+            "value" : "אין סוג אינסולין זמין. אנא הגדר זאת בתפריט דנה"
           }
         },
         "hu" : {
@@ -15357,6 +15945,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "インスリンの種類がありません。ダナメニューで設定してください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "사용 가능한 인슐린 유형이 없습니다. Dana 메뉴에서 구성하세요."
           }
         },
         "nb" : {
@@ -15491,10 +16085,10 @@
             "value" : "Non, il suffit de déconnecter"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "नहीं, बस डिस्कनेक्ट करें"
+            "value" : "לא, פשוט תתנתק"
           }
         },
         "hu" : {
@@ -15513,6 +16107,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "いいえ、切断するだけです"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "아니요, 그냥 연결 해제"
           }
         },
         "nb" : {
@@ -15647,10 +16247,10 @@
             "value" : "Non, conserver en l'état"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "नहीं, जैसा है वैसा ही रखें"
+            "value" : "לא, שמור כמו שהוא"
           }
         },
         "hu" : {
@@ -15669,6 +16269,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "いいえ、そのままで"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "아니요, 그대로 유지"
           }
         },
         "nb" : {
@@ -15803,10 +16409,10 @@
             "value" : "Non, conserver la pompe en l'état"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "नहीं, पंप को वैसे ही रखें"
+            "value" : "לא, שמור על המשאבה כפי שהיא"
           }
         },
         "hu" : {
@@ -15825,6 +16431,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "いいえ、ポンプはそのままで"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "아니요, 펌프 그대로 유지"
           }
         },
         "nb" : {
@@ -15959,10 +16571,10 @@
             "value" : "Remarque : Votre pompe Dana dispose d'un réglage spécial qui vous permet de faire taire les signaux sonores de votre pompe Dana. Pour l'activer, veuillez contacter votre distributeur Dana."
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "नोट: आपके दाना पंप में एक विशेष सेटिंग है जिससे आप अपने दाना पंप बीप को शांत कर सकते हैं। इसे सक्षम करने के लिए, कृपया अपने दाना वितरक से संपर्क करें।"
+            "value" : "הערה: למשאבת דנה שלך יש הגדרה מיוחדת המאפשרת לך להשתיק את צפצופי משאבת דנה שלך. כדי לאפשר זאת, אנא פנה למפיץ דנה שלך"
           }
         },
         "hu" : {
@@ -15981,6 +16593,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "注：Danaポンプには、Danaポンプのビープ音を無音にする特別な設定があります。これを有効にするには、Danaの販売代理店にお問い合わせください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "참고: Dana 펌프에는 Dana 펌프 신호음을 무음으로 설정할 수 있는 특수 설정이 있습니다. 이 기능을 활성화하려면 Dana 대리점에 문의하시기 바랍니다."
           }
         },
         "nb" : {
@@ -16115,10 +16733,10 @@
             "value" : "Occlusion"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "रुकावट"
+            "value" : "חסימה"
           }
         },
         "hu" : {
@@ -16137,6 +16755,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "咬合"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오클루전"
           }
         },
         "nb" : {
@@ -16271,10 +16895,10 @@
             "value" : "Arrêt"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ऑफ"
+            "value" : "כבוי"
           }
         },
         "hu" : {
@@ -16293,6 +16917,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "オフ"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "꺼짐"
           }
         },
         "nb" : {
@@ -16427,10 +17057,10 @@
             "value" : "Oke"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ठीक है"
+            "value" : "בסדר"
           }
         },
         "hu" : {
@@ -16449,6 +17079,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "확인"
           }
         },
         "nb" : {
@@ -16583,10 +17219,10 @@
             "value" : "Sur"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ऑन"
+            "value" : "על"
           }
         },
         "hu" : {
@@ -16605,6 +17241,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "オン"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "켜짐"
           }
         },
         "nb" : {
@@ -16739,10 +17381,10 @@
             "value" : "Seul le bolus automatique est pris en charge"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "केवल स्वचालित बोलस समर्थित है"
+            "value" : "נתמך רק בולוס אוטומטי"
           }
         },
         "hu" : {
@@ -16761,6 +17403,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "自動ボーラスのみ対応"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "자동 볼러스만 지원됩니다."
           }
         },
         "nb" : {
@@ -16895,10 +17543,10 @@
             "value" : "Couplage"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पेयरिंग"
+            "value" : "זיווג"
           }
         },
         "hu" : {
@@ -16917,6 +17565,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ペアリング"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "페어링"
           }
         },
         "nb" : {
@@ -17051,10 +17705,10 @@
             "value" : "Broche 1"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पिन 1"
+            "value" : "סיכה 1"
           }
         },
         "hu" : {
@@ -17073,6 +17727,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ピン 1"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "핀 1"
           }
         },
         "nb" : {
@@ -17207,10 +17867,10 @@
             "value" : "Broche 2"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पिन 2"
+            "value" : "פין 2"
           }
         },
         "hu" : {
@@ -17229,6 +17889,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ピン 2"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "핀 2"
           }
         },
         "nb" : {
@@ -17363,10 +18029,10 @@
             "value" : "Code postal requis"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पिनकोड आवश्यक है"
+            "value" : "נדרש קוד PIN"
           }
         },
         "hu" : {
@@ -17385,6 +18051,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ピンコード必須"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "핀코드 필요"
           }
         },
         "nb" : {
@@ -17519,10 +18191,10 @@
             "value" : "Veuillez envisager de modifier votre stratégie de dosage dans le menu de réglage."
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "कृपया सेटिंग मेनू में अपनी खुराक की रणनीति बदलने पर विचार करें"
+            "value" : "אנא שקול לשנות את אסטרטגיית המינון שלך בתפריט ההגדרות"
           }
         },
         "hu" : {
@@ -17541,6 +18213,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "設定メニューで投与戦略の変更を検討してください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "설정 메뉴에서 투약 전략을 변경하는 것을 고려해 보세요."
           }
         },
         "nb" : {
@@ -17675,10 +18353,10 @@
             "value" : "Prime amount"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "प्राइम अमाउंट"
+            "value" : "סכום פריים"
           }
         },
         "hu" : {
@@ -17697,6 +18375,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prime amount"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "프라임 금액"
           }
         },
         "nb" : {
@@ -17831,10 +18515,10 @@
             "value" : "Batterie de la pompe 0%%"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पंप बैटरी 0%%"
+            "value" : "סוללת משאבה 0%%"
           }
         },
         "hu" : {
@@ -17853,6 +18537,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ポンプ電池 0"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프 배터리 0%%"
           }
         },
         "nb" : {
@@ -17987,10 +18677,10 @@
             "value" : "La batterie de la pompe est vide. Remplacez-la maintenant !"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पंप की बैटरी खाली है। इसे अभी बदलें!"
+            "value" : "סוללת המשאבה ריקה. החלף אותו עכשיו!"
           }
         },
         "hu" : {
@@ -18009,6 +18699,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ポンプのバッテリーが空です。すぐに交換してください！"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프 배터리가 비어 있습니다. 지금 교체하세요!"
           }
         },
         "nb" : {
@@ -18143,10 +18839,10 @@
             "value" : "La batterie de la pompe doit être remplacée prochainement"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पंप बैटरी को जल्द ही बदलना होगा"
+            "value" : "יש להחליף את סוללת המשאבה בקרוב"
           }
         },
         "hu" : {
@@ -18165,6 +18861,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ポンプのバッテリーはすぐに交換が必要"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프 배터리를 곧 교체해야 합니다."
           }
         },
         "nb" : {
@@ -18299,10 +19001,10 @@
             "value" : "Erreur de pompe"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पंप त्रुटि"
+            "value" : "שגיאת משאבה"
           }
         },
         "hu" : {
@@ -18321,6 +19023,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ポンプエラー"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프 오류"
           }
         },
         "nb" : {
@@ -18455,10 +19163,10 @@
             "value" : "Informations sur la pompe"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पंप की जानकारी"
+            "value" : "מידע על משאבה"
           }
         },
         "hu" : {
@@ -18477,6 +19185,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ポンプ情報"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프 정보"
           }
         },
         "nb" : {
@@ -18611,10 +19325,10 @@
             "value" : "Pump is disconnected"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पंप डिस्कनेक्ट हो गया है"
+            "value" : "המשאבה מנותקת"
           }
         },
         "hu" : {
@@ -18633,6 +19347,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pump is disconnected"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프 연결이 끊어짐"
           }
         },
         "nb" : {
@@ -18767,10 +19487,10 @@
             "value" : "La pompe est toujours déconnectée"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पंप अभी भी डिस्कनेक्ट हो गया है"
+            "value" : "המשאבה עדיין מנותקת"
           }
         },
         "hu" : {
@@ -18789,6 +19509,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ポンプはまだ接続されていない"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프가 여전히 연결이 끊어짐"
           }
         },
         "nb" : {
@@ -18923,10 +19649,10 @@
             "value" : "Nom de la pompe"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पंप का नाम"
+            "value" : "שם המשאבה"
           }
         },
         "hu" : {
@@ -18945,6 +19671,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ポンプ名"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프 이름"
           }
         },
         "nb" : {
@@ -19079,10 +19811,10 @@
             "value" : "Arrêt de la pompe"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पंप शटडाउन"
+            "value" : "כיבוי משאבה"
           }
         },
         "hu" : {
@@ -19101,6 +19833,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ポンプ停止"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프 종료"
           }
         },
         "nb" : {
@@ -19235,10 +19973,10 @@
             "value" : "Durée de la pompe"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पंप का समय"
+            "value" : "זמן משאבה"
           }
         },
         "hu" : {
@@ -19257,6 +19995,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ポンプ時間"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프 시간"
           }
         },
         "nb" : {
@@ -19391,10 +20135,10 @@
             "value" : "Réactiver la synchronisation des bolus ?"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "बोलस सिंकिंग को फिर से सक्षम करें?"
+            "value" : "להפעיל מחדש סנכרון בולוס?"
           }
         },
         "hu" : {
@@ -19413,6 +20157,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ボーラス同期を再度有効にするか？"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "볼러스 동기화를 다시 사용하시겠습니까?"
           }
         },
         "nb" : {
@@ -19547,10 +20297,10 @@
             "value" : "Réception de chaînes hexagonales non valides. Réessayez"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "अमान्य हेक्स स्ट्रिंग्स प्राप्त हुए। फिर से कोशिश करें"
+            "value" : "קיבלו מחרוזות hex לא חוקיות. נסה שוב"
           }
         },
         "hu" : {
@@ -19569,6 +20319,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "無効な16進文字列を受信しました。再試行してください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "잘못된 16진수 문자열을 받았습니다. 다시 시도하세요."
           }
         },
         "nb" : {
@@ -19703,10 +20459,10 @@
             "value" : "Réception de longueurs de codes d'identification non valides. Réessayez"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "अमान्य पिनकोड लंबाई प्राप्त हुई। फिर से कोशिश करें"
+            "value" : "קיבלו אורכי קוד PIN לא חוקיים. נסה שוב"
           }
         },
         "hu" : {
@@ -19725,6 +20481,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "無効なピンコード長を受信しました。再試行してください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "잘못된 핀코드 길이를 받았습니다. 다시 시도하세요."
           }
         },
         "nb" : {
@@ -19859,10 +20621,10 @@
             "value" : "Reconnect to pump"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पंप से फिर से कनेक्ट करें"
+            "value" : "התחבר מחדש למשאבה"
           }
         },
         "hu" : {
@@ -19881,6 +20643,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reconnect to pump"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프에 다시 연결"
           }
         },
         "nb" : {
@@ -20015,10 +20783,10 @@
             "value" : "Reconnecter la pompe tp"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "tp पंप को फिर से कनेक्ट करें"
+            "value" : "חבר מחדש את משאבת tp"
           }
         },
         "hu" : {
@@ -20037,6 +20805,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ポンプを再接続する"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TP 펌프 다시 연결"
           }
         },
         "nb" : {
@@ -20171,10 +20945,10 @@
             "value" : "Se reconnecter..."
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पुन: कनेक्ट हो रहा है..."
+            "value" : "מתחבר מחדש..."
           }
         },
         "hu" : {
@@ -20193,6 +20967,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "再接続..."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다시 연결하기..."
           }
         },
         "nb" : {
@@ -20327,10 +21107,10 @@
             "value" : "Quantité de recharge"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "रिफिल राशि"
+            "value" : "כמות מילוי"
           }
         },
         "hu" : {
@@ -20349,6 +21129,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "補充量"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "리필 금액"
           }
         },
         "nb" : {
@@ -20483,10 +21269,10 @@
             "value" : "Taux d'insuline restant"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "इंसुलिन का स्तर बना रहना"
+            "value" : "רמת האינסולין שנותרה"
           }
         },
         "hu" : {
@@ -20505,6 +21291,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "インスリン残量"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "남은 인슐린 수치"
           }
         },
         "nb" : {
@@ -20639,10 +21431,10 @@
             "value" : "Retirer la pompe"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पंप निकालें"
+            "value" : "הסר את המשאבה"
           }
         },
         "hu" : {
@@ -20661,6 +21453,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ポンプの取り外し"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프 제거"
           }
         },
         "nb" : {
@@ -20795,10 +21593,10 @@
             "value" : "Montant du réservoir"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "जलाशयों की मात्रा"
+            "value" : "כמות המאגר"
           }
         },
         "hu" : {
@@ -20817,6 +21615,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Reservoir amount"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "저수량"
           }
         },
         "nb" : {
@@ -20951,10 +21755,10 @@
             "value" : "Réservoir et canule"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "जलाशय और कैनुला"
+            "value" : "מאגר וקינולה"
           }
         },
         "hu" : {
@@ -20973,6 +21777,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "リザーバーとカニューレ"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "저장소 및 캐뉼라"
           }
         },
         "nb" : {
@@ -21107,10 +21917,10 @@
             "value" : "Le réservoir est vide. Remplacez-le maintenant !"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "जलाशय खाली है। इसे अभी बदलें!"
+            "value" : "המאגר ריק. החלף אותו עכשיו!"
           }
         },
         "hu" : {
@@ -21129,6 +21939,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "リザーバーが空です。すぐに交換してください！"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "저장소가 비어 있습니다. 지금 교체하세요!"
           }
         },
         "nb" : {
@@ -21263,10 +22079,10 @@
             "value" : "Remplissage du réservoir/de la canule"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "जलाशय/कैनुला रिफिल"
+            "value" : "מילוי מאגר/קנולה"
           }
         },
         "hu" : {
@@ -21285,6 +22101,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "リザーバー／カニューレ再充填"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "저장소/캐뉼라 리필"
           }
         },
         "nb" : {
@@ -21419,10 +22241,10 @@
             "value" : "Curriculum vitae"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "रिज्यूमे"
+            "value" : "קורות חיים"
           }
         },
         "hu" : {
@@ -21441,6 +22263,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "履歴書"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이력서"
           }
         },
         "nb" : {
@@ -21575,10 +22403,10 @@
             "value" : "Remise de curriculum vitae"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "डिलीवरी फिर से शुरू करें"
+            "value" : "המשך המסירה"
           }
         },
         "hu" : {
@@ -21597,6 +22425,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "履歴書の送付"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "배달 재개"
           }
         },
         "nb" : {
@@ -21731,10 +22565,10 @@
             "value" : "Reprise de l'administration d'insuline"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "इंसुलिन डिलीवरी फिर से शुरू करें"
+            "value" : "המשך אספקת האינסולין"
           }
         },
         "hu" : {
@@ -21753,6 +22587,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "インスリンデリバリーの再開"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "인슐린 배달 재개"
           }
         },
         "nb" : {
@@ -21887,10 +22727,10 @@
             "value" : "Économiser"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "सेव करें"
+            "value" : "שמור"
           }
         },
         "hu" : {
@@ -21909,6 +22749,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "セーブ"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "저장"
           }
         },
         "nb" : {
@@ -22043,10 +22889,10 @@
             "value" : "Numérisation"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "स्कैन किया जा रहा है"
+            "value" : "סריקה"
           }
         },
         "hu" : {
@@ -22065,6 +22911,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "スキャニング"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스캔"
           }
         },
         "nb" : {
@@ -22199,10 +23051,10 @@
             "value" : "Basale programmée"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "शेड्यूल्ड बेसल"
+            "value" : "בסיסי מתוזמן"
           }
         },
         "hu" : {
@@ -22221,6 +23073,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "予定ベース"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "예약된 기초"
           }
         },
         "nb" : {
@@ -22355,10 +23213,10 @@
             "value" : "Fonction de défilement"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "स्क्रॉल फ़ंक्शन"
+            "value" : "פונקציית גלילה"
           }
         },
         "hu" : {
@@ -22377,6 +23235,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "スクロール機能"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스크롤 기능"
           }
         },
         "nb" : {
@@ -22511,10 +23375,10 @@
             "value" : "sec"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "सेकंड"
+            "value" : "שניות"
           }
         },
         "hu" : {
@@ -22533,6 +23397,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "秒"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "초"
           }
         },
         "nb" : {
@@ -22667,10 +23537,10 @@
             "value" : "Select insulin type"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "इंसुलिन के प्रकार का चयन करें"
+            "value" : "בחר סוג אינסולין"
           }
         },
         "hu" : {
@@ -22689,6 +23559,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Select insulin type"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "인슐린 유형 선택"
           }
         },
         "nb" : {
@@ -22823,10 +23699,10 @@
             "value" : "Sélectionner la vitesse d'administration du bolus"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "बोलस डिलीवरी स्पीड का चयन करें"
+            "value" : "בחר את מהירות מסירת הבולוס"
           }
         },
         "hu" : {
@@ -22845,6 +23721,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ボーラス投与速度の選択"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "볼러스 전달 속도 선택"
           }
         },
         "nb" : {
@@ -22979,10 +23861,10 @@
             "value" : "Sélectionnez le type d'insuline que vous utiliserez dans cette pompe."
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "इंसुलिन के प्रकार का चयन करें जिसे आप इस पंप में उपयोग कर रहे हैं"
+            "value" : "בחר את סוג האינסולין שבו תשתמש במשאבה זו"
           }
         },
         "hu" : {
@@ -23001,6 +23883,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "このポンプで使用するインスリンの種類を選択してください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 펌프에 사용할 인슐린의 유형을 선택합니다."
           }
         },
         "nb" : {
@@ -23135,10 +24023,10 @@
             "value" : "Sélectionnez le type d'insuline que vous utiliserez dans cette pompe."
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "इस पंप में आप जिस प्रकार के इंसुलिन का उपयोग कर रहे हैं, उसका चयन करें।"
+            "value" : "בחר את סוג האינסולין שבו תשתמש במשאבה זו."
           }
         },
         "hu" : {
@@ -23157,6 +24045,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Select the type of insulin that you will be using in this pump."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 펌프에 사용할 인슐린의 유형을 선택합니다."
           }
         },
         "nb" : {
@@ -23291,10 +24185,10 @@
             "value" : "Fixer un rappel pour la déconnexion"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "डिस्कनेक्ट करने के लिए रिमाइंडर सेट करें"
+            "value" : "הגדר תזכורת לניתוק"
           }
         },
         "hu" : {
@@ -23313,6 +24207,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "切断のリマインダーを設定する"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "연결 해제 알림 설정"
           }
         },
         "nb" : {
@@ -23447,10 +24347,10 @@
             "value" : "Définit le profil basal que la pompe doit utiliser. Notez que cela remplacera le profil qui se trouve dans la pompe par celui qui se trouve dans %@."
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पंप द्वारा उपयोग किए जाने वाले बेसल प्रोफाइल को सेट करें। ध्यान दें, यह पंप में मौजूद प्रोफ़ाइल को %@ में से एक के साथ अधिलेखित कर देगा"
+            "value" : "הגדר את פרופיל הבסיס שבו המשאבה צריכה להשתמש. שים לב, שהוא יחליף את הפרופיל שנמצא במשאבה, עם זה ב %@"
           }
         },
         "hu" : {
@@ -23469,6 +24369,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ポンプが使用する基礎プロフィールを設定する。ポンプに内蔵されているプロファイルを、 %@のプロファイルで上書きすることに注意してください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프가 사용할 기본 프로필을 설정합니다. 펌프에 있는 프로필을 %@에 있는 프로필로 덮어쓴다는 점에 유의하세요."
           }
         },
         "nb" : {
@@ -23603,10 +24509,10 @@
             "value" : "Le réglage de la température de base n'est pas pris en charge pour l'instant."
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "अस्थायी बेसल सेट करना इस समय समर्थित नहीं है"
+            "value" : "הגדרת Temp Basal אינה נתמכת בשלב זה"
           }
         },
         "hu" : {
@@ -23625,6 +24531,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "基礎体温の設定は現在サポートされていません。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "현재 기본 온도 설정은 지원되지 않습니다."
           }
         },
         "nb" : {
@@ -23759,10 +24671,10 @@
             "value" : "Le réglage de la température de base n'est pas pris en charge pour le moment. Durée : %lld sec"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "अस्थायी बेसल सेट करना इस समय समर्थित नहीं है। अवधि: %lld सेकंड"
+            "value" : "הגדרת Temp Basal אינה נתמכת בשלב זה. משך הפעילות: %lld שניות"
           }
         },
         "hu" : {
@@ -23781,6 +24693,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "現在、基礎体温の設定には対応していません。持続時間 %lld秒"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "현재 기본 온도 설정은 지원되지 않습니다. 지속 시간 %lld초"
           }
         },
         "nb" : {
@@ -23915,10 +24833,10 @@
             "value" : "Mise en place de Dana-i"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "दाना-आई की स्थापना"
+            "value" : "הגדרת דניה-I"
           }
         },
         "hu" : {
@@ -23937,6 +24855,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ダナアイの設定"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dana-i 설정"
           }
         },
         "nb" : {
@@ -24071,10 +24995,10 @@
             "value" : "Mise en place de DanaRS v3"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "DanARS v3 सेट अप करना"
+            "value" : "הגדרת דאנארס v3"
           }
         },
         "hu" : {
@@ -24093,6 +25017,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "DanaRS v3のセットアップ"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DanaRS v3 설정"
           }
         },
         "nb" : {
@@ -24227,10 +25157,10 @@
             "value" : "Mise en place terminée"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "सेटअप पूरा हुआ"
+            "value" : "ההתקנה הושלמה"
           }
         },
         "hu" : {
@@ -24249,6 +25179,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Setup Complete"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "설정 완료"
           }
         },
         "nb" : {
@@ -24383,10 +25319,10 @@
             "value" : "Partager les journaux des pompes Dana"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "दाना पंप लॉग साझा करें"
+            "value" : "שתף יומני משאבת דנה"
           }
         },
         "hu" : {
@@ -24405,6 +25341,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ダナ・ポンプの記録を共有する"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dana 펌프 로그 공유"
           }
         },
         "nb" : {
@@ -24539,10 +25481,10 @@
             "value" : "L'heure doit-elle être affichée en 12 heures ou en 24 heures ?"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "समय 12h या 24h में प्रदर्शित होना चाहिए"
+            "value" : "הזמן צריך להיות מוצג תוך 12 שעות או 24 שעות"
           }
         },
         "hu" : {
@@ -24561,6 +25503,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "時刻は12時間表示か24時間表示か"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "시간을 12시간 또는 24시간 단위로 표시할지 여부"
           }
         },
         "nb" : {
@@ -24695,10 +25643,10 @@
             "value" : "Perte de signal"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "सिग्नल लॉस"
+            "value" : "אובדן אותות"
           }
         },
         "hu" : {
@@ -24717,6 +25665,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "信号損失"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "신호 손실"
           }
         },
         "nb" : {
@@ -24851,10 +25805,10 @@
             "value" : "Son"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "साउंड"
+            "value" : "סאונד"
           }
         },
         "hu" : {
@@ -24873,6 +25827,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "サウンド"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "사운드"
           }
         },
         "nb" : {
@@ -25007,10 +25967,10 @@
             "value" : "Statut"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "स्टेटस"
+            "value" : "סטטוס"
           }
         },
         "hu" : {
@@ -25029,6 +25989,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ステータス"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "상태"
           }
         },
         "nb" : {
@@ -25163,10 +26129,10 @@
             "value" : "Étape 1 : Amorcer la canule"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "चरण 1: प्राइम कैनुला"
+            "value" : "שלב 1: צינורית פריים"
           }
         },
         "hu" : {
@@ -25185,6 +26151,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Step 1: Prime cannula"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1단계: 프라임 캐뉼라"
           }
         },
         "nb" : {
@@ -25319,10 +26291,10 @@
             "value" : "Étape 1 : Définir le niveau du réservoir"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "चरण 1: जलाशय स्तर सेट करें"
+            "value" : "שלב 1: הגדר את רמת המאגר"
           }
         },
         "hu" : {
@@ -25341,6 +26313,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Step 1: Set reservoir level"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1단계: 저장소 레벨 설정"
           }
         },
         "nb" : {
@@ -25475,10 +26453,10 @@
             "value" : "Étape 2 : Définir la quantité de remplissage du tube"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "चरण 2: ट्यूब रिफिल राशि सेट करें"
+            "value" : "שלב 2: הגדר את כמות מילוי הצינור"
           }
         },
         "hu" : {
@@ -25497,6 +26475,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Step 2: Set tube refill amount"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2단계: 튜브 리필량 설정"
           }
         },
         "nb" : {
@@ -25629,10 +26613,10 @@
             "value" : "Étape 3 : Amorcer la canule"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "चरण 3: प्राइम कैनुला"
+            "value" : "שלב 3: צינורית פריים"
           }
         },
         "hu" : {
@@ -25651,6 +26635,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ステップ3：カニューレのプライム"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3단계: 프라임 캐뉼라"
           }
         },
         "nb" : {
@@ -25785,10 +26775,10 @@
             "value" : "Arrêt de la température basale"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "टेम्प बेसल बंद करो"
+            "value" : "עצור את הטמפרטורה הבסיסית"
           }
         },
         "hu" : {
@@ -25807,6 +26797,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "基礎体温停止"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "임시 기본값 중지"
           }
         },
         "nb" : {
@@ -25941,10 +26937,10 @@
             "value" : "Suspendre"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "सस्पेंड"
+            "value" : "להשעות"
           }
         },
         "hu" : {
@@ -25963,6 +26959,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "サスペンド"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "일시 중단"
           }
         },
         "nb" : {
@@ -26097,10 +27099,10 @@
             "value" : "Suspendre la livraison"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "डिलीवरी निलंबित करें"
+            "value" : "השעה את המסירה"
           }
         },
         "hu" : {
@@ -26119,6 +27121,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "配送の一時停止"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "배달 일시 중단"
           }
         },
         "nb" : {
@@ -26253,10 +27261,10 @@
             "value" : "Suspendre l'administration d'insuline"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "इंसुलिन डिलीवरी को निलंबित करें"
+            "value" : "השהה את אספקת האינסולין"
           }
         },
         "hu" : {
@@ -26275,6 +27283,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "インスリン投与を一時停止する"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "인슐린 배달 일시 중단"
           }
         },
         "nb" : {
@@ -26409,10 +27423,10 @@
             "value" : "Synchronisation des données de la pompe"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पंप डेटा सिंक करें"
+            "value" : "סנכרן נתוני משאבה"
           }
         },
         "hu" : {
@@ -26431,6 +27445,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ポンプデータの同期"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프 데이터 동기화"
           }
         },
         "nb" : {
@@ -26565,10 +27585,10 @@
             "value" : "Temp Basal"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "टेम्प बेसल"
+            "value" : "טמפ' בסיסי"
           }
         },
         "hu" : {
@@ -26587,6 +27607,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "基礎温度"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "기본 온도"
           }
         },
         "nb" : {
@@ -26721,10 +27747,10 @@
             "value" : "La pompe à insuline Dana-I a été lancée pour la première fois en 2020 par le fabricant Sooil et est la dernière de la série."
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "दाना-आई इंसुलिन पंप को पहली बार 2020 में निर्माता सॉइल द्वारा रिलीज़ किया गया था और यह श्रृंखला में नवीनतम है"
+            "value" : "משאבת האינסולין Dana-I שוחררה לראשונה בשנת 2020 על ידי היצרנית Sooil והיא האחרונה בסדרה"
           }
         },
         "hu" : {
@@ -26743,6 +27769,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Dana-Iインスリンポンプは、メーカーのSooilが2020年に初めて発売したもので、シリーズの最新作である。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다나-아이 인슐린 펌프는 2020년 제조업체 수일에서 처음 출시되었으며 최신 시리즈입니다."
           }
         },
         "nb" : {
@@ -26877,10 +27909,10 @@
             "value" : "La pompe à insuline DanaRS a été lancée en 2002. REMARQUE : seules les pompes DanaRS dotées de la version 3 du micrologiciel sont prises en charge."
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "DaNARS इंसुलिन पंप पहली बार 2002 में जारी किया गया था। नोट: फ़र्मवेयर संस्करण 3 वाले केवल DanARS पंप समर्थित हैं।"
+            "value" : "משאבת האינסולין של DanaRS שוחררה לראשונה בשנת 2002. הערה: רק משאבות DanaRS עם גרסת קושחה 3 נתמכות"
           }
         },
         "hu" : {
@@ -26899,6 +27931,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "DanaRS インスリンポンプは 2002 年に初めて発売された。注：ファームウェアバージョン3のDanaRSポンプのみがサポートされています。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DanaRS 인슐린 펌프는 2002년에 처음 출시되었습니다. 참고: 펌웨어 버전 3이 설치된 DanaRS 펌프만 지원됩니다."
           }
         },
         "nb" : {
@@ -27033,10 +28071,10 @@
             "value" : "L'option de vitesse de bolus la plus rapide"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "सबसे तेज़ बोलस स्पीड विकल्प"
+            "value" : "אפשרות מהירות הבולוס המהירה ביותר"
           }
         },
         "hu" : {
@@ -27055,6 +28093,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "最速のボーラス速度オプション"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "가장 빠른 볼러스 속도 옵션"
           }
         },
         "nb" : {
@@ -27189,10 +28233,10 @@
             "value" : "L'administration d'insuline a été suspendue. Action échouée"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "इंसुलिन डिलीवरी को निलंबित कर दिया गया है। कार्रवाई विफल हुई।"
+            "value" : "מסירת האינסולין הושעה. הפעולה נכשלה"
           }
         },
         "hu" : {
@@ -27211,6 +28255,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "インスリン投与が中断されました。処置失敗"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "인슐린 배달이 일시 중단되었습니다. 작업이 실패했습니다."
           }
         },
         "nb" : {
@@ -27345,10 +28395,10 @@
             "value" : "La limite maximale de bolus est atteinte. Veuillez essayer une quantité inférieure ou augmenter la limite"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "अधिकतम बोलस सीमा समाप्त हो गई है। कृपया कम राशि आज़माएँ या सीमा बढ़ाएँ"
+            "value" : "מגבלת הבולוס המקסימלית מושגת. אנא נסה סכום נמוך יותר או הגדל את המגבלה"
           }
         },
         "hu" : {
@@ -27367,6 +28417,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ボーラスの上限値に達しています。量を減らすか、上限を増やしてください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "최대 충전 한도에 도달했습니다. 더 적은 양을 시도하거나 한도를 늘려주세요."
           }
         },
         "nb" : {
@@ -27501,10 +28557,10 @@
             "value" : "La limite maximale d'insuline par jour est atteinte. Veuillez essayer une quantité plus faible ou augmenter la limite"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "अधिकतम दैनिक इंसुलिन सीमा पूरी हो गई है। कृपया कम मात्रा आज़माएँ या सीमा बढ़ाएँ"
+            "value" : "מגבלת האינסולין היומית המקסימלית מושגת. אנא נסה סכום נמוך יותר או הגדל את המגבלה"
           }
         },
         "hu" : {
@@ -27523,6 +28579,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "1日のインスリン量が上限に達しています。もう少し量を減らすか、上限を増やしてください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "일일 최대 인슐린 한도에 도달했습니다. 양을 줄이거나 한도를 늘려 보세요."
           }
         },
         "nb" : {
@@ -27657,10 +28719,10 @@
             "value" : "L'option de vitesse du bolus moyen"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "मिडिल बोलस स्पीड विकल्प"
+            "value" : "אפשרות מהירות הבולוס האמצעית"
           }
         },
         "hu" : {
@@ -27679,6 +28741,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "中間ボーラス速度オプション"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "중간 볼러스 속도 옵션"
           }
         },
         "nb" : {
@@ -27813,10 +28881,10 @@
             "value" : "La pompe a détecté un problème avec son arbre. Retirez le réservoir, vérifiez tout et réessayez."
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पंप ने अपने चाफ्ट के साथ एक समस्या का पता लगाया है। कृपया जलाशय को हटा दें, सबकुछ जांचें और फिर से कोशिश करें"
+            "value" : "המשאבה זיהתה בעיה עם המשאבה שלה. אנא הסר את המאגר, בדוק הכל ונסה שוב"
           }
         },
         "hu" : {
@@ -27835,6 +28903,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ポンプがシャフトの問題を検出しました。リザーバを取り外し、すべてを確認してから再度お試しください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프에서 샤프트에 문제가 감지되었습니다. 저장통을 제거하고 모든 것을 확인한 후 다시 시도하세요."
           }
         },
         "nb" : {
@@ -27969,10 +29043,10 @@
             "value" : "The pump reminds you when the amount of insulin in the pump reaches this level"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पंप आपको याद दिलाता है कि पंप में इंसुलिन की मात्रा इस स्तर तक कब पहुंचती है"
+            "value" : "המשאבה מזכירה לך מתי כמות האינסולין במשאבה מגיעה לרמה זו"
           }
         },
         "hu" : {
@@ -27991,6 +29065,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "The pump reminds you when the amount of insulin in the pump reaches this level"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프의 인슐린 양이 이 수준에 도달하면 펌프가 알려줍니다."
           }
         },
         "nb" : {
@@ -28125,10 +29205,10 @@
             "value" : "Option de vitesse de bolus la plus lente"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "सबसे धीमा बोलस स्पीड विकल्प"
+            "value" : "אפשרות מהירות הבולוס האיטית ביותר"
           }
         },
         "hu" : {
@@ -28147,6 +29227,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "最も遅いボーラス速度オプション"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "가장 느린 볼러스 속도 옵션"
           }
         },
         "nb" : {
@@ -28281,10 +29367,10 @@
             "value" : "L'heure de votre pompe est différente de l'heure actuelle. Voulez-vous mettre à jour l'heure de votre pompe pour qu'elle corresponde à l'heure actuelle ?"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "आपके पंप का समय वर्तमान समय से अलग है। क्या आप अपने पंप के समय को मौजूदा समय में अपडेट करना चाहते हैं?"
+            "value" : "הזמן במשאבה שלך שונה מהזמן הנוכחי. האם ברצונך לעדכן את השעה במשאבה שלך לשעה הנוכחית?"
           }
         },
         "hu" : {
@@ -28303,6 +29389,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ポンプの時刻が現在時刻と異なっています。ポンプの時刻を現在時刻に更新しますか？"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프의 시간이 현재 시간과 다릅니다. 펌프의 시간을 현재 시간으로 업데이트하시겠습니까?"
           }
         },
         "nb" : {
@@ -28437,10 +29529,10 @@
             "value" : "L'heure de votre pompe est différente de l'heure actuelle. L'heure de votre pompe contrôle les paramètres de votre thérapie programmée. Faites défiler vers le bas jusqu'à la ligne Heure de la pompe pour consulter le décalage horaire et configurer votre pompe."
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "आपके पंप का समय वर्तमान समय से अलग है। आपके पंप का समय आपकी निर्धारित थेरेपी सेटिंग्स को नियंत्रित करता है। समय के अंतर की समीक्षा करने और अपने पंप को कॉन्फ़िगर करने के लिए पंप टाइम पंक्ति तक नीचे स्क्रॉल करें।"
+            "value" : "הזמן במשאבה שלך שונה מהזמן הנוכחי. זמן המשאבה שלך שולט בהגדרות הטיפול המתוזמנות שלך. גלול מטה לשורה זמן משאבה כדי לבדוק את הפרש הזמן ולהגדיר את המשאבה שלך."
           }
         },
         "hu" : {
@@ -28459,6 +29551,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ポンプの時刻は現在時刻とは異なります。ポンプの時刻はスケジュールされた治療設定を制御します。ポンプ時刻の行までスクロールして、時差を確認し、ポンプを設定してください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프의 시간이 현재 시간과 다릅니다. 펌프의 시간은 예약된 치료 설정을 제어합니다. 아래로 스크롤하여 펌프 시간 행으로 이동하여 시차를 검토하고 펌프를 구성합니다."
           }
         },
         "nb" : {
@@ -28593,10 +29691,10 @@
             "value" : "Il n'y a pas eu d'interactions avec la pompe depuis trop longtemps. Désactivez cette fonction dans la pompe ou interagissez avec la pompe."
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "पंप के साथ बहुत लंबे समय से कोई इंटरैक्शन नहीं हुआ है। या तो पंप में इस फ़ंक्शन को अक्षम करें या पंप के साथ इंटरैक्ट करें"
+            "value" : "לא היו אינטראקציות עם המשאבה זמן רב מדי. או להשבית פונקציה זו במשאבה או ליצור אינטראקציה עם המשאבה"
           }
         },
         "hu" : {
@@ -28615,6 +29713,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "あまりにも長い間、ポンプとの相互作用がありません。ポンプのこの機能を無効にするか、ポンプと対話するかしてください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프와 너무 오랫동안 상호 작용이 없었습니다. 펌프에서 이 기능을 비활성화하거나 펌프와 상호 작용하세요."
           }
         },
         "nb" : {
@@ -28749,10 +29853,10 @@
             "value" : "Cette méthode de remplissage n'est prévue que lorsque la pompe ne permet pas de remplir le réservoir ou d'amorcer la canule."
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "रिफिलिंग की यह विधि केवल तभी अभिप्रेत है जब पंप जलाशय को फिर से भरने या कैनुला को प्राइम करने का कोई तरीका प्रदान नहीं कर सकता है"
+            "value" : "שיטת מילוי זו מיועדת רק כאשר המשאבה אינה יכולה לספק דרך למלא מחדש את המאגר או לטעון את הצינורית"
           }
         },
         "hu" : {
@@ -28771,6 +29875,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "This method of refilling is only intended for when the pump cannot provide a way to refill the reservoir or prime the cannula"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 리필 방법은 펌프가 저장통을 리필하거나 캐뉼라를 프라이밍할 수 없는 경우에만 사용할 수 있습니다."
           }
         },
         "nb" : {
@@ -28905,10 +30015,10 @@
             "value" : "Changement d'heure détecté"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "समय परिवर्तन का पता चला"
+            "value" : "שינוי זמן זוהה"
           }
         },
         "hu" : {
@@ -28927,6 +30037,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "検出された時間変化"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "시간 변경 감지"
           }
         },
         "nb" : {
@@ -29061,10 +30177,10 @@
             "value" : "Mode d'emploi du Bluetooth"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ब्लूटूथ मोड टॉगल करें"
+            "value" : "החלף מצב בלוטות'"
           }
         },
         "hu" : {
@@ -29083,6 +30199,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ブルートゥース・モデル"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "블루투스 모드 전환"
           }
         },
         "nb" : {
@@ -29217,10 +30339,10 @@
             "value" : "Tonalité silencieuse à bascule ?"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "टॉगल साइलेंट टोन?"
+            "value" : "להחליף צליל שקט?"
           }
         },
         "hu" : {
@@ -29239,6 +30361,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "トグル・サイレント・トーン？"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "무음 톤을 전환하시겠습니까?"
           }
         },
         "nb" : {
@@ -29373,10 +30501,10 @@
             "value" : "Quantité de remplissage du tube"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ट्यूब रिफिल राशि"
+            "value" : "כמות מילוי הצינור"
           }
         },
         "hu" : {
@@ -29395,6 +30523,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tube refill amount"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "튜브 리필 금액"
           }
         },
         "nb" : {
@@ -29529,10 +30663,10 @@
             "value" : "Type de recharge"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "रिफिल का प्रकार"
+            "value" : "סוג המילוי"
           }
         },
         "hu" : {
@@ -29551,6 +30685,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "詰め替えタイプ"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "리필 유형"
           }
         },
         "nb" : {
@@ -29685,10 +30825,10 @@
             "value" : "U"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "यू"
+            "value" : "U"
           }
         },
         "hu" : {
@@ -29704,6 +30844,12 @@
           }
         },
         "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "U"
+          }
+        },
+        "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "U"
@@ -29841,10 +30987,10 @@
             "value" : "U/h"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "यू/घंटा"
+            "value" : "U/שעה"
           }
         },
         "hu" : {
@@ -29863,6 +31009,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "U/時"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "U/hr"
           }
         },
         "nb" : {
@@ -29997,10 +31149,10 @@
             "value" : "Inconnu"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "अनजान"
+            "value" : "לא ידוע"
           }
         },
         "hu" : {
@@ -30019,6 +31171,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "不明"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "알 수 없음"
           }
         },
         "nb" : {
@@ -30153,10 +31311,10 @@
             "value" : "Erreur inconnue"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "अज्ञात त्रुटि"
+            "value" : "שגיאה לא ידועה"
           }
         },
         "hu" : {
@@ -30175,6 +31333,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "不明なエラー"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "알 수 없는 오류"
           }
         },
         "nb" : {
@@ -30309,10 +31473,10 @@
             "value" : "Options pour l'utilisateur"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "उपयोगकर्ता के विकल्प"
+            "value" : "אפשרויות משתמש"
           }
         },
         "hu" : {
@@ -30331,6 +31495,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ユーザーオプション"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "사용자 옵션"
           }
         },
         "nb" : {
@@ -30465,10 +31635,10 @@
             "value" : "Vibrations"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "वाइब्रेशन"
+            "value" : "רטט"
           }
         },
         "hu" : {
@@ -30487,6 +31657,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "振動"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "진동"
           }
         },
         "nb" : {
@@ -30621,10 +31797,10 @@
             "value" : "WARNING: Please don't use this until you've read the documentation"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "चेतावनी: कृपया इसका उपयोग तब तक न करें जब तक आप दस्तावेज़ीकरण नहीं पढ़ लेते"
+            "value" : "אזהרה: אנא אל תשתמש בזה עד שתקרא את התיעוד"
           }
         },
         "hu" : {
@@ -30643,6 +31819,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "WARNING: Please don't use this until you've read the documentation"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "경고: 문서를 읽을 때까지 이 기능을 사용하지 마세요."
           }
         },
         "nb" : {
@@ -30777,10 +31959,10 @@
             "value" : "AVERTISSEMENT : A UTILISER AVEC PRUDENCE !"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "चेतावनी: सावधानी के साथ प्रयोग करें!"
+            "value" : "אזהרה: השתמש בזהירות!"
           }
         },
         "hu" : {
@@ -30799,6 +31981,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "WARNING: USE WITH CAUTION!"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "경고: 주의해서 사용하세요!"
           }
         },
         "nb" : {
@@ -30933,10 +32121,10 @@
             "value" : "Bienvenue !"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "आपका स्वागत है!"
+            "value" : "ברוכים הבאים!"
           }
         },
         "hu" : {
@@ -30955,6 +32143,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ようこそ！"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "환영합니다!"
           }
         },
         "nb" : {
@@ -31089,10 +32283,10 @@
             "value" : "Qu'est-ce que c'est ?"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "यह क्या है?"
+            "value" : "מה זה?"
           }
         },
         "hu" : {
@@ -31111,6 +32305,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "これは何だ？"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이게 뭐죠?"
           }
         },
         "nb" : {
@@ -31245,10 +32445,10 @@
             "value" : "Oui, 1 heure"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "हां, 1 घंटा"
+            "value" : "כן, שעה"
           }
         },
         "hu" : {
@@ -31267,6 +32467,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "はい、1時間"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "예, 1시간"
           }
         },
         "nb" : {
@@ -31401,10 +32607,10 @@
             "value" : "Oui, 5 minutes"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "हां, 5 मिनट"
+            "value" : "כן, 5 דקות"
           }
         },
         "hu" : {
@@ -31423,6 +32629,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "はい、5分"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "예, 5분"
           }
         },
         "nb" : {
@@ -31557,10 +32769,10 @@
             "value" : "Oui, 15 minutes"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "हां, 15 मिनट"
+            "value" : "כן, 15 דקות"
           }
         },
         "hu" : {
@@ -31579,6 +32791,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "はい、15分"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "예, 15분"
           }
         },
         "nb" : {
@@ -31713,10 +32931,10 @@
             "value" : "Oui, 30 minutes"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "हां, 30 मिनट"
+            "value" : "כן, 30 דקות"
           }
         },
         "hu" : {
@@ -31735,6 +32953,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "はい、30分"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "예, 30분"
           }
         },
         "nb" : {
@@ -31869,10 +33093,10 @@
             "value" : "Oui, désactiver la synchronisation des bolus"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "हां, बोलस सिंकिंग को अक्षम करें"
+            "value" : "כן, השבת את סנכרון הבולוס"
           }
         },
         "hu" : {
@@ -31891,6 +33115,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "はい、ボーラス同期を無効にします"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "예, 볼러스 동기화 비활성화"
           }
         },
         "nb" : {
@@ -32025,10 +33255,10 @@
             "value" : "Oui, désactiver les tonalités silencieuses"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "हां, साइलेंट टोन को डिसेबल करें"
+            "value" : "כן, השבת צלילים שקטים"
           }
         },
         "hu" : {
@@ -32047,6 +33277,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "はい、サイレントトーンを無効にする"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "예, 무음 톤 비활성화"
           }
         },
         "nb" : {
@@ -32181,10 +33417,10 @@
             "value" : "Oui, activer les tonalités silencieuses"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "हां, साइलेंट टोन सक्षम करें"
+            "value" : "כן, אפשר צלילים שקטים"
           }
         },
         "hu" : {
@@ -32203,6 +33439,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "はい、サイレントトーンを有効にする"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "예, 무음 톤 사용"
           }
         },
         "nb" : {
@@ -32337,10 +33579,10 @@
             "value" : "Oui, réactiver la synchronisation des bolus"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "हां, बोलस सिंकिंग को फिर से सक्षम करें"
+            "value" : "כן, הפעל מחדש את סנכרון הבולוס"
           }
         },
         "hu" : {
@@ -32359,6 +33601,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "はい、ボーラス同期を再度有効にしてください"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "예, 볼러스 동기화를 다시 활성화합니다."
           }
         },
         "nb" : {
@@ -32493,10 +33741,10 @@
             "value" : "Oui, passage en mode continu"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "हां, निरंतर मोड पर स्विच करें"
+            "value" : "כן, עבור למצב רציף"
           }
         },
         "hu" : {
@@ -32515,6 +33763,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "はい、連続モードに切り替える"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "예, 연속 모드로 전환"
           }
         },
         "nb" : {
@@ -32649,10 +33903,10 @@
             "value" : "Oui, passer en mode interactif"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "हां, इंटरैक्टिव मोड पर स्विच करें"
+            "value" : "כן, עבור למצב אינטראקטיבי"
           }
         },
         "hu" : {
@@ -32671,6 +33925,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "はい、対話モードに切り替える"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "예, 대화형 모드로 전환합니다."
           }
         },
         "nb" : {
@@ -32805,10 +34065,10 @@
             "value" : "Oui, synchronisation avec l'heure actuelle"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "हां, मौजूदा समय में सिंक करें"
+            "value" : "כן, סנכרן עם השעה הנוכחית"
           }
         },
         "hu" : {
@@ -32827,6 +34087,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "はい、現在時刻に同期"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "예, 현재 시간에 동기화"
           }
         },
         "nb" : {
@@ -32961,10 +34227,10 @@
             "value" : "Votre "
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "आपका "
+            "value" : "שלך "
           }
         },
         "hu" : {
@@ -32983,6 +34249,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "あなたの "
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "귀하의"
           }
         },
         "nb" : {
@@ -33117,10 +34389,10 @@
             "value" : "Votre limite journalière de base a été atteinte. Veuillez contacter votre distributeur Dana pour augmenter la limite."
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "आपकी दैनिक मूलभूत सीमा समाप्त हो गई है। लिमिट बढ़ाने के लिए कृपया अपने दाना डिस्ट्रीब्यूटर से संपर्क करें"
+            "value" : "הגבול הבסיסי היומי שלך הושג. אנא צור קשר עם מפיץ דנה שלך כדי להגדיל את המגבלה"
           }
         },
         "hu" : {
@@ -33139,6 +34411,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "1日の基礎摂取量の上限に達しました。制限を増やすには、Danaの販売代理店にご連絡ください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "일일 기본 한도에 도달했습니다. 한도를 늘리려면 Dana 총판에게 문의하시기 바랍니다."
           }
         },
         "nb" : {
@@ -33273,10 +34551,10 @@
             "value" : "Votre limite quotidienne d'insuline a été atteinte. Veuillez contacter votre distributeur Dana pour augmenter la limite."
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "आपकी दैनिक इंसुलिन की सीमा पूरी हो गई है। लिमिट बढ़ाने के लिए कृपया अपने दाना डिस्ट्रीब्यूटर से संपर्क करें"
+            "value" : "מגבלת האינסולין היומית שלך הושגה. אנא צור קשר עם מפיץ דנה שלך כדי להגדיל את המגבלה"
           }
         },
         "hu" : {
@@ -33295,6 +34573,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "インスリンの1日あたりの摂取量が上限に達しました。限度額を増やすには、ダナ販売店にご連絡ください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "일일 인슐린 한도에 도달했습니다. 한도를 늘리려면 Dana 유통업체에 문의하시기 바랍니다."
           }
         },
         "nb" : {
@@ -33429,10 +34713,10 @@
             "value" : "Votre pompe est déconnectée depuis plus de 5 minutes !"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "आपका पंप 5 मिनट से अधिक समय तक डिस्कनेक्ट हो जाता है!"
+            "value" : "המשאבה שלך מנותקת יותר מ -5 דקות!"
           }
         },
         "hu" : {
@@ -33451,6 +34735,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Your pump is disconnected longer than 5 minutes!"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프 연결이 5분 이상 끊겼습니다!"
           }
         },
         "nb" : {
@@ -33585,10 +34875,10 @@
             "value" : "Votre pompe est toujours déconnectée après la période définie !"
           }
         },
-        "hi" : {
+        "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "निर्धारित अवधि के बाद भी आपका पंप डिस्कनेक्ट हो गया है!"
+            "value" : "המשאבה שלך עדיין מנותקת לאחר התקופה שנקבעה!"
           }
         },
         "hu" : {
@@ -33607,6 +34897,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "設定時間経過後もポンプは切断されたままです！"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "설정된 기간이 지나도 펌프의 연결이 끊어지지 않습니다!"
           }
         },
         "nb" : {
