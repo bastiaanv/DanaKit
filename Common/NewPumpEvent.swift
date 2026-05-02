@@ -8,7 +8,7 @@ public extension NewPumpEvent {
             date: date,
             dose: dose,
             raw: "\(DoseType.bolus.rawValue) \(units) \(dateFormatter.string(from: date))".data(using: .utf8) ?? Data([]),
-            title: LocalizedString("Bolus", comment: "Pump Event title for UnfinalizedDose with doseType of .bolus")
+            title: String(localized: "Bolus", comment: "Pump Event title for UnfinalizedDose with doseType of .bolus")
         )
     }
 
@@ -19,7 +19,7 @@ public extension NewPumpEvent {
             dose: dose,
             raw: "\(DoseType.tempBasal.rawValue) \(dose.programmedUnits) \(dateFormatter.string(from: date))"
                 .data(using: .utf8) ?? Data([]),
-            title: LocalizedString("Temp Basal", comment: "Pump Event title for UnfinalizedDose with doseType of .tempBasal")
+            title: String(localized: "Temp Basal", comment: "Pump Event title for UnfinalizedDose with doseType of .tempBasal")
         )
     }
 
@@ -29,7 +29,7 @@ public extension NewPumpEvent {
             date: date,
             dose: dose,
             raw: "\(DoseType.basal.rawValue) \(dateFormatter.string(from: date))".data(using: .utf8) ?? Data([]),
-            title: LocalizedString("Basal", comment: "Pump Event title for UnfinalizedDose with doseType of .basal")
+            title: String(localized: "Basal", comment: "Pump Event title for UnfinalizedDose with doseType of .basal")
         )
     }
 
@@ -39,7 +39,7 @@ public extension NewPumpEvent {
             date: date,
             dose: dose,
             raw: "\(DoseType.resume.rawValue) \(dateFormatter.string(from: date))".data(using: .utf8) ?? Data([]),
-            title: LocalizedString("Resume", comment: "Pump Event title for UnfinalizedDose with doseType of .resume")
+            title: String(localized: "Resume", comment: "Pump Event title for UnfinalizedDose with doseType of .resume")
         )
     }
 
@@ -49,7 +49,7 @@ public extension NewPumpEvent {
             date: date,
             dose: dose,
             raw: "\(DoseType.suspend.rawValue) \(dateFormatter.string(from: date))".data(using: .utf8) ?? Data([]),
-            title: LocalizedString("Suspend", comment: "Pump Event title for UnfinalizedDose with doseType of .suspend")
+            title: String(localized: "Suspend", comment: "Pump Event title for UnfinalizedDose with doseType of .suspend")
         )
     }
 }

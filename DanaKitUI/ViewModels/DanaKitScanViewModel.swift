@@ -74,8 +74,8 @@ class DanaKitScanViewModel: ObservableObject {
         case .invalidBle5Keys:
             isConnecting = false
             isConnectionError = true
-            connectionErrorMessage = LocalizedString("Failed to pair to ", comment: "Dana-i failed to pair p1") +
-                (pumpManager?.state.deviceName ?? "<NO_NAME>") + LocalizedString(
+            connectionErrorMessage = String(localized: "Failed to pair to ", comment: "Dana-i failed to pair p1") +
+                (pumpManager?.state.deviceName ?? "<NO_NAME>") + String(localized:
                     ". Please go to your bluetooth settings, forget this device, and try again",
                     comment: "Dana-i failed to pair p2"
                 )
@@ -136,7 +136,7 @@ class DanaKitScanViewModel: ObservableObject {
 
     func processPinPrompt() {
         guard pin1.count == 12, pin2.count == 8 else {
-            pinCodePromptError = LocalizedString(
+            pinCodePromptError = String(localized:
                 "Received invalid pincode lengths. Try again",
                 comment: "Dana-RS v3 pincode prompt error invalid length"
             )
@@ -145,7 +145,7 @@ class DanaKitScanViewModel: ObservableObject {
         }
 
         guard let pin1 = Data(hexString: pin1), let pin2 = Data(hexString: pin2) else {
-            pinCodePromptError = LocalizedString(
+            pinCodePromptError = String(localized:
                 "Received invalid hex strings. Try again",
                 comment: "Dana-RS v3 pincode prompt error invalid hex"
             )
@@ -166,7 +166,7 @@ class DanaKitScanViewModel: ObservableObject {
         }
 
         guard checkSum.first == pairingKeyCheckSum else {
-            pinCodePromptError = LocalizedString(
+            pinCodePromptError = String(localized: 
                 "Checksum failed. Try again",
                 comment: "Dana-RS v3 pincode prompt error checksum failed"
             )

@@ -9,33 +9,40 @@ struct DanaKitScanView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(LocalizedString("Found Dana-i/RS pumps", comment: "Title for DanaKitScanView"))
-                .font(.title)
-                .bold()
-                .padding(.horizontal)
-
-            HStack(alignment: .center, spacing: 0) {
-                Text(
-                    !$viewModel.isConnecting.wrappedValue ?
-                        LocalizedString("Scanning", comment: "Scanning text") :
-                        LocalizedString("Connecting", comment: "Connecting text")
-                )
-                Spacer()
-                ActivityIndicator(isAnimating: .constant(true), style: .medium)
+            List {
+                Section(header: SectionHeader(label: !$viewModel.isConnecting.wrappedValue ?
+                                              String(localized: "Scanning", comment: "Scanning text") :
+                                                String(localized: "Connecting", comment: "Connecting text"))) {
+                    
+                    ForEach($viewModel.scannedDevices) { $result in
+                        Button(action: { viewModel.connect($result.wrappedValue) }) {
+                            HStack {
+                                Text($result.name.wrappedValue)
+                                Spacer()
+                                if !$viewModel.isConnecting.wrappedValue {
+                                    NavigationLink.empty
+                                } else if $result.name.wrappedValue == viewModel.connectingTo {
+                                    ActivityIndicator(isAnimating: .constant(true), style: .medium)
+                                }
+                            }
+                            .padding(.horizontal)
+                        }
+                        .disabled($viewModel.isConnecting.wrappedValue)
+                        .buttonStyle(.plain)
+                    }
+                }
             }
-            .padding(.horizontal)
-
-            Divider()
-            content
         }
-
         .navigationBarHidden(false)
+        .navigationTitle(String(localized: "Pairing", comment: "Title for DanaKitScanView"))
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(LocalizedString("Cancel", comment: "Cancel button title"), action: {
+                Button(action: {
                     viewModel.stopScan()
                     self.dismiss()
-                })
+                }) {
+                    Text("Cancel", comment: "Cancel button title")
+                }
             }
         }
         .onChange(of: isPresented) { newValue in
@@ -44,55 +51,33 @@ struct DanaKitScanView: View {
             }
         }
         .alert(
-            LocalizedString("Error while connecting to device", comment: "Connection error message"),
+            String(localized: "Error while connecting to device", comment: "Connection error message"),
             isPresented: $viewModel.isConnectionError,
             presenting: $viewModel.connectionErrorMessage,
             actions: { _ in
-                Button(LocalizedString("Okay", comment: "label Okay"), action: {})
+                Button(action: {}) {
+                    Text("Okay", comment: "label Okay")
+                }
             },
             message: { detail in Text(detail.wrappedValue ?? "") }
         )
         .alert(
-            LocalizedString("Dana-RS v3 found!", comment: "Dana-RS v3 found"),
+            String(localized: "Dana-RS v3 found!", comment: "Dana-RS v3 found"),
             isPresented: $viewModel.isPromptingPincode
         ) {
-            Button(LocalizedString("Cancel", comment: "Cancel button title"), role: .cancel) {
-                viewModel.cancelPinPrompt()
+            Button(action: viewModel.cancelPinPrompt) {
+                Text("Cancel", comment: "Cancel button title")
             }
-            Button(LocalizedString("Okay", comment: "label Okay")) {
-                viewModel.processPinPrompt()
+            Button(action: viewModel.processPinPrompt) {
+                Text("Okay", comment: "label Okay")
             }
 
-            TextField(LocalizedString("Pin 1", comment: "Dana-RS v3 pincode prompt pin 1"), text: $viewModel.pin1)
-            TextField(LocalizedString("Pin 2", comment: "Dana-RS v3 pincode prompt pin 2"), text: $viewModel.pin2)
+            TextField(String(localized: "Pin 1", comment: "Dana-RS v3 pincode prompt pin 1"), text: $viewModel.pin1)
+            TextField(String(localized: "Pin 2", comment: "Dana-RS v3 pincode prompt pin 2"), text: $viewModel.pin2)
         } message: {
             if let message = $viewModel.pinCodePromptError.wrappedValue {
                 Text(message)
             }
         }
     }
-
-    @ViewBuilder private var content: some View {
-        List($viewModel.scannedDevices) { $result in
-            Button(action: { viewModel.connect($result.wrappedValue) }) {
-                HStack {
-                    Text($result.name.wrappedValue)
-                    Spacer()
-                    if !$viewModel.isConnecting.wrappedValue {
-                        NavigationLink.empty
-                    } else if $result.name.wrappedValue == viewModel.connectingTo {
-                        ActivityIndicator(isAnimating: .constant(true), style: .medium)
-                    }
-                }
-                .padding(.horizontal)
-            }
-            .disabled($viewModel.isConnecting.wrappedValue)
-            .buttonStyle(.plain)
-        }
-        .listStyle(.plain)
-    }
-}
-
-#Preview {
-    DanaKitScanView(viewModel: DanaKitScanViewModel(nextStep: {}))
 }

@@ -76,9 +76,9 @@ class DanaKitSettingsViewModel: ObservableObject {
         return numberFormatter
     }()
 
-    let reservoirVolumeFormatter: QuantityFormatter = {
-        let formatter = QuantityFormatter(for: .internationalUnit())
-        formatter.numberFormatter.maximumFractionDigits = 1
+    let reservoirVolumeFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 1
         return formatter
     }()
 
@@ -274,8 +274,7 @@ class DanaKitSettingsViewModel: ObservableObject {
     }
 
     func reservoirText(for units: Double) -> String {
-        let quantity = HKQuantity(unit: .internationalUnit(), doubleValue: units)
-        return reservoirVolumeFormatter.string(from: quantity) ?? ""
+        return reservoirVolumeFormatter.string(from: units) ?? ""
     }
 
     func toggleSilentTone() {
@@ -370,14 +369,14 @@ class DanaKitSettingsViewModel: ObservableObject {
 
     private func updateBasalButtonText() -> String {
         guard let pumpManager = self.pumpManager else {
-            return LocalizedString("Suspend delivery", comment: "Dana settings suspend delivery")
+            return String(localized: "Suspend Insulin Delivery", comment: "Dana settings suspend delivery")
         }
 
         if pumpManager.state.isPumpSuspended {
-            return LocalizedString("Resume delivery", comment: "Dana settings resume delivery")
+            return String(localized: "Resume Insulin Delivery", comment: "Dana settings resume delivery")
         }
 
-        return LocalizedString("Suspend delivery", comment: "Dana settings suspend delivery")
+        return String(localized: "Suspend Insulin Delivery", comment: "Dana settings suspend delivery")
     }
 
     private func updateBasalRate() {

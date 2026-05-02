@@ -102,13 +102,13 @@ extension DanaKitPumpManager {
     private func buildPumpStatusHighlight() -> DeviceStatusHighlight? {
         if state.reservoirLevel < 1 {
             return PumpStatusHighlight(
-                localizedMessage: LocalizedString("No Insulin", comment: "Status highlight that a pump is out of insulin."),
+                localizedMessage: String(localized: "No Insulin", comment: "Status highlight that a pump is out of insulin."),
                 imageName: "exclamationmark.circle.fill",
                 state: .critical
             )
         } else if state.isPumpSuspended {
             return PumpStatusHighlight(
-                localizedMessage: LocalizedString(
+                localizedMessage: String(localized:
                     "Insulin Suspended",
                     comment: "Status highlight that insulin delivery was suspended."
                 ),
@@ -120,7 +120,7 @@ extension DanaKitPumpManager {
             .timeIntervalSince(state.lastStatusDate) > .minutes(12)
         {
             return PumpStatusHighlight(
-                localizedMessage: LocalizedString(
+                localizedMessage: String(localized: 
                     "Signal Loss",
                     comment: "Status highlight when communications with the pod haven't happened recently."
                 ),

@@ -11,8 +11,8 @@ struct DanaKitSetupCompleteView: View {
             title
             VStack(alignment: .leading) {
                 Text(
-                    LocalizedString("Your ", comment: "Dana setup complete p1") + friendlyPumpModelName +
-                        LocalizedString(" is ready to be used!", comment: "Dana setup complete p2")
+                    String(localized: "Your ", comment: "Dana setup complete p1") + friendlyPumpModelName +
+                    String(localized: " is ready to be used!", comment: "Dana setup complete p2")
                 )
 
                 HStack {
@@ -25,22 +25,25 @@ struct DanaKitSetupCompleteView: View {
                 }
                 .padding(.vertical)
 
-                Text(LocalizedString(
+                Text(
                     "Note: You Dana pump has a special setting which allows you to silence your Dana pump beeps. To enable this, please contact your Dana distributor",
                     comment: "Dana setup SMB setting"
-                ))
+                )
             }
             .padding(.horizontal)
             Spacer()
 
-            ContinueButton(text: LocalizedString("Finish", comment: "Text for finish button"), action: { finish?() })
+            ContinueButton(
+                text: String(localized: "Finish", comment: "Text for finish button"),
+                action: { finish?() }
+            )
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarHidden(false)
     }
 
     @ViewBuilder private var title: some View {
-        Text(LocalizedString("Setup Complete", comment: "Title for setup complete"))
+        Text("Setup Complete", comment: "Title for setup complete")
             .font(.title)
             .bold()
             .padding(.horizontal)
@@ -48,8 +51,4 @@ struct DanaKitSetupCompleteView: View {
         Divider()
             .padding(.bottom)
     }
-}
-
-#Preview {
-    DanaKitSetupCompleteView(finish: {}, friendlyPumpModelName: "Dana-i", imageName: "danai")
 }

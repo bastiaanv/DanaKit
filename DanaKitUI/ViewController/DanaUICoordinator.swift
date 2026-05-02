@@ -5,10 +5,7 @@ import SwiftUI
 import UIKit
 
 enum DanaUIScreen {
-    case debugView
     case firstRunScreen
-    case danarsv1Explaination
-    case danarsv1Password
     case danarsv3Explaination
     case danaiExplaination
     case insulinConfirmationScreen
@@ -19,14 +16,8 @@ enum DanaUIScreen {
 
     func next() -> DanaUIScreen? {
         switch self {
-        case .debugView:
-            return .firstRunScreen
         case .firstRunScreen:
             return nil
-        case .danarsv1Explaination:
-            return .danarsv1Password
-        case .danarsv1Password:
-            return .insulinConfirmationScreen
         case .danarsv3Explaination:
             return .insulinConfirmationScreen
         case .danaiExplaination:
@@ -97,8 +88,11 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        delegate = self
+
+        navigationBar.prefersLargeTitles = true // Ensure nav bar text is displayed correctly
 
         if screenStack.isEmpty {
             screenStack = [getInitialScreen()]
@@ -116,28 +110,10 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
 
     private func viewControllerForScreen(_ screen: DanaUIScreen) -> UIViewController {
         switch screen {
-        case .debugView:
-            let viewModel = DanaKitDebugViewModel(pumpManager)
-            return hostingController(rootView: DanaKitDebugView(viewModel: viewModel))
         case .firstRunScreen:
             let view = DanaKitSetupView(
-                nextAction: goToExplaination,
-                debugAction: { self.navigateTo(.debugView) }
+                nextAction: goToExplaination
             ) // self.allowDebugFeatures ? { self.navigateTo(.debugView) } : {})
-            return hostingController(rootView: view)
-        case .danarsv1Explaination:
-            let view = DanaRSv1Explaination(nextAction: stepFinished)
-            return hostingController(rootView: view)
-        case .danarsv1Password:
-            let view = DanaRSv1Password(nextAction: { password in
-                guard let pumpManager = self.pumpManager else {
-                    self.stepFinished()
-                    return
-                }
-
-                pumpManager.state.devicePassword = password
-                self.stepFinished()
-            })
             return hostingController(rootView: view)
         case .danarsv3Explaination:
             let view = DanaRSv3Explaination(nextAction: stepFinished)
@@ -175,6 +151,21 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
             let nextStep: () -> Void = {
                 self.pumpManagerOnboardingDelegate?.pumpManagerOnboarding(didCreatePumpManager: self.pumpManager!)
                 self.completionDelegate?.completionNotifyingDidComplete(self)
+                
+                if let pumpManager = self.pumpManager {
+                    pumpManager.pumpDelegate.notify { delegate in
+                        guard let delegate else {
+                            return
+                        }
+                        
+                        let dose = DoseEntry.resume(insulinType: pumpManager.state.insulinType)
+                        delegate.pumpManager(
+                            pumpManager,
+                            hasNewPumpEvents: [NewPumpEvent.resume(dose: dose)],
+                            lastReconciliation: Date.now,
+                            replacePendingEvents: true) { _ in }
+                    }
+                }
             }
 
             let view = DanaKitSetupCompleteView(
@@ -223,9 +214,6 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
 
     func goToExplaination(_ index: Int) {
         switch index {
-        case 0:
-            navigateTo(.danarsv1Explaination)
-            return
         case 1:
             navigateTo(.danarsv3Explaination)
             return

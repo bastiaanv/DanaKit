@@ -25,11 +25,13 @@ struct InsulinTypeView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            title
-
-            ScrollView {
-                InsulinTypeChooser(insulinType: $insulinType, supportedInsulinTypes: supportedInsulinTypes)
-                    .padding(.horizontal)
+            List {
+                Section(header: SectionHeader(label: String(localized:
+                    "Select the type of insulin that you will be using in this pump",
+                    comment: "Title text for insulin type confirmation page"
+                ))) {
+                    InsulinTypeChooser(insulinType: $insulinType, supportedInsulinTypes: supportedInsulinTypes)
+                }
             }
 
             Spacer()
@@ -38,23 +40,7 @@ struct InsulinTypeView: View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarHidden(false)
-    }
-
-    @ViewBuilder private var title: some View {
-        Text(LocalizedString("Select insulin type", comment: "Title for insulin type"))
-            .font(.title)
-            .bold()
-            .padding(.horizontal)
-
-        Text(LocalizedString(
-            "Select the type of insulin that you will be using in this pump",
-            comment: "Title text for insulin type confirmation page"
-        ))
-            .fixedSize(horizontal: false, vertical: true)
-            .padding(.horizontal)
-
-        Divider()
-            .padding(.vertical)
+        .navigationTitle(String(localized: "Insulin Type", comment: "Title for insulin type"))
     }
 }
 

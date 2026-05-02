@@ -27,8 +27,7 @@ class PeripheralManager: NSObject {
     private let WRITE_CHAR_UUID = CBUUID(string: "FFF2")
     private var writeCharacteristic: CBCharacteristic?
 
-    private var writeQueue: NSCondition?
-    private var writeTimeoutTask: Task<Void, Never>?
+    private var writeQueue: DanaKitDispatchGroup?
     private var writeResponse: (any DanaParsePacketProtocol)?
 
     private var historyLog: [HistoryItem] = []
@@ -54,10 +53,8 @@ class PeripheralManager: NSObject {
     }
 
     deinit {
-        self.writeTimeoutTask?.cancel()
-
         if let semaphore = self.writeQueue {
-            semaphore.signal()
+            semaphore.leave()
         }
     }
 
@@ -71,32 +68,10 @@ class PeripheralManager: NSObject {
             type: .send
         )
 
-        let writeQ = NSCondition()
+        let writeQ = DanaKitDispatchGroup()
+        writeQ.enter()
         writeQueue = writeQ
-        write(packet)
-
-        writeQ.lock()
-        defer { writeQ.unlock() }
-
-        log.info("Waiting for response...")
-        // Wait for response or timeout timer...
-        writeQ.wait()
-
-        log.info("Waiting done!")
-
-        writeTimeoutTask?.cancel()
-        writeTimeoutTask = nil
-        writeQueue = nil
-
-        guard let response = writeResponse else {
-            throw NSError(domain: "Timeout has been hit...", code: 0, userInfo: nil)
-        }
-
-        writeResponse = nil
-        return response
-    }
-
-    private func write(_ packet: DanaGeneratePacket) {
+        
         let command = (UInt16(packet.type ?? DanaPacketType.TYPE_RESPONSE) << 8) + UInt16(packet.opCode)
 
         // Make sure we have the correct state
@@ -107,48 +82,35 @@ class PeripheralManager: NSObject {
         }
 
         var data = DanaKitEncryption.encodePacket(operationCode: packet.opCode, buffer: packet.data, deviceName: deviceName)
-        log
-            .debug(
-                "Sending opCode: \(packet.opCode), encrypted data: \(data.hexString()), randomSyncKey: \(DanaKitEncryption.randomSyncKey)"
-            )
+        log.debug("Sending opCode: \(packet.opCode), encrypted data: \(data.hexString())")
 
         if DanaKitEncryption.enhancedEncryption != EncryptionType.DEFAULT.rawValue {
             data = DanaKitEncryption.encodeSecondLevel(data: data)
             log.debug("Second level encrypted data: \(data.hexString())")
         }
-
-        // Now schedule a 6 sec timeout (or 21 when in fetchHistoryMode) for the pump to send its message back
-        // This timeout will be cancelled by `processMessage` once it received the message
-        // If this timeout expired, disconnect from the pump and prompt an error...
+        
         let isHistoryPacket = self.isHistoryPacket(opCode: command)
+        let timeout = !isHistoryPacket ? TimeInterval.seconds(4) : TimeInterval.seconds(21)
+
         while !data.isEmpty {
             let end = min(20, data.count)
             let message = data.subdata(in: 0 ..< end)
 
-            writeQ(message)
+            writeValue(message)
             data = data.subdata(in: end ..< data.count)
         }
 
-        writeTimeoutTask = Task {
-            do {
-                try await Task.sleep(nanoseconds: UInt64(!isHistoryPacket ? .seconds(4) : .seconds(21)) * 1_000_000_000)
-                guard let semaphore = self.writeQueue else {
-                    // We did what we must, so exist and be happy :)
-                    return
-                }
+        // Wait for response or timeout timer...
+        let _ = writeQ.wait(timeout: .now() + timeout)
 
-                self.log.error("Timeout has been hit...")
-                semaphore.signal()
+        writeQueue = nil
 
-                // We hit a timeout
-                // This means the pump received the message but could decrypt it
-                // We need to reconnect in order to fix the encryption keys
-                self.bluetoothManager.manager.cancelPeripheralConnection(self.connectedDevice)
-                self.writeTimeoutTask = nil
-            } catch {
-                // Task was cancelled because message has been received
-            }
+        guard let response = writeResponse else {
+            throw NSError(domain: "Timeout has been hit...", code: 0, userInfo: nil)
         }
+
+        writeResponse = nil
+        return response
     }
 
     private func connectionFailure(_ error: any Error) {
@@ -230,7 +192,7 @@ extension PeripheralManager: CBPeripheralDelegate {
         parseReceivedValue(data)
     }
 
-    private func writeQ(_ data: Data) {
+    private func writeValue(_ data: Data) {
         guard let writeCharacteristic = writeCharacteristic else {
             log.error("No write characteristic available. Device might be disconnected...")
             return
@@ -252,7 +214,7 @@ extension PeripheralManager {
         )
 
         log.debug("Sending Initial encryption request. Data: \(data.hexString())")
-        writeQ(data)
+        writeValue(data)
     }
 
     private func sendTimeInfo() {
@@ -263,7 +225,7 @@ extension PeripheralManager {
         )
 
         log.debug("Sending normal time information. Data: \(data.hexString())")
-        writeQ(data)
+        writeValue(data)
     }
 
     private func sendV3PairingInformation(_ requestNewPairing: UInt8) {
@@ -274,7 +236,7 @@ extension PeripheralManager {
         )
 
         log.debug("Sending RSv3 time information. Data: \(data.hexString())")
-        writeQ(data)
+        writeValue(data)
     }
 
     // 0x00 Start encryption, 0x01 Request pairing
@@ -307,7 +269,7 @@ extension PeripheralManager {
         )
 
         log.debug("Sending pairing request. Data: \(data.hexString())")
-        writeQ(data)
+        writeValue(data)
     }
 
     private func sendEasyMenuCheck() {
@@ -318,7 +280,7 @@ extension PeripheralManager {
         )
 
         log.debug("Sending easy menu check. Data: \(data.hexString())")
-        writeQ(data)
+        writeValue(data)
     }
 
     private func sendBLE5PairingInformation() {
@@ -329,7 +291,7 @@ extension PeripheralManager {
         )
 
         log.debug("Sending BLE5 time information. Data: \(Data([0, 0, 0, 0]).hexString())")
-        writeQ(data)
+        writeValue(data)
     }
 
     private func sendPassKeyCheck(_ pairingKey: Data) {
@@ -340,7 +302,7 @@ extension PeripheralManager {
         )
 
         log.debug("Sending Passkey check. Data: \(data.hexString())")
-        writeQ(data)
+        writeValue(data)
     }
 
     /// Used after entering PIN codes (only for DanaRS v3)
@@ -694,7 +656,7 @@ extension PeripheralManager {
                 )
 
                 historyLog = []
-                semaphore.signal()
+                semaphore.leave()
             } else {
                 historyLog.append(data)
             }
@@ -703,7 +665,7 @@ extension PeripheralManager {
         }
 
         writeResponse = message
-        semaphore.signal()
+        semaphore.leave()
     }
 
     private func isHistoryPacket(opCode: UInt16) -> Bool {

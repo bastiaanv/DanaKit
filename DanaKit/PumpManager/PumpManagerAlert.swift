@@ -21,50 +21,50 @@ public enum PumpManagerAlert: Hashable, Codable {
     var contentTitle: String {
         switch self {
         case .batteryZeroPercent:
-            return LocalizedString("Pump battery 0%", comment: "Alert title for batteryZeroPercent")
+            return String(localized: "Pump battery 0%", comment: "Alert title for batteryZeroPercent")
         case .pumpError:
-            return LocalizedString("Pump error", comment: "Alert title for pumpError")
+            return String(localized: "Pump error", comment: "Alert title for pumpError")
         case .occlusion:
-            return LocalizedString("Occlusion", comment: "Alert title for occlusion")
+            return String(localized: "Occlusion", comment: "Alert title for occlusion")
         case .lowBattery:
-            return LocalizedString("Low pump battery", comment: "Alert title for lowBattery")
+            return String(localized: "Low pump battery", comment: "Alert title for lowBattery")
         case .shutdown:
-            return LocalizedString("Pump shutdown", comment: "Alert title for shutdown")
+            return String(localized: "Pump shutdown", comment: "Alert title for shutdown")
         case .basalCompare:
-            return LocalizedString("Basal Compare", comment: "Alert title for basalCompare")
+            return String(localized: "Basal Compare", comment: "Alert title for basalCompare")
         case .bloodSugarMeasure:
-            return LocalizedString("Blood glucose Measure", comment: "Alert title for bloodSugarMeasure")
+            return String(localized: "Blood glucose Measure", comment: "Alert title for bloodSugarMeasure")
         case .remainingInsulinLevel:
-            return LocalizedString("Remaining insulin level", comment: "Alert title for remainingInsulinLevel")
+            return String(localized: "Remaining insulin level", comment: "Alert title for remainingInsulinLevel")
         case .emptyReservoir:
-            return LocalizedString("Empty reservoir", comment: "Alert title for emptyReservoir")
+            return String(localized: "Empty reservoir", comment: "Alert title for emptyReservoir")
         case .checkShaft:
-            return LocalizedString("Check chaft", comment: "Alert title for checkShaft")
+            return String(localized: "Check chaft", comment: "Alert title for checkShaft")
         case .basalMax:
-            return LocalizedString("Basal limit reached", comment: "Alert title for basalMax")
+            return String(localized: "Basal limit reached", comment: "Alert title for basalMax")
         case .dailyMax:
-            return LocalizedString("Daily limit reached", comment: "Alert title for dailyMax")
+            return String(localized: "Daily limit reached", comment: "Alert title for dailyMax")
         case .bloodSugarCheckMiss:
-            return LocalizedString("Missed Blood glucose check", comment: "Alert title for bloodSugarCheckMiss")
+            return String(localized: "Missed Blood glucose check", comment: "Alert title for bloodSugarCheckMiss")
         case .ble5InvalidKeys:
-            return LocalizedString("ERROR: Failed to pair device", comment: "Dana-i invalid ble5 keys")
+            return String(localized: "ERROR: Failed to pair device", comment: "Dana-i invalid ble5 keys")
         case .unknown:
-            return LocalizedString("Unknown error", comment: "Alert title for unknown")
+            return String(localized: "Unknown error", comment: "Alert title for unknown")
         }
     }
 
     var contentBody: String {
         switch self {
         case .batteryZeroPercent:
-            return LocalizedString("Battery is empty. Replace it now!", comment: "Alert body for batteryZeroPercent")
+            return String(localized: "Battery is empty. Replace it now!", comment: "Alert body for batteryZeroPercent")
         case .pumpError:
-            return LocalizedString("Check the pump and try again", comment: "Alert body for pumpError")
+            return String(localized: "Check the pump and try again", comment: "Alert body for pumpError")
         case .occlusion:
-            return LocalizedString("Check the reservoir and infus and try again", comment: "Alert body for occlusion")
+            return String(localized: "Check the reservoir and infus and try again", comment: "Alert body for occlusion")
         case .lowBattery:
-            return LocalizedString("Pump battery needs to be replaced soon", comment: "Alert body for lowBattery")
+            return String(localized: "Pump battery needs to be replaced soon", comment: "Alert body for lowBattery")
         case .shutdown:
-            return LocalizedString(
+            return String(localized: 
                 "There has not been any interactions with the pump for too long. Either disable this function in the pump or interact with the pump",
                 comment: "Alert body for shutdown"
             )
@@ -75,34 +75,34 @@ public enum PumpManagerAlert: Hashable, Codable {
         case .remainingInsulinLevel:
             return ""
         case .emptyReservoir:
-            return LocalizedString("Reservoir is empty. Replace it now!", comment: "Alert body for emptyReservoir")
+            return String(localized: "Reservoir is empty. Replace it now!", comment: "Alert body for emptyReservoir")
         case .checkShaft:
-            return LocalizedString(
+            return String(localized: 
                 "The pump has detected an issue with its chaft. Please remove the reservoir, check everything and try again",
                 comment: "Alert body for checkShaft"
             )
         case .basalMax:
-            return LocalizedString(
+            return String(localized: 
                 "Your daily basal limit has been reached. Please contact your Dana distributer to increase the limit",
                 comment: "Alert body for basalMax"
             )
         case .dailyMax:
-            return LocalizedString(
+            return String(localized: 
                 "Your daily insulin limit has been reached. Please contact your Dana distributer to increase the limit",
                 comment: "Alert body for dailyMax"
             )
         case .bloodSugarCheckMiss:
-            return LocalizedString(
+            return String(localized: 
                 "A blood glucose check reminder has been setup in your pump and is triggered. Please remove it or give your glucose level to the pump",
                 comment: "Alert body for bloodSugarCheckMiss"
             )
         case let .ble5InvalidKeys(deviceName):
-            return LocalizedString("Failed to pair to ", comment: "Dana-i failed to pair p1") + deviceName + LocalizedString(
+            return String(localized: "Failed to pair to ", comment: "Dana-i failed to pair p1") + deviceName + String(localized: 
                 ". Please go to your bluetooth settings, forget this device, and try again",
                 comment: "Dana-i failed to pair p2"
             )
         case .unknown:
-            return LocalizedString(
+            return String(localized: 
                 "An unknown error has occurred during processing the alert from the pump. Please report this",
                 comment: "Alert body for unknown"
             )
@@ -215,7 +215,7 @@ public enum PumpManagerAlert: Hashable, Codable {
     }
 
     var actionButtonLabel: String {
-        LocalizedString("Okay", comment: "Ok")
+        String(localized: "Okay", comment: "Ok")
     }
 
     var foregroundContent: Alert.Content {
