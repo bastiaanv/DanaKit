@@ -686,8 +686,9 @@
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				en,
 				ar,
-				zh-Hans,
+				"zh-Hans",
 				cs,
 				da,
 				nl,
@@ -701,7 +702,7 @@
 				ja,
 				nb,
 				pl,
-				pt-BR,
+				"pt-BR",
 				ro,
 				ru,
 				sk,
@@ -709,7 +710,7 @@
 				sv,
 				tr,
 				uk,
-				vi
+				vi,
 			);
 			mainGroup = 84752E7826ED0FFE009FD801;
 			packageReferences = (
