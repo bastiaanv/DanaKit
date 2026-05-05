@@ -71,7 +71,7 @@ class PeripheralManager: NSObject {
         let writeQ = DanaKitDispatchGroup()
         writeQ.enter()
         writeQueue = writeQ
-        
+
         let command = (UInt16(packet.type ?? DanaPacketType.TYPE_RESPONSE) << 8) + UInt16(packet.opCode)
 
         // Make sure we have the correct state
@@ -88,7 +88,7 @@ class PeripheralManager: NSObject {
             data = DanaKitEncryption.encodeSecondLevel(data: data)
             log.debug("Second level encrypted data: \(data.hexString())")
         }
-        
+
         let isHistoryPacket = self.isHistoryPacket(opCode: command)
         let timeout = !isHistoryPacket ? TimeInterval.seconds(4) : TimeInterval.seconds(21)
 
@@ -101,7 +101,7 @@ class PeripheralManager: NSObject {
         }
 
         // Wait for response or timeout timer...
-        let _ = writeQ.wait(timeout: .now() + timeout)
+        _ = writeQ.wait(timeout: .now() + timeout)
 
         writeQueue = nil
 

@@ -12,7 +12,7 @@ struct DanaKitSetupCompleteView: View {
             VStack(alignment: .leading) {
                 Text(
                     String(localized: "Your ", comment: "Dana setup complete p1") + friendlyPumpModelName +
-                    String(localized: " is ready to be used!", comment: "Dana setup complete p2")
+                        String(localized: " is ready to be used!", comment: "Dana setup complete p2")
                 )
 
                 HStack {

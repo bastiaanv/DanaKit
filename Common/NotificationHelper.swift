@@ -13,7 +13,8 @@ public enum NotificationHelper {
         ensureCanSendNotification {
             let content = UNMutableNotificationContent()
             content.title = String(localized: "Pump is still disconnected", comment: "Title disconnect reminder notification")
-            content.body = String(localized:
+            content.body = String(
+                localized:
                 "Your pump is still disconnected after the set period!",
                 comment: "Body disconnect reminder notification"
             )
@@ -32,7 +33,8 @@ public enum NotificationHelper {
         ensureCanSendNotification {
             let content = UNMutableNotificationContent()
             content.title = String(localized: "Pump is disconnected", comment: "Title disconnect warning notification")
-            content.body = String(localized: 
+            content.body = String(
+                localized:
                 "Your pump is disconnected longer than 5 minutes!",
                 comment: "Body disconnect warning notification"
             )

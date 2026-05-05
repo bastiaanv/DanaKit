@@ -12,7 +12,10 @@ struct DanaKitSetupView: View {
     var body: some View {
         VStack(alignment: .leading) {
             List {
-                Section(header: SectionHeader(label: String(localized: "Choose your Dana pump", comment: "Onboarding subheader"))) {
+                Section(header: SectionHeader(label: String(
+                    localized: "Choose your Dana pump",
+                    comment: "Onboarding subheader"
+                ))) {
                     CheckmarkListItem(
                         title: Text("Dana-i", comment: "dana-i option text for DanaKitSetupView"),
                         description: Text(
@@ -28,7 +31,7 @@ struct DanaKitSetupView: View {
                             }
                         )
                     )
-                    
+
                     CheckmarkListItem(
                         title: Text("DanaRS-v3", comment: "danaRS v3 option text for DanaKitSetupView"),
                         description: Text(
@@ -46,7 +49,6 @@ struct DanaKitSetupView: View {
                     )
                 }
                 .buttonStyle(PlainButtonStyle()) // Disable row highlighting on selection
-                
             }
             .insetGroupedListStyle()
 

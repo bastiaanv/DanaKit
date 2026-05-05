@@ -13,7 +13,8 @@ struct DanaKitSettingsPumpSpeed: View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
                 List {
-                    Section(header: SectionHeader(label: String(localized:
+                    Section(header: SectionHeader(label: String(
+                        localized:
                         "Select the bolus delivery speed",
                         comment: "Dana delivery speed body"
                     ))) {
@@ -56,7 +57,7 @@ struct DanaKitSettingsPumpSpeed: View {
                     }
                 }
             }
-            
+
             Spacer()
 
             ContinueButton(action: {

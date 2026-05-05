@@ -151,19 +151,20 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
             let nextStep: () -> Void = {
                 self.pumpManagerOnboardingDelegate?.pumpManagerOnboarding(didCreatePumpManager: self.pumpManager!)
                 self.completionDelegate?.completionNotifyingDidComplete(self)
-                
+
                 if let pumpManager = self.pumpManager {
                     pumpManager.pumpDelegate.notify { delegate in
                         guard let delegate else {
                             return
                         }
-                        
+
                         let dose = DoseEntry.resume(insulinType: pumpManager.state.insulinType)
                         delegate.pumpManager(
                             pumpManager,
                             hasNewPumpEvents: [NewPumpEvent.resume(dose: dose)],
                             lastReconciliation: Date.now,
-                            replacePendingEvents: true) { _ in }
+                            replacePendingEvents: true
+                        ) { _ in }
                     }
                 }
             }

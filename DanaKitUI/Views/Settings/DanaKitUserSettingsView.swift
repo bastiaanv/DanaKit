@@ -24,7 +24,7 @@ struct DanaKitUserSettingsView: View {
             allowedOptions: [0, 1],
             formatter: { value in
                 value == 1 ? String(localized: "24h notation", comment: "24h notation") :
-                String(localized: "12h notation", comment: "12h notation") },
+                    String(localized: "12h notation", comment: "12h notation") },
             didChange: { value in viewModel.isTimeDisplay24H = value == 1 },
             title: Text("24h display", comment: "Text for 24h display"),
             description: Text("Should time be display in 12h or 24h", comment: "Description for 24h display")

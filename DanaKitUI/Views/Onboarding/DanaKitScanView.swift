@@ -10,10 +10,11 @@ struct DanaKitScanView: View {
     var body: some View {
         VStack(alignment: .leading) {
             List {
-                Section(header: SectionHeader(label: !$viewModel.isConnecting.wrappedValue ?
-                                              String(localized: "Scanning", comment: "Scanning text") :
-                                                String(localized: "Connecting", comment: "Connecting text"))) {
-                    
+                Section(header: SectionHeader(
+                    label: !$viewModel.isConnecting.wrappedValue ?
+                        String(localized: "Scanning", comment: "Scanning text") :
+                        String(localized: "Connecting", comment: "Connecting text")
+                )) {
                     ForEach($viewModel.scannedDevices) { $result in
                         Button(action: { viewModel.connect($result.wrappedValue) }) {
                             HStack {
