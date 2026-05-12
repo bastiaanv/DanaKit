@@ -272,7 +272,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ". Vă rugăm să accesați setările bluetooth, să uitați acest dispozitiv și să încercați din nou"
+            "value" : ". Vă rugăm să accesați setările Bluetooth, să uitați acest dispozitiv și să reîncercați"
           }
         },
         "ru" : {
@@ -1240,7 +1240,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notație de 12 ore"
+            "value" : "Notație 12 ore"
           }
         },
         "ru" : {
@@ -1564,7 +1564,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notație de 24 de ore"
+            "value" : "Notație 24 de ore"
           }
         },
         "ru" : {
@@ -2050,7 +2050,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "O reamintire pentru verificarea glicemiei a fost configurată în pompă și este declanșată. Vă rugăm să o eliminați sau să transmiteți nivelul glicemiei pompei."
+            "value" : "O reamintire pentru verificarea glicemiei a fost configurată în pompă și este declanșată. Vă rugăm să o eliminați sau să transmiteți nivelul glicemiei către pompă."
           }
         },
         "ru" : {
@@ -2212,7 +2212,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "O expirare a bolusului este activă. Ciclul de buclă nu poate fi finalizat până când expirarea nu este inactivă."
+            "value" : "O expirare a timpului de bolus este activă. Ciclul de buclă nu poate fi finalizat până când expirarea timpului nu devine inactivă."
           }
         },
         "ru" : {
@@ -3184,7 +3184,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Iluminare de fundal la timp"
+            "value" : "Timp iluminare de fundal"
           }
         },
         "ru" : {
@@ -4966,7 +4966,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Renunță"
+            "value" : "Anulați"
           }
         },
         "ru" : {
@@ -5128,7 +5128,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vârsta canulei"
+            "value" : "Vechimea canulei"
           }
         },
         "ru" : {
@@ -5614,7 +5614,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Veficați axul"
+            "value" : "Verificați axul"
           }
         },
         "ru" : {
@@ -6424,7 +6424,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Alegeți pompa Dana"
+            "value" : "Alegeți-vă pompa Dana"
           }
         },
         "ru" : {
@@ -8368,7 +8368,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Viteză de livrare"
+            "value" : "Viteză de administrare"
           }
         },
         "ru" : {
@@ -8578,7 +8578,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "禁用追加胰岛素同步？"
+            "value" : "禁用大剂量同步？"
           }
         }
       }
@@ -9500,7 +9500,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "În timpul procesului de asociere, dispozitivul Dana-i va afișa o solicitare de asociere, în timp ce iPhone-ul va afișa o solicitare pentru un cod de asociere. Pe pompă, selectați OK și introduceți codul de 6 cifre pe ecranul iPhone-ului. După aceea, %@ este gata să comunice cu dispozitivul Dana-i."
+            "value" : "În timpul procesului de asociere, dispozitivul Dana-i va afișa o solicitare de asociere, în timp ce iPhone va afișa o solicitare pentru un cod de asociere. Pe pompă, selectați OK și introduceți codul de 6 cifre pe ecranul iPhone-ului. După aceea, %@ este gata să comunice cu dispozitivul Dana-i."
           }
         },
         "ru" : {
@@ -9662,7 +9662,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "În timpul procesului de asociere, DanaRS v1 va afișa o solicitare de asociere, în timp ce iPhone-ul va afișa o solicitare pentru un cod de asociere. Pe pompă, selectați OK și introduceți codul pe iPhone. După aceea, Loop este gata să comunice cu DanaRS v1."
+            "value" : "În timpul procesului de asociere, DanaRS v1 va afișa o solicitare de asociere, în timp ce iPhone va afișa o solicitare pentru un cod de asociere. Pe pompă, selectați OK și introduceți codul pe iPhone. După aceea, Loop este gata să comunice cu DanaRS v1."
           }
         },
         "ru" : {
@@ -9824,7 +9824,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "În timpul procesului de asociere, DanaRS v3 va afișa o solicitare de asociere, în timp ce iPhone-ul va afișa o solicitare pentru un cod de asociere. Pe pompă, selectați OK și introduceți codul pe iPhone. După aceea, Loop este gata să comunice cu DanaRS v1."
+            "value" : "În timpul procesului de asociere, DanaRS v3 va afișa o solicitare de asociere, în timp ce iPhone va afișa o solicitare pentru un cod de asociere. Pe pompă, selectați OK și introduceți codul pe iPhone. După aceea, Loop este gata să comunice cu DanaRS v1."
           }
         },
         "ru" : {
@@ -10634,7 +10634,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "EROARE: Nu s-a reușit asocierea dispozitivului"
+            "value" : "EROARE: Eșec la asocierea dispozitivului"
           }
         },
         "ru" : {
@@ -10796,7 +10796,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nu s-a putut ajusta bazala"
+            "value" : "Eșec la ajusta bazala"
           }
         },
         "ru" : {
@@ -10958,7 +10958,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nu s-a reușit setarei timpului de pe pompă"
+            "value" : "Eșec la setarea timpului de pe pompă"
           }
         },
         "ru" : {
@@ -11120,7 +11120,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nu s-a putut ajusta suspendarea"
+            "value" : "Eșec la ajusta suspendarea"
           }
         },
         "ru" : {
@@ -11282,7 +11282,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nu s-a putut ajusta valoarea bazală temporară"
+            "value" : "Eșec la ajusta valoarea bazală temporară"
           }
         },
         "ru" : {
@@ -11444,7 +11444,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nu a reușit să ajusteze temp basal. %@"
+            "value" : "Eșec la ajustarea bazalei temporare. %@"
           }
         },
         "ru" : {
@@ -11606,7 +11606,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nu s-a putut genera programul bazal Dana"
+            "value" : "Eșec la genera programul bazal Dana"
           }
         },
         "ru" : {
@@ -11768,7 +11768,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nu s-a reușit stabilirea unei conexiuni"
+            "value" : "Eșec la stabilirea unei conexiuni"
           }
         },
         "ru" : {
@@ -11930,7 +11930,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nu s-a reușit realizarea unei conexiuni:"
+            "value" : "Eșec la realizarea unei conexiuni:"
           }
         },
         "ru" : {
@@ -12092,7 +12092,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nu s-a putut asocia cu "
+            "value" : "Eșec la asocia cu "
           }
         },
         "ru" : {
@@ -12578,7 +12578,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nu s-a putut seta cantitatea din rezervor. Resincronizați datele pompei și încercați din nou."
+            "value" : "Eșec la seta cantitatea din rezervor. Resincronizați datele pompei și încercați din nou."
           }
         },
         "ru" : {
@@ -16142,7 +16142,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nu, doar deconectează-te"
+            "value" : "Nu, doar deconectați"
           }
         },
         "ru" : {
@@ -17600,7 +17600,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Împerechere"
+            "value" : "Asociere"
           }
         },
         "ru" : {
@@ -20354,7 +20354,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Am primit șiruri hexadecimale nevalide. Încercați din nou."
+            "value" : "Am primit șiruri hexazecimale nevalide. Încercați din nou."
           }
         },
         "ru" : {
@@ -22622,7 +22622,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reluarea administrării insulinei"
+            "value" : "Reluați administrarea insulinei"
           }
         },
         "ru" : {
@@ -22784,7 +22784,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Salvează"
+            "value" : "Salvați"
           }
         },
         "ru" : {
@@ -24728,7 +24728,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Setarea temp basal nu este susținută în acest moment. Durata: %lld sec"
+            "value" : "Setarea unei bazale temporare nu este acceptată în acest moment. Durata: %lld sec"
           }
         },
         "ru" : {
@@ -26670,7 +26670,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pasul 3: Amorsarea canulei"
+            "value" : "Pasul 3: Amorsați canula"
           }
         },
         "ru" : {
@@ -27156,7 +27156,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Suspendați livrarea"
+            "value" : "Suspendați administrarea"
           }
         },
         "ru" : {
@@ -27318,7 +27318,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Suspendarea administrării insulinei"
+            "value" : "Suspendați administrarea insulinei"
           }
         },
         "ru" : {
@@ -32226,7 +32226,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "欢迎光临"
+            "value" : "欢迎使用！"
           }
         }
       }
@@ -33198,7 +33198,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "是的，禁用大剂量同步。"
+            "value" : "是，禁用大剂量同步。"
           }
         }
       }
@@ -33312,7 +33312,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Da, dezactivează tonurile silențioase"
+            "value" : "Da, dezactivați tonurile silențioase"
           }
         },
         "ru" : {
@@ -33474,7 +33474,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Da, Activează tonurile silențioase"
+            "value" : "Da, Activați tonurile silențioase"
           }
         },
         "ru" : {
