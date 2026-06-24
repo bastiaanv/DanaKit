@@ -35,7 +35,7 @@ struct DanaKitScanView: View {
             }
         }
         .navigationBarHidden(false)
-        .navigationTitle(String(localized: "Pairing", comment: "Title for DanaKitScanView"))
+        .uikitNavigationTitle(String(localized: "Pairing", comment: "Title for DanaKitScanView"))
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {

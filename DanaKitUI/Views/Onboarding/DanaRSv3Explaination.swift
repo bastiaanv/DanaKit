@@ -47,7 +47,7 @@ struct DanaRSv3Explaination: View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarHidden(false)
-        .navigationTitle(String(localized: "Setting up DanaRS v3", comment: "Title for danars v3 explaination"))
+        .uikitNavigationTitle(String(localized: "Setting up DanaRS v3", comment: "Title for danars v3 explaination"))
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: self.dismiss) {

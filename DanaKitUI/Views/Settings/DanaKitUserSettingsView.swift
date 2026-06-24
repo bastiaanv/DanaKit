@@ -159,7 +159,7 @@ struct DanaKitUserSettingsView: View {
             )
         }
         .edgesIgnoringSafeArea(.bottom)
-        .navigationBarTitle(String(localized: "User options", comment: "Title for user options"))
+        .uikitNavigationTitle(String(localized: "User options", comment: "Title for user options"))
     }
 
     private func beepFormatter(value: Int) -> String {

@@ -24,6 +24,7 @@
 		B802D50A2C1F675600B92C35 /* ContinousBluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B802D5082C1F675600B92C35 /* ContinousBluetoothManager.swift */; };
 		B80C73D62B7D534300821A38 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80C73D52B7D534300821A38 /* TimeInterval.swift */; };
 		B80EC4B02B45F66E005E2A1A /* DanaKitSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80EC4AF2B45F66E005E2A1A /* DanaKitSettingsView.swift */; };
+		23EE72FA08ABD14A4E70A612 /* View+UIKitNavigationTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A5EF46C17076A73B9D04B5 /* View+UIKitNavigationTitle.swift */; };
 		B80EC4B22B45F681005E2A1A /* DanaKitSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80EC4B12B45F681005E2A1A /* DanaKitSettingsViewModel.swift */; };
 		B8179E5A2B20F2A10049EEE7 /* OSLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8179E592B20F2A10049EEE7 /* OSLog.swift */; };
 		B81C52242B30E95E00FB801D /* IdentifiableClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81C52232B30E95E00FB801D /* IdentifiableClass.swift */; };
@@ -175,6 +176,7 @@
 		B802D5082C1F675600B92C35 /* ContinousBluetoothManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContinousBluetoothManager.swift; sourceTree = "<group>"; };
 		B80C73D52B7D534300821A38 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		B80EC4AF2B45F66E005E2A1A /* DanaKitSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanaKitSettingsView.swift; sourceTree = "<group>"; };
+		63A5EF46C17076A73B9D04B5 /* View+UIKitNavigationTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+UIKitNavigationTitle.swift"; sourceTree = "<group>"; };
 		B80EC4B12B45F681005E2A1A /* DanaKitSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanaKitSettingsViewModel.swift; sourceTree = "<group>"; };
 		B8179E592B20F2A10049EEE7 /* OSLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSLog.swift; sourceTree = "<group>"; };
 		B81C52232B30E95E00FB801D /* IdentifiableClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentifiableClass.swift; sourceTree = "<group>"; };
@@ -529,6 +531,7 @@
 				B85335D92B58599300DB470A /* ReservoirView.swift */,
 				B8F4DCA32B94C06100AB00E6 /* Image.swift */,
 				B8F4DCAD2B94CF8100AB00E6 /* ContinueButton.swift */,
+				63A5EF46C17076A73B9D04B5 /* View+UIKitNavigationTitle.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -862,6 +865,7 @@
 				B864F7A22B49EF3800C503A2 /* DanaKitSetupCompleteView.swift in Sources */,
 				B8360A9D2B2646A100152188 /* DanaGeneralAvgBolus.swift in Sources */,
 				B8F4DCA42B94C06100AB00E6 /* Image.swift in Sources */,
+				23EE72FA08ABD14A4E70A612 /* View+UIKitNavigationTitle.swift in Sources */,
 				B80EC4B02B45F66E005E2A1A /* DanaKitSettingsView.swift in Sources */,
 				B8360AD32B2A348100152188 /* DanaHistorySuspend.swift in Sources */,
 				B8360AAF2B2A298200152188 /* DanaGeneralGetUserOption.swift in Sources */,

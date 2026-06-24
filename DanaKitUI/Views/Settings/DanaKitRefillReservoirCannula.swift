@@ -181,7 +181,7 @@ struct DanaKitRefillReservoirAndCannulaView: View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarHidden(false)
-        .navigationBarTitle(String(
+        .uikitNavigationTitle(String(
             localized:
             viewModel.cannulaOnly ? "Cannula refill" : "Reservoir/cannula refill",
             comment: "Title for reservoir/cannula refill"
