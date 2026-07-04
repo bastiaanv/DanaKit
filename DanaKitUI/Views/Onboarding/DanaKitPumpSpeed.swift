@@ -69,7 +69,6 @@ struct DanaKitPumpSpeed: View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarHidden(false)
-        .navigationTitle(String(localized: "Delivery speed", comment: "Title for delivery speed"))
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: self.dismiss) {

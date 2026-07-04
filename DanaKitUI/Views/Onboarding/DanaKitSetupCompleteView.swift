@@ -8,7 +8,6 @@ struct DanaKitSetupCompleteView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            title
             VStack(alignment: .leading) {
                 Text(
                     String(localized: "Your ", comment: "Dana setup complete p1") + friendlyPumpModelName +
@@ -40,15 +39,5 @@ struct DanaKitSetupCompleteView: View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarHidden(false)
-    }
-
-    @ViewBuilder private var title: some View {
-        Text("Setup Complete", comment: "Title for setup complete")
-            .font(.title)
-            .bold()
-            .padding(.horizontal)
-
-        Divider()
-            .padding(.bottom)
     }
 }

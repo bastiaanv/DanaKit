@@ -45,7 +45,6 @@ struct DanaIExplainationView: View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarHidden(false)
-        .navigationTitle(String(localized: "Setting up Dana-i", comment: "Title for dana-i explaination"))
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: self.dismiss) {

@@ -102,25 +102,41 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
         }
     }
 
-    private func hostingController<Content: View>(rootView: Content) -> DismissibleHostingController<some View> {
+    private func hostingController<Content: View>(
+        rootView: Content,
+        title: String? = nil,
+        largeTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode = .automatic
+    ) -> DismissibleHostingController<some View> {
         let rootView = rootView
             .environment(\.appName, Bundle.main.bundleDisplayName)
-        return DismissibleHostingController(content: rootView, colorPalette: colorPalette)
+
+        let hostedView = DismissibleHostingController(content: rootView, colorPalette: colorPalette)
+        hostedView.navigationItem.title = title
+        hostedView.navigationItem.largeTitleDisplayMode = largeTitleDisplayMode
+
+        return hostedView
     }
 
     private func viewControllerForScreen(_ screen: DanaUIScreen) -> UIViewController {
         switch screen {
         case .firstRunScreen:
-            let view = DanaKitSetupView(
-                nextAction: goToExplaination
-            ) // self.allowDebugFeatures ? { self.navigateTo(.debugView) } : {})
-            return hostingController(rootView: view)
+            return hostingController(
+                rootView: DanaKitSetupView(nextAction: goToExplaination),
+                title: String(localized: "Welcome!", comment: "Onboarding Header")
+            )
+
         case .danarsv3Explaination:
-            let view = DanaRSv3Explaination(nextAction: stepFinished)
-            return hostingController(rootView: view)
+            return hostingController(
+                rootView: DanaRSv3Explaination(nextAction: stepFinished),
+                title: String(localized: "Setting up DanaRS v3", comment: "Title for danars v3 explaination")
+            )
+
         case .danaiExplaination:
-            let view = DanaIExplainationView(nextAction: stepFinished)
-            return hostingController(rootView: view)
+            return hostingController(
+                rootView: DanaIExplainationView(nextAction: stepFinished),
+                title: String(localized: "Setting up Dana-i", comment: "Title for dana-i explaination")
+            )
+
         case .insulinConfirmationScreen:
             let confirm: (InsulinType) -> Void = { confirmedType in
                 self.pumpManager?.state.insulinType = confirmedType
@@ -131,22 +147,33 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
                 supportedInsulinTypes: allowedInsulinTypes,
                 didConfirm: confirm
             )
-            return hostingController(rootView: view)
+            return hostingController(
+                rootView: view,
+                title: String(localized: "Insulin Type", comment: "Title for insulin type")
+            )
+
         case .bolusSpeedScreen:
             let next: (BolusSpeed) -> Void = { bolusSpeed in
                 self.pumpManager?.state.bolusSpeed = bolusSpeed
                 self.stepFinished()
             }
-            let view = DanaKitPumpSpeed(next: next)
 
-            return hostingController(rootView: view)
+            return hostingController(
+                rootView: DanaKitPumpSpeed(next: next),
+                title: String(localized: "Delivery speed", comment: "Title for delivery speed")
+            )
+
         case .deviceScanningScreen:
             pumpManager?.state.isOnBoarded = true
             pumpManager?.notifyStateDidChange()
             pumpManagerOnboardingDelegate?.pumpManagerOnboarding(didOnboardPumpManager: pumpManager!)
 
             let viewModel = DanaKitScanViewModel(pumpManager, nextStep: stepFinished)
-            return hostingController(rootView: DanaKitScanView(viewModel: viewModel))
+            return hostingController(
+                rootView: DanaKitScanView(viewModel: viewModel),
+                title: String(localized: "Pairing", comment: "Title for DanaKitScanView")
+            )
+
         case .setupComplete:
             let nextStep: () -> Void = {
                 self.pumpManagerOnboardingDelegate?.pumpManagerOnboarding(didCreatePumpManager: self.pumpManager!)
@@ -173,14 +200,22 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
                 friendlyPumpModelName: pumpManager?.state.getFriendlyDeviceName() ?? "",
                 imageName: pumpManager?.state.getDanaPumpImageName() ?? "danai"
             )
-            return hostingController(rootView: view)
+            return hostingController(
+                rootView: view,
+                title: String(localized: "Setup Complete", comment: "Title for setup complete")
+            )
+
         case .settings:
+            let viewModel = DanaKitSettingsViewModel(pumpManager, stepFinished)
             let view = DanaKitSettingsView(
-                viewModel: DanaKitSettingsViewModel(pumpManager, stepFinished),
+                viewModel: viewModel,
                 supportedInsulinTypes: allowedInsulinTypes,
                 imageName: pumpManager?.state.getDanaPumpImageName() ?? "danai"
             )
-            return hostingController(rootView: view)
+            return hostingController(
+                rootView: view,
+                title: viewModel.pumpModel
+            )
         }
     }
 
