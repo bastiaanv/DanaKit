@@ -274,7 +274,7 @@ class DanaKitSettingsViewModel: ObservableObject {
     }
 
     func reservoirText(for units: Double) -> String {
-        return reservoirVolumeFormatter.string(from: units) ?? ""
+        reservoirVolumeFormatter.string(from: units) ?? ""
     }
 
     func toggleSilentTone() {

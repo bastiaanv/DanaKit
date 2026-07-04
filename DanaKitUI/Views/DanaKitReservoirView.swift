@@ -52,7 +52,8 @@ public final class DanaKitReservoirView: LevelHUDView, NibLoadable {
             )
 
             accessibilityValue = String(
-                format: String(localized: 
+                format: String(
+                    localized:
                     "%@ units remaining at %@",
                     comment: "Accessibility format string for (1: localized volume)(2: time)"
                 ),

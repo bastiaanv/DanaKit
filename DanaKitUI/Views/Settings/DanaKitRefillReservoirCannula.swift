@@ -14,7 +14,8 @@ struct DanaKitRefillReservoirAndCannulaView: View {
     var body: some View {
         List {
             Section {
-                Text(String(localized:
+                Text(String(
+                    localized:
                     "This method of refilling is only intended for when the pump cannot provide a way to refill the reservoir or prime the cannula",
                     comment: "Label for warning refill"
                 ))
@@ -50,7 +51,8 @@ struct DanaKitRefillReservoirAndCannulaView: View {
 
                     if viewModel.failedReservoirAmount {
                         Label(
-                            String(localized:
+                            String(
+                                localized:
                                 "Failed to set reservoir amount. Re-sync pump data and try again please",
                                 comment: "Label for error first step refill"
                             ),
@@ -93,7 +95,8 @@ struct DanaKitRefillReservoirAndCannulaView: View {
 
                     if viewModel.failedTubeAmount {
                         Label(
-                            String(localized:
+                            String(
+                                localized:
                                 "Failed to prime the tube. Please try again later",
                                 comment: "Label for error second step refill"
                             ),
@@ -145,7 +148,8 @@ struct DanaKitRefillReservoirAndCannulaView: View {
 
                     if viewModel.failedPrimeAmount {
                         Label(
-                            String(localized:
+                            String(
+                                localized:
                                 "Failed to prime the cannula. Please try again later",
                                 comment: "Label for error third step refill"
                             ),
@@ -177,7 +181,8 @@ struct DanaKitRefillReservoirAndCannulaView: View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarHidden(false)
-        .navigationBarTitle(String(localized:
+        .navigationBarTitle(String(
+            localized:
             viewModel.cannulaOnly ? "Cannula refill" : "Reservoir/cannula refill",
             comment: "Title for reservoir/cannula refill"
         ))

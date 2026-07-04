@@ -108,7 +108,8 @@ extension DanaKitPumpManager {
             )
         } else if state.isPumpSuspended {
             return PumpStatusHighlight(
-                localizedMessage: String(localized:
+                localizedMessage: String(
+                    localized:
                     "Insulin Suspended",
                     comment: "Status highlight that insulin delivery was suspended."
                 ),
@@ -120,7 +121,8 @@ extension DanaKitPumpManager {
             .timeIntervalSince(state.lastStatusDate) > .minutes(12)
         {
             return PumpStatusHighlight(
-                localizedMessage: String(localized: 
+                localizedMessage: String(
+                    localized:
                     "Signal Loss",
                     comment: "Status highlight when communications with the pod haven't happened recently."
                 ),

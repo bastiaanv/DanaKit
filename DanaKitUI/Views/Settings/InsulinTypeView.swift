@@ -26,7 +26,8 @@ struct InsulinTypeView: View {
     var body: some View {
         VStack(alignment: .leading) {
             List {
-                Section(header: SectionHeader(label: String(localized:
+                Section(header: SectionHeader(label: String(
+                    localized:
                     "Select the type of insulin that you will be using in this pump",
                     comment: "Title text for insulin type confirmation page"
                 ))) {

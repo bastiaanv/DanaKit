@@ -21,9 +21,8 @@ final class DanaKitDispatchGroup {
         lock.unlock()
         group.leave()
     }
-    
-    @discardableResult
-    func wait(timeout: DispatchTime) -> DispatchTimeoutResult {
-        return group.wait(timeout: timeout)
+
+    @discardableResult func wait(timeout: DispatchTime) -> DispatchTimeoutResult {
+        group.wait(timeout: timeout)
     }
 }

@@ -64,7 +64,8 @@ public enum PumpManagerAlert: Hashable, Codable {
         case .lowBattery:
             return String(localized: "Pump battery needs to be replaced soon", comment: "Alert body for lowBattery")
         case .shutdown:
-            return String(localized: 
+            return String(
+                localized:
                 "There has not been any interactions with the pump for too long. Either disable this function in the pump or interact with the pump",
                 comment: "Alert body for shutdown"
             )
@@ -77,32 +78,38 @@ public enum PumpManagerAlert: Hashable, Codable {
         case .emptyReservoir:
             return String(localized: "Reservoir is empty. Replace it now!", comment: "Alert body for emptyReservoir")
         case .checkShaft:
-            return String(localized: 
+            return String(
+                localized:
                 "The pump has detected an issue with its chaft. Please remove the reservoir, check everything and try again",
                 comment: "Alert body for checkShaft"
             )
         case .basalMax:
-            return String(localized: 
+            return String(
+                localized:
                 "Your daily basal limit has been reached. Please contact your Dana distributer to increase the limit",
                 comment: "Alert body for basalMax"
             )
         case .dailyMax:
-            return String(localized: 
+            return String(
+                localized:
                 "Your daily insulin limit has been reached. Please contact your Dana distributer to increase the limit",
                 comment: "Alert body for dailyMax"
             )
         case .bloodSugarCheckMiss:
-            return String(localized: 
+            return String(
+                localized:
                 "A blood glucose check reminder has been setup in your pump and is triggered. Please remove it or give your glucose level to the pump",
                 comment: "Alert body for bloodSugarCheckMiss"
             )
         case let .ble5InvalidKeys(deviceName):
-            return String(localized: "Failed to pair to ", comment: "Dana-i failed to pair p1") + deviceName + String(localized: 
+            return String(localized: "Failed to pair to ", comment: "Dana-i failed to pair p1") + deviceName + String(
+                localized:
                 ". Please go to your bluetooth settings, forget this device, and try again",
                 comment: "Dana-i failed to pair p2"
             )
         case .unknown:
-            return String(localized: 
+            return String(
+                localized:
                 "An unknown error has occurred during processing the alert from the pump. Please report this",
                 comment: "Alert body for unknown"
             )

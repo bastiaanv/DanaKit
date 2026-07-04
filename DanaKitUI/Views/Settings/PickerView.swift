@@ -28,7 +28,7 @@ struct PickerView: View {
                 title
                     .font(.title)
                     .bold()
-                
+
                 if let description {
                     description
                         .fixedSize(horizontal: false, vertical: true)

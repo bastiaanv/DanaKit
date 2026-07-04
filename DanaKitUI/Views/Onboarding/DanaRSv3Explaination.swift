@@ -12,7 +12,8 @@ struct DanaRSv3Explaination: View {
             List {
                 Section {
                     Text(String(
-                        format: String(localized:
+                        format: String(
+                            localized:
                             "After setting up the insulin type and bolus speed, you will see all the found Dana pumps. Select the pump you want to link with %1$@.",
                             comment: "General subtext for dana (1: appName)"
                         ),
@@ -30,7 +31,8 @@ struct DanaRSv3Explaination: View {
                     .padding(.vertical, 10)
 
                     Text(String(
-                        format: String(localized:
+                        format: String(
+                            localized:
                             "During the pairing process, your DanaRS v3 will show a pairing prompt while you iPhone will show a prompt for two pairing codes. On your pump, select OK and type the two codes on your iPhone. After that, %1$@ is ready to communicate with your DanaRS v3",
                             comment: "Subtext for danars v3 (1: appName)"
                         ),
@@ -38,7 +40,7 @@ struct DanaRSv3Explaination: View {
                     ))
                 }
             }
-            
+
             Spacer()
 
             ContinueButton(action: nextAction)
