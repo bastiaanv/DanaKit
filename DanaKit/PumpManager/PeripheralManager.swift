@@ -30,6 +30,11 @@ class PeripheralManager: NSObject {
     private var writeQueue: DanaKitDispatchGroup?
     private var writeResponse: (any DanaParsePacketProtocol)?
 
+    // Handshake state. Scoped to this connection, since a PeripheralManager is created per connection
+    private var pumpCheckSent = false
+    private var encryptionModeSet = false
+    private var isConnectionFinished = false
+
     private var historyLog: [HistoryItem] = []
 
     private var deviceName: String {
@@ -207,6 +212,13 @@ extension PeripheralManager: CBPeripheralDelegate {
 
 extension PeripheralManager {
     private func sendFirstMessageEncryption() {
+        guard !pumpCheckSent else {
+            log.warning("PUMP_CHECK has already been sent for this connection. Ignoring duplicate call")
+            return
+        }
+
+        pumpCheckSent = true
+
         let data = DanaKitEncryption.encodePacket(
             operationCode: DanaPacketType.OPCODE_ENCRYPTION__PUMP_CHECK,
             buffer: nil,
@@ -346,10 +358,18 @@ extension PeripheralManager {
     }
 
     private func processConnectResponse(_ data: Data) {
+        guard !encryptionModeSet else {
+            // The pump can answer PUMP_CHECK a second time (often with an empty payload) after the handshake moved on.
+            // Failing the connection here would tear down a session which is doing just fine
+            log.warning("Ignoring duplicate PUMP_CHECK response. Data: \(data.hexString())")
+            return
+        }
+
         if data.count == 4, isOk(data) {
             // response OK v1
             log.info("Setting encryption mode to DEFAULT")
             DanaKitEncryption.setEnhancedEncryption(EncryptionType.DEFAULT.rawValue)
+            encryptionModeSet = true
 
             pumpManager.state.ignorePassword = false
 
@@ -363,6 +383,7 @@ extension PeripheralManager {
             // response OK v3, 2nd layer encryption
             log.info("Setting encryption mode to RSv3")
             DanaKitEncryption.setEnhancedEncryption(EncryptionType.RSv3.rawValue)
+            encryptionModeSet = true
 
             pumpManager.state.ignorePassword = true
 
@@ -383,6 +404,7 @@ extension PeripheralManager {
         } else if data.count == 14, isOk(data) {
             log.info("Setting encryption mode to BLE5")
             DanaKitEncryption.setEnhancedEncryption(EncryptionType.BLE_5.rawValue)
+            encryptionModeSet = true
 
             pumpManager.state.hwModel = data[5]
             pumpManager.state.pumpProtocol = data[7]
@@ -459,6 +481,7 @@ extension PeripheralManager {
     }
 
     private func finishConnection() {
+        isConnectionFinished = true
         pumpManager.state.isConnected = true
         log.info("Connection and encryption successful!")
 
@@ -561,6 +584,12 @@ extension PeripheralManager {
 
         log.debug("Decoding successful! Data: \(decryptedData.hexString())")
         if decryptedData[0] == DanaPacketType.TYPE_ENCRYPTION_RESPONSE {
+            guard !isConnectionFinished else {
+                // The handshake is done. A late encryption packet must never be able to fail the connection
+                log.warning("Ignoring encryption packet received after connection was established. Data: \(decryptedData.hexString())")
+                return
+            }
+
             switch decryptedData[1] {
             case DanaPacketType.OPCODE_ENCRYPTION__PUMP_CHECK:
                 processConnectResponse(decryptedData)
