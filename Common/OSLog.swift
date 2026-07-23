@@ -10,10 +10,9 @@ class DanaLogger {
     }
 
     public func debug(_ msg: String, file: String = #file, _ function: String = #function, _ line: Int = #line) {
-        #if DANAKIT_DEBUG_LOGGING
-            let message = "\(file.file) - \(function)#\(line): \(msg)"
-            logger.debug("\(message, privacy: .public)")
-        #endif
+        let message = "\(file.file) - \(function)#\(line): \(msg)"
+        logger.debug("\(message, privacy: .public)")
+        writeToFile(message, .debug)
     }
 
     public func info(_ msg: String, file: String = #file, _ function: String = #function, _ line: Int = #line) {
