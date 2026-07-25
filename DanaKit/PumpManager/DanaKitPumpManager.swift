@@ -425,7 +425,11 @@ extension DanaKitPumpManager: PumpManager {
                 return
             }
 
-            let dataUserOption = userOptionResult.data as! PacketGeneralGetUserOption
+            guard let dataUserOption = userOptionResult.data as? PacketGeneralGetUserOption else {
+                log.error("Received unexpected data while fetching user options...")
+                return
+            }
+
             state.lowReservoirRate = dataUserOption.lowReservoirRate
             state.isTimeDisplay24H = dataUserOption.isTimeDisplay24H
             state.isButtonScrollOnOff = dataUserOption.isButtonScrollOnOff
@@ -1500,17 +1504,28 @@ extension DanaKitPumpManager: PumpManager {
                             return
                         }
 
+                        guard let basalData = basalResult.data as? PacketBasalGetRate,
+                              let bolusData = bolusResult.data as? PacketBolusGetStepInformation
+                        else {
+                            self.log.error("Pump sent back unexpected delivery limits")
+                            completion(.failure(
+                                PumpManagerError
+                                    .configuration(DanaKitPumpManagerError.unknown("Pump sent back unexpected delivery limits"))
+                            ))
+                            return
+                        }
+
                         self.log.info("Delivery settings received!")
                         self.logDeviceCommunication("Delivery settings received!", type: .delegateResponse)
 
                         completion(.success(DeliveryLimits(
                             maximumBasalRate: HKQuantity(
                                 unit: HKUnit.internationalUnit().unitDivided(by: .hour()),
-                                doubleValue: (basalResult.data as! PacketBasalGetRate).maxBasal
+                                doubleValue: basalData.maxBasal
                             ),
                             maximumBolus: HKQuantity(
                                 unit: .internationalUnit(),
-                                doubleValue: (bolusResult.data as! PacketBolusGetStepInformation).maxBolus
+                                doubleValue: bolusData.maxBolus
                             )
                         )))
                     } catch {
