@@ -425,7 +425,11 @@ extension DanaKitPumpManager: PumpManager {
                 return
             }
 
-            let dataUserOption = userOptionResult.data as! PacketGeneralGetUserOption
+            guard let dataUserOption = userOptionResult.data as? PacketGeneralGetUserOption else {
+                log.error("Received unexpected data while fetching user options...")
+                return
+            }
+
             state.lowReservoirRate = dataUserOption.lowReservoirRate
             state.isTimeDisplay24H = dataUserOption.isTimeDisplay24H
             state.isButtonScrollOnOff = dataUserOption.isButtonScrollOnOff
@@ -1520,17 +1524,28 @@ extension DanaKitPumpManager: PumpManager {
                             return
                         }
 
+                        guard let basalData = basalResult.data as? PacketBasalGetRate,
+                              let bolusData = bolusResult.data as? PacketBolusGetStepInformation
+                        else {
+                            self.log.error("Pump sent back unexpected delivery limits")
+                            completion(.failure(
+                                PumpManagerError
+                                    .configuration(DanaKitPumpManagerError.unknown("Pump sent back unexpected delivery limits"))
+                            ))
+                            return
+                        }
+
                         self.log.info("Delivery settings received!")
                         self.logDeviceCommunication("Delivery settings received!", type: .delegateResponse)
 
                         completion(.success(DeliveryLimits(
                             maximumBasalRate: HKQuantity(
                                 unit: HKUnit.internationalUnit().unitDivided(by: .hour()),
-                                doubleValue: (basalResult.data as! PacketBasalGetRate).maxBasal
+                                doubleValue: basalData.maxBasal
                             ),
                             maximumBolus: HKQuantity(
                                 unit: .internationalUnit(),
-                                doubleValue: (bolusResult.data as! PacketBolusGetStepInformation).maxBolus
+                                doubleValue: bolusData.maxBolus
                             )
                         )))
                     } catch {
@@ -1825,83 +1840,87 @@ public extension DanaKitPumpManager {
     }
 
     internal func notifyBolusDone(deliveredUnits: Double) {
-        log.info("Bolus completed - \(deliveredUnits)U")
-        logDeviceCommunication("Bolus completed - \(deliveredUnits)U", type: .delegateResponse)
-
-        let bolusCompletedAt = Date.now
-
-        do {
-            let resultInitialScreenInformation = try bluetooth.writeMessage(generatePacketGeneralGetInitialScreenInformation())
-            if resultInitialScreenInformation.success,
-               let data = resultInitialScreenInformation.data as? PacketGeneralGetInitialScreenInformation
-            {
-                state.reservoirLevel = data.reservoirRemainingUnits
-            }
-        } catch {}
-
-        state.lastStatusPumpDateTime = fetchPumpTime() ?? Date.now
-        state.lastStatusDate = Date.now
-        state.bolusState = .noBolus
-        notifyStateDidChange()
-
-        let work = DispatchWorkItem { [weak self] in
-            self?.disconnect()
-        }
-
-        delegateQueue.asyncAfter(deadline: .now() + 1, execute: work)
-
-        guard let doseEntry = self.doseEntry else {
-            log.error("No doseEntry available...")
-            return
-        }
-
-        doseEntry.deliveredUnits = deliveredUnits
-        let dose = doseEntry.toDoseEntry(endDate: bolusCompletedAt)
-
-        self.doseEntry = nil
-        doseReporter = nil
-
-        guard !isPriming else {
-            log.debug("PumpManager is in priming mode -> Skip reporting dose")
-            return
-        }
-
-        var events = [NewPumpEvent.bolus(dose: dose, units: deliveredUnits, date: dose.startDate)]
-        if let tempBasalEvent = getTempBasalEvent() {
-            events.append(tempBasalEvent)
-        }
-
-        pumpDelegate.notify { delegate in
-            guard let delegate = delegate else {
-                self.log.error("Dose could not be reported -> Missing delegate")
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let self else {
                 return
             }
 
-            delegate.pumpManager(
-                self,
-                didReadReservoirValue: self.state.reservoirLevel,
-                at: self.state.lastStatusDate,
-            ) { result in
-                switch result {
-                case let .failure(error):
-                    self.handlePumpDelegateError(method: "didReadReservoirValue", error)
-                case .success:
-                    break
+            self.log.info("Bolus completed - \(deliveredUnits)U")
+            self.logDeviceCommunication("Bolus completed - \(deliveredUnits)U", type: .delegateResponse)
+
+            let bolusCompletedAt = Date.now
+
+            do {
+                let resultInitialScreenInformation = try self.bluetooth.writeMessage(generatePacketGeneralGetInitialScreenInformation())
+                if resultInitialScreenInformation.success,
+                let data = resultInitialScreenInformation.data as? PacketGeneralGetInitialScreenInformation
+                {
+                    state.reservoirLevel = data.reservoirRemainingUnits
                 }
+            } catch {}
+
+            self.state.lastStatusPumpDateTime = fetchPumpTime() ?? Date.now
+            self.state.lastStatusDate = Date.now
+            self.state.bolusState = .noBolus
+            self.notifyStateDidChange()
+
+            let work = DispatchWorkItem { [weak self] in
+                self?.disconnect()
             }
-            delegate.pumpManager(
-                self,
-                hasNewPumpEvents: events,
-                lastReconciliation: self.state.lastStatusDate,
-                replacePendingEvents: true,
-            ) { error in
-                if let error = error {
-                    self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
+
+            self.delegateQueue.asyncAfter(deadline: .now() + 1, execute: work)
+
+            guard let doseEntry = self.doseEntry else {
+                log.error("No doseEntry available...")
+                return
+            }
+
+            doseEntry.deliveredUnits = deliveredUnits
+            let dose = doseEntry.toDoseEntry(endDate: bolusCompletedAt)
+
+            self.doseEntry = nil
+            self.doseReporter = nil
+
+            guard !self.isPriming else {
+                log.debug("PumpManager is in priming mode -> Skip reporting dose")
+                return
+            }
+
+            var events = [NewPumpEvent.bolus(dose: dose, units: deliveredUnits, date: dose.startDate)]
+            if let tempBasalEvent = getTempBasalEvent() {
+                events.append(tempBasalEvent)
+            }
+
+            self.pumpDelegate.notify { delegate in
+                guard let delegate = delegate else {
+                    self.log.error("Dose could not be reported -> Missing delegate")
+                    return
+                }
+
+                delegate.pumpManager(
+                    self,
+                    didReadReservoirValue: self.state.reservoirLevel,
+                    at: self.state.lastStatusDate,
+                ) { result in
+                    switch result {
+                    case let .failure(error):
+                        self.handlePumpDelegateError(method: "didReadReservoirValue", error)
+                    case .success:
+                        break
+                    }
+                }
+                delegate.pumpManager(
+                    self,
+                    hasNewPumpEvents: events,
+                    lastReconciliation: self.state.lastStatusDate,
+                    replacePendingEvents: true,
+                ) { error in
+                    if let error = error {
+                        self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
+                    }
                 }
             }
         }
-
-        notifyStateDidChange()
     }
 
     internal func checkBolusDone() {

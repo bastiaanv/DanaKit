@@ -10,7 +10,12 @@ class PeripheralManager: NSObject {
     private var completion: ((ConnectionResult) -> Void)?
 
     private var pumpManager: DanaKitPumpManager
+
+    /// Guards `readBuffer`, `readBufferUpdatedAt`, `writeQueue`, `pendingCommand` and `writeResponse`.
+    /// Those are touched from both the thread issuing the command and the bluetooth queue
+    private let stateLock = NSLock()
     private var readBuffer = Data([])
+    private var readBufferUpdatedAt: Date?
 
     private let okCharCodes: [UInt8] = [0x4F, 0x4B] // O, K
     private let pumpCharCodes: [UInt8] = [0x50, 0x55, 0x4D, 0x50] // P, U, M, P
@@ -29,6 +34,12 @@ class PeripheralManager: NSObject {
 
     private var writeQueue: DanaKitDispatchGroup?
     private var writeResponse: (any DanaParsePacketProtocol)?
+
+    /// The command we are currently awaiting a response for. The pump echos the command of the
+    /// request in its response, which allows us to recognize the response of a command which has
+    /// already timed out. Handing such a response to the next command would return a packet of a
+    /// completely different type than the caller expects
+    private var pendingCommand: UInt16?
 
     // Handshake state. Scoped to this connection, since a PeripheralManager is created per connection
     private var pumpCheckSent = false
@@ -64,20 +75,17 @@ class PeripheralManager: NSObject {
     }
 
     func writeMessage(_ packet: DanaGeneratePacket) throws -> (any DanaParsePacketProtocol) {
-        guard writeQueue == nil else {
-            throw NSError(domain: "A command is already running", code: 0, userInfo: nil)
-        }
+        let command = (UInt16(packet.type ?? DanaPacketType.TYPE_RESPONSE) << 8) + UInt16(packet.opCode)
+
+        let writeQ = DanaKitDispatchGroup()
+        writeQ.enter()
+
+        try claim(command, with: writeQ)
 
         pumpManager.logDeviceCommunication(
             "Sending data - Name: \(packet.name), Operation code: \(packet.opCode), data: \(packet.data?.hexString() ?? "nil")",
             type: .send
         )
-
-        let writeQ = DanaKitDispatchGroup()
-        writeQ.enter()
-        writeQueue = writeQ
-
-        let command = (UInt16(packet.type ?? DanaPacketType.TYPE_RESPONSE) << 8) + UInt16(packet.opCode)
 
         // Make sure we have the correct state
         if packet.opCode == CommandGeneralSetHistoryUploadMode, let data = packet.data {
@@ -108,14 +116,111 @@ class PeripheralManager: NSObject {
         // Wait for response or timeout timer...
         _ = writeQ.wait(timeout: .now() + timeout)
 
-        writeQueue = nil
-
-        guard let response = writeResponse else {
+        guard let response = release() else {
             throw NSError(domain: "Timeout has been hit...", code: 0, userInfo: nil)
         }
 
-        writeResponse = nil
         return response
+    }
+
+    /// Registers this command as the one we are awaiting a response for
+    private func claim(_ command: UInt16, with writeQ: DanaKitDispatchGroup) throws {
+        stateLock.lock()
+        defer { stateLock.unlock() }
+
+        guard writeQueue == nil else {
+            throw NSError(domain: "A command is already running", code: 0, userInfo: nil)
+        }
+
+        // Get rid of the leftovers of a command which has timed out. Without this, a half received
+        // message would block the read buffer for the remainder of this connection, since every
+        // following message would be appended to it, and the items of an aborted history upload
+        // would be reported a second time
+        discardStaleReadBuffer()
+        writeResponse = nil
+        historyLog = []
+
+        writeQueue = writeQ
+        pendingCommand = command
+    }
+
+    /// Deregisters the awaited command and returns its response, if one has been received in time
+    private func release() -> (any DanaParsePacketProtocol)? {
+        stateLock.lock()
+        defer { stateLock.unlock() }
+
+        writeQueue = nil
+        pendingCommand = nil
+
+        let response = writeResponse
+        writeResponse = nil
+
+        return response
+    }
+
+    /// The command a response is currently awaited for, if any
+    private var awaitedCommand: UInt16? {
+        stateLock.lock()
+        defer { stateLock.unlock() }
+
+        return writeQueue == nil ? nil : pendingCommand
+    }
+
+    private enum DeliveryResult {
+        /// The response has been handed over. The group has to be left
+        case delivered(DanaKitDispatchGroup)
+        /// A history item has been collected. The upload is still running
+        case collected
+        /// Nobody is awaiting this response (anymore)
+        case dropped
+    }
+
+    /// Hands the response over to the command which is awaiting it. History items are collected
+    /// until the pump signals the end of the upload
+    private func deliver(_ message: any DanaParsePacketProtocol) -> DeliveryResult {
+        stateLock.lock()
+        defer { stateLock.unlock() }
+
+        guard let semaphore = writeQueue, pendingCommand == message.command else {
+            return .dropped
+        }
+
+        if let historyItem = message.data as? HistoryItem {
+            guard historyItem.code == HistoryCode.RECORD_TYPE_DONE_UPLOAD else {
+                historyLog.append(historyItem)
+                return .collected
+            }
+
+            writeResponse = DanaParsePacket<[HistoryItem]>(
+                success: true,
+                rawData: Data([]),
+                data: historyLog.map({ $0 })
+            )
+
+            historyLog = []
+            return .delivered(semaphore)
+        }
+
+        writeResponse = message
+        return .delivered(semaphore)
+    }
+
+    /// Drops a partially received message which nobody is waiting for anymore.
+    /// Must be called while holding `stateLock`
+    private func discardStaleReadBuffer() {
+        guard !readBuffer.isEmpty else {
+            return
+        }
+
+        // The chunks of a single message arrive within milliseconds of each other. Anything older
+        // belongs to a command which has been given up on
+        if let updatedAt = readBufferUpdatedAt, Date.now.timeIntervalSince(updatedAt) < .seconds(2) {
+            return
+        }
+
+        log.warning("Discarding \(readBuffer.count) bytes of a message which was never completed")
+        readBuffer = Data([])
+        readBufferUpdatedAt = nil
     }
 
     private func connectionFailure(_ error: any Error) {
@@ -530,52 +635,19 @@ extension PeripheralManager {
             data = DanaKitEncryption.decodeSecondLevel(data: data)
         }
 
-        readBuffer.append(data)
-        guard readBuffer.count >= 6 else {
-            // Buffer is not ready to be processed
+        let rawMessage: Data
+        switch appendToReadBuffer(data) {
+        case .incomplete:
             return
-        }
-
-        if
-            !(readBuffer[0] == PACKET_START_BYTE || readBuffer[0] == ENCRYPTED_START_BYTE) ||
-            !(readBuffer[1] == PACKET_START_BYTE || readBuffer[1] == ENCRYPTED_START_BYTE)
-        {
-            // The buffer does not start with the opening bytes. Check if the buffer is filled with old data
-            if let indexStartByte = readBuffer.firstIndex(of: PACKET_START_BYTE) {
-                readBuffer = readBuffer.subdata(in: indexStartByte ..< readBuffer.count)
-            } else if let indexEncryptedStartByte = readBuffer.firstIndex(of: ENCRYPTED_START_BYTE) {
-                readBuffer = readBuffer.subdata(in: indexEncryptedStartByte ..< readBuffer.count)
-            } else {
-                log
-                    .error(
-                        "Received invalid packets. Starting bytes do not exists in message. Encryption mode possibly wrong Data: \(readBuffer.hexString())"
-                    )
-                readBuffer = Data([])
-                bluetoothManager.manager.cancelPeripheralConnection(connectedDevice)
-                return
-            }
-        }
-
-        let length = Int(readBuffer[2])
-        guard length + 7 == readBuffer.count else {
-            // Not all packets have been received yet...
-            log.debug("Not all packets have been received yet - Should be: \(length + 7), currently: \(readBuffer.count)")
+        case .unrecoverable:
+            bluetoothManager.manager.cancelPeripheralConnection(connectedDevice)
             return
+        case let .message(message):
+            rawMessage = message
         }
 
-        guard
-            (readBuffer[length + 5] == PACKET_END_BYTE || readBuffer[length + 5] == ENCRYPTED_END_BYTE) &&
-            (readBuffer[length + 6] == PACKET_END_BYTE || readBuffer[length + 6] == ENCRYPTED_END_BYTE)
-        else {
-            // Invalid packets received...
-            log.error("Received invalid packets. Ending bytes do not match. Data: \(readBuffer.hexString())")
-            readBuffer = Data([])
-            return
-        }
-
-        log.debug("Received message! Starting to decrypt data: \(readBuffer.hexString())")
-        let decryptedData = DanaKitEncryption.decodePacket(buffer: readBuffer, deviceName: deviceName)
-        readBuffer = Data([])
+        log.debug("Received message! Starting to decrypt data: \(rawMessage.hexString())")
+        let decryptedData = DanaKitEncryption.decodePacket(buffer: rawMessage, deviceName: deviceName)
 
         guard !decryptedData.isEmpty else {
             log.error("Decryption failed...")
@@ -634,6 +706,87 @@ extension PeripheralManager {
         processMessage(decryptedData)
     }
 
+    private enum ReadBufferResult {
+        /// The message is still being assembled
+        case incomplete
+        /// A complete raw message, ready to be decrypted
+        case message(Data)
+        /// The received data cannot be interpreted at all. The connection should be dropped
+        case unrecoverable
+    }
+
+    /// Adds the received chunk to the read buffer and hands back the raw message once it is complete
+    private func appendToReadBuffer(_ data: Data) -> ReadBufferResult {
+        stateLock.lock()
+        defer { stateLock.unlock() }
+
+        readBuffer.append(data)
+        readBufferUpdatedAt = Date.now
+
+        guard readBuffer.count >= 6 else {
+            // Buffer is not ready to be processed
+            return .incomplete
+        }
+
+        if
+            !(readBuffer[0] == PACKET_START_BYTE || readBuffer[0] == ENCRYPTED_START_BYTE) ||
+            !(readBuffer[1] == PACKET_START_BYTE || readBuffer[1] == ENCRYPTED_START_BYTE)
+        {
+            // The buffer does not start with the opening bytes. Check if the buffer is filled with old data
+            if let indexStartByte = readBuffer.firstIndex(of: PACKET_START_BYTE) {
+                readBuffer = readBuffer.subdata(in: indexStartByte ..< readBuffer.count)
+            } else if let indexEncryptedStartByte = readBuffer.firstIndex(of: ENCRYPTED_START_BYTE) {
+                readBuffer = readBuffer.subdata(in: indexEncryptedStartByte ..< readBuffer.count)
+            } else {
+                log
+                    .error(
+                        "Received invalid packets. Starting bytes do not exists in message. Encryption mode possibly wrong Data: \(readBuffer.hexString())"
+                    )
+                clearReadBuffer()
+                return .unrecoverable
+            }
+        }
+
+        let length = Int(readBuffer[2])
+        guard length + 7 == readBuffer.count else {
+            guard readBuffer.count < length + 7 else {
+                // The buffer can never complete anymore. Get rid of it, otherwise every following
+                // message would be appended to it and this connection would never receive anything again
+                log
+                    .error(
+                        "Read buffer got out of sync. Should be: \(length + 7), currently: \(readBuffer.count). Data: \(readBuffer.hexString())"
+                    )
+                clearReadBuffer()
+                return .incomplete
+            }
+
+            // Not all packets have been received yet...
+            log.debug("Not all packets have been received yet - Should be: \(length + 7), currently: \(readBuffer.count)")
+            return .incomplete
+        }
+
+        guard
+            (readBuffer[length + 5] == PACKET_END_BYTE || readBuffer[length + 5] == ENCRYPTED_END_BYTE) &&
+            (readBuffer[length + 6] == PACKET_END_BYTE || readBuffer[length + 6] == ENCRYPTED_END_BYTE)
+        else {
+            // Invalid packets received...
+            log.error("Received invalid packets. Ending bytes do not match. Data: \(readBuffer.hexString())")
+            clearReadBuffer()
+            return .incomplete
+        }
+
+        let rawMessage = readBuffer
+        clearReadBuffer()
+
+        return .message(rawMessage)
+    }
+
+    /// Must be called while holding `stateLock`
+    private func clearReadBuffer() {
+        readBuffer = Data([])
+        readBufferUpdatedAt = nil
+    }
+
     private func processMessage(_ data: Data) {
         let message = parseMessage(data: data, usingUtc: pumpManager.state.usingUtc)
         guard let message = message else {
@@ -649,52 +802,56 @@ extension PeripheralManager {
             )
         } catch {}
 
-        if message.notifyType != nil {
-            switch message.notifyType {
+        if let notifyType = message.notifyType {
+            switch notifyType {
             case CommandNotifyDeliveryComplete:
-                let data = message.data as! PacketNotifyDeliveryComplete
-                pumpManager.notifyBolusDone(deliveredUnits: data.deliveredInsulin)
-                return
+                if let data = message.data as? PacketNotifyDeliveryComplete {
+                    pumpManager.notifyBolusDone(deliveredUnits: data.deliveredInsulin)
+                    return
+                }
             case CommandNotifyDeliveryRateDisplay:
-                let data = message.data as! PacketNotifyDeliveryRateDisplay
-                pumpManager.notifyBolusDidUpdate(deliveredUnits: data.deliveredInsulin)
-                return
+                if let data = message.data as? PacketNotifyDeliveryRateDisplay {
+                    pumpManager.notifyBolusDidUpdate(deliveredUnits: data.deliveredInsulin)
+                    return
+                }
             case CommandNotifyAlarm:
-                let data = message.data as! PacketNotifyAlarm
-                pumpManager.notifyBolusError()
-                pumpManager.notifyAlert(data.alert)
-                return
+                if let data = message.data as? PacketNotifyAlarm {
+                    pumpManager.notifyBolusError()
+                    pumpManager.notifyAlert(data.alert)
+                    return
+                }
             default:
-                pumpManager.notifyBolusError()
-                return
+                break
             }
+
+            pumpManager.notifyBolusError()
+            return
         }
 
         // Message received and dequeueing timeout
-        guard let semaphore = writeQueue else {
+        guard let awaitedCommand = awaitedCommand else {
             log.error("No stream found to send this message back...")
             return
         }
 
-        if let data = message.data as? HistoryItem {
-            if data.code == HistoryCode.RECORD_TYPE_DONE_UPLOAD {
-                writeResponse = DanaParsePacket<[HistoryItem]>(
-                    success: true,
-                    rawData: Data([]),
-                    data: historyLog.map({ $0 })
+        // A response which arrives after its command has timed out must never be handed to the
+        // command which is running now: that one is expecting a completely different packet
+        guard message.command == awaitedCommand else {
+            log
+                .warning(
+                    "Ignoring response of command \(message.command ?? 0) while awaiting command \(awaitedCommand). It is most likely the late response of a command which has timed out"
                 )
-
-                historyLog = []
-                semaphore.leave()
-            } else {
-                historyLog.append(data)
-            }
-
             return
         }
 
-        writeResponse = message
-        semaphore.leave()
+        switch deliver(message) {
+        case let .delivered(semaphore):
+            semaphore.leave()
+        case .collected:
+            break
+        case .dropped:
+            log.warning("Command \(awaitedCommand) is not awaiting a response anymore. Dropping it...")
+        }
     }
 
     private func isHistoryPacket(opCode: UInt16) -> Bool {
