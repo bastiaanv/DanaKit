@@ -1188,6 +1188,26 @@ extension DanaKitPumpManager: PumpManager {
                 switch result {
                 case .success:
                     do {
+                        if self.state.isTempBasalInProgress {
+                            let packet = generatePacketBasalCancelTemporary()
+                            let result = try self.bluetooth.writeMessage(packet)
+
+                            guard result.success else {
+                                self.disconnect()
+                                self.log.error("Could not cancel old temp basal")
+                                completion(
+                                    PumpManagerError
+                                        .configuration(
+                                            DanaKitPumpManagerError
+                                                .failedTempBasalAdjustment("Could not cancel old temp basal")
+                                        )
+                                )
+                                return
+                            }
+
+                            self.log.info("Successfully canceled old temp basal")
+                        }
+                        
                         let packet = generatePacketBasalSetSuspendOn()
                         let result = try self.bluetooth.writeMessage(packet)
 
