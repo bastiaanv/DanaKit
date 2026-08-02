@@ -46,7 +46,7 @@ struct DanaKitUserSettingsView: View {
         PickerView(
             value: Int(viewModel.backlightOnTimeInSec),
             allowedOptions: Array(0 ... 48).map({ $0 * 5 }),
-            formatter: { value in "\(value) \(String(localized: "sec", comment: "text for second"))" },
+            formatter: { value in String(format: String(localized: "%d sec", comment: "second placeholder"), value) },
             didChange: { value in viewModel.backlightOnTimeInSec = UInt8(value) },
             title: Text("Backlight on time", comment: "backlightOnTime")
         )
@@ -56,7 +56,7 @@ struct DanaKitUserSettingsView: View {
         PickerView(
             value: Int(viewModel.lcdOnTimeInSec),
             allowedOptions: Array(0 ... 48).map({ $0 * 5 }),
-            formatter: { value in "\(value) \(String(localized: "sec", comment: "text for second"))" },
+            formatter: { value in String(format: String(localized: "%d sec", comment: "second placeholder"), value) },
             didChange: { value in viewModel.lcdOnTimeInSec = UInt8(value) },
             title: Text("Lcd on time", comment: "lcdOnTime")
         )
@@ -122,7 +122,9 @@ struct DanaKitUserSettingsView: View {
                         Text("Backlight on time", comment: "backlightOnTime")
                             .foregroundColor(Color.primary)
                         Spacer()
-                        Text("\(viewModel.backlightOnTimeInSec) \(String(localized: "sec", comment: "text for second"))")
+                        Text(String(format:
+                                        String(localized: "%d sec", comment: "second placeholder"),
+                                    viewModel.backlightOnTimeInSec))
                     }
                 }
                 NavigationLink(destination: lcdOnTimeInSecView) {
@@ -130,7 +132,9 @@ struct DanaKitUserSettingsView: View {
                         Text("Lcd on time", comment: "lcdOnTime")
                             .foregroundColor(Color.primary)
                         Spacer()
-                        Text("\(viewModel.lcdOnTimeInSec) \(String(localized: "sec", comment: "text for second"))")
+                        Text(String(format:
+                                        String(localized: "%d sec", comment: "second placeholder"),
+                                    viewModel.lcdOnTimeInSec))
                     }
                 }
                 NavigationLink(destination: beepAlarmView) {
@@ -159,7 +163,6 @@ struct DanaKitUserSettingsView: View {
             )
         }
         .edgesIgnoringSafeArea(.bottom)
-        .navigationBarTitle(String(localized: "User options", comment: "Title for user options"))
     }
 
     private func beepFormatter(value: Int) -> String {

@@ -43,6 +43,10 @@ class DanaKitSettingsViewModel: ObservableObject {
     private var didFinish: (() -> Void)?
     private(set) var userOptionsView: DanaKitUserSettingsView
     private(set) var refillView: DanaKitRefillReservoirAndCannulaView
+    
+    let toUserOptions: () -> Void
+    let toBolusSpeed: () -> Void
+    let toInsulinType: () -> Void
 
     public var pumpModel: String {
         pumpManager?.state.getFriendlyDeviceName() ?? ""
@@ -88,8 +92,17 @@ class DanaKitSettingsViewModel: ObservableObject {
         return formatter
     }()
 
-    public init(_ pumpManager: DanaKitPumpManager?, _ didFinish: (() -> Void)?) {
+    public init(
+        _ pumpManager: DanaKitPumpManager?,
+        toUserOptions: @escaping () -> Void,
+        toBolusSpeed: @escaping () -> Void,
+        toInsulinType: @escaping () -> Void,
+        didFinish: (() -> Void)?
+    ) {
         self.pumpManager = pumpManager
+        self.toUserOptions = toUserOptions
+        self.toBolusSpeed = toBolusSpeed
+        self.toInsulinType = toInsulinType
         self.didFinish = didFinish
 
         userOptionsView = DanaKitUserSettingsView(viewModel: DanaKitUserSettingsViewModel(self.pumpManager))

@@ -333,39 +333,43 @@ struct DanaKitSettingsView: View {
             }
 
             Section(header: SectionHeader(label: String(
-                localized:
-                "Configuration",
+                localized: "Configuration",
                 comment: "The title of the configuration section in DanaKit settings"
             )))
                 {
-                    NavigationLink(destination: InsulinTypeView(
-                        initialValue: viewModel.insulinType,
-                        supportedInsulinTypes: supportedInsulinTypes,
-                        didConfirm: viewModel.didChangeInsulinType
-                    )) {
-                        HStack {
+                    Button(action: { viewModel.toInsulinType() }) {
+                        HStack(spacing: 5) {
                             Text("Insulin Type", comment: "Text for confidence reminders navigation link")
                                 .foregroundColor(Color.primary)
                             Spacer()
                             Text(viewModel.insulinType.brandName)
                                 .foregroundColor(.secondary)
+                            Image(systemName: "chevron.right")
+                                .font(.system(size: UIFont.systemFontSize, weight: .bold))
+                                .foregroundStyle(.secondary)
                         }
                     }
-                    NavigationLink(destination: DanaKitSettingsPumpSpeed(
-                        value: Int(viewModel.bolusSpeed.rawValue),
-                        didChange: viewModel.didBolusSpeedChanged
-                    )) {
-                        HStack {
+                    Button(action: { viewModel.toBolusSpeed() }) {
+                        HStack(spacing: 5) {
                             Text("Delivery speed", comment: "Title for delivery speed")
                                 .foregroundColor(Color.primary)
                             Spacer()
                             Text(viewModel.bolusSpeed.format())
                                 .foregroundColor(.secondary)
+                            Image(systemName: "chevron.right")
+                                .font(.system(size: UIFont.systemFontSize, weight: .bold))
+                                .foregroundStyle(.secondary)
                         }
                     }
-                    NavigationLink(destination: viewModel.userOptionsView) {
-                        Text("User options", comment: "Title for user options")
-                            .foregroundColor(Color.primary)
+                    Button(action: { viewModel.toUserOptions() }) {
+                        HStack {
+                            Text("User options", comment: "Title for user options")
+                                .foregroundColor(Color.primary)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .font(.system(size: UIFont.systemFontSize, weight: .bold))
+                                .foregroundStyle(.secondary)
+                        }
                     }
                     Button(action: {
                         viewModel.showingBlindReservoirCannulaRefill = true
@@ -633,12 +637,4 @@ struct DanaKitSettingsView: View {
 
         return guidanceColors.critical
     }
-}
-
-#Preview {
-    DanaKitSettingsView(
-        viewModel: DanaKitSettingsViewModel(nil, nil),
-        supportedInsulinTypes: InsulinType.allCases,
-        imageName: "danai"
-    )
 }

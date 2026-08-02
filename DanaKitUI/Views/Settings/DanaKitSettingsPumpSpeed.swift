@@ -69,6 +69,5 @@ struct DanaKitSettingsPumpSpeed: View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarHidden(false)
-        .navigationTitle(String(localized: "Delivery speed", comment: "Title for delivery speed"))
     }
 }
