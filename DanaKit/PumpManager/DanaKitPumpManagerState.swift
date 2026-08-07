@@ -318,7 +318,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
     public var allowAutomaticTimeSync: Bool = true
 
     /// When enabled, blocks the user from accidentally suspending insulin delivery
-    /// (e.g. while traveling). Only gates the active -> suspended transition; resuming
+    /// Only gates the active -> suspended transition; resuming
     /// a suspended pump is never blocked by this flag.
     public var travelLockEnabled: Bool = false
 
