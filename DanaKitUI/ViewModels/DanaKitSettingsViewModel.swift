@@ -68,10 +68,7 @@ class DanaKitSettingsViewModel: ObservableObject {
 
         return pumpManager.state.basalDeliveryOrdinal == .tempBasal && pumpManager.state.tempBasalEndsAt > Date.now
     }
-
-    /// True when the travel lock should block the next tap on the suspend/resume
-    /// button. Only applies to the active -> suspended transition; a pump that is
-    /// already suspended is always resumable regardless of the lock.
+    
     public var isSuspendActionLocked: Bool {
         guard let pumpManager = self.pumpManager else {
             return false
@@ -360,9 +357,6 @@ class DanaKitSettingsViewModel: ObservableObject {
             return
         }
 
-        // Travel lock only ever blocks going active -> suspended; resuming is
-        // always allowed. Guarded here (not via `.disabled()` in the view) so the
-        // card's long-press-to-unlock gesture keeps receiving touches while locked.
         if isSuspendActionLocked || isUpdatingPumpState || isSyncing {
             return
         }
