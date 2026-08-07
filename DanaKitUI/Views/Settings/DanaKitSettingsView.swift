@@ -65,12 +65,10 @@ struct DanaKitSettingsView: View {
         ActionSheet(
             title: Text("Toggle silent tone?", comment: "Title for silent tone action sheet"),
             buttons: [
-                .default(
-                    viewModel.silentTone ? Text(
-                        "Yes, Disable silent tones",
-                        comment: "Button text to disable silent tone"
-                    ) :
-                        Text("Yes, Enable silent tones", comment: "Button text to enable silent tone")
+                .default(viewModel.silentTone ? Text("Yes, Disable silent tones",
+                            comment: "Button text to disable silent tone"
+                        ) :
+                            Text("Yes, Enable silent tones", comment: "Button text to enable silent tone")
                 ) {
                     self.viewModel.toggleSilentTone()
                 },
@@ -91,18 +89,12 @@ struct DanaKitSettingsView: View {
                     "What is this?",
                     comment: "Button text to get help about Continuous mode"
                 )) {
-                    openURL(
-                        URL(
-                            string: "https://loopkit.github.io/loopdocs/troubleshooting/dana-faq/#q-help-i-frequently-encounter-signal-loss-or-orange-loops"
-                        )!
-                    )
+                    openURL(URL(string: "https://loopkit.github.io/loopdocs/troubleshooting/dana-faq/#q-help-i-frequently-encounter-signal-loss-or-orange-loops")!)
                 },
-                .default(
-                    viewModel.isUsingContinuousMode ? Text(
-                        "Yes, Switch to interactive mode",
-                        comment: "Button text to disable continuous mode"
-                    ) :
-                        Text(
+                .default(viewModel.isUsingContinuousMode ? Text("Yes, Switch to interactive mode",
+                            comment: "Button text to disable continuous mode"
+                        ) :
+                            Text(
                             "Yes, Switch to continuous mode",
                             comment: "Button text to enable continuous mode"
                         )
@@ -121,12 +113,10 @@ struct DanaKitSettingsView: View {
                 comment: "Title for bolus syncing disable action sheet"
             ) : Text("Disable bolus syncing?", comment: "Title for bolus syncing disable action sheet"),
             buttons: [
-                .default(
-                    viewModel.isBolusSyncingDisabled ? Text(
-                        "Yes, re-enable bolus syncing",
-                        comment: "Button text to re-enable bplus syncing"
-                    ) :
-                        Text(
+                .default(viewModel.isBolusSyncingDisabled ? Text("Yes, re-enable bolus syncing",
+                            comment: "Button text to re-enable bplus syncing"
+                        ) :
+                            Text(
                             "Yes, disable bolus syncing",
                             comment: "Button text to disable bolus syncing"
                         )
@@ -194,40 +184,48 @@ struct DanaKitSettingsView: View {
                             "The time on your pump is different from the current time. Your pump’s time controls your scheduled therapy settings. Scroll down to Pump Time row to review the time difference and configure your pump.",
                             comment: "description for time change detected notice"
                         )
-                        .font(Font.footnote.weight(.semibold))
+                            .font(Font.footnote.weight(.semibold))
                     }.padding(.vertical, 8)
                 }
             }
 
-            Section {
-                Button(action: {
-                    viewModel.suspendResumeButtonPressed()
-                }) {
-                    HStack {
-                        Text($viewModel.basalButtonText.wrappedValue)
-                        Spacer()
-                        if viewModel.isUpdatingPumpState {
-                            ActivityIndicator(isAnimating: .constant(true), style: .medium)
-                        }
+            Section(header: SectionHeader(label: String(localized:
+                "Manage",
+                comment: "The title of the manage section in DanaKit settings"
+            ))) {
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
+                    quickActionCard(
+                        title: $viewModel.basalButtonText.wrappedValue,
+                        systemImage: suspendResumeIconName,
+                        tint: suspendResumeIconColor,
+                        isVisuallyDisabled: viewModel.isSuspendActionLocked || viewModel.isUpdatingPumpState || viewModel.isSyncing,
+                        showSpinner: viewModel.isUpdatingPumpState
+                    ) {
+                        viewModel.suspendResumeButtonPressed()
                     }
-                }
-                .disabled(viewModel.isUpdatingPumpState || viewModel.isSyncing)
+                    .onLongPressGesture(minimumDuration: 0.5) {
+                        viewModel.toggleTravelLock()
+                    }
 
-                if viewModel.isTempBasal {
-                    Button(action: {
+                    quickActionCard(
+                        title: String(localized: "Stop temp basal", comment: "Dana settings stop temp basal"),
+                        systemImage: "xmark.circle.fill",
+                        tint: viewModel.isTempBasal ? Color.accentColor : Color.secondary,
+                        isVisuallyDisabled: !viewModel.isTempBasal || viewModel.isUpdatingPumpState || viewModel.isSyncing,
+                        showSpinner: viewModel.isTempBasal && viewModel.isUpdatingPumpState
+                    ) {
                         viewModel.stopTempBasal()
-                    }) {
-                        HStack {
-                            Text("Stop temp basal", comment: "Dana settings stop temp basal")
-                            Spacer()
-                            if viewModel.isUpdatingPumpState {
-                                ActivityIndicator(isAnimating: .constant(true), style: .medium)
-                            }
-                        }
                     }
-                    .disabled(viewModel.isUpdatingPumpState || viewModel.isSyncing)
                 }
+                .padding(.vertical, 4)
+                .listRowInsets(EdgeInsets())
+                .listRowBackground(Color.clear)
+            }
 
+            Section(header: SectionHeader(label: String(localized:
+                "Sync",
+                comment: "The title of the sync section in DanaKit settings"
+            ))) {
                 Button(action: {
                     viewModel.syncData()
                 }) {
@@ -332,12 +330,10 @@ struct DanaKitSettingsView: View {
                 }
             }
 
-            Section(header: SectionHeader(label: String(
-                localized:
+            Section(header: SectionHeader(label: String(localized:
                 "Configuration",
                 comment: "The title of the configuration section in DanaKit settings"
-            )))
-                {
+            ))) {
                     NavigationLink(destination: InsulinTypeView(
                         initialValue: viewModel.insulinType,
                         supportedInsulinTypes: supportedInsulinTypes,
@@ -391,8 +387,7 @@ struct DanaKitSettingsView: View {
                     }
                 }
 
-            Section(header: SectionHeader(label: String(
-                localized:
+            Section(header: SectionHeader(label: String(localized:
                 "Pump information",
                 comment: "The title of the pump information section in DanaKit settings"
             ))) {
@@ -451,8 +446,7 @@ struct DanaKitSettingsView: View {
                 }
             }
 
-            Section(header: SectionHeader(label: String(
-                localized:
+            Section(header: SectionHeader(label: String(localized:
                 "Pump time",
                 comment: "The title of the pump time section in DanaKit settings"
             ))) {
@@ -514,6 +508,7 @@ struct DanaKitSettingsView: View {
         }
         .listStyle(InsetGroupedListStyle())
         .navigationBarItems(trailing: doneButton)
+        .navigationBarTitle(viewModel.pumpModel)
     }
 
     private var doneButton: some View {
@@ -560,8 +555,8 @@ struct DanaKitSettingsView: View {
                         "Insulin\nSuspended",
                         comment: "Text shown in insulin delivery space when insulin suspended"
                     )
-                    .fontWeight(.bold)
-                    .fixedSize()
+                        .fontWeight(.bold)
+                        .fixedSize()
                 }
             } else if let basalRate = $viewModel.basalRate.wrappedValue {
                 HStack(alignment: .center) {
@@ -632,6 +627,58 @@ struct DanaKitSettingsView: View {
         }
 
         return guidanceColors.critical
+    }
+
+    private var suspendResumeIconName: String {
+        if viewModel.isSuspendActionLocked {
+            return "lock.fill"
+        }
+
+        return viewModel.isSuspended ? "play.circle.fill" : "pause.circle.fill"
+    }
+
+    private var suspendResumeIconColor: Color {
+        if viewModel.isSuspendActionLocked {
+            return guidanceColors.warning
+        }
+
+        return viewModel.isSuspended ? guidanceColors.warning : Color.accentColor
+    }
+
+    @ViewBuilder private func quickActionCard(
+        title: String,
+        systemImage: String,
+        tint: Color,
+        isVisuallyDisabled: Bool,
+        showSpinner: Bool,
+        action: @escaping () -> Void
+    ) -> some View {
+        // Deliberately not a `Button`: SwiftUI's Button gesture recognizer can swallow a
+        // sibling `.onLongPressGesture` attached at the call site. A plain view with its
+        // own tap gesture lets tap and long-press coexist reliably.
+        VStack(spacing: 8) {
+            Image(systemName: systemImage)
+                .font(.system(size: 28))
+                .foregroundColor(tint)
+            HStack(spacing: 6) {
+                Text(title)
+                    .font(.footnote.weight(.medium))
+                    .foregroundColor(.primary)
+                    .multilineTextAlignment(.center)
+                if showSpinner {
+                    ActivityIndicator(isAnimating: .constant(true), style: .medium)
+                }
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 16)
+        .background(
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .fill(Color(UIColor.secondarySystemGroupedBackground))
+        )
+        .opacity(isVisuallyDisabled ? 0.4 : 1.0)
+        .contentShape(Rectangle())
+        .onTapGesture(perform: action)
     }
 }
 

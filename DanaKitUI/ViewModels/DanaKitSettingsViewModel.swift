@@ -17,19 +17,20 @@ class DanaKitSettingsViewModel: ObservableObject {
     @Published var isTogglingConnection: Bool = false
     @Published var isBolusSyncingDisabled = false
     @Published var isSyncing: Bool = false
-    @Published var lastSync: Date? = nil
+    @Published var lastSync: Date?
     @Published var batteryLevel: Double = 0
     @Published var showingSilentTone: Bool = false
     @Published var silentTone: Bool = false
     @Published var basalProfileNumber: UInt8 = 0
-    @Published var cannulaAge: String? = nil
-    @Published var reservoirAge: String? = nil
-    @Published var batteryAge: String? = nil
+    @Published var cannulaAge: String?
+    @Published var reservoirAge: String?
+    @Published var batteryAge: String?
 
     @Published var showPumpTimeSyncWarning: Bool = false
-    @Published var pumpTime: Date? = nil
-    @Published var pumpTimeSyncedAt: Date? = nil
+    @Published var pumpTime: Date?
+    @Published var pumpTimeSyncedAt: Date?
     @Published var nightlyPumpTimeSync: Bool = false
+    @Published var travelLockEnabled: Bool = false
 
     @Published var reservoirLevelWarning: Double
     @Published var reservoirLevel: Double?
@@ -66,6 +67,17 @@ class DanaKitSettingsViewModel: ObservableObject {
         }
 
         return pumpManager.state.basalDeliveryOrdinal == .tempBasal && pumpManager.state.tempBasalEndsAt > Date.now
+    }
+
+    /// True when the travel lock should block the next tap on the suspend/resume
+    /// button. Only applies to the active -> suspended transition; a pump that is
+    /// already suspended is always resumable regardless of the lock.
+    public var isSuspendActionLocked: Bool {
+        guard let pumpManager = self.pumpManager else {
+            return false
+        }
+
+        return travelLockEnabled && !pumpManager.state.isPumpSuspended
     }
 
     let basalRateFormatter: NumberFormatter = {
@@ -109,6 +121,7 @@ class DanaKitSettingsViewModel: ObservableObject {
         pumpTime = self.pumpManager?.state.pumpTime
         pumpTimeSyncedAt = self.pumpManager?.state.pumpTimeSyncedAt
         nightlyPumpTimeSync = self.pumpManager?.state.allowAutomaticTimeSync ?? false
+        travelLockEnabled = self.pumpManager?.state.travelLockEnabled ?? false
         isBolusSyncingDisabled = self.pumpManager?.state.isBolusSyncDisabled ?? false
         batteryLevel = self.pumpManager?.state.batteryRemaining ?? 0
         silentTone = self.pumpManager?.state.useSilentTones ?? false
@@ -274,7 +287,7 @@ class DanaKitSettingsViewModel: ObservableObject {
     }
 
     func reservoirText(for units: Double) -> String {
-        reservoirVolumeFormatter.string(from: units) ?? ""
+        return reservoirVolumeFormatter.string(from: units) ?? ""
     }
 
     func toggleSilentTone() {
@@ -295,6 +308,19 @@ class DanaKitSettingsViewModel: ObservableObject {
         pumpManager.notifyStateDidChange()
     }
 
+    func toggleTravelLock() {
+        guard let pumpManager = self.pumpManager else {
+            return
+        }
+
+        let impactHeavy = UIImpactFeedbackGenerator(style: .heavy)
+        impactHeavy.impactOccurred()
+
+        pumpManager.state.travelLockEnabled.toggle()
+        travelLockEnabled = pumpManager.state.travelLockEnabled
+        pumpManager.notifyStateDidChange()
+    }
+
     func transformBasalProfile(_ index: UInt8) -> String {
         if index == 0 {
             return "A"
@@ -308,7 +334,7 @@ class DanaKitSettingsViewModel: ObservableObject {
     }
 
     func stopTempBasal() {
-        if isTempBasal {
+        if isTempBasal, !isUpdatingPumpState, !isSyncing {
             isUpdatingPumpState = true
 
             // Stop temp basal
@@ -331,6 +357,13 @@ class DanaKitSettingsViewModel: ObservableObject {
 
     func suspendResumeButtonPressed() {
         guard let pumpManager = self.pumpManager else {
+            return
+        }
+
+        // Travel lock only ever blocks going active -> suspended; resuming is
+        // always allowed. Guarded here (not via `.disabled()` in the view) so the
+        // card's long-press-to-unlock gesture keeps receiving touches while locked.
+        if isSuspendActionLocked || isUpdatingPumpState || isSyncing {
             return
         }
 
