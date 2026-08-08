@@ -52,10 +52,10 @@ struct DanaKitSettingsView: View {
     var blindReservoirCannulaRefill: ActionSheet {
         ActionSheet(title: Text("Type of refill", comment: "Title for refill action"), buttons: [
             .default(Text("Cannula only", comment: "Button text to cannula only")) {
-                viewModel.navigateToRefillView(true)
+                viewModel.toRefill(true)
             },
             .default(Text("Reservoir and cannula", comment: "Button text to Reservoir and cannula")) {
-                viewModel.navigateToRefillView(false)
+                viewModel.toRefill(false)
             },
             .cancel(Text("Cancel", comment: "Button text to cancel"))
         ])
@@ -377,16 +377,9 @@ struct DanaKitSettingsView: View {
                         HStack {
                             Text("Reservoir/cannula refill", comment: "Title for reservoir/cannula refill")
                             Spacer()
-                            NavigationLink(
-                                destination: viewModel.refillView,
-                                isActive: $viewModel.showingReservoirCannulaRefillView
-                            ) {
-                                EmptyView() }
-                                .hidden()
-                                .frame(width: 0, height: 0)
                             Image(systemName: "chevron.right")
-                                .font(.system(size: UIFont.systemFontSize, weight: .medium))
-                                .opacity(0.35)
+                                .font(.system(size: UIFont.systemFontSize, weight: .bold))
+                                .foregroundStyle(.secondary)
                         }
                         .foregroundColor(Color.primary)
                     }

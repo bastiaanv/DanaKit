@@ -16,6 +16,8 @@ enum DanaUIScreen {
     case userOptions
     case bolusSpeed
     case insulinType
+    case refillCannulaOnly
+    case refillFull
 
     func next() -> DanaUIScreen? {
         switch self {
@@ -213,6 +215,7 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
                 toUserOptions: { self.navigateTo(.userOptions) },
                 toBolusSpeed: { self.navigateTo(.bolusSpeed) },
                 toInsulinType: { self.navigateTo(.insulinType) },
+                toRefill: { cannulaOnly in self.navigateTo(cannulaOnly ? .refillCannulaOnly : .refillFull) },
                 didFinish: stepFinished
             )
             let view = DanaKitSettingsView(
@@ -258,6 +261,20 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
                     didConfirm: confirmInsulinType
                 ),
                 title: String(localized: "Insulin Type", comment: "Title for insulin type")
+            )
+            
+        case .refillCannulaOnly:
+            let viewModel = DanaKitRefillReservoirCannulaViewModel(pumpManager: pumpManager, cannulaOnly: true)
+            return hostingController(
+                rootView: DanaKitRefillReservoirAndCannulaView(viewModel: viewModel),
+                title: String(localized: "Cannula refill", comment: "Title for reservoir/cannula refill")
+            )
+            
+        case .refillFull:
+            let viewModel = DanaKitRefillReservoirCannulaViewModel(pumpManager: pumpManager, cannulaOnly: false)
+            return hostingController(
+                rootView: DanaKitRefillReservoirAndCannulaView(viewModel: viewModel),
+                title: String(localized: "Reservoir/cannula refill", comment: "Title for reservoir/cannula refill")
             )
         }
     }
