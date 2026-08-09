@@ -199,35 +199,43 @@ struct DanaKitSettingsView: View {
                 }
             }
 
-            Section {
-                Button(action: {
-                    viewModel.suspendResumeButtonPressed()
-                }) {
-                    HStack {
-                        Text($viewModel.basalButtonText.wrappedValue)
-                        Spacer()
-                        if viewModel.isUpdatingPumpState {
-                            ActivityIndicator(isAnimating: .constant(true), style: .medium)
-                        }
+            Section(header: SectionHeader(label: String(localized:
+                "Manage",
+                comment: "The title of the manage section in DanaKit settings"
+            ))) {
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
+                    quickActionCard(
+                        title: $viewModel.basalButtonText.wrappedValue,
+                        systemImage: suspendResumeIconName,
+                        tint: suspendResumeIconColor,
+                        isVisuallyDisabled: viewModel.isSuspendActionLocked || viewModel.isUpdatingPumpState || viewModel.isSyncing,
+                        showSpinner: viewModel.isUpdatingPumpState
+                    ) {
+                        viewModel.suspendResumeButtonPressed()
                     }
-                }
-                .disabled(viewModel.isUpdatingPumpState || viewModel.isSyncing)
+                    .onLongPressGesture(minimumDuration: 0.5) {
+                        viewModel.toggleTravelLock()
+                    }
 
-                if viewModel.isTempBasal {
-                    Button(action: {
+                    quickActionCard(
+                        title: String(localized: "Stop temp basal", comment: "Dana settings stop temp basal"),
+                        systemImage: "xmark.circle.fill",
+                        tint: viewModel.isTempBasal ? Color.accentColor : Color.secondary,
+                        isVisuallyDisabled: !viewModel.isTempBasal || viewModel.isUpdatingPumpState || viewModel.isSyncing,
+                        showSpinner: viewModel.isTempBasal && viewModel.isUpdatingPumpState
+                    ) {
                         viewModel.stopTempBasal()
-                    }) {
-                        HStack {
-                            Text("Stop temp basal", comment: "Dana settings stop temp basal")
-                            Spacer()
-                            if viewModel.isUpdatingPumpState {
-                                ActivityIndicator(isAnimating: .constant(true), style: .medium)
-                            }
-                        }
                     }
-                    .disabled(viewModel.isUpdatingPumpState || viewModel.isSyncing)
                 }
+                .padding(.vertical, 4)
+                .listRowInsets(EdgeInsets())
+                .listRowBackground(Color.clear)
+            }
 
+            Section(header: SectionHeader(label: String(localized:
+                "Sync",
+                comment: "The title of the sync section in DanaKit settings"
+            ))) {
                 Button(action: {
                     viewModel.syncData()
                 }) {
@@ -629,5 +637,57 @@ struct DanaKitSettingsView: View {
         }
 
         return guidanceColors.critical
+    }
+
+    private var suspendResumeIconName: String {
+        if viewModel.isSuspendActionLocked {
+            return "lock.fill"
+        }
+
+        return viewModel.isSuspended ? "play.circle.fill" : "pause.circle.fill"
+    }
+
+    private var suspendResumeIconColor: Color {
+        if viewModel.isSuspendActionLocked {
+            return guidanceColors.warning
+        }
+
+        return viewModel.isSuspended ? guidanceColors.warning : Color.accentColor
+    }
+
+    @ViewBuilder private func quickActionCard(
+        title: String,
+        systemImage: String,
+        tint: Color,
+        isVisuallyDisabled: Bool,
+        showSpinner: Bool,
+        action: @escaping () -> Void
+    ) -> some View {
+        // Deliberately not a `Button`: SwiftUI's Button gesture recognizer can swallow a
+        // sibling `.onLongPressGesture` attached at the call site. A plain view with its
+        // own tap gesture lets tap and long-press coexist reliably.
+        VStack(spacing: 8) {
+            Image(systemName: systemImage)
+                .font(.system(size: 28))
+                .foregroundColor(tint)
+            HStack(spacing: 6) {
+                Text(title)
+                    .font(.footnote.weight(.medium))
+                    .foregroundColor(.primary)
+                    .multilineTextAlignment(.center)
+                if showSpinner {
+                    ActivityIndicator(isAnimating: .constant(true), style: .medium)
+                }
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 16)
+        .background(
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .fill(Color(UIColor.secondarySystemGroupedBackground))
+        )
+        .opacity(isVisuallyDisabled ? 0.4 : 1.0)
+        .contentShape(Rectangle())
+        .onTapGesture(perform: action)
     }
 }
