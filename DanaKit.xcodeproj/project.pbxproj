@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1029AE4827094D0E00B7F5B6 /* DanaKitPumpManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1029AE4627094D0E00B7F5B6 /* DanaKitPumpManager.swift */; };
+		D1AB2C3D4E5F60718293A4B5D /* DanaKitPumpManager+History.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AB2C3D4E5F60718293A4B5C /* DanaKitPumpManager+History.swift */; };
 		1029AE4927094D0E00B7F5B6 /* DanaKitPumpManagerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1029AE4727094D0E00B7F5B6 /* DanaKitPumpManagerState.swift */; };
 		3E489BE02FABC5D5003C0B39 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E489BDF2FABC5D3003C0B39 /* String.swift */; };
 		3E6CD15B2F3F9250009648C2 /* DanaKitDispatchGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6CD15A2F3F9250009648C2 /* DanaKitDispatchGroup.swift */; };
@@ -159,6 +160,7 @@
 
 /* Begin PBXFileReference section */
 		1029AE4627094D0E00B7F5B6 /* DanaKitPumpManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DanaKitPumpManager.swift; sourceTree = "<group>"; };
+		D1AB2C3D4E5F60718293A4B5C /* DanaKitPumpManager+History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DanaKitPumpManager+History.swift"; sourceTree = "<group>"; };
 		1029AE4727094D0E00B7F5B6 /* DanaKitPumpManagerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DanaKitPumpManagerState.swift; sourceTree = "<group>"; };
 		3E489BDF2FABC5D3003C0B39 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		3E6CD15A2F3F9250009648C2 /* DanaKitDispatchGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanaKitDispatchGroup.swift; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 				B802D5082C1F675600B92C35 /* ContinousBluetoothManager.swift */,
 				B802D5072C1F675600B92C35 /* InteractiveBluetoothManager.swift */,
 				1029AE4627094D0E00B7F5B6 /* DanaKitPumpManager.swift */,
+				D1AB2C3D4E5F60718293A4B5C /* DanaKitPumpManager+History.swift */,
 				1029AE4727094D0E00B7F5B6 /* DanaKitPumpManagerState.swift */,
 				B8360AE82B2B954700152188 /* BluetoothManager.swift */,
 				B83815C92B34C8CA00627125 /* PeripheralManager.swift */,
@@ -770,6 +773,7 @@
 				B8360AE32B2A3C3C00152188 /* DanaNotifyDeliveryRateDisplay.swift in Sources */,
 				B87730972BB865B100D2C653 /* ActivityViewController.swift in Sources */,
 				B87115752B4DD0AC004B4A98 /* DanaKitPumpManagerError.swift in Sources */,
+				D1AB2C3D4E5F60718293A4B5D /* DanaKitPumpManager+History.swift in Sources */,
 				B85418AA2B20F52200C3B4D0 /* Common.swift in Sources */,
 				B8360AB32B2A2A6A00152188 /* DanaGeneralKeepConnection.swift in Sources */,
 				B85335DC2B58658A00DB470A /* DanaKitSettingsPumpSpeed.swift in Sources */,

@@ -92,6 +92,14 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         } else {
             basalDeliveryOrdinal = .active
         }
+
+        if let unfinalizedRaw = rawValue["unfinalizedDose"] as? UnfinalizedDose.RawValue {
+            unfinalizedDose = UnfinalizedDose(rawValue: unfinalizedRaw)
+        } else {
+            unfinalizedDose = nil
+        }
+
+        loopInitiatedBolusStartDates = rawValue["loopInitiatedBolusStartDates"] as? [Date] ?? []
     }
 
     public init(basalSchedule: [Double]? = nil) {
@@ -136,6 +144,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         isBolusSyncDisabled = false
         batteryAge = nil
         pumpTimeZone = nil
+        loopInitiatedBolusStartDates = []
     }
 
     public var rawValue: RawValue {
@@ -188,6 +197,8 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         value["isBolusSyncDisabled"] = isBolusSyncDisabled
         value["batteryAge"] = batteryAge
         value["pumpTimeZone"] = pumpTimeZone?.secondsFromGMT()
+        value["unfinalizedDose"] = unfinalizedDose?.rawValue
+        value["loopInitiatedBolusStartDates"] = loopInitiatedBolusStartDates
 
         return value
     }
@@ -240,6 +251,14 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
     public var devicePassword: UInt16 = 0
 
     public var basalSchedule: [Double]
+
+    /// An in-progress bolus that has not yet been finalized, persisted so it is not lost if the
+    /// app is terminated or the BLE link is dropped mid-delivery (see PumpManagerDoseReporting.md §10).
+    public var unfinalizedDose: UnfinalizedDose?
+
+    /// The start dates of Loop-commanded boluses, used to suppress the "echo" of those boluses when
+    /// they later appear in pump history so they are not double-counted (§7 reconciliation).
+    public var loopInitiatedBolusStartDates: [Date] = []
 
     public var ble5Keys = Data([0, 0, 0, 0, 0, 0])
 

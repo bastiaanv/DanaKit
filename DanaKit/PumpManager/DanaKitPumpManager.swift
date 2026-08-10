@@ -46,13 +46,25 @@ public class DanaKitPumpManager: DeviceManager {
             name: UIApplication.willEnterForegroundNotification,
             object: nil
         )
+
+        // Rehydrate an in-progress bolus that survived an app restart so its IOB is not lost and it
+        // can be reconciled against pump history on the next sync (see PumpManagerDoseReporting.md §10).
+        if let pending = state.unfinalizedDose {
+            self.doseEntry = pending
+            if pending.expectedEndDate > Date.now {
+                self.doseReporter = DanaKitDoseProgressReporter(total: pending.value)
+            }
+            // Clear the persisted in-progress flag so continuous-mode syncing is not blocked; the
+            // pending dose remains and is finalized against pump history on the next sync.
+            self.state.bolusState = .noBolus
+        }
     }
 
     public required convenience init?(rawState: PumpManager.RawStateValue) {
         self.init(state: DanaKitPumpManagerState(rawValue: rawState))
     }
 
-    private let log = DanaLogger(category: "DanaKitPumpManager")
+    let log = DanaLogger(category: "DanaKitPumpManager")
     public let pumpDelegate = WeakSynchronizedDelegate<PumpManagerDelegate>()
 
     private let statusObservers = WeakSynchronizedSet<PumpManagerStatusObserver>()
@@ -60,8 +72,8 @@ public class DanaKitPumpManager: DeviceManager {
     private let scanDeviceObservers = WeakSynchronizedSet<StateObserver>()
 
     private var isPriming = false
-    private var doseReporter: DanaKitDoseProgressReporter?
-    private var doseEntry: UnfinalizedDose?
+    var doseReporter: DanaKitDoseProgressReporter?
+    var doseEntry: UnfinalizedDose?
 
     public var isOnboarded: Bool {
         state.isOnBoarded
@@ -137,7 +149,7 @@ public class DanaKitPumpManager: DeviceManager {
         provideHeartbeat = mustProvideBLEHeartbeat
     }
 
-    private func issueHeartbeatIfNeeded() {
+    func issueHeartbeatIfNeeded() {
         if provideHeartbeat, Date().timeIntervalSince(lastHeartbeat) > 2 * 60 {
             pumpDelegate.notify { delegate in
                 guard let delegate = delegate else {
@@ -323,303 +335,6 @@ extension DanaKitPumpManager: PumpManager {
 
         syncPump(completion)
     }
-
-    /// Extention from ensureCurrentPumpData, but overrides the stale data check
-    public func syncPump(_ completion: ((Date?) -> Void)?) {
-        delegateQueue.async {
-            let this = self
-            self.log.info("Syncing pump data")
-            self.logDeviceCommunication("Syncing pump data", type: .delegate)
-
-            self.bluetooth.ensureConnected { result in
-                switch result {
-                case .success:
-                    self.syncUserOptions()
-                    let events = self.syncHistory()
-
-                    if self.shouldSyncTime() {
-                        self.syncTime()
-                    }
-
-                    let pumpTime = self.fetchPumpTime()
-                    if let pumpTime = pumpTime {
-                        self.state.pumpTimeSyncedAt = Date.now
-                        self.state.pumpTime = pumpTime
-                    }
-
-                    self.state.lastStatusPumpDateTime = pumpTime ?? Date.now
-                    self.state.lastStatusDate = Date.now
-                    self.disconnect()
-
-                    self.issueHeartbeatIfNeeded()
-                    self.notifyStateDidChange()
-
-                    self.pumpDelegate.notify { delegate in
-                        guard let delegate = delegate else {
-                            this.log.error("Reservoir level & last check could not be reported -> Missing delegate")
-                            return
-                        }
-
-                        delegate.pumpManager(
-                            this,
-                            hasNewPumpEvents: events,
-                            lastReconciliation: this.state.lastStatusDate,
-                            replacePendingEvents: true,
-                        ) { error in
-                            if let error = error {
-                                this.handlePumpDelegateError(method: "hasNewPumpEvents", error)
-                            }
-                        }
-                        delegate.pumpManager(
-                            this,
-                            didReadReservoirValue: this.state.reservoirLevel,
-                            at: this.state.lastStatusDate,
-                        ) { result in
-                            switch result {
-                            case let .failure(error):
-                                this.handlePumpDelegateError(method: "didReadReservoirValue", error)
-                            case .success:
-                                break
-                            }
-                        }
-                        delegate.pumpManagerDidUpdateState(this)
-                    }
-
-                    self.log.info("Sync successful!")
-                    completion?(Date.now)
-                default:
-                    completion?(nil)
-                    return
-                }
-            }
-        }
-    }
-
-    private func syncTime() {
-        syncPumpTime { error in
-            if let error = error {
-                self.log.error("Failed to automaticly sync pump time: \(error.localizedDescription)")
-            }
-        }
-    }
-
-    private func shouldSyncTime() -> Bool {
-        guard state.allowAutomaticTimeSync else {
-            return false
-        }
-        guard let pumpTime = state.pumpTime else {
-            return false
-        }
-
-        let pumpTimeComp = Calendar.current.dateComponents([.day], from: pumpTime)
-        let nowComp = Calendar.current.dateComponents([.day], from: Date.now)
-        return pumpTimeComp.day != nowComp.day
-    }
-
-    private func syncUserOptions() {
-        do {
-            let userOptionPacket = generatePacketGeneralGetUserOption()
-            let userOptionResult = try bluetooth.writeMessage(userOptionPacket)
-            guard userOptionResult.success else {
-                log.error("Failed to fetch user options...")
-                return
-            }
-
-            guard let dataUserOption = userOptionResult.data as? PacketGeneralGetUserOption else {
-                log.error("Received unexpected data while fetching user options...")
-                return
-            }
-
-            state.lowReservoirRate = dataUserOption.lowReservoirRate
-            state.isTimeDisplay24H = dataUserOption.isTimeDisplay24H
-            state.isButtonScrollOnOff = dataUserOption.isButtonScrollOnOff
-            state.beepAndAlarm = dataUserOption.beepAndAlarm
-            state.lcdOnTimeInSec = dataUserOption.lcdOnTimeInSec
-            state.backlightOnTimInSec = dataUserOption.backlightOnTimInSec
-            state.selectedLanguage = dataUserOption.selectedLanguage
-            state.units = dataUserOption.units
-            state.shutdownHour = dataUserOption.shutdownHour
-            state.cannulaVolume = dataUserOption.cannulaVolume
-            state.refillAmount = dataUserOption.refillAmount
-            state.targetBg = dataUserOption.targetBg
-            state.units = dataUserOption.units
-        } catch {
-            log.error("Failed to sync user options: \(error.localizedDescription)")
-        }
-    }
-
-    private func fetchPumpTime() -> Date? {
-        do {
-            let timePacket = state
-                .usingUtc ? generatePacketGeneralGetPumpTimeUtcWithTimezone() : generatePacketGeneralGetPumpTime()
-            let timeResult = try bluetooth.writeMessage(timePacket)
-
-            guard timeResult.success else {
-                log.error("Failed to fetch pump time with utc...")
-                return nil
-            }
-
-            if let data = timeResult.data as? PacketGeneralGetPumpTimeUtcWithTimezone {
-                state.pumpTimeZone = TimeZone(secondsFromGMT: data.timezoneOffset * 3600)
-            }
-
-            let date = state.usingUtc ? (timeResult.data as? PacketGeneralGetPumpTimeUtcWithTimezone)?
-                .time : (timeResult.data as? PacketGeneralGetPumpTime)?.time
-            guard let date = date else {
-                return nil
-            }
-
-            return date
-        } catch {
-            log.error("Failed to sync time: \(error.localizedDescription)")
-            return nil
-        }
-    }
-
-    private func syncHistory() -> [NewPumpEvent] {
-        var hasHistoryModeBeenActivate = false
-        do {
-            let activateHistoryModePacket =
-                generatePacketGeneralSetHistoryUploadMode(options: PacketGeneralSetHistoryUploadMode(mode: 1))
-            let activateHistoryModeResult = try bluetooth.writeMessage(activateHistoryModePacket)
-            guard activateHistoryModeResult.success else {
-                return []
-            }
-
-            hasHistoryModeBeenActivate = true
-
-            let fetchHistoryPacket =
-                generatePacketHistoryAll(options: PacketHistoryBase(from: state.lastStatusPumpDateTime, usingUtc: state.usingUtc))
-            let fetchHistoryResult = try bluetooth.writeMessage(fetchHistoryPacket)
-            guard fetchHistoryResult.success else {
-                return []
-            }
-
-            let deactivateHistoryModePacket =
-                generatePacketGeneralSetHistoryUploadMode(options: PacketGeneralSetHistoryUploadMode(mode: 0))
-            _ = try bluetooth.writeMessage(deactivateHistoryModePacket)
-
-            guard let list = fetchHistoryResult.data as? [HistoryItem] else {
-                return []
-            }
-
-            return list.compactMap({ item in
-                switch item.code {
-                case HistoryCode.RECORD_TYPE_ALARM:
-                    return [NewPumpEvent(
-                        date: item.timestamp,
-                        dose: nil,
-                        raw: item.raw,
-                        title: "Alarm: \(getAlarmMessage(param8: item.alarm))",
-                        type: .alarm,
-                        alarmType: PumpAlarmType.fromParam8(item.alarm)
-                    )]
-
-                case HistoryCode.RECORD_TYPE_BOLUS:
-                    // Skip bolus syncing if enabled by user
-                    if self.state.isBolusSyncDisabled {
-                        return []
-                    }
-
-                    // If we find a bolus here, we assume that is hasnt been synced to Loop
-                    return [NewPumpEvent.bolus(
-                        dose: DoseEntry.bolus(
-                            units: item.value!,
-                            deliveredUnits: item.value!,
-                            duration: item.durationInMin! * 60,
-                            activationType: .manualNoRecommendation,
-                            insulinType: self.state.insulinType,
-                            startDate: item.timestamp
-                        ),
-                        units: item.value!,
-                        date: item.timestamp
-                    )]
-
-                case HistoryCode.RECORD_TYPE_SUSPEND:
-                    if item.value! == 1 {
-                        return [NewPumpEvent.suspend(dose: DoseEntry.suspend(suspendDate: item.timestamp))]
-                    } else {
-                        return [NewPumpEvent.resume(
-                            dose: DoseEntry.resume(insulinType: self.state.insulinType, resumeDate: item.timestamp),
-                            date: item.timestamp
-                        )]
-                    }
-
-                case HistoryCode.RECORD_TYPE_PRIME:
-                    guard let value = item.value, value < 1 else {
-                        // This is a tube refill, not a canulla refill
-                        return []
-                    }
-
-                    if self.state.cannulaDate == nil {
-                        self.state.cannulaDate = item.timestamp
-                    } else if let cannulaDate = self.state.cannulaDate, item.timestamp > cannulaDate {
-                        self.state.cannulaDate = item.timestamp
-                    }
-
-                    return [
-                        NewPumpEvent(
-                            date: item.timestamp,
-                            dose: nil,
-                            raw: item.raw,
-                            title: "Prime \(value)U",
-                            type: .replaceComponent(componentType: .infusionSet),
-                            alarmType: nil
-                        ),
-                        NewPumpEvent(
-                            date: item.timestamp,
-                            dose: nil,
-                            raw: item.raw,
-                            title: "Prime \(value)U",
-                            type: .prime,
-                            alarmType: nil
-                        )
-                    ]
-
-                case HistoryCode.RECORD_TYPE_REFILL:
-                    if self.state.reservoirDate == nil {
-                        self.state.reservoirDate = item.timestamp
-                    } else if let reservoirDate = self.state.reservoirDate, item.timestamp > reservoirDate {
-                        self.state.reservoirDate = item.timestamp
-                    }
-
-                    return [
-                        NewPumpEvent(
-                            date: item.timestamp,
-                            dose: nil,
-                            raw: item.raw,
-                            title: "Rewind \(item.value ?? 0)U",
-                            type: .rewind,
-                            alarmType: nil
-                        ),
-                        NewPumpEvent(
-                            date: item.timestamp,
-                            dose: nil,
-                            raw: item.raw,
-                            title: "Rewind \(item.value ?? 0)U",
-                            type: .replaceComponent(componentType: .reservoir),
-                            alarmType: nil
-                        )
-                    ]
-
-                default:
-                    return []
-                }
-            }).flatMap { $0 }
-
-        } catch {
-            log.error("Failed to sync history. Error: \(error.localizedDescription)")
-            if hasHistoryModeBeenActivate {
-                do {
-                    let deactivateHistoryModePacket =
-                        generatePacketGeneralSetHistoryUploadMode(options: PacketGeneralSetHistoryUploadMode(mode: 0))
-                    _ = try bluetooth.writeMessage(deactivateHistoryModePacket)
-                } catch {}
-            }
-            return []
-        }
-    }
-
     public func createBolusProgressReporter(reportingOn _: DispatchQueue) -> DoseProgressReporter? {
         doseReporter
     }
@@ -662,6 +377,7 @@ extension DanaKitPumpManager: PumpManager {
                         self.state.bolusState = .noBolus
                         self.doseReporter = nil
                         self.doseEntry = nil
+                        self.state.unfinalizedDose = nil
                         self.notifyStateDidChange()
                         self.disconnect()
 
@@ -682,6 +398,7 @@ extension DanaKitPumpManager: PumpManager {
                             self.state.bolusState = .noBolus
                             self.doseReporter = nil
                             self.doseEntry = nil
+                            self.state.unfinalizedDose = nil
                             self.notifyStateDidChange()
                             self.disconnect()
 
@@ -706,6 +423,12 @@ extension DanaKitPumpManager: PumpManager {
                         self.state.bolusState = .inProgress
 
                         if !self.isPriming {
+                            // Persist the in-progress bolus so it survives BLE loss / app termination
+                            // (§10), and record it as Loop-commanded so its history echo is not
+                            // double-counted (§7). Not done for priming, whose delivery is not a dose.
+                            self.state.unfinalizedDose = doseEntry
+                            self.recordLoopInitiatedBolus(dose.startDate)
+
                             let dose = doseEntry.toDoseEntry(endDate: nil)
                             self.pumpDelegate.notify { delegate in
                                 guard let delegate = delegate else {
@@ -715,7 +438,6 @@ extension DanaKitPumpManager: PumpManager {
 
                                 let event = NewPumpEvent.bolus(
                                     dose: dose,
-                                    units: dose.programmedUnits,
                                     date: dose.startDate
                                 )
                                 delegate.pumpManager(
@@ -840,6 +562,7 @@ extension DanaKitPumpManager: PumpManager {
             let dose = doseEntry.toDoseEntry(endDate: bolusCancelledAt)
             self.doseEntry = nil
             doseReporter = nil
+            state.unfinalizedDose = nil
 
             sendCancelEvent(dose)
             completion(.success(nil))
@@ -863,7 +586,7 @@ extension DanaKitPumpManager: PumpManager {
 
                 delegate.pumpManager(
                     self,
-                    hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, units: dose.deliveredUnits ?? 0, date: dose.startDate)],
+                    hasNewPumpEvents: [NewPumpEvent.bolus(dose: dose, date: dose.startDate)],
                     lastReconciliation: self.state.lastStatusDate,
                     replacePendingEvents: true,
                 ) { error in
@@ -1796,6 +1519,7 @@ public extension DanaKitPumpManager {
 
         self.doseEntry = nil
         doseReporter = nil
+        state.unfinalizedDose = nil
         state.bolusState = .noBolus
         state.lastStatusDate = Date.now
         notifyStateDidChange()
@@ -1880,13 +1604,14 @@ public extension DanaKitPumpManager {
 
             self.doseEntry = nil
             self.doseReporter = nil
+            self.state.unfinalizedDose = nil
 
             guard !self.isPriming else {
                 log.debug("PumpManager is in priming mode -> Skip reporting dose")
                 return
             }
 
-            var events = [NewPumpEvent.bolus(dose: dose, units: deliveredUnits, date: dose.startDate)]
+            var events = [NewPumpEvent.bolus(dose: dose, date: dose.startDate)]
             if let tempBasalEvent = getTempBasalEvent() {
                 events.append(tempBasalEvent)
             }
@@ -1936,29 +1661,12 @@ public extension DanaKitPumpManager {
             type: .error
         )
 
-        // We assume the bolus will be completed
-        doseEntry.deliveredUnits = doseEntry.value
-        let dose = doseEntry.toDoseEntry(endDate: Date.now)
-
-        var events = [NewPumpEvent.bolus(dose: dose, units: doseEntry.value, date: dose.startDate)]
-        if state.basalDeliveryOrdinal == .tempBasal,
-           let unitsPerHour = state.tempBasalUnits,
-           let duration = state.tempBasalDuration
-        {
-            events.append(NewPumpEvent.tempBasal(
-                dose:
-                DoseEntry.tempBasal(
-                    absoluteUnit: unitsPerHour,
-                    duration: duration,
-                    insulinType: state.insulinType,
-                    startDate: state.basalDeliveryDate,
-                )
-            ))
-        }
-
+        // Do NOT assume the bolus fully delivered. The dose stays mutable and persisted (so its IOB is
+        // not lost and it is not purged); the next sync reconciles it against the pump's own history and
+        // finalizes it with the true delivered amount (§10 — the pump is the source of truth).
+        // bolusState is cleared so ensureCurrentPumpData will allow the recovery sync to proceed.
         state.bolusState = .noBolus
         state.lastStatusDate = Date.now
-        self.doseEntry = nil
         notifyStateDidChange()
 
         pumpDelegate.notify { delegate in
@@ -1968,16 +1676,6 @@ public extension DanaKitPumpManager {
             }
 
             delegate.pumpManager(self, didError: .uncertainDelivery)
-            delegate.pumpManager(
-                self,
-                hasNewPumpEvents: events,
-                lastReconciliation: self.state.lastStatusDate,
-                replacePendingEvents: true,
-            ) { error in
-                if let error = error {
-                    self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
-                }
-            }
         }
     }
 
@@ -1993,29 +1691,10 @@ public extension DanaKitPumpManager {
         )
     }
 
-    private func handlePumpDelegateError(method: String, _ error: Error, _ function: String = #function, _ line: Int = #line) {
+    func handlePumpDelegateError(method: String, _ error: Error, _ function: String = #function, _ line: Int = #line) {
         let logLine = "Received pump delegate error in \(method): \(error) at \(function):\(line)"
         log.error(logLine)
         logDeviceCommunication(logLine, type: .error)
     }
 
-    private func getTempBasalEvent(endDate: Date? = nil) -> NewPumpEvent? {
-        guard state.basalDeliveryOrdinal == .tempBasal,
-              let unitsPerHour = state.tempBasalUnits,
-              let duration = state.tempBasalDuration
-        else {
-            return nil
-        }
-
-        return NewPumpEvent.tempBasal(
-            dose: DoseEntry.tempBasal(
-                absoluteUnit: unitsPerHour,
-                duration: duration,
-                insulinType: state.insulinType,
-                startDate: state.basalDeliveryDate,
-                endDate: endDate
-            ),
-            date: state.basalDeliveryDate
-        )
-    }
 }
