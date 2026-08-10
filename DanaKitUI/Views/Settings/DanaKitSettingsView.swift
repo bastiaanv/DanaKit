@@ -209,7 +209,8 @@ struct DanaKitSettingsView: View {
                         systemImage: suspendResumeIconName,
                         tint: suspendResumeIconColor,
                         isVisuallyDisabled: viewModel.isSuspendActionLocked || viewModel.isUpdatingPumpState || viewModel.isSyncing,
-                        showSpinner: viewModel.isUpdatingPumpState
+                        showSpinner: viewModel.isUpdatingPumpState,
+                        spinnerReplacesIcon: true
                     ) {
                         viewModel.suspendResumeButtonPressed()
                     }
@@ -222,7 +223,8 @@ struct DanaKitSettingsView: View {
                         systemImage: "xmark.circle.fill",
                         tint: viewModel.isTempBasal ? Color.accentColor : Color.secondary,
                         isVisuallyDisabled: !viewModel.isTempBasal || viewModel.isUpdatingPumpState || viewModel.isSyncing,
-                        showSpinner: viewModel.isTempBasal && viewModel.isUpdatingPumpState
+                        showSpinner: viewModel.isTempBasal && viewModel.isUpdatingPumpState,
+                        spinnerReplacesIcon: true
                     ) {
                         viewModel.stopTempBasal()
                     }
@@ -661,21 +663,27 @@ struct DanaKitSettingsView: View {
         tint: Color,
         isVisuallyDisabled: Bool,
         showSpinner: Bool,
+        spinnerReplacesIcon: Bool = false,
         action: @escaping () -> Void
     ) -> some View {
         // Deliberately not a `Button`: SwiftUI's Button gesture recognizer can swallow a
         // sibling `.onLongPressGesture` attached at the call site. A plain view with its
         // own tap gesture lets tap and long-press coexist reliably.
         VStack(spacing: 8) {
-            Image(systemName: systemImage)
-                .font(.system(size: 28))
-                .foregroundColor(tint)
+            if showSpinner, spinnerReplacesIcon {
+                ActivityIndicator(isAnimating: .constant(true), style: .medium)
+                    .frame(height: 28)
+            } else {
+                Image(systemName: systemImage)
+                    .font(.system(size: 28))
+                    .foregroundColor(tint)
+            }
             HStack(spacing: 6) {
                 Text(title)
                     .font(.footnote.weight(.medium))
                     .foregroundColor(.primary)
                     .multilineTextAlignment(.center)
-                if showSpinner {
+                if showSpinner, !spinnerReplacesIcon {
                     ActivityIndicator(isAnimating: .constant(true), style: .medium)
                 }
             }
