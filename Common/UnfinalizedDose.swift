@@ -1,13 +1,12 @@
 import Foundation
 import LoopKit
 
-public class UnfinalizedDose {
+public class UnfinalizedDose : NSObject {
     public typealias RawValue = [String: Any]
 
     public let type: DoseType
     public let startDate: Date
     public let expectedEndDate: Date
-    public let unit: DoseUnit
     public let value: Double
     public var deliveredUnits: Double = 0
     public let insulinType: InsulinType?
@@ -18,7 +17,6 @@ public class UnfinalizedDose {
             type: .bolus,
             startDate: Date.now,
             expectedEndDate: Date.now.addingTimeInterval(duration),
-            unit: .units,
             value: units,
             deliveredUnits: 0,
             insulinType: insulinType,
@@ -30,7 +28,6 @@ public class UnfinalizedDose {
         type: DoseType,
         startDate: Date,
         expectedEndDate: Date,
-        unit: DoseUnit,
         value: Double,
         deliveredUnits: Double,
         insulinType: InsulinType?,
@@ -39,7 +36,6 @@ public class UnfinalizedDose {
         self.type = type
         self.startDate = startDate
         self.expectedEndDate = expectedEndDate
-        self.unit = unit
         self.value = value
         self.deliveredUnits = deliveredUnits
         self.insulinType = insulinType
@@ -73,16 +69,12 @@ public class UnfinalizedDose {
             isMutable: true
         )
     }
-}
-
-extension UnfinalizedDose: RawRepresentable {
+    
     public required convenience init?(rawValue: RawValue) {
         guard let typeRawValue = rawValue["type"] as? DoseType.RawValue,
               let type = DoseType(rawValue: typeRawValue),
               let startDate = rawValue["startDate"] as? Date,
               let expectedEndDate = rawValue["expectedEndDate"] as? Date,
-              let unitRawValue = rawValue["unit"] as? DoseUnit.RawValue,
-              let unit = DoseUnit(rawValue: unitRawValue),
               let value = rawValue["value"] as? Double
         else {
             return nil
@@ -96,7 +88,6 @@ extension UnfinalizedDose: RawRepresentable {
             type: type,
             startDate: startDate,
             expectedEndDate: expectedEndDate,
-            unit: unit,
             value: value,
             deliveredUnits: deliveredUnits,
             insulinType: insulinType,
@@ -109,7 +100,6 @@ extension UnfinalizedDose: RawRepresentable {
             "type": type.rawValue,
             "startDate": startDate,
             "expectedEndDate": expectedEndDate,
-            "unit": unit.rawValue,
             "value": value,
             "deliveredUnits": deliveredUnits,
             "insulinType": insulinType?.rawValue as Any,

@@ -427,7 +427,7 @@ extension DanaKitPumpManager: PumpManager {
                             // (§10), and record it as Loop-commanded so its history echo is not
                             // double-counted (§7). Not done for priming, whose delivery is not a dose.
                             self.state.unfinalizedDose = doseEntry
-                            self.recordLoopInitiatedBolus(dose.startDate)
+                            self.recordLoopInitiatedBolus(doseEntry.startDate)
 
                             let dose = doseEntry.toDoseEntry(endDate: nil)
                             self.pumpDelegate.notify { delegate in
