@@ -422,7 +422,6 @@ extension DanaKitPumpManager: PumpManager {
                         if !self.isPriming {
                             self.state.bolusDose = doseEntry
                             self.state.bolusState = .inProgress
-                            self.recordLoopInitiatedBolus(doseEntry.startDate)
 
                             let dose = doseEntry.toDoseEntry(endDate: nil)
                             self.pumpDelegate.notify { delegate in

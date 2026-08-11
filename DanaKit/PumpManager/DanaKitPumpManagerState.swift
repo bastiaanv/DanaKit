@@ -98,8 +98,6 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         } else {
             bolusDose = nil
         }
-
-        loopInitiatedBolusStartDates = rawValue["loopInitiatedBolusStartDates"] as? [Date] ?? []
     }
 
     public init(basalSchedule: [Double]? = nil) {
@@ -144,7 +142,6 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         isBolusSyncDisabled = false
         batteryAge = nil
         pumpTimeZone = nil
-        loopInitiatedBolusStartDates = []
     }
 
     public var rawValue: RawValue {
@@ -198,7 +195,6 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         value["batteryAge"] = batteryAge
         value["pumpTimeZone"] = pumpTimeZone?.secondsFromGMT()
         value["bolusDose"] = bolusDose?.rawValue
-        value["loopInitiatedBolusStartDates"] = loopInitiatedBolusStartDates
 
         return value
     }
@@ -253,10 +249,6 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
     public var basalSchedule: [Double]
 
     public var bolusDose: UnfinalizedDose?
-
-    /// The start dates of Loop-commanded boluses, used to suppress the "echo" of those boluses when
-    /// they later appear in pump history so they are not double-counted (§7 reconciliation).
-    public var loopInitiatedBolusStartDates: [Date] = []
 
     public var ble5Keys = Data([0, 0, 0, 0, 0, 0])
 

@@ -45,7 +45,12 @@ import Testing
         let profileBasalRate: [Double] = Array(repeating: 0.5, count: 23)
         let options = PacketBasalSetProfileRate(profileNumber: 0, profileBasalRate: profileBasalRate)
 
-        #expect(throws: any Error.self) { try generatePacketBasalSetProfileRate(options: options) }
+        let expectedError = NSError(
+            domain: "INVALID_LENGTH",
+            code: 1,
+            userInfo: [NSLocalizedDescriptionKey: "Invalid basal rate. Expected length = 24"]
+        )
+        #expect(throws: expectedError) { try generatePacketBasalSetProfileRate(options: options) }
     }
 
     @Test func generateBasalSetSuspendOff() {
@@ -152,8 +157,9 @@ import Testing
             isf: Array(repeating: 1, count: 23)
         )
 
-        #expect(throws: any Error.self) { try generatePacketBolusSet24CIRCFArray(options: optionsInvalidIc) }
-        #expect(throws: any Error.self) { try generatePacketBolusSet24CIRCFArray(options: optionsInvalidIsf) }
+        let expectedError = NSError(domain: "INVALID_LENGTH", code: 1, userInfo: [NSLocalizedDescriptionKey: "Invalid length isf or ic"])
+        #expect(throws: expectedError) { try generatePacketBolusSet24CIRCFArray(options: optionsInvalidIc) }
+        #expect(throws: expectedError) { try generatePacketBolusSet24CIRCFArray(options: optionsInvalidIsf) }
     }
 
     @Test func generateBolusSetExtended() {

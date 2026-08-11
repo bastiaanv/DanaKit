@@ -16,14 +16,14 @@ extension DanaKitPumpManager {
                     self.syncUserOptions()
                     var events = self.syncHistory()
 
-                    // Re-report any in-progress (or just-expired) temp basal and any pending bolus on
-                    // every sync. Mutable doses only persist in Loop for as long as they are reported,
-                    // and are otherwise purged (PumpManagerDoseReporting.md §3).
                     if let tempBasalEvent = self.getTempBasalEvent() {
                         events.append(tempBasalEvent)
                     }
-                    if let pendingBolusEvent = self.getPendingBolusEvent() {
-                        events.append(pendingBolusEvent)
+                    if let pendingBolus = self.state.bolusDose {
+                        events.append(NewPumpEvent.bolus(
+                            dose: pendingBolus.toDoseEntry(endDate: nil),
+                            date: pendingBolus.startDate
+                        ))
                     }
 
                     if self.shouldSyncTime() {
@@ -206,18 +206,7 @@ extension DanaKitPumpManager {
                     ))
 
                 case HistoryCode.RECORD_TYPE_BOLUS:
-                    if reconcilePendingBolus(with: item, into: &events) {
-                        break
-                    }
-
-                    // Respect the user's opt-out of reporting new pump-history boluses.
                     if state.isBolusSyncDisabled {
-                        break
-                    }
-
-                    // Loop already reported this bolus (it appears in history after Loop finalised
-                    // it), so skip it and avoid double-counting (§7 reconciliation).
-                    if isLoopInitiatedBolus(item.timestamp) {
                         break
                     }
 
@@ -339,71 +328,9 @@ extension DanaKitPumpManager {
                 duration: duration,
                 insulinType: state.insulinType,
                 startDate: state.basalDeliveryDate,
-                endDate: (endDate != nil || expired) ? effectiveEnd : nil
+                endDate: (endDate != nil || expired) ? effectiveEnd : nil,
             ),
             date: state.basalDeliveryDate
         )
-    }
-
-    /// A mutable bolus still awaiting reconciliation (e.g. after a BLE drop or app restart). Re-report
-    /// it on every sync so Loop does not purge it, until pump history reconciles and finalizes it.
-    private func getPendingBolusEvent() -> NewPumpEvent? {
-        guard let doseEntry = state.bolusDose else {
-            return nil
-        }
-
-        let dose = doseEntry.toDoseEntry(endDate: nil)
-        return NewPumpEvent.bolus(dose: dose, date: dose.startDate)
-    }
-
-    /// Width of the window used to decide whether a pump-history bolus corresponds to a Loop-commanded
-    /// bolus (either one still pending, or one Loop already finalized). Chosen generously to tolerate
-    /// clock skew while still only matching a discrete large event.
-    private var bolusReconciliationWindow: TimeInterval {
-        .minutes(4)
-    }
-
-    /// Remember that a Loop command started a bolus, so its later appearance in pump history is not
-    /// double-counted. Pruned to bound memory/persistence growth.
-    func recordLoopInitiatedBolus(_ startDate: Date) {
-        state.loopInitiatedBolusStartDates.append(startDate)
-        state.loopInitiatedBolusStartDates.removeAll { Date.now.timeIntervalSince($0) > .hours(1) }
-    }
-
-    private func isLoopInitiatedBolus(_ timestamp: Date) -> Bool {
-        state.loopInitiatedBolusStartDates.contains {
-            abs(timestamp.timeIntervalSince($0)) <= bolusReconciliationWindow
-        }
-    }
-
-    /// Try to reconcile a still-pending Loop-commanded bolus against a pump-history bolus record.
-    /// On a match, finalizes the pending dose with the pump's true delivered amount and emits a single
-    /// event using the dose's stable identity, clearing the pending state. Returns `true` if this
-    /// history record was consumed (so the caller must not also emit a separate pump-UI bolus).
-    private func reconcilePendingBolus(with item: HistoryItem, into events: inout [NewPumpEvent]) -> Bool {
-        guard let doseEntry = state.bolusDose,
-              let delivered = item.value
-        else {
-            return false
-        }
-
-        // Match by the bolus start time. A pending dose interrupted by a BLE drop is the same physical
-        // delivery as the later history record, so they must share a start time within the window.
-        guard abs(item.timestamp.timeIntervalSince(doseEntry.startDate)) <= bolusReconciliationWindow else {
-            return false
-        }
-
-        // The pump is the source of truth for what was actually delivered (§10).
-        doseEntry.deliveredUnits = min(delivered, doseEntry.value)
-        let endDate = item.timestamp.addingTimeInterval((item.durationInMin ?? 0) * 60)
-        let dose = doseEntry.toDoseEntry(endDate: endDate)
-
-        events.append(NewPumpEvent.bolus(dose: dose, date: dose.startDate))
-        log.info("Reconciled pending bolus with pump history: \(dose.deliveredUnits ?? 0)U delivered")
-
-        doseReporter = nil
-        state.bolusDose = nil
-
-        return true
     }
 }
