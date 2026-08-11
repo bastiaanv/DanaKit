@@ -1,6 +1,5 @@
 struct DanaGeneratePacket {
     let name: String
-    let type: UInt8? = nil
     let opCode: UInt8
     let data: Data?
 }
