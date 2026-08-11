@@ -48,11 +48,10 @@ public class DanaKitPumpManager: DeviceManager {
         )
 
         // Rehydrate an in-progress bolus that survived an app restart so its IOB is not lost and it
-        // can be reconciled against pump history on the next sync (see PumpManagerDoseReporting.md §10).
-        if let pending = state.unfinalizedDose {
-            self.doseEntry = pending
+        // can be reconciled against pump history on the next sync
+        if let pending = state.bolusDose {
             if pending.expectedEndDate > Date.now {
-                self.doseReporter = DanaKitDoseProgressReporter(total: pending.value)
+                doseReporter = DanaKitDoseProgressReporter(total: pending.value)
             }
             // Clear the persisted in-progress flag so continuous-mode syncing is not blocked; the
             // pending dose remains and is finalized against pump history on the next sync.
@@ -73,7 +72,7 @@ public class DanaKitPumpManager: DeviceManager {
 
     private var isPriming = false
     var doseReporter: DanaKitDoseProgressReporter?
-    var doseEntry: UnfinalizedDose?
+    private var lastReportedBolusStep: Int = 0
 
     public var isOnboarded: Bool {
         state.isOnBoarded
@@ -309,7 +308,7 @@ extension DanaKitPumpManager: PumpManager {
         case .canceling:
             return .canceling
         case .inProgress:
-            if let dose = doseEntry?.toDoseEntry(endDate: nil) {
+            if let dose = state.bolusDose?.toDoseEntry(endDate: nil) {
                 return .inProgress(dose)
             }
 
@@ -335,6 +334,7 @@ extension DanaKitPumpManager: PumpManager {
 
         syncPump(completion)
     }
+
     public func createBolusProgressReporter(reportingOn _: DispatchQueue) -> DoseProgressReporter? {
         doseReporter
     }
@@ -376,8 +376,7 @@ extension DanaKitPumpManager: PumpManager {
                     guard !self.state.isPumpSuspended else {
                         self.state.bolusState = .noBolus
                         self.doseReporter = nil
-                        self.doseEntry = nil
-                        self.state.unfinalizedDose = nil
+                        self.state.bolusDose = nil
                         self.notifyStateDidChange()
                         self.disconnect()
 
@@ -387,6 +386,7 @@ extension DanaKitPumpManager: PumpManager {
                     }
 
                     do {
+                        self.lastReportedBolusStep = 0
                         let packet =
                             generatePacketBolusStart(options: PacketBolusStart(
                                 amount: units,
@@ -397,8 +397,7 @@ extension DanaKitPumpManager: PumpManager {
                         guard result.success else {
                             self.state.bolusState = .noBolus
                             self.doseReporter = nil
-                            self.doseEntry = nil
-                            self.state.unfinalizedDose = nil
+                            self.state.bolusDose = nil
                             self.notifyStateDidChange()
                             self.disconnect()
 
@@ -418,15 +417,11 @@ extension DanaKitPumpManager: PumpManager {
                             insulinType: self.state.insulinType
                         )
 
-                        self.doseEntry = doseEntry
                         self.doseReporter = DanaKitDoseProgressReporter(total: units)
-                        self.state.bolusState = .inProgress
 
                         if !self.isPriming {
-                            // Persist the in-progress bolus so it survives BLE loss / app termination
-                            // (§10), and record it as Loop-commanded so its history echo is not
-                            // double-counted (§7). Not done for priming, whose delivery is not a dose.
-                            self.state.unfinalizedDose = doseEntry
+                            self.state.bolusDose = doseEntry
+                            self.state.bolusState = .inProgress
                             self.recordLoopInitiatedBolus(doseEntry.startDate)
 
                             let dose = doseEntry.toDoseEntry(endDate: nil)
@@ -548,7 +543,7 @@ extension DanaKitPumpManager: PumpManager {
             state.bolusState = .noBolus
             notifyStateDidChange()
 
-            guard let doseEntry = self.doseEntry else {
+            guard let doseEntry = state.bolusDose else {
                 completion(.success(nil))
                 return
             }
@@ -560,9 +555,8 @@ extension DanaKitPumpManager: PumpManager {
             )
 
             let dose = doseEntry.toDoseEntry(endDate: bolusCancelledAt)
-            self.doseEntry = nil
             doseReporter = nil
-            state.unfinalizedDose = nil
+            state.bolusDose = nil
 
             sendCancelEvent(dose)
             completion(.success(nil))
@@ -934,7 +928,7 @@ extension DanaKitPumpManager: PumpManager {
 
                             self.log.info("Successfully canceled old temp basal")
                         }
-                        
+
                         let packet = generatePacketBasalSetSuspendOn()
                         let result = try self.bluetooth.writeMessage(packet)
 
@@ -1510,23 +1504,22 @@ public extension DanaKitPumpManager {
     }
 
     internal func notifyBolusError() {
-        guard let doseEntry = doseEntry, state.bolusState != .noBolus else {
+        guard let doseEntry = state.bolusDose, state.bolusState != .noBolus else {
             // Ignore if no bolus is going
             return
         }
 
         logDeviceCommunication("Error during bolus - \(doseEntry.deliveredUnits)U of \(doseEntry.value)U", type: .error)
 
-        self.doseEntry = nil
         doseReporter = nil
-        state.unfinalizedDose = nil
+        state.bolusDose = nil
         state.bolusState = .noBolus
         state.lastStatusDate = Date.now
         notifyStateDidChange()
     }
 
     internal func notifyBolusDidUpdate(deliveredUnits: Double) {
-        guard let doseEntry = self.doseEntry else {
+        guard let doseEntry = state.bolusDose else {
             log.error("No bolus entry found...")
             return
         }
@@ -1535,7 +1528,9 @@ public extension DanaKitPumpManager {
         doseReporter?.notify(deliveredUnits: deliveredUnits)
         notifyStateDidChange()
 
-        if deliveredUnits.truncatingRemainder(dividingBy: getDoseDivider()) == 0.0 {
+        let currentStep = Int(deliveredUnits / 5.0)
+        if currentStep > lastReportedBolusStep {
+            lastReportedBolusStep = currentStep
             do {
                 let command = generatePacketGeneralKeepConnection()
                 let result = try bluetooth.writeMessage(command)
@@ -1575,9 +1570,10 @@ public extension DanaKitPumpManager {
             let bolusCompletedAt = Date.now
 
             do {
-                let resultInitialScreenInformation = try self.bluetooth.writeMessage(generatePacketGeneralGetInitialScreenInformation())
+                let resultInitialScreenInformation = try self.bluetooth
+                    .writeMessage(generatePacketGeneralGetInitialScreenInformation())
                 if resultInitialScreenInformation.success,
-                let data = resultInitialScreenInformation.data as? PacketGeneralGetInitialScreenInformation
+                   let data = resultInitialScreenInformation.data as? PacketGeneralGetInitialScreenInformation
                 {
                     state.reservoirLevel = data.reservoirRemainingUnits
                 }
@@ -1594,7 +1590,7 @@ public extension DanaKitPumpManager {
 
             self.delegateQueue.asyncAfter(deadline: .now() + 1, execute: work)
 
-            guard let doseEntry = self.doseEntry else {
+            guard let doseEntry = state.bolusDose else {
                 log.error("No doseEntry available...")
                 return
             }
@@ -1602,9 +1598,8 @@ public extension DanaKitPumpManager {
             doseEntry.deliveredUnits = deliveredUnits
             let dose = doseEntry.toDoseEntry(endDate: bolusCompletedAt)
 
-            self.doseEntry = nil
             self.doseReporter = nil
-            self.state.unfinalizedDose = nil
+            self.state.bolusDose = nil
 
             guard !self.isPriming else {
                 log.debug("PumpManager is in priming mode -> Skip reporting dose")
@@ -1649,7 +1644,7 @@ public extension DanaKitPumpManager {
     }
 
     internal func checkBolusDone() {
-        guard let doseEntry = self.doseEntry else {
+        guard let doseEntry = state.bolusDose else {
             // Disconnect was done after bolus was complete!
             return
         }
@@ -1661,10 +1656,26 @@ public extension DanaKitPumpManager {
             type: .error
         )
 
-        // Do NOT assume the bolus fully delivered. The dose stays mutable and persisted (so its IOB is
-        // not lost and it is not purged); the next sync reconciles it against the pump's own history and
-        // finalizes it with the true delivered amount (§10 — the pump is the source of truth).
-        // bolusState is cleared so ensureCurrentPumpData will allow the recovery sync to proceed.
+        // We assume the bolus will be completed
+        doseEntry.deliveredUnits = doseEntry.value
+        let dose = doseEntry.toDoseEntry(endDate: Date.now)
+
+        var events = [NewPumpEvent.bolus(dose: dose, date: dose.startDate)]
+        if state.basalDeliveryOrdinal == .tempBasal,
+           let unitsPerHour = state.tempBasalUnits,
+           let duration = state.tempBasalDuration
+        {
+            events.append(NewPumpEvent.tempBasal(
+                dose:
+                DoseEntry.tempBasal(
+                    absoluteUnit: unitsPerHour,
+                    duration: duration,
+                    insulinType: state.insulinType,
+                    startDate: state.basalDeliveryDate,
+                )
+            ))
+        }
+
         state.bolusState = .noBolus
         state.lastStatusDate = Date.now
         notifyStateDidChange()
@@ -1676,6 +1687,16 @@ public extension DanaKitPumpManager {
             }
 
             delegate.pumpManager(self, didError: .uncertainDelivery)
+            delegate.pumpManager(
+                self,
+                hasNewPumpEvents: events,
+                lastReconciliation: self.state.lastStatusDate,
+                replacePendingEvents: true,
+            ) { error in
+                if let error = error {
+                    self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
+                }
+            }
         }
     }
 
@@ -1696,5 +1717,4 @@ public extension DanaKitPumpManager {
         log.error(logLine)
         logDeviceCommunication(logLine, type: .error)
     }
-
 }

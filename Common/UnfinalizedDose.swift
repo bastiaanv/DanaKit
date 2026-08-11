@@ -1,7 +1,7 @@
 import Foundation
 import LoopKit
 
-public class UnfinalizedDose : NSObject {
+public class UnfinalizedDose: NSObject {
     public typealias RawValue = [String: Any]
 
     public let type: DoseType
@@ -12,7 +12,12 @@ public class UnfinalizedDose : NSObject {
     public let insulinType: InsulinType?
     public let automatic: Bool?
 
-    public convenience init(units: Double, duration: TimeInterval, activationType: BolusActivationType, insulinType: InsulinType?) {
+    public convenience init(
+        units: Double,
+        duration: TimeInterval,
+        activationType: BolusActivationType,
+        insulinType: InsulinType?
+    ) {
         self.init(
             type: .bolus,
             startDate: Date.now,
@@ -69,7 +74,7 @@ public class UnfinalizedDose : NSObject {
             isMutable: true
         )
     }
-    
+
     public required convenience init?(rawValue: RawValue) {
         guard let typeRawValue = rawValue["type"] as? DoseType.RawValue,
               let type = DoseType(rawValue: typeRawValue),

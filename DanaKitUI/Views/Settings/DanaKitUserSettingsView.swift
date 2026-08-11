@@ -122,9 +122,11 @@ struct DanaKitUserSettingsView: View {
                         Text("Backlight on time", comment: "backlightOnTime")
                             .foregroundColor(Color.primary)
                         Spacer()
-                        Text(String(format:
-                                        String(localized: "%d sec", comment: "second placeholder"),
-                                    viewModel.backlightOnTimeInSec))
+                        Text(String(
+                            format:
+                            String(localized: "%d sec", comment: "second placeholder"),
+                            viewModel.backlightOnTimeInSec
+                        ))
                     }
                 }
                 NavigationLink(destination: lcdOnTimeInSecView) {
@@ -132,9 +134,11 @@ struct DanaKitUserSettingsView: View {
                         Text("Lcd on time", comment: "lcdOnTime")
                             .foregroundColor(Color.primary)
                         Spacer()
-                        Text(String(format:
-                                        String(localized: "%d sec", comment: "second placeholder"),
-                                    viewModel.lcdOnTimeInSec))
+                        Text(String(
+                            format:
+                            String(localized: "%d sec", comment: "second placeholder"),
+                            viewModel.lcdOnTimeInSec
+                        ))
                     }
                 }
                 NavigationLink(destination: beepAlarmView) {

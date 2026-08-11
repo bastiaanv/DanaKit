@@ -2,8 +2,7 @@
 import Testing
 
 struct EncryptionTests {
-    @Test
-    func testEncodePumpCheckCommand() {
+    @Test func testEncodePumpCheckCommand() {
         let param = EncryptParams(
             operationCode: DanaPacketType.OPCODE_ENCRYPTION__PUMP_CHECK,
             data: nil,
@@ -14,13 +13,12 @@ struct EncryptionTests {
             passKeySecret: Data()
         )
         let result = encrypt(param)
-        
+
         #expect(result.isEncryptionMode)
         #expect(result.data == Data([165, 165, 12, 233, 243, 217, 162, 187, 191, 216, 195, 190, 218, 181, 198, 84, 137, 90, 90]))
     }
 
-    @Test
-    func testEncodeTimeInformationCommand() {
+    @Test func testEncodeTimeInformationCommand() {
         let param = EncryptParams(
             operationCode: DanaPacketType.OPCODE_ENCRYPTION__TIME_INFORMATION,
             data: Data([0, 0, 0, 0]),
@@ -35,8 +33,7 @@ struct EncryptionTests {
         #expect(result.data == Data([165, 165, 6, 233, 242, 143, 232, 243, 143, 247, 28, 90, 90]))
     }
 
-    @Test
-    func testEncodeTimeInformationCommandEnhancedEncryption2() {
+    @Test func testEncodeTimeInformationCommandEnhancedEncryption2() {
         let param = EncryptParams(
             operationCode: DanaPacketType.OPCODE_ENCRYPTION__TIME_INFORMATION,
             data: Data([0, 0, 0, 0]),
@@ -51,8 +48,7 @@ struct EncryptionTests {
         #expect(result.data == Data([165, 165, 6, 233, 242, 143, 229, 226, 137, 183, 82, 90, 90]))
     }
 
-    @Test
-    func testEncodeTimeInformationCommandEmpty() {
+    @Test func testEncodeTimeInformationCommandEmpty() {
         let param = EncryptParams(
             operationCode: DanaPacketType.OPCODE_ENCRYPTION__TIME_INFORMATION,
             data: Data(),
@@ -67,8 +63,7 @@ struct EncryptionTests {
         #expect(result.data == Data([165, 165, 2, 233, 242, 134, 120, 90, 90]))
     }
 
-    @Test
-    func testEncodeGetPumpCheckCommand() {
+    @Test func testEncodeGetPumpCheckCommand() {
         let param = EncryptParams(
             operationCode: DanaPacketType.OPCODE_ENCRYPTION__GET_PUMP_CHECK,
             data: Data(),
@@ -83,8 +78,7 @@ struct EncryptionTests {
         #expect(result.data == Data([165, 165, 2, 233, 0, 81, 109, 90, 90]))
     }
 
-    @Test
-    func testEncodeGetEasyMenuCheckCommand() {
+    @Test func testEncodeGetEasyMenuCheckCommand() {
         let param = EncryptParams(
             operationCode: DanaPacketType.OPCODE_ENCRYPTION__GET_EASYMENU_CHECK,
             data: Data(),
@@ -99,8 +93,7 @@ struct EncryptionTests {
         #expect(result.data == Data([165, 165, 2, 233, 7, 33, 82, 90, 90]))
     }
 
-    @Test
-    func testEncodePasskeyRequestCommand() {
+    @Test func testEncodePasskeyRequestCommand() {
         let param = EncryptParams(
             operationCode: DanaPacketType.OPCODE_ENCRYPTION__PASSKEY_REQUEST,
             data: Data(),
@@ -115,8 +108,7 @@ struct EncryptionTests {
         #expect(result.data == Data([165, 165, 2, 233, 34, 80, 77, 90, 90]))
     }
 
-    @Test
-    func testEncodeCheckPasskeyCommand() {
+    @Test func testEncodeCheckPasskeyCommand() {
         let param = EncryptParams(
             operationCode: DanaPacketType.OPCODE_ENCRYPTION__CHECK_PASSKEY,
             data: Data([1, 2]),
@@ -131,8 +123,7 @@ struct EncryptionTests {
         #expect(result.data == Data([165, 165, 4, 233, 35, 228, 128, 28, 180, 90, 90]))
     }
 
-    @Test
-    func testEncodeNormalCommandEnhancedEncryption2() {
+    @Test func testEncodeNormalCommandEnhancedEncryption2() {
         let param = EncryptParams(
             operationCode: DanaPacketType.OPCODE_BASAL__SET_TEMPORARY_BASAL,
             data: Data([200, 1]),
@@ -147,8 +138,7 @@ struct EncryptionTests {
         #expect(result.data == Data([165, 165, 4, 73, 147, 71, 233, 137, 149, 90, 90]))
     }
 
-    @Test
-    func testEncodeNormalCommandEmptyDataEnhancedEncryption2() {
+    @Test func testEncodeNormalCommandEmptyDataEnhancedEncryption2() {
         let param = EncryptParams(
             operationCode: DanaPacketType.OPCODE_REVIEW__INITIAL_SCREEN_INFORMATION,
             data: Data(),
@@ -166,8 +156,7 @@ struct EncryptionTests {
     // TODO: Need example keys from older Dana pumps
     // func testEncodeNormalCommandEmptyDataEnhancedEncryption0() {}
 
-    @Test
-    func testEncodeNormalCommandEmptyDataEnhancedEncryption1() {
+    @Test func testEncodeNormalCommandEmptyDataEnhancedEncryption1() {
         // DANA_PACKET_TYPE.ETC__KEEP_CONNECTION
         let data = Data([165, 165, 2, 65, 9, 176, 75, 90, 90])
         let enhancedEncryption: UInt8 = 1
@@ -189,8 +178,7 @@ struct EncryptionTests {
         #expect(result.buffer == Data([19, 203, 1, 47, 8, 203, 194, 168, 207]))
     }
 
-    @Test
-    func testEncodeNormalCommandEmptyDataEnhancedEncryption1MultipleMessages() {
+    @Test func testEncodeNormalCommandEmptyDataEnhancedEncryption1MultipleMessages() {
         // DANA_PACKET_TYPE.ETC__KEEP_CONNECTION
         let dataKeepConnection = Data([165, 165, 2, 65, 9, 176, 75, 90, 90])
         let enhancedEncryption: UInt8 = 1
@@ -246,8 +234,7 @@ struct EncryptionTests {
         #expect(result3.buffer == Data([70, 81, 52, 121, 145, 240, 177, 76, 177]))
     }
 
-    @Test
-    func testEncodeSecondLevel() {
+    @Test func testEncodeSecondLevel() {
         // DANA_PACKET_TYPE.OPCODE_REVIEW__INITIAL_SCREEN_INFORMATION
         let data = Data([165, 165, 2, 73, 241, 235, 35, 90, 90])
         let enhancedEncryption: UInt8 = 2

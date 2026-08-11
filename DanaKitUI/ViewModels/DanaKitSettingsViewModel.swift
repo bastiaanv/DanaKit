@@ -42,7 +42,7 @@ class DanaKitSettingsViewModel: ObservableObject {
     private var didFinish: (() -> Void)?
     private(set) var userOptionsView: DanaKitUserSettingsView
     private(set) var refillView: DanaKitRefillReservoirAndCannulaView
-    
+
     let toUserOptions: () -> Void
     let toBolusSpeed: () -> Void
     let toInsulinType: () -> Void

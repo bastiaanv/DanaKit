@@ -4,7 +4,6 @@ import LoopKit
 // MARK: - History / pump data sync
 
 extension DanaKitPumpManager {
-    /// Extention from ensureCurrentPumpData, but overrides the stale data check
     public func syncPump(_ completion: ((Date?) -> Void)?) {
         delegateQueue.async {
             let this = self
@@ -207,24 +206,18 @@ extension DanaKitPumpManager {
                     ))
 
                 case HistoryCode.RECORD_TYPE_BOLUS:
-                    // Reconcile a Loop-commanded bolus that is still in progress (e.g. after a BLE
-                    // drop or app restart) against the pump's actual delivered history. If matched,
-                    // this finalizes the pending dose with the true delivered amount and emits it
-                    // using the dose's stable identity, so nothing more is added for this record.
-                    // This runs regardless of the bolus-sync preference: a lost pending dose must be
-                    // recovered for IOB correctness.
-                    if self.reconcilePendingBolus(with: item, into: &events) {
+                    if reconcilePendingBolus(with: item, into: &events) {
                         break
                     }
 
                     // Respect the user's opt-out of reporting new pump-history boluses.
-                    if self.state.isBolusSyncDisabled {
+                    if state.isBolusSyncDisabled {
                         break
                     }
 
                     // Loop already reported this bolus (it appears in history after Loop finalised
                     // it), so skip it and avoid double-counting (§7 reconciliation).
-                    if self.isLoopInitiatedBolus(item.timestamp) {
+                    if isLoopInitiatedBolus(item.timestamp) {
                         break
                     }
 
@@ -235,7 +228,7 @@ extension DanaKitPumpManager {
                             deliveredUnits: item.value!,
                             duration: item.durationInMin! * 60,
                             activationType: .manualNoRecommendation,
-                            insulinType: self.state.insulinType,
+                            insulinType: state.insulinType,
                             startDate: item.timestamp,
                             wasProgrammedByPumpUI: true
                         ),
@@ -247,7 +240,7 @@ extension DanaKitPumpManager {
                         events.append(NewPumpEvent.suspend(dose: DoseEntry.suspend(suspendDate: item.timestamp)))
                     } else {
                         events.append(NewPumpEvent.resume(
-                            dose: DoseEntry.resume(insulinType: self.state.insulinType, resumeDate: item.timestamp),
+                            dose: DoseEntry.resume(insulinType: state.insulinType, resumeDate: item.timestamp),
                             date: item.timestamp
                         ))
                     }
@@ -258,10 +251,10 @@ extension DanaKitPumpManager {
                         break
                     }
 
-                    if self.state.cannulaDate == nil {
-                        self.state.cannulaDate = item.timestamp
-                    } else if let cannulaDate = self.state.cannulaDate, item.timestamp > cannulaDate {
-                        self.state.cannulaDate = item.timestamp
+                    if state.cannulaDate == nil {
+                        state.cannulaDate = item.timestamp
+                    } else if let cannulaDate = state.cannulaDate, item.timestamp > cannulaDate {
+                        state.cannulaDate = item.timestamp
                     }
 
                     events.append(NewPumpEvent(
@@ -282,10 +275,10 @@ extension DanaKitPumpManager {
                     ))
 
                 case HistoryCode.RECORD_TYPE_REFILL:
-                    if self.state.reservoirDate == nil {
-                        self.state.reservoirDate = item.timestamp
-                    } else if let reservoirDate = self.state.reservoirDate, item.timestamp > reservoirDate {
-                        self.state.reservoirDate = item.timestamp
+                    if state.reservoirDate == nil {
+                        state.reservoirDate = item.timestamp
+                    } else if let reservoirDate = state.reservoirDate, item.timestamp > reservoirDate {
+                        state.reservoirDate = item.timestamp
                     }
 
                     events.append(NewPumpEvent(
@@ -306,10 +299,6 @@ extension DanaKitPumpManager {
                     ))
 
                 default:
-                    // Includes RECORD_TYPE_TEMP_BASAL and RECORD_TYPE_BASALHOUR. The history record
-                    // carries no duration, so a trustworthy temp-basal dose cannot be reconstructed
-                    // from it; the running temp basal is instead re-reported from in-app state via
-                    // getTempBasalEvent() in syncPump.
                     break
                 }
             }
@@ -359,7 +348,7 @@ extension DanaKitPumpManager {
     /// A mutable bolus still awaiting reconciliation (e.g. after a BLE drop or app restart). Re-report
     /// it on every sync so Loop does not purge it, until pump history reconciles and finalizes it.
     private func getPendingBolusEvent() -> NewPumpEvent? {
-        guard let doseEntry = doseEntry else {
+        guard let doseEntry = state.bolusDose else {
             return nil
         }
 
@@ -392,7 +381,7 @@ extension DanaKitPumpManager {
     /// event using the dose's stable identity, clearing the pending state. Returns `true` if this
     /// history record was consumed (so the caller must not also emit a separate pump-UI bolus).
     private func reconcilePendingBolus(with item: HistoryItem, into events: inout [NewPumpEvent]) -> Bool {
-        guard let doseEntry = doseEntry,
+        guard let doseEntry = state.bolusDose,
               let delivered = item.value
         else {
             return false
@@ -412,9 +401,8 @@ extension DanaKitPumpManager {
         events.append(NewPumpEvent.bolus(dose: dose, date: dose.startDate))
         log.info("Reconciled pending bolus with pump history: \(dose.deliveredUnits ?? 0)U delivered")
 
-        self.doseEntry = nil
         doseReporter = nil
-        state.unfinalizedDose = nil
+        state.bolusDose = nil
 
         return true
     }

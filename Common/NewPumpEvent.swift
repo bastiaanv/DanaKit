@@ -7,7 +7,8 @@ public extension NewPumpEvent {
         return NewPumpEvent(
             date: date,
             dose: dose,
-            raw: "\(DoseType.bolus.rawValue) \(dose.programmedUnits) \(dateFormatter.string(from: dose.startDate))".data(using: .utf8) ?? Data([]),
+            raw: "\(DoseType.bolus.rawValue) \(dose.programmedUnits) \(dateFormatter.string(from: dose.startDate))"
+                .data(using: .utf8) ?? Data([]),
             title: String(localized: "Bolus", comment: "Pump Event title for UnfinalizedDose with doseType of .bolus")
         )
     }
