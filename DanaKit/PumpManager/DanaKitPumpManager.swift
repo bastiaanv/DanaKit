@@ -1527,33 +1527,24 @@ public extension DanaKitPumpManager {
         doseReporter?.notify(deliveredUnits: deliveredUnits)
         notifyStateDidChange()
 
-        let currentStep = Int(deliveredUnits / 5.0)
+        let currentStep = Int(deliveredUnits)
         if currentStep > lastReportedBolusStep {
             lastReportedBolusStep = currentStep
-            do {
-                let command = generatePacketGeneralKeepConnection()
-                let result = try bluetooth.writeMessage(command)
+            DispatchQueue.global(qos: .userInitiated).async {
+                do {
+                    let command = generatePacketGeneralKeepConnection()
+                    let result = try self.bluetooth.writeMessage(command)
 
-                guard result.success else {
-                    log.warning("Pump declined keepalive")
-                    return
+                    guard result.success else {
+                        self.log.warning("Pump declined keepalive")
+                        return
+                    }
+
+                    self.log.info("Pump accepted keepalive")
+                } catch {
+                    self.log.error("Failed to send keepalive: \(error)")
                 }
-
-                log.info("Pump accepted keepalive")
-            } catch {
-                log.error("Failed to send keepalive: \(error)")
             }
-        }
-    }
-
-    private func getDoseDivider() -> Double {
-        switch state.bolusSpeed {
-        case .speed12:
-            return 20.0
-        case .speed30:
-            return 8.0
-        case .speed60:
-            return 4.0
         }
     }
 
