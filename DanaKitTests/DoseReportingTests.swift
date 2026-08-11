@@ -1,4 +1,5 @@
 @testable import DanaKit
+import LoopKit
 import XCTest
 
 /// Tests covering the dose-accounting behaviors called out in PumpManagerDoseReporting.md §11:

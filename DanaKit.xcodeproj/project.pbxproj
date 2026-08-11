@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1029AE4827094D0E00B7F5B6 /* DanaKitPumpManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1029AE4627094D0E00B7F5B6 /* DanaKitPumpManager.swift */; };
-		D1AB2C3D4E5F60718293A4B5D /* DanaKitPumpManager+History.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AB2C3D4E5F60718293A4B5C /* DanaKitPumpManager+History.swift */; };
 		1029AE4927094D0E00B7F5B6 /* DanaKitPumpManagerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1029AE4727094D0E00B7F5B6 /* DanaKitPumpManagerState.swift */; };
+		3E07E695302A5B440084A02D /* DanaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84752E8226ED0FFE009FD801 /* DanaKit.framework */; platformFilter = ios; };
 		3E489BE02FABC5D5003C0B39 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E489BDF2FABC5D3003C0B39 /* String.swift */; };
 		3E6CD15B2F3F9250009648C2 /* DanaKitDispatchGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E6CD15A2F3F9250009648C2 /* DanaKitDispatchGroup.swift */; };
 		3EC76F7D2E5B2DA5002A3D2B /* DanaKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84752E8226ED0FFE009FD801 /* DanaKit.framework */; };
@@ -132,9 +132,17 @@
 		B8FB5F172B5D91A6001C88BA /* NewPumpEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FB5F162B5D91A6001C88BA /* NewPumpEvent.swift */; };
 		B8FDA0DE2B77D037007004A5 /* PumpManagerAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FDA0DD2B77D037007004A5 /* PumpManagerAlert.swift */; };
 		B8FF961A2B4305A300C14280 /* NavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8FF96192B4305A300C14280 /* NavigationLink.swift */; };
+		D1AB2C3D4E5F60718293A4B5D /* DanaKitPumpManager+History.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AB2C3D4E5F60718293A4B5C /* DanaKitPumpManager+History.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3E07E696302A5B440084A02D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84752E7926ED0FFE009FD801 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84752E8126ED0FFE009FD801;
+			remoteInfo = DanaKit;
+		};
 		3EC76F7F2E5B2DA5002A3D2B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 84752E7926ED0FFE009FD801 /* Project object */;
@@ -160,8 +168,8 @@
 
 /* Begin PBXFileReference section */
 		1029AE4627094D0E00B7F5B6 /* DanaKitPumpManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DanaKitPumpManager.swift; sourceTree = "<group>"; };
-		D1AB2C3D4E5F60718293A4B5C /* DanaKitPumpManager+History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DanaKitPumpManager+History.swift"; sourceTree = "<group>"; };
 		1029AE4727094D0E00B7F5B6 /* DanaKitPumpManagerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DanaKitPumpManagerState.swift; sourceTree = "<group>"; };
+		3E07E691302A5B440084A02D /* DanaKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DanaKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E489BDF2FABC5D3003C0B39 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		3E6CD15A2F3F9250009648C2 /* DanaKitDispatchGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanaKitDispatchGroup.swift; sourceTree = "<group>"; };
 		84752E8226ED0FFE009FD801 /* DanaKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DanaKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -289,6 +297,7 @@
 		C187C199279086A8006E3557 /* DanaKitPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DanaKitPlugin.h; sourceTree = "<group>"; };
 		C187C1A2279087A4006E3557 /* OSLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSLog.swift; sourceTree = "<group>"; };
 		C187C1A427908B1C006E3557 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D1AB2C3D4E5F60718293A4B5C /* DanaKitPumpManager+History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DanaKitPumpManager+History.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -305,10 +314,19 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		3E07E692302A5B440084A02D /* DanaKitTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DanaKitTests; sourceTree = "<group>"; };
 		3E6007882D0C5D0C00B186D1 /* DanaKitPlugin */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3E60078D2D0C5D0C00B186D1 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = DanaKitPlugin; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3E07E68E302A5B440084A02D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E07E695302A5B440084A02D /* DanaKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3E6007842D0C5D0C00B186D1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -346,6 +364,7 @@
 				B88516882B305D3F0063402A /* DanaKitUI */,
 				C187C198279086A8006E3557 /* DanaKitPlugin */,
 				B66A6B772E6B985D00F1641B /* Localization */,
+				3E07E692302A5B440084A02D /* DanaKitTests */,
 				84752E8326ED0FFE009FD801 /* Products */,
 				84752E9C26ED10A0009FD801 /* Frameworks */,
 				3E6007AA2D0C5DF200B186D1 /* Recovered References */,
@@ -357,6 +376,7 @@
 			children = (
 				84752E8226ED0FFE009FD801 /* DanaKit.framework */,
 				C187C197279086A8006E3557 /* DanaKitPlugin.loopplugin */,
+				3E07E691302A5B440084A02D /* DanaKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -623,6 +643,29 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		3E07E690302A5B440084A02D /* DanaKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3E07E69A302A5B440084A02D /* Build configuration list for PBXNativeTarget "DanaKitTests" */;
+			buildPhases = (
+				3E07E68D302A5B440084A02D /* Sources */,
+				3E07E68E302A5B440084A02D /* Frameworks */,
+				3E07E68F302A5B440084A02D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3E07E697302A5B440084A02D /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				3E07E692302A5B440084A02D /* DanaKitTests */,
+			);
+			name = DanaKitTests;
+			packageProductDependencies = (
+			);
+			productName = DanaKitTests;
+			productReference = 3E07E691302A5B440084A02D /* DanaKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		3E6007862D0C5D0C00B186D1 /* DanaKitPlugin */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3E60078E2D0C5D0C00B186D1 /* Build configuration list for PBXNativeTarget "DanaKitPlugin" */;
@@ -675,10 +718,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastSwiftUpdateCheck = 1430;
+				LastSwiftUpdateCheck = 2660;
 				LastUpgradeCheck = 1540;
 				ORGANIZATIONNAME = "Randall Knutson";
 				TargetAttributes = {
+					3E07E690302A5B440084A02D = {
+						CreatedOnToolsVersion = 26.6;
+					};
 					3E6007862D0C5D0C00B186D1 = {
 						CreatedOnToolsVersion = 16.1;
 					};
@@ -729,11 +775,19 @@
 			targets = (
 				84752E8126ED0FFE009FD801 /* DanaKit */,
 				3E6007862D0C5D0C00B186D1 /* DanaKitPlugin */,
+				3E07E690302A5B440084A02D /* DanaKitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3E07E68F302A5B440084A02D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3E6007852D0C5D0C00B186D1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -756,6 +810,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3E07E68D302A5B440084A02D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3E6007832D0C5D0C00B186D1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -888,6 +949,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3E07E697302A5B440084A02D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 84752E8126ED0FFE009FD801 /* DanaKit */;
+			targetProxy = 3E07E696302A5B440084A02D /* PBXContainerItemProxy */;
+		};
 		3EC76F802E5B2DA5002A3D2B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 84752E8126ED0FFE009FD801 /* DanaKit */;
@@ -896,6 +963,51 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		3E07E698302A5B440084A02D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bastiaanv.DanaKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3E07E699302A5B440084A02D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bastiaanv.DanaKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		3E60078B2D0C5D0C00B186D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1213,6 +1325,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3E07E69A302A5B440084A02D /* Build configuration list for PBXNativeTarget "DanaKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E07E698302A5B440084A02D /* Debug */,
+				3E07E699302A5B440084A02D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3E60078E2D0C5D0C00B186D1 /* Build configuration list for PBXNativeTarget "DanaKitPlugin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
