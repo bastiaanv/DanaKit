@@ -157,7 +157,11 @@ import Testing
             isf: Array(repeating: 1, count: 23)
         )
 
-        let expectedError = NSError(domain: "INVALID_LENGTH", code: 1, userInfo: [NSLocalizedDescriptionKey: "Invalid length isf or ic"])
+        let expectedError = NSError(
+            domain: "INVALID_LENGTH",
+            code: 1,
+            userInfo: [NSLocalizedDescriptionKey: "Invalid length isf or ic"]
+        )
         #expect(throws: expectedError) { try generatePacketBolusSet24CIRCFArray(options: optionsInvalidIc) }
         #expect(throws: expectedError) { try generatePacketBolusSet24CIRCFArray(options: optionsInvalidIsf) }
     }

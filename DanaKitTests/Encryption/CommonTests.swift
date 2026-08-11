@@ -1,10 +1,8 @@
 @testable import DanaKit
 import Testing
 
-@Suite
 class CommonUtilsTests {
-    @Test
-    func encodePacketSerialNumber() {
+    @Test  func encodePacketSerialNumber() {
         // Pump check command
         var message = Data([165, 165, 12, 1, 0])
         message += DEVICE_NAME.utf8.map { UInt8($0) }
