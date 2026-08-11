@@ -345,25 +345,29 @@ class DanaKitSettingsViewModel: ObservableObject {
     }
 
     func stopTempBasal() {
-        if isTempBasal, !isUpdatingPumpState, !isSyncing {
-            isUpdatingPumpState = true
-
-            // Stop temp basal
-            pumpManager?.enactTempBasal(unitsPerHour: 0, for: 0, completion: { error in
-                DispatchQueue.main.async {
-                    self.basalButtonText = self.updateBasalButtonText()
-                    self.isUpdatingPumpState = false
-                }
-
-                // Check if action failed, otherwise skip state sync
-                guard error == nil else {
-                    self.log.error("\(#function): failed to stop temp basal. Error: \(error!.localizedDescription)")
-                    return
-                }
-            })
-
+        guard let pumpManager = self.pumpManager else {
             return
         }
+        
+        if isTempBasalLocked || isUpdatingPumpState || isSyncing {
+            return
+        }
+        
+        isUpdatingPumpState = true
+
+        // Stop temp basal
+        pumpManager.enactTempBasal(unitsPerHour: 0, for: 0, completion: { error in
+            DispatchQueue.main.async {
+                self.basalButtonText = self.updateBasalButtonText()
+                self.isUpdatingPumpState = false
+            }
+
+            // Check if action failed, otherwise skip state sync
+            guard error == nil else {
+                self.log.error("\(#function): failed to stop temp basal. Error: \(error!.localizedDescription)")
+                return
+            }
+        })
     }
 
     func suspendResumeButtonPressed() {
@@ -378,7 +382,7 @@ class DanaKitSettingsViewModel: ObservableObject {
         isUpdatingPumpState = true
 
         if pumpManager.state.isPumpSuspended {
-            self.pumpManager?.resumeDelivery { error in
+            pumpManager.resumeDelivery { error in
                 DispatchQueue.main.async {
                     self.basalButtonText = self.updateBasalButtonText()
                     self.isUpdatingPumpState = false
