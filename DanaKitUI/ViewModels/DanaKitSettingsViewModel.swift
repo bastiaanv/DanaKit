@@ -80,6 +80,14 @@ class DanaKitSettingsViewModel: ObservableObject {
 
         return travelLockEnabled && !pumpManager.state.isPumpSuspended
     }
+    
+    public var isTempBasalLocked: Bool {
+        guard let pumpManager = self.pumpManager else {
+            return false
+        }
+                
+        return travelLockEnabled || !(pumpManager.state.basalDeliveryOrdinal == .tempBasal && pumpManager.state.tempBasalEndsAt > Date.now)
+    }
 
     let basalRateFormatter: NumberFormatter = {
         let numberFormatter = NumberFormatter()

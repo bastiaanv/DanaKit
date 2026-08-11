@@ -48,7 +48,7 @@ struct DanaKitSettingsView: View {
             ]
         )
     }
-
+    
     var blindReservoirCannulaRefill: ActionSheet {
         ActionSheet(title: Text("Type of refill", comment: "Title for refill action"), buttons: [
             .default(Text("Cannula only", comment: "Button text to cannula only")) {
@@ -199,10 +199,19 @@ struct DanaKitSettingsView: View {
                 }
             }
 
-            Section(header: SectionHeader(label: String(localized:
-                "Manage",
-                comment: "The title of the manage section in DanaKit settings"
-            ))) {
+            Section(
+                header: SectionHeader(label: String(localized:
+                    "Manage",
+                    comment: "The title of the manage section in DanaKit settings"
+                )),
+                footer: viewModel.travelLockEnabled ? Text(
+                    "Pump management actions temporarily locked.\nLong press \"Suspend Insulin Delivery\" to unlock.",
+                    comment: "Footer in the manage section explaining how to disable the travel lock"
+                ) : Text(
+                    "Long press the \"Suspend Insulin Delivery\" button to enable the travel lock.",
+                    comment: "Footer in the manage section explaining how to enable the travel lock"
+                )
+            ) {
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
                     quickActionCard(
                         title: $viewModel.basalButtonText.wrappedValue,
@@ -220,13 +229,16 @@ struct DanaKitSettingsView: View {
 
                     quickActionCard(
                         title: String(localized: "Stop temp basal", comment: "Dana settings stop temp basal"),
-                        systemImage: "xmark.circle.fill",
-                        tint: viewModel.isTempBasal ? Color.accentColor : Color.secondary,
-                        isVisuallyDisabled: !viewModel.isTempBasal || viewModel.isUpdatingPumpState || viewModel.isSyncing,
+                        systemImage: viewModel.travelLockEnabled ? "lock.fill" : "xmark.circle.fill",
+                        tint: tempBasalIconColor,
+                        isVisuallyDisabled: viewModel.isTempBasalLocked || viewModel.isUpdatingPumpState || viewModel.isSyncing,
                         showSpinner: viewModel.isTempBasal && viewModel.isUpdatingPumpState,
                         spinnerReplacesIcon: true
                     ) {
                         viewModel.stopTempBasal()
+                    }
+                    .onLongPressGesture(minimumDuration: 0.5) {
+                        viewModel.toggleTravelLock()
                     }
                 }
                 .padding(.vertical, 4)
@@ -655,6 +667,14 @@ struct DanaKitSettingsView: View {
         }
 
         return viewModel.isSuspended ? guidanceColors.warning : Color.accentColor
+    }
+    
+    private var tempBasalIconColor: Color {
+        if viewModel.travelLockEnabled {
+            return guidanceColors.warning
+        }
+        
+        return viewModel.isTempBasal ? Color.accentColor : Color.secondary
     }
 
     @ViewBuilder private func quickActionCard(

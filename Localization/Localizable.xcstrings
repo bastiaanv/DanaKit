@@ -14749,6 +14749,9 @@
         }
       }
     },
+    "Long press the \"Suspend Insulin Delivery\" button to enable the travel lock." : {
+
+    },
     "Low pump battery" : {
       "comment" : "Alert title for lowBattery",
       "extractionState" : "manual",
@@ -19449,6 +19452,9 @@
           }
         }
       }
+    },
+    "Pump management actions temporarily locked.\nLong press \"Suspend Insulin Delivery\" to unlock." : {
+
     },
     "Pump name" : {
       "comment" : "Text for Dana pump name",
