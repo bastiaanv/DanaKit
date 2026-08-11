@@ -15073,6 +15073,9 @@
         }
       }
     },
+    "Manage" : {
+
+    },
     "Manually sync Pump time" : {
       "comment" : "Label for syncing the time on the pump",
       "extractionState" : "manual",
@@ -27220,6 +27223,9 @@
           }
         }
       }
+    },
+    "Sync" : {
+
     },
     "Sync pump data" : {
       "comment" : "DanaKit sync pump",
