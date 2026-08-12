@@ -205,40 +205,41 @@ struct DanaKitSettingsView: View {
                     comment: "The title of the manage section in DanaKit settings"
                 )),
                 footer: viewModel.travelLockEnabled ? Text(
-                    "Pump management actions temporarily locked.\nLong press \"Suspend Insulin Delivery\" to unlock.",
+                    "Pump management actions are locked.\nLong press either button to unlock.",
                     comment: "Footer in the manage section explaining how to disable the travel lock"
                 ) : Text(
-                    "Long press the \"Suspend Insulin Delivery\" button to enable the travel lock.",
+                    "Long press either button to lock the pump management actions.",
                     comment: "Footer in the manage section explaining how to enable the travel lock"
                 )
             ) {
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
-                    quickActionCard(
-                        title: $viewModel.basalButtonText.wrappedValue,
-                        systemImage: suspendResumeIconName,
-                        tint: suspendResumeIconColor,
-                        isVisuallyDisabled: viewModel.isSuspendActionLocked || viewModel.isUpdatingPumpState || viewModel.isSyncing,
-                        showSpinner: viewModel.isUpdatingPumpState,
-                        spinnerReplacesIcon: true
+                    pumpManagementActionCard(
+                        title: viewModel.isSuspended
+                            ? String(localized: "Resume Insulin Delivery", comment: "Dana settings resume delivery")
+                            : String(localized: "Suspend Insulin Delivery", comment: "Dana settings suspend delivery"),
+                        systemImage: viewModel.isSuspended ? "play.circle.fill" : "pause.circle.fill",
+                        iconColor: viewModel.isSuspended ? Color.accentColor :  guidanceColors.warning
                     ) {
                         viewModel.suspendResumeButtonPressed()
                     }
-                    .onLongPressGesture(minimumDuration: 0.5) {
-                        viewModel.toggleTravelLock()
-                    }
 
-                    quickActionCard(
-                        title: String(localized: "Stop temp basal", comment: "Dana settings stop temp basal"),
-                        systemImage: viewModel.travelLockEnabled ? "lock.fill" : "xmark.circle.fill",
-                        tint: tempBasalIconColor,
-                        isVisuallyDisabled: viewModel.isTempBasalLocked || viewModel.isUpdatingPumpState || viewModel.isSyncing,
-                        showSpinner: viewModel.isTempBasal && viewModel.isUpdatingPumpState,
-                        spinnerReplacesIcon: true
-                    ) {
-                        viewModel.stopTempBasal()
-                    }
-                    .onLongPressGesture(minimumDuration: 0.5) {
-                        viewModel.toggleTravelLock()
+                    if viewModel.isTempBasal {
+                        pumpManagementActionCard(
+                            title: String(localized: "Stop temp basal", comment: "Dana settings stop temp basal"),
+                            systemImage: "xmark.circle.fill",
+                            iconColor: Color.accentColor
+                        ) {
+                            viewModel.stopTempBasal()
+                        }
+                    } else {
+                        pumpManagementActionCard(
+                            title: String(localized: "Set manual temp basal", comment: "Dana settings set manual temp basal"),
+                            systemImage: "plus.circle.fill",
+                            iconColor: Color.accentColor,
+                            disabled: viewModel.isSuspended
+                        ) {
+                            viewModel.setManualTempBasal()
+                        }
                     }
                 }
                 .padding(.vertical, 4)
@@ -653,59 +654,30 @@ struct DanaKitSettingsView: View {
         return guidanceColors.critical
     }
 
-    private var suspendResumeIconName: String {
-        if viewModel.isSuspendActionLocked {
-            return "lock.fill"
-        }
-
-        return viewModel.isSuspended ? "play.circle.fill" : "pause.circle.fill"
-    }
-
-    private var suspendResumeIconColor: Color {
-        if viewModel.isSuspendActionLocked {
-            return guidanceColors.warning
-        }
-
-        return viewModel.isSuspended ? guidanceColors.warning : Color.accentColor
-    }
-    
-    private var tempBasalIconColor: Color {
-        if viewModel.travelLockEnabled {
-            return guidanceColors.warning
-        }
-        
-        return viewModel.isTempBasal ? Color.accentColor : Color.secondary
-    }
-
-    @ViewBuilder private func quickActionCard(
+    @ViewBuilder private func pumpManagementActionCard(
         title: String,
         systemImage: String,
-        tint: Color,
-        isVisuallyDisabled: Bool,
-        showSpinner: Bool,
-        spinnerReplacesIcon: Bool = false,
+        iconColor: Color,
+        disabled: Bool = false,
         action: @escaping () -> Void
     ) -> some View {
-        // Deliberately not a `Button`: SwiftUI's Button gesture recognizer can swallow a
-        // sibling `.onLongPressGesture` attached at the call site. A plain view with its
-        // own tap gesture lets tap and long-press coexist reliably.
+        let visuallyDisabled = disabled || viewModel.travelLockEnabled || viewModel.isUpdatingPumpState || viewModel.isSyncing
+        
         VStack(spacing: 8) {
-            if showSpinner, spinnerReplacesIcon {
+            if viewModel.isUpdatingPumpState {
                 ActivityIndicator(isAnimating: .constant(true), style: .medium)
                     .frame(height: 28)
             } else {
-                Image(systemName: systemImage)
+                Image(systemName: viewModel.travelLockEnabled ? "lock.fill" : systemImage)
                     .font(.system(size: 28))
-                    .foregroundColor(tint)
+                    .foregroundColor(viewModel.travelLockEnabled ? guidanceColors.warning : iconColor)
             }
+            
             HStack(spacing: 6) {
                 Text(title)
                     .font(.footnote.weight(.medium))
                     .foregroundColor(.primary)
                     .multilineTextAlignment(.center)
-                if showSpinner, !spinnerReplacesIcon {
-                    ActivityIndicator(isAnimating: .constant(true), style: .medium)
-                }
             }
         }
         .frame(maxWidth: .infinity)
@@ -714,8 +686,11 @@ struct DanaKitSettingsView: View {
             RoundedRectangle(cornerRadius: 12, style: .continuous)
                 .fill(Color(UIColor.secondarySystemGroupedBackground))
         )
-        .opacity(isVisuallyDisabled ? 0.4 : 1.0)
+        .opacity(visuallyDisabled ? 0.4 : 1.0)
         .contentShape(Rectangle())
         .onTapGesture(perform: action)
+        .onLongPressGesture(minimumDuration: 0.5) {
+            viewModel.toggleTravelLock()
+        }
     }
 }

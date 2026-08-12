@@ -89,6 +89,10 @@ class DanaKitSettingsViewModel: ObservableObject {
         return travelLockEnabled || !(pumpManager.state.basalDeliveryOrdinal == .tempBasal && pumpManager.state.tempBasalEndsAt > Date.now)
     }
 
+    public func setManualTempBasal() {
+        return
+    }
+    
     let basalRateFormatter: NumberFormatter = {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
@@ -161,8 +165,6 @@ class DanaKitSettingsViewModel: ObservableObject {
         if let batteryDate = self.pumpManager?.state.batteryAge {
             batteryAge = formatDateToDayHour(batteryDate)
         }
-
-        basalButtonText = updateBasalButtonText()
 
         self.pumpManager?.addStateObserver(self, queue: .main)
     }
@@ -358,7 +360,6 @@ class DanaKitSettingsViewModel: ObservableObject {
         // Stop temp basal
         pumpManager.enactTempBasal(unitsPerHour: 0, for: 0, completion: { error in
             DispatchQueue.main.async {
-                self.basalButtonText = self.updateBasalButtonText()
                 self.isUpdatingPumpState = false
             }
 
@@ -384,7 +385,6 @@ class DanaKitSettingsViewModel: ObservableObject {
         if pumpManager.state.isPumpSuspended {
             pumpManager.resumeDelivery { error in
                 DispatchQueue.main.async {
-                    self.basalButtonText = self.updateBasalButtonText()
                     self.isUpdatingPumpState = false
                 }
 
@@ -400,7 +400,6 @@ class DanaKitSettingsViewModel: ObservableObject {
 
         pumpManager.suspendDelivery(completion: { error in
             DispatchQueue.main.async {
-                self.basalButtonText = self.updateBasalButtonText()
                 self.isUpdatingPumpState = false
             }
 
@@ -412,17 +411,17 @@ class DanaKitSettingsViewModel: ObservableObject {
         })
     }
 
-    private func updateBasalButtonText() -> String {
-        guard let pumpManager = self.pumpManager else {
-            return String(localized: "Suspend Insulin Delivery", comment: "Dana settings suspend delivery")
-        }
-
-        if pumpManager.state.isPumpSuspended {
-            return String(localized: "Resume Insulin Delivery", comment: "Dana settings resume delivery")
-        }
-
-        return String(localized: "Suspend Insulin Delivery", comment: "Dana settings suspend delivery")
-    }
+//    private func updateBasalButtonText() -> String {
+//        guard let pumpManager = self.pumpManager else {
+//            return String(localized: "Suspend Insulin Delivery", comment: "Dana settings suspend delivery")
+//        }
+//
+//        if pumpManager.state.isPumpSuspended {
+//            return String(localized: "Resume Insulin Delivery", comment: "Dana settings resume delivery")
+//        }
+//
+//        return String(localized: "Suspend Insulin Delivery", comment: "Dana settings suspend delivery")
+//    }
 
     private func updateBasalRate() {
         guard let pumpManager = self.pumpManager else {
@@ -465,8 +464,6 @@ extension DanaKitSettingsViewModel: StateObserver {
         basalProfileNumber = state.basalProfileNumber
         showPumpTimeSyncWarning = state.shouldShowTimeWarning()
         updateBasalRate()
-
-        basalButtonText = updateBasalButtonText()
 
         if let cannulaDate = state.cannulaDate {
             cannulaAge = formatDateToDayHour(cannulaDate)

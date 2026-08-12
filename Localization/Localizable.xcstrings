@@ -14749,7 +14749,7 @@
         }
       }
     },
-    "Long press the \"Suspend Insulin Delivery\" button to enable the travel lock." : {
+    "Long press either button to lock the pump management actions." : {
 
     },
     "Low pump battery" : {
@@ -19453,7 +19453,7 @@
         }
       }
     },
-    "Pump management actions temporarily locked.\nLong press \"Suspend Insulin Delivery\" to unlock." : {
+    "Pump management actions are locked.\nLong press either button to unlock." : {
 
     },
     "Pump name" : {
@@ -23991,6 +23991,9 @@
           }
         }
       }
+    },
+    "Set manual temp basal" : {
+
     },
     "Set reminder for disconnect" : {
       "comment" : "Title disconnect reminder sheet",
