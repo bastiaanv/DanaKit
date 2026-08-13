@@ -10,6 +10,7 @@ struct DanaKitSettingsView: View {
 
     @ObservedObject var viewModel: DanaKitSettingsViewModel
     @State private var isSharePresented: Bool = false
+    @State private var isManualTempBasalOptionsPresented: Bool = false
 
     var supportedInsulinTypes: [InsulinType]
     var imageName: String
@@ -197,6 +198,33 @@ struct DanaKitSettingsView: View {
                         .font(Font.footnote.weight(.semibold))
                     }.padding(.vertical, 8)
                 }
+
+                if viewModel.isTempBasalManual, let percentage = viewModel.tempBasalPercentage,
+                   let endsAt = viewModel.tempBasalEndsAt, let duration = viewModel.tempBasalDuration
+                {
+                    TimelineView(.periodic(from: .now, by: 1)) { context in
+                        let remaining = max(0, endsAt.timeIntervalSince(.now))
+                        let progress = 1 - (remaining / duration)
+                        
+                        VStack(alignment: .leading, spacing: 4) {
+                            HStack(spacing: 4) {
+                                Text(String(format: String(localized: "Manual Temp Basal (\(percentage)%%)",
+                                                           comment: "title for manual temp basal including percentage")))
+                                .font(Font.subheadline.weight(.bold))
+                                Spacer()
+                                Text(String(
+                                     format: String(
+                                         localized: "Ends in %@",
+                                         comment: "description for manual temp basal time remaining"
+                                     ),
+                                     viewModel.formatRemaining(until: endsAt, now: context.date)
+                                 ))
+
+                            }
+                            ProgressView(value: progress).tint(Color.accentColor)
+                        }.padding(.vertical, 8)
+                    }
+                }
             }
 
             Section(
@@ -238,7 +266,22 @@ struct DanaKitSettingsView: View {
                             iconColor: Color.accentColor,
                             disabled: viewModel.isSuspended
                         ) {
-                            viewModel.setManualTempBasal()
+                            isManualTempBasalOptionsPresented = true
+                        }
+                        .sheet(isPresented: $isManualTempBasalOptionsPresented) {
+                            ManualTempBasalEntryView(
+                                enactBasal: { rate, duration, completion in
+                                    viewModel.enactManualTempBasal(rate, for: duration) { error in
+                                        completion(error)
+                                        if error == nil {
+                                            isManualTempBasalOptionsPresented = false
+                                        }
+                                    }
+                                },
+                                didCancel: {
+                                    isManualTempBasalOptionsPresented = false
+                                }
+                            )
                         }
                     }
                 }
@@ -635,6 +678,8 @@ struct DanaKitSettingsView: View {
     var deliverySectionTitle: Text {
         if viewModel.isSuspended {
             return Text("Insulin Delivery", comment: "Title of insulin delivery section")
+        } else if viewModel.isTempBasalManual {
+            return Text("Manual Temp Basal", comment: "Pump event title for manual temp basal")
         } else if viewModel.isTempBasal {
             return Text("Temp Basal", comment: "Pump Event title for UnfinalizedDose with doseType of .tempBasal")
         } else {

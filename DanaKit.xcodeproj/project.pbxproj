@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		037D2218302D174A008BC5F0 /* ManualTempBasalEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037D2217302D174A008BC5F0 /* ManualTempBasalEntryView.swift */; };
+		037D221A302D17B6008BC5F0 /* HKUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037D2219302D17B4008BC5F0 /* HKUnit.swift */; };
 		1029AE4827094D0E00B7F5B6 /* DanaKitPumpManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1029AE4627094D0E00B7F5B6 /* DanaKitPumpManager.swift */; };
 		1029AE4927094D0E00B7F5B6 /* DanaKitPumpManagerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1029AE4727094D0E00B7F5B6 /* DanaKitPumpManagerState.swift */; };
 		3E489BE02FABC5D5003C0B39 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E489BDF2FABC5D3003C0B39 /* String.swift */; };
@@ -158,6 +160,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		037D2217302D174A008BC5F0 /* ManualTempBasalEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualTempBasalEntryView.swift; sourceTree = "<group>"; };
+		037D2219302D17B4008BC5F0 /* HKUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HKUnit.swift; sourceTree = "<group>"; };
 		1029AE4627094D0E00B7F5B6 /* DanaKitPumpManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DanaKitPumpManager.swift; sourceTree = "<group>"; };
 		1029AE4727094D0E00B7F5B6 /* DanaKitPumpManagerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DanaKitPumpManagerState.swift; sourceTree = "<group>"; };
 		3E489BDF2FABC5D3003C0B39 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -399,6 +403,7 @@
 		84752EE926ED1402009FD801 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				037D2219302D17B4008BC5F0 /* HKUnit.swift */,
 				3E489BDF2FABC5D3003C0B39 /* String.swift */,
 				3E6CD15A2F3F9250009648C2 /* DanaKitDispatchGroup.swift */,
 				B802D5052C1F674600B92C35 /* NotificationHelper.swift */,
@@ -570,6 +575,7 @@
 		B8F4DCA22B94C02500AB00E6 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				037D2217302D174A008BC5F0 /* ManualTempBasalEntryView.swift */,
 				B8C3125D2CAF1DCD007E9961 /* DanaKitRefillReservoirCannula.swift */,
 				B80EC4AF2B45F66E005E2A1A /* DanaKitSettingsView.swift */,
 				B85335DB2B58658A00DB470A /* DanaKitSettingsPumpSpeed.swift */,
@@ -778,6 +784,7 @@
 				B8360AD12B2A346C00152188 /* DanaHistoryRefill.swift in Sources */,
 				B8A0163F2B433E000054AECA /* InsulinTypeConfirmation.swift in Sources */,
 				B8360AB92B2A2C3C00152188 /* DanaGeneralSetPumpTime.swift in Sources */,
+				037D221A302D17B6008BC5F0 /* HKUnit.swift in Sources */,
 				B8FF961A2B4305A300C14280 /* NavigationLink.swift in Sources */,
 				B8360A932B2644A800152188 /* DanaBolusSetExtended.swift in Sources */,
 				B8360AD72B2A34E300152188 /* DanaLoopHistoryEvents.swift in Sources */,
@@ -828,6 +835,7 @@
 				B8360AA52B2A281700152188 /* DanaGeneralGetPumpDecRatio.swift in Sources */,
 				B8360AB12B2A2A1900152188 /* DanaGeneralGetUserTimeChangeFlag.swift in Sources */,
 				B8360AC12B2A2DA600152188 /* DanaHistoryAll.swift in Sources */,
+				037D2218302D174A008BC5F0 /* ManualTempBasalEntryView.swift in Sources */,
 				B8360AE22B2A3C3C00152188 /* DanaNotifyMissedBolus.swift in Sources */,
 				B62557432BF65396006C4517 /* Bundle.swift in Sources */,
 				B8F4DCB22B97290800AB00E6 /* InsulinTypeView.swift in Sources */,

@@ -276,6 +276,8 @@ extension DanaKitPumpManager: PumpManager {
             self.state.basalDeliveryDate = Date.now
             self.state.tempBasalDuration = nil
             self.state.tempBasalUnits = nil
+            self.state.tempBasalPercentage = nil
+            self.state.isTempBasalManual = false
         }
 
         return PumpManagerStatus(
@@ -877,11 +879,17 @@ extension DanaKitPumpManager: PumpManager {
         }
     }
 
-    /// NOTE: There are 2 ways to set a temp basal:
-    /// - The normal way (which only accepts full hours and percentages)
-    /// - A short APS-special temp basal command (which only accepts 15 min or 30 min)
-    /// Currently, this is implemented with a simpel U/hr -> % calculator
-    /// NOTE: A temp basal >200% for 30 min (or full hour) is rescheduled to 15min
+    
+    public func enactTempBasal(percentage: UInt16, for duration: TimeInterval, automatic: Bool, completion: @escaping (PumpManagerError?) -> Void) {
+        log.info("Enact manual temp basal. Value: \(percentage)%, duration: \(duration) sec")
+        logDeviceCommunication(
+            "Enact temp basal. Value: \(percentage)%, duration: \(duration) sec",
+            type: .delegate
+        )
+        
+        _enactTempBasal(percentage: percentage, for: duration, automatic: automatic, completion: completion)
+    }
+    
     public func enactTempBasal(
         unitsPerHour: Double,
         for duration: TimeInterval,
@@ -892,7 +900,37 @@ extension DanaKitPumpManager: PumpManager {
             "Enact temp basal. Value: \(unitsPerHour) U/hr, duration: \(duration) sec",
             type: .delegate
         )
-
+        
+        guard let percentage = self.absoluteBasalRateToPercentage(
+            absoluteValue: unitsPerHour,
+            basalSchedule: self.state.basalSchedule
+        ) else {
+            self.disconnect()
+            self.log.error("Basal schedule is not available...")
+            completion(
+                PumpManagerError
+                    .configuration(
+                        DanaKitPumpManagerError
+                            .failedTempBasalAdjustment("Basal schedule is not available...")
+                    )
+            )
+            return
+        }
+            
+        _enactTempBasal(percentage: percentage, for: duration, automatic: true, completion: completion)
+    }
+    
+    /// NOTE: There are 2 ways to set a temp basal:
+    /// - The normal way (which only accepts full hours and percentages)
+    /// - A short APS-special temp basal command (which only accepts 15 min or 30 min)
+    /// Currently, this is implemented with a simpel U/hr -> % calculator
+    /// NOTE: A temp basal >200% for 30 min (or full hour) is rescheduled to 15min
+    private func _enactTempBasal(
+        percentage: UInt16,
+        for duration: TimeInterval,
+        automatic: Bool,
+        completion: @escaping (PumpManagerError?) -> Void
+    ) {
         guard state.bolusState == .noBolus else {
             log.error("Rejecting command -> Pump is bolussing...")
             completion(.deviceState(DanaKitPumpManagerError.pumpIsBusy))
@@ -949,37 +987,20 @@ extension DanaKitPumpManager: PumpManager {
                                 return
                             }
                         }
-
-                        guard var percentage = self.absoluteBasalRateToPercentage(
-                            absoluteValue: unitsPerHour,
-                            basalSchedule: self.state.basalSchedule
-                        ) else {
-                            self.disconnect()
-                            self.log.error("Basal schedule is not available...")
-                            completion(
-                                PumpManagerError
-                                    .configuration(
-                                        DanaKitPumpManagerError
-                                            .failedTempBasalAdjustment("Basal schedule is not available...")
-                                    )
-                            )
-                            return
-                        }
-
+                        
                         // Temp basal >15min && >200% is not supported
                         // Floor it down to 15min
                         if percentage > 200, duration != .minutes(15) {
                             duration = .minutes(15)
                         }
 
-                        var unitsPerHour = unitsPerHour
+                        // The pump does not support temp basals over 500%
+                        // Limiting the percentage and update the correct abosulute temp basal rate
+                        var percentage = percentage
                         if percentage > 500 {
-                            // The pump does not support temp basals over 500%
-                            // Limiting the percentage and update the correct abosulute temp basal rate
                             percentage = 500
-                            unitsPerHour = self.currentBaseBasalRate * 5
                         }
-
+                        
                         if self.state.isTempBasalInProgress {
                             let packet = generatePacketBasalCancelTemporary()
                             let result = try self.bluetooth.writeMessage(packet)
@@ -1000,11 +1021,20 @@ extension DanaKitPumpManager: PumpManager {
                             self.log.info("Successfully canceled old temp basal")
                         }
 
+                        // 500% fix is already applied
+                        let unitsPerHour = (Double(percentage) / 100) * self.currentBaseBasalRate
+                        
                         if duration < .ulpOfOne {
                             // Temp basal is already canceled (if deem needed)
                             self.disconnect()
 
-                            self.reportBasal(unitsPerHour: unitsPerHour, duration: duration, isTempBasal: false)
+                            self.reportBasal(
+                                unitsPerHour: unitsPerHour,
+                                duration: duration,
+                                percentage: percentage,
+                                isTempBasal: false,
+                                automatic: automatic
+                            )
 
                             self.log.info("Successfully cancelled temp basal")
                             self.logDeviceCommunication("Successfully cancelled temp basal", type: .delegateResponse)
@@ -1031,7 +1061,13 @@ extension DanaKitPumpManager: PumpManager {
                                 return
                             }
 
-                            self.reportBasal(unitsPerHour: unitsPerHour, duration: duration, isTempBasal: true)
+                            self.reportBasal(
+                                unitsPerHour: unitsPerHour,
+                                duration: duration,
+                                percentage: percentage,
+                                isTempBasal: true,
+                                automatic: automatic
+                            )
 
                             self.log.info("Successfully started 15 min temp basal")
                             self.logDeviceCommunication("Successfully started 15 min temp basal", type: .delegateResponse)
@@ -1058,7 +1094,13 @@ extension DanaKitPumpManager: PumpManager {
                                 return
                             }
 
-                            self.reportBasal(unitsPerHour: unitsPerHour, duration: duration, isTempBasal: true)
+                            self.reportBasal(
+                                unitsPerHour: unitsPerHour,
+                                duration: duration,
+                                percentage: percentage,
+                                isTempBasal: true,
+                                automatic: automatic
+                            )
 
                             self.log.info("Successfully started 30 min temp basal")
                             self.logDeviceCommunication("Successfully started 30 min temp basal", type: .delegateResponse)
@@ -1090,7 +1132,13 @@ extension DanaKitPumpManager: PumpManager {
                                 return
                             }
 
-                            self.reportBasal(unitsPerHour: unitsPerHour, duration: duration, isTempBasal: true)
+                            self.reportBasal(
+                                unitsPerHour: unitsPerHour,
+                                duration: duration,
+                                percentage: percentage,
+                                isTempBasal: true,
+                                automatic: automatic
+                            )
 
                             let log = "Successfully started \(durationInHours)h temp basal"
                             self.log.info(log)
@@ -1112,8 +1160,8 @@ extension DanaKitPumpManager: PumpManager {
             }
         }
     }
-
-    private func reportBasal(unitsPerHour: Double, duration: Double, isTempBasal: Bool) {
+    
+    private func reportBasal(unitsPerHour: Double, duration: Double, percentage: UInt16, isTempBasal: Bool, automatic: Bool) {
         var events: [NewPumpEvent] = []
 
         let startDate = Date.now
@@ -1122,6 +1170,7 @@ extension DanaKitPumpManager: PumpManager {
                 dose: DoseEntry.tempBasal(
                     absoluteUnit: unitsPerHour,
                     duration: duration,
+                    automatic: automatic,
                     insulinType: state.insulinType,
                     startDate: startDate
                 ),
@@ -1139,11 +1188,11 @@ extension DanaKitPumpManager: PumpManager {
         }
 
         if let units = state.tempBasalUnits {
-            // Report cancelled temp basal
             events.append(NewPumpEvent.tempBasal(
                 dose: DoseEntry.tempBasal(
                     absoluteUnit: units,
                     duration: 0, // Ignored
+                    automatic: !state.isTempBasalManual,
                     insulinType: state.insulinType,
                     startDate: state.basalDeliveryDate,
                     endDate: Date.now
@@ -1156,6 +1205,8 @@ extension DanaKitPumpManager: PumpManager {
         state.basalDeliveryDate = startDate
         state.tempBasalUnits = isTempBasal ? unitsPerHour : nil
         state.tempBasalDuration = isTempBasal ? duration : nil
+        state.tempBasalPercentage = isTempBasal ? percentage : nil
+        state.isTempBasalManual = isTempBasal ? !automatic : false
         state.lastStatusDate = Date.now
         notifyStateDidChange()
 
@@ -1950,6 +2001,7 @@ public extension DanaKitPumpManager {
                 DoseEntry.tempBasal(
                     absoluteUnit: unitsPerHour,
                     duration: duration,
+                    automatic: !state.isTempBasalManual,
                     insulinType: state.insulinType,
                     startDate: state.basalDeliveryDate,
                 )
@@ -2011,6 +2063,7 @@ public extension DanaKitPumpManager {
             dose: DoseEntry.tempBasal(
                 absoluteUnit: unitsPerHour,
                 duration: duration,
+                automatic: !state.isTempBasalManual,
                 insulinType: state.insulinType,
                 startDate: state.basalDeliveryDate,
                 endDate: endDate

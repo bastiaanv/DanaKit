@@ -72,7 +72,26 @@ class DanaKitSettingsViewModel: ObservableObject {
 
         return pumpManager.state.basalDeliveryOrdinal == .tempBasal && pumpManager.state.tempBasalEndsAt > Date.now
     }
+
+    public var isTempBasalManual: Bool {
+        isTempBasal && (pumpManager?.state.isTempBasalManual ?? false)
+    }
+
+    public var tempBasalPercentage: UInt16? {
+        guard isTempBasalManual else { return nil }
+        return pumpManager?.state.tempBasalPercentage
+    }
     
+    public var tempBasalDuration: TimeInterval? {
+        guard isTempBasalManual else { return nil }
+        return pumpManager?.state.tempBasalDuration
+    }
+
+    public var tempBasalEndsAt: Date? {
+        guard isTempBasal else { return nil }
+        return pumpManager?.state.tempBasalEndsAt
+    }
+
     public var isSuspendActionLocked: Bool {
         guard let pumpManager = self.pumpManager else {
             return false
@@ -112,6 +131,19 @@ class DanaKitSettingsViewModel: ObservableObject {
         formatter.timeStyle = .medium
         return formatter
     }()
+
+    private let countdownFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute]
+        formatter.unitsStyle = .abbreviated
+        formatter.maximumUnitCount = 2
+        return formatter
+    }()
+
+    func formatRemaining(until endDate: Date, now: Date = Date.now) -> String {
+        let remaining = max(0, endDate.timeIntervalSince(now))
+        return countdownFormatter.string(from: remaining) ?? ""
+    }
 
     public init(
         _ pumpManager: DanaKitPumpManager?,
@@ -411,17 +443,13 @@ class DanaKitSettingsViewModel: ObservableObject {
         })
     }
 
-//    private func updateBasalButtonText() -> String {
-//        guard let pumpManager = self.pumpManager else {
-//            return String(localized: "Suspend Insulin Delivery", comment: "Dana settings suspend delivery")
-//        }
-//
-//        if pumpManager.state.isPumpSuspended {
-//            return String(localized: "Resume Insulin Delivery", comment: "Dana settings resume delivery")
-//        }
-//
-//        return String(localized: "Suspend Insulin Delivery", comment: "Dana settings suspend delivery")
-//    }
+    func enactManualTempBasal(_ rate: UInt16, for duration: TimeInterval, completion: @escaping (PumpManagerError?) -> Void) {
+        guard let pumpManager = self.pumpManager else {
+            return
+        }
+        
+        return pumpManager.enactTempBasal(percentage: rate, for: duration, automatic: false, completion: completion)
+    }
 
     private func updateBasalRate() {
         guard let pumpManager = self.pumpManager else {

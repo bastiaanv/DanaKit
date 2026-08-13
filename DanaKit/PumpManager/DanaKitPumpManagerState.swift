@@ -37,6 +37,8 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         basalSchedule = rawValue["basalSchedule"] as? [Double] ?? []
         tempBasalUnits = rawValue["tempBasalUnits"] as? Double
         tempBasalDuration = rawValue["tempBasalDuration"] as? Double
+        isTempBasalManual = rawValue["isTempBasalManual"] as? Bool ?? false
+        tempBasalPercentage = rawValue["tempBasalPercentage"] as? UInt16
         ble5Keys = rawValue["ble5Keys"] as? Data ?? Data([0, 0, 0, 0, 0, 0])
         pairingKey = rawValue["pairingKey"] as? Data ?? Data([0, 0, 0, 0, 0, 0])
         randomPairingKey = rawValue["randomPairingKey"] as? Data ?? Data([0, 0, 0])
@@ -165,6 +167,8 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         value["basalSchedule"] = basalSchedule
         value["tempBasalUnits"] = tempBasalUnits
         value["tempBasalDuration"] = tempBasalDuration
+        value["isTempBasalManual"] = isTempBasalManual
+        value["tempBasalPercentage"] = tempBasalPercentage
         value["ble5Keys"] = ble5Keys
         value["pairingKey"] = pairingKey
         value["randomPairingKey"] = randomPairingKey
@@ -283,6 +287,10 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
     public var basalDeliveryOrdinal: DanaKitBasal = .active
     public var tempBasalUnits: Double?
     public var tempBasalDuration: Double?
+    
+    // Manual Temp Basal
+    public var isTempBasalManual: Bool = false
+    public var tempBasalPercentage: UInt16?
     public var tempBasalEndsAt: Date {
         basalDeliveryDate + (tempBasalDuration ?? 0)
     }
@@ -298,6 +306,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
                 DoseEntry.tempBasal(
                     absoluteUnit: tempBasalUnits ?? 0,
                     duration: tempBasalDuration ?? 0,
+                    automatic: !isTempBasalManual,
                     insulinType: insulinType!,
                     startDate: basalDeliveryDate
                 )

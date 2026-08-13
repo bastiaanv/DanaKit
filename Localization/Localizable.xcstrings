@@ -819,6 +819,16 @@
         }
       }
     },
+    "%d%% for %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$d%% for %2$@"
+          }
+        }
+      }
+    },
     "12 sec/U" : {
       "comment" : "Dana bolus speed 12u per min",
       "extractionState" : "manual",
@@ -10213,6 +10223,9 @@
         }
       }
     },
+    "Ends in %@" : {
+
+    },
     "Error while connecting to device" : {
       "comment" : "Connection error message",
       "extractionState" : "manual",
@@ -15079,6 +15092,12 @@
     "Manage" : {
 
     },
+    "Manual Temp Basal" : {
+
+    },
+    "Manual Temp Basal (%u%%%%)" : {
+
+    },
     "Manually sync Pump time" : {
       "comment" : "Label for syncing the time on the pump",
       "extractionState" : "manual",
@@ -15402,6 +15421,9 @@
           }
         }
       }
+    },
+    "Missing Config" : {
+
     },
     "Nightly pump time sync" : {
       "comment" : "Text for Nightly pump time sync",
@@ -19942,6 +19964,9 @@
         }
       }
     },
+    "Rate" : {
+
+    },
     "Re-enable bolus syncing?" : {
       "comment" : "Title for bolus syncing disable action sheet",
       "extractionState" : "manual",
@@ -24157,6 +24182,9 @@
         }
       }
     },
+    "Set Temporary Basal" : {
+
+    },
     "Set the basal profile the pump should use. Note, that it will overwrite the profile that is in the pump, with the one in %1$@" : {
       "comment" : "Description for basal profile number",
       "extractionState" : "manual",
@@ -27560,6 +27588,12 @@
         }
       }
     },
+    "Temporary Basal" : {
+
+    },
+    "Temporary Basal Failed" : {
+
+    },
     "The Dana-I insulin pump was first release in 2020 by manufacturer Sooil and is the latest in the series" : {
       "comment" : "dana-i description",
       "extractionState" : "manual",
@@ -29828,6 +29862,9 @@
         }
       }
     },
+    "This PumpManager has not been configured with a maximum basal rate because it was added before manual temp basal was a feature. Please set a new maximum basal rate." : {
+
+    },
     "Time Change Detected" : {
       "comment" : "Title for pod sync time action sheet.\ntitle for time change detected notice",
       "extractionState" : "manual",
@@ -30958,6 +30995,19 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "U/hr"
+          }
+        }
+      }
+    },
+    "Unable to set a temporary basal rate: %@" : {
+
+    },
+    "Unable to set a temporary basal rate: %@\n\n%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Unable to set a temporary basal rate: %1$@\n\n%2$@"
           }
         }
       }
@@ -34525,6 +34575,9 @@
           }
         }
       }
+    },
+    "Your insulin delivery will not be automatically adjusted until the temporary basal rate finishes or is canceled." : {
+
     },
     "Your pump is disconnected longer than 5 minutes!" : {
       "comment" : "Body disconnect warning notification",
