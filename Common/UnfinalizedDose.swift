@@ -28,8 +28,56 @@ public class UnfinalizedDose: NSObject {
             automatic: activationType.isAutomatic
         )
     }
+    
+    public convenience init(resumeStartTime: Date, insulinType: InsulinType?) {
+        self.init(
+            type: .resume,
+            startDate: resumeStartTime,
+            expectedEndDate: resumeStartTime,
+            value: 0,
+            deliveredUnits: 0,
+            insulinType: insulinType,
+            automatic: false
+        )
+    }
+    
+    public convenience init(suspendStartTime: Date) {
+        self.init(
+            type: .suspend,
+            startDate: suspendStartTime,
+            expectedEndDate: suspendStartTime,
+            value: 0,
+            deliveredUnits: 0,
+            insulinType: nil,
+            automatic: false
+        )
+    }
+    
+    public convenience init(basalRate: Double, insulinType: InsulinType?, startDate: Date = Date.now) {
+        self.init(
+            type: .basal,
+            startDate: startDate,
+            expectedEndDate: startDate,
+            value: basalRate,
+            deliveredUnits: 0,
+            insulinType: insulinType,
+            automatic: false
+        )
+    }
+    
+    public convenience init(tempRate: Double, duration: TimeInterval, insulinType: InsulinType?, automatic: Bool, startDate: Date = Date.now) {
+        self.init(
+            type: .tempBasal,
+            startDate: startDate,
+            expectedEndDate: startDate.addingTimeInterval(duration),
+            value: tempRate,
+            deliveredUnits: 0,
+            insulinType: insulinType,
+            automatic: automatic
+        )
+    }
 
-    init(
+    private init(
         type: DoseType,
         startDate: Date,
         expectedEndDate: Date,
@@ -48,31 +96,77 @@ public class UnfinalizedDose: NSObject {
     }
 
     public func toDoseEntry(endDate: Date?) -> DoseEntry {
-        if let endDate = endDate {
+        let isMutable = endDate == nil
+
+        switch type {
+        case .bolus:
+            var endDate = endDate ?? expectedEndDate
+            if endDate > Date.now {
+                // The endDate of a bolus cannot be in the future...
+                endDate = Date.now
+            }
+
             return DoseEntry(
                 type: .bolus,
                 startDate: startDate,
                 endDate: endDate,
                 value: value,
                 unit: .units,
-                deliveredUnits: deliveredUnits,
+                deliveredUnits: isMutable ? nil : deliveredUnits,
                 insulinType: insulinType,
                 automatic: automatic,
-                isMutable: false
+                isMutable: isMutable
+            )
+
+        case .basal:
+            return DoseEntry(
+                type: .basal,
+                startDate: startDate,
+                value: roundBasalRate(value),
+                unit: .unitsPerHour,
+                insulinType: insulinType
+            )
+
+        case .tempBasal:
+            let actualEndDate: Date
+            if let endDate {
+                // in case this finalization happens late (TBR ended while not connected to the phone, etc)
+               // don't report the end date later than the scheduled end date
+                actualEndDate = min(endDate, expectedEndDate)
+            } else {
+                actualEndDate = expectedEndDate
+            }
+                 
+            let duration = actualEndDate.timeIntervalSince(startDate)
+            return DoseEntry(
+                type: .tempBasal,
+                startDate: startDate,
+                endDate: actualEndDate,
+                value: value,
+                unit: .unitsPerHour,
+                deliveredUnits: isMutable ? nil : roundBasalRate(value * (duration / .hours(1))),
+                insulinType: insulinType,
+                automatic: automatic,
+                isMutable: isMutable
+            )
+
+        case .suspend:
+            return DoseEntry(
+                suspendDate: startDate,
+                automatic: automatic
+            )
+
+        case .resume:
+            return DoseEntry(
+                resumeDate: startDate,
+                insulinType: insulinType,
+                automatic: automatic
             )
         }
-
-        return DoseEntry(
-            type: .bolus,
-            startDate: startDate,
-            endDate: expectedEndDate,
-            value: value,
-            unit: .units,
-            deliveredUnits: nil,
-            insulinType: insulinType,
-            automatic: automatic,
-            isMutable: true
-        )
+    }
+    
+    private func roundBasalRate(_ rate: Double) -> Double {
+        DanaKitPumpManager.onboardingSupportedBasalRates.last(where: { $0 <= rate }) ?? 0
     }
 
     public required convenience init?(rawValue: RawValue) {

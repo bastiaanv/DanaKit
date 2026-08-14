@@ -161,17 +161,7 @@ extension BluetoothManager {
 
             pumpManagerDelegate.state.reservoirLevel = data.reservoirRemainingUnits
             pumpManagerDelegate.state.batteryRemaining = data.batteryRemaining
-            pumpManagerDelegate.state.isPumpSuspended = data.isPumpSuspended
-            pumpManagerDelegate.state.isTempBasalInProgress = data.isTempBasalInProgress
-
-            if pumpManagerDelegate.state.basalDeliveryOrdinal != .suspended, data.isPumpSuspended {
-                // Suspended has been enabled via the pump
-                // We cannot be sure at what point it has been enabled...
-                pumpManagerDelegate.state.basalDeliveryDate = Date.now
-            }
-
-            pumpManagerDelegate.state.basalDeliveryOrdinal = data.isTempBasalInProgress ? .tempBasal :
-                data.isPumpSuspended ? .suspended : .active
+            pumpManagerDelegate.state.basalDeliveryOrdinal = data.basalDeliveryOrdinal
             pumpManagerDelegate.state.bolusState = .noBolus
 
             pumpManagerDelegate.notifyStateDidChange()

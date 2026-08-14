@@ -17,7 +17,7 @@ extension DanaKitPumpManager {
                     var events = self.syncHistory()
 
                     if let tempBasalEvent = self.getTempBasalEvent() {
-                        events.append(tempBasalEvent)
+                        events.append(contentsOf: tempBasalEvent)
                     }
                     if let pendingBolus = self.state.bolusDose {
                         events.append(NewPumpEvent.bolus(
@@ -307,30 +307,37 @@ extension DanaKitPumpManager {
         }
     }
 
-    func getTempBasalEvent(endDate: Date? = nil) -> NewPumpEvent? {
-        guard state.basalDeliveryOrdinal == .tempBasal,
-              let unitsPerHour = state.tempBasalUnits,
-              let duration = state.tempBasalDuration
-        else {
+    func getTempBasalEvent(endDate: Date? = nil) -> [NewPumpEvent]? {
+        guard state.basalDose.type == .tempBasal else {
             return nil
         }
 
-        // A temp basal that has run its full duration is reported as finalized (immutable, with a
-        // real endDate and deliveredUnits) rather than silently dropped. Its raw identity is stable
-        // (rate + start date), so this updates the existing mutable entry in Loop rather than
-        // duplicating it (PumpManagerDoseReporting.md §3/§4).
-        let expired = endDate == nil && state.tempBasalEndsAt <= Date.now
-        let effectiveEnd = endDate ?? state.tempBasalEndsAt
+        let expired = endDate == nil && state.basalDose.expectedEndDate <= Date.now
+        let effectiveEnd = endDate ?? state.basalDose.expectedEndDate
 
-        return NewPumpEvent.tempBasal(
-            dose: DoseEntry.tempBasal(
-                absoluteUnit: unitsPerHour,
-                duration: duration,
-                insulinType: state.insulinType,
-                startDate: state.basalDeliveryDate,
-                endDate: (endDate != nil || expired) ? effectiveEnd : nil,
-            ),
-            date: state.basalDeliveryDate
+        let dose = state.basalDose.toDoseEntry(endDate: endDate)
+        let tempBasalDose = NewPumpEvent.tempBasal(
+            dose: dose,
+            date: state.basalDose.startDate
         )
+        
+        var events = [tempBasalDose]
+        if expired {
+            let basalDose = DoseEntry.basal(
+                rate: state.getScheduledBasalRate(date: dose.endDate),
+                insulinType: state.insulinType,
+                startDate: dose.endDate
+            )
+            events.append(NewPumpEvent.basal(dose: basalDose, date: dose.endDate))
+            
+            state.basalDose = UnfinalizedDose(
+                basalRate: basalDose.unitsPerHour,
+                insulinType: state.insulinType,
+                startDate: basalDose.startDate
+            )
+            notifyStateDidChange()
+        }
+        
+        return events
     }
 }

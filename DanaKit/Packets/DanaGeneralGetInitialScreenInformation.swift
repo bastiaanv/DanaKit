@@ -12,6 +12,18 @@ struct PacketGeneralGetInitialScreenInformation: Codable {
     let extendedBolusAbsoluteRemaining: Double
     let insulinOnBoard: Double
     let errorState: Int?
+    
+    var basalDeliveryOrdinal: DanaKitBasal {
+        if isPumpSuspended {
+            return .suspended
+        }
+        
+        if isTempBasalInProgress {
+            return .tempBasal
+        }
+        
+        return .active
+    }
 }
 
 let CommandGeneralGetInitialScreenInformation: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +

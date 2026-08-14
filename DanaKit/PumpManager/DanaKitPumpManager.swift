@@ -82,21 +82,6 @@ public class DanaKitPumpManager: DeviceManager {
         bluetooth.isConnected
     }
 
-    private let basalIntervals: [TimeInterval] = Array(0 ..< 24).map({ TimeInterval(60 * 60 * $0) })
-    public var currentBaseBasalRate: Double {
-        guard !state.basalSchedule.isEmpty else {
-            // Prevent crash if basalSchedule isnt set
-            return 0
-        }
-
-        let now = Date()
-        let startOfDay = Calendar.current.startOfDay(for: now)
-        let nowTimeInterval = now.timeIntervalSince(startOfDay)
-
-        let index = (basalIntervals.firstIndex(where: { $0 > nowTimeInterval }) ?? 24) - 1
-        return state.basalSchedule.indices.contains(index) ? state.basalSchedule[index] : 0
-    }
-
     public var status: PumpManagerStatus {
         self.status(state)
     }
@@ -282,13 +267,6 @@ extension DanaKitPumpManager: PumpManager {
 
     private func status(_ state: DanaKitPumpManagerState) -> LoopKit.PumpManagerStatus {
         // Check if temp basal is expired, before constructing basalDeliveryState
-        if self.state.basalDeliveryOrdinal == .tempBasal, self.state.tempBasalEndsAt < Date.now {
-            self.state.basalDeliveryOrdinal = .active
-            self.state.basalDeliveryDate = Date.now
-            self.state.tempBasalDuration = nil
-            self.state.tempBasalUnits = nil
-        }
-
         return PumpManagerStatus(
             timeZone: state.pumpTimeZone ?? TimeZone.current,
             device: device(),
@@ -373,7 +351,7 @@ extension DanaKitPumpManager: PumpManager {
             self.bluetooth.ensureConnected { result in
                 switch result {
                 case .success:
-                    guard !self.state.isPumpSuspended else {
+                    guard self.state.basalDeliveryOrdinal != .suspended else {
                         self.state.bolusState = .noBolus
                         self.doseReporter = nil
                         self.state.bolusDose = nil
@@ -619,7 +597,7 @@ extension DanaKitPumpManager: PumpManager {
             self.bluetooth.ensureConnected { result in
                 switch result {
                 case .success:
-                    guard !self.state.isPumpSuspended else {
+                    guard self.state.basalDeliveryOrdinal != .suspended else {
                         self.log.error("Pump is suspended")
                         self.disconnect()
                         completion(PumpManagerError.deviceState(DanaKitPumpManagerError.pumpSuspended))
@@ -693,10 +671,10 @@ extension DanaKitPumpManager: PumpManager {
                             // The pump does not support temp basals over 500%
                             // Limiting the percentage and update the correct abosulute temp basal rate
                             percentage = 500
-                            unitsPerHour = self.currentBaseBasalRate * 5
+                            unitsPerHour = self.state.getScheduledBasalRate() * 5
                         }
 
-                        if self.state.isTempBasalInProgress {
+                        if self.state.basalDeliveryOrdinal == .tempBasal {
                             let packet = generatePacketBasalCancelTemporary()
                             let result = try self.bluetooth.writeMessage(packet)
 
@@ -831,47 +809,43 @@ extension DanaKitPumpManager: PumpManager {
 
     private func reportBasal(unitsPerHour: Double, duration: Double, isTempBasal: Bool) {
         var events: [NewPumpEvent] = []
+        var basalDose: UnfinalizedDose
 
         let startDate = Date.now
         if isTempBasal {
+            basalDose = UnfinalizedDose(
+                tempRate: unitsPerHour,
+                duration: duration,
+                insulinType: state.insulinType,
+                automatic: true,
+                startDate: startDate
+            )
             events.append(NewPumpEvent.tempBasal(
-                dose: DoseEntry.tempBasal(
-                    absoluteUnit: unitsPerHour,
-                    duration: duration,
-                    insulinType: state.insulinType,
-                    startDate: startDate
-                ),
+                dose: basalDose.toDoseEntry(endDate: nil),
                 date: startDate
             ))
         } else {
+            basalDose = UnfinalizedDose(
+                basalRate: state.getScheduledBasalRate(date: startDate),
+                insulinType: state.insulinType,
+                startDate: startDate
+            )
             events.append(NewPumpEvent.basal(
-                dose: DoseEntry.basal(
-                    rate: currentBaseBasalRate,
-                    insulinType: state.insulinType,
-                    startDate: startDate
-                ),
+                dose: basalDose.toDoseEntry(endDate: nil),
                 date: startDate
             ))
         }
 
-        if let units = state.tempBasalUnits {
+        if state.basalDose.type == .tempBasal {
             // Report cancelled temp basal
             events.append(NewPumpEvent.tempBasal(
-                dose: DoseEntry.tempBasal(
-                    absoluteUnit: units,
-                    duration: 0, // Ignored
-                    insulinType: state.insulinType,
-                    startDate: state.basalDeliveryDate,
-                    endDate: Date.now
-                ),
-                date: state.basalDeliveryDate
+                dose: state.basalDose.toDoseEntry(endDate: startDate),
+                date: state.basalDose.startDate
             ))
         }
 
         state.basalDeliveryOrdinal = isTempBasal ? .tempBasal : .active
-        state.basalDeliveryDate = startDate
-        state.tempBasalUnits = isTempBasal ? unitsPerHour : nil
-        state.tempBasalDuration = isTempBasal ? duration : nil
+        state.basalDose = basalDose
         state.lastStatusDate = Date.now
         notifyStateDidChange()
 
@@ -908,7 +882,7 @@ extension DanaKitPumpManager: PumpManager {
                 switch result {
                 case .success:
                     do {
-                        if self.state.isTempBasalInProgress {
+                        if self.state.basalDeliveryOrdinal == .tempBasal {
                             let packet = generatePacketBasalCancelTemporary()
                             let result = try self.bluetooth.writeMessage(packet)
 
@@ -945,18 +919,16 @@ extension DanaKitPumpManager: PumpManager {
                             return
                         }
 
-                        var events = [NewPumpEvent.suspend(dose: DoseEntry.suspend())]
-                        if let tempBasalEvent = self.getTempBasalEvent(endDate: Date.now) {
-                            events.append(tempBasalEvent)
+                        let dose = UnfinalizedDose(suspendStartTime: Date.now)
+                        var events = [NewPumpEvent.suspend(dose: dose.toDoseEntry(endDate: nil))]
+                        if let tempBasalEvent = self.getTempBasalEvent(endDate: dose.startDate) {
+                            events.append(contentsOf: tempBasalEvent)
                         }
 
                         self.state.lastStatusPumpDateTime = pumpTime ?? Date.now
-                        self.state.lastStatusDate = Date.now
-                        self.state.isPumpSuspended = true
                         self.state.basalDeliveryOrdinal = .suspended
-                        self.state.basalDeliveryDate = Date.now
-                        self.state.tempBasalUnits = nil
-                        self.state.tempBasalDuration = nil
+                        self.state.basalDose = dose
+                        self.state.lastStatusDate = Date.now
                         self.notifyStateDidChange()
 
                         self.pumpDelegate.notify { delegate in
@@ -1023,13 +995,11 @@ extension DanaKitPumpManager: PumpManager {
                         }
 
                         self.state.lastStatusPumpDateTime = pumpTime ?? Date.now
-                        self.state.lastStatusDate = Date.now
-                        self.state.isPumpSuspended = false
                         self.state.basalDeliveryOrdinal = .active
-                        self.state.basalDeliveryDate = Date.now
+                        self.state.basalDose = UnfinalizedDose(resumeStartTime: Date.now, insulinType: self.state.insulinType)
+                        self.state.lastStatusDate = Date.now
                         self.notifyStateDidChange()
 
-                        let dose = DoseEntry.resume(insulinType: self.state.insulinType!)
                         self.pumpDelegate.notify { delegate in
                             guard let delegate = delegate else {
                                 this.log.error("Resume could not be reported -> Missing delegate")
@@ -1038,7 +1008,9 @@ extension DanaKitPumpManager: PumpManager {
 
                             delegate.pumpManager(
                                 this,
-                                hasNewPumpEvents: [NewPumpEvent.resume(dose: dose)],
+                                hasNewPumpEvents: [NewPumpEvent.resume(
+                                    dose: self.state.basalDose.toDoseEntry(endDate: nil)
+                                )],
                                 lastReconciliation: this.state.lastStatusDate,
                                 replacePendingEvents: true,
                             ) { error in
@@ -1071,7 +1043,6 @@ extension DanaKitPumpManager: PumpManager {
         completion: @escaping (Result<BasalRateSchedule, Error>) -> Void
     ) {
         delegateQueue.async {
-            let this = self
             self.log.info("Syncing basal schedule...")
             self.logDeviceCommunication("Syncing basal schedule...", type: .delegate)
 
@@ -1114,35 +1085,8 @@ extension DanaKitPumpManager: PumpManager {
                             return
                         }
 
-                        let dose = DoseEntry.basal(rate: self.currentBaseBasalRate, insulinType: self.state.insulinType)
-                        var events = [NewPumpEvent.basal(dose: dose)]
-                        if let tempBasalEvent = self.getTempBasalEvent() {
-                            events.append(tempBasalEvent)
-                        }
-
-                        self.state.basalDeliveryOrdinal = .active
-                        self.state.basalDeliveryDate = Date.now
                         self.state.basalSchedule = basal
-                        self.state.lastStatusDate = Date.now
                         self.notifyStateDidChange()
-
-                        self.pumpDelegate.notify { delegate in
-                            guard let delegate = delegate else {
-                                this.log.error("Basal could not be reported -> Missing delegate")
-                                return
-                            }
-
-                            delegate.pumpManager(
-                                this,
-                                hasNewPumpEvents: events,
-                                lastReconciliation: this.state.lastStatusDate,
-                                replacePendingEvents: true,
-                            ) { error in
-                                if let error = error {
-                                    this.handlePumpDelegateError(method: "hasNewPumpEvents", error)
-                                }
-                            }
-                        }
 
                         self.log.info("Basal schedule synced!")
                         self.logDeviceCommunication("Basal schedule synced!", type: .delegateResponse)
@@ -1471,7 +1415,7 @@ public extension DanaKitPumpManager {
             alarmType: alert.type
         )]
         if let tempBasalEvent = getTempBasalEvent() {
-            events.append(tempBasalEvent)
+            events.append(contentsOf: tempBasalEvent)
         }
 
         pumpDelegate.notify { delegate in
@@ -1598,7 +1542,7 @@ public extension DanaKitPumpManager {
 
             var events = [NewPumpEvent.bolus(dose: dose, date: dose.startDate)]
             if let tempBasalEvent = getTempBasalEvent() {
-                events.append(tempBasalEvent)
+                events.append(contentsOf: tempBasalEvent)
             }
 
             self.pumpDelegate.notify { delegate in
@@ -1651,19 +1595,8 @@ public extension DanaKitPumpManager {
         let dose = doseEntry.toDoseEntry(endDate: Date.now)
 
         var events = [NewPumpEvent.bolus(dose: dose, date: dose.startDate)]
-        if state.basalDeliveryOrdinal == .tempBasal,
-           let unitsPerHour = state.tempBasalUnits,
-           let duration = state.tempBasalDuration
-        {
-            events.append(NewPumpEvent.tempBasal(
-                dose:
-                DoseEntry.tempBasal(
-                    absoluteUnit: unitsPerHour,
-                    duration: duration,
-                    insulinType: state.insulinType,
-                    startDate: state.basalDeliveryDate,
-                )
-            ))
+        if let tempBasal = getTempBasalEvent() {
+            events.append(contentsOf: tempBasal)
         }
 
         state.bolusState = .noBolus
