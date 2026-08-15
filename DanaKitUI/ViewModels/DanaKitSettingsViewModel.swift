@@ -10,7 +10,7 @@ class DanaKitSettingsViewModel: ObservableObject {
     @Published var showingBolusSyncingDisabled = false
     @Published var showingBlindReservoirCannulaRefill = false
     @Published var basalButtonText: String = ""
-    @Published var bolusSpeed: BolusSpeed
+    @Published var bolusSpeed: BolusSpeed = .speed12
     @Published var isUsingContinuousMode: Bool = false
     @Published var isUpdatingPumpState: Bool = false
     @Published var isConnected: Bool = false
@@ -35,17 +35,15 @@ class DanaKitSettingsViewModel: ObservableObject {
     @Published var nightlyPumpTimeSync: Bool = false
     @Published var travelLockEnabled: Bool = false
 
-    @Published var reservoirLevelWarning: Double
+    @Published var reservoirLevelWarning: Double = 20
     @Published var reservoirLevel: Double?
     @Published var isSuspended: Bool = false
     @Published var basalRate: Double?
 
     private let log = DanaLogger(category: "SettingsView")
-    private(set) var insulinType: InsulinType
+    private(set) var insulinType: InsulinType = .novolog
     private(set) var pumpManager: DanaKitPumpManager?
     private var didFinish: (() -> Void)?
-    private(set) var userOptionsView: DanaKitUserSettingsView
-    private(set) var refillView: DanaKitRefillReservoirAndCannulaView
 
     let toUserOptions: () -> Void
     let toBolusSpeed: () -> Void
@@ -104,22 +102,6 @@ class DanaKitSettingsViewModel: ObservableObject {
         )
     }
 
-    public func setManualTempBasal() {}
-
-    let basalRateFormatter: NumberFormatter = {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.minimumFractionDigits = 1
-        numberFormatter.minimumIntegerDigits = 1
-        return numberFormatter
-    }()
-
-    let reservoirVolumeFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.maximumFractionDigits = 1
-        return formatter
-    }()
-
     private let dateFormatter = {
         let formatter = DateFormatter()
         formatter.timeStyle = .medium
@@ -154,45 +136,10 @@ class DanaKitSettingsViewModel: ObservableObject {
         self.toRefill = toRefill
         self.didFinish = didFinish
 
-        userOptionsView = DanaKitUserSettingsView(viewModel: DanaKitUserSettingsViewModel(self.pumpManager))
-        refillView =
-            DanaKitRefillReservoirAndCannulaView(viewModel: DanaKitRefillReservoirCannulaViewModel(
-                pumpManager: pumpManager,
-                cannulaOnly: false
-            ))
-
-        isUsingContinuousMode = self.pumpManager?.state.isUsingContinuousMode ?? false
-        isConnected = self.pumpManager?.state.isConnected ?? false
-        insulinType = self.pumpManager?.state.insulinType ?? .novolog
-        bolusSpeed = self.pumpManager?.state.bolusSpeed ?? .speed12
-        lastSync = self.pumpManager?.state.lastStatusDate
-        reservoirLevel = self.pumpManager?.state.reservoirLevel
-        isSuspended = self.pumpManager?.state.basalDeliveryOrdinal == .suspended
-        pumpTime = self.pumpManager?.state.pumpTime
-        pumpTimeSyncedAt = self.pumpManager?.state.pumpTimeSyncedAt
-        nightlyPumpTimeSync = self.pumpManager?.state.allowAutomaticTimeSync ?? false
-        travelLockEnabled = self.pumpManager?.state.travelLockEnabled ?? false
-        isBolusSyncingDisabled = self.pumpManager?.state.isBolusSyncDisabled ?? false
-        batteryLevel = self.pumpManager?.state.batteryRemaining ?? 0
-        silentTone = self.pumpManager?.state.useSilentTones ?? false
-        reservoirLevelWarning = Double(self.pumpManager?.state.lowReservoirRate ?? 20)
-        basalProfileNumber = self.pumpManager?.state.basalProfileNumber ?? 0
-        showPumpTimeSyncWarning = self.pumpManager?.state.shouldShowTimeWarning() ?? false
-        updateBasalRate()
-
-        if let cannulaDate = self.pumpManager?.state.cannulaDate {
-            cannulaAge = formatDateToDayHour(cannulaDate)
+        if let pumpManager {
+            stateDidUpdate(pumpManager.state, pumpManager.state)
+            pumpManager.addStateObserver(self, queue: .main)
         }
-
-        if let reservoirDate = self.pumpManager?.state.reservoirDate {
-            reservoirAge = formatDateToDayHour(reservoirDate)
-        }
-
-        if let batteryDate = self.pumpManager?.state.batteryAge {
-            batteryAge = formatDateToDayHour(batteryDate)
-        }
-
-        self.pumpManager?.addStateObserver(self, queue: .main)
     }
 
     func stopUsingDana() {
@@ -228,6 +175,10 @@ class DanaKitSettingsViewModel: ObservableObject {
 
     func forceDisconnect() {
         pumpManager?.disconnect(true)
+    }
+
+    func getScheduledBasal() -> Double {
+        pumpManager?.state.getScheduledBasalRate() ?? 0
     }
 
     func didChangeInsulinType(_ newType: InsulinType?) {
@@ -323,10 +274,6 @@ class DanaKitSettingsViewModel: ObservableObject {
                 self.isSyncing = false
             }
         }
-    }
-
-    func reservoirText(for units: Double) -> String {
-        reservoirVolumeFormatter.string(from: units) ?? ""
     }
 
     func toggleSilentTone() {

@@ -6,6 +6,7 @@ import SwiftUI
 struct ManualTempBasalEntryView: View {
     @Environment(\.guidanceColors) var guidanceColors
 
+    var currentScheduledBasal: Double
     var enactBasal: ((UInt16, TimeInterval, @escaping (PumpManagerError?) -> Void) -> Void)?
     var didCancel: (() -> Void)?
 
@@ -22,9 +23,11 @@ struct ManualTempBasalEntryView: View {
         + stride(from: 1, through: 24, by: 1).map { TimeInterval.hours(Double($0)) }
 
     init(
+        currentScheduledBasal: Double,
         enactBasal: ((UInt16, TimeInterval, @escaping (PumpManagerError?) -> Void) -> Void)? = nil,
         didCancel: (() -> Void)? = nil
     ) {
+        self.currentScheduledBasal = currentScheduledBasal
         self.enactBasal = enactBasal
         self.didCancel = didCancel
     }
@@ -79,7 +82,12 @@ struct ManualTempBasalEntryView: View {
                             ResizeablePicker(
                                 selection: $rateEntered,
                                 data: allowedRates,
-                                formatter: { "\($0)%" }
+                                formatter: {
+                                    String(
+                                        format: String(localized: "%@ (%@ U/hr)", comment: "MTB rate"),
+                                        $0.formatted(.percent),
+                                        String(format: "%.2f", currentScheduledBasal * (Double($0) / 100))
+                                    ) }
                             )
                             ResizeablePicker(
                                 selection: $durationEntered,

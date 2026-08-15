@@ -21,7 +21,7 @@ public enum PumpManagerAlert: Hashable, Codable {
     var contentTitle: String {
         switch self {
         case .batteryZeroPercent:
-            return String(localized: "Pump battery 0%", comment: "Alert title for batteryZeroPercent")
+            return String(localized: "Pump battery empty", comment: "Alert title for batteryZeroPercent")
         case .pumpError:
             return String(localized: "Pump error", comment: "Alert title for pumpError")
         case .occlusion:

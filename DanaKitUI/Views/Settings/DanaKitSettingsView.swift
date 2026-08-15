@@ -231,6 +231,7 @@ struct DanaKitSettingsView: View {
                         }
                         .sheet(isPresented: $isManualTempBasalOptionsPresented) {
                             ManualTempBasalEntryView(
+                                currentScheduledBasal: viewModel.getScheduledBasal(),
                                 enactBasal: { rate, duration, completion in
                                     viewModel.enactManualTempBasal(rate, for: duration) { error in
                                         completion(error)
@@ -371,7 +372,6 @@ struct DanaKitSettingsView: View {
                 Button(action: { viewModel.toInsulinType() }) {
                     HStack(spacing: 5) {
                         Text("Insulin Type", comment: "Text for confidence reminders navigation link")
-                            .foregroundColor(Color.primary)
                         Spacer()
                         Text(viewModel.insulinType.brandName)
                             .foregroundColor(.secondary)
@@ -379,11 +379,11 @@ struct DanaKitSettingsView: View {
                             .font(.system(size: UIFont.systemFontSize, weight: .bold))
                             .foregroundStyle(.secondary)
                     }
+                    .foregroundColor(Color.primary)
                 }
                 Button(action: { viewModel.toBolusSpeed() }) {
                     HStack(spacing: 5) {
                         Text("Delivery speed", comment: "Title for delivery speed")
-                            .foregroundColor(Color.primary)
                         Spacer()
                         Text(viewModel.bolusSpeed.format())
                             .foregroundColor(.secondary)
@@ -391,16 +391,17 @@ struct DanaKitSettingsView: View {
                             .font(.system(size: UIFont.systemFontSize, weight: .bold))
                             .foregroundStyle(.secondary)
                     }
+                    .foregroundColor(Color.primary)
                 }
                 Button(action: { viewModel.toUserOptions() }) {
                     HStack {
                         Text("User options", comment: "Title for user options")
-                            .foregroundColor(Color.primary)
                         Spacer()
                         Image(systemName: "chevron.right")
                             .font(.system(size: UIFont.systemFontSize, weight: .bold))
                             .foregroundStyle(.secondary)
                     }
+                    .foregroundColor(Color.primary)
                 }
                 Button(action: {
                     viewModel.showingBlindReservoirCannulaRefill = true
@@ -558,7 +559,7 @@ struct DanaKitSettingsView: View {
                         .frame(width: 19, height: 26)
 
                     HStack(alignment: .firstTextBaseline, spacing: 3) {
-                        Text(viewModel.reservoirText(for: reservoirLevel))
+                        Text(String(format: "%.1f", reservoirLevel))
                             .font(.system(size: 28))
                             .fontWeight(.heavy)
                             .fixedSize()
@@ -592,7 +593,7 @@ struct DanaKitSettingsView: View {
             } else if let basalRate = $viewModel.basalRate.wrappedValue {
                 HStack(alignment: .center, spacing: 10) {
                     HStack(alignment: .lastTextBaseline, spacing: 3) {
-                        Text(viewModel.basalRateFormatter.string(from: basalRate) ?? "")
+                        Text(String(format: "%.2f", basalRate))
                             .font(.system(size: 28))
                             .fontWeight(.heavy)
                             .fixedSize()
