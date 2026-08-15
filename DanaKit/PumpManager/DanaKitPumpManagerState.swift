@@ -55,6 +55,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         cannulaDate = rawValue["cannulaDate2"] as? Date
         reservoirDate = rawValue["reservoirDate"] as? Date
         allowAutomaticTimeSync = rawValue["allowAutomaticTimeSync"] as? Bool ?? true
+        travelLockEnabled = rawValue["travelLockEnabled"] as? Bool ?? false
         isBolusSyncDisabled = rawValue["isBolusSyncDisabled"] as? Bool ?? false
         batteryAge = rawValue["batteryAge"] as? Date
 
@@ -148,6 +149,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         cannulaDate = nil
         isUsingContinuousMode = false
         allowAutomaticTimeSync = true
+        travelLockEnabled = false
         isBolusSyncDisabled = false
         batteryAge = nil
         pumpTimeZone = nil
@@ -202,6 +204,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         value["reservoirDate"] = reservoirDate
         value["isUsingContinuousMode"] = isUsingContinuousMode
         value["allowAutomaticTimeSync"] = allowAutomaticTimeSync
+        value["travelLockEnabled"] = travelLockEnabled
         value["isBolusSyncDisabled"] = isBolusSyncDisabled
         value["batteryAge"] = batteryAge
         value["pumpTimeZone"] = pumpTimeZone?.secondsFromGMT()
@@ -317,6 +320,11 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
 
     /// Allows DanaKit to automaticly sync the time every evening
     public var allowAutomaticTimeSync: Bool = true
+
+    /// When enabled, blocks the user from accidentally suspending insulin delivery
+    /// Only gates the active -> suspended transition; resuming
+    /// a suspended pump is never blocked by this flag.
+    public var travelLockEnabled: Bool = false
 
     func shouldShowTimeWarning() -> Bool {
         guard let pumpTime = self.pumpTime, let syncedAt = pumpTimeSyncedAt else {
@@ -453,7 +461,7 @@ extension DanaKitPumpManagerState: CustomDebugStringConvertible {
             "* pumpProtocol: \(pumpProtocol)",
             "* lastStatusDate: \(lastStatusDate)",
             "* pumpTime: \(pumpTime ?? Date.distantPast)",
-            "* insulinType: \(insulinType ?? .none)",
+            "* insulinType: \(String(describing: insulinType))",
             "* reservoirLevel: \(reservoirLevel)",
             "* bolusState: \(bolusState.rawValue)",
             "* basalDeliveryOrdinal: \(basalDeliveryOrdinal)",
@@ -463,6 +471,7 @@ extension DanaKitPumpManagerState: CustomDebugStringConvertible {
             "* useSilentTones: \(useSilentTones)",
             "* isBolusSyncDisabled: \(isBolusSyncDisabled)",
             "* allowAutomaticTimeSync: \(allowAutomaticTimeSync)",
+            "* travelLockEnabled: \(travelLockEnabled)",
             "* reservoirDate: \(reservoirDate ?? Date.distantPast)",
             "* cannulaDate: \(cannulaDate ?? Date.distantPast)"
         ].joined(separator: "\n")

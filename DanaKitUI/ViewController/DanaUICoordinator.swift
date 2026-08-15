@@ -225,7 +225,7 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
             )
             return hostingController(
                 rootView: view,
-                title: viewModel.pumpModel
+                title: pumpManager?.state.getFriendlyDeviceName() ?? ""
             )
 
         case .userOptions:

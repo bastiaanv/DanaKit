@@ -29,7 +29,7 @@ let CommandLoopSetEventHistory: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 
 
 func generatePacketLoopSetEventHistory(options: PacketLoopSetEventHistory) -> DanaGeneratePacket {
     var data = Data(count: 11)
-    var param1 = options.param1
+    let param1 = options.param1
 
 //    if options.packetType == LoopHistoryEvents.carbs || options.packetType == LoopHistoryEvents.bolus, param1 < 0 {
 //        // Assuming LoopHistoryEvents is an enum with associated values, you may need to adjust this condition

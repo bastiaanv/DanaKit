@@ -32,6 +32,7 @@ public extension DoseEntry {
     static func tempBasal(
         absoluteUnit: Double,
         duration: TimeInterval,
+        automatic: Bool,
         insulinType: InsulinType?,
         startDate: Date = Date.now,
         endDate: Date? = nil
@@ -46,7 +47,7 @@ public extension DoseEntry {
                 unit: .unitsPerHour,
                 deliveredUnits: roundBasalRate(absoluteUnit * (duration / .hours(1))),
                 insulinType: insulinType,
-                automatic: true,
+                automatic: automatic,
                 isMutable: false
             )
         }
@@ -58,7 +59,7 @@ public extension DoseEntry {
             value: absoluteUnit,
             unit: .unitsPerHour,
             insulinType: insulinType,
-            automatic: true,
+            automatic: automatic,
             isMutable: true
         )
     }
