@@ -124,7 +124,7 @@ struct DanaKitUserSettingsView: View {
                         Spacer()
                         Text(String(
                             format:
-                            String(localized: "%d sec", comment: "second placeholder"),
+                            String(localized: "%lld sec", comment: "second placeholder"),
                             viewModel.backlightOnTimeInSec
                         ))
                     }
@@ -136,7 +136,7 @@ struct DanaKitUserSettingsView: View {
                         Spacer()
                         Text(String(
                             format:
-                            String(localized: "%d sec", comment: "second placeholder"),
+                            String(localized: "%lld sec", comment: "second placeholder"),
                             viewModel.lcdOnTimeInSec
                         ))
                     }
