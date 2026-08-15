@@ -28,7 +28,7 @@ public class UnfinalizedDose: NSObject {
             automatic: activationType.isAutomatic
         )
     }
-    
+
     public convenience init(resumeStartTime: Date, insulinType: InsulinType?) {
         self.init(
             type: .resume,
@@ -40,7 +40,7 @@ public class UnfinalizedDose: NSObject {
             automatic: false
         )
     }
-    
+
     public convenience init(suspendStartTime: Date) {
         self.init(
             type: .suspend,
@@ -52,7 +52,7 @@ public class UnfinalizedDose: NSObject {
             automatic: false
         )
     }
-    
+
     public convenience init(basalRate: Double, insulinType: InsulinType?, startDate: Date = Date.now) {
         self.init(
             type: .basal,
@@ -64,8 +64,14 @@ public class UnfinalizedDose: NSObject {
             automatic: false
         )
     }
-    
-    public convenience init(tempRate: Double, duration: TimeInterval, insulinType: InsulinType?, automatic: Bool, startDate: Date = Date.now) {
+
+    public convenience init(
+        tempRate: Double,
+        duration: TimeInterval,
+        insulinType: InsulinType?,
+        automatic: Bool,
+        startDate: Date = Date.now
+    ) {
         self.init(
             type: .tempBasal,
             startDate: startDate,
@@ -131,12 +137,12 @@ public class UnfinalizedDose: NSObject {
             let actualEndDate: Date
             if let endDate {
                 // in case this finalization happens late (TBR ended while not connected to the phone, etc)
-               // don't report the end date later than the scheduled end date
+                // don't report the end date later than the scheduled end date
                 actualEndDate = min(endDate, expectedEndDate)
             } else {
                 actualEndDate = expectedEndDate
             }
-                 
+
             let duration = actualEndDate.timeIntervalSince(startDate)
             return DoseEntry(
                 type: .tempBasal,
@@ -164,7 +170,7 @@ public class UnfinalizedDose: NSObject {
             )
         }
     }
-    
+
     private func roundBasalRate(_ rate: Double) -> Double {
         DanaKitPumpManager.onboardingSupportedBasalRates.last(where: { $0 <= rate }) ?? 0
     }

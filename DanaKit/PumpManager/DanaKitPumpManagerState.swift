@@ -90,13 +90,13 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         } else {
             basalDeliveryOrdinal = .active
         }
-        
+
         if let unfinalizedBasalRaw = rawValue["basalDose"] as? UnfinalizedDose.RawValue {
             basalDose = UnfinalizedDose(rawValue: unfinalizedBasalRaw) ??
-                    UnfinalizedDose(
-                        basalRate: Self.getScheduledBasalRate(basalSchedule: basalSchedule, date: Date.now),
-                        insulinType: insulinType
-                    )
+                UnfinalizedDose(
+                    basalRate: Self.getScheduledBasalRate(basalSchedule: basalSchedule, date: Date.now),
+                    insulinType: insulinType
+                )
         } else {
             basalDose = UnfinalizedDose(
                 basalRate: Self.getScheduledBasalRate(basalSchedule: basalSchedule, date: Date.now),
@@ -428,13 +428,13 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         // Dana-i (BLE5)
         return 2
     }
-    
+
     public func getScheduledBasalRate(date: Date = Date.now) -> Double {
-        return Self.getScheduledBasalRate(basalSchedule: basalSchedule, date: date)
+        Self.getScheduledBasalRate(basalSchedule: basalSchedule, date: date)
     }
-   
+
     private static let basalIntervals: [TimeInterval] = Array(0 ..< 24).map({ TimeInterval(60 * 60 * $0) })
-    private static func getScheduledBasalRate(basalSchedule: [Double], date: Date) -> Double {
+    private static func getScheduledBasalRate(basalSchedule: [Double], date _: Date) -> Double {
         guard !basalSchedule.isEmpty else {
             // Prevent crash if basalSchedule isnt set
             return 0

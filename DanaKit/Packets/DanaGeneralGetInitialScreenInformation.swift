@@ -12,16 +12,16 @@ struct PacketGeneralGetInitialScreenInformation: Codable {
     let extendedBolusAbsoluteRemaining: Double
     let insulinOnBoard: Double
     let errorState: Int?
-    
+
     var basalDeliveryOrdinal: DanaKitBasal {
         if isPumpSuspended {
             return .suspended
         }
-        
+
         if isTempBasalInProgress {
             return .tempBasal
         }
-        
+
         return .active
     }
 }

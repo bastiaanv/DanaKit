@@ -61,11 +61,15 @@ class DanaKitSettingsViewModel: ObservableObject {
     }
 
     public var isTempBasalManual: Bool {
-        isTempBasal && (pumpManager?.state.isTempBasalManual ?? false)
+        isTempBasal && !(pumpManager?.state.basalDose.automatic ?? true)
     }
 
     public var isSuspendActionLocked: Bool {
-        travelLockEnabled && !(pumpManager?.state.isPumpSuspended ?? true)
+        guard let pumpManager else {
+            return true
+        }
+
+        return travelLockEnabled && pumpManager.state.basalDose.type != .suspend
     }
 
     public var isTempBasalLocked: Bool {
@@ -74,7 +78,7 @@ class DanaKitSettingsViewModel: ObservableObject {
         }
 
         return travelLockEnabled ||
-            !(pumpManager.state.basalDeliveryOrdinal == .tempBasal && pumpManager.state.tempBasalEndsAt > Date.now)
+            !(pumpManager.state.basalDeliveryOrdinal == .tempBasal && pumpManager.state.basalDose.expectedEndDate > Date.now)
     }
 
     var tempBasalRemaining: String? {
@@ -82,7 +86,7 @@ class DanaKitSettingsViewModel: ObservableObject {
             return nil
         }
 
-        let remaining = pumpManager.state.tempBasalEndsAt.timeIntervalSinceNow
+        let remaining = pumpManager.state.basalDose.expectedEndDate.timeIntervalSinceNow
         let hours = Int(floor(remaining.hours))
         let minutes = Int(floor(remaining.minutes))
 

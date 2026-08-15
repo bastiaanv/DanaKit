@@ -267,7 +267,7 @@ extension DanaKitPumpManager: PumpManager {
 
     private func status(_ state: DanaKitPumpManagerState) -> LoopKit.PumpManagerStatus {
         // Check if temp basal is expired, before constructing basalDeliveryState
-        return PumpManagerStatus(
+        PumpManagerStatus(
             timeZone: state.pumpTimeZone ?? TimeZone.current,
             device: device(),
             pumpBatteryChargeRemaining: state.batteryRemaining / 100,
@@ -695,7 +695,6 @@ extension DanaKitPumpManager: PumpManager {
                         var percentage = percentage
                         if percentage > 500 {
                             percentage = 500
-                            unitsPerHour = self.state.getScheduledBasalRate() * 5
                         }
 
                         if self.state.basalDeliveryOrdinal == .tempBasal {
@@ -719,7 +718,7 @@ extension DanaKitPumpManager: PumpManager {
                         }
 
                         // 500% fix is already applied
-                        let unitsPerHour = (Double(percentage) / 100) * self.currentBaseBasalRate
+                        let unitsPerHour = (Double(percentage) / 100) * self.state.getScheduledBasalRate()
 
                         if duration < .ulpOfOne {
                             // Temp basal is already canceled (if deem needed)
@@ -858,7 +857,7 @@ extension DanaKitPumpManager: PumpManager {
         }
     }
 
-    private func reportBasal(unitsPerHour: Double, duration: Double, percentage: UInt16, isTempBasal: Bool, automatic: Bool) {
+    private func reportBasal(unitsPerHour: Double, duration: Double, percentage _: UInt16, isTempBasal: Bool, automatic: Bool) {
         var events: [NewPumpEvent] = []
         var basalDose: UnfinalizedDose
 
@@ -868,7 +867,7 @@ extension DanaKitPumpManager: PumpManager {
                 tempRate: unitsPerHour,
                 duration: duration,
                 insulinType: state.insulinType,
-                automatic: true,
+                automatic: automatic,
                 startDate: startDate
             )
             events.append(NewPumpEvent.tempBasal(

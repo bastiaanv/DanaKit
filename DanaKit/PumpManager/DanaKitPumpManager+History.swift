@@ -313,29 +313,24 @@ extension DanaKitPumpManager {
         }
 
         let isExpired = endDate == nil && state.basalDose.expectedEndDate <= Date.now
-        let dose = state.basalDose.toDoseEntry(endDate: endDate)
+        let dose = state.basalDose.toDoseEntry(endDate: isExpired ? state.basalDose.expectedEndDate : endDate)
         let tempBasalDose = NewPumpEvent.tempBasal(
             dose: dose,
             date: state.basalDose.startDate
         )
-        
+
         var events = [tempBasalDose]
         if isExpired {
-            let basalDose = DoseEntry.basal(
-                rate: state.getScheduledBasalRate(date: dose.endDate),
+            state.basalDose = UnfinalizedDose(
+                basalRate: state.getScheduledBasalRate(date: dose.endDate),
                 insulinType: state.insulinType,
                 startDate: dose.endDate
             )
-            events.append(NewPumpEvent.basal(dose: basalDose, date: dose.endDate))
-            
-            state.basalDose = UnfinalizedDose(
-                basalRate: basalDose.unitsPerHour,
-                insulinType: state.insulinType,
-                startDate: basalDose.startDate
-            )
+
             notifyStateDidChange()
+            events.append(NewPumpEvent.basal(dose: state.basalDose.toDoseEntry(endDate: nil), date: dose.endDate))
         }
-        
+
         return events
     }
 }

@@ -81,7 +81,6 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		3E07E692302A5B440084A02D /* DanaKitTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DanaKitTests; sourceTree = "<group>"; };
 		3E6007882D0C5D0C00B186D1 /* DanaKitPlugin */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (3E60078D2D0C5D0C00B186D1 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = DanaKitPlugin; sourceTree = "<group>"; };
-		3E914BDA302B4C42000DE467 /* Localization */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Localization; sourceTree = "<group>"; };
 		3E914BE1302B4C45000DE467 /* DanaKitPlugin */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DanaKitPlugin; sourceTree = "<group>"; };
 		3E914C03302B4C47000DE467 /* DanaKitUI */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DanaKitUI; sourceTree = "<group>"; };
 		3E914C30302B4C50000DE467 /* Common */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Common; sourceTree = "<group>"; };
@@ -133,7 +132,6 @@
 				3E914C90302B4CE2000DE467 /* DanaKit */,
 				3E914C03302B4C47000DE467 /* DanaKitUI */,
 				3E914BE1302B4C45000DE467 /* DanaKitPlugin */,
-				3E914BDA302B4C42000DE467 /* Localization */,
 				3E07E692302A5B440084A02D /* DanaKitTests */,
 				84752E8326ED0FFE009FD801 /* Products */,
 				84752E9C26ED10A0009FD801 /* Frameworks */,
@@ -242,7 +240,6 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				3E914BDA302B4C42000DE467 /* Localization */,
 				3E914C03302B4C47000DE467 /* DanaKitUI */,
 				3E914C30302B4C50000DE467 /* Common */,
 				3E914C90302B4CE2000DE467 /* DanaKit */,

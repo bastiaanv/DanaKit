@@ -1,16 +1,11 @@
-enum LoopTempBasalDuration {
-    case min15
-    case min30
+enum LoopTempBasalDuration: UInt8 {
+    case min15 = 150
+    case min30 = 160
 }
 
 struct PacketLoopSetTemporaryBasal {
     var percent: UInt16
     var duration: LoopTempBasalDuration
-}
-
-enum TemporaryBasalDuration {
-    static let PARAM_30_MIN: UInt8 = 160
-    static let PARAM_15_MIN: UInt8 = 150
 }
 
 let CommandLoopSetTemporaryBasal: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
@@ -26,7 +21,7 @@ func generatePacketLoopSetTemporaryBasal(options: PacketLoopSetTemporaryBasal) -
     let data = Data([
         UInt8(percent & 0xFF),
         UInt8((percent >> 8) & 0xFF),
-        UInt8((options.duration == .min30 ? TemporaryBasalDuration.PARAM_30_MIN : TemporaryBasalDuration.PARAM_15_MIN) & 0xFF)
+        options.duration.rawValue
     ])
 
     return DanaGeneratePacket(
