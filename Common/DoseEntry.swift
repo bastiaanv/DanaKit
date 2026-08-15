@@ -8,7 +8,8 @@ public extension DoseEntry {
         duration: TimeInterval,
         activationType: BolusActivationType,
         insulinType: InsulinType?,
-        startDate: Date = Date.now
+        startDate: Date = Date.now,
+        wasProgrammedByPumpUI: Bool = false
     ) -> DoseEntry {
         var endTime = Date.now
         endTime.addTimeInterval(duration)
@@ -23,7 +24,8 @@ public extension DoseEntry {
             insulinType: insulinType,
             automatic: activationType.isAutomatic,
             manuallyEntered: activationType == .manualNoRecommendation,
-            isMutable: false
+            isMutable: false,
+            wasProgrammedByPumpUI: wasProgrammedByPumpUI
         )
     }
 

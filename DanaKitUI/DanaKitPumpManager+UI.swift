@@ -106,7 +106,7 @@ extension DanaKitPumpManager {
                 imageName: "exclamationmark.circle.fill",
                 state: .critical
             )
-        } else if state.isPumpSuspended {
+        } else if state.basalDeliveryOrdinal == .suspended {
             return PumpStatusHighlight(
                 localizedMessage: String(
                     localized:

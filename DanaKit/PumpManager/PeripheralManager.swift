@@ -75,7 +75,7 @@ class PeripheralManager: NSObject {
     }
 
     func writeMessage(_ packet: DanaGeneratePacket) throws -> (any DanaParsePacketProtocol) {
-        let command = (UInt16(packet.type ?? DanaPacketType.TYPE_RESPONSE) << 8) + UInt16(packet.opCode)
+        let command = (UInt16(DanaPacketType.TYPE_RESPONSE) << 8) + UInt16(packet.opCode)
 
         let writeQ = DanaKitDispatchGroup()
         writeQ.enter()

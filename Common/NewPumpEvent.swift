@@ -2,12 +2,13 @@ import Foundation
 import LoopKit
 
 public extension NewPumpEvent {
-    static func bolus(dose: DoseEntry, units: Double, date: Date = Date.now) -> NewPumpEvent {
+    static func bolus(dose: DoseEntry, date: Date = Date.now) -> NewPumpEvent {
         let dateFormatter = ISO8601DateFormatter()
         return NewPumpEvent(
             date: date,
             dose: dose,
-            raw: "\(DoseType.bolus.rawValue) \(units) \(dateFormatter.string(from: date))".data(using: .utf8) ?? Data([]),
+            raw: "\(DoseType.bolus.rawValue) \(dose.programmedUnits) \(dateFormatter.string(from: dose.startDate))"
+                .data(using: .utf8) ?? Data([]),
             title: String(localized: "Bolus", comment: "Pump Event title for UnfinalizedDose with doseType of .bolus")
         )
     }
@@ -17,7 +18,7 @@ public extension NewPumpEvent {
         return NewPumpEvent(
             date: date,
             dose: dose,
-            raw: "\(DoseType.tempBasal.rawValue) \(dose.programmedUnits) \(dateFormatter.string(from: date))"
+            raw: "\(DoseType.tempBasal.rawValue) \(dose.unitsPerHour) \(dateFormatter.string(from: dose.startDate))"
                 .data(using: .utf8) ?? Data([]),
             title: String(localized: "Temp Basal", comment: "Pump Event title for UnfinalizedDose with doseType of .tempBasal")
         )

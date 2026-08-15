@@ -57,15 +57,19 @@ class DanaKitSettingsViewModel: ObservableObject {
             return false
         }
 
-        return pumpManager.state.basalDeliveryOrdinal == .tempBasal && pumpManager.state.tempBasalEndsAt > Date.now
+        return pumpManager.state.basalDeliveryOrdinal == .tempBasal
     }
 
     public var isTempBasalManual: Bool {
-        isTempBasal && (pumpManager?.state.isTempBasalManual ?? false)
+        isTempBasal && !(pumpManager?.state.basalDose.automatic ?? true)
     }
 
     public var isSuspendActionLocked: Bool {
-        travelLockEnabled && !(pumpManager?.state.isPumpSuspended ?? true)
+        guard let pumpManager else {
+            return true
+        }
+
+        return travelLockEnabled && pumpManager.state.basalDose.type != .suspend
     }
 
     public var isTempBasalLocked: Bool {
@@ -74,7 +78,7 @@ class DanaKitSettingsViewModel: ObservableObject {
         }
 
         return travelLockEnabled ||
-            !(pumpManager.state.basalDeliveryOrdinal == .tempBasal && pumpManager.state.tempBasalEndsAt > Date.now)
+            !(pumpManager.state.basalDeliveryOrdinal == .tempBasal && pumpManager.state.basalDose.expectedEndDate > Date.now)
     }
 
     var tempBasalRemaining: String? {
@@ -82,7 +86,7 @@ class DanaKitSettingsViewModel: ObservableObject {
             return nil
         }
 
-        let remaining = pumpManager.state.tempBasalEndsAt.timeIntervalSinceNow
+        let remaining = pumpManager.state.basalDose.expectedEndDate.timeIntervalSinceNow
         let hours = Int(floor(remaining.hours))
         let minutes = Int(floor(remaining.minutes))
 
@@ -163,7 +167,7 @@ class DanaKitSettingsViewModel: ObservableObject {
         bolusSpeed = self.pumpManager?.state.bolusSpeed ?? .speed12
         lastSync = self.pumpManager?.state.lastStatusDate
         reservoirLevel = self.pumpManager?.state.reservoirLevel
-        isSuspended = self.pumpManager?.state.isPumpSuspended ?? false
+        isSuspended = self.pumpManager?.state.basalDeliveryOrdinal == .suspended
         pumpTime = self.pumpManager?.state.pumpTime
         pumpTimeSyncedAt = self.pumpManager?.state.pumpTimeSyncedAt
         nightlyPumpTimeSync = self.pumpManager?.state.allowAutomaticTimeSync ?? false
@@ -404,8 +408,8 @@ class DanaKitSettingsViewModel: ObservableObject {
 
         isUpdatingPumpState = true
 
-        if pumpManager.state.isPumpSuspended {
-            pumpManager.resumeDelivery { error in
+        if pumpManager.state.basalDeliveryOrdinal == .suspended {
+            self.pumpManager?.resumeDelivery { error in
                 DispatchQueue.main.async {
                     self.isUpdatingPumpState = false
                 }
@@ -447,10 +451,10 @@ class DanaKitSettingsViewModel: ObservableObject {
             return
         }
 
-        if pumpManager.state.basalDeliveryOrdinal == .tempBasal, pumpManager.state.tempBasalEndsAt > Date.now {
-            basalRate = pumpManager.state.tempBasalUnits ?? pumpManager.currentBaseBasalRate
+        if pumpManager.state.basalDeliveryOrdinal == .tempBasal {
+            basalRate = pumpManager.state.basalDose.value
         } else {
-            basalRate = pumpManager.currentBaseBasalRate
+            basalRate = pumpManager.state.getScheduledBasalRate()
         }
     }
 
@@ -472,7 +476,7 @@ extension DanaKitSettingsViewModel: StateObserver {
         bolusSpeed = state.bolusSpeed
         lastSync = state.lastStatusDate
         reservoirLevel = state.reservoirLevel
-        isSuspended = state.isPumpSuspended
+        isSuspended = state.basalDeliveryOrdinal == .suspended
         isBolusSyncingDisabled = state.isBolusSyncDisabled
         pumpTime = state.pumpTime
         pumpTimeSyncedAt = state.pumpTimeSyncedAt
