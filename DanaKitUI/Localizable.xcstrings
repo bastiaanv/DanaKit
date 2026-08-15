@@ -325,326 +325,6 @@
         }
       }
     },
-    "(%lld hr %lld min)" : {
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld ساعة %lld دقيقة)"
-          }
-        },
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld hod %lld min)"
-          }
-        },
-        "da" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld timer %lld minutter)"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld Std. %lld Min.)"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld hr %lld min)"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld h %lld min)"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld tuntia %lld minuuttia)"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld h %lld min)"
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld שעות %lld דקות)"
-          }
-        },
-        "hu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld óra %lld perc)"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld ore %lld minuti)"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld 時間 %lld 分)"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld 시간 %lld 분)"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld timer %lld minutter)"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld uur %lld min)"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld godz. %lld min.)"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld h %lld min)"
-          }
-        },
-        "ro" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld ore %lld minute)"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld час %lld мин)"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld hodín %lld minút)"
-          }
-        },
-        "sl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld ur %lld min)"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld timmar %lld minuter)"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld saat %lld dakika)"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld год %lld хв)"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld giờ %lld phút)"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld 小时 %lld 分钟)"
-          }
-        }
-      }
-    },
-    "(%lld min)" : {
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld دقيقة)"
-          }
-        },
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld min)"
-          }
-        },
-        "da" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld min)"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld Min.)"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld min)"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld min)"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld min)"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld min)"
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld דקות)"
-          }
-        },
-        "hu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld perc)"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld min)"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld 分)"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld 분)"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld min)"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld min)"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld min)"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld min)"
-          }
-        },
-        "ro" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld min)"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld мин)"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld min)"
-          }
-        },
-        "sl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld min)"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld min)"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld dakika)"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld хв)"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld phút)"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(%lld 分钟)"
-          }
-        }
-      }
-    },
     "%@ (%@ U/hr)" : {
       "comment" : "",
       "extractionState" : "manual",
@@ -652,157 +332,157 @@
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%@ (%%@ وحدة/ساعة)"
+            "value" : "%@ (%@ وحدة/ساعة)"
           }
         },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%@ (%%@ U/hod.)"
+            "value" : "%@ (%@ U/hod.)"
           }
         },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%@ (%%@ U/time)"
+            "value" : "%@ (%@ U/time)"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%@ (%%@ U/Std.)"
+            "value" : "%@ (%@ U/h)"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%@ (%%@ U/hr)"
+            "value" : "%@ (%@ U/hr)"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%@ (%%@ U/h)"
+            "value" : "%@ (%@ U/h)"
           }
         },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%@ (%%@ U/h)"
+            "value" : "%@ (%@ U/h)"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%@ (%%@ U/h)"
+            "value" : "%@ (%@ U/h)"
           }
         },
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%@ (%%@ U/שעה)"
+            "value" : "%@ (%@ U/שעה)"
           }
         },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%@ (%%@ U/óra)"
+            "value" : "%@ (%@ U/óra)"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%@ (%%@ U/ora)"
+            "value" : "%@ (%@ U/ora)"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%@ (%%@ 時間あたり)"
+            "value" : "%@ (%@ U/hr)"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%@ (%%@ 시간당)"
+            "value" : "%@ (%@ U/hr)"
           }
         },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%@ (%%@ U/time)"
+            "value" : "%@ (%@ enheter/time)"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%@ (%%@ U/uur)"
+            "value" : "%@ (%@ U/uur)"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%@ (%%@ U/godz.)"
+            "value" : "%@ (%@ U/godz.)"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%@ (%%@ U/h)"
+            "value" : "%@ (%@ U/h)"
           }
         },
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%@ (%%@ U/oră)"
+            "value" : "%@ (%@ U/oră)"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%@ (%%@ единиц/час)"
+            "value" : "%@ (%@ единиц в час)"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%@ (%%@ U/hod.)"
+            "value" : "%@ (%@ U/hod.)"
           }
         },
         "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%@ (%%@ U/hr)"
+            "value" : "%@ (%@ U/hr)"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%@ (%%@ U/tim)"
+            "value" : "%@ (%@ enheter/timme)"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%@ (%%@ saat başına)"
+            "value" : "%@ (%@ birim/saat)"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%@ (%%@ одиниць/год)"
+            "value" : "%@ (%@ одиниць на годину)"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%@ (%%@ U/giờ)"
+            "value" : "%@ (%@ U/giờ)"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%@ (%%@ 单位/小时)"
+            "value" : "%@（%@ 单位/小时）"
           }
         }
       }
@@ -1451,162 +1131,482 @@
         }
       }
     },
-    "%d sec" : {
+    "%lld hr %lld min" : {
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%d ثانية"
+            "value" : "%lld ساعة %lld دقيقة"
           }
         },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%d sekund"
+            "value" : "%lld hod. %lld min."
           }
         },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%d sek."
+            "value" : "%lld time %lld minut"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%d Sek."
+            "value" : "%lld Std. %lld Min."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%d sec"
+            "value" : "%lld hr %lld min"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%d segundos"
+            "value" : "%lld h %lld min"
           }
         },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%d sekuntia"
+            "value" : "%lld tuntia %lld minuuttia"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%d s"
+            "value" : "%lld heure %lld minute"
           }
         },
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%d שניות"
+            "value" : "%lld שעה %lld דקות"
           }
         },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%d másodperc"
+            "value" : "%lld óra %lld perc"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%d sec"
+            "value" : "%lld ore %lld minuti"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%d 秒"
+            "value" : "%lld 時間 %lld 分"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%d 초"
+            "value" : "%lld 시간 %lld 분"
           }
         },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%d sek"
+            "value" : "%lld time %lld minutt"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%d sec"
+            "value" : "%lld uur %lld minuten"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%d sek."
+            "value" : "%lld godz. %lld min."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%d seg"
+            "value" : "%lld hora %lld minuto"
           }
         },
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%d secunde"
+            "value" : "%lld ore %lld minute"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%d сек"
+            "value" : "%lld час %lld минут"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%d sekúnd"
+            "value" : "%lld hodín %lld minút"
           }
         },
         "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%d sek"
+            "value" : "%lld ur %lld min"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%d sek"
+            "value" : "%lld tim %lld min"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%d saniye"
+            "value" : "%lld saat %lld dakika"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%d секунд"
+            "value" : "%lld год %lld хв"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%d giây"
+            "value" : "%lld giờ %lld phút"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%%d 秒"
+            "value" : "%lld 小时 %lld 分钟"
+          }
+        }
+      }
+    },
+    "%lld min" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld دقيقة"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld min"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld min."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld Min."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld min"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld min"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld min"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld min"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld דקות"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld perc"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld min"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld 分"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld 분"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld min"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld min"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld min"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld min"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld min"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld мин"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld min"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld min"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld min"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld dakika"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld хв"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld phút"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld 分钟"
+          }
+        }
+      }
+    },
+    "%lld sec" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld ثانية"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld s"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld sek."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld Sek."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld sec"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld segundos"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld sekuntia"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld s"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld שניות"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld másodperc"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld sec"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld 秒"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld 초"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld sek"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld sec"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld sek."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld seg"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld secunde"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld сек"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld sekúnd"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld sek"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld sek"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld saniye"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld секунд"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld giây"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld 秒"
           }
         }
       }
@@ -19741,6 +19741,168 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "预注剂量"
+          }
+        }
+      }
+    },
+    "Pump battery empty" : {
+      "comment" : "Alert title for batteryZeroPercent",
+      "extractionState" : "manual",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "البطارية فارغة"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Baterie čerpadla je vybitá"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pumpebatteriet er tomt"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pumpenakku leer"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pump battery empty"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La batería de la bomba está agotada"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pumpun akku tyhjä"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Batterie de la pompe déchargée"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "סוללת המשאבה ריקה"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Az akkumulátor lemerült"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La batteria della pompa è scarica"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ポンプ用バッテリーが空になりました"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "펌프 배터리 방전"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pumpebatteriet er tomt"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accu van de pomp leeg"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Akumulator pompy rozładowany"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bateria da bomba vazia"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bateria pompei este descărcată"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Аккумулятор насоса разряжен"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Batéria čerpadla je vybitá"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Baterija črpalke je prazna"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pumpbatteriet är tomt"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pompa aküsü boş"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Акумулятор насоса розряджений"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pin bơm rỗng"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "泵电池电量耗尽"
           }
         }
       }

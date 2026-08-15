@@ -591,7 +591,7 @@ struct DanaKitSettingsView: View {
                     .fixedSize()
                 }
             } else if let basalRate = $viewModel.basalRate.wrappedValue {
-                HStack(alignment: .center, spacing: 10) {
+                VStack(alignment: .leading, spacing: 3) {
                     HStack(alignment: .lastTextBaseline, spacing: 3) {
                         Text(String(format: "%.2f", basalRate))
                             .font(.system(size: 28))
@@ -599,11 +599,12 @@ struct DanaKitSettingsView: View {
                             .fixedSize()
                         Text("U/hr", comment: "Units for showing temp basal rate")
                             .foregroundColor(.secondary)
-
-                        if let tempRemaining = viewModel.tempBasalRemaining {
-                            Text(tempRemaining)
-                                .foregroundColor(.secondary)
-                        }
+                    }
+                    
+                    if let tempRemaining = viewModel.tempBasalRemaining {
+                        Text(tempRemaining)
+                            .foregroundColor(.secondary)
+                            .font(.footnote)
                     }
                 }
             } else {

@@ -90,14 +90,14 @@ class DanaKitSettingsViewModel: ObservableObject {
 
         if hours > 0 {
             return String(
-                format: String(localized: "(%lld hr %lld min)", comment: "temp basal remaining hours+minutes"),
+                format: String(localized: "%lld hr %lld min", comment: "temp basal remaining hours+minutes"),
                 hours,
                 minutes - hours * 60
             )
         }
 
         return String(
-            format: String(localized: "(%lld min)", comment: "temp basal remaining minutes"),
+            format: String(localized: "%lld min", comment: "temp basal remaining minutes"),
             minutes
         )
     }

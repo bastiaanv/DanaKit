@@ -46,7 +46,7 @@ struct DanaKitUserSettingsView: View {
         PickerView(
             value: Int(viewModel.backlightOnTimeInSec),
             allowedOptions: Array(0 ... 48).map({ $0 * 5 }),
-            formatter: { value in String(format: String(localized: "%d sec", comment: "second placeholder"), value) },
+            formatter: { value in String(format: String(localized: "%lld sec", comment: "second placeholder"), value) },
             didChange: { value in viewModel.backlightOnTimeInSec = UInt8(value) },
             title: Text("Backlight on time", comment: "backlightOnTime")
         )
@@ -56,7 +56,7 @@ struct DanaKitUserSettingsView: View {
         PickerView(
             value: Int(viewModel.lcdOnTimeInSec),
             allowedOptions: Array(0 ... 48).map({ $0 * 5 }),
-            formatter: { value in String(format: String(localized: "%d sec", comment: "second placeholder"), value) },
+            formatter: { value in String(format: String(localized: "%lld sec", comment: "second placeholder"), value) },
             didChange: { value in viewModel.lcdOnTimeInSec = UInt8(value) },
             title: Text("Lcd on time", comment: "lcdOnTime")
         )
