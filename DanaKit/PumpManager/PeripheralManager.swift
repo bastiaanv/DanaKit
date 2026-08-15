@@ -658,7 +658,10 @@ extension PeripheralManager {
         if decryptedData[0] == DanaPacketType.TYPE_ENCRYPTION_RESPONSE {
             guard !isConnectionFinished else {
                 // The handshake is done. A late encryption packet must never be able to fail the connection
-                log.warning("Ignoring encryption packet received after connection was established. Data: \(decryptedData.hexString())")
+                log
+                    .warning(
+                        "Ignoring encryption packet received after connection was established. Data: \(decryptedData.hexString())"
+                    )
                 return
             }
 
@@ -766,8 +769,8 @@ extension PeripheralManager {
         }
 
         guard
-            (readBuffer[length + 5] == PACKET_END_BYTE || readBuffer[length + 5] == ENCRYPTED_END_BYTE) &&
-            (readBuffer[length + 6] == PACKET_END_BYTE || readBuffer[length + 6] == ENCRYPTED_END_BYTE)
+            readBuffer[length + 5] == PACKET_END_BYTE || readBuffer[length + 5] == ENCRYPTED_END_BYTE,
+            readBuffer[length + 6] == PACKET_END_BYTE || readBuffer[length + 6] == ENCRYPTED_END_BYTE
         else {
             // Invalid packets received...
             log.error("Received invalid packets. Ending bytes do not match. Data: \(readBuffer.hexString())")
