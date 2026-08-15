@@ -49,7 +49,7 @@ struct DanaKitSettingsView: View {
             ]
         )
     }
-    
+
     var blindReservoirCannulaRefill: ActionSheet {
         ActionSheet(title: Text("Type of refill", comment: "Title for refill action"), buttons: [
             .default(Text("Cannula only", comment: "Button text to cannula only")) {
@@ -198,55 +198,16 @@ struct DanaKitSettingsView: View {
                         .font(Font.footnote.weight(.semibold))
                     }.padding(.vertical, 8)
                 }
-
-                if viewModel.isTempBasalManual, let percentage = viewModel.tempBasalPercentage,
-                   let endsAt = viewModel.tempBasalEndsAt, let duration = viewModel.tempBasalDuration
-                {
-                    TimelineView(.periodic(from: .now, by: 1)) { context in
-                        let remaining = max(0, endsAt.timeIntervalSince(.now))
-                        let progress = 1 - (remaining / duration)
-                        
-                        VStack(alignment: .leading, spacing: 4) {
-                            HStack(spacing: 4) {
-                                Text(String(format: String(localized: "Manual Temp Basal (\(percentage)%%)",
-                                                           comment: "title for manual temp basal including percentage")))
-                                .font(Font.subheadline.weight(.bold))
-                                Spacer()
-                                Text(String(
-                                     format: String(
-                                         localized: "Ends in %@",
-                                         comment: "description for manual temp basal time remaining"
-                                     ),
-                                     viewModel.formatRemaining(until: endsAt, now: context.date)
-                                 ))
-
-                            }
-                            ProgressView(value: progress).tint(Color.accentColor)
-                        }.padding(.vertical, 8)
-                    }
-                }
             }
 
-            Section(
-                header: SectionHeader(label: String(localized:
-                    "Manage",
-                    comment: "The title of the manage section in DanaKit settings"
-                )),
-                footer: viewModel.travelLockEnabled ? Text(
-                    "Pump management actions are locked.\nLong press either button to unlock.",
-                    comment: "Footer in the manage section explaining how to disable the travel lock"
-                ) : Text(
-                    "Long press either button to lock the pump management actions.",
-                    comment: "Footer in the manage section explaining how to enable the travel lock"
-                )
-            ) {
+            Section {
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
                     pumpManagementActionCard(
                         title: viewModel.isSuspended
                             ? String(localized: "Resume Insulin Delivery", comment: "Dana settings resume delivery")
                             : String(localized: "Suspend Insulin Delivery", comment: "Dana settings suspend delivery"),
                         systemImage: viewModel.isSuspended ? "play.circle.fill" : "pause.circle.fill",
-                        iconColor: viewModel.isSuspended ? Color.accentColor :  guidanceColors.warning
+                        iconColor: viewModel.isSuspended ? Color.accentColor : guidanceColors.warning
                     ) {
                         viewModel.suspendResumeButtonPressed()
                     }
@@ -288,12 +249,18 @@ struct DanaKitSettingsView: View {
                 .padding(.vertical, 4)
                 .listRowInsets(EdgeInsets())
                 .listRowBackground(Color.clear)
+            } header: {
+                Text("Manage", comment: "The title of the manage section in DanaKit settings")
+            } footer: { viewModel.travelLockEnabled ? Text(
+                "Pump management actions are locked.\nLong press either button to unlock.",
+                comment: "Footer in the manage section explaining how to disable the travel lock"
+            ) : Text(
+                "Long press either button to lock the pump management actions.",
+                comment: "Footer in the manage section explaining how to enable the travel lock"
+            )
             }
 
-            Section(header: SectionHeader(label: String(localized:
-                "Sync",
-                comment: "The title of the sync section in DanaKit settings"
-            ))) {
+            Section {
                 Button(action: {
                     viewModel.syncData()
                 }) {
@@ -396,69 +363,65 @@ struct DanaKitSettingsView: View {
                         viewModel.updateBatteryAge()
                     })
                 }
+            } header: {
+                Text("Sync", comment: "The title of the sync section in DanaKit settings")
             }
 
-            Section(header: SectionHeader(label: String(
-                localized: "Configuration",
-                comment: "The title of the configuration section in DanaKit settings"
-            )))
-                {
-                    Button(action: { viewModel.toInsulinType() }) {
-                        HStack(spacing: 5) {
-                            Text("Insulin Type", comment: "Text for confidence reminders navigation link")
-                                .foregroundColor(Color.primary)
-                            Spacer()
-                            Text(viewModel.insulinType.brandName)
-                                .foregroundColor(.secondary)
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: UIFont.systemFontSize, weight: .bold))
-                                .foregroundStyle(.secondary)
-                        }
-                    }
-                    Button(action: { viewModel.toBolusSpeed() }) {
-                        HStack(spacing: 5) {
-                            Text("Delivery speed", comment: "Title for delivery speed")
-                                .foregroundColor(Color.primary)
-                            Spacer()
-                            Text(viewModel.bolusSpeed.format())
-                                .foregroundColor(.secondary)
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: UIFont.systemFontSize, weight: .bold))
-                                .foregroundStyle(.secondary)
-                        }
-                    }
-                    Button(action: { viewModel.toUserOptions() }) {
-                        HStack {
-                            Text("User options", comment: "Title for user options")
-                                .foregroundColor(Color.primary)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: UIFont.systemFontSize, weight: .bold))
-                                .foregroundStyle(.secondary)
-                        }
-                    }
-                    Button(action: {
-                        viewModel.showingBlindReservoirCannulaRefill = true
-                    }) {
-                        HStack {
-                            Text("Reservoir/cannula refill", comment: "Title for reservoir/cannula refill")
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: UIFont.systemFontSize, weight: .bold))
-                                .foregroundStyle(.secondary)
-                        }
-                        .foregroundColor(Color.primary)
-                    }
-                    .actionSheet(isPresented: $viewModel.showingBlindReservoirCannulaRefill) {
-                        blindReservoirCannulaRefill
+            Section {
+                Button(action: { viewModel.toInsulinType() }) {
+                    HStack(spacing: 5) {
+                        Text("Insulin Type", comment: "Text for confidence reminders navigation link")
+                            .foregroundColor(Color.primary)
+                        Spacer()
+                        Text(viewModel.insulinType.brandName)
+                            .foregroundColor(.secondary)
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: UIFont.systemFontSize, weight: .bold))
+                            .foregroundStyle(.secondary)
                     }
                 }
+                Button(action: { viewModel.toBolusSpeed() }) {
+                    HStack(spacing: 5) {
+                        Text("Delivery speed", comment: "Title for delivery speed")
+                            .foregroundColor(Color.primary)
+                        Spacer()
+                        Text(viewModel.bolusSpeed.format())
+                            .foregroundColor(.secondary)
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: UIFont.systemFontSize, weight: .bold))
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                Button(action: { viewModel.toUserOptions() }) {
+                    HStack {
+                        Text("User options", comment: "Title for user options")
+                            .foregroundColor(Color.primary)
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: UIFont.systemFontSize, weight: .bold))
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                Button(action: {
+                    viewModel.showingBlindReservoirCannulaRefill = true
+                }) {
+                    HStack {
+                        Text("Reservoir/cannula refill", comment: "Title for reservoir/cannula refill")
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: UIFont.systemFontSize, weight: .bold))
+                            .foregroundStyle(.secondary)
+                    }
+                    .foregroundColor(Color.primary)
+                }
+                .actionSheet(isPresented: $viewModel.showingBlindReservoirCannulaRefill) {
+                    blindReservoirCannulaRefill
+                }
+            } header: {
+                Text("Configuration", comment: "The title of the configuration section in DanaKit settings")
+            }
 
-            Section(header: SectionHeader(label: String(
-                localized:
-                "Pump information",
-                comment: "The title of the pump information section in DanaKit settings"
-            ))) {
+            Section {
                 HStack {
                     Text("Pump name", comment: "Text for Dana pump name")
                         .foregroundColor(Color.primary)
@@ -512,13 +475,11 @@ struct DanaKitSettingsView: View {
                 .actionSheet(isPresented: $viewModel.showingBolusSyncingDisabled) {
                     disableBolusSync
                 }
+            } header: {
+                Text("Pump information", comment: "The title of the pump information section in DanaKit settings")
             }
 
-            Section(header: SectionHeader(label: String(
-                localized:
-                "Pump time",
-                comment: "The title of the pump time section in DanaKit settings"
-            ))) {
+            Section {
                 HStack {
                     Text("Pump time", comment: "Text for pump time")
                         .foregroundColor(Color.primary)
@@ -556,6 +517,8 @@ struct DanaKitSettingsView: View {
                 .actionSheet(isPresented: $viewModel.showingTimeSyncConfirmation) {
                     syncPumpTime
                 }
+            } header: {
+                Text("Pump time", comment: "The title of the pump time section in DanaKit settings")
             }
 
             Section {
@@ -627,7 +590,7 @@ struct DanaKitSettingsView: View {
                     .fixedSize()
                 }
             } else if let basalRate = $viewModel.basalRate.wrappedValue {
-                HStack(alignment: .center) {
+                HStack(alignment: .center, spacing: 10) {
                     HStack(alignment: .lastTextBaseline, spacing: 3) {
                         Text(viewModel.basalRateFormatter.string(from: basalRate) ?? "")
                             .font(.system(size: 28))
@@ -635,6 +598,11 @@ struct DanaKitSettingsView: View {
                             .fixedSize()
                         Text("U/hr", comment: "Units for showing temp basal rate")
                             .foregroundColor(.secondary)
+
+                        if let tempRemaining = viewModel.tempBasalRemaining {
+                            Text(tempRemaining)
+                                .foregroundColor(.secondary)
+                        }
                     }
                 }
             } else {
@@ -707,7 +675,7 @@ struct DanaKitSettingsView: View {
         action: @escaping () -> Void
     ) -> some View {
         let visuallyDisabled = disabled || viewModel.travelLockEnabled || viewModel.isUpdatingPumpState || viewModel.isSyncing
-        
+
         VStack(spacing: 8) {
             if viewModel.isUpdatingPumpState {
                 ActivityIndicator(isAnimating: .constant(true), style: .medium)
@@ -717,7 +685,7 @@ struct DanaKitSettingsView: View {
                     .font(.system(size: 28))
                     .foregroundColor(viewModel.travelLockEnabled ? guidanceColors.warning : iconColor)
             }
-            
+
             HStack(spacing: 6) {
                 Text(title)
                     .font(.footnote.weight(.medium))

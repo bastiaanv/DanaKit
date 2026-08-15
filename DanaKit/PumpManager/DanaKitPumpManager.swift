@@ -879,17 +879,21 @@ extension DanaKitPumpManager: PumpManager {
         }
     }
 
-    
-    public func enactTempBasal(percentage: UInt16, for duration: TimeInterval, automatic: Bool, completion: @escaping (PumpManagerError?) -> Void) {
+    public func enactTempBasal(
+        percentage: UInt16,
+        for duration: TimeInterval,
+        automatic: Bool,
+        completion: @escaping (PumpManagerError?) -> Void
+    ) {
         log.info("Enact manual temp basal. Value: \(percentage)%, duration: \(duration) sec")
         logDeviceCommunication(
             "Enact temp basal. Value: \(percentage)%, duration: \(duration) sec",
             type: .delegate
         )
-        
+
         _enactTempBasal(percentage: percentage, for: duration, automatic: automatic, completion: completion)
     }
-    
+
     public func enactTempBasal(
         unitsPerHour: Double,
         for duration: TimeInterval,
@@ -900,13 +904,13 @@ extension DanaKitPumpManager: PumpManager {
             "Enact temp basal. Value: \(unitsPerHour) U/hr, duration: \(duration) sec",
             type: .delegate
         )
-        
-        guard let percentage = self.absoluteBasalRateToPercentage(
+
+        guard let percentage = absoluteBasalRateToPercentage(
             absoluteValue: unitsPerHour,
-            basalSchedule: self.state.basalSchedule
+            basalSchedule: state.basalSchedule
         ) else {
-            self.disconnect()
-            self.log.error("Basal schedule is not available...")
+            disconnect()
+            log.error("Basal schedule is not available...")
             completion(
                 PumpManagerError
                     .configuration(
@@ -916,10 +920,10 @@ extension DanaKitPumpManager: PumpManager {
             )
             return
         }
-            
+
         _enactTempBasal(percentage: percentage, for: duration, automatic: true, completion: completion)
     }
-    
+
     /// NOTE: There are 2 ways to set a temp basal:
     /// - The normal way (which only accepts full hours and percentages)
     /// - A short APS-special temp basal command (which only accepts 15 min or 30 min)
@@ -987,7 +991,7 @@ extension DanaKitPumpManager: PumpManager {
                                 return
                             }
                         }
-                        
+
                         // Temp basal >15min && >200% is not supported
                         // Floor it down to 15min
                         if percentage > 200, duration != .minutes(15) {
@@ -1000,7 +1004,7 @@ extension DanaKitPumpManager: PumpManager {
                         if percentage > 500 {
                             percentage = 500
                         }
-                        
+
                         if self.state.isTempBasalInProgress {
                             let packet = generatePacketBasalCancelTemporary()
                             let result = try self.bluetooth.writeMessage(packet)
@@ -1023,7 +1027,7 @@ extension DanaKitPumpManager: PumpManager {
 
                         // 500% fix is already applied
                         let unitsPerHour = (Double(percentage) / 100) * self.currentBaseBasalRate
-                        
+
                         if duration < .ulpOfOne {
                             // Temp basal is already canceled (if deem needed)
                             self.disconnect()
@@ -1160,7 +1164,7 @@ extension DanaKitPumpManager: PumpManager {
             }
         }
     }
-    
+
     private func reportBasal(unitsPerHour: Double, duration: Double, percentage: UInt16, isTempBasal: Bool, automatic: Bool) {
         var events: [NewPumpEvent] = []
 
@@ -1262,7 +1266,7 @@ extension DanaKitPumpManager: PumpManager {
 
                             self.log.info("Successfully canceled old temp basal")
                         }
-                        
+
                         let packet = generatePacketBasalSetSuspendOn()
                         let result = try self.bluetooth.writeMessage(packet)
 
@@ -1902,9 +1906,10 @@ public extension DanaKitPumpManager {
             let bolusCompletedAt = Date.now
 
             do {
-                let resultInitialScreenInformation = try self.bluetooth.writeMessage(generatePacketGeneralGetInitialScreenInformation())
+                let resultInitialScreenInformation = try self.bluetooth
+                    .writeMessage(generatePacketGeneralGetInitialScreenInformation())
                 if resultInitialScreenInformation.success,
-                let data = resultInitialScreenInformation.data as? PacketGeneralGetInitialScreenInformation
+                   let data = resultInitialScreenInformation.data as? PacketGeneralGetInitialScreenInformation
                 {
                     state.reservoirLevel = data.reservoirRemainingUnits
                 }

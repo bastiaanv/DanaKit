@@ -25,6 +25,9 @@ class DanaKitSettingsViewModel: ObservableObject {
     @Published var cannulaAge: String?
     @Published var reservoirAge: String?
     @Published var batteryAge: String?
+    @Published var deviceName: String?
+    @Published var hardwareModel: UInt8?
+    @Published var firmwareVersion: UInt8?
 
     @Published var showPumpTimeSyncWarning: Bool = false
     @Published var pumpTime: Date?
@@ -43,27 +46,11 @@ class DanaKitSettingsViewModel: ObservableObject {
     private var didFinish: (() -> Void)?
     private(set) var userOptionsView: DanaKitUserSettingsView
     private(set) var refillView: DanaKitRefillReservoirAndCannulaView
-    
+
     let toUserOptions: () -> Void
     let toBolusSpeed: () -> Void
     let toInsulinType: () -> Void
     let toRefill: (Bool) -> Void
-
-    public var pumpModel: String {
-        pumpManager?.state.getFriendlyDeviceName() ?? ""
-    }
-
-    public var deviceName: String? {
-        pumpManager?.state.deviceName
-    }
-
-    public var hardwareModel: UInt8? {
-        pumpManager?.state.hwModel
-    }
-
-    public var firmwareVersion: UInt8? {
-        pumpManager?.state.pumpProtocol
-    }
 
     public var isTempBasal: Bool {
         guard let pumpManager = self.pumpManager else {
@@ -77,41 +64,44 @@ class DanaKitSettingsViewModel: ObservableObject {
         isTempBasal && (pumpManager?.state.isTempBasalManual ?? false)
     }
 
-    public var tempBasalPercentage: UInt16? {
-        guard isTempBasalManual else { return nil }
-        return pumpManager?.state.tempBasalPercentage
-    }
-    
-    public var tempBasalDuration: TimeInterval? {
-        guard isTempBasalManual else { return nil }
-        return pumpManager?.state.tempBasalDuration
-    }
-
-    public var tempBasalEndsAt: Date? {
-        guard isTempBasal else { return nil }
-        return pumpManager?.state.tempBasalEndsAt
-    }
-
     public var isSuspendActionLocked: Bool {
-        guard let pumpManager = self.pumpManager else {
-            return false
-        }
-
-        return travelLockEnabled && !pumpManager.state.isPumpSuspended
+        travelLockEnabled && !(pumpManager?.state.isPumpSuspended ?? true)
     }
-    
+
     public var isTempBasalLocked: Bool {
         guard let pumpManager = self.pumpManager else {
             return false
         }
-                
-        return travelLockEnabled || !(pumpManager.state.basalDeliveryOrdinal == .tempBasal && pumpManager.state.tempBasalEndsAt > Date.now)
+
+        return travelLockEnabled ||
+            !(pumpManager.state.basalDeliveryOrdinal == .tempBasal && pumpManager.state.tempBasalEndsAt > Date.now)
     }
 
-    public func setManualTempBasal() {
-        return
+    var tempBasalRemaining: String? {
+        guard isTempBasal, let pumpManager else {
+            return nil
+        }
+
+        let remaining = pumpManager.state.tempBasalEndsAt.timeIntervalSinceNow
+        let hours = Int(floor(remaining.hours))
+        let minutes = Int(floor(remaining.minutes))
+
+        if hours > 0 {
+            return String(
+                format: String(localized: "(%lld hr %lld min)", comment: "temp basal remaining hours+minutes"),
+                hours,
+                minutes - hours * 60
+            )
+        }
+
+        return String(
+            format: String(localized: "(%lld min)", comment: "temp basal remaining minutes"),
+            minutes
+        )
     }
-    
+
+    public func setManualTempBasal() {}
+
     let basalRateFormatter: NumberFormatter = {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
@@ -332,7 +322,7 @@ class DanaKitSettingsViewModel: ObservableObject {
     }
 
     func reservoirText(for units: Double) -> String {
-        return reservoirVolumeFormatter.string(from: units) ?? ""
+        reservoirVolumeFormatter.string(from: units) ?? ""
     }
 
     func toggleSilentTone() {
@@ -382,11 +372,11 @@ class DanaKitSettingsViewModel: ObservableObject {
         guard let pumpManager = self.pumpManager else {
             return
         }
-        
+
         if isTempBasalLocked || isUpdatingPumpState || isSyncing {
             return
         }
-        
+
         isUpdatingPumpState = true
 
         // Stop temp basal
@@ -447,7 +437,7 @@ class DanaKitSettingsViewModel: ObservableObject {
         guard let pumpManager = self.pumpManager else {
             return
         }
-        
+
         return pumpManager.enactTempBasal(percentage: rate, for: duration, automatic: false, completion: completion)
     }
 
@@ -491,6 +481,9 @@ extension DanaKitSettingsViewModel: StateObserver {
         silentTone = state.useSilentTones
         basalProfileNumber = state.basalProfileNumber
         showPumpTimeSyncWarning = state.shouldShowTimeWarning()
+        deviceName = pumpManager?.state.deviceName
+        hardwareModel = pumpManager?.state.hwModel
+        firmwareVersion = pumpManager?.state.pumpProtocol
         updateBasalRate()
 
         if let cannulaDate = state.cannulaDate {

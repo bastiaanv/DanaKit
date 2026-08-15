@@ -809,22 +809,162 @@
         }
       }
     },
-    "%d sec" : {
+    "%u %@" : {
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%%1$u %2$@"
+          }
+        },
+        "cs" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%%1$u %2$@"
+          }
+        },
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%%1$u %2$@"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%%1$u %2$@"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%d sec"
+            "value" : "%%1$u %2$@"
           }
-        }
-      }
-    },
-    "%d%% for %@" : {
-      "localizations" : {
-        "en" : {
+        },
+        "es" : {
           "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$d%% for %2$@"
+            "state" : "translated",
+            "value" : "%%1$u %2$@"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%%1$u %2$@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%%1$u %2$@"
+          }
+        },
+        "he" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%%1$u %2$@"
+          }
+        },
+        "hu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%%1$u %2$@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%%1$u %2$@"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%%1$u %2$@"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1$u %2$@"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%%1$u %2$@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%%1$u %2$@"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%%1$u %2$@"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%%1$u %2$@"
+          }
+        },
+        "ro" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%%1$u %2$@"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%%1$u %2$@"
+          }
+        },
+        "sk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%%1$u %2$@"
+          }
+        },
+        "sl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%%1$u %2$@"
+          }
+        },
+        "sv" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%%1$u %2$@"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%%1$u %2$@"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%%1$u %2$@"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%%1$u %2$@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%%1$u %2$@"
           }
         }
       }
@@ -2366,7 +2506,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "인슐린 유형과 볼루스 속도를 설정하면 검색된 모든 다나 펌프가 표시된 화면이 나타납니다. XX0XX}와 연결하려는 펌프를 선택합니다."
+            "value" : "인슐린 유형과 볼루스 속도를 설정하면 검색된 모든 다나 펌프가 표시된 화면이 나타납니다. %@ 와 연결하려는 펌프를 선택합니다."
           }
         },
         "nb" : {
@@ -10223,9 +10363,6 @@
         }
       }
     },
-    "Ends in %@" : {
-
-    },
     "Error while connecting to device" : {
       "comment" : "Connection error message",
       "extractionState" : "manual",
@@ -14762,9 +14899,6 @@
         }
       }
     },
-    "Long press either button to lock the pump management actions." : {
-
-    },
     "Low pump battery" : {
       "comment" : "Alert title for lowBattery",
       "extractionState" : "manual",
@@ -15089,15 +15223,6 @@
         }
       }
     },
-    "Manage" : {
-
-    },
-    "Manual Temp Basal" : {
-
-    },
-    "Manual Temp Basal (%u%%%%)" : {
-
-    },
     "Manually sync Pump time" : {
       "comment" : "Label for syncing the time on the pump",
       "extractionState" : "manual",
@@ -15421,9 +15546,6 @@
           }
         }
       }
-    },
-    "Missing Config" : {
-
     },
     "Nightly pump time sync" : {
       "comment" : "Text for Nightly pump time sync",
@@ -19475,9 +19597,6 @@
         }
       }
     },
-    "Pump management actions are locked.\nLong press either button to unlock." : {
-
-    },
     "Pump name" : {
       "comment" : "Text for Dana pump name",
       "extractionState" : "manual",
@@ -19963,9 +20082,6 @@
           }
         }
       }
-    },
-    "Rate" : {
-
     },
     "Re-enable bolus syncing?" : {
       "comment" : "Title for bolus syncing disable action sheet",
@@ -24017,9 +24133,6 @@
         }
       }
     },
-    "Set manual temp basal" : {
-
-    },
     "Set reminder for disconnect" : {
       "comment" : "Title disconnect reminder sheet",
       "extractionState" : "manual",
@@ -24181,9 +24294,6 @@
           }
         }
       }
-    },
-    "Set Temporary Basal" : {
-
     },
     "Set the basal profile the pump should use. Note, that it will overwrite the profile that is in the pump, with the one in %1$@" : {
       "comment" : "Description for basal profile number",
@@ -24570,7 +24680,7 @@
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "A temp basal beállítása jelenleg nem támogatott. Időtartam: {másodperc"
+            "value" : "A temp basal beállítása jelenleg nem támogatott. Időtartam: %lld másodperc"
           }
         },
         "it" : {
@@ -27261,9 +27371,6 @@
         }
       }
     },
-    "Sync" : {
-
-    },
     "Sync pump data" : {
       "comment" : "DanaKit sync pump",
       "extractionState" : "manual",
@@ -27587,12 +27694,6 @@
           }
         }
       }
-    },
-    "Temporary Basal" : {
-
-    },
-    "Temporary Basal Failed" : {
-
     },
     "The Dana-I insulin pump was first release in 2020 by manufacturer Sooil and is the latest in the series" : {
       "comment" : "dana-i description",
@@ -29862,9 +29963,6 @@
         }
       }
     },
-    "This PumpManager has not been configured with a maximum basal rate because it was added before manual temp basal was a feature. Please set a new maximum basal rate." : {
-
-    },
     "Time Change Detected" : {
       "comment" : "Title for pod sync time action sheet.\ntitle for time change detected notice",
       "extractionState" : "manual",
@@ -30995,19 +31093,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "U/hr"
-          }
-        }
-      }
-    },
-    "Unable to set a temporary basal rate: %@" : {
-
-    },
-    "Unable to set a temporary basal rate: %@\n\n%@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Unable to set a temporary basal rate: %1$@\n\n%2$@"
           }
         }
       }
@@ -34575,9 +34660,6 @@
           }
         }
       }
-    },
-    "Your insulin delivery will not be automatically adjusted until the temporary basal rate finishes or is canceled." : {
-
     },
     "Your pump is disconnected longer than 5 minutes!" : {
       "comment" : "Body disconnect warning notification",

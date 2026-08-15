@@ -225,16 +225,16 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
             )
             return hostingController(
                 rootView: view,
-                title: viewModel.pumpModel
+                title: pumpManager?.state.getFriendlyDeviceName() ?? ""
             )
-            
+
         case .userOptions:
             let viewModel = DanaKitUserSettingsViewModel(pumpManager)
             return hostingController(
                 rootView: DanaKitUserSettingsView(viewModel: viewModel),
                 title: String(localized: "User options", comment: "Title for user options")
             )
-            
+
         case .bolusSpeed:
             let bolusSpeedChanged: (BolusSpeed) -> Void = { bolusSpeed in
                 self.pumpManager?.state.bolusSpeed = bolusSpeed
@@ -248,7 +248,7 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
                 ),
                 title: String(localized: "Delivery speed", comment: "Title for delivery speed")
             )
-            
+
         case .insulinType:
             let confirmInsulinType: (InsulinType) -> Void = { insulinType in
                 self.pumpManager?.state.insulinType = insulinType
@@ -262,14 +262,14 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
                 ),
                 title: String(localized: "Insulin Type", comment: "Title for insulin type")
             )
-            
+
         case .refillCannulaOnly:
             let viewModel = DanaKitRefillReservoirCannulaViewModel(pumpManager: pumpManager, cannulaOnly: true)
             return hostingController(
                 rootView: DanaKitRefillReservoirAndCannulaView(viewModel: viewModel),
                 title: String(localized: "Cannula refill", comment: "Title for reservoir/cannula refill")
             )
-            
+
         case .refillFull:
             let viewModel = DanaKitRefillReservoirCannulaViewModel(pumpManager: pumpManager, cannulaOnly: false)
             return hostingController(

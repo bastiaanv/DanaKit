@@ -287,7 +287,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
     public var basalDeliveryOrdinal: DanaKitBasal = .active
     public var tempBasalUnits: Double?
     public var tempBasalDuration: Double?
-    
+
     // Manual Temp Basal
     public var isTempBasalManual: Bool = false
     public var tempBasalPercentage: UInt16?
@@ -447,7 +447,7 @@ extension DanaKitPumpManagerState: CustomDebugStringConvertible {
             "* pumpProtocol: \(pumpProtocol)",
             "* lastStatusDate: \(lastStatusDate)",
             "* pumpTime: \(pumpTime ?? Date.distantPast)",
-            "* insulinType: \(insulinType ?? .none)",
+            "* insulinType: \(String(describing: insulinType))",
             "* reservoirLevel: \(reservoirLevel)",
             "* bolusState: \(bolusState.rawValue)",
             "* basalDeliveryOrdinal: \(basalDeliveryOrdinal)",
