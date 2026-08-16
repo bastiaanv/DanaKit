@@ -1650,6 +1650,7 @@ public extension DanaKitPumpManager {
         }
 
         state.bolusState = .noBolus
+        state.bolusDose = nil
         state.lastStatusDate = Date.now
         notifyStateDidChange()
 
