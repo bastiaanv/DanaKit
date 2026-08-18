@@ -1,36 +1,66 @@
 import Combine
+import LoopKit
 import OSLog
 
 class DanaLogger {
     private let logger: Logger
     private let writer = DanaLogWriter.shared
+    public static var pumpManager: DanaKitPumpManager?
 
     init(category: String) {
         logger = Logger(subsystem: "com.randallknutson.DanaKit", category: category)
     }
 
-    public func debug(_ msg: String, file: String = #file, _ function: String = #function, _ line: Int = #line) {
+    public func debug(
+        _ msg: String,
+        file: String = #file,
+        _ function: String = #function,
+        _ line: Int = #line,
+        type: DeviceLogEntryType = .delegate
+    ) {
         let message = "\(file.file) - \(function)#\(line): \(msg)"
         logger.debug("\(message, privacy: .public)")
         writeToFile(message, .debug)
+        writeToPumpManager(message, .debug, type: type)
     }
 
-    public func info(_ msg: String, file: String = #file, _ function: String = #function, _ line: Int = #line) {
+    public func info(
+        _ msg: String,
+        file: String = #file,
+        _ function: String = #function,
+        _ line: Int = #line,
+        type: DeviceLogEntryType = .delegate
+    ) {
         let message = "\(file.file) - \(function)#\(line): \(msg)"
         logger.info("\(message, privacy: .public)")
         writeToFile(message, .info)
+        writeToPumpManager(message, .info, type: type)
     }
 
-    public func warning(_ msg: String, file: String = #file, _ function: String = #function, _ line: Int = #line) {
+    public func warning(
+        _ msg: String,
+        file: String = #file,
+        _ function: String = #function,
+        _ line: Int = #line,
+        type: DeviceLogEntryType = .delegate
+    ) {
         let message = "\(file.file) - \(function)#\(line): \(msg)"
         logger.warning("\(message, privacy: .public)")
         writeToFile(message, .notice)
+        writeToPumpManager(message, .notice, type: type)
     }
 
-    public func error(_ msg: String, file: String = #file, _ function: String = #function, _ line: Int = #line) {
+    public func error(
+        _ msg: String,
+        file: String = #file,
+        _ function: String = #function,
+        _ line: Int = #line,
+        type: DeviceLogEntryType = .delegate
+    ) {
         let message = "\(file.file) - \(function)#\(line): \(msg)"
         logger.error("\(message, privacy: .public)")
         writeToFile(message, .error)
+        writeToPumpManager(message, .error, type: type)
     }
 
     func getDebugLogs() -> [URL] {
@@ -39,6 +69,25 @@ class DanaLogger {
 
     private func writeToFile(_ msg: String, _ type: OSLogEntryLog.Level) {
         writer.append(msg, level: getLevel(type))
+    }
+
+    private func writeToPumpManager(_ msg: String, _ level: OSLogEntryLog.Level, type: DeviceLogEntryType) {
+        guard let pumpManager = Self.pumpManager else {
+            return
+        }
+
+        pumpManager.pumpDelegate.notify { delegate in
+            guard let delegate else {
+                return
+            }
+
+            delegate.deviceManager(
+                pumpManager,
+                logEventForDeviceIdentifier: pumpManager.state.deviceName,
+                type: type,
+                message: "[\(self.getLevel(level))] \(msg)",
+            ) { _ in }
+        }
     }
 
     private func getLevel(_ type: OSLogEntryLog.Level) -> String {

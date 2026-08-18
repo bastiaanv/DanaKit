@@ -600,7 +600,7 @@ struct DanaKitSettingsView: View {
                         Text("U/hr", comment: "Units for showing temp basal rate")
                             .foregroundColor(.secondary)
                     }
-                    
+
                     if let tempRemaining = viewModel.tempBasalRemaining {
                         Text(tempRemaining)
                             .foregroundColor(.secondary)

@@ -82,11 +82,6 @@ class PeripheralManager: NSObject {
 
         try claim(command, with: writeQ)
 
-        pumpManager.logDeviceCommunication(
-            "Sending data - Name: \(packet.name), Operation code: \(packet.opCode), data: \(packet.data?.hexString() ?? "nil")",
-            type: .send
-        )
-
         // Make sure we have the correct state
         if packet.opCode == CommandGeneralSetHistoryUploadMode, let data = packet.data {
             pumpManager.state.isInFetchHistoryMode = data[0] == 0x01
@@ -95,7 +90,7 @@ class PeripheralManager: NSObject {
         }
 
         var data = DanaKitEncryption.encodePacket(operationCode: packet.opCode, buffer: packet.data, deviceName: deviceName)
-        log.debug("Sending opCode: \(packet.opCode), encrypted data: \(data.hexString())")
+        log.debug("Sending data - Name: \(packet.name), OpCode: \(packet.opCode), Encoded data: \(data.hexString())", type: .send)
 
         if DanaKitEncryption.enhancedEncryption != EncryptionType.DEFAULT.rawValue {
             data = DanaKitEncryption.encodeSecondLevel(data: data)
@@ -631,7 +626,7 @@ extension PeripheralManager {
         if !data.isEmpty && pumpManager.state.isConnected && DanaKitEncryption.enhancedEncryption != EncryptionType.DEFAULT
             .rawValue
         {
-            log.debug("Second lvl decryption")
+            log.debug("Second lvl decryption", type: .receive)
             data = DanaKitEncryption.decodeSecondLevel(data: data)
         }
 
@@ -646,7 +641,7 @@ extension PeripheralManager {
             rawMessage = message
         }
 
-        log.debug("Received message! Starting to decrypt data: \(rawMessage.hexString())")
+        log.debug("Received message! Starting to decrypt data: \(rawMessage.hexString())", type: .receive)
         let decryptedData = DanaKitEncryption.decodePacket(buffer: rawMessage, deviceName: deviceName)
 
         guard !decryptedData.isEmpty else {
@@ -654,13 +649,14 @@ extension PeripheralManager {
             return
         }
 
-        log.debug("Decoding successful! Data: \(decryptedData.hexString())")
+        log.debug("Decoding successful! Data: \(decryptedData.hexString())", type: .receive)
         if decryptedData[0] == DanaPacketType.TYPE_ENCRYPTION_RESPONSE {
             guard !isConnectionFinished else {
                 // The handshake is done. A late encryption packet must never be able to fail the connection
                 log
                     .warning(
-                        "Ignoring encryption packet received after connection was established. Data: \(decryptedData.hexString())"
+                        "Ignoring encryption packet received after connection was established. Data: \(decryptedData.hexString())",
+                        type: .receive
                     )
                 return
             }
@@ -696,13 +692,13 @@ extension PeripheralManager {
                 processEasyMenuCheck(decryptedData)
                 return
             default:
-                log.error("Received invalid encryption command type \(decryptedData[1])")
+                log.error("Received invalid encryption command type \(decryptedData[1])", type: .receive)
                 return
             }
         }
 
         guard decryptedData[0] == DanaPacketType.TYPE_RESPONSE || decryptedData[0] == DanaPacketType.TYPE_NOTIFY else {
-            log.error("Received invalid packet type \(decryptedData[0])")
+            log.error("Received invalid packet type \(decryptedData[0])", type: .receive)
             return
         }
 
@@ -743,7 +739,8 @@ extension PeripheralManager {
             } else {
                 log
                     .error(
-                        "Received invalid packets. Starting bytes do not exists in message. Encryption mode possibly wrong Data: \(readBuffer.hexString())"
+                        "Received invalid packets. Starting bytes do not exists in message. Encryption mode possibly wrong Data: \(readBuffer.hexString())",
+                        type: .receive
                     )
                 clearReadBuffer()
                 return .unrecoverable
@@ -799,7 +796,7 @@ extension PeripheralManager {
 
         do {
             let json = String(bytes: try JSONEncoder().encode(message), encoding: .utf8) ?? "EMPTY"
-            pumpManager.logDeviceCommunication(
+            log.info(
                 "Received data - Operation code: \(message.opCode ?? 0), JSON packet: \(json)",
                 type: .receive
             )
@@ -842,7 +839,8 @@ extension PeripheralManager {
         guard message.command == awaitedCommand else {
             log
                 .warning(
-                    "Ignoring response of command \(message.command ?? 0) while awaiting command \(awaitedCommand). It is most likely the late response of a command which has timed out"
+                    "Ignoring response of command \(message.command ?? 0) while awaiting command \(awaitedCommand). It is most likely the late response of a command which has timed out",
+                    type: .receive
                 )
             return
         }
@@ -853,7 +851,7 @@ extension PeripheralManager {
         case .collected:
             break
         case .dropped:
-            log.warning("Command \(awaitedCommand) is not awaiting a response anymore. Dropping it...")
+            log.warning("Command \(awaitedCommand) is not awaiting a response anymore. Dropping it...", type: .receive)
         }
     }
 
