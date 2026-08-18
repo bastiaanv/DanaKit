@@ -24115,110 +24115,110 @@
         }
       }
     },
-    "Resume Insulin Delivery" : {
+    "Resume Delivery" : {
       "comment" : "Dana settings resume delivery",
       "extractionState" : "manual",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "استئناف توصيل الأنسولين"
+            "value" : "استئناف التسليم"
           }
         },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Obnovení podávání inzulínu"
+            "value" : "Obnovit doručování"
           }
         },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Genoptag insulintilførsel"
+            "value" : "Genoptag levering"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wiederaufnahme der Insulinabgabe"
+            "value" : "Lieferung wieder aufnehmen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Resume Insulin Delivery"
+            "value" : "Resume Delivery"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reanudar la administración de insulina"
+            "value" : "Reanudar el envío"
           }
         },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jatka insuliinin toimittamista"
+            "value" : "Jatka toimitusta"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reprise de l'administration d'insuline"
+            "value" : "Reprise de la livraison"
           }
         },
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "המשך אספקת האינסולין"
+            "value" : "המשך משלוח"
           }
         },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Folytassa az inzulinszállítást"
+            "value" : "A kézbesítés folytatása"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Riprendere la somministrazione di insulina"
+            "value" : "Riprendi la consegna"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "インスリンデリバリーの再開"
+            "value" : "配信を再開"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "인슐린 배달 재개"
+            "value" : "배송 재개"
           }
         },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gjenoppta insulintilførsel"
+            "value" : "Gjenoppta levering"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hervat insulinetoediening"
+            "value" : "Levering hervat"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wznowienie podawania insuliny"
+            "value" : "Wznowienie dostaw"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Retomar a administração de insulina"
+            "value" : "Retomar a entrega"
           }
         },
         "ro" : {
@@ -24230,37 +24230,37 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Возобновление доставки инсулина"
+            "value" : "Возобновить доставку"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Obnovenie podávania inzulínu"
+            "value" : "Obnoviť doručovanie"
           }
         },
         "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nadaljuj dostavo insulina"
+            "value" : "Nadaljuj z dostavo"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Återuppta insulintillförsel"
+            "value" : "Återuppta leveransen"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "İnsülin Uygulamasına Devam Et"
+            "value" : "Teslimatı Yeniden Başlat"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Відновити видачу інсуліну"
+            "value" : "Відновити доставку"
           }
         },
         "vi" : {
@@ -24272,7 +24272,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "恢复胰岛素输送"
+            "value" : "恢复投递"
           }
         }
       }
@@ -28645,7 +28645,7 @@
         }
       }
     },
-    "Stop temp basal" : {
+    "Stop Temp Basal" : {
       "comment" : "Dana settings stop temp basal",
       "extractionState" : "manual",
       "localizations" : {
@@ -28676,7 +28676,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stop temp basal"
+            "value" : "Stop Temp Basal"
           }
         },
         "es" : {
@@ -28700,13 +28700,13 @@
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "עצור את הטמפרטורה הבסיסית"
+            "value" : "עצור את טמפ בזל"
           }
         },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stop temp basal"
+            "value" : "Ideiglenes bazális leállítása"
           }
         },
         "it" : {
@@ -28724,7 +28724,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "임시 기본값 중지"
+            "value" : "임시 기저율 중지"
           }
         },
         "nb" : {
@@ -28772,7 +28772,7 @@
         "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ustavite temp bazalno"
+            "value" : "Zaustavitev začasne bazalne doze"
           }
         },
         "sv" : {
@@ -29131,50 +29131,50 @@
         }
       }
     },
-    "Suspend Insulin Delivery" : {
+    "Suspend Delivery" : {
       "comment" : "Dana settings suspend delivery",
       "extractionState" : "manual",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "إيقاف توصيل الأنسولين"
+            "value" : "تعليق التسليم"
           }
         },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pozastavení podávání inzulínu"
+            "value" : "Pozastavit doručování"
           }
         },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Afbryd insulintilførsel"
+            "value" : "Sæt leveringen på pause"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Insulinabgabe aussetzen"
+            "value" : "Lieferung aussetzen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Suspend Insulin Delivery"
+            "value" : "Suspend Delivery"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Suspender la administración de insulina"
+            "value" : "Suspender la entrega"
           }
         },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Keskeytä insuliinin toimitus"
+            "value" : "Keskeytä toimitus"
           }
         },
         "fr" : {
@@ -29186,55 +29186,55 @@
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "השהה את אספקת האינסולין"
+            "value" : "השהה את המשלוח"
           }
         },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Az inzulinszállítás felfüggesztése"
+            "value" : "A kézbesítés felfüggesztése"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sospendere la somministrazione di insulina"
+            "value" : "Sospendi la consegna"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "インスリン投与を一時停止する"
+            "value" : "配送を一時停止"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "인슐린 배달 일시 중단"
+            "value" : "배송 일시 중지"
           }
         },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avbryt insulintilførselen"
+            "value" : "Stopp levering"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Insulinetoediening opschorten"
+            "value" : "Levering opschorten"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wstrzymanie podawania insuliny"
+            "value" : "Wstrzymaj dostawę"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Suspender a administração de insulina"
+            "value" : "Suspender entrega"
           }
         },
         "ro" : {
@@ -29246,37 +29246,37 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Приостановить подачу инсулина"
+            "value" : "Приостановить доставку"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pozastavenie podávania inzulínu"
+            "value" : "Pozastaviť doručovanie"
           }
         },
         "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Prekinitev dovajanja insulina"
+            "value" : "Začasna prekinitev dostave"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avbryt insulintillförseln"
+            "value" : "Avbryta leverans"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "İnsülin Uygulamasını Askıya Alın"
+            "value" : "Teslimatı askıya al"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Призупинити видачу інсуліну"
+            "value" : "Призупинити доставку"
           }
         },
         "vi" : {
@@ -29288,7 +29288,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "暂停胰岛素注射"
+            "value" : "暂停配送"
           }
         }
       }
