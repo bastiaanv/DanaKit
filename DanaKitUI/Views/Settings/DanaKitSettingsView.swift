@@ -201,67 +201,63 @@ struct DanaKitSettingsView: View {
             }
 
             Section {
-                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
-                    pumpManagementActionCard(
-                        title: viewModel.isSuspended
-                            ? String(localized: "Resume Delivery", comment: "Dana settings resume delivery")
-                            : String(localized: "Suspend Delivery", comment: "Dana settings suspend delivery"),
-                        systemImage: viewModel.isSuspended ? "play.circle.fill" : "pause.circle.fill",
-                        iconColor: viewModel.isSuspended ? Color.accentColor : guidanceColors.warning
-                    ) {
-                        viewModel.suspendResumeButtonPressed()
-                    }
-
-                    if viewModel.isTempBasal {
-                        pumpManagementActionCard(
-                            title: String(localized: "Stop Temp Basal", comment: "Dana settings stop temp basal"),
-                            systemImage: "xmark.circle.fill",
-                            iconColor: Color.accentColor
-                        ) {
-                            viewModel.stopTempBasal()
-                        }
-                    } else {
-                        pumpManagementActionCard(
-                            title: String(localized: "Set manual temp basal", comment: "Dana settings set manual temp basal"),
-                            systemImage: "plus.circle.fill",
-                            iconColor: Color.accentColor,
-                            disabled: viewModel.isSuspended
-                        ) {
-                            isManualTempBasalOptionsPresented = true
-                        }
-                        .sheet(isPresented: $isManualTempBasalOptionsPresented) {
-                            ManualTempBasalEntryView(
-                                currentScheduledBasal: viewModel.getScheduledBasal(),
-                                enactBasal: { rate, duration, completion in
-                                    viewModel.enactManualTempBasal(rate, for: duration) { error in
-                                        completion(error)
-                                        if error == nil {
-                                            isManualTempBasalOptionsPresented = false
-                                        }
-                                    }
-                                },
-                                didCancel: {
-                                    isManualTempBasalOptionsPresented = false
-                                }
-                            )
+                Button(action: {
+                    viewModel.suspendResumeButtonPressed()
+                }) {
+                    HStack {
+                        viewModel.isSuspended
+                            ? Text("Resume Delivery", comment: "Dana settings resume delivery")
+                            : Text("Suspend Delivery", comment: "Dana settings suspend delivery")
+                        Spacer()
+                        if viewModel.isUpdatingPumpState {
+                            ActivityIndicator(isAnimating: .constant(true), style: .medium)
                         }
                     }
                 }
-                .padding(.vertical, 4)
-                .listRowInsets(EdgeInsets())
-                .listRowBackground(Color.clear)
-            } header: {
-                Text("Manage", comment: "The title of the manage section in DanaKit settings")
-            } footer: { viewModel.travelLockEnabled ? Text(
-                "Pump management actions are locked.\nLong press either button to unlock.",
-                comment: "Footer in the manage section explaining how to disable the travel lock"
-            ) : Text(
-                "Long press either button to lock the pump management actions.",
-                comment: "Footer in the manage section explaining how to enable the travel lock"
-            )
-            }
+                .disabled(viewModel.isUpdatingPumpState || viewModel.isSyncing)
 
-            Section {
+                if viewModel.isTempBasal {
+                    Button(action: {
+                        viewModel.stopTempBasal()
+                    }) {
+                        HStack {
+                            Text("Stop Temp Basal", comment: "Dana settings stop temp basal")
+                            Spacer()
+                            if viewModel.isUpdatingPumpState {
+                                ActivityIndicator(isAnimating: .constant(true), style: .medium)
+                            }
+                        }
+                    }
+                    .disabled(viewModel.isUpdatingPumpState || viewModel.isSyncing)
+                } else {
+                    Button(action: { isManualTempBasalOptionsPresented = true }) {
+                        HStack {
+                            Text("Set manual temp basal", comment: "Dana settings set manual temp basal")
+                            Spacer()
+                            if viewModel.isUpdatingPumpState {
+                                ActivityIndicator(isAnimating: .constant(true), style: .medium)
+                            }
+                        }
+                    }
+                    .disabled(viewModel.isUpdatingPumpState || viewModel.isSyncing)
+                    .sheet(isPresented: $isManualTempBasalOptionsPresented) {
+                        ManualTempBasalEntryView(
+                            currentScheduledBasal: viewModel.getScheduledBasal(),
+                            enactBasal: { rate, duration, completion in
+                                viewModel.enactManualTempBasal(rate, for: duration) { error in
+                                    completion(error)
+                                    if error == nil {
+                                        isManualTempBasalOptionsPresented = false
+                                    }
+                                }
+                            },
+                            didCancel: {
+                                isManualTempBasalOptionsPresented = false
+                            }
+                        )
+                    }
+                }
+
                 Button(action: {
                     viewModel.syncData()
                 }) {
@@ -365,7 +361,7 @@ struct DanaKitSettingsView: View {
                     })
                 }
             } header: {
-                Text("Sync", comment: "The title of the sync section in DanaKit settings")
+                Text("Manage", comment: "The title of the manage section in DanaKit settings")
             }
 
             Section {
@@ -667,45 +663,5 @@ struct DanaKitSettingsView: View {
         }
 
         return guidanceColors.critical
-    }
-
-    @ViewBuilder private func pumpManagementActionCard(
-        title: String,
-        systemImage: String,
-        iconColor: Color,
-        disabled: Bool = false,
-        action: @escaping () -> Void
-    ) -> some View {
-        let visuallyDisabled = disabled || viewModel.travelLockEnabled || viewModel.isUpdatingPumpState || viewModel.isSyncing
-
-        VStack(spacing: 8) {
-            if viewModel.isUpdatingPumpState {
-                ActivityIndicator(isAnimating: .constant(true), style: .medium)
-                    .frame(height: 28)
-            } else {
-                Image(systemName: viewModel.travelLockEnabled ? "lock.fill" : systemImage)
-                    .font(.system(size: 28))
-                    .foregroundColor(viewModel.travelLockEnabled ? guidanceColors.warning : iconColor)
-            }
-
-            HStack(spacing: 6) {
-                Text(title)
-                    .font(.footnote.weight(.medium))
-                    .foregroundColor(.primary)
-                    .multilineTextAlignment(.center)
-            }
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 16)
-        .background(
-            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .fill(Color(UIColor.secondarySystemGroupedBackground))
-        )
-        .opacity(visuallyDisabled ? 0.4 : 1.0)
-        .contentShape(Rectangle())
-        .onTapGesture(perform: action)
-        .onLongPressGesture(minimumDuration: 0.5) {
-            viewModel.toggleTravelLock()
-        }
     }
 }
