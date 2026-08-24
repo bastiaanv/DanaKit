@@ -333,14 +333,10 @@ class DanaKitSettingsViewModel: ObservableObject {
             return
         }
 
-        if isSuspendActionLocked || isUpdatingPumpState || isSyncing {
-            return
-        }
-
         isUpdatingPumpState = true
 
         if pumpManager.state.basalDeliveryOrdinal == .suspended {
-            self.pumpManager?.resumeDelivery { error in
+            pumpManager.resumeDelivery { error in
                 DispatchQueue.main.async {
                     self.isUpdatingPumpState = false
                 }
