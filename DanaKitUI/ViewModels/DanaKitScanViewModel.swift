@@ -33,15 +33,43 @@ class DanaKitScanViewModel: ObservableObject {
         self.pumpManager?.addScanDeviceObserver(self, queue: .main)
         self.pumpManager?.addStateObserver(self, queue: .main)
 
+        #if targetEnvironment(simulator)
+        // The simulator has no CoreBluetooth and `CBPeripheral` can't be constructed, so a real
+        // scan can never surface a device. Present a fake Dana pump instead so the setup flow can
+        // proceed to the settings screens (see `connect(_:)` and `DanaKitPumpManager.connectSimulated`).
+        isScanning = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { [weak self] in
+            self?.scannedDevices = [ScanResultItem(name: "DanaSim01", bleIdentifier: "SIMULATOR")]
+            self?.isScanning = false
+        }
+        #else
         do {
             try self.pumpManager?.startScan()
             isScanning = true
         } catch {
             log.error("Failed to start scanning: \(error.localizedDescription)")
         }
+        #endif
     }
 
     func connect(_ item: ScanResultItem) {
+        #if targetEnvironment(simulator)
+        guard let pumpManager = pumpManager else {
+            log.error("No pump manager...")
+            return
+        }
+
+        stopScan()
+
+        isConnecting = true
+        connectingTo = item.name
+
+        // No real Bluetooth in the simulator: fabricate a connected pump, then advance the flow.
+        pumpManager.connectSimulated {
+            self.isConnecting = false
+            self.nextStep()
+        }
+        #else
         guard let pumpManager = pumpManager, let device = foundDevices[item.bleIdentifier] else {
             log.error("No view or device...")
             return
@@ -59,6 +87,7 @@ class DanaKitScanViewModel: ObservableObject {
                 self.connectComplete(result, device)
             }
         }
+        #endif
     }
 
     func connectComplete(_ result: ConnectionResult, _ peripheral: CBPeripheral) {
