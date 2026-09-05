@@ -15541,166 +15541,6 @@
         }
       }
     },
-    "Long press either button to lock the pump management actions." : {
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "اضغط مطولاً على أي من الزرين لتثبيت إعدادات تشغيل المضخة."
-          }
-        },
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dlouhým stisknutím libovolného tlačítka uzamknete ovládání čerpadla."
-          }
-        },
-        "da" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tryk længe på en af knapperne for at låse pumpestyringsfunktionerne."
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Halten Sie eine der beiden Tasten lange gedrückt, um die Funktionen zur Pumpensteuerung zu sperren."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Long press either button to lock the pump management actions."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mantén pulsado cualquiera de los botones para bloquear las funciones de control de la bomba."
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Paina kumpaakin painiketta pitkään, jotta pumpun hallintatoiminnot lukittuvat."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Appuyez longuement sur l'un ou l'autre des boutons pour verrouiller les commandes de la pompe."
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "לחץ לחיצה ארוכה על אחד מהכפתור כדי לנעול את פעולות ניהול המשאבה."
-          }
-        },
-        "hu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bármelyik gombot hosszan nyomva tartva zárolhatja a szivattyú vezérlési műveleteit."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Premere a lungo uno dei due pulsanti per bloccare le funzioni di gestione della pompa."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "いずれかのボタンを長押しすると、ポンプの管理操作がロックされます。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "두 버튼 중 하나를 길게 눌러 펌프 제어 기능을 잠그십시오."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Trykk lenge på en av knappene for å låse pumpestyringsfunksjonene."
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Houd een van beide knoppen lang ingedrukt om de bedieningsfuncties van de pomp te vergrendelen."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Naciśnij i przytrzymaj dowolny przycisk, aby zablokować funkcje sterowania pompą."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pressione e mantenha pressionado qualquer um dos botões para bloquear as ações de controle da bomba."
-          }
-        },
-        "ro" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apăsați îndelung oricare dintre butoane pentru a bloca acțiunile de control al pompei."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Нажмите и удерживайте любую кнопку, чтобы заблокировать управление насосом."
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dlhým stlačením ktoréhokoľvek tlačidla uzamknete ovládacie funkcie čerpadla."
-          }
-        },
-        "sl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "S podolgim pritiskom na kateri koli gumb zaklenite funkcije upravljanja črpalke."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tryck länge på någon av knapparna för att låsa pumpens styrfunktioner."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pompa yönetim işlemlerini kilitlemek için her iki tuştan birine uzun süre basın."
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Натисніть і утримуйте будь-яку кнопку, щоб заблокувати функції керування насосом."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nhấn và giữ một trong hai nút để khóa các hành động quản lý bơm."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "长按任一按钮即可锁定泵的管理操作。"
-          }
-        }
-      }
-    },
     "Low pump battery" : {
       "comment" : "Alert title for lowBattery",
       "extractionState" : "manual",
@@ -20879,166 +20719,6 @@
         }
       }
     },
-    "Pump management actions are locked.\nLong press either button to unlock." : {
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "إجراءات إدارة المضخة مقفلة.\nاضغط مطولاً على أي من الزرين لإلغاء القفل."
-          }
-        },
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ovládací prvky čerpadla jsou uzamčeny.\nK odemčení dlouze stiskněte libovolné tlačítko."
-          }
-        },
-        "da" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pumpestyringsfunktionerne er låst.\nTryk og hold en af knapperne nede for at låse op."
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Die Pumpensteuerungsfunktionen sind gesperrt.\nDrücken Sie eine der beiden Tasten lange, um die Sperre aufzuheben."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pump management actions are locked.\nLong press either button to unlock."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Las funciones de control de la bomba están bloqueadas.\nMantén pulsado cualquiera de los botones para desbloquearlas."
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pumpun hallintatoiminnot on lukittu.\nAvaa lukitus painamalla kumpaakin painiketta pitkään."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Les commandes de la pompe sont verrouillées.\nAppuyez longuement sur l'un des deux boutons pour les déverrouiller."
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "פעולות ניהול המשאבה נעולות.\nלחץ לחיצה ארוכה על אחד מהכפתור כדי לבטל את הנעילה."
-          }
-        },
-        "hu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "A szivattyú vezérlési funkciói zárolva vannak.\nA zárolás feloldásához nyomja meg hosszan bármelyik gombot."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Le funzioni di gestione della pompa sono bloccate.\nPremere a lungo uno dei due pulsanti per sbloccarle."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ポンプの管理操作がロックされています。\nどちらかのボタンを長押ししてロックを解除してください。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "펌프 제어 기능이 잠겨 있습니다.\n두 버튼 중 하나를 길게 눌러 잠금을 해제하십시오."
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Funksjonene for pumpestyring er låst.\nTrykk lenge på en av knappene for å låse opp."
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "De pompbedieningsfuncties zijn vergrendeld.\nHoud een van beide knoppen lang ingedrukt om de vergrendeling op te heffen."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Funkcje sterowania pompą są zablokowane.\nAby odblokować, naciśnij i przytrzymaj dowolny przycisk."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "As ações de gerenciamento da bomba estão bloqueadas.\nPressione e mantenha pressionado qualquer um dos botões para desbloquear."
-          }
-        },
-        "ro" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Funcțiile de control al pompei sunt blocate.\nApăsați lung oricare dintre butoane pentru a le debloca."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Функции управления насосом заблокированы.\nЧтобы разблокировать, нажмите и удерживайте любую кнопку."
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Funkcie riadenia čerpadla sú uzamknuté.\nNa odomknutie stlačte a podržte ktorékoľvek tlačidlo."
-          }
-        },
-        "sl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Upravljanje črpalke je zaklenjeno.\nZa odklepanje pritisnite in držite kateri koli gumb."
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pumpens inställningar är låsta.\nTryck länge på någon av knapparna för att låsa upp dem."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pompa yönetim işlemleri kilitlenmiştir.\nKilidi açmak için her iki düğmeden birine uzun süre basın."
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Функції керування насосом заблоковано.\nЩоб розблокувати, натисніть і утримуйте будь-яку кнопку."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Các hành động quản lý bơm bị khóa.\nNhấn và giữ một trong hai nút để mở khóa."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "泵管理操作已被锁定。\n长按任意一个按钮即可解锁。"
-          }
-        }
-      }
-    },
     "Pump name" : {
       "comment" : "Text for Dana pump name",
       "extractionState" : "manual",
@@ -24115,110 +23795,110 @@
         }
       }
     },
-    "Resume Insulin Delivery" : {
+    "Resume Delivery" : {
       "comment" : "Dana settings resume delivery",
       "extractionState" : "manual",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "استئناف توصيل الأنسولين"
+            "value" : "استئناف التسليم"
           }
         },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Obnovení podávání inzulínu"
+            "value" : "Obnovit doručování"
           }
         },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Genoptag insulintilførsel"
+            "value" : "Genoptag levering"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wiederaufnahme der Insulinabgabe"
+            "value" : "Lieferung wieder aufnehmen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Resume Insulin Delivery"
+            "value" : "Resume Delivery"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reanudar la administración de insulina"
+            "value" : "Reanudar el envío"
           }
         },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jatka insuliinin toimittamista"
+            "value" : "Jatka toimitusta"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reprise de l'administration d'insuline"
+            "value" : "Reprise de la livraison"
           }
         },
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "המשך אספקת האינסולין"
+            "value" : "המשך משלוח"
           }
         },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Folytassa az inzulinszállítást"
+            "value" : "A kézbesítés folytatása"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Riprendere la somministrazione di insulina"
+            "value" : "Riprendi la consegna"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "インスリンデリバリーの再開"
+            "value" : "配信を再開"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "인슐린 배달 재개"
+            "value" : "배송 재개"
           }
         },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gjenoppta insulintilførsel"
+            "value" : "Gjenoppta levering"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hervat insulinetoediening"
+            "value" : "Levering hervat"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wznowienie podawania insuliny"
+            "value" : "Wznowienie dostaw"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Retomar a administração de insulina"
+            "value" : "Retomar a entrega"
           }
         },
         "ro" : {
@@ -24230,37 +23910,37 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Возобновление доставки инсулина"
+            "value" : "Возобновить доставку"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Obnovenie podávania inzulínu"
+            "value" : "Obnoviť doručovanie"
           }
         },
         "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nadaljuj dostavo insulina"
+            "value" : "Nadaljuj z dostavo"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Återuppta insulintillförsel"
+            "value" : "Återuppta leveransen"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "İnsülin Uygulamasına Devam Et"
+            "value" : "Teslimatı Yeniden Başlat"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Відновити видачу інсуліну"
+            "value" : "Відновити доставку"
           }
         },
         "vi" : {
@@ -24272,7 +23952,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "恢复胰岛素输送"
+            "value" : "恢复投递"
           }
         }
       }
@@ -28645,7 +28325,7 @@
         }
       }
     },
-    "Stop temp basal" : {
+    "Stop Temp Basal" : {
       "comment" : "Dana settings stop temp basal",
       "extractionState" : "manual",
       "localizations" : {
@@ -28676,7 +28356,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stop temp basal"
+            "value" : "Stop Temp Basal"
           }
         },
         "es" : {
@@ -28700,13 +28380,13 @@
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "עצור את הטמפרטורה הבסיסית"
+            "value" : "עצור את טמפ בזל"
           }
         },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stop temp basal"
+            "value" : "Ideiglenes bazális leállítása"
           }
         },
         "it" : {
@@ -28724,7 +28404,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "임시 기본값 중지"
+            "value" : "임시 기저율 중지"
           }
         },
         "nb" : {
@@ -28772,7 +28452,7 @@
         "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ustavite temp bazalno"
+            "value" : "Zaustavitev začasne bazalne doze"
           }
         },
         "sv" : {
@@ -29131,50 +28811,50 @@
         }
       }
     },
-    "Suspend Insulin Delivery" : {
+    "Suspend Delivery" : {
       "comment" : "Dana settings suspend delivery",
       "extractionState" : "manual",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "إيقاف توصيل الأنسولين"
+            "value" : "تعليق التسليم"
           }
         },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pozastavení podávání inzulínu"
+            "value" : "Pozastavit doručování"
           }
         },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Afbryd insulintilførsel"
+            "value" : "Sæt leveringen på pause"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Insulinabgabe aussetzen"
+            "value" : "Lieferung aussetzen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Suspend Insulin Delivery"
+            "value" : "Suspend Delivery"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Suspender la administración de insulina"
+            "value" : "Suspender la entrega"
           }
         },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Keskeytä insuliinin toimitus"
+            "value" : "Keskeytä toimitus"
           }
         },
         "fr" : {
@@ -29186,55 +28866,55 @@
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "השהה את אספקת האינסולין"
+            "value" : "השהה את המשלוח"
           }
         },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Az inzulinszállítás felfüggesztése"
+            "value" : "A kézbesítés felfüggesztése"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sospendere la somministrazione di insulina"
+            "value" : "Sospendi la consegna"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "インスリン投与を一時停止する"
+            "value" : "配送を一時停止"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "인슐린 배달 일시 중단"
+            "value" : "배송 일시 중지"
           }
         },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avbryt insulintilførselen"
+            "value" : "Stopp levering"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Insulinetoediening opschorten"
+            "value" : "Levering opschorten"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wstrzymanie podawania insuliny"
+            "value" : "Wstrzymaj dostawę"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Suspender a administração de insulina"
+            "value" : "Suspender entrega"
           }
         },
         "ro" : {
@@ -29246,37 +28926,37 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Приостановить подачу инсулина"
+            "value" : "Приостановить доставку"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pozastavenie podávania inzulínu"
+            "value" : "Pozastaviť doručovanie"
           }
         },
         "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Prekinitev dovajanja insulina"
+            "value" : "Začasna prekinitev dostave"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avbryt insulintillförseln"
+            "value" : "Avbryta leverans"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "İnsülin Uygulamasını Askıya Alın"
+            "value" : "Teslimatı askıya al"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Призупинити видачу інсуліну"
+            "value" : "Призупинити доставку"
           }
         },
         "vi" : {
@@ -29288,167 +28968,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "暂停胰岛素注射"
-          }
-        }
-      }
-    },
-    "Sync" : {
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "المزامنة"
-          }
-        },
-        "cs" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Synchronizace"
-          }
-        },
-        "da" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Synkronisering"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Synchronisieren"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sync"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sincronizar"
-          }
-        },
-        "fi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Synkronointi"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Synchronisation"
-          }
-        },
-        "he" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "סנכרון"
-          }
-        },
-        "hu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Szinkronizálás"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sincronizza"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "同期"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "동기화"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Synkroniser"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Synchroniseren"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Synchronizacja"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sincronizar"
-          }
-        },
-        "ro" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sincronizare"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Синхронизация"
-          }
-        },
-        "sk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Synchronizácia"
-          }
-        },
-        "sl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sinhronizacija"
-          }
-        },
-        "sv" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Synkronisera"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Senkronize et"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Синхронізація"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Đồng bộ hóa"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "同步"
+            "value" : "暂停配送"
           }
         }
       }

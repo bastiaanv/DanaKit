@@ -9,7 +9,6 @@ class DanaKitSettingsViewModel: ObservableObject {
     @Published var showingDisconnectReminder = false
     @Published var showingBolusSyncingDisabled = false
     @Published var showingBlindReservoirCannulaRefill = false
-    @Published var basalButtonText: String = ""
     @Published var bolusSpeed: BolusSpeed = .speed12
     @Published var isUsingContinuousMode: Bool = false
     @Published var isUpdatingPumpState: Bool = false
@@ -33,7 +32,6 @@ class DanaKitSettingsViewModel: ObservableObject {
     @Published var pumpTime: Date?
     @Published var pumpTimeSyncedAt: Date?
     @Published var nightlyPumpTimeSync: Bool = false
-    @Published var travelLockEnabled: Bool = false
 
     @Published var reservoirLevelWarning: Double = 20
     @Published var reservoirLevel: Double?
@@ -67,7 +65,7 @@ class DanaKitSettingsViewModel: ObservableObject {
             return true
         }
 
-        return travelLockEnabled && pumpManager.state.basalDose.type != .suspend
+        return pumpManager.state.basalDose.type != .suspend
     }
 
     public var isTempBasalLocked: Bool {
@@ -75,8 +73,7 @@ class DanaKitSettingsViewModel: ObservableObject {
             return false
         }
 
-        return travelLockEnabled ||
-            !(pumpManager.state.basalDeliveryOrdinal == .tempBasal && pumpManager.state.basalDose.expectedEndDate > Date.now)
+        return !(pumpManager.state.basalDeliveryOrdinal == .tempBasal && pumpManager.state.basalDose.expectedEndDate > Date.now)
     }
 
     var tempBasalRemaining: String? {
@@ -294,19 +291,6 @@ class DanaKitSettingsViewModel: ObservableObject {
         pumpManager.notifyStateDidChange()
     }
 
-    func toggleTravelLock() {
-        guard let pumpManager = self.pumpManager else {
-            return
-        }
-
-        let impactHeavy = UIImpactFeedbackGenerator(style: .heavy)
-        impactHeavy.impactOccurred()
-
-        pumpManager.state.travelLockEnabled.toggle()
-        travelLockEnabled = pumpManager.state.travelLockEnabled
-        pumpManager.notifyStateDidChange()
-    }
-
     func transformBasalProfile(_ index: UInt8) -> String {
         if index == 0 {
             return "A"
@@ -349,14 +333,10 @@ class DanaKitSettingsViewModel: ObservableObject {
             return
         }
 
-        if isSuspendActionLocked || isUpdatingPumpState || isSyncing {
-            return
-        }
-
         isUpdatingPumpState = true
 
         if pumpManager.state.basalDeliveryOrdinal == .suspended {
-            self.pumpManager?.resumeDelivery { error in
+            pumpManager.resumeDelivery { error in
                 DispatchQueue.main.async {
                     self.isUpdatingPumpState = false
                 }
