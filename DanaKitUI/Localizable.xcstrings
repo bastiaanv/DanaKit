@@ -9334,7 +9334,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Deconectare pompă"
+            "value" : "Deconectați de la pompă"
           }
         },
         "ru" : {
@@ -10142,7 +10142,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "În timpul procesului de asociere, dispozitivul Dana-i va afișa o solicitare de asociere, în timp ce iPhone va afișa o solicitare pentru un cod de asociere. Pe pompă, selectați OK și introduceți codul de 6 cifre pe ecranul iPhone-ului. După aceea, %@ este gata să comunice cu dispozitivul Dana-i."
+            "value" : "În timpul procesului de asociere, dispozitivul Dana-i va afișa o solicitare de asociere, în timp ce pe iPhone va fi afișată o solicitare pentru un cod de asociere. Pe pompă, selectați OK și introduceți codul de 6 cifre pe ecranul iPhone-ului. După aceea, %@ este gata să comunice cu dispozitivul Dana-i."
           }
         },
         "ru" : {
@@ -10304,7 +10304,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "În timpul procesului de asociere, DanaRS v1 va afișa o solicitare de asociere, în timp ce iPhone va afișa o solicitare pentru un cod de asociere. Pe pompă, selectați OK și introduceți codul pe iPhone. După aceea, Loop este gata să comunice cu DanaRS v1."
+            "value" : "În timpul procesului de asociere, DanaRS v1 va afișa o solicitare de asociere, în timp ce pe iPhone va fi afișată o solicitare pentru un cod de asociere. Pe pompă, selectați OK și introduceți codul pe iPhone. După aceea, Loop este gata să comunice cu DanaRS v1."
           }
         },
         "ru" : {
@@ -10466,7 +10466,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "În timpul procesului de asociere, DanaRS v3 va afișa o solicitare de asociere, în timp ce iPhone va afișa o solicitare pentru un cod de asociere. Pe pompă, selectați OK și introduceți codul pe iPhone. După aceea, Loop este gata să comunice cu DanaRS v1."
+            "value" : "În timpul procesului de asociere, DanaRS v3 va afișa o solicitare de asociere, în timp ce pe iPhone va fi afișată o solicitare pentru un cod de asociere. Pe pompă, selectați OK și introduceți codul pe iPhone. După aceea, Loop este gata să comunice cu DanaRS v1."
           }
         },
         "ru" : {
@@ -10628,7 +10628,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "În timpul procesului de asociere, DanaRS v3 va afișa o solicitare de asociere, în timp ce iPhone-ul va afișa o solicitare pentru două coduri de asociere. Pe pompă, selectați OK și introduceți cele două coduri pe iPhone. După aceea, %@ este gata să comunice cu DanaRS v3."
+            "value" : "În timpul procesului de asociere, DanaRS v3 va afișa o solicitare de asociere, în timp ce pe iPhone va fi afișată o solicitare pentru două coduri de asociere. Pe pompă, selectați OK și introduceți cele două coduri pe iPhone. După aceea, %@ este gata să comunice cu DanaRS v3."
           }
         },
         "ru" : {
@@ -10790,7 +10790,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "În timpul procesului de asociere, DanaRS v3 va afișa o solicitare de asociere, în timp ce iPhone-ul va afișa o solicitare pentru două coduri de asociere. Pe pompă, selectați OK și introduceți cele două coduri pe iPhone. După aceea, Loop este gata să comunice cu DanaRS v3."
+            "value" : "În timpul procesului de asociere, DanaRS v3 va afișa o solicitare de asociere, în timp ce pe iPhone va fi afișată o solicitare pentru două coduri de asociere. Pe pompă, selectați OK și introduceți cele două coduri pe iPhone. După aceea, Loop este gata să comunice cu DanaRS v3."
           }
         },
         "ru" : {
@@ -11438,7 +11438,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eșec la ajusta bazala"
+            "value" : "Eșec la ajustarea bazalei"
           }
         },
         "ru" : {
@@ -11762,7 +11762,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eșec la ajusta suspendarea"
+            "value" : "Eșec la ajustarea suspendării"
           }
         },
         "ru" : {
@@ -11924,7 +11924,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eșec la ajusta valoarea bazală temporară"
+            "value" : "Eșec la ajustarea valorii bazale temporare"
           }
         },
         "ru" : {
@@ -12248,7 +12248,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eșec la genera programul bazal Dana"
+            "value" : "Eșec la generarea programului bazal Dana"
           }
         },
         "ru" : {
@@ -12734,7 +12734,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eșec la asocia cu "
+            "value" : "Eșec la asocierea cu "
           }
         },
         "ru" : {
@@ -13220,7 +13220,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eșec la seta cantitatea din rezervor. Resincronizați datele pompei și încercați din nou."
+            "value" : "Eșec la setarea cantității din rezervor. Resincronizați datele pompei și încercați din nou."
           }
         },
         "ru" : {
@@ -15164,7 +15164,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "LCD la timp"
+            "value" : "Timp LCD"
           }
         },
         "ru" : {
@@ -16132,7 +16132,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Temperatură manuală bazală"
+            "value" : "Bazală temporară manuală"
           }
         },
         "ru" : {
@@ -21288,7 +21288,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Rente"
+            "value" : "Rate"
           }
         },
         "nl" : {
@@ -25522,7 +25522,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Setare manuală a ratei bazale în funcție de temperatură"
+            "value" : "Setați manual bazala temporară"
           }
         },
         "ru" : {
@@ -25844,7 +25844,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Setare bazală temporară"
+            "value" : "Setați bazala temporară"
           }
         },
         "ru" : {
@@ -28920,7 +28920,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Suspendați administrarea insulinei"
+            "value" : "Suspendați administrarea"
           }
         },
         "ru" : {
@@ -29404,7 +29404,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bazal temporar"
+            "value" : "Bazală temporară"
           }
         },
         "ru" : {
@@ -31508,7 +31508,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ora pompei este diferită de ora curentă. Ora pompei dvs. controlează setările de terapie programate. Derulați în jos la rândul Ora pompei pentru a revizui diferența de oră și a configura pompa dvs."
+            "value" : "Ora pompei este diferită de ora curentă. Ora pompei dumneavoastră controlează setările de terapie programate. Derulați în jos la rândul Ora pompei pentru a revizui diferența de oră și a configura pompa dumneavoastră."
           }
         },
         "ru" : {
@@ -35876,7 +35876,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Da, Activați tonurile silențioase"
+            "value" : "Da, activați tonurile silențioase"
           }
         },
         "ru" : {
