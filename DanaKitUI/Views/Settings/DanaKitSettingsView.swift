@@ -214,7 +214,7 @@ struct DanaKitSettingsView: View {
 
                     if viewModel.isTempBasal {
                         pumpManagementActionCard(
-                            title: String(localized: "Stop temp basal", comment: "Dana settings stop temp basal"),
+                            title: String(localized: "Stop Temp Basal", comment: "Dana settings stop temp basal"),
                             systemImage: "xmark.circle.fill",
                             iconColor: Color.accentColor
                         ) {
@@ -600,7 +600,7 @@ struct DanaKitSettingsView: View {
                         Text("U/hr", comment: "Units for showing temp basal rate")
                             .foregroundColor(.secondary)
                     }
-                    
+
                     if let tempRemaining = viewModel.tempBasalRemaining {
                         Text(tempRemaining)
                             .foregroundColor(.secondary)
