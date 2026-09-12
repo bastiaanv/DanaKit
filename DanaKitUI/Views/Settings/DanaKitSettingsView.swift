@@ -204,8 +204,8 @@ struct DanaKitSettingsView: View {
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
                     pumpManagementActionCard(
                         title: viewModel.isSuspended
-                            ? String(localized: "Resume Insulin Delivery", comment: "Dana settings resume delivery")
-                            : String(localized: "Suspend Insulin Delivery", comment: "Dana settings suspend delivery"),
+                            ? String(localized: "Resume Delivery", comment: "Dana settings resume delivery")
+                            : String(localized: "Suspend Delivery", comment: "Dana settings suspend delivery"),
                         systemImage: viewModel.isSuspended ? "play.circle.fill" : "pause.circle.fill",
                         iconColor: viewModel.isSuspended ? Color.accentColor : guidanceColors.warning
                     ) {

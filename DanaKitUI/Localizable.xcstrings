@@ -24115,6 +24115,9 @@
         }
       }
     },
+    "Resume Delivery" : {
+
+    },
     "Resume Insulin Delivery" : {
       "comment" : "Dana settings resume delivery",
       "extractionState" : "manual",
@@ -29130,6 +29133,9 @@
           }
         }
       }
+    },
+    "Suspend Delivery" : {
+
     },
     "Suspend Insulin Delivery" : {
       "comment" : "Dana settings suspend delivery",
