@@ -718,7 +718,7 @@ extension DanaKitPumpManager: PumpManager {
                         }
 
                         // 500% fix is already applied
-                        let unitsPerHour = (Double(percentage) / 100) * self.state.getScheduledBasalRate()
+                        let unitsPerHour = ((Double(percentage) / 100) * self.state.getScheduledBasalRate()).rounded(toPlaces: 2)
 
                         if duration < .ulpOfOne {
                             // Temp basal is already canceled (if deem needed)
