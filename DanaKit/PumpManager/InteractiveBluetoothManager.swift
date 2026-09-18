@@ -5,20 +5,22 @@ import LoopKit
 class InteractiveBluetoothManager: NSObject, BluetoothManager {
     weak var pumpManager: DanaKitPumpManager?
 
-    var autoConnectUUID: String?
-    var connectionCompletion: ((ConnectionResult) -> Void)?
-    var connectionCallback: ((ConnectionResult) -> Void)?
-    var devices: [DanaPumpScan] = []
-    var isBusy: Bool = false
+    // The properties below are touched from the bluetooth queue, the main queue, the timeout task
+    // and the thread issuing a command. Hence the locks
+    @Locked var autoConnectUUID: String?
+    @Locked var connectionCompletion: ((ConnectionResult) -> Void)?
+    @Locked var connectionCallback: ((ConnectionResult) -> Void)?
+    @Locked var devices: [DanaPumpScan] = []
+    @Locked var isBusy: Bool = false
 
-    var timoutCallback: Task<Void, Never>?
+    @Locked var timoutCallback: Task<Void, Never>?
 
     let log = DanaLogger(category: "InteractiveBluetoothManager")
     var manager: CBCentralManager!
     let managerQueue = DispatchQueue(label: "com.DanaKit.bluetoothManagerQueue", qos: .unspecified)
 
-    var peripheral: CBPeripheral?
-    var peripheralManager: PeripheralManager?
+    @Locked var peripheral: CBPeripheral?
+    @Locked var peripheralManager: PeripheralManager?
 
     public var isConnected: Bool {
         self.manager.state == .poweredOn && self.peripheral?.state == .connected
@@ -37,10 +39,12 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
     }
 
     func ensureConnected(_ completion: @escaping (ConnectionResult) -> Void, _: String = #function) {
-        connectionCallback = { result in
+        let callback: (ConnectionResult) -> Void = { result in
             self.isBusy = true
-            self.timoutCallback?.cancel()
-            self.timoutCallback = nil
+            self._timoutCallback.mutate { task in
+                task?.cancel()
+                task = nil
+            }
 
             if case .timeout = result {
                 self.resetConnectionCompletion()
@@ -64,17 +68,19 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
             self.isBusy = false
         }
 
+        connectionCallback = callback
+
         // Device still has an active connection with pump and is probably busy with something
         if isConnected {
             if isBusy {
                 log.error("Failed to connect: Already connected")
                 pumpManager?.logDeviceCommunication("Dana - Failed to connect: Already connected", type: .connection)
-                connectionCallback?(.alreadyConnectedAndBusy)
+                callback(.alreadyConnectedAndBusy)
                 return
             }
 
             // We can re-use the current connection. YEAH!!
-            connectionCallback?(.success)
+            callback(.success)
 
             // We stored the peripheral. We can quickly reconnect
         } else if let peripheral = peripheral {
@@ -148,14 +154,14 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
             } catch {
                 log.error("Failed to connect: " + error.localizedDescription)
                 pumpManager?.logDeviceCommunication("Dana - Failed to connect: " + error.localizedDescription, type: .connection)
-                connectionCallback?(.failure(error))
+                callback(.failure(error))
             }
 
         } else {
             // Should never reach, but is only possible if device is not onboard (we have no ble identifier to connect to)
             log.error("Pump is not onboarded")
             pumpManager?.logDeviceCommunication("Dana - Pump is not onboarded", type: .connection)
-            connectionCallback?(.failure(NSError(domain: "Pump is not onboarded", code: -1)))
+            callback(.failure(NSError(domain: "Pump is not onboarded", code: -1)))
         }
     }
 
@@ -163,7 +169,12 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
         timoutCallback = Task {
             do {
                 try await Task.sleep(nanoseconds: UInt64(seconds) * 1_000_000_000)
-                guard let connectionCallback = self.connectionCallback else {
+                // Take the callback, so it cannot be called by the connect completion as well
+                let connectionCallback = self._connectionCallback.mutate { current -> ((ConnectionResult) -> Void)? in
+                    defer { current = nil }
+                    return current
+                }
+                guard let connectionCallback = connectionCallback else {
                     // This is amazing, we've done what we must and continue our live :)
                     return
                 }
@@ -172,7 +183,6 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
                 self.log.error("Failed to connect: Timeout reached...")
 
                 connectionCallback(.timeout)
-                self.connectionCallback = nil
             } catch {}
         }
     }

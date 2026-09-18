@@ -7,7 +7,8 @@ class PeripheralManager: NSObject {
 
     private let connectedDevice: CBPeripheral
     private let bluetoothManager: BluetoothManager
-    private var completion: ((ConnectionResult) -> Void)?
+    /// Read on the bluetooth queue and cleared on the main queue
+    @Locked private var completion: ((ConnectionResult) -> Void)?
 
     private var pumpManager: DanaKitPumpManager
 
@@ -529,7 +530,10 @@ extension PeripheralManager {
                     return
                 }
 
-                completion(.invalidBle5Keys)
+                // Always report the connection result on the main queue, never on the bluetooth queue
+                DispatchQueue.main.async {
+                    completion(.invalidBle5Keys)
+                }
                 return
             }
 
@@ -602,7 +606,9 @@ extension PeripheralManager {
             return
         }
 
-        completion(.requestedPincode(errorMessage))
+        DispatchQueue.main.async {
+            completion(.requestedPincode(errorMessage))
+        }
     }
 
     private func isOk(_ data: Data) -> Bool {

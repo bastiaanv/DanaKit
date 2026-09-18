@@ -195,9 +195,15 @@ extension BluetoothManager {
         dispatchPrecondition(condition: .onQueue(managerQueue))
         log.info("\(peripheral), \(advertisementData)")
 
-        if autoConnectUUID != nil, peripheral.identifier.uuidString == autoConnectUUID {
+        if let autoConnectUUID = autoConnectUUID, peripheral.identifier.uuidString == autoConnectUUID {
             stopScan()
-            connect(peripheral, connectionCompletion!)
+
+            guard let connectionCompletion = connectionCompletion else {
+                log.error("No connection callback found... Timeout hit probably")
+                return
+            }
+
+            connect(peripheral, connectionCompletion)
             return
         }
 

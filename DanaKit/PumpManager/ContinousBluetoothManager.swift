@@ -10,17 +10,19 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
         }
     }
 
-    var autoConnectUUID: String?
-    var connectionCompletion: ((ConnectionResult) -> Void)?
-    var devices: [DanaPumpScan] = []
+    // The properties below are touched from the bluetooth queue, the main queue and the thread
+    // issuing a command. Hence the locks
+    @Locked var autoConnectUUID: String?
+    @Locked var connectionCompletion: ((ConnectionResult) -> Void)?
+    @Locked var devices: [DanaPumpScan] = []
 
     let log = DanaLogger(category: "ContinousBluetoothManager")
     var manager: CBCentralManager!
     let managerQueue = DispatchQueue(label: "com.DanaKit.bluetoothManagerQueue", qos: .unspecified)
 
-    var peripheral: CBPeripheral?
-    var peripheralManager: PeripheralManager?
-    var forcedDisconnect = false
+    @Locked var peripheral: CBPeripheral?
+    @Locked var peripheralManager: PeripheralManager?
+    @Locked var forcedDisconnect = false
 
     public var isConnected: Bool {
         self.manager.state == .poweredOn && self.peripheral?.state == .connected && self.pumpManager?.state
@@ -87,8 +89,8 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
             autoConnectUUID = pumpManager?.state.bleIdentifier
         }
 
-        if peripheral != nil {
-            connect(peripheral!) { result in
+        if let peripheral = peripheral {
+            connect(peripheral) { result in
                 switch result {
                 case .success:
                     self.forcedDisconnect = false
