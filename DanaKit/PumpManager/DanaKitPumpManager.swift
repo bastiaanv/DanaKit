@@ -120,6 +120,30 @@ public class DanaKitPumpManager: DeviceManager {
         bluetooth.connect(peripheral, completion)
     }
 
+    #if targetEnvironment(simulator)
+    /// Simulator only: there is no CoreBluetooth here, so fabricate a connected, primed Dana-i and
+    /// report success after a short delay. This lets the setup flow finish and makes the pump
+    /// settings screens reachable without real hardware. Compiled out of device builds entirely.
+    public func connectSimulated(_ completion: @escaping () -> Void) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.state.deviceName = "DanaSim01"
+            self.state.bleIdentifier = "SIMULATOR"
+            self.state.hwModel = 0x09 // Dana-i (BLE5)
+            self.state.pumpProtocol = 0x0A
+            self.state.isConnected = true
+            self.state.reservoirLevel = 215
+            self.state.batteryRemaining = 85
+            self.state.batteryAge = Date.now
+            self.state.isPumpSuspended = false
+            self.state.bolusState = .noBolus
+            self.state.lastStatusDate = Date.now
+            self.state.pumpTime = Date.now
+            self.notifyStateDidChange()
+            completion()
+        }
+    }
+    #endif
+
     func finishV3Pairing(_ pairingKey: Data, _ randomPairingKey: Data) throws {
         try bluetooth.finishV3Pairing(pairingKey, randomPairingKey)
     }
@@ -295,6 +319,14 @@ extension DanaKitPumpManager: PumpManager {
     }
 
     public func ensureCurrentPumpData(completion: ((Date?) -> Void)?) {
+        #if targetEnvironment(simulator)
+        // No pump to poll in the simulator; report fresh data so Trio's periodic status polls and
+        // the settings screen don't hang or error against the absent device.
+        state.lastStatusDate = Date.now
+        completion?(state.lastStatusDate)
+        return
+        #endif
+
         guard Date.now.timeIntervalSince(state.lastStatusDate) > .minutes(4) else {
             log
                 .warning(
