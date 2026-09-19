@@ -1,10 +1,12 @@
-let CommandBolusStop: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
-    UInt16(DanaPacketType.OPCODE_BOLUS__SET_STEP_BOLUS_STOP & 0xFF)
+class DanaBolusStop : DanaKitBasePacket {
+    let name = "Bolus_Stop"
+    let opCode = DanaPacketType.OPCODE_BOLUS__SET_STEP_BOLUS_STOP
 
-func generatePacketBolusStop() -> DanaGeneratePacket {
-    DanaGeneratePacket(name: "Bolus_Stop", opCode: DanaPacketType.OPCODE_BOLUS__SET_STEP_BOLUS_STOP, data: nil)
-}
-
-func parsePacketBolusStop(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
-    DanaParsePacket(success: data[DataStart] == 0, rawData: data, data: nil)
+    func generate() throws -> Data {
+        Data()
+    }
+    
+    func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
+        DanaParsePacket<String>(success: data[DataStart] == 0, rawData: data, data: nil)
+    }
 }

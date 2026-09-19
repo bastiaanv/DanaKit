@@ -31,39 +31,41 @@ public struct PacketGeneralGetUserOption: Codable {
     var targetBg: UInt16?
 }
 
-let CommandGeneralGetUserOption: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
-    UInt16(DanaPacketType.OPCODE_OPTION__GET_USER_OPTION & 0xFF)
+class DanaGeneralGetUserOption : DanaKitBasePacket {
+    let name = "General_GetUserOption"
+    let opCode = DanaPacketType.OPCODE_OPTION__GET_USER_OPTION
 
-func generatePacketGeneralGetUserOption() -> DanaGeneratePacket {
-    DanaGeneratePacket(
-        name: "General_GetUserOption",
-        opCode: DanaPacketType.OPCODE_OPTION__GET_USER_OPTION,
-        data: nil
-    )
-}
-
-func parsePacketGeneralGetUserOption(data: Data, usingUtc _: Bool?) -> DanaParsePacket<PacketGeneralGetUserOption> {
-    DanaParsePacket(
-        success: data[DataStart + 3] >= 5,
-        rawData: data,
-        data: PacketGeneralGetUserOption(
-            isTimeDisplay24H: data[DataStart] == 0,
-            isButtonScrollOnOff: data[DataStart + 1] == 1,
-            beepAndAlarm: BeepAlarmType(rawValue: data[DataStart + 2]) ?? .sound,
-            lcdOnTimeInSec: data[DataStart + 3],
-            backlightOnTimInSec: data[DataStart + 4],
-            selectedLanguage: data[DataStart + 5],
-            units: data[DataStart + 6],
-            shutdownHour: data[DataStart + 7],
-            lowReservoirRate: data[DataStart + 8],
-            cannulaVolume: data.uint16(at: DataStart + 9),
-            refillAmount: data.uint16(at: DataStart + 11),
-            selectableLanguage1: data[DataStart + 13],
-            selectableLanguage2: data[DataStart + 14],
-            selectableLanguage3: data[DataStart + 15],
-            selectableLanguage4: data[DataStart + 16],
-            selectableLanguage5: data[DataStart + 17],
-            targetBg: data.count >= 22 ? data.uint16(at: DataStart + 18) : nil
+    func generate() throws -> Data {
+        Data()
+    }
+    
+    func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
+        guard data.count > 19 else {
+            return DanaParsePacket<String>(success: false, rawData: data, data: nil)
+        }
+        
+        return DanaParsePacket(
+            success: data[DataStart + 3] >= 5,
+            rawData: data,
+            data: PacketGeneralGetUserOption(
+                isTimeDisplay24H: data[DataStart] == 0,
+                isButtonScrollOnOff: data[DataStart + 1] == 1,
+                beepAndAlarm: BeepAlarmType(rawValue: data[DataStart + 2]) ?? .sound,
+                lcdOnTimeInSec: data[DataStart + 3],
+                backlightOnTimInSec: data[DataStart + 4],
+                selectedLanguage: data[DataStart + 5],
+                units: data[DataStart + 6],
+                shutdownHour: data[DataStart + 7],
+                lowReservoirRate: data[DataStart + 8],
+                cannulaVolume: data.uint16(at: DataStart + 9),
+                refillAmount: data.uint16(at: DataStart + 11),
+                selectableLanguage1: data[DataStart + 13],
+                selectableLanguage2: data[DataStart + 14],
+                selectableLanguage3: data[DataStart + 15],
+                selectableLanguage4: data[DataStart + 16],
+                selectableLanguage5: data[DataStart + 17],
+                targetBg: data.count >= 22 ? data.uint16(at: DataStart + 18) : nil
+            )
         )
-    )
+    }
 }

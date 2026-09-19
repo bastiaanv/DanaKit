@@ -39,11 +39,7 @@ enum DanaUIScreen {
     }
 }
 
-protocol DanaUINavigator: AnyObject {
-    func navigateTo(_ screen: DanaUIScreen)
-}
-
-class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, CompletionNotifying, UINavigationControllerDelegate {
+class DanaUICoordinator: UINavigationController, @MainActor PumpManagerOnboarding, @MainActor CompletionNotifying, UINavigationControllerDelegate {
     var pumpManagerOnboardingDelegate: PumpManagerOnboardingDelegate?
 
     var completionDelegate: CompletionDelegate?
@@ -319,9 +315,7 @@ class DanaUICoordinator: UINavigationController, PumpManagerOnboarding, Completi
             return
         }
     }
-}
 
-extension DanaUICoordinator: DanaUINavigator {
     func navigateTo(_ screen: DanaUIScreen) {
         screenStack.append(screen)
         let viewController = viewControllerForScreen(screen)

@@ -1,27 +1,26 @@
 struct PacketGeneralSetPumpTimeUtcWithTimezone {
-    var time: Date
-    var zoneOffset: UInt8
+    let time: Date
+    let zoneOffset: UInt8
 }
 
-let CommandGeneralSetPumpTimeUtcWithTimezone: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
-    UInt16(DanaPacketType.OPCODE_OPTION__SET_PUMP_UTC_AND_TIME_ZONE & 0xFF)
+class DanaGeneralSetPumpTimeUtcWithTimezone : DanaKitBasePacket {
+    let name = "General_SetPumpTimeUtcWithTimezone"
+    let opCode = DanaPacketType.OPCODE_OPTION__SET_PUMP_UTC_AND_TIME_ZONE
+    
+    private let options: PacketGeneralSetPumpTimeUtcWithTimezone
+    init(options: PacketGeneralSetPumpTimeUtcWithTimezone) {
+        self.options = options
+    }
 
-func generatePacketGeneralSetPumpTimeUtcWithTimezone(options: PacketGeneralSetPumpTimeUtcWithTimezone) -> DanaGeneratePacket {
-    var data = Data(count: 7)
-    data.addDate(at: 0, date: options.time)
-    data[6] = options.zoneOffset
-
-    return DanaGeneratePacket(
-        name: "General_SetPumpTimeUtcWithTimezone",
-        opCode: DanaPacketType.OPCODE_OPTION__SET_PUMP_UTC_AND_TIME_ZONE,
-        data: data
-    )
-}
-
-func parsePacketGeneralSetPumpTimeUtcWithTimezone(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
-    DanaParsePacket(
-        success: data[DataStart] == 0,
-        rawData: data,
-        data: nil
-    )
+    func generate() throws -> Data {
+        var data = Data(count: 7)
+        data.addDate(at: 0, date: options.time)
+        data[6] = options.zoneOffset
+        
+        return data
+    }
+    
+    func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
+        DanaParsePacket<String>(success: data[DataStart] == 0, rawData: data, data: nil)
+    }
 }

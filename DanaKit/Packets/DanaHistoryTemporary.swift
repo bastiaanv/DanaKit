@@ -1,10 +1,12 @@
-let CommandHistoryTemporary: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
-    UInt16(DanaPacketType.OPCODE_REVIEW__TEMPORARY & 0xFF)
+class DanaHistoryTemporary : HistoryPacket, DanaKitBasePacket {
+    let name = "Review_TemporaryBasal"
+    let opCode = DanaPacketType.OPCODE_REVIEW__TEMPORARY
 
-func generatePacketHistoryTemporary(options: PacketHistoryBase) -> DanaGeneratePacket {
-    DanaGeneratePacket(
-        name: "Review_TemporaryBasal",
-        opCode: DanaPacketType.OPCODE_REVIEW__TEMPORARY,
-        data: generatePacketHistoryData(options: options)
-    )
+    func generate() throws -> Data {
+        return generatePacketHistoryData()
+    }
+    
+    func parse(data: Data, usingUtc: Bool?) -> any DanaParsePacketProtocol {
+        super.parse(data: data, usingUtc: usingUtc)
+    }
 }

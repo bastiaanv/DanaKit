@@ -1,10 +1,12 @@
-let CommandHistorySuspend: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
-    UInt16(DanaPacketType.OPCODE_REVIEW__SUSPEND & 0xFF)
+class DanaHistorySuspend : HistoryPacket, DanaKitBasePacket {
+    let name = "Review_Suspended"
+    let opCode = DanaPacketType.OPCODE_REVIEW__SUSPEND
 
-func generatePacketHistorySuspend(options: PacketHistoryBase) -> DanaGeneratePacket {
-    DanaGeneratePacket(
-        name: "Review_Suspended",
-        opCode: DanaPacketType.OPCODE_REVIEW__SUSPEND,
-        data: generatePacketHistoryData(options: options)
-    )
+    func generate() throws -> Data {
+        return generatePacketHistoryData()
+    }
+    
+    func parse(data: Data, usingUtc: Bool?) -> any DanaParsePacketProtocol {
+        super.parse(data: data, usingUtc: usingUtc)
+    }
 }

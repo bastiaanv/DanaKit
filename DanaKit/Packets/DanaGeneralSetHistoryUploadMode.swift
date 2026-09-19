@@ -4,26 +4,23 @@ struct PacketGeneralSetHistoryUploadMode {
      *
      * Need to do this before and after fetching the history from pump
      */
-    var mode: UInt8
+    let mode: UInt8
 }
 
-let CommandGeneralSetHistoryUploadMode: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
-    UInt16(DanaPacketType.OPCODE_REVIEW__SET_HISTORY_UPLOAD_MODE & 0xFF)
+class DanaGeneralSetHistoryUploadMode : DanaKitBasePacket {
+    let name = "General_SetHistoryUploadMode"
+    let opCode = DanaPacketType.OPCODE_REVIEW__SET_HISTORY_UPLOAD_MODE
+    
+    private let options: PacketGeneralSetHistoryUploadMode
+    init(options: PacketGeneralSetHistoryUploadMode) {
+        self.options = options
+    }
 
-func generatePacketGeneralSetHistoryUploadMode(options: PacketGeneralSetHistoryUploadMode) -> DanaGeneratePacket {
-    let data = Data([options.mode])
-
-    return DanaGeneratePacket(
-        name: "General_SetHistoryUploadMode",
-        opCode: DanaPacketType.OPCODE_REVIEW__SET_HISTORY_UPLOAD_MODE,
-        data: data
-    )
-}
-
-func parsePacketGeneralSetHistoryUploadMode(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
-    DanaParsePacket(
-        success: data[DataStart] == 0,
-        rawData: data,
-        data: nil
-    )
+    func generate() throws -> Data {
+        Data([options.mode])
+    }
+    
+    func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
+        DanaParsePacket<String>(success: data[DataStart] == 0, rawData: data, data: nil)
+    }
 }

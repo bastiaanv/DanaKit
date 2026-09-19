@@ -166,7 +166,7 @@ class DanaKitSettingsViewModel: ObservableObject {
     }
 
     func scheduleDisconnectNotification(_ duration: TimeInterval) {
-        NotificationHelper.setDisconnectReminder(duration)
+        pumpManager?.setAlert(notification: .disconnectedReminder(after: duration))
         pumpManager?.disconnect(true)
     }
 

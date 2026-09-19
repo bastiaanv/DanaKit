@@ -9,7 +9,7 @@ public protocol StateObserver: AnyObject {
     func deviceScanDidUpdate(_ device: DanaPumpScan)
 }
 
-public class DanaKitPumpManager: DeviceManager {
+public class DanaKitPumpManager: DeviceManager, @unchecked Sendable{
     private(set) var bluetooth: BluetoothManager
 
     private var oldState: DanaKitPumpManagerState
@@ -28,10 +28,13 @@ public class DanaKitPumpManager: DeviceManager {
     init(state: DanaKitPumpManagerState, dateGenerator _: @escaping () -> Date = Date.init) {
         self.state = state
         oldState = DanaKitPumpManagerState(rawValue: state.rawValue)
-        DanaKitEncryption.setEnhancedEncryption(state.encryptionMode)
 
         bluetooth = self.state.isUsingContinuousMode ? ContinousBluetoothManager() : InteractiveBluetoothManager()
         bluetooth.pumpManager = self
+        
+        DispatchQueue.main.async {
+            DanaLogger.pumpManager = self
+        }
 
         let nc = NotificationCenter.default
         nc.addObserver(
@@ -64,8 +67,10 @@ public class DanaKitPumpManager: DeviceManager {
     }
 
     let log = DanaLogger(category: "DanaKitPumpManager")
+    
+    private let pumpQueue = DispatchQueue(label: "com.DanaKit.PumpManager", qos: .userInitiated)
+    
     public let pumpDelegate = WeakSynchronizedDelegate<PumpManagerDelegate>()
-
     private let statusObservers = WeakSynchronizedSet<PumpManagerStatusObserver>()
     private let stateObservers = WeakSynchronizedSet<StateObserver>()
     private let scanDeviceObservers = WeakSynchronizedSet<StateObserver>()
@@ -180,6 +185,19 @@ public class DanaKitPumpManager: DeviceManager {
 
     @objc func appMovedToForeground() {
         backgroundTask.stopBackgroundTask()
+    }
+    
+    func setAlert(notification: DanaKitNotification) {
+        pumpDelegate.notify {
+            $0?.issueAlert(notification.alert)
+        }
+    }
+    
+    func clearAlerts() {
+        pumpDelegate.notify {
+            $0?.retractAlert(identifier: DanaKitNotification.disconnectWarning.identifier)
+            $0?.retractAlert(identifier: DanaKitNotification.disconnectedReminder(after: .minutes(1)).identifier)
+        }
     }
 }
 
@@ -339,15 +357,14 @@ extension DanaKitPumpManager: PumpManager {
             return
         }
 
-        delegateQueue.async {
-            let this = self
+        pumpQueue.async {
             let duration = self.estimatedDuration(toBolus: units)
             self.log.info("Enact bolus, units: \(units)U, duration: \(duration)sec")
             self.logDeviceCommunication("Enact bolus, units: \(units)U, duration: \(duration)sec", type: .delegate)
-
+            
             self.state.bolusState = .initiating
             self.notifyStateDidChange()
-
+            
             self.bluetooth.ensureConnected { result in
                 switch result {
                 case .success:
@@ -357,77 +374,76 @@ extension DanaKitPumpManager: PumpManager {
                         self.state.bolusDose = nil
                         self.notifyStateDidChange()
                         self.disconnect()
-
+                        
                         self.log.error("Pump is suspended")
                         completion(PumpManagerError.deviceState(DanaKitPumpManagerError.pumpSuspended))
                         return
                     }
-
+                    
                     do {
                         self.lastReportedBolusStep = 0
-                        let packet =
-                            generatePacketBolusStart(options: PacketBolusStart(
-                                amount: units,
-                                speed: !self.isPriming ? self.state.bolusSpeed : .speed12
-                            ))
+                        let packet = DanaBolusStart(options: PacketBolusStart(
+                            amount: units,
+                            speed: !self.isPriming ? self.state.bolusSpeed : .speed12
+                        ))
                         let result = try self.bluetooth.writeMessage(packet)
-
+                        
                         guard result.success else {
                             self.state.bolusState = .noBolus
                             self.doseReporter = nil
                             self.state.bolusDose = nil
                             self.notifyStateDidChange()
                             self.disconnect()
-
+                            
                             self.log.error("Pump rejected command. Data: \(result.rawData.base64EncodedString())")
-                            completion(PumpManagerError.deviceState(transformBolusError(code: result.rawData[DataStart])))
+                            completion(PumpManagerError.deviceState(packet.transformBolusError(code: result.rawData[DataStart])))
                             return
                         }
-
+                        
                         // Sync the pump time
                         self.state.lastStatusPumpDateTime = self.fetchPumpTime() ?? Date.now
                         self.state.lastStatusDate = Date.now
-
+                        
                         let doseEntry = UnfinalizedDose(
                             units: units,
                             duration: duration,
                             activationType: activationType,
                             insulinType: self.state.insulinType
                         )
-
+                        
                         self.doseReporter = DanaKitDoseProgressReporter(total: units)
-
+                        
                         if !self.isPriming {
                             self.state.bolusDose = doseEntry
                             self.state.bolusState = .inProgress
-
+                            
                             let dose = doseEntry.toDoseEntry(endDate: nil)
                             self.pumpDelegate.notify { delegate in
                                 guard let delegate = delegate else {
-                                    this.log.error("Dose could not be reported -> Missing delegate")
+                                    self.log.error("Dose could not be reported -> Missing delegate")
                                     return
                                 }
-
+                                
                                 let event = NewPumpEvent.bolus(
                                     dose: dose,
                                     date: dose.startDate
                                 )
                                 delegate.pumpManager(
-                                    this,
+                                    self,
                                     hasNewPumpEvents: [event],
-                                    lastReconciliation: this.state.lastStatusDate,
+                                    lastReconciliation: self.state.lastStatusDate,
                                     replacePendingEvents: false,
                                 ) { error in
                                     if let error = error {
-                                        this.handlePumpDelegateError(method: "hasNewPumpEvents", error)
+                                        self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
                                     }
                                 }
                             }
                         }
-
+                        
                         self.log.info("Successfully started bolus!")
                         self.logDeviceCommunication("Successfully started bolus!", type: .delegateResponse)
-
+                        
                         self.notifyStateDidChange()
                         completion(nil)
                     } catch {
@@ -435,7 +451,7 @@ extension DanaKitPumpManager: PumpManager {
                         self.doseReporter = nil
                         self.notifyStateDidChange()
                         self.disconnect()
-
+                        
                         self.log.error("Failed to do bolus. Error: \(error.localizedDescription)")
                         completion(PumpManagerError.connection(DanaKitPumpManagerError.unknown(error.localizedDescription)))
                     }
@@ -444,7 +460,7 @@ extension DanaKitPumpManager: PumpManager {
                     self.state.bolusState = .noBolus
                     self.doseReporter = nil
                     self.notifyStateDidChange()
-
+                    
                     completion(PumpManagerError.connection(DanaKitPumpManagerError.noConnection(result)))
                     return
                 }
@@ -467,7 +483,7 @@ extension DanaKitPumpManager: PumpManager {
     }
 
     public func cancelBolus(completion: @escaping (PumpManagerResult<DoseEntry?>) -> Void) {
-        delegateQueue.async {
+        pumpQueue.async {
             self.log.info("Cancelling bolus...")
             self.logDeviceCommunication("Cancelling bolus...", type: .delegate)
 
@@ -499,8 +515,7 @@ extension DanaKitPumpManager: PumpManager {
 
     private func doCancelAction(oldBolusState: BolusState, completion: @escaping (PumpManagerResult<DoseEntry?>) -> Void) {
         do {
-            let packet = generatePacketBolusStop()
-            let result = try bluetooth.writeMessage(packet)
+            let result = try bluetooth.writeMessage(DanaBolusStop())
 
             if !result.success {
                 state.bolusState = oldBolusState
@@ -633,7 +648,7 @@ extension DanaKitPumpManager: PumpManager {
             return
         }
 
-        delegateQueue.async {
+        pumpQueue.async {
             self.bluetooth.ensureConnected { result in
                 switch result {
                 case .success:
@@ -698,8 +713,7 @@ extension DanaKitPumpManager: PumpManager {
                         }
 
                         if self.state.basalDeliveryOrdinal == .tempBasal {
-                            let packet = generatePacketBasalCancelTemporary()
-                            let result = try self.bluetooth.writeMessage(packet)
+                            let result = try self.bluetooth.writeMessage(DanaBasalCancelTemporary())
 
                             guard result.success else {
                                 self.disconnect()
@@ -737,8 +751,7 @@ extension DanaKitPumpManager: PumpManager {
                             completion(nil)
 
                         } else if duration == .minutes(15) {
-                            let packet =
-                                generatePacketLoopSetTemporaryBasal(options: PacketLoopSetTemporaryBasal(
+                            let packet = DanaLoopSetTemporaryBasal(options: PacketLoopSetTemporaryBasal(
                                     percent: percentage,
                                     duration: .min15
                                 ))
@@ -770,8 +783,7 @@ extension DanaKitPumpManager: PumpManager {
                             completion(nil)
 
                         } else if duration == .minutes(30) {
-                            let packet =
-                                generatePacketLoopSetTemporaryBasal(options: PacketLoopSetTemporaryBasal(
+                            let packet = DanaLoopSetTemporaryBasal(options: PacketLoopSetTemporaryBasal(
                                     percent: percentage,
                                     duration: .min30
                                 ))
@@ -806,8 +818,7 @@ extension DanaKitPumpManager: PumpManager {
                         } else {
                             // Full hour
                             let durationInHours = UInt8(floor(duration / .hours(1)))
-                            let packet =
-                                generatePacketBasalSetTemporary(
+                            let packet = DanaBasalSetTemporary(
                                     options: PacketBasalSetTemporary(
                                         temporaryBasalRatio: UInt8(percentage),
                                         temporaryBasalDuration: durationInHours
@@ -923,8 +934,7 @@ extension DanaKitPumpManager: PumpManager {
     }
 
     public func suspendDelivery(completion: @escaping (Error?) -> Void) {
-        delegateQueue.async {
-            let this = self
+        pumpQueue.async {
             self.log.info("Suspend delivery")
             self.logDeviceCommunication("Suspend delivery", type: .delegate)
 
@@ -933,8 +943,7 @@ extension DanaKitPumpManager: PumpManager {
                 case .success:
                     do {
                         if self.state.basalDeliveryOrdinal == .tempBasal {
-                            let packet = generatePacketBasalCancelTemporary()
-                            let result = try self.bluetooth.writeMessage(packet)
+                            let result = try self.bluetooth.writeMessage(DanaBasalCancelTemporary())
 
                             guard result.success else {
                                 self.disconnect()
@@ -952,8 +961,7 @@ extension DanaKitPumpManager: PumpManager {
                             self.log.info("Successfully canceled old temp basal")
                         }
 
-                        let packet = generatePacketBasalSetSuspendOn()
-                        let result = try self.bluetooth.writeMessage(packet)
+                        let result = try self.bluetooth.writeMessage(DanaBasalSetSuspendOn())
 
                         let pumpTime = self.fetchPumpTime()
                         if let pumpTime = pumpTime {
@@ -983,18 +991,18 @@ extension DanaKitPumpManager: PumpManager {
 
                         self.pumpDelegate.notify { delegate in
                             guard let delegate = delegate else {
-                                this.log.error("Suspend could not be reported -> Missing delegate")
+                                self.log.error("Suspend could not be reported -> Missing delegate")
                                 return
                             }
 
                             delegate.pumpManager(
-                                this,
+                                self,
                                 hasNewPumpEvents: events,
-                                lastReconciliation: this.state.lastStatusDate,
+                                lastReconciliation: self.state.lastStatusDate,
                                 replacePendingEvents: true,
                             ) { error in
                                 if let error = error {
-                                    this.handlePumpDelegateError(method: "hasNewPumpEvents", error)
+                                    self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
                                 }
                             }
                         }
@@ -1018,8 +1026,7 @@ extension DanaKitPumpManager: PumpManager {
     }
 
     public func resumeDelivery(completion: @escaping (Error?) -> Void) {
-        delegateQueue.async {
-            let this = self
+        pumpQueue.async {
             self.log.info("Resume delivery")
             self.logDeviceCommunication("Resume delivery", type: .delegate)
 
@@ -1027,8 +1034,7 @@ extension DanaKitPumpManager: PumpManager {
                 switch result {
                 case .success:
                     do {
-                        let packet = generatePacketBasalSetSuspendOff()
-                        let result = try self.bluetooth.writeMessage(packet)
+                        let result = try self.bluetooth.writeMessage(DanaBasalSetSuspendOff())
 
                         let pumpTime = self.fetchPumpTime()
                         if let pumpTime = pumpTime {
@@ -1052,20 +1058,20 @@ extension DanaKitPumpManager: PumpManager {
 
                         self.pumpDelegate.notify { delegate in
                             guard let delegate = delegate else {
-                                this.log.error("Resume could not be reported -> Missing delegate")
+                                self.log.error("Resume could not be reported -> Missing delegate")
                                 return
                             }
 
                             delegate.pumpManager(
-                                this,
+                                self,
                                 hasNewPumpEvents: [NewPumpEvent.resume(
                                     dose: self.state.basalDose.toDoseEntry(endDate: nil)
                                 )],
-                                lastReconciliation: this.state.lastStatusDate,
+                                lastReconciliation: self.state.lastStatusDate,
                                 replacePendingEvents: true,
                             ) { error in
                                 if let error = error {
-                                    this.handlePumpDelegateError(method: "hasNewPumpEvents", error)
+                                    self.handlePumpDelegateError(method: "hasNewPumpEvents", error)
                                 }
                             }
                         }
@@ -1092,58 +1098,56 @@ extension DanaKitPumpManager: PumpManager {
         items scheduleItems: [RepeatingScheduleValue<Double>],
         completion: @escaping (Result<BasalRateSchedule, Error>) -> Void
     ) {
-        delegateQueue.async {
+        pumpQueue.async {
             self.log.info("Syncing basal schedule...")
             self.logDeviceCommunication("Syncing basal schedule...", type: .delegate)
-
+            
             self.bluetooth.ensureConnected { result in
                 switch result {
                 case .success:
                     do {
                         let basal = DanaKitPumpManagerState.convertBasal(scheduleItems)
-                        let packet =
-                            try generatePacketBasalSetProfileRate(options: PacketBasalSetProfileRate(
-                                profileNumber: self.state.basalProfileNumber,
-                                profileBasalRate: basal
-                            ))
+                        let packet = DanaBasalSetProfileRate(options: PacketBasalSetProfileRate(
+                            profileNumber: self.state.basalProfileNumber,
+                            profileBasalRate: basal
+                        ))
                         let result = try self.bluetooth.writeMessage(packet)
-
+                        
                         guard result.success else {
                             self.disconnect()
                             self.log.error("Pump rejected command (setting rates)")
                             completion(.failure(PumpManagerError.configuration(DanaKitPumpManagerError.failedBasalAdjustment)))
                             return
                         }
-
-                        let activatePacket =
-                            generatePacketBasalSetProfileNumber(options: PacketBasalSetProfileNumber(
-                                profileNumber: self.state.basalProfileNumber
-                            ))
+                        
+                        let activatePacket = DanaBasalSetProfileNumber(options: PacketBasalSetProfileNumber(
+                            profileNumber: self.state.basalProfileNumber
+                        ))
                         let activateResult = try self.bluetooth.writeMessage(activatePacket)
-
+                        
                         self.disconnect()
-
+                        
                         guard activateResult.success else {
                             self.log.error("Pump rejected command (activate profile)")
                             completion(.failure(PumpManagerError.configuration(DanaKitPumpManagerError.failedBasalAdjustment)))
                             return
                         }
-
+                        
                         guard let schedule = DailyValueSchedule<Double>(dailyItems: scheduleItems) else {
                             self.log.error("Failed to convert schedule")
                             completion(.failure(PumpManagerError.configuration(DanaKitPumpManagerError.failedBasalGeneration)))
                             return
                         }
-
+                        
                         self.state.basalSchedule = basal
                         self.notifyStateDidChange()
-
+                        
                         self.log.info("Basal schedule synced!")
                         self.logDeviceCommunication("Basal schedule synced!", type: .delegateResponse)
                         completion(.success(schedule))
                     } catch {
                         self.disconnect()
-
+                        
                         self.log.error("Failed to suspend delivery. Error: \(error.localizedDescription)")
                         completion(.failure(
                             PumpManagerError
@@ -1160,16 +1164,17 @@ extension DanaKitPumpManager: PumpManager {
     }
 
     public func setUserSettings(data: PacketGeneralSetUserOption, completion: @escaping (Bool) -> Void) {
-        delegateQueue.async {
+        pumpQueue.async {
             self.log.info("Syncing user settings...")
             self.logDeviceCommunication("Syncing user settings...", type: .delegate)
 
-            self.bluetooth.ensureConnected { result in
+            self.bluetooth.ensureConnected { [weak self] result in
+                guard let self else { return }
+                
                 switch result {
                 case .success:
                     do {
-                        let packet = generatePacketGeneralSetUserOption(options: data)
-                        let result = try self.bluetooth.writeMessage(packet)
+                        let result = try self.bluetooth.writeMessage(DanaGeneralSetUserOption(options: data))
 
                         self.disconnect()
                         guard result.success else {
@@ -1196,7 +1201,7 @@ extension DanaKitPumpManager: PumpManager {
     }
 
     public func syncDeliveryLimits(limits _: DeliveryLimits, completion: @escaping (Result<DeliveryLimits, Error>) -> Void) {
-        delegateQueue.async {
+        pumpQueue.async {
             // Dana does not allow the max basal and max bolus to be set
             self.log.info("Skipping sync delivery limits (not supported by dana). Fetching current settings")
             self.logDeviceCommunication(
@@ -1208,8 +1213,7 @@ extension DanaKitPumpManager: PumpManager {
                 switch result {
                 case .success:
                     do {
-                        let basalPacket = generatePacketBasalGetRate()
-                        let basalResult = try self.bluetooth.writeMessage(basalPacket)
+                        let basalResult = try self.bluetooth.writeMessage(DanaBasalGetRate())
 
                         guard basalResult.success else {
                             self.log.error("Pump refused to send basal rates back")
@@ -1221,8 +1225,7 @@ extension DanaKitPumpManager: PumpManager {
                             return
                         }
 
-                        let bolusPacket = generatePacketBolusGetStepInformation()
-                        let bolusResult = try self.bluetooth.writeMessage(bolusPacket)
+                        let bolusResult = try self.bluetooth.writeMessage(DanaBolusGetStepInformation())
 
                         self.disconnect()
                         guard bolusResult.success else {
@@ -1276,8 +1279,7 @@ extension DanaKitPumpManager: PumpManager {
     }
 
     public func syncPumpTime(completion: @escaping (Error?) -> Void) {
-        delegateQueue.async {
-            let this = self
+        pumpQueue.async {
             self.log.info("Syncing pump time...")
             self.logDeviceCommunication("Syncing pump time...", type: .delegate)
 
@@ -1286,16 +1288,16 @@ extension DanaKitPumpManager: PumpManager {
                 case .success:
                     do {
                         let offset = Date.now.timeIntervalSince(self.state.pumpTime ?? Date.distantPast)
-                        let packet: DanaGeneratePacket
+                        let packet: DanaKitBasePacket
                         if self.state.usingUtc {
                             let offsetInHours = round(Double(TimeZone.current.secondsFromGMT(for: Date.now) / 3600))
                             packet =
-                                generatePacketGeneralSetPumpTimeUtcWithTimezone(options: PacketGeneralSetPumpTimeUtcWithTimezone(
+                                DanaGeneralSetPumpTimeUtcWithTimezone(options: PacketGeneralSetPumpTimeUtcWithTimezone(
                                     time: Date.now,
                                     zoneOffset: UInt8(truncatingIfNeeded: Int8(offsetInHours))
                                 ))
                         } else {
-                            packet = generatePacketGeneralSetPumpTime(options: PacketGeneralSetPumpTime(time: Date.now))
+                            packet = DanaGeneralSetPumpTime(options: PacketGeneralSetPumpTime(time: Date.now))
                         }
 
                         let result = try self.bluetooth.writeMessage(packet)
@@ -1318,11 +1320,11 @@ extension DanaKitPumpManager: PumpManager {
 
                         self.pumpDelegate.notify { delegate in
                             guard let delegate = delegate else {
-                                this.log.error("Clock offset could not be reported -> Missing delegate")
+                                self.log.error("Clock offset could not be reported -> Missing delegate")
                                 return
                             }
 
-                            delegate.pumpManager(this, didAdjustPumpClockBy: offset)
+                            delegate.pumpManager(self, didAdjustPumpClockBy: offset)
                         }
 
                         self.log.info("Pump time synced!")
@@ -1526,8 +1528,7 @@ public extension DanaKitPumpManager {
             lastReportedBolusStep = currentStep
             DispatchQueue.global(qos: .userInitiated).async {
                 do {
-                    let command = generatePacketGeneralKeepConnection()
-                    let result = try self.bluetooth.writeMessage(command)
+                    let result = try self.bluetooth.writeMessage(DanaGeneralKeepConnection())
 
                     guard result.success else {
                         self.log.warning("Pump declined keepalive")
@@ -1554,8 +1555,7 @@ public extension DanaKitPumpManager {
             let bolusCompletedAt = Date.now
 
             do {
-                let resultInitialScreenInformation = try self.bluetooth
-                    .writeMessage(generatePacketGeneralGetInitialScreenInformation())
+                let resultInitialScreenInformation = try self.bluetooth.writeMessage(DanaGeneralGetInitialScreenInformation())
                 if resultInitialScreenInformation.success,
                    let data = resultInitialScreenInformation.data as? PacketGeneralGetInitialScreenInformation
                 {

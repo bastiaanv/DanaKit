@@ -20,34 +20,40 @@ struct PacketBolusSetOption {
     var missedBolus04EndMin: UInt8
 }
 
-let CommandBolusSetOption: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
-    UInt16(DanaPacketType.OPCODE_BOLUS__SET_BOLUS_OPTION & 0xFF)
+class DanaBolusSetOption : DanaKitBasePacket {
+    let name = "Bolus_SetOption"
+    let opCode = DanaPacketType.OPCODE_BOLUS__SET_BOLUS_OPTION
+    
+    private let options: PacketBolusSetOption
+    init(options: PacketBolusSetOption) {
+        self.options = options
+    }
 
-func generatePacketBolusSetOption(options: PacketBolusSetOption) -> DanaGeneratePacket {
-    var data = Data(count: 19)
-    data[0] = options.extendedBolusOptionOnOff
-    data[1] = options.bolusCalculationOption
-    data[2] = options.missedBolusConfig
-    data[3] = options.missedBolus01StartHour
-    data[4] = options.missedBolus01StartMin
-    data[5] = options.missedBolus01EndHour
-    data[6] = options.missedBolus01EndMin
-    data[7] = options.missedBolus02StartHour
-    data[8] = options.missedBolus02StartMin
-    data[9] = options.missedBolus02EndHour
-    data[10] = options.missedBolus02EndMin
-    data[11] = options.missedBolus03StartHour
-    data[12] = options.missedBolus03StartMin
-    data[13] = options.missedBolus03EndHour
-    data[14] = options.missedBolus03EndMin
-    data[15] = options.missedBolus04StartHour
-    data[16] = options.missedBolus04StartMin
-    data[17] = options.missedBolus04EndHour
-    data[18] = options.missedBolus04EndMin
-
-    return DanaGeneratePacket(name: "Bolus_SetOption", opCode: DanaPacketType.OPCODE_BOLUS__SET_BOLUS_OPTION, data: data)
-}
-
-func parsePacketBolusSetOption(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
-    DanaParsePacket(success: data[DataStart] == 0, rawData: data, data: nil)
+    func generate() throws -> Data {
+        Data([
+            options.extendedBolusOptionOnOff,
+            options.bolusCalculationOption,
+            options.missedBolusConfig,
+            options.missedBolus01StartHour,
+            options.missedBolus01StartMin,
+            options.missedBolus01EndHour,
+            options.missedBolus01EndMin,
+            options.missedBolus02StartHour,
+            options.missedBolus02StartMin,
+            options.missedBolus02EndHour,
+            options.missedBolus02EndMin,
+            options.missedBolus03StartHour,
+            options.missedBolus03StartMin,
+            options.missedBolus03EndHour,
+            options.missedBolus03EndMin,
+            options.missedBolus04StartHour,
+            options.missedBolus04StartMin,
+            options.missedBolus04EndHour,
+            options.missedBolus04EndMin
+        ])
+    }
+    
+    func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
+        DanaParsePacket<String>(success: data[DataStart] == 0, rawData: data, data: nil)
+    }
 }

@@ -18127,6 +18127,9 @@
         }
       }
     },
+    "OK" : {
+
+    },
     "Okay" : {
       "comment" : "Ok\nlabel Okay",
       "extractionState" : "manual",

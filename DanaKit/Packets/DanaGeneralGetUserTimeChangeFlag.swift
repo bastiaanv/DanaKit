@@ -2,32 +2,27 @@ struct PacketGeneralGetUserTimeChangeFlag: Codable {
     var userTimeChangeFlag: UInt8
 }
 
-let CommandGeneralGetUserTimeChangeFlag: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
-    UInt16(DanaPacketType.OPCODE_REVIEW__GET_USER_TIME_CHANGE_FLAG & 0xFF)
+class DanaGeneralGetUserTimeChangeFlag : DanaKitBasePacket {
+    let name = "General_GetUserTimeChangeFlag"
+    let opCode = DanaPacketType.OPCODE_REVIEW__GET_USER_TIME_CHANGE_FLAG
 
-func generatePacketGeneralGetUserTimeChangeFlag() -> DanaGeneratePacket {
-    DanaGeneratePacket(
-        name: "General_GetUserTimeChangeFlag",
-        opCode: DanaPacketType.OPCODE_REVIEW__GET_USER_TIME_CHANGE_FLAG,
-        data: nil
-    )
-}
+    func generate() throws -> Data {
+        Data()
+    }
+    
+    func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
+        guard data.count >= 3 else {
+            return DanaParsePacket(
+                success: false,
+                rawData: data,
+                data: PacketGeneralGetUserTimeChangeFlag(userTimeChangeFlag: 0)
+            )
+        }
 
-func parsePacketGeneralGetUserTimeChangeFlag(
-    data: Data,
-    usingUtc _: Bool?
-) -> DanaParsePacket<PacketGeneralGetUserTimeChangeFlag> {
-    guard data.count >= 3 else {
         return DanaParsePacket(
-            success: false,
+            success: true,
             rawData: data,
-            data: PacketGeneralGetUserTimeChangeFlag(userTimeChangeFlag: 0)
+            data: PacketGeneralGetUserTimeChangeFlag(userTimeChangeFlag: data[DataStart])
         )
     }
-
-    return DanaParsePacket(
-        success: true,
-        rawData: data,
-        data: PacketGeneralGetUserTimeChangeFlag(userTimeChangeFlag: data[DataStart])
-    )
 }

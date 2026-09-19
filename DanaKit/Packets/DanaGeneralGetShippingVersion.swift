@@ -2,23 +2,21 @@ struct PacketGeneralGetShippingVersion: Codable {
     var bleModel: String
 }
 
-let CommandGeneralGetShippingVersion: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
-    UInt16(DanaPacketType.OPCODE_GENERAL__GET_SHIPPING_VERSION & 0xFF)
+class DanaGeneralGetShippingVersion : DanaKitBasePacket {
+    let name = "General_GetShippingVersion"
+    let opCode = DanaPacketType.OPCODE_GENERAL__GET_SHIPPING_VERSION
 
-func generatePacketGeneralGetShippingVersion() -> DanaGeneratePacket {
-    DanaGeneratePacket(
-        name: "General_GetShippingVersion",
-        opCode: DanaPacketType.OPCODE_GENERAL__GET_SHIPPING_VERSION,
-        data: nil
-    )
-}
-
-func parsePacketGeneralGetShippingVersion(data: Data, usingUtc _: Bool?) -> DanaParsePacket<PacketGeneralGetShippingVersion> {
-    DanaParsePacket(
-        success: true,
-        rawData: data,
-        data: PacketGeneralGetShippingVersion(
-            bleModel: String(data: data.subdata(in: DataStart ..< data.count), encoding: .utf8) ?? ""
+    func generate() throws -> Data {
+        Data()
+    }
+    
+    func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
+        DanaParsePacket(
+            success: true,
+            rawData: data,
+            data: PacketGeneralGetShippingVersion(
+                bleModel: String(data: data.subdata(in: DataStart ..< data.count), encoding: .utf8) ?? ""
+            )
         )
-    )
+    }
 }

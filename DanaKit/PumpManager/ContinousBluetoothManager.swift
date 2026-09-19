@@ -1,7 +1,6 @@
 import BackgroundTasks
 import CoreBluetooth
 import Foundation
-import UserNotifications
 
 class ContinousBluetoothManager: NSObject, BluetoothManager {
     var pumpManager: DanaKitPumpManager? {
@@ -19,10 +18,13 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
     let log = DanaLogger(category: "ContinousBluetoothManager")
     var manager: CBCentralManager!
     let managerQueue = DispatchQueue(label: "com.DanaKit.bluetoothManagerQueue", qos: .unspecified)
+    var scanTimeout: DispatchWorkItem?
 
     @Locked var peripheral: CBPeripheral?
     @Locked var peripheralManager: PeripheralManager?
     @Locked var forcedDisconnect = false
+    
+    private var backgroundHandler: DispatchWorkItem?
 
     public var isConnected: Bool {
         self.manager.state == .poweredOn && self.peripheral?.state == .connected && self.pumpManager?.state
@@ -42,22 +44,33 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
     }
 
     private func handleBackgroundTask() {
-        Task {
-            while isConnected {
-                keepConnectionAlive()
-                try await Task.sleep(nanoseconds: 60_000_000_000) // 60 seconds
+        backgroundHandler?.cancel()
+        
+        let workItem = DispatchWorkItem { [weak self] in
+                guard let self else {
+                    return
+                }
+            
+            guard self.isConnected else {
+                self.backgroundHandler = nil
+                return
             }
 
-            self.log.warning("Existed background job. Not connected anymore")
+            self.keepConnectionAlive()
         }
+        
+        backgroundHandler = workItem
+        managerQueue.asyncAfter(
+            deadline: .now() + .minutes(1),
+            execute: workItem
+        )
     }
 
     private func keepConnectionAlive() {
         do {
             if pumpManager?.status.bolusState == .noBolus {
                 log.info("Sending keep alive message")
-                let keepAlivePacket = generatePacketGeneralKeepConnection()
-                let result = try writeMessage(keepAlivePacket)
+                let result = try writeMessage(DanaGeneralKeepConnection())
                 guard result.success else {
                     log.error("Pump rejected keepAlive request: \(result.rawData.base64EncodedString())")
                     return
@@ -70,7 +83,7 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
         }
     }
 
-    func writeMessage(_ packet: DanaGeneratePacket) throws -> (any DanaParsePacketProtocol) {
+    func writeMessage(_ packet: DanaKitBasePacket) throws -> (any DanaParsePacketProtocol) {
         guard let peripheralManager = self.peripheralManager, isConnected else {
             throw NSError(domain: "No connected device", code: 0, userInfo: nil)
         }
@@ -84,7 +97,7 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
             return
         }
 
-        NotificationHelper.setDisconnectWarning()
+        pumpManager?.setAlert(notification: .disconnectWarning)
         if autoConnectUUID == nil {
             autoConnectUUID = pumpManager?.state.bleIdentifier
         }
@@ -112,23 +125,18 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
             return
         }
 
-        do {
-            try connect(autoConnect) { result in
-                switch result {
-                case .success:
-                    self.forcedDisconnect = false
-                    self.updateInitialState()
-                    self.handleBackgroundTask()
-                    callback(true)
+        connect(autoConnect) { result in
+            switch result {
+            case .success:
+                self.forcedDisconnect = false
+                self.updateInitialState()
+                self.handleBackgroundTask()
+                callback(true)
 
-                default:
-                    self.log.error("Failed to do auto connection: \(result)")
-                    callback(false)
-                }
+            default:
+                self.log.error("Failed to do auto connection: \(result)")
+                callback(false)
             }
-        } catch {
-            log.error("Failed to auto connect: \(error.localizedDescription)")
-            callback(false)
         }
     }
 
@@ -182,8 +190,12 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
 
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         bleCentralManagerDidUpdateState(central)
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+        
+        let workItem = DispatchWorkItem { [weak self] in
+            guard let self else {
+                return
+            }
+            
             if central.state == .poweredOn {
                 self.reconnect { result in
                     guard result else {
@@ -195,6 +207,11 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
                 }
             }
         }
+
+        managerQueue.asyncAfter(
+            deadline: .now() + .seconds(5),
+            execute: workItem
+        )
     }
 
     func centralManager(
@@ -208,12 +225,13 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
 
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         bleCentralManager(central, didConnect: peripheral)
-
-        NotificationHelper.clearDisconnectWarning()
-        NotificationHelper.clearDisconnectReminder()
+        pumpManager?.clearAlerts()
     }
 
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        backgroundHandler?.cancel()
+        backgroundHandler = nil
+
         bleCentralManager(central, didDisconnectPeripheral: peripheral, error: error)
 
         guard !forcedDisconnect else {

@@ -1,10 +1,12 @@
-let CommandBasalCancelTemporary: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
-    UInt16(DanaPacketType.OPCODE_BASAL__CANCEL_TEMPORARY_BASAL & 0xFF)
-
-func generatePacketBasalCancelTemporary() -> DanaGeneratePacket {
-    DanaGeneratePacket(name: "Basal_CancelTemporary", opCode: DanaPacketType.OPCODE_BASAL__CANCEL_TEMPORARY_BASAL, data: nil)
-}
-
-func parsePacketBasalCancelTemporary(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
-    DanaParsePacket(success: data[DataStart] == 0, rawData: data, data: nil)
+class DanaBasalCancelTemporary : DanaKitBasePacket {
+    let name = "Basal_CancelTemporary"
+    let opCode = DanaPacketType.OPCODE_BASAL__CANCEL_TEMPORARY_BASAL
+    
+    func generate() -> Data {
+        Data()
+    }
+    
+    func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
+        DanaParsePacket<String>(success: data[DataStart] == 0, rawData: data, data: nil)
+    }
 }

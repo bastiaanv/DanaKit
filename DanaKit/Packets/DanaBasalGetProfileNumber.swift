@@ -2,13 +2,15 @@ struct PacketBasalGetProfileNumber: Codable {
     let activeProfile: UInt8
 }
 
-let CommandBasalGetProfileNumber: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
-    UInt16(DanaPacketType.OPCODE_BASAL__GET_PROFILE_BASAL_RATE & 0xFF)
-
-func generatePacketBasalGetProfileNumber() -> DanaGeneratePacket {
-    DanaGeneratePacket(name: "Basal_GetProfileNumber", opCode: DanaPacketType.OPCODE_BASAL__GET_PROFILE_BASAL_RATE, data: nil)
-}
-
-func parsePacketBasalGetProfileNumber(data: Data, usingUtc _: Bool?) -> DanaParsePacket<PacketBasalGetProfileNumber> {
-    DanaParsePacket(success: true, rawData: data, data: PacketBasalGetProfileNumber(activeProfile: data[DataStart]))
+class DanaBasalGetProfileNumber : DanaKitBasePacket {
+    let name = "Basal_GetProfileNumber"
+    let opCode = DanaPacketType.OPCODE_BASAL__GET_PROFILE_BASAL_RATE
+    
+    func generate() -> Data {
+        Data()
+    }
+    
+    func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
+        DanaParsePacket<PacketBasalGetProfileNumber>(success: true, rawData: data, data: PacketBasalGetProfileNumber(activeProfile: data[DataStart]))
+    }
 }

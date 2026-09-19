@@ -1,10 +1,12 @@
-let CommandHistoryRefill: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
-    UInt16(DanaPacketType.OPCODE_REVIEW__REFILL & 0xFF)
+class DanaHistoryRefill : HistoryPacket, DanaKitBasePacket {
+    let name = "Review_Refill"
+    let opCode = DanaPacketType.OPCODE_REVIEW__REFILL
 
-func generatePacketHistoryRefill(options: PacketHistoryBase) -> DanaGeneratePacket {
-    DanaGeneratePacket(
-        name: "Review_Refill",
-        opCode: DanaPacketType.OPCODE_REVIEW__REFILL,
-        data: generatePacketHistoryData(options: options)
-    )
+    func generate() throws -> Data {
+        return generatePacketHistoryData()
+    }
+    
+    func parse(data: Data, usingUtc: Bool?) -> any DanaParsePacketProtocol {
+        super.parse(data: data, usingUtc: usingUtc)
+    }
 }

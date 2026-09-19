@@ -1,10 +1,12 @@
-let CommandHistoryBolus: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
-    UInt16(DanaPacketType.OPCODE_REVIEW__BOLUS & 0xFF)
+class DanaHistoryBolus : HistoryPacket, DanaKitBasePacket {
+    let name = "Review_Bolus"
+    let opCode = DanaPacketType.OPCODE_REVIEW__BOLUS
 
-func generatePacketHistoryBolus(options: PacketHistoryBase) -> DanaGeneratePacket {
-    DanaGeneratePacket(
-        name: "Review_Bolus",
-        opCode: DanaPacketType.OPCODE_REVIEW__BOLUS,
-        data: generatePacketHistoryData(options: options)
-    )
+    func generate() throws -> Data {
+        return generatePacketHistoryData()
+    }
+    
+    func parse(data: Data, usingUtc: Bool?) -> any DanaParsePacketProtocol {
+        super.parse(data: data, usingUtc: usingUtc)
+    }
 }
