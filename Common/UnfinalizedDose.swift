@@ -107,7 +107,7 @@ public class UnfinalizedDose: NSObject {
         switch type {
         case .bolus:
             var endDate = endDate ?? expectedEndDate
-            if endDate > Date.now {
+            if !isMutable, endDate > Date.now {
                 // The endDate of a bolus cannot be in the future...
                 endDate = Date.now
             }
