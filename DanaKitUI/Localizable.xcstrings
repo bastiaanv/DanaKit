@@ -14324,7 +14324,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "인슐린 배달"
+            "value" : "인슐린 주입"
           }
         },
         "nb" : {
@@ -25086,7 +25086,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "选择栓剂输送速度"
+            "value" : "选择推注输送速度"
           }
         }
       }
@@ -26054,7 +26054,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "设置泵应使用的基础配置文件。注意，它将用 %@中的配置文件覆盖泵中的配置文件。"
+            "value" : "设置泵应使用的基础率配置。注意，它将用 %@中的配置文件覆盖泵中的配置文件。"
           }
         }
       }
@@ -26378,7 +26378,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "目前不支持设置基础温度。持续时间：%lld 秒"
+            "value" : "目前不支持设置基础率。持续时间：%lld 秒"
           }
         }
       }
@@ -27188,7 +27188,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "时间应该以 12 小时还是 24 小时显示"
+            "value" : "时间应该以 12 小时制或 24 小时制显示"
           }
         }
       }
@@ -27836,7 +27836,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "步骤 1：排空套管"
+            "value" : "步骤 1: 插管准备"
           }
         }
       }
@@ -27998,7 +27998,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "步骤 1：设置药筒药量"
+            "value" : "步骤 1：设置储备库药量"
           }
         }
       }
@@ -28320,7 +28320,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "步骤 3：插管填料"
+            "value" : "步骤 3：插管准备"
           }
         }
       }
@@ -29612,7 +29612,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "临时基础胰岛素失败"
+            "value" : "临时基础率设置失败"
           }
         }
       }
@@ -30098,7 +30098,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "最快的栓塞速度选项"
+            "value" : "最快的推注速度选项"
           }
         }
       }
@@ -30182,7 +30182,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "인슐린 배달이 일시 중단되었습니다. 작업이 실패했습니다."
+            "value" : "인슐린 주입이 일시 중단되었습니다. 작업이 실패했습니다."
           }
         },
         "nb" : {
@@ -31232,7 +31232,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "最慢栓塞速度选项"
+            "value" : "最慢推注速度选项"
           }
         }
       }
