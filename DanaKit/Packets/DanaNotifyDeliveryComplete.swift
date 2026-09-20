@@ -2,14 +2,14 @@ struct PacketNotifyDeliveryComplete: Codable {
     var deliveredInsulin: Double
 }
 
-class DanaNotifyDeliveryComplete : DanaKitBasePacket {
+class DanaNotifyDeliveryComplete: DanaKitBasePacket {
     let name = "Notify_DeliveryComplete"
     let opCode = DanaPacketType.OPCODE_NOTIFY__DELIVERY_COMPLETE
 
     func generate() throws -> Data {
         Data()
     }
-    
+
     func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
         DanaParsePacket(
             success: true,

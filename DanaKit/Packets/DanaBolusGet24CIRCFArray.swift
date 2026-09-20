@@ -8,14 +8,14 @@ struct PacketBolusGet24CIRCFArray: Codable {
     var isf: [UInt16]
 }
 
-class DanaBolusGet24CIRCFArray : DanaKitBasePacket {
+class DanaBolusGet24CIRCFArray: DanaKitBasePacket {
     let name = "Bolus_Get24CIRCFArray"
     let opCode = DanaPacketType.OPCODE_BOLUS__GET_24_CIR_CF_ARRAY
 
     func generate() -> Data {
         Data()
     }
-    
+
     func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
         var isf: [UInt16] = []
         var ic: [UInt16] = []

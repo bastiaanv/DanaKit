@@ -3,10 +3,10 @@ struct PacketBolusSetExtended {
     var extendedDurationInHalfHours: UInt8
 }
 
-class DanaBolusSetExtended : DanaKitBasePacket {
+class DanaBolusSetExtended: DanaKitBasePacket {
     let name = "Bolus_SetExtended"
     let opCode = DanaPacketType.OPCODE_BOLUS__SET_EXTENDED_BOLUS
-    
+
     private let options: PacketBolusSetExtended
     init(options: PacketBolusSetExtended) {
         self.options = options
@@ -19,7 +19,7 @@ class DanaBolusSetExtended : DanaKitBasePacket {
             options.extendedDurationInHalfHours
         ])
     }
-    
+
     func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
         DanaParsePacket<String>(success: data[DataStart] == 0, rawData: data, data: nil)
     }

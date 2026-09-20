@@ -35,7 +35,7 @@ class HistoryPacket {
     init(options: PacketHistoryBase) {
         self.options = options
     }
-    
+
     func generatePacketHistoryData() -> Data {
         var data = Data(count: 6)
 
@@ -272,6 +272,4 @@ class HistoryPacket {
             return "None"
         }
     }
-
 }
-

@@ -3,7 +3,7 @@ import SwiftUI
 
 struct DanaKitUserSettingsView: View {
     @ObservedObject var viewModel: DanaKitUserSettingsViewModel
-    
+
     @State var isEdittingReservoirWarning = false
     @State var isEdittingTimeFormat = false
     @State var isEdittingScroll = false
@@ -23,23 +23,26 @@ struct DanaKitUserSettingsView: View {
                         allowedOptions: Array(5 ... 40),
                         formatter: { String($0) + String(localized: "U", comment: "Insulin unit") }
                     )
-                    
+
                     valueRow(
                         labelValue: Text("24h display", comment: "Text for 24h display"),
                         statePicker: $isEdittingTimeFormat,
                         valueValue: $viewModel.isTimeDisplay24H,
                         allowedOptions: [true, false],
-                        formatter: { $0 ? String(localized: "24h notation", comment: "24h notation") : String(localized: "12h notation", comment: "12h notation") }
+                        formatter: {
+                            $0 ? String(localized: "24h notation", comment: "24h notation") :
+                                String(localized: "12h notation", comment: "12h notation") }
                     )
-                    
+
                     valueRow(
                         labelValue: Text("Scroll function", comment: "Text for Scroll function"),
                         statePicker: $isEdittingScroll,
                         valueValue: $viewModel.isButtonScrollOnOff,
                         allowedOptions: [true, false],
-                        formatter: { $0 ? String(localized: "On", comment: "text on") : String(localized: "Off", comment: "text off") }
+                        formatter: {
+                            $0 ? String(localized: "On", comment: "text on") : String(localized: "Off", comment: "text off") }
                     )
-                    
+
                     valueRow(
                         labelValue: Text("Backlight on time", comment: "backlightOnTime"),
                         statePicker: $isEdittingBacklight,
@@ -47,7 +50,7 @@ struct DanaKitUserSettingsView: View {
                         allowedOptions: Array(0 ... 48).map({ $0 * 5 }),
                         formatter: { String(format: String(localized: "%lld sec", comment: "second placeholder"), $0) }
                     )
-                    
+
                     valueRow(
                         labelValue: Text("Lcd on time", comment: "lcdOnTime"),
                         statePicker: $isEdittingLcd,
@@ -55,7 +58,7 @@ struct DanaKitUserSettingsView: View {
                         allowedOptions: Array(0 ... 48).map({ $0 * 5 }),
                         formatter: { String(format: String(localized: "%lld sec", comment: "second placeholder"), $0) }
                     )
-                    
+
                     valueRow(
                         labelValue: Text("Alarm beeps", comment: "beepAndAlarm"),
                         statePicker: $isEdittingBeeps,
@@ -63,7 +66,7 @@ struct DanaKitUserSettingsView: View {
                         allowedOptions: [.both, .sound, .vibration],
                         formatter: { $0.title }
                     )
-                    
+
                     valueRow(
                         labelValue: Text("Refill amount", comment: "refillAmount"),
                         statePicker: $isEdittingRefill,
@@ -83,7 +86,7 @@ struct DanaKitUserSettingsView: View {
         }
         .edgesIgnoringSafeArea(.bottom)
     }
-    
+
     @ViewBuilder private func valueRow<T: Hashable>(
         labelValue: Text,
         statePicker: Binding<Bool>,

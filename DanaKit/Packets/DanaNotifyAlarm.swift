@@ -3,14 +3,14 @@ struct PacketNotifyAlarm: Codable {
     var alert: PumpManagerAlert
 }
 
-class DanaNotifyAlarm : DanaKitBasePacket {
+class DanaNotifyAlarm: DanaKitBasePacket {
     let name = "Notify_Alarm"
     let opCode = DanaPacketType.OPCODE_NOTIFY__ALARM
 
     func generate() throws -> Data {
         Data()
     }
-    
+
     func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
         let DANA_NOTIFY_ALARM: [Int: PumpManagerAlert] = [
             0x01: PumpManagerAlert.batteryZeroPercent(data),

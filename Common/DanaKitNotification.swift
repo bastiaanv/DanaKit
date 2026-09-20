@@ -4,7 +4,7 @@ import LoopKit
 enum DanaKitNotification {
     case disconnectedReminder(after: TimeInterval)
     case disconnectWarning
-    
+
     var alert: Alert {
         let content = alertContent
         return Alert(
@@ -14,17 +14,23 @@ enum DanaKitNotification {
             trigger: trigger,
         )
     }
-    
+
     private static let managerIdentifier = "Medtrum"
     var identifier: Alert.Identifier {
         switch self {
         case .disconnectedReminder:
-            return Alert.Identifier(managerIdentifier: Self.managerIdentifier, alertIdentifier: "com.bastiaanv.continuous-ble.disconnect-reminder")
+            return Alert.Identifier(
+                managerIdentifier: Self.managerIdentifier,
+                alertIdentifier: "com.bastiaanv.continuous-ble.disconnect-reminder"
+            )
         case .disconnectWarning:
-            return Alert.Identifier(managerIdentifier: Self.managerIdentifier, alertIdentifier: "com.bastiaanv.continuous-ble.disconnect-warning")
+            return Alert.Identifier(
+                managerIdentifier: Self.managerIdentifier,
+                alertIdentifier: "com.bastiaanv.continuous-ble.disconnect-warning"
+            )
         }
     }
-    
+
     private var alertContent: Alert.Content {
         switch self {
         case .disconnectedReminder:
@@ -47,10 +53,10 @@ enum DanaKitNotification {
             )
         }
     }
-    
+
     private var trigger: Alert.Trigger {
         switch self {
-        case .disconnectedReminder(let after):
+        case let .disconnectedReminder(after):
             return Alert.Trigger.delayed(interval: after)
         default:
             return Alert.Trigger.immediate

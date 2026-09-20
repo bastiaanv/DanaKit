@@ -23,7 +23,7 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
     @Locked var peripheral: CBPeripheral?
     @Locked var peripheralManager: PeripheralManager?
     @Locked var forcedDisconnect = false
-    
+
     private var backgroundHandler: DispatchWorkItem?
 
     public var isConnected: Bool {
@@ -45,12 +45,12 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
 
     private func handleBackgroundTask() {
         backgroundHandler?.cancel()
-        
+
         let workItem = DispatchWorkItem { [weak self] in
-                guard let self else {
-                    return
-                }
-            
+            guard let self else {
+                return
+            }
+
             guard self.isConnected else {
                 self.backgroundHandler = nil
                 return
@@ -58,7 +58,7 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
 
             self.keepConnectionAlive()
         }
-        
+
         backgroundHandler = workItem
         managerQueue.asyncAfter(
             deadline: .now() + .minutes(1),
@@ -190,12 +190,12 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
 
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         bleCentralManagerDidUpdateState(central)
-        
+
         let workItem = DispatchWorkItem { [weak self] in
             guard let self else {
                 return
             }
-            
+
             if central.state == .poweredOn {
                 self.reconnect { result in
                     guard result else {

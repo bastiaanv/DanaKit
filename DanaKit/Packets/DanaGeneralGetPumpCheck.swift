@@ -4,14 +4,14 @@ struct PacketGeneralGetPumpCheck: Codable {
     let productCode: UInt8
 }
 
-class DanaGeneralGetPumpCheck : DanaKitBasePacket {
+class DanaGeneralGetPumpCheck: DanaKitBasePacket {
     let name = "General_GetPumpCheck"
     let opCode = DanaPacketType.OPCODE_REVIEW__GET_PUMP_CHECK
 
     func generate() throws -> Data {
         Data()
     }
-    
+
     func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
         DanaParsePacket(
             success: data[4] < 4, // Unsupported hardware...

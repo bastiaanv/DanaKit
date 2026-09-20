@@ -4,14 +4,14 @@ struct PacketGeneralGetShippingInformation: Codable {
     var shippingDate: Date
 }
 
-class DanaGeneralGetShippingInformation : DanaKitBasePacket {
+class DanaGeneralGetShippingInformation: DanaKitBasePacket {
     let name = "General_GetShippingInformation"
     let opCode = DanaPacketType.OPCODE_REVIEW__GET_SHIPPING_INFORMATION
 
     func generate() throws -> Data {
         Data()
     }
-    
+
     func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
         guard data.count >= 18 else {
             return DanaParsePacket(

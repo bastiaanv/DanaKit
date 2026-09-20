@@ -9,14 +9,14 @@ struct PacketBolusGetCalculationInformation: Codable {
     var units: UInt8
 }
 
-class DanaBolusGetCalculationInformation : DanaKitBasePacket {
+class DanaBolusGetCalculationInformation: DanaKitBasePacket {
     let name = "Bolus_GetCalculationInformation"
     let opCode = DanaPacketType.OPCODE_BOLUS__GET_CALCULATION_INFORMATION
 
     func generate() -> Data {
         Data()
     }
-    
+
     func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
         let currentBg = data.uint16(at: DataStart + 1)
         let carbohydrate = data.uint16(at: DataStart + 3)

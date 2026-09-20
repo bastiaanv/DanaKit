@@ -24,10 +24,10 @@ struct PacketLoopSetEventHistory {
     var param2: UInt16
 }
 
-class DanaLoopSetEventHistory : DanaKitBasePacket {
+class DanaLoopSetEventHistory: DanaKitBasePacket {
     let name = "Review_SetApsEvent"
     let opCode = DanaPacketType.OPCODE__APS_SET_EVENT_HISTORY
-    
+
     private let options: PacketLoopSetEventHistory
     init(options: PacketLoopSetEventHistory) {
         self.options = options
@@ -43,10 +43,10 @@ class DanaLoopSetEventHistory : DanaKitBasePacket {
         data[8] = UInt8(options.param1 & 0xFF)
         data[9] = UInt8(options.param2 >> 8)
         data[10] = UInt8(options.param2 & 0xFF)
-        
+
         return data
     }
-    
+
     func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
         DanaParsePacket<String>(success: data[DataStart] == 0, rawData: data, data: nil)
     }

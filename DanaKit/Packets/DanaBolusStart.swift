@@ -3,10 +3,10 @@ struct PacketBolusStart {
     var speed: BolusSpeed
 }
 
-class DanaBolusStart : DanaKitBasePacket {
+class DanaBolusStart: DanaKitBasePacket {
     let name = "Bolus_Start"
     let opCode = DanaPacketType.OPCODE_BOLUS__SET_STEP_BOLUS_START
-    
+
     private let options: PacketBolusStart
     init(options: PacketBolusStart) {
         self.options = options
@@ -14,18 +14,18 @@ class DanaBolusStart : DanaKitBasePacket {
 
     func generate() throws -> Data {
         let bolusRate = UInt16(options.amount * 100)
-        
+
         return Data([
             UInt8(bolusRate & 0xFF),
             UInt8((bolusRate >> 8) & 0xFF),
             options.speed.rawValue
         ])
     }
-    
+
     func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
         DanaParsePacket<String>(success: data[DataStart] == 0, rawData: data, data: nil)
     }
-    
+
     /**
      * Error codes:
      * 0x01 => Pump suspended

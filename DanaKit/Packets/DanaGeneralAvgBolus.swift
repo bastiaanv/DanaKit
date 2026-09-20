@@ -6,14 +6,14 @@ struct PacketGeneralAvgBolus: Codable {
     var bolusAvg28days: Double
 }
 
-class DanaGeneralAvgBolus : DanaKitBasePacket {
+class DanaGeneralAvgBolus: DanaKitBasePacket {
     let name = "General_GetAvgBolus"
     let opCode = DanaPacketType.OPCODE_REVIEW__BOLUS_AVG
 
     func generate() throws -> Data {
         Data()
     }
-    
+
     func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
         let checkValue = (Double(1 & (0x0000_00FF << 8)) + Double(1 & 0x0000_00FF)) / 100
 

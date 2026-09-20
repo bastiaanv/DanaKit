@@ -582,7 +582,7 @@ extension PeripheralManager {
 extension PeripheralManager {
     private func parseReceivedValue(_ receievedData: Data) {
         var data = receievedData
-        if !data.isEmpty && pumpManager.state.isConnected && encryptor.shouldDoSecondLevel() {
+        if !data.isEmpty, pumpManager.state.isConnected, encryptor.shouldDoSecondLevel() {
             log.debug("Second lvl decryption", type: .receive)
             data = encryptor.decodeSecondLevel(data: data)
         }
@@ -611,7 +611,7 @@ extension PeripheralManager {
             processConnectHandshake(decryptedData)
             return
         }
-        
+
         if decryptedData[0] == DanaPacketType.TYPE_NOTIFY {
             processNotify(decryptedData)
             return
@@ -621,7 +621,7 @@ extension PeripheralManager {
             processMessage(decryptedData)
             return
         }
-        
+
         log.error("Received invalid packet type \(decryptedData[0])", type: .receive)
     }
 
@@ -712,7 +712,7 @@ extension PeripheralManager {
             log.error("No stream found to send this message back...")
             return
         }
-        
+
         let message = awaitedPacket.parse(data: data, usingUtc: pumpManager.state.usingUtc)
 
         do {
@@ -722,7 +722,7 @@ extension PeripheralManager {
                 type: .receive
             )
         } catch {}
-        
+
         stateLock.lock()
         defer { stateLock.unlock() }
 
@@ -751,7 +751,7 @@ extension PeripheralManager {
         writeResponse = message
         semaphore.leave()
     }
-    
+
     private func processNotify(_ data: Data) {
         switch data[OpCodeIndex] {
         case DanaPacketType.OPCODE_NOTIFY__DELIVERY_COMPLETE:
@@ -777,7 +777,7 @@ extension PeripheralManager {
             return
         }
     }
-    
+
     private func processConnectHandshake(_ data: Data) {
         guard !isConnectionFinished else {
             let message = "Ignoring encryption packet received after connection was established. Data: \(data.hexString())"

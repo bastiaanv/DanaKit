@@ -159,7 +159,7 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
 
     private func startTimeout(seconds: TimeInterval) {
         timoutCallback?.cancel()
-        
+
         let workItem = DispatchWorkItem { [weak self] in
             guard let self, let connectionCallback else {
                 return
@@ -170,7 +170,7 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
 
             connectionCallback(.timeout)
         }
-        
+
         timoutCallback = workItem
         managerQueue.asyncAfter(
             deadline: .now() + seconds,

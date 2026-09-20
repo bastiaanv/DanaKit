@@ -8,10 +8,10 @@ struct PacketLoopSetTemporaryBasal {
     var duration: LoopTempBasalDuration
 }
 
-class DanaLoopSetTemporaryBasal : DanaKitBasePacket {
+class DanaLoopSetTemporaryBasal: DanaKitBasePacket {
     let name = "LoopSpecific_SetShortTempBasal"
     let opCode = DanaPacketType.OPCODE_BASAL__APS_SET_TEMPORARY_BASAL
-    
+
     private let options: PacketLoopSetTemporaryBasal
     init(options: PacketLoopSetTemporaryBasal) {
         self.options = options
@@ -30,7 +30,7 @@ class DanaLoopSetTemporaryBasal : DanaKitBasePacket {
             options.duration.rawValue
         ])
     }
-    
+
     func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
         DanaParsePacket<String>(success: data[DataStart] == 0, rawData: data, data: nil)
     }

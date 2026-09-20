@@ -7,14 +7,14 @@ struct PacketBolusGetStepInformation: Codable {
     var bolusStep: UInt8
 }
 
-class DanaBolusGetStepInformation : DanaKitBasePacket {
+class DanaBolusGetStepInformation: DanaKitBasePacket {
     let name = "Bolus_GetStepInformation"
     let opCode = DanaPacketType.OPCODE_BOLUS__GET_STEP_BOLUS_INFORMATION
 
     func generate() -> Data {
         Data()
     }
-    
+
     func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
         let lastBolusTime = Calendar.current.date(
             bySettingHour: Int(data[DataStart + 4]),

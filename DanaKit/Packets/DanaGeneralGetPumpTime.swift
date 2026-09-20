@@ -2,14 +2,14 @@ struct PacketGeneralGetPumpTime: Codable {
     var time: Date
 }
 
-class DanaGeneralGetPumpTime : DanaKitBasePacket {
+class DanaGeneralGetPumpTime: DanaKitBasePacket {
     let name = "General_GetPumpTime"
     let opCode = DanaPacketType.OPCODE_OPTION__GET_PUMP_TIME
 
     func generate() throws -> Data {
         Data()
     }
-    
+
     func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
         let time = DateComponents(
             year: 2000 + Int(data[DataStart]),

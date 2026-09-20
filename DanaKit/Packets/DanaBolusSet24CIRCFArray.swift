@@ -5,10 +5,10 @@ struct PacketBolusSet24CIRCFArray {
     var isf: [UInt16]
 }
 
-class DanaBolusSet24CIRCFArray : DanaKitBasePacket {
+class DanaBolusSet24CIRCFArray: DanaKitBasePacket {
     let name = "Bolus_Set24CIRCFArray"
     let opCode = DanaPacketType.OPCODE_BOLUS__SET_24_CIR_CF_ARRAY
-    
+
     private let options: PacketBolusSet24CIRCFArray
     init(options: PacketBolusSet24CIRCFArray) {
         self.options = options
@@ -35,10 +35,10 @@ class DanaBolusSet24CIRCFArray : DanaKitBasePacket {
             data[i * 2 + 48] = UInt8(roundedISF & 0xFF)
             data[i * 2 + 49] = UInt8((roundedISF >> 8) & 0xFF)
         }
-        
+
         return data
     }
-    
+
     func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
         DanaParsePacket<String>(success: data[DataStart] == 0, rawData: data, data: nil)
     }

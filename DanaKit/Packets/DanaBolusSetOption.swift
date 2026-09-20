@@ -20,10 +20,10 @@ struct PacketBolusSetOption {
     var missedBolus04EndMin: UInt8
 }
 
-class DanaBolusSetOption : DanaKitBasePacket {
+class DanaBolusSetOption: DanaKitBasePacket {
     let name = "Bolus_SetOption"
     let opCode = DanaPacketType.OPCODE_BOLUS__SET_BOLUS_OPTION
-    
+
     private let options: PacketBolusSetOption
     init(options: PacketBolusSetOption) {
         self.options = options
@@ -52,7 +52,7 @@ class DanaBolusSetOption : DanaKitBasePacket {
             options.missedBolus04EndMin
         ])
     }
-    
+
     func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
         DanaParsePacket<String>(success: data[DataStart] == 0, rawData: data, data: nil)
     }

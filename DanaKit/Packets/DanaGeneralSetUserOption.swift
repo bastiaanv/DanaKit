@@ -15,10 +15,10 @@ public struct PacketGeneralSetUserOption {
     let targetBg: UInt16?
 }
 
-class DanaGeneralSetUserOption : DanaKitBasePacket {
+class DanaGeneralSetUserOption: DanaKitBasePacket {
     let name = "General_SetUserOption"
     let opCode = DanaPacketType.OPCODE_OPTION__SET_USER_OPTION
-    
+
     private let options: PacketGeneralSetUserOption
     init(options: PacketGeneralSetUserOption) {
         self.options = options
@@ -45,10 +45,9 @@ class DanaGeneralSetUserOption : DanaKitBasePacket {
             data[14] = UInt8((targetBg >> 8) & 0xFF)
         }
 
-        
         return data
     }
-    
+
     func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
         DanaParsePacket<String>(success: data[DataStart] == 0, rawData: data, data: nil)
     }

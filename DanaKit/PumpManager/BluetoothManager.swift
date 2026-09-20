@@ -84,9 +84,9 @@ extension BluetoothManager {
         let peripherals = manager.retrievePeripherals(withIdentifiers: [identifier])
         if let peripheral = peripherals.first {
             self.peripheral = peripheral
-            self.peripheralManager = PeripheralManager(peripheral, self, self.pumpManager!, completion)
+            peripheralManager = PeripheralManager(peripheral, self, pumpManager!, completion)
 
-            self.manager.connect(peripheral, options: nil)
+            manager.connect(peripheral, options: nil)
             return
         }
 
@@ -94,18 +94,18 @@ extension BluetoothManager {
         do {
             try startScan()
             scanTimeout?.cancel()
-            
+
             // throw error if device could not be found after 10 sec
             let workItem = DispatchWorkItem { [weak self] in
                 guard let self else {
                     return
                 }
-                
+
                 if peripheral == nil {
                     completion(.failure(NSError(domain: "Device is not findable", code: -1)))
                 }
             }
-            
+
             scanTimeout = workItem
             managerQueue.asyncAfter(
                 deadline: .now() + .seconds(10),

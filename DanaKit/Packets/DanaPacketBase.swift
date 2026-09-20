@@ -1,11 +1,10 @@
 protocol DanaKitBasePacket {
     var name: String { get }
     var opCode: UInt8 { get }
-    
+
     func generate() throws -> Data
     func parse(data: Data, usingUtc: Bool?) -> any DanaParsePacketProtocol
 }
-
 
 protocol DanaParsePacketProtocol: Codable {
     var success: Bool { get }

@@ -27,7 +27,7 @@ class DanaKitDoseProgressReporter: DoseProgressReporter {
     public func notify(deliveredUnits: Double) {
         self.deliveredUnits = deliveredUnits
         let observersCopy = lock.withLock { observers }
-        
+
         for observer in observersCopy {
             observer.doseProgressReporterDidUpdate(self)
         }

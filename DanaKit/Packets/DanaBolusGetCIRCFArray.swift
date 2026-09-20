@@ -21,14 +21,14 @@ struct PacketBolusGetCIRCFArray: Codable {
     var nightCF: Float
 }
 
-class DanaBolusGetCIRCFArray : DanaKitBasePacket {
+class DanaBolusGetCIRCFArray: DanaKitBasePacket {
     let name = "Bolus_GetCIRCFArray"
     let opCode = DanaPacketType.OPCODE_BOLUS__GET_CIR_CF_ARRAY
 
     func generate() -> Data {
         Data()
     }
-    
+
     func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
         let language = data[DataStart]
         let unit = data[DataStart + 1]

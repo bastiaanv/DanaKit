@@ -6,7 +6,7 @@ public enum BeepAlarmType: UInt8, Codable {
     static func all() -> [Int] {
         [1, 2, 3]
     }
-    
+
     var title: String {
         switch self {
         case .sound:
@@ -42,19 +42,19 @@ public struct PacketGeneralGetUserOption: Codable {
     var targetBg: UInt16?
 }
 
-class DanaGeneralGetUserOption : DanaKitBasePacket {
+class DanaGeneralGetUserOption: DanaKitBasePacket {
     let name = "General_GetUserOption"
     let opCode = DanaPacketType.OPCODE_OPTION__GET_USER_OPTION
 
     func generate() throws -> Data {
         Data()
     }
-    
+
     func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
         guard data.count > 19 else {
             return DanaParsePacket<String>(success: false, rawData: data, data: nil)
         }
-        
+
         return DanaParsePacket(
             success: data[DataStart + 3] >= 5,
             rawData: data,

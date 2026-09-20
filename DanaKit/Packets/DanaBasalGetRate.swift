@@ -4,14 +4,14 @@ struct PacketBasalGetRate: Codable {
     let basalProfile: [Double]
 }
 
-class DanaBasalGetRate : DanaKitBasePacket {
+class DanaBasalGetRate: DanaKitBasePacket {
     let name = "Basal_GetRate"
     let opCode = DanaPacketType.OPCODE_BASAL__GET_BASAL_RATE
-    
+
     func generate() -> Data {
         Data()
     }
-    
+
     func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
         let maxBasal = Double(data.uint16(at: DataStart)) / 100.0
         let basalStep = Double(data[DataStart + 2]) / 100.0

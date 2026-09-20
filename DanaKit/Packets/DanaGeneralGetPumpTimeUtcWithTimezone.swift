@@ -3,14 +3,14 @@ struct PacketGeneralGetPumpTimeUtcWithTimezone: Codable {
     var timezoneOffset: Int
 }
 
-class DanaGeneralGetPumpTimeUtcWithTimezone : DanaKitBasePacket {
+class DanaGeneralGetPumpTimeUtcWithTimezone: DanaKitBasePacket {
     let name = "General_GetPumpTimeUtcWithTimezone"
     let opCode = DanaPacketType.OPCODE_OPTION__GET_PUMP_UTC_AND_TIME_ZONE
 
     func generate() throws -> Data {
         Data()
     }
-    
+
     func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
         let timezoneOffsetInHours = Int(Int8(bitPattern: data[DataStart + 6]))
 

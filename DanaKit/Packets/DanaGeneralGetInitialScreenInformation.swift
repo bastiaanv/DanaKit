@@ -26,14 +26,14 @@ struct PacketGeneralGetInitialScreenInformation: Codable {
     }
 }
 
-class DanaGeneralGetInitialScreenInformation : DanaKitBasePacket {
+class DanaGeneralGetInitialScreenInformation: DanaKitBasePacket {
     let name = "General_GetInitialScreenInformation"
     let opCode = DanaPacketType.OPCODE_REVIEW__INITIAL_SCREEN_INFORMATION
 
     func generate() throws -> Data {
         Data()
     }
-    
+
     func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
         if data.count < 17 {
             return DanaParsePacket(success: false, rawData: data, data: PacketGeneralGetInitialScreenInformation(

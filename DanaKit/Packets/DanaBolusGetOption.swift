@@ -20,14 +20,14 @@ struct PacketBolusGetOption: Codable {
     var missedBolus04EndMinute: UInt8
 }
 
-class DanaBolusGetOption : DanaKitBasePacket {
+class DanaBolusGetOption: DanaKitBasePacket {
     let name = "Bolus_GetOption"
     let opCode = DanaPacketType.OPCODE_BOLUS__GET_BOLUS_OPTION
 
     func generate() -> Data {
         Data()
     }
-    
+
     func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
         let isExtendedBolusEnabled = data[DataStart] == 1
 

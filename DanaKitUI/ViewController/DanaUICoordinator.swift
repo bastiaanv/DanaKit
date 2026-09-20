@@ -39,7 +39,9 @@ enum DanaUIScreen {
     }
 }
 
-class DanaUICoordinator: UINavigationController, @MainActor PumpManagerOnboarding, @MainActor CompletionNotifying, UINavigationControllerDelegate {
+class DanaUICoordinator: UINavigationController, @MainActor PumpManagerOnboarding, @MainActor CompletionNotifying,
+    UINavigationControllerDelegate
+{
     var pumpManagerOnboardingDelegate: PumpManagerOnboardingDelegate?
 
     var completionDelegate: CompletionDelegate?
