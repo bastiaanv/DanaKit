@@ -1,5 +1,5 @@
 struct PacketBolusGet24CIRCFArray: Codable {
-    var unit: UInt8 // Change to the appropriate data type in Swift
+    var unit: UInt8
 
     /** Length: 24, value per hour. insulin to carbohydrate ratio */
     var ic: [UInt16]

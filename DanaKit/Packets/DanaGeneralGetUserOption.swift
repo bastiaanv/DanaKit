@@ -6,6 +6,17 @@ public enum BeepAlarmType: UInt8, Codable {
     static func all() -> [Int] {
         [1, 2, 3]
     }
+    
+    var title: String {
+        switch self {
+        case .sound:
+            return String(localized: "Sound", comment: "beepAndAlarm.sound")
+        case .vibration:
+            return String(localized: "Vibration", comment: "beepAndAlarm.vibration")
+        case .both:
+            return String(localized: "Both", comment: "beepAndAlarm.both")
+        }
+    }
 }
 
 public struct PacketGeneralGetUserOption: Codable {

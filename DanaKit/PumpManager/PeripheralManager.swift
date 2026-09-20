@@ -89,7 +89,6 @@ class PeripheralManager: NSObject {
 
         if encryptor.shouldDoSecondLevel() {
             data = encryptor.encodeSecondLevel(data: data)
-            log.debug("Second level encrypted data: \(data.hexString())")
         }
 
         let isHistoryPacket = self.isHistoryPacket(opCode: command)
@@ -259,7 +258,6 @@ extension PeripheralManager: CBPeripheralDelegate {
             return
         }
 
-        log.debug("Writing data \(data.hexString())")
         connectedDevice.writeValue(data, for: writeCharacteristic, type: .withoutResponse)
     }
 }

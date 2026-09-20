@@ -8,7 +8,7 @@ struct PacketBasalSetTemporary {
 
 class DanaBasalSetTemporary : DanaKitBasePacket {
     let name = "Basal_SetTemporary"
-    let opCode = DanaPacketType.OPCODE_BASAL__SET_SUSPEND_ON
+    let opCode = DanaPacketType.OPCODE_BASAL__SET_TEMPORARY_BASAL
     
     private let options: PacketBasalSetTemporary
     init(options: PacketBasalSetTemporary) {

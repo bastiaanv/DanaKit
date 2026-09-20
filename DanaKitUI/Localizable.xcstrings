@@ -28976,6 +28976,9 @@
         }
       }
     },
+    "Sync" : {
+
+    },
     "Sync pump data" : {
       "comment" : "DanaKit sync pump",
       "extractionState" : "manual",
