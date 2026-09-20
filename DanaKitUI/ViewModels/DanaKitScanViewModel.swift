@@ -22,19 +22,19 @@ class DanaKitScanViewModel: ObservableObject {
     @Published var pin2 = ""
 
     private let log = DanaLogger(category: "ScanView")
-    private var pumpManager: DanaKitPumpManager?
+    private var pumpManager: DanaKitPumpManager
     private var nextStep: () -> Void
     private var foundDevices: [String: CBPeripheral] = [:]
 
-    init(_ pumpManager: DanaKitPumpManager? = nil, nextStep: @escaping () -> Void) {
+    init(_ pumpManager: DanaKitPumpManager, nextStep: @escaping () -> Void) {
         self.pumpManager = pumpManager
         self.nextStep = nextStep
 
-        self.pumpManager?.addScanDeviceObserver(self, queue: .main)
-        self.pumpManager?.addStateObserver(self, queue: .main)
+        self.pumpManager.addScanDeviceObserver(self, queue: .main)
+        self.pumpManager.addStateObserver(self, queue: .main)
 
         do {
-            try self.pumpManager?.startScan()
+            try self.pumpManager.startScan()
             isScanning = true
         } catch {
             log.error("Failed to start scanning: \(error.localizedDescription)")
@@ -42,7 +42,7 @@ class DanaKitScanViewModel: ObservableObject {
     }
 
     func connect(_ item: ScanResultItem) {
-        guard let pumpManager = pumpManager, let device = foundDevices[item.bleIdentifier] else {
+        guard let device = foundDevices[item.bleIdentifier] else {
             log.error("No view or device...")
             return
         }
@@ -75,7 +75,7 @@ class DanaKitScanViewModel: ObservableObject {
             isConnecting = false
             isConnectionError = true
             connectionErrorMessage = String(localized: "Failed to pair to ", comment: "Dana-i failed to pair p1") +
-                (pumpManager?.state.deviceName ?? "<NO_NAME>") + String(
+                (pumpManager.state.deviceName ?? "<NO_NAME>") + String(
                     localized:
                     ". Please go to your bluetooth settings, forget this device, and try again",
                     comment: "Dana-i failed to pair p2"
@@ -97,21 +97,16 @@ class DanaKitScanViewModel: ObservableObject {
     }
 
     func stopScan() {
-        pumpManager?.stopScan()
+        pumpManager.stopScan()
         isScanning = false
     }
 
     func cancelPinPrompt() {
         isPromptingPincode = false
-        pumpManager?.disconnect()
+        pumpManager.disconnect()
     }
 
     func syncTime(_ peripheral: CBPeripheral) {
-        guard let pumpManager = pumpManager else {
-            nextStep()
-            return
-        }
-
         pumpManager.syncPumpTime { error in
             if let error = error {
                 self.log.error("Failed to sync pump time: \(error)")
@@ -122,13 +117,8 @@ class DanaKitScanViewModel: ObservableObject {
     }
 
     func syncData(_ peripheral: CBPeripheral) {
-        guard let pumpManager = pumpManager else {
-            nextStep()
-            return
-        }
-
         pumpManager.ensureCurrentPumpData { _ in
-            pumpManager.disconnect(peripheral)
+            self.pumpManager.disconnect(peripheral)
             DispatchQueue.main.async {
                 self.nextStep()
             }
@@ -179,8 +169,10 @@ class DanaKitScanViewModel: ObservableObject {
         }
 
         do {
-            try pumpManager?.finishV3Pairing(pin1, randomPairingKey)
-        } catch {}
+            try pumpManager.finishV3Pairing(pin1, randomPairingKey)
+        } catch {
+            log.error("Failed to finish v3: \(error)")
+        }
     }
 }
 

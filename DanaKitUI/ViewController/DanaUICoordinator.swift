@@ -48,12 +48,12 @@ class DanaUICoordinator: UINavigationController, @MainActor PumpManagerOnboardin
 
     var screenStack = [DanaUIScreen]()
     var currentScreen: DanaUIScreen {
-        screenStack.last!
+        screenStack.last ?? .firstRunScreen
     }
 
     private let colorPalette: LoopUIColorPalette
 
-    private var pumpManager: DanaKitPumpManager?
+    private var pumpManager: DanaKitPumpManager
 
     private var allowedInsulinTypes: [InsulinType]
 
@@ -67,19 +67,17 @@ class DanaUICoordinator: UINavigationController, @MainActor PumpManagerOnboardin
         allowedInsulinTypes: [InsulinType] = []
     )
     {
-        if pumpManager == nil, pumpManagerSettings == nil {
-            self.pumpManager = DanaKitPumpManager(state: DanaKitPumpManagerState(rawValue: [:]))
-        } else if pumpManager == nil, pumpManagerSettings != nil {
-            let basal = DanaKitPumpManagerState.convertBasal(pumpManagerSettings!.basalSchedule.items)
+        if let pumpManager {
+            self.pumpManager = pumpManager
+        } else if let pumpManagerSettings {
+            let basal = DanaKitPumpManagerState.convertBasal(pumpManagerSettings.basalSchedule.items)
             self.pumpManager = DanaKitPumpManager(state: DanaKitPumpManagerState(basalSchedule: basal))
         } else {
-            self.pumpManager = pumpManager
+            self.pumpManager = DanaKitPumpManager(state: DanaKitPumpManagerState(rawValue: [:]))
         }
 
         self.colorPalette = colorPalette
-
         self.allowDebugFeatures = allowDebugFeatures
-
         self.allowedInsulinTypes = allowedInsulinTypes
 
         super.init(navigationBarClass: UINavigationBar.self, toolbarClass: UIToolbar.self)
@@ -140,7 +138,7 @@ class DanaUICoordinator: UINavigationController, @MainActor PumpManagerOnboardin
 
         case .insulinConfirmationScreen:
             let confirm: (InsulinType) -> Void = { confirmedType in
-                self.pumpManager?.state.insulinType = confirmedType
+                self.pumpManager.state.insulinType = confirmedType
                 self.stepFinished()
             }
             let view = InsulinTypeConfirmation(
@@ -155,7 +153,7 @@ class DanaUICoordinator: UINavigationController, @MainActor PumpManagerOnboardin
 
         case .bolusSpeedScreen:
             let next: (BolusSpeed) -> Void = { bolusSpeed in
-                self.pumpManager?.state.bolusSpeed = bolusSpeed
+                self.pumpManager.state.bolusSpeed = bolusSpeed
                 self.stepFinished()
             }
 
@@ -165,9 +163,9 @@ class DanaUICoordinator: UINavigationController, @MainActor PumpManagerOnboardin
             )
 
         case .deviceScanningScreen:
-            pumpManager?.state.isOnBoarded = true
-            pumpManager?.notifyStateDidChange()
-            pumpManagerOnboardingDelegate?.pumpManagerOnboarding(didOnboardPumpManager: pumpManager!)
+            pumpManager.state.isOnBoarded = true
+            pumpManager.notifyStateDidChange()
+            pumpManagerOnboardingDelegate?.pumpManagerOnboarding(didOnboardPumpManager: pumpManager)
 
             let viewModel = DanaKitScanViewModel(pumpManager, nextStep: stepFinished)
             return hostingController(
@@ -177,30 +175,28 @@ class DanaUICoordinator: UINavigationController, @MainActor PumpManagerOnboardin
 
         case .setupComplete:
             let nextStep: () -> Void = {
-                self.pumpManagerOnboardingDelegate?.pumpManagerOnboarding(didCreatePumpManager: self.pumpManager!)
+                self.pumpManagerOnboardingDelegate?.pumpManagerOnboarding(didCreatePumpManager: self.pumpManager)
                 self.completionDelegate?.completionNotifyingDidComplete(self)
 
-                if let pumpManager = self.pumpManager {
-                    pumpManager.pumpDelegate.notify { delegate in
-                        guard let delegate else {
-                            return
-                        }
-
-                        let dose = DoseEntry.resume(insulinType: pumpManager.state.insulinType)
-                        delegate.pumpManager(
-                            pumpManager,
-                            hasNewPumpEvents: [NewPumpEvent.resume(dose: dose)],
-                            lastReconciliation: Date.now,
-                            replacePendingEvents: true
-                        ) { _ in }
+                self.pumpManager.pumpDelegate.notify { delegate in
+                    guard let delegate else {
+                        return
                     }
+
+                    let dose = DoseEntry.resume(insulinType: self.pumpManager.state.insulinType)
+                    delegate.pumpManager(
+                        self.pumpManager,
+                        hasNewPumpEvents: [NewPumpEvent.resume(dose: dose)],
+                        lastReconciliation: Date.now,
+                        replacePendingEvents: true
+                    ) { _ in }
                 }
             }
 
             let view = DanaKitSetupCompleteView(
                 finish: nextStep,
-                friendlyPumpModelName: pumpManager?.state.getFriendlyDeviceName() ?? "",
-                imageName: pumpManager?.state.getDanaPumpImageName() ?? "danai"
+                friendlyPumpModelName: pumpManager.state.getFriendlyDeviceName(),
+                imageName: pumpManager.state.getDanaPumpImageName()
             )
             return hostingController(
                 rootView: view,
@@ -219,11 +215,11 @@ class DanaUICoordinator: UINavigationController, @MainActor PumpManagerOnboardin
             let view = DanaKitSettingsView(
                 viewModel: viewModel,
                 supportedInsulinTypes: allowedInsulinTypes,
-                imageName: pumpManager?.state.getDanaPumpImageName() ?? "danai"
+                imageName: pumpManager.state.getDanaPumpImageName()
             )
             return hostingController(
                 rootView: view,
-                title: pumpManager?.state.getFriendlyDeviceName() ?? ""
+                title: pumpManager.state.getFriendlyDeviceName()
             )
 
         case .userOptions:
@@ -235,13 +231,13 @@ class DanaUICoordinator: UINavigationController, @MainActor PumpManagerOnboardin
 
         case .bolusSpeed:
             let bolusSpeedChanged: (BolusSpeed) -> Void = { bolusSpeed in
-                self.pumpManager?.state.bolusSpeed = bolusSpeed
-                self.pumpManager?.notifyStateDidChange()
+                self.pumpManager.state.bolusSpeed = bolusSpeed
+                self.pumpManager.notifyStateDidChange()
             }
 
             return hostingController(
                 rootView: DanaKitSettingsPumpSpeed(
-                    value: Int(pumpManager?.state.bolusSpeed.rawValue ?? 0),
+                    value: Int(pumpManager.state.bolusSpeed.rawValue),
                     didChange: bolusSpeedChanged
                 ),
                 title: String(localized: "Delivery speed", comment: "Title for delivery speed")
@@ -249,12 +245,12 @@ class DanaUICoordinator: UINavigationController, @MainActor PumpManagerOnboardin
 
         case .insulinType:
             let confirmInsulinType: (InsulinType) -> Void = { insulinType in
-                self.pumpManager?.state.insulinType = insulinType
-                self.pumpManager?.notifyStateDidChange()
+                self.pumpManager.state.insulinType = insulinType
+                self.pumpManager.notifyStateDidChange()
             }
             return hostingController(
                 rootView: InsulinTypeView(
-                    initialValue: pumpManager?.state.insulinType ?? allowedInsulinTypes[0],
+                    initialValue: pumpManager.state.insulinType ?? allowedInsulinTypes[0],
                     supportedInsulinTypes: allowedInsulinTypes,
                     didConfirm: confirmInsulinType
                 ),
@@ -281,7 +277,7 @@ class DanaUICoordinator: UINavigationController, @MainActor PumpManagerOnboardin
         if let nextStep = currentScreen.next() {
             navigateTo(nextStep)
         } else {
-            pumpManager?.notifyDelegateOfDeactivation {
+            pumpManager.notifyDelegateOfDeactivation {
                 DispatchQueue.main.async {
                     self.completionDelegate?.completionNotifyingDidComplete(self)
                 }
@@ -290,10 +286,6 @@ class DanaUICoordinator: UINavigationController, @MainActor PumpManagerOnboardin
     }
 
     func getInitialScreen() -> DanaUIScreen {
-        guard let pumpManager = self.pumpManager else {
-            return .firstRunScreen
-        }
-
         if pumpManager.isOnboarded {
             return .settings
         }

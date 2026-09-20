@@ -188,31 +188,35 @@ class PeripheralManager: NSObject {
 
 extension PeripheralManager: CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        guard error == nil else {
-            log.error("\(error!.localizedDescription)")
-            connectionFailure(error!)
+        if let error {
+            log.error("didDiscoverServices: \(error.localizedDescription)")
+            connectionFailure(error)
             return
         }
 
-        let service = peripheral.services?.first(where: { $0.uuid == CBUUID.DANAKIT_SERVICE })
-        if service == nil {
+        guard let service = peripheral.services?.first(where: { $0.uuid == CBUUID.DANAKIT_SERVICE }) else {
             log.error("Failed to discover dana data service...")
             connectionFailure(NSError(domain: "Failed to discover dana data service...", code: 0, userInfo: nil))
             return
         }
 
         log.debug("Discovered service \(CBUUID.DANAKIT_SERVICE)")
-        peripheral.discoverCharacteristics([CBUUID.DANAKIT_READ_CHAR, CBUUID.DANAKIT_WRITE_CHAR], for: service!)
+        peripheral.discoverCharacteristics([CBUUID.DANAKIT_READ_CHAR, CBUUID.DANAKIT_WRITE_CHAR], for: service)
     }
 
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-        guard error == nil else {
-            log.error("\(error!.localizedDescription)")
-            connectionFailure(error!)
+        if let error {
+            log.error("didDiscoverCharacteristicsFor: \(error.localizedDescription)")
+            connectionFailure(error)
             return
         }
 
-        let service = peripheral.services!.first(where: { $0.uuid == CBUUID.DANAKIT_SERVICE })!
+        guard let service = peripheral.services?.first(where: { $0.uuid == CBUUID.DANAKIT_SERVICE }) else {
+            log.error("Failed to discover dana service")
+            connectionFailure(NSError(domain: "Failed to discover dana service", code: 0, userInfo: nil))
+            return
+        }
+
         readCharacteristic = service.characteristics?.first(where: { $0.uuid == CBUUID.DANAKIT_READ_CHAR })
         writeCharacteristic = service.characteristics?.first(where: { $0.uuid == CBUUID.DANAKIT_WRITE_CHAR })
 
@@ -227,9 +231,9 @@ extension PeripheralManager: CBPeripheralDelegate {
     }
 
     func peripheral(_: CBPeripheral, didUpdateNotificationStateFor _: CBCharacteristic, error: Error?) {
-        guard error == nil else {
-            log.error("\(error!.localizedDescription)")
-            connectionFailure(error!)
+        if let error {
+            log.error("didUpdateNotificationStateFor: \(error.localizedDescription)")
+            connectionFailure(error)
             return
         }
 
@@ -238,13 +242,14 @@ extension PeripheralManager: CBPeripheralDelegate {
     }
 
     func peripheral(_: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        guard error == nil else {
-            log.error("\(error!.localizedDescription)")
-            connectionFailure(error!)
+        if let error {
+            log.error("didUpdateValueFor: \(error.localizedDescription)")
+            connectionFailure(error)
             return
         }
 
         guard let data = characteristic.value else {
+            log.warning("Data empty")
             return
         }
 

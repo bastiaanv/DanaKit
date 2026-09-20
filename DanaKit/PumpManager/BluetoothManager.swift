@@ -2,8 +2,6 @@ import CoreBluetooth
 import Foundation
 import LoopKit
 
-let deviceNameRegex = try! NSRegularExpression(pattern: "^[a-zA-Z]{3}[0-9]{5}[a-zA-Z]{2}$")
-
 public enum ConnectionResult {
     case success
     case requestedPincode(String?)
@@ -82,9 +80,9 @@ extension BluetoothManager {
         connectionCompletion = completion
 
         let peripherals = manager.retrievePeripherals(withIdentifiers: [identifier])
-        if let peripheral = peripherals.first {
+        if let peripheral = peripherals.first, let pumpManager {
             self.peripheral = peripheral
-            peripheralManager = PeripheralManager(peripheral, self, pumpManager!, completion)
+            peripheralManager = PeripheralManager(peripheral, self, pumpManager, completion)
 
             manager.connect(peripheral, options: nil)
             return
@@ -184,8 +182,6 @@ extension BluetoothManager {
     }
 }
 
-// MARK: Central manager functions
-
 extension BluetoothManager {
     func bleCentralManagerDidUpdateState(_ central: CBCentralManager) {
         dispatchPrecondition(condition: .onQueue(managerQueue))
@@ -199,8 +195,9 @@ extension BluetoothManager {
         advertisementData: [String: Any],
         rssi _: NSNumber
     ) {
+        let deviceNameRegex = try? NSRegularExpression(pattern: "^[a-zA-Z]{3}[0-9]{5}[a-zA-Z]{2}$")
         guard let name = advertisementData[CBAdvertisementDataLocalNameKey] as? String,
-              deviceNameRegex.firstMatch(in: name, range: NSMakeRange(0, name.count)) != nil
+              deviceNameRegex?.firstMatch(in: name, range: NSRange(name.startIndex..., in: name)) != nil
         else {
             return
         }
@@ -276,6 +273,9 @@ extension BluetoothManager {
     }
 
     func bleCentralManager(_: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        log.info("Device connect error, name: \(peripheral.name ?? "<NO_NAME>"), error: \(error!.localizedDescription)")
+        log
+            .error(
+                "Device connect error, name: \(peripheral.name ?? "<NO_NAME>"), error: \(String(describing: error?.localizedDescription))"
+            )
     }
 }

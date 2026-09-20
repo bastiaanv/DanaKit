@@ -133,14 +133,18 @@ struct ManualTempBasalEntryView: View {
     }
 
     var errorAlert: SwiftUI.Alert {
-        let errorMessage = errorMessage(error: error!)
+        let errorMessage = errorMessage(error: error)
         return SwiftUI.Alert(
             title: Text("Temporary Basal Failed", comment: "Alert title for a failure to set temporary basal"),
             message: errorMessage
         )
     }
 
-    func errorMessage(error: PumpManagerError) -> Text {
+    func errorMessage(error: PumpManagerError?) -> Text {
+        guard let error else {
+            return Text(String(""))
+        }
+
         if let recovery = error.recoverySuggestion {
             return Text(String(
                 format:
