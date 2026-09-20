@@ -67,14 +67,16 @@ class ContinousBluetoothManager: NSObject, BluetoothManager {
     }
 
     private func keepConnectionAlive() {
+        guard let pumpManager else {
+            return
+        }
+
         do {
-            if pumpManager?.status.bolusState == .noBolus {
+            if pumpManager.status.bolusState == .noBolus {
                 log.info("Sending keep alive message")
-                let result = try writeMessage(DanaGeneralKeepConnection())
-                guard result.success else {
-                    log.error("Pump rejected keepAlive request: \(result.rawData.base64EncodedString())")
-                    return
-                }
+                _ = try writeMessage(DanaGeneralKeepConnection())
+
+                pumpManager.emitHeartbeat()
             } else {
                 log.info("Skip sending keep alive message. Reason: bolus is running")
             }

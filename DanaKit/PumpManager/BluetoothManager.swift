@@ -2,6 +2,8 @@ import CoreBluetooth
 import Foundation
 import LoopKit
 
+private let deviceNameRegex = try? NSRegularExpression(pattern: "^[a-zA-Z]{3}[0-9]{5}[a-zA-Z]{2}$")
+
 public enum ConnectionResult {
     case success
     case requestedPincode(String?)
@@ -195,7 +197,6 @@ extension BluetoothManager {
         advertisementData: [String: Any],
         rssi _: NSNumber
     ) {
-        let deviceNameRegex = try? NSRegularExpression(pattern: "^[a-zA-Z]{3}[0-9]{5}[a-zA-Z]{2}$")
         guard let name = advertisementData[CBAdvertisementDataLocalNameKey] as? String,
               deviceNameRegex?.firstMatch(in: name, range: NSRange(name.startIndex..., in: name)) != nil
         else {
@@ -273,9 +274,8 @@ extension BluetoothManager {
     }
 
     func bleCentralManager(_: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        log
-            .error(
-                "Device connect error, name: \(peripheral.name ?? "<NO_NAME>"), error: \(String(describing: error?.localizedDescription))"
-            )
+        let message =
+            "Device connect error, name: \(peripheral.name ?? "<NO_NAME>"), error: \(String(describing: error?.localizedDescription))"
+        log.error(message)
     }
 }

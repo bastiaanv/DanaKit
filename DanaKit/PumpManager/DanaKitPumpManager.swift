@@ -1449,6 +1449,17 @@ public extension DanaKitPumpManager {
         scanDeviceObservers.removeElement(observer)
     }
 
+    func emitHeartbeat() {
+        pumpDelegate.notify { delegate in
+            guard let delegate = delegate else {
+                self.log.error("No heartbeat -> Missing delegate")
+                return
+            }
+
+            delegate.pumpManagerBLEHeartbeatDidFire(self)
+        }
+    }
+
     internal func notifyAlert(_ alert: PumpManagerAlert) {
         let identifier = Alert.Identifier(managerIdentifier: managerIdentifier, alertIdentifier: alert.identifier)
         let loopAlert = Alert(
