@@ -5,29 +5,28 @@ struct PacketGeneralSaveHistory {
     var historyValue: UInt16
 }
 
-let CommandGeneralSaveHistory: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
-    UInt16(DanaPacketType.OPCODE_ETC__SET_HISTORY_SAVE & 0xFF)
+class DanaGeneralSaveHistory: DanaKitBasePacket {
+    let name = "General_SetHistory"
+    let opCode = DanaPacketType.OPCODE_ETC__SET_HISTORY_SAVE
 
-func generatePacketGeneralSaveHistory(options: PacketGeneralSaveHistory) -> DanaGeneratePacket {
-    var data = Data(count: 10)
-    data[0] = options.historyType
-    data.addDate(at: 1, date: options.historyDate)
+    private let options: PacketGeneralSaveHistory
+    init(options: PacketGeneralSaveHistory) {
+        self.options = options
+    }
 
-    data[7] = options.historyCode
-    data[8] = UInt8(options.historyValue & 0xFF)
-    data[9] = UInt8((options.historyValue >> 8) & 0xFF)
+    func generate() throws -> Data {
+        var data = Data(count: 10)
+        data[0] = options.historyType
+        data.addDate(at: 1, date: options.historyDate)
 
-    return DanaGeneratePacket(
-        name: "General_SetHistory",
-        opCode: DanaPacketType.OPCODE_ETC__SET_HISTORY_SAVE,
-        data: data
-    )
-}
+        data[7] = options.historyCode
+        data[8] = UInt8(options.historyValue & 0xFF)
+        data[9] = UInt8((options.historyValue >> 8) & 0xFF)
 
-func parsePacketGeneralSaveHistory(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
-    DanaParsePacket(
-        success: data[DataStart] == 0,
-        rawData: data,
-        data: nil
-    )
+        return data
+    }
+
+    func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
+        DanaParsePacket<String>(success: data[DataStart] == 0, rawData: data, data: nil)
+    }
 }

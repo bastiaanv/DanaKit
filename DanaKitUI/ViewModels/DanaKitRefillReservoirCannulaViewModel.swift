@@ -42,21 +42,17 @@ class DanaKitRefillReservoirCannulaViewModel: ObservableObject {
     @Published var tubeProgress: Double = 0
     @Published var primeProgress: Double = 0
 
-    private let pumpManager: DanaKitPumpManager?
+    private let pumpManager: DanaKitPumpManager
     private var primeReporter: DoseProgressReporter?
     private let processQueue = DispatchQueue(label: "DanaKit.prime.processQueue")
 
-    init(pumpManager: DanaKitPumpManager?, cannulaOnly: Bool) {
+    init(pumpManager: DanaKitPumpManager, cannulaOnly: Bool) {
         self.pumpManager = pumpManager
         self.cannulaOnly = cannulaOnly
         currentStep = cannulaOnly ? RefillSteps.prime : RefillSteps.reservoir
     }
 
     func setReservoirAmount() {
-        guard let pumpManager = self.pumpManager else {
-            return
-        }
-
         loadingReservoirAmount = true
         let model = PacketGeneralSetUserOption(
             isTimeDisplay24H: pumpManager.state.isTimeDisplay24H,
@@ -89,10 +85,6 @@ class DanaKitRefillReservoirCannulaViewModel: ObservableObject {
     }
 
     func primeTube() {
-        guard let pumpManager = self.pumpManager else {
-            return
-        }
-
         loadingTubeAmount = true
         tubeDeliveredUnits = 0
         tubeProgress = 0
@@ -104,7 +96,7 @@ class DanaKitRefillReservoirCannulaViewModel: ObservableObject {
             }
 
             self.failedTubeAmount = false
-            self.primeReporter = pumpManager.createBolusProgressReporter(reportingOn: self.processQueue)
+            self.primeReporter = self.pumpManager.createBolusProgressReporter(reportingOn: self.processQueue)
 
             guard let primeReporter = self.primeReporter else {
                 self.loadingPrimeAmount = false
@@ -117,10 +109,6 @@ class DanaKitRefillReservoirCannulaViewModel: ObservableObject {
     }
 
     func primeCannula() {
-        guard let pumpManager = self.pumpManager else {
-            return
-        }
-
         loadingPrimeAmount = true
         primeDeliveredUnits = 0
         primeProgress = 0
@@ -133,7 +121,7 @@ class DanaKitRefillReservoirCannulaViewModel: ObservableObject {
             }
 
             self.failedPrimeAmount = false
-            self.primeReporter = pumpManager.createBolusProgressReporter(reportingOn: self.processQueue)
+            self.primeReporter = self.pumpManager.createBolusProgressReporter(reportingOn: self.processQueue)
 
             guard let primeReporter = self.primeReporter else {
                 self.loadingPrimeAmount = false

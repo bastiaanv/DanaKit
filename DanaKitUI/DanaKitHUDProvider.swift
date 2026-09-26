@@ -65,9 +65,7 @@ internal class DanaKitHUDProvider: NSObject, HUDProvider {
     private func hudDidAppear() {
         updateReservoirView()
         pumpManager.ensureCurrentPumpData { _ in
-            DispatchQueue.main.async {
-                self.updateReservoirView()
-            }
+            self.updateReservoirView()
         }
     }
 
@@ -86,12 +84,15 @@ internal class DanaKitHUDProvider: NSObject, HUDProvider {
 
     private func updateReservoirView() {
         guard let reservoirView = reservoirView,
-              let lastStatusDate = pumpManager.rawState["lastStatusDate"] as? Date
+              let lastStatusDate = pumpManager.rawState["lastStatusDate"] as? Date,
+              let level = pumpManager.rawState["reservoirLevel"] as? Double
         else {
             return
         }
 
-        reservoirView.update(level: pumpManager.rawState["reservoirLevel"] as? Double, at: lastStatusDate)
+        DispatchQueue.main.async {
+            reservoirView.update(level: level, at: lastStatusDate)
+        }
     }
 }
 

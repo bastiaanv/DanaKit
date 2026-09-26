@@ -2,14 +2,20 @@ struct PacketBasalSetProfileNumber {
     let profileNumber: UInt8
 }
 
-let CommandBasalSetProfileNumber: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
-    UInt16(DanaPacketType.OPCODE_BASAL__SET_PROFILE_NUMBER & 0xFF)
-func generatePacketBasalSetProfileNumber(options: PacketBasalSetProfileNumber) -> DanaGeneratePacket {
-    let data = Data([options.profileNumber & 0xFF])
+class DanaBasalSetProfileNumber: DanaKitBasePacket {
+    let name = "Basal_SetProfileNumber"
+    let opCode = DanaPacketType.OPCODE_BASAL__SET_PROFILE_NUMBER
 
-    return DanaGeneratePacket(name: "Basal_SetProfileNumber", opCode: DanaPacketType.OPCODE_BASAL__SET_PROFILE_NUMBER, data: data)
-}
+    private let options: PacketBasalSetProfileNumber
+    init(options: PacketBasalSetProfileNumber) {
+        self.options = options
+    }
 
-func parsePacketBasalSetProfileNumber(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
-    DanaParsePacket(success: data[DataStart] == 0, rawData: data, data: nil)
+    func generate() -> Data {
+        Data([options.profileNumber & 0xFF])
+    }
+
+    func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
+        DanaParsePacket<String>(success: data[DataStart] == 0, rawData: data, data: nil)
+    }
 }

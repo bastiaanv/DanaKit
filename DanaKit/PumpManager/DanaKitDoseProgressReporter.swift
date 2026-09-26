@@ -6,6 +6,7 @@ class DanaKitDoseProgressReporter: DoseProgressReporter {
         DoseProgress(deliveredUnits: deliveredUnits, percentComplete: deliveredUnits / total)
     }
 
+    private let lock = UnfairLock()
     private var observers = WeakSet<DoseProgressObserver>()
 
     private let total: Double
@@ -25,11 +26,10 @@ class DanaKitDoseProgressReporter: DoseProgressReporter {
 
     public func notify(deliveredUnits: Double) {
         self.deliveredUnits = deliveredUnits
+        let observersCopy = lock.withLock { observers }
 
-        DispatchQueue.main.async {
-            for observer in self.observers {
-                observer.doseProgressReporterDidUpdate(self)
-            }
+        for observer in observersCopy {
+            observer.doseProgressReporterDidUpdate(self)
         }
     }
 }

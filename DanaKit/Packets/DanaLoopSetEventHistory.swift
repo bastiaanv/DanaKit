@@ -24,37 +24,30 @@ struct PacketLoopSetEventHistory {
     var param2: UInt16
 }
 
-let CommandLoopSetEventHistory: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
-    UInt16(DanaPacketType.OPCODE__APS_SET_EVENT_HISTORY & 0xFF)
+class DanaLoopSetEventHistory: DanaKitBasePacket {
+    let name = "Review_SetApsEvent"
+    let opCode = DanaPacketType.OPCODE__APS_SET_EVENT_HISTORY
 
-func generatePacketLoopSetEventHistory(options: PacketLoopSetEventHistory) -> DanaGeneratePacket {
-    var data = Data(count: 11)
-    let param1 = options.param1
+    private let options: PacketLoopSetEventHistory
+    init(options: PacketLoopSetEventHistory) {
+        self.options = options
+    }
 
-//    if options.packetType == LoopHistoryEvents.carbs || options.packetType == LoopHistoryEvents.bolus, param1 < 0 {
-//        // Assuming LoopHistoryEvents is an enum with associated values, you may need to adjust this condition
-//        param1 = 0
-//    }
+    func generate() throws -> Data {
+        var data = Data(count: 11)
 
-    data[0] = options.packetType
-    data.addDate(at: 1, date: options.time)
+        data[0] = options.packetType
+        data.addDate(at: 1, date: options.time)
 
-    data[7] = UInt8(param1 >> 8)
-    data[8] = UInt8(param1 & 0xFF)
-    data[9] = UInt8(options.param2 >> 8)
-    data[10] = UInt8(options.param2 & 0xFF)
+        data[7] = UInt8(options.param1 >> 8)
+        data[8] = UInt8(options.param1 & 0xFF)
+        data[9] = UInt8(options.param2 >> 8)
+        data[10] = UInt8(options.param2 & 0xFF)
 
-    return DanaGeneratePacket(
-        name: "Review_SetApsEvent",
-        opCode: DanaPacketType.OPCODE__APS_SET_EVENT_HISTORY,
-        data: data
-    )
-}
+        return data
+    }
 
-func parsePacketLoopSetEventHistory(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
-    DanaParsePacket(
-        success: data[DataStart] == 0,
-        rawData: data,
-        data: nil // Replace with the actual parsed data if needed
-    )
+    func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
+        DanaParsePacket<String>(success: data[DataStart] == 0, rawData: data, data: nil)
+    }
 }

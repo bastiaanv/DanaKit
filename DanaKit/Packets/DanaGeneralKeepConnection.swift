@@ -1,18 +1,12 @@
-let CommandGeneralKeepConnection: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
-    UInt16(DanaPacketType.OPCODE_ETC__KEEP_CONNECTION & 0xFF)
+class DanaGeneralKeepConnection: DanaKitBasePacket {
+    let name = "General_KeepConnection"
+    let opCode = DanaPacketType.OPCODE_ETC__KEEP_CONNECTION
 
-func generatePacketGeneralKeepConnection() -> DanaGeneratePacket {
-    DanaGeneratePacket(
-        name: "General_KeepConnection",
-        opCode: DanaPacketType.OPCODE_ETC__KEEP_CONNECTION,
-        data: nil
-    )
-}
+    func generate() throws -> Data {
+        Data()
+    }
 
-func parsePacketGeneralKeepConnection(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
-    DanaParsePacket(
-        success: data[DataStart] == 0,
-        rawData: data,
-        data: nil
-    )
+    func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
+        DanaParsePacket<String>(success: data[DataStart] == 0, rawData: data, data: nil)
+    }
 }

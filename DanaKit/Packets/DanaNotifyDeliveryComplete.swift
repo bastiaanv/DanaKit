@@ -2,16 +2,22 @@ struct PacketNotifyDeliveryComplete: Codable {
     var deliveredInsulin: Double
 }
 
-let CommandNotifyDeliveryComplete: UInt16 = (UInt16(DanaPacketType.TYPE_NOTIFY & 0xFF) << 8) +
-    UInt16(DanaPacketType.OPCODE_NOTIFY__DELIVERY_COMPLETE & 0xFF)
+class DanaNotifyDeliveryComplete: DanaKitBasePacket {
+    let name = "Notify_DeliveryComplete"
+    let opCode = DanaPacketType.OPCODE_NOTIFY__DELIVERY_COMPLETE
 
-func parsePacketNotifyDeliveryComplete(data: Data, usingUtc _: Bool?) -> DanaParsePacket<PacketNotifyDeliveryComplete> {
-    DanaParsePacket(
-        success: true,
-        notifyType: CommandNotifyDeliveryComplete,
-        rawData: data,
-        data: PacketNotifyDeliveryComplete(
-            deliveredInsulin: Double(data.uint16(at: DataStart)) / 100
+    func generate() throws -> Data {
+        Data()
+    }
+
+    func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
+        DanaParsePacket(
+            success: true,
+            notifyType: (UInt16(DanaPacketType.TYPE_NOTIFY & 0xFF) << 8) + UInt16(opCode),
+            rawData: data,
+            data: PacketNotifyDeliveryComplete(
+                deliveredInsulin: Double(data.uint16(at: DataStart)) / 100
+            )
         )
-    )
+    }
 }

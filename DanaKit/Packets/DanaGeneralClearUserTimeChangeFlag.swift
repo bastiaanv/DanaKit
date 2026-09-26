@@ -1,14 +1,12 @@
-let CommandGeneralClearUserTimeChangeFlag: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
-    UInt16(DanaPacketType.OPCODE_REVIEW__SET_USER_TIME_CHANGE_FLAG_CLEAR & 0xFF)
+class DanaGeneralClearUserTimeChangeFlag: DanaKitBasePacket {
+    let name = "General_ClearUserTimeChangeFlag"
+    let opCode = DanaPacketType.OPCODE_REVIEW__SET_USER_TIME_CHANGE_FLAG_CLEAR
 
-func generatePacketGeneralClearUserTimeChangeFlag() -> DanaGeneratePacket {
-    DanaGeneratePacket(
-        name: "General_ClearUserTimeChangeFlag",
-        opCode: DanaPacketType.OPCODE_REVIEW__SET_USER_TIME_CHANGE_FLAG_CLEAR,
-        data: nil
-    )
-}
+    func generate() throws -> Data {
+        Data()
+    }
 
-func parsePacketGeneralClearUserTimeChangeFlag(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
-    DanaParsePacket(success: data[DataStart] == 0, rawData: data, data: nil)
+    func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
+        DanaParsePacket<String>(success: data[DataStart] == 0, rawData: data, data: nil)
+    }
 }

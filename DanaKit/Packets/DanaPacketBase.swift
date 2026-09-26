@@ -1,7 +1,9 @@
-struct DanaGeneratePacket {
-    let name: String
-    let opCode: UInt8
-    let data: Data?
+protocol DanaKitBasePacket {
+    var name: String { get }
+    var opCode: UInt8 { get }
+
+    func generate() throws -> Data
+    func parse(data: Data, usingUtc: Bool?) -> any DanaParsePacketProtocol
 }
 
 protocol DanaParsePacketProtocol: Codable {
