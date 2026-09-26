@@ -254,7 +254,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ". Ga naar de bluetooth instellingen, vergeet dit apparaat en probeer het opnieuw"
+            "value" : ". Ga naar je Bluetooth-instellingen, vergeet dit apparaat en probeer het opnieuw"
           }
         },
         "pl" : {
@@ -1864,7 +1864,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "12h notatie"
+            "value" : "12-uurs weergave"
           }
         },
         "pl" : {
@@ -2188,7 +2188,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "24h notatie"
+            "value" : "24-uurs weergave"
           }
         },
         "pl" : {
@@ -2836,7 +2836,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Een bolustime-out is actief. De luscyclus kan niet worden voltooid totdat de time-out inactief is."
+            "value" : "Een bolustime-out is actief. De loopcyclus kan niet worden voltooid totdat de time-out inactief is."
           }
         },
         "pl" : {
@@ -6238,7 +6238,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "As controleren"
+            "value" : "Controleer de aandrijfas"
           }
         },
         "pl" : {
@@ -6886,7 +6886,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Checksum mislukt. Probeer opnieuw"
+            "value" : "Gegevenscontrole mislukt. Probeer opnieuw"
           }
         },
         "pl" : {
@@ -8992,7 +8992,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Leversnelheid"
+            "value" : "Toedieningssnelheid"
           }
         },
         "pl" : {
@@ -9962,7 +9962,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "OK"
+            "value" : "Voltooid"
           }
         },
         "pl" : {
@@ -10286,7 +10286,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tijdens het koppelproces zal uw DanaRS v1 een koppelprompt tonen en uw iPhone een vraag om een koppelcode. Selecteer OK op je pomp en typ de code in op je iPhone. Daarna is Loop klaar om te communiceren met je DanaRS v1."
+            "value" : "Tijdens het koppelproces zal uw DanaRS v1 een koppelprompt tonen en je iPhone een vraag om een koppelcode. Selecteer OK op je pomp en typ de code in op je iPhone. Daarna is Loop klaar om te communiceren met je DanaRS v1."
           }
         },
         "pl" : {
@@ -11744,7 +11744,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Opschorting niet afgesteld"
+            "value" : "Pauzeren of hervatten is niet gelukt"
           }
         },
         "pl" : {
@@ -11906,7 +11906,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Temperatuur basaal niet aangepast"
+            "value" : "Tijdelijke basaalstand niet aangepast"
           }
         },
         "pl" : {
@@ -12068,7 +12068,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gefaald om temp basaal aan te passen. %@"
+            "value" : "Aanpassen tijdelijke basaalstand %@ mislukt. "
           }
         },
         "pl" : {
@@ -12230,7 +12230,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dana basaalprogramma niet gegenereerd"
+            "value" : "Het basaalprogramma voor de Dana-pomp kon niet worden gemaakt"
           }
         },
         "pl" : {
@@ -13202,7 +13202,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Het is niet gelukt om de reservoir in te stellen. Synchroniseer de pompgegevens opnieuw en probeer het opnieuw."
+            "value" : "Het is niet gelukt om het reservoir in te stellen. Synchroniseer de pompgegevens en probeer het opnieuw."
           }
         },
         "pl" : {
@@ -13526,7 +13526,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Afwerking"
+            "value" : "Voltooi"
           }
         },
         "pl" : {
@@ -14012,7 +14012,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Insuline\nopgeschort"
+            "value" : "Insuline\nonderbroken"
           }
         },
         "pl" : {
@@ -14660,7 +14660,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Insuline Opgeschort"
+            "value" : "Insuline onderbroken"
           }
         },
         "pl" : {
@@ -16114,7 +16114,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Handmatige basale temperatuurinstelling"
+            "value" : "Handmatige tijdelijke basaalstand"
           }
         },
         "pl" : {
@@ -17732,7 +17732,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Opmerking: Uw Dana-pomp heeft een speciale instelling waarmee u de pieptonen van uw Dana-pomp kunt uitschakelen. Neem contact op met uw Dana-distributeur om dit in te schakelen."
+            "value" : "Let op: je Dana-pomp heeft een speciale instelling waarmee je de piepjes van de pomp kunt uitzetten. Wil je dit aanzetten? Neem dan contact op met je Dana-leverancier."
           }
         },
         "pl" : {
@@ -17894,7 +17894,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Occlusie"
+            "value" : "Verstopping"
           }
         },
         "pl" : {
@@ -18218,7 +18218,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Oke"
+            "value" : "OK"
           }
         },
         "pl" : {
@@ -18866,7 +18866,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pen 1"
+            "value" : "Pin 1"
           }
         },
         "pl" : {
@@ -19028,7 +19028,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pen 2"
+            "value" : "Pin 2"
           }
         },
         "pl" : {
@@ -20648,7 +20648,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pomp is nog steeds losgekoppeld"
+            "value" : "Pomp is nog steeds ontkoppeld"
           }
         },
         "pl" : {
@@ -21294,7 +21294,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tarief"
+            "value" : "Dosis"
           }
         },
         "pl" : {
@@ -22104,7 +22104,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sluit de tp-pomp weer aan"
+            "value" : "Sluit de pomp weer aan"
           }
         },
         "pl" : {
@@ -23886,7 +23886,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Levering hervat"
+            "value" : "Toediening hervat"
           }
         },
         "pl" : {
@@ -24372,7 +24372,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gepland Basaal"
+            "value" : "Geplande basaalstand"
           }
         },
         "pl" : {
@@ -25182,7 +25182,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Selecteer het type insuline dat je gaat gebruiken in deze pomp"
+            "value" : "Selecteer het type insuline dat je in deze pomp gaat gebruiken."
           }
         },
         "pl" : {
@@ -25504,7 +25504,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Handmatige basale temperatuur instellen"
+            "value" : "Handmatige tijdelijke basaalstand instellen"
           }
         },
         "pl" : {
@@ -25826,7 +25826,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tijdelijke basale waarde instellen"
+            "value" : "Tijdelijke basaalstand instellen"
           }
         },
         "pl" : {
@@ -25988,7 +25988,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stel het basaalprofiel in dat de pomp moet gebruiken. Merk op dat het profiel in de pomp wordt overschreven met dat in %@."
+            "value" : "Kies welk basaalprofiel de pomp moet gebruiken. Let op: het profiel dat nu in de pomp staat, wordt dan vervangen door het profiel uit %@."
           }
         },
         "pl" : {
@@ -26150,7 +26150,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Temp basaal instellen wordt op dit moment niet ondersteund"
+            "value" : "Tijdelijke basaalstanden instellen wordt op dit moment niet ondersteund"
           }
         },
         "pl" : {
@@ -26312,7 +26312,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Het instellen van de basale temperatuur wordt op dit moment niet ondersteund. Duur: %lld sec"
+            "value" : "Het instellen van de tijdelijke basaalstand wordt op dit moment niet ondersteund. Duur: %lld sec"
           }
         },
         "pl" : {
@@ -27932,7 +27932,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stap 1: Stel het reservoirniveau in"
+            "value" : "Stap 1: Stel het niveau van het reservoir in"
           }
         },
         "pl" : {
@@ -28416,7 +28416,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stop temp basaal"
+            "value" : "Stop tijdelijke basaalstand"
           }
         },
         "pl" : {
@@ -28578,7 +28578,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "opschorten"
+            "value" : "Onderbreken"
           }
         },
         "pl" : {
@@ -28740,7 +28740,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Levering opschorten"
+            "value" : "Toediening onderbreken"
           }
         },
         "pl" : {
@@ -28902,7 +28902,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Levering opschorten"
+            "value" : "Toediening onderbreken"
           }
         },
         "pl" : {
@@ -29226,7 +29226,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tijdelijk basaal"
+            "value" : "Tijdelijke basaalstand"
           }
         },
         "pl" : {
@@ -29386,7 +29386,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tijdelijke basale"
+            "value" : "Tijdelijke basaalstand"
           }
         },
         "pl" : {
@@ -29546,7 +29546,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tijdelijke basale regeling mislukt"
+            "value" : "Tijdelijke basaalstand mislukt"
           }
         },
         "pl" : {
@@ -30194,7 +30194,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "De insulinetoediening is opgeschort. Actie mislukt"
+            "value" : "De insulinetoediening is onderbroken. Actie mislukt"
           }
         },
         "pl" : {
@@ -31814,7 +31814,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Deze methode van bijvullen is alleen bedoeld voor als de pomp geen manier heeft om het reservoir bij te vullen of de canule te vullen."
+            "value" : "Gebruik deze manier van vullen alleen als de pomp zelf geen mogelijkheid heeft om het reservoir te vullen of de canule te vullen."
           }
         },
         "pl" : {
@@ -31974,7 +31974,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voor deze PumpManager is geen maximale basale toedieningssnelheid ingesteld, omdat hij is toegevoegd voordat de functie voor handmatige tijdelijke basale toedieningssnelheid beschikbaar was. Stel alstublieft een nieuwe maximale basale toedieningssnelheid in."
+            "value" : "Voor deze pomp is nog geen maximale basaalstand ingesteld. De pomp is namelijk toegevoegd voordat je zelf een tijdelijke basaal kon instellen. Stel een nieuwe maximale basaalstand in."
           }
         },
         "pl" : {
@@ -32298,7 +32298,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bluetooth modus schakelen"
+            "value" : "Bluetooth modus aan- of uitzetten?"
           }
         },
         "pl" : {
@@ -32460,7 +32460,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Toggle stille toon?"
+            "value" : "Stil geluid aan- of uitzetten?"
           }
         },
         "pl" : {
@@ -32946,7 +32946,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eh"
+            "value" : "E"
           }
         },
         "pl" : {
@@ -33108,7 +33108,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eh/u"
+            "value" : "E/u"
           }
         },
         "pl" : {
@@ -34238,7 +34238,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "WAARSCHUWING: Gebruik dit niet totdat je de documentatie hebt gelezen"
+            "value" : "WAARSCHUWING: Gebruik dit pas als je de documentatie hebt gelezen"
           }
         },
         "pl" : {
@@ -35696,7 +35696,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ja, Stille tonen uitschakelen"
+            "value" : "Ja, stille geluiden uitschakelen"
           }
         },
         "pl" : {
@@ -35858,7 +35858,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ja, stille tonen inschakelen"
+            "value" : "Ja, stille geluiden inschakelen"
           }
         },
         "pl" : {
@@ -36830,7 +36830,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Uw dagelijkse basaallimiet is bereikt. Neem contact op met uw Dana-distributeur om de limiet te verhogen."
+            "value" : "Je dagelijkse basaallimiet is bereikt. Neem contact op met je Dana-distributeur om de limiet te verhogen."
           }
         },
         "pl" : {
@@ -36992,7 +36992,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Uw dagelijkse insulinenlimiet is bereikt. Neem contact op met uw Dana-distributeur om de limiet te verhogen."
+            "value" : "Je dagelijkse insulinenlimiet is bereikt. Neem contact op met je Dana-distributeur om de limiet te verhogen."
           }
         },
         "pl" : {
@@ -37152,7 +37152,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Uw insulineafgifte wordt pas automatisch aangepast zodra de tijdelijke basale dosis is afgelopen of is geannuleerd."
+            "value" : "Je insulineafgifte wordt pas automatisch aangepast zodra de tijdelijke basale dosis is afgelopen of is geannuleerd."
           }
         },
         "pl" : {
