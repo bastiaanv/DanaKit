@@ -9,10 +9,10 @@ struct DanaKitSetupCompleteView: View {
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
-                Text(
-                    String(localized: "Your ", comment: "Dana setup complete p1") + friendlyPumpModelName +
-                        String(localized: " is ready to be used!", comment: "Dana setup complete p2")
-                )
+                Text(String(
+                    format: String(localized: "Your %@ is ready to be used!", comment: "Dana setup complete"),
+                    friendlyPumpModelName
+                ))
 
                 HStack {
                     Spacer()

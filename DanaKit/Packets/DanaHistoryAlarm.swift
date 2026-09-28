@@ -1,10 +1,12 @@
-let CommandHistoryAlarm: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
-    UInt16(DanaPacketType.OPCODE_REVIEW__ALARM & 0xFF)
+class DanaHistoryAlarm: HistoryPacket, DanaKitBasePacket {
+    let name = "Review_Alarm"
+    let opCode = DanaPacketType.OPCODE_REVIEW__ALARM
 
-func generatePacketHistoryAlarm(options: PacketHistoryBase) -> DanaGeneratePacket {
-    DanaGeneratePacket(
-        name: "Review_Alarm",
-        opCode: DanaPacketType.OPCODE_REVIEW__ALARM,
-        data: generatePacketHistoryData(options: options)
-    )
+    func generate() throws -> Data {
+        generatePacketHistoryData()
+    }
+
+    func parse(data: Data, usingUtc: Bool?) -> any DanaParsePacketProtocol {
+        super.parse(data: data, usingUtc: usingUtc)
+    }
 }

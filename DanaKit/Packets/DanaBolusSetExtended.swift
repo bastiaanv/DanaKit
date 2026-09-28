@@ -3,18 +3,24 @@ struct PacketBolusSetExtended {
     var extendedDurationInHalfHours: UInt8
 }
 
-let CommandBolusSetExtended: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
-    UInt16(DanaPacketType.OPCODE_BOLUS__SET_EXTENDED_BOLUS & 0xFF)
+class DanaBolusSetExtended: DanaKitBasePacket {
+    let name = "Bolus_SetExtended"
+    let opCode = DanaPacketType.OPCODE_BOLUS__SET_EXTENDED_BOLUS
 
-func generatePacketBolusSetExtended(options: PacketBolusSetExtended) -> DanaGeneratePacket {
-    var data = Data(count: 3)
-    data[0] = UInt8(options.extendedAmount & 0xFF)
-    data[1] = UInt8((options.extendedAmount >> 8) & 0xFF)
-    data[2] = options.extendedDurationInHalfHours
+    private let options: PacketBolusSetExtended
+    init(options: PacketBolusSetExtended) {
+        self.options = options
+    }
 
-    return DanaGeneratePacket(name: "Bolus_SetExtended", opCode: DanaPacketType.OPCODE_BOLUS__SET_EXTENDED_BOLUS, data: data)
-}
+    func generate() throws -> Data {
+        Data([
+            UInt8(options.extendedAmount & 0xFF),
+            UInt8((options.extendedAmount >> 8) & 0xFF),
+            options.extendedDurationInHalfHours
+        ])
+    }
 
-func parsePacketBolusSetExtended(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
-    DanaParsePacket(success: data[DataStart] == 0, rawData: data, data: nil)
+    func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
+        DanaParsePacket<String>(success: data[DataStart] == 0, rawData: data, data: nil)
+    }
 }

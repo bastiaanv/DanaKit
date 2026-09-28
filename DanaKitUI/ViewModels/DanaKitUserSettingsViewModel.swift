@@ -2,7 +2,7 @@ import Foundation
 import LoopKit
 
 class DanaKitUserSettingsViewModel: ObservableObject {
-    @Published var storingUseroption = false
+    @Published var storingUseroption: Bool
     @Published var lowReservoirRate: UInt8
     @Published var isTimeDisplay24H: Bool
     @Published var isButtonScrollOnOff: Bool
@@ -11,25 +11,22 @@ class DanaKitUserSettingsViewModel: ObservableObject {
     @Published var backlightOnTimeInSec: UInt8
     @Published var refillAmount: UInt16
 
-    private let pumpManager: DanaKitPumpManager?
+    private let pumpManager: DanaKitPumpManager
 
-    init(_ pumpManager: DanaKitPumpManager?) {
+    init(_ pumpManager: DanaKitPumpManager) {
         self.pumpManager = pumpManager
 
-        lowReservoirRate = self.pumpManager?.state.lowReservoirRate ?? 0
-        isTimeDisplay24H = self.pumpManager?.state.isTimeDisplay24H ?? false
-        isButtonScrollOnOff = self.pumpManager?.state.isButtonScrollOnOff ?? false
-        beepAndAlarm = self.pumpManager?.state.beepAndAlarm ?? .sound
-        lcdOnTimeInSec = self.pumpManager?.state.lcdOnTimeInSec ?? 0
-        backlightOnTimeInSec = self.pumpManager?.state.backlightOnTimInSec ?? 0
-        refillAmount = self.pumpManager?.state.refillAmount ?? 0
+        storingUseroption = false
+        lowReservoirRate = pumpManager.state.lowReservoirRate
+        isTimeDisplay24H = pumpManager.state.isTimeDisplay24H
+        isButtonScrollOnOff = pumpManager.state.isButtonScrollOnOff
+        beepAndAlarm = pumpManager.state.beepAndAlarm
+        lcdOnTimeInSec = pumpManager.state.lcdOnTimeInSec
+        backlightOnTimeInSec = pumpManager.state.backlightOnTimInSec
+        refillAmount = pumpManager.state.refillAmount
     }
 
     func storeUserOption() {
-        guard let pumpManager = self.pumpManager else {
-            return
-        }
-
         storingUseroption = true
         let model = PacketGeneralSetUserOption(
             isTimeDisplay24H: isTimeDisplay24H,

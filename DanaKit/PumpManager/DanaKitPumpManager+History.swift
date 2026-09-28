@@ -107,8 +107,7 @@ extension DanaKitPumpManager {
 
     private func syncUserOptions() {
         do {
-            let userOptionPacket = generatePacketGeneralGetUserOption()
-            let userOptionResult = try bluetooth.writeMessage(userOptionPacket)
+            let userOptionResult = try bluetooth.writeMessage(DanaGeneralGetUserOption())
             guard userOptionResult.success else {
                 log.error("Failed to fetch user options...")
                 return
@@ -139,8 +138,8 @@ extension DanaKitPumpManager {
 
     func fetchPumpTime() -> Date? {
         do {
-            let timePacket = state
-                .usingUtc ? generatePacketGeneralGetPumpTimeUtcWithTimezone() : generatePacketGeneralGetPumpTime()
+            let timePacket: DanaKitBasePacket = state
+                .usingUtc ? DanaGeneralGetPumpTimeUtcWithTimezone() : DanaGeneralGetPumpTime()
             let timeResult = try bluetooth.writeMessage(timePacket)
 
             guard timeResult.success else {
@@ -169,7 +168,7 @@ extension DanaKitPumpManager {
         var hasHistoryModeBeenActivate = false
         do {
             let activateHistoryModePacket =
-                generatePacketGeneralSetHistoryUploadMode(options: PacketGeneralSetHistoryUploadMode(mode: 1))
+                DanaGeneralSetHistoryUploadMode(options: PacketGeneralSetHistoryUploadMode(mode: 1))
             let activateHistoryModeResult = try bluetooth.writeMessage(activateHistoryModePacket)
             guard activateHistoryModeResult.success else {
                 return []
@@ -178,14 +177,14 @@ extension DanaKitPumpManager {
             hasHistoryModeBeenActivate = true
 
             let fetchHistoryPacket =
-                generatePacketHistoryAll(options: PacketHistoryBase(from: state.lastStatusPumpDateTime, usingUtc: state.usingUtc))
+                DanaHistoryAll(options: PacketHistoryBase(from: state.lastStatusPumpDateTime, usingUtc: state.usingUtc))
             let fetchHistoryResult = try bluetooth.writeMessage(fetchHistoryPacket)
             guard fetchHistoryResult.success else {
                 return []
             }
 
             let deactivateHistoryModePacket =
-                generatePacketGeneralSetHistoryUploadMode(options: PacketGeneralSetHistoryUploadMode(mode: 0))
+                DanaGeneralSetHistoryUploadMode(options: PacketGeneralSetHistoryUploadMode(mode: 0))
             _ = try bluetooth.writeMessage(deactivateHistoryModePacket)
 
             guard let list = fetchHistoryResult.data as? [HistoryItem] else {
@@ -200,7 +199,7 @@ extension DanaKitPumpManager {
                         date: item.timestamp,
                         dose: nil,
                         raw: item.raw,
-                        title: "Alarm: \(getAlarmMessage(param8: item.alarm))",
+                        title: "Alarm: \(fetchHistoryPacket.getAlarmMessage(param8: item.alarm))",
                         type: .alarm,
                         alarmType: PumpAlarmType.fromParam8(item.alarm)
                     ))
@@ -299,7 +298,7 @@ extension DanaKitPumpManager {
             if hasHistoryModeBeenActivate {
                 do {
                     let deactivateHistoryModePacket =
-                        generatePacketGeneralSetHistoryUploadMode(options: PacketGeneralSetHistoryUploadMode(mode: 0))
+                        DanaGeneralSetHistoryUploadMode(options: PacketGeneralSetHistoryUploadMode(mode: 0))
                     _ = try bluetooth.writeMessage(deactivateHistoryModePacket)
                 } catch {}
             }

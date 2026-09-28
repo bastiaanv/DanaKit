@@ -2,13 +2,13 @@ import CoreBluetooth
 import Foundation
 import LoopKit
 
-let deviceNameRegex = try! NSRegularExpression(pattern: "^[a-zA-Z]{3}[0-9]{5}[a-zA-Z]{2}$")
+private let deviceNameRegex = try? NSRegularExpression(pattern: "^[a-zA-Z]{3}[0-9]{5}[a-zA-Z]{2}$")
 
 public enum ConnectionResult {
     case success
     case requestedPincode(String?)
     case invalidBle5Keys
-    case failure(Error)
+    case failure(any Error & Sendable)
     case timeout
     case alreadyConnectedAndBusy
 }
@@ -38,11 +38,12 @@ protocol BluetoothManager: AnyObject, CBCentralManagerDelegate {
     var isConnected: Bool { get }
     var autoConnectUUID: String? { get set }
 
+    var scanTimeout: DispatchWorkItem? { get set }
     var connectionCompletion: ((ConnectionResult) -> Void)? { get set }
 
     var devices: [DanaPumpScan] { get set }
 
-    func writeMessage(_ packet: DanaGeneratePacket) throws -> (any DanaParsePacketProtocol)
+    func writeMessage(_ packet: DanaKitBasePacket) throws -> (any DanaParsePacketProtocol)
     func disconnect(_ peripheral: CBPeripheral, force: Bool) -> Void
     func ensureConnected(_ completion: @escaping (ConnectionResult) -> Void, _ identifier: String) -> Void
 }
@@ -71,34 +72,47 @@ extension BluetoothManager {
         log.info("Stopped scanning")
     }
 
-    func connect(_ bleIdentifier: String, _ completion: @escaping (ConnectionResult) -> Void) throws {
+    func connect(_ bleIdentifier: String, _ completion: @escaping (ConnectionResult) -> Void) {
         guard let identifier = UUID(uuidString: bleIdentifier) else {
             log.error("Invalid identifier - \(bleIdentifier)")
-            throw NSError(domain: "Invalid identifier - \(bleIdentifier)", code: -1)
+            completion(.failure(NSError(domain: "Invalid identifier - \(bleIdentifier)", code: -1)))
+            return
         }
 
         connectionCompletion = completion
 
         let peripherals = manager.retrievePeripherals(withIdentifiers: [identifier])
-        if let peripheral = peripherals.first {
-            DispatchQueue.main.async {
-                self.peripheral = peripheral
-                self.peripheralManager = PeripheralManager(peripheral, self, self.pumpManager!, completion)
+        if let peripheral = peripherals.first, let pumpManager {
+            self.peripheral = peripheral
+            peripheralManager = PeripheralManager(peripheral, self, pumpManager, completion)
 
-                self.manager.connect(peripheral, options: nil)
-            }
+            manager.connect(peripheral, options: nil)
             return
         }
 
         autoConnectUUID = bleIdentifier
-        try startScan()
+        do {
+            try startScan()
+            scanTimeout?.cancel()
 
-        // throw error if device could not be found after 10 sec
-        Task {
-            try await Task.sleep(nanoseconds: 10_000_000_000)
-            guard self.peripheral != nil else {
-                throw NSError(domain: "Device is not findable", code: -1)
+            // throw error if device could not be found after 10 sec
+            let workItem = DispatchWorkItem { [weak self] in
+                guard let self else {
+                    return
+                }
+
+                if peripheral == nil {
+                    completion(.failure(NSError(domain: "Device is not findable", code: -1)))
+                }
             }
+
+            scanTimeout = workItem
+            managerQueue.asyncAfter(
+                deadline: .now() + .seconds(10),
+                execute: workItem
+            )
+        } catch {
+            completion(.failure(error))
         }
     }
 
@@ -140,8 +154,7 @@ extension BluetoothManager {
 
         do {
             log.info("Sending getInitialScreenInformation")
-            let initialScreenPacket = generatePacketGeneralGetInitialScreenInformation()
-            let resultInitialScreenInformation = try writeMessage(initialScreenPacket)
+            let resultInitialScreenInformation = try writeMessage(DanaGeneralGetInitialScreenInformation())
 
             guard resultInitialScreenInformation.success else {
                 log.error("Failed to fetch Initial screen...")
@@ -171,8 +184,6 @@ extension BluetoothManager {
     }
 }
 
-// MARK: Central manager functions
-
 extension BluetoothManager {
     func bleCentralManagerDidUpdateState(_ central: CBCentralManager) {
         dispatchPrecondition(condition: .onQueue(managerQueue))
@@ -187,13 +198,14 @@ extension BluetoothManager {
         rssi _: NSNumber
     ) {
         guard let name = advertisementData[CBAdvertisementDataLocalNameKey] as? String,
-              deviceNameRegex.firstMatch(in: name, range: NSMakeRange(0, name.count)) != nil
+              deviceNameRegex?.firstMatch(in: name, range: NSRange(name.startIndex..., in: name)) != nil
         else {
             return
         }
 
-        dispatchPrecondition(condition: .onQueue(managerQueue))
         log.info("\(peripheral), \(advertisementData)")
+        scanTimeout?.cancel()
+        scanTimeout = nil
 
         if let autoConnectUUID = autoConnectUUID, peripheral.identifier.uuidString == autoConnectUUID {
             stopScan()
@@ -240,7 +252,7 @@ extension BluetoothManager {
         self.peripheral = peripheral
         peripheralManager = PeripheralManager(peripheral, self, pumpManager, connectionCompletion)
 
-        peripheral.discoverServices([PeripheralManager.SERVICE_UUID])
+        peripheral.discoverServices([CBUUID.DANAKIT_SERVICE])
     }
 
     func bleCentralManager(_: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
@@ -262,6 +274,8 @@ extension BluetoothManager {
     }
 
     func bleCentralManager(_: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        log.info("Device connect error, name: \(peripheral.name ?? "<NO_NAME>"), error: \(error!.localizedDescription)")
+        let message =
+            "Device connect error, name: \(peripheral.name ?? "<NO_NAME>"), error: \(String(describing: error?.localizedDescription))"
+        log.error(message)
     }
 }

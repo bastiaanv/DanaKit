@@ -1,10 +1,12 @@
-let CommandHistoryDaily: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
-    UInt16(DanaPacketType.OPCODE_REVIEW__DAILY & 0xFF)
+class DanaHistoryDaily: HistoryPacket, DanaKitBasePacket {
+    let name = "Review_Daily"
+    let opCode = DanaPacketType.OPCODE_REVIEW__DAILY
 
-func generatePacketHistoryDaily(options: PacketHistoryBase) -> DanaGeneratePacket {
-    DanaGeneratePacket(
-        name: "Review_Daily",
-        opCode: DanaPacketType.OPCODE_REVIEW__DAILY,
-        data: generatePacketHistoryData(options: options)
-    )
+    func generate() throws -> Data {
+        generatePacketHistoryData()
+    }
+
+    func parse(data: Data, usingUtc: Bool?) -> any DanaParsePacketProtocol {
+        super.parse(data: data, usingUtc: usingUtc)
+    }
 }

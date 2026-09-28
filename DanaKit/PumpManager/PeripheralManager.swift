@@ -1,5 +1,4 @@
 import CoreBluetooth
-import os.log
 import SwiftUI
 
 class PeripheralManager: NSObject {
@@ -11,6 +10,7 @@ class PeripheralManager: NSObject {
     @Locked private var completion: ((ConnectionResult) -> Void)?
 
     private var pumpManager: DanaKitPumpManager
+    private let encryptor = DanaKitEncryption()
 
     /// Guards `readBuffer`, `readBufferUpdatedAt`, `writeQueue`, `pendingCommand` and `writeResponse`.
     /// Those are touched from both the thread issuing the command and the bluetooth queue
@@ -27,20 +27,12 @@ class PeripheralManager: NSObject {
     private let ENCRYPTED_START_BYTE: UInt8 = 0xAA
     private let ENCRYPTED_END_BYTE: UInt8 = 0xEE
 
-    public static let SERVICE_UUID = CBUUID(string: "FFF0")
-    private let READ_CHAR_UUID = CBUUID(string: "FFF1")
     private var readCharacteristic: CBCharacteristic?
-    private let WRITE_CHAR_UUID = CBUUID(string: "FFF2")
     private var writeCharacteristic: CBCharacteristic?
 
+    private var pendingPacket: DanaKitBasePacket?
     private var writeQueue: DanaKitDispatchGroup?
     private var writeResponse: (any DanaParsePacketProtocol)?
-
-    /// The command we are currently awaiting a response for. The pump echos the command of the
-    /// request in its response, which allows us to recognize the response of a command which has
-    /// already timed out. Handing such a response to the next command would return a packet of a
-    /// completely different type than the caller expects
-    private var pendingCommand: UInt16?
 
     // Handshake state. Scoped to this connection, since a PeripheralManager is created per connection
     private var pumpCheckSent = false
@@ -66,6 +58,7 @@ class PeripheralManager: NSObject {
 
         super.init()
 
+        encryptor.setEnhancedEncryption(pumpManager.state.encryptionMode)
         peripheral.delegate = self
     }
 
@@ -75,27 +68,27 @@ class PeripheralManager: NSObject {
         }
     }
 
-    func writeMessage(_ packet: DanaGeneratePacket) throws -> (any DanaParsePacketProtocol) {
+    func writeMessage(_ packet: DanaKitBasePacket) throws -> (any DanaParsePacketProtocol) {
         let command = (UInt16(DanaPacketType.TYPE_RESPONSE) << 8) + UInt16(packet.opCode)
+        let packetData = try packet.generate()
 
         let writeQ = DanaKitDispatchGroup()
         writeQ.enter()
 
-        try claim(command, with: writeQ)
+        try claim(packet, with: writeQ)
 
         // Make sure we have the correct state
-        if packet.opCode == CommandGeneralSetHistoryUploadMode, let data = packet.data {
-            pumpManager.state.isInFetchHistoryMode = data[0] == 0x01
+        if packet.opCode == DanaPacketType.OPCODE_REVIEW__SET_HISTORY_UPLOAD_MODE, !packetData.isEmpty {
+            pumpManager.state.isInFetchHistoryMode = packetData[0] == 0x01
         } else {
             pumpManager.state.isInFetchHistoryMode = false
         }
 
-        var data = DanaKitEncryption.encodePacket(operationCode: packet.opCode, buffer: packet.data, deviceName: deviceName)
+        var data = encryptor.encodePacket(operationCode: packet.opCode, buffer: packetData, deviceName: deviceName)
         log.debug("Sending data - Name: \(packet.name), OpCode: \(packet.opCode), Encoded data: \(data.hexString())", type: .send)
 
-        if DanaKitEncryption.enhancedEncryption != EncryptionType.DEFAULT.rawValue {
-            data = DanaKitEncryption.encodeSecondLevel(data: data)
-            log.debug("Second level encrypted data: \(data.hexString())")
+        if encryptor.shouldDoSecondLevel() {
+            data = encryptor.encodeSecondLevel(data: data)
         }
 
         let isHistoryPacket = self.isHistoryPacket(opCode: command)
@@ -120,7 +113,7 @@ class PeripheralManager: NSObject {
     }
 
     /// Registers this command as the one we are awaiting a response for
-    private func claim(_ command: UInt16, with writeQ: DanaKitDispatchGroup) throws {
+    private func claim(_ packet: DanaKitBasePacket, with writeQ: DanaKitDispatchGroup) throws {
         stateLock.lock()
         defer { stateLock.unlock() }
 
@@ -137,7 +130,7 @@ class PeripheralManager: NSObject {
         historyLog = []
 
         writeQueue = writeQ
-        pendingCommand = command
+        pendingPacket = packet
     }
 
     /// Deregisters the awaited command and returns its response, if one has been received in time
@@ -146,7 +139,7 @@ class PeripheralManager: NSObject {
         defer { stateLock.unlock() }
 
         writeQueue = nil
-        pendingCommand = nil
+        pendingPacket = nil
 
         let response = writeResponse
         writeResponse = nil
@@ -155,50 +148,11 @@ class PeripheralManager: NSObject {
     }
 
     /// The command a response is currently awaited for, if any
-    private var awaitedCommand: UInt16? {
+    private var awaitedPacket: DanaKitBasePacket? {
         stateLock.lock()
         defer { stateLock.unlock() }
 
-        return writeQueue == nil ? nil : pendingCommand
-    }
-
-    private enum DeliveryResult {
-        /// The response has been handed over. The group has to be left
-        case delivered(DanaKitDispatchGroup)
-        /// A history item has been collected. The upload is still running
-        case collected
-        /// Nobody is awaiting this response (anymore)
-        case dropped
-    }
-
-    /// Hands the response over to the command which is awaiting it. History items are collected
-    /// until the pump signals the end of the upload
-    private func deliver(_ message: any DanaParsePacketProtocol) -> DeliveryResult {
-        stateLock.lock()
-        defer { stateLock.unlock() }
-
-        guard let semaphore = writeQueue, pendingCommand == message.command else {
-            return .dropped
-        }
-
-        if let historyItem = message.data as? HistoryItem {
-            guard historyItem.code == HistoryCode.RECORD_TYPE_DONE_UPLOAD else {
-                historyLog.append(historyItem)
-                return .collected
-            }
-
-            writeResponse = DanaParsePacket<[HistoryItem]>(
-                success: true,
-                rawData: Data([]),
-                data: historyLog.map({ $0 })
-            )
-
-            historyLog = []
-            return .delivered(semaphore)
-        }
-
-        writeResponse = message
-        return .delivered(semaphore)
+        return writeQueue == nil ? nil : pendingPacket
     }
 
     /// Drops a partially received message which nobody is waiting for anymore.
@@ -234,33 +188,37 @@ class PeripheralManager: NSObject {
 
 extension PeripheralManager: CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        guard error == nil else {
-            log.error("\(error!.localizedDescription)")
-            connectionFailure(error!)
+        if let error {
+            log.error("didDiscoverServices: \(error.localizedDescription)")
+            connectionFailure(error)
             return
         }
 
-        let service = peripheral.services?.first(where: { $0.uuid == PeripheralManager.SERVICE_UUID })
-        if service == nil {
+        guard let service = peripheral.services?.first(where: { $0.uuid == CBUUID.DANAKIT_SERVICE }) else {
             log.error("Failed to discover dana data service...")
             connectionFailure(NSError(domain: "Failed to discover dana data service...", code: 0, userInfo: nil))
             return
         }
 
-        log.debug("Discovered service \(PeripheralManager.SERVICE_UUID)")
-        peripheral.discoverCharacteristics([READ_CHAR_UUID, WRITE_CHAR_UUID], for: service!)
+        log.debug("Discovered service \(CBUUID.DANAKIT_SERVICE)")
+        peripheral.discoverCharacteristics([CBUUID.DANAKIT_READ_CHAR, CBUUID.DANAKIT_WRITE_CHAR], for: service)
     }
 
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-        guard error == nil else {
-            log.error("\(error!.localizedDescription)")
-            connectionFailure(error!)
+        if let error {
+            log.error("didDiscoverCharacteristicsFor: \(error.localizedDescription)")
+            connectionFailure(error)
             return
         }
 
-        let service = peripheral.services!.first(where: { $0.uuid == PeripheralManager.SERVICE_UUID })!
-        readCharacteristic = service.characteristics?.first(where: { $0.uuid == READ_CHAR_UUID })
-        writeCharacteristic = service.characteristics?.first(where: { $0.uuid == WRITE_CHAR_UUID })
+        guard let service = peripheral.services?.first(where: { $0.uuid == CBUUID.DANAKIT_SERVICE }) else {
+            log.error("Failed to discover dana service")
+            connectionFailure(NSError(domain: "Failed to discover dana service", code: 0, userInfo: nil))
+            return
+        }
+
+        readCharacteristic = service.characteristics?.first(where: { $0.uuid == CBUUID.DANAKIT_READ_CHAR })
+        writeCharacteristic = service.characteristics?.first(where: { $0.uuid == CBUUID.DANAKIT_WRITE_CHAR })
 
         guard writeCharacteristic != nil, let readCharacteristic = readCharacteristic else {
             log.error("Failed to discover dana write or read characteristic")
@@ -268,14 +226,14 @@ extension PeripheralManager: CBPeripheralDelegate {
             return
         }
 
-        log.debug("Discovered characteristics \(READ_CHAR_UUID) and \(WRITE_CHAR_UUID)")
+        log.debug("Discovered characteristics \(CBUUID.DANAKIT_READ_CHAR) and \(CBUUID.DANAKIT_WRITE_CHAR)")
         peripheral.setNotifyValue(true, for: readCharacteristic)
     }
 
     func peripheral(_: CBPeripheral, didUpdateNotificationStateFor _: CBCharacteristic, error: Error?) {
-        guard error == nil else {
-            log.error("\(error!.localizedDescription)")
-            connectionFailure(error!)
+        if let error {
+            log.error("didUpdateNotificationStateFor: \(error.localizedDescription)")
+            connectionFailure(error)
             return
         }
 
@@ -284,13 +242,14 @@ extension PeripheralManager: CBPeripheralDelegate {
     }
 
     func peripheral(_: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        guard error == nil else {
-            log.error("\(error!.localizedDescription)")
-            connectionFailure(error!)
+        if let error {
+            log.error("didUpdateValueFor: \(error.localizedDescription)")
+            connectionFailure(error)
             return
         }
 
         guard let data = characteristic.value else {
+            log.warning("Data empty")
             return
         }
 
@@ -304,7 +263,6 @@ extension PeripheralManager: CBPeripheralDelegate {
             return
         }
 
-        log.debug("Writing data \(data.hexString())")
         connectedDevice.writeValue(data, for: writeCharacteristic, type: .withoutResponse)
     }
 }
@@ -320,7 +278,7 @@ extension PeripheralManager {
 
         pumpCheckSent = true
 
-        let data = DanaKitEncryption.encodePacket(
+        let data = encryptor.encodePacket(
             operationCode: DanaPacketType.OPCODE_ENCRYPTION__PUMP_CHECK,
             buffer: nil,
             deviceName: deviceName
@@ -331,7 +289,7 @@ extension PeripheralManager {
     }
 
     private func sendTimeInfo() {
-        let data = DanaKitEncryption.encodePacket(
+        let data = encryptor.encodePacket(
             operationCode: DanaPacketType.OPCODE_ENCRYPTION__TIME_INFORMATION,
             buffer: nil,
             deviceName: deviceName
@@ -342,7 +300,7 @@ extension PeripheralManager {
     }
 
     private func sendV3PairingInformation(_ requestNewPairing: UInt8) {
-        let data = DanaKitEncryption.encodePacket(
+        let data = encryptor.encodePacket(
             operationCode: DanaPacketType.OPCODE_ENCRYPTION__TIME_INFORMATION,
             buffer: Data([requestNewPairing]),
             deviceName: deviceName
@@ -354,7 +312,7 @@ extension PeripheralManager {
 
     // 0x00 Start encryption, 0x01 Request pairing
     private func sendV3PairingInformationEmpty() {
-        var (pairingKey, randomPairingKey) = DanaKitEncryption.getPairingKeys()
+        var (pairingKey, randomPairingKey) = encryptor.getPairingKeys()
         if pairingKey.filter({ $0 != 0 }).isEmpty || randomPairingKey.filter({ $0 != 0 }).isEmpty {
             pairingKey = pumpManager.state.pairingKey
             randomPairingKey = pumpManager.state.randomPairingKey
@@ -370,12 +328,12 @@ extension PeripheralManager {
             "Setting encryption keys. Pairing key: \(pairingKey.hexString()), random pairing key: \(randomPairingKey.hexString()), random sync key: \(randomSyncKey)"
         log.debug(message)
 
-        DanaKitEncryption.setPairingKeys(pairingKey: pairingKey, randomPairingKey: randomPairingKey, randomSyncKey: randomSyncKey)
+        encryptor.setPairingKeys(pairingKey: pairingKey, randomPairingKey: randomPairingKey, randomSyncKey: randomSyncKey)
         sendV3PairingInformation(0)
     }
 
     private func sendPairingRequest() {
-        let data = DanaKitEncryption.encodePacket(
+        let data = encryptor.encodePacket(
             operationCode: DanaPacketType.OPCODE_ENCRYPTION__PASSKEY_REQUEST,
             buffer: nil,
             deviceName: deviceName
@@ -386,7 +344,7 @@ extension PeripheralManager {
     }
 
     private func sendEasyMenuCheck() {
-        let data = DanaKitEncryption.encodePacket(
+        let data = encryptor.encodePacket(
             operationCode: DanaPacketType.OPCODE_ENCRYPTION__GET_EASYMENU_CHECK,
             buffer: nil,
             deviceName: deviceName
@@ -397,7 +355,7 @@ extension PeripheralManager {
     }
 
     private func sendBLE5PairingInformation() {
-        let data = DanaKitEncryption.encodePacket(
+        let data = encryptor.encodePacket(
             operationCode: DanaPacketType.OPCODE_ENCRYPTION__TIME_INFORMATION,
             buffer: Data([0, 0, 0, 0]),
             deviceName: deviceName
@@ -408,7 +366,7 @@ extension PeripheralManager {
     }
 
     private func sendPassKeyCheck(_ pairingKey: Data) {
-        let data = DanaKitEncryption.encodePacket(
+        let data = encryptor.encodePacket(
             operationCode: DanaPacketType.OPCODE_ENCRYPTION__CHECK_PASSKEY,
             buffer: pairingKey,
             deviceName: deviceName
@@ -425,7 +383,7 @@ extension PeripheralManager {
                 "Storing security keys: Pairing key: \(pairingKey.hexString()), random pairing key: \(randomPairingKey.hexString())"
             )
 
-        DanaKitEncryption.setPairingKeys(pairingKey: pairingKey, randomPairingKey: randomPairingKey, randomSyncKey: nil)
+        encryptor.setPairingKeys(pairingKey: pairingKey, randomPairingKey: randomPairingKey, randomSyncKey: nil)
         pumpManager.state.pairingKey = pairingKey
         pumpManager.state.randomPairingKey = randomPairingKey
 
@@ -433,7 +391,7 @@ extension PeripheralManager {
     }
 
     private func processEasyMenuCheck(_: Data) {
-        if DanaKitEncryption.enhancedEncryption == EncryptionType.RSv3.rawValue {
+        if encryptor.isDanaRS() {
             sendV3PairingInformationEmpty()
         } else {
             sendTimeInfo()
@@ -455,7 +413,7 @@ extension PeripheralManager {
 
         log.info("processPairingRequest2 -> pairingKey: \(data.subdata(in: 2 ..< 4).hexString())")
         let pairingKey = data.subdata(in: 2 ..< 4)
-        DanaKitEncryption.setPairingKeys(pairingKey: pairingKey, randomPairingKey: Data(), randomSyncKey: nil)
+        encryptor.setPairingKeys(pairingKey: pairingKey, randomPairingKey: Data(), randomSyncKey: nil)
     }
 
     private func processConnectResponse(_ data: Data) {
@@ -469,12 +427,12 @@ extension PeripheralManager {
         if data.count == 4, isOk(data) {
             // response OK v1
             log.info("Setting encryption mode to DEFAULT")
-            DanaKitEncryption.setEnhancedEncryption(EncryptionType.DEFAULT.rawValue)
+            encryptor.setEnhancedEncryption(EncryptionType.DEFAULT.rawValue)
             encryptionModeSet = true
 
             pumpManager.state.ignorePassword = false
 
-            let (pairingKey, _) = DanaKitEncryption.getPairingKeys()
+            let (pairingKey, _) = encryptor.getPairingKeys()
             if !pairingKey.isEmpty {
                 sendPassKeyCheck(pairingKey)
             } else {
@@ -483,7 +441,7 @@ extension PeripheralManager {
         } else if data.count == 9, isOk(data) {
             // response OK v3, 2nd layer encryption
             log.info("Setting encryption mode to RSv3")
-            DanaKitEncryption.setEnhancedEncryption(EncryptionType.RSv3.rawValue)
+            encryptor.setEnhancedEncryption(EncryptionType.RSv3.rawValue)
             encryptionModeSet = true
 
             pumpManager.state.ignorePassword = true
@@ -504,7 +462,7 @@ extension PeripheralManager {
             }
         } else if data.count == 14, isOk(data) {
             log.info("Setting encryption mode to BLE5")
-            DanaKitEncryption.setEnhancedEncryption(EncryptionType.BLE_5.rawValue)
+            encryptor.setEnhancedEncryption(EncryptionType.BLE_5.rawValue)
             encryptionModeSet = true
 
             pumpManager.state.hwModel = data[5]
@@ -537,7 +495,7 @@ extension PeripheralManager {
                 return
             }
 
-            DanaKitEncryption.setBle5Key(ble5Key: ble5Keys)
+            encryptor.setBle5Key(ble5Key: ble5Keys)
             pumpManager.state.ble5Keys = ble5Keys
             sendBLE5PairingInformation()
         } else if data.count == 6, isPump(data) {
@@ -553,13 +511,13 @@ extension PeripheralManager {
     }
 
     private func processEncryptionResponse(_ data: Data) {
-        if DanaKitEncryption.enhancedEncryption == EncryptionType.BLE_5.rawValue {
+        if encryptor.isDanaI() {
             finishConnection()
 
-        } else if DanaKitEncryption.enhancedEncryption == EncryptionType.RSv3.rawValue {
+        } else if encryptor.isDanaRS() {
             // data[2] : 0x00 OK  0x01 Error, No pairing
             if data[2] == 0x00 {
-                let (pairingKey, randomPairingKey) = DanaKitEncryption.getPairingKeys()
+                let (pairingKey, randomPairingKey) = encryptor.getPairingKeys()
                 if pairingKey.isEmpty || randomPairingKey.isEmpty {
                     log.debug("Device is requesting pincode")
                     promptPincode(nil)
@@ -629,11 +587,9 @@ extension PeripheralManager {
 extension PeripheralManager {
     private func parseReceivedValue(_ receievedData: Data) {
         var data = receievedData
-        if !data.isEmpty && pumpManager.state.isConnected && DanaKitEncryption.enhancedEncryption != EncryptionType.DEFAULT
-            .rawValue
-        {
+        if !data.isEmpty, pumpManager.state.isConnected, encryptor.shouldDoSecondLevel() {
             log.debug("Second lvl decryption", type: .receive)
-            data = DanaKitEncryption.decodeSecondLevel(data: data)
+            data = encryptor.decodeSecondLevel(data: data)
         }
 
         let rawMessage: Data
@@ -648,7 +604,7 @@ extension PeripheralManager {
         }
 
         log.debug("Received message! Starting to decrypt data: \(rawMessage.hexString())", type: .receive)
-        let decryptedData = DanaKitEncryption.decodePacket(buffer: rawMessage, deviceName: deviceName)
+        let decryptedData = encryptor.decodePacket(buffer: rawMessage, deviceName: deviceName)
 
         guard !decryptedData.isEmpty else {
             log.error("Decryption failed...")
@@ -657,58 +613,21 @@ extension PeripheralManager {
 
         log.debug("Decoding successful! Data: \(decryptedData.hexString())", type: .receive)
         if decryptedData[0] == DanaPacketType.TYPE_ENCRYPTION_RESPONSE {
-            guard !isConnectionFinished else {
-                // The handshake is done. A late encryption packet must never be able to fail the connection
-                log
-                    .warning(
-                        "Ignoring encryption packet received after connection was established. Data: \(decryptedData.hexString())",
-                        type: .receive
-                    )
-                return
-            }
-
-            switch decryptedData[1] {
-            case DanaPacketType.OPCODE_ENCRYPTION__PUMP_CHECK:
-                processConnectResponse(decryptedData)
-                return
-            case DanaPacketType.OPCODE_ENCRYPTION__TIME_INFORMATION:
-                processEncryptionResponse(decryptedData)
-                return
-            case DanaPacketType.OPCODE_ENCRYPTION__CHECK_PASSKEY:
-                if decryptedData[2] == 0x05 {
-                    sendTimeInfo()
-                } else {
-                    sendPairingRequest()
-                }
-                return
-            case DanaPacketType.OPCODE_ENCRYPTION__PASSKEY_REQUEST:
-                processPairingRequest(decryptedData)
-                return
-            case DanaPacketType.OPCODE_ENCRYPTION__PASSKEY_RETURN:
-                processPairingRequest2(decryptedData)
-                return
-            case DanaPacketType.OPCODE_ENCRYPTION__GET_PUMP_CHECK:
-                if decryptedData[2] == 0x05 {
-                    sendTimeInfo()
-                } else {
-                    sendEasyMenuCheck()
-                }
-                return
-            case DanaPacketType.OPCODE_ENCRYPTION__GET_EASYMENU_CHECK:
-                processEasyMenuCheck(decryptedData)
-                return
-            default:
-                log.error("Received invalid encryption command type \(decryptedData[1])", type: .receive)
-                return
-            }
-        }
-
-        guard decryptedData[0] == DanaPacketType.TYPE_RESPONSE || decryptedData[0] == DanaPacketType.TYPE_NOTIFY else {
-            log.error("Received invalid packet type \(decryptedData[0])", type: .receive)
+            processConnectHandshake(decryptedData)
             return
         }
 
-        processMessage(decryptedData)
+        if decryptedData[0] == DanaPacketType.TYPE_NOTIFY {
+            processNotify(decryptedData)
+            return
+        }
+
+        if decryptedData[0] == DanaPacketType.TYPE_RESPONSE {
+            processMessage(decryptedData)
+            return
+        }
+
+        log.error("Received invalid packet type \(decryptedData[0])", type: .receive)
     }
 
     private enum ReadBufferResult {
@@ -794,11 +713,12 @@ extension PeripheralManager {
     }
 
     private func processMessage(_ data: Data) {
-        let message = parseMessage(data: data, usingUtc: pumpManager.state.usingUtc)
-        guard let message = message else {
-            log.error("Received unparsable message. Data: \(data.hexString())")
+        guard let awaitedPacket, data[OpCodeIndex] == awaitedPacket.opCode else {
+            log.error("No stream found to send this message back...")
             return
         }
+
+        let message = awaitedPacket.parse(data: data, usingUtc: pumpManager.state.usingUtc)
 
         do {
             let json = String(bytes: try JSONEncoder().encode(message), encoding: .utf8) ?? "EMPTY"
@@ -808,60 +728,105 @@ extension PeripheralManager {
             )
         } catch {}
 
-        if let notifyType = message.notifyType {
-            switch notifyType {
-            case CommandNotifyDeliveryComplete:
-                if let data = message.data as? PacketNotifyDeliveryComplete {
-                    pumpManager.notifyBolusDone(deliveredUnits: data.deliveredInsulin)
-                    return
-                }
-            case CommandNotifyDeliveryRateDisplay:
-                if let data = message.data as? PacketNotifyDeliveryRateDisplay {
-                    pumpManager.notifyBolusDidUpdate(deliveredUnits: data.deliveredInsulin)
-                    return
-                }
-            case CommandNotifyAlarm:
-                if let data = message.data as? PacketNotifyAlarm {
-                    pumpManager.notifyBolusError()
-                    pumpManager.notifyAlert(data.alert)
-                    return
-                }
-            default:
-                break
+        stateLock.lock()
+        defer { stateLock.unlock() }
+
+        guard let semaphore = writeQueue else {
+            log.warning("Command \(awaitedPacket.opCode) is not awaiting a response anymore. Dropping it...", type: .receive)
+            return
+        }
+
+        if let historyItem = message.data as? HistoryItem {
+            guard historyItem.code == HistoryCode.RECORD_TYPE_DONE_UPLOAD else {
+                historyLog.append(historyItem)
+                return
             }
 
-            pumpManager.notifyBolusError()
-            return
-        }
+            writeResponse = DanaParsePacket<[HistoryItem]>(
+                success: true,
+                rawData: Data([]),
+                data: historyLog.map({ $0 })
+            )
 
-        // Message received and dequeueing timeout
-        guard let awaitedCommand = awaitedCommand else {
-            log.error("No stream found to send this message back...")
-            return
-        }
-
-        // A response which arrives after its command has timed out must never be handed to the
-        // command which is running now: that one is expecting a completely different packet
-        guard message.command == awaitedCommand else {
-            log
-                .warning(
-                    "Ignoring response of command \(message.command ?? 0) while awaiting command \(awaitedCommand). It is most likely the late response of a command which has timed out",
-                    type: .receive
-                )
-            return
-        }
-
-        switch deliver(message) {
-        case let .delivered(semaphore):
+            historyLog = []
             semaphore.leave()
-        case .collected:
-            break
-        case .dropped:
-            log.warning("Command \(awaitedCommand) is not awaiting a response anymore. Dropping it...", type: .receive)
+            return
+        }
+
+        writeResponse = message
+        semaphore.leave()
+    }
+
+    private func processNotify(_ data: Data) {
+        switch data[OpCodeIndex] {
+        case DanaPacketType.OPCODE_NOTIFY__DELIVERY_COMPLETE:
+            let message = DanaNotifyDeliveryComplete().parse(data: data, usingUtc: pumpManager.state.usingUtc)
+            if let data = message.data as? PacketNotifyDeliveryComplete {
+                pumpManager.notifyBolusDone(deliveredUnits: data.deliveredInsulin)
+            }
+            return
+        case DanaPacketType.OPCODE_NOTIFY__DELIVERY_RATE_DISPLAY:
+            let message = DanaNotifyDeliveryRateDisplay().parse(data: data, usingUtc: pumpManager.state.usingUtc)
+            if let data = message.data as? PacketNotifyDeliveryRateDisplay {
+                pumpManager.notifyBolusDidUpdate(deliveredUnits: data.deliveredInsulin)
+            }
+            return
+        case DanaPacketType.OPCODE_NOTIFY__ALARM:
+            let message = DanaNotifyAlarm().parse(data: data, usingUtc: pumpManager.state.usingUtc)
+            if let data = message.data as? PacketNotifyAlarm {
+                pumpManager.notifyBolusError()
+                pumpManager.notifyAlert(data.alert)
+            }
+            return
+        default:
+            return
+        }
+    }
+
+    private func processConnectHandshake(_ data: Data) {
+        guard !isConnectionFinished else {
+            let message = "Ignoring encryption packet received after connection was established. Data: \(data.hexString())"
+            log.warning(message, type: .receive)
+            return
+        }
+
+        switch data[1] {
+        case DanaPacketType.OPCODE_ENCRYPTION__PUMP_CHECK:
+            processConnectResponse(data)
+            return
+        case DanaPacketType.OPCODE_ENCRYPTION__TIME_INFORMATION:
+            processEncryptionResponse(data)
+            return
+        case DanaPacketType.OPCODE_ENCRYPTION__CHECK_PASSKEY:
+            if data[2] == 0x05 {
+                sendTimeInfo()
+            } else {
+                sendPairingRequest()
+            }
+            return
+        case DanaPacketType.OPCODE_ENCRYPTION__PASSKEY_REQUEST:
+            processPairingRequest(data)
+            return
+        case DanaPacketType.OPCODE_ENCRYPTION__PASSKEY_RETURN:
+            processPairingRequest2(data)
+            return
+        case DanaPacketType.OPCODE_ENCRYPTION__GET_PUMP_CHECK:
+            if data[2] == 0x05 {
+                sendTimeInfo()
+            } else {
+                sendEasyMenuCheck()
+            }
+            return
+        case DanaPacketType.OPCODE_ENCRYPTION__GET_EASYMENU_CHECK:
+            processEasyMenuCheck(data)
+            return
+        default:
+            log.error("Received invalid encryption command type \(data[1])", type: .receive)
+            return
         }
     }
 
     private func isHistoryPacket(opCode: UInt16) -> Bool {
-        opCode > CommandHistoryBolus && opCode < CommandHistoryAll
+        opCode > DanaPacketType.OPCODE_REVIEW__BOLUS && opCode < DanaPacketType.OPCODE_REVIEW__ALL_HISTORY
     }
 }

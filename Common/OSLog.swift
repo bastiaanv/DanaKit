@@ -108,11 +108,6 @@ class DanaLogger {
     }
 }
 
-/// Appends the log entries to the log file. Shared by every DanaLogger, since they all write to
-/// the same file.
-///
-/// The writing itself is done on a background queue: the pump communication runs on the main queue
-/// and on the bluetooth queue, and stalling either of those makes commands time out
 private final class DanaLogWriter {
     static let shared = DanaLogWriter()
 

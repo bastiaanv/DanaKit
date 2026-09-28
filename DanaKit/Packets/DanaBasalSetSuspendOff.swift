@@ -1,10 +1,12 @@
-let CommandBasalSetSuspendOff: UInt16 = (UInt16(DanaPacketType.TYPE_RESPONSE & 0xFF) << 8) +
-    UInt16(DanaPacketType.OPCODE_BASAL__SET_SUSPEND_OFF & 0xFF)
+class DanaBasalSetSuspendOff: DanaKitBasePacket {
+    let name = "Basal_SetSuspendOff"
+    let opCode = DanaPacketType.OPCODE_BASAL__SET_SUSPEND_OFF
 
-func generatePacketBasalSetSuspendOff() -> DanaGeneratePacket {
-    DanaGeneratePacket(name: "Basal_SetSuspendOff", opCode: DanaPacketType.OPCODE_BASAL__SET_SUSPEND_OFF, data: nil)
-}
+    func generate() -> Data {
+        Data()
+    }
 
-func parsePacketBasalSetSuspendOff(data: Data, usingUtc _: Bool?) -> DanaParsePacket<String> {
-    DanaParsePacket(success: data[DataStart] == 0, rawData: data, data: nil)
+    func parse(data: Data, usingUtc _: Bool?) -> any DanaParsePacketProtocol {
+        DanaParsePacket<String>(success: data[DataStart] == 0, rawData: data, data: nil)
+    }
 }
