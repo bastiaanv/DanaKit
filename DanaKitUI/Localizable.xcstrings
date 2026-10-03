@@ -252,7 +252,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ (%@ U/uur)"
+            "value" : "%@ (%@ E/uur)"
           }
         },
         "pl" : {
@@ -1538,7 +1538,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "12 sec/U"
+            "value" : "12 sec/E"
           }
         },
         "pl" : {
@@ -2186,7 +2186,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "30 sec/U"
+            "value" : "30 sec/E"
           }
         },
         "pl" : {
@@ -2348,7 +2348,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "60 sec/U"
+            "value" : "60 sec/E"
           }
         },
         "pl" : {
@@ -24854,7 +24854,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scrollfunctie"
+            "value" : "Scrolfunctie"
           }
         },
         "pl" : {
@@ -31646,7 +31646,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "De pomp heeft een probleem met de as gedetecteerd. Verwijder het reservoir, controleer alles en probeer het opnieuw."
+            "value" : "De pomp heeft een probleem met de as gedetecteerd. Verwijder het reservoir, controleer de pomp goed en probeer het opnieuw."
           }
         },
         "pl" : {
@@ -32294,7 +32294,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "De tijd op je pomp verschilt van de huidige tijd. De tijd op je pomp bepaalt je geplande therapie-instellingen. Scroll naar beneden naar de rij Pomptijd om het tijdsverschil te bekijken en je pomp te configureren."
+            "value" : "De tijd op je pomp verschilt van de huidige tijd. De tijd op je pomp bepaalt je geplande therapie-instellingen. Scrol naar beneden naar de rij Pomptijd om het tijdsverschil te bekijken en je pomp te configureren."
           }
         },
         "pl" : {
