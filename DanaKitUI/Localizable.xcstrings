@@ -9978,7 +9978,7 @@
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "În timpul procesului de asociere, dispozitivul Dana-i va afișa o solicitare de asociere, în timp ce pe iPhone va fi afișată o solicitare pentru un cod de asociere. Pe pompă, selectați OK și introduceți codul de 6 cifre pe ecranul iPhone-ului. După aceea, %@ este gata să comunice cu dispozitivul Dana-i."
+            "value" : "În timpul procesului de asociere, dispozitivul Dana-i va afișa o solicitare de asociere, în timp ce pe iPhone va fi afișată o solicitare pentru un cod de asociere. Pe pompă, selectați OK și introduceți codul de 6 cifre pe iPhone. După aceea, %@ este gata să comunice cu dispozitivul Dana-i."
           }
         },
         "ru" : {
