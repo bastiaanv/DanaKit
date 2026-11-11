@@ -89,10 +89,10 @@ class DanaKitScanViewModel: ObservableObject {
             isConnecting = false
             isConnectionError = true
             connectionErrorMessage = "Connection timeout is hit..."
-        case .alreadyConnectedAndBusy:
+        case .busy:
             isConnecting = false
             isConnectionError = true
-            connectionErrorMessage = "Device is already connected..."
+            connectionErrorMessage = "Another pump operation is in progress"
         }
     }
 

@@ -100,8 +100,8 @@ extension DanaKitPumpManagerError: LocalizedError {
             return "Requested PIN"
         case .timeout:
             return "Timeout was hit"
-        case .alreadyConnectedAndBusy:
-            return "Is already connected and is busy"
+        case .busy:
+            return "Another pump operation is in progress"
         }
     }
 }
