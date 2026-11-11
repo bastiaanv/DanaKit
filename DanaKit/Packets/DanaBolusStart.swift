@@ -13,7 +13,13 @@ class DanaBolusStart: DanaKitBasePacket {
     }
 
     func generate() throws -> Data {
-        let bolusRate = UInt16(options.amount * 100)
+        guard let bolusRate = UInt16(exactly: (options.amount * 100).rounded()) else {
+            throw NSError(
+                domain: "INVALID_AMOUNT",
+                code: 1,
+                userInfo: [NSLocalizedDescriptionKey: "Invalid bolus amount"]
+            )
+        }
 
         return Data([
             UInt8(bolusRate & 0xFF),
