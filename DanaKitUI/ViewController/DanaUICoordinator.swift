@@ -137,7 +137,7 @@ class DanaUICoordinator: UINavigationController, @MainActor PumpManagerOnboardin
         case .danaiExplaination:
             return hostingController(
                 rootView: DanaIExplainationView(nextAction: stepFinished),
-                title: String(localized: "Setting up Dana-i", comment: "Title for dana-i explaination")
+                title: String(localized: "Setting up Dana-i/i2", comment: "Title for dana-i and dana-i2 explaination")
             )
 
         case .insulinConfirmationScreen:
