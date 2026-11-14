@@ -234,6 +234,10 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         hwModel >= 7
     }
 
+    public var isDanaI2: Bool {
+        hwModel == 0x0B || hwModel == 0x0C
+    }
+    
     /// Pump protocol
     public var pumpProtocol: UInt8 = 0x00
     public var encryptionMode: UInt8 = 0x00 // 0x00 = DEFAULT, 0x01 = RS, 0x02 = BLE5

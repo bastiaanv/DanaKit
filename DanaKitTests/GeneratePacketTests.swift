@@ -226,6 +226,49 @@ import Testing
         #expect(packet.data == Data([244, 1, 2]))
     }
 
+    @Test func generateBolusStart_DanaI2Normal() throws {
+        let options = PacketBolusStart(amount: 5, speed: .speed12, commandType: .normal)
+        let packet = DanaBolusStart(options: options)
+
+        #expect(try packet.generate() == Data([244, 1, 0, 0]))
+    }
+
+    @Test func generateBolusStart_DanaI2Algorithm() throws {
+        let options = PacketBolusStart(amount: 5, speed: .speed12, commandType: .algorithm)
+        let packet = DanaBolusStart(options: options)
+
+        #expect(try packet.generate() == Data([244, 1, 0, 1]))
+    }
+
+    @Test func parseBolusStart_DanaI2HighByteError() throws {
+        // Max bolus violation (0x0100) has a low byte of 0
+        let packet = DanaBolusStart(options: PacketBolusStart(amount: 5, speed: .speed12, commandType: .normal))
+        let data = Data([0xB2, 74, 0x00, 0x01])
+
+        #expect(packet.parse(data: data, usingUtc: true).success == false)
+        #expect(
+            packet.transformBolusError(data: data).localizedDescription == DanaKitPumpManagerError.bolusMaxViolation
+                .localizedDescription
+        )
+    }
+
+    @Test func parseBolusStart_DanaI2Ok() throws {
+        let packet = DanaBolusStart(options: PacketBolusStart(amount: 5, speed: .speed12, commandType: .normal))
+
+        #expect(packet.parse(data: Data([0xB2, 74, 0x00, 0x00]), usingUtc: true).success == true)
+    }
+
+    @Test func parseBolusStart_OldPumpError() throws {
+        let packet = DanaBolusStart(options: PacketBolusStart(amount: 5, speed: .speed12))
+        let data = Data([0xB2, 74, 0x10])
+
+        #expect(packet.parse(data: data, usingUtc: true).success == false)
+        #expect(
+            packet.transformBolusError(data: data).localizedDescription == DanaKitPumpManagerError.bolusMaxViolation
+                .localizedDescription
+        )
+    }
+
     @Test func generateBolusStop() {
         let packet = generatePacketBolusStop()
 
