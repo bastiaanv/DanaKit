@@ -258,6 +258,45 @@ import Testing
         #expect(packet.parse(data: Data([0xB2, 74, 0x00, 0x00]), usingUtc: true).success == true)
     }
 
+    @Test func parseHistory_SingleRecord() throws {
+        // Bolus of 1.50U
+        let data = Data([0xB2, 0x0F, 0x02, 23, 12, 5, 11, 0, 0, 0x80, 0x00, 0x96])
+        let packet = DanaHistoryAll(options: PacketHistoryBase(from: nil, usingUtc: true))
+
+        let items = try #require(packet.parse(data: data, usingUtc: true).data as? [HistoryItem])
+        #expect(items.count == 1)
+        #expect(items[0].code == HistoryCode.RECORD_TYPE_BOLUS)
+        #expect(items[0].value == 1.5)
+        #expect(items[0].raw == data)
+    }
+
+    @Test func parseHistory_BulkRecords() throws {
+        // Dana-i2: bolus of 1.50U and a prime of 0.30U in one packet
+        let data = Data([
+            0xB2, 0x0F,
+            0x02, 23, 12, 5, 11, 0, 0, 0x80, 0x00, 0x96,
+            0x04, 23, 12, 5, 11, 5, 0, 0x00, 0x00, 0x1E
+        ])
+        let packet = DanaHistoryAll(options: PacketHistoryBase(from: nil, usingUtc: true))
+
+        let items = try #require(packet.parse(data: data, usingUtc: true).data as? [HistoryItem])
+        #expect(items.count == 2)
+        #expect(items[0].code == HistoryCode.RECORD_TYPE_BOLUS)
+        #expect(items[0].value == 1.5)
+        #expect(items[0].raw == Data([0xB2, 0x0F, 0x02, 23, 12, 5, 11, 0, 0, 0x80, 0x00, 0x96]))
+        #expect(items[1].code == HistoryCode.RECORD_TYPE_PRIME)
+        #expect(items[1].value == 0.3)
+        #expect(items[1].raw == Data([0xB2, 0x0F, 0x04, 23, 12, 5, 11, 5, 0, 0x00, 0x00, 0x1E]))
+    }
+
+    @Test func parseHistory_DoneUpload() throws {
+        let packet = DanaHistoryAll(options: PacketHistoryBase(from: nil, usingUtc: true))
+
+        let items = try #require(packet.parse(data: Data([0xB2, 0x0F, 0x00, 0x00, 0x00]), usingUtc: true).data as? [HistoryItem])
+        #expect(items.count == 1)
+        #expect(items[0].code == HistoryCode.RECORD_TYPE_DONE_UPLOAD)
+    }
+
     @Test func parseBolusStart_OldPumpError() throws {
         let packet = DanaBolusStart(options: PacketBolusStart(amount: 5, speed: .speed12))
         let data = Data([0xB2, 74, 0x10])

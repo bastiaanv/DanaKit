@@ -746,9 +746,11 @@ extension PeripheralManager {
             return
         }
 
-        if let historyItem = message.data as? HistoryItem {
-            guard historyItem.code == HistoryCode.RECORD_TYPE_DONE_UPLOAD else {
-                historyLog.append(historyItem)
+        if let historyItems = message.data as? [HistoryItem] {
+            // Dana-i2 sends up to 20 records per packet, older pumps one
+            let records = historyItems.filter { $0.code != HistoryCode.RECORD_TYPE_DONE_UPLOAD }
+            historyLog.append(contentsOf: records)
+            guard records.count < historyItems.count else {
                 return
             }
 
