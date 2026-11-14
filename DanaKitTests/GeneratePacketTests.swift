@@ -297,6 +297,14 @@ import Testing
         #expect(items[0].code == HistoryCode.RECORD_TYPE_DONE_UPLOAD)
     }
 
+    @Test func pumpCheckErrorText() throws {
+        #expect(PeripheralManager.pumpCheckErrorText(nil) == "Pump error")
+        #expect(PeripheralManager.pumpCheckErrorText(0x02) == "Occlusion")
+        // Low battery comes first when more flags are set
+        #expect(PeripheralManager.pumpCheckErrorText(0x03) == "Low battery")
+        #expect(PeripheralManager.pumpCheckErrorText(0x80) == "Pump error (0x80)")
+    }
+
     @Test func parseBolusStart_OldPumpError() throws {
         let packet = DanaBolusStart(options: PacketBolusStart(amount: 5, speed: .speed12))
         let data = Data([0xB2, 74, 0x10])
