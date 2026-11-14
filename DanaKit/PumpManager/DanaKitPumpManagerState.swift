@@ -49,6 +49,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         cannulaVolume = rawValue["cannulaVolume"] as? UInt16 ?? 0
         refillAmount = rawValue["refillAmount"] as? UInt16 ?? 0
         targetBg = rawValue["targetBg"] as? UInt16
+        autoLock = rawValue["autoLock"] as? Bool
         useSilentTones = rawValue["useSilentTones"] as? Bool ?? true
         batteryRemaining = rawValue["batteryRemaining"] as? Double ?? 0
         basalProfileNumber = rawValue["basalProfileNumber"] as? UInt8 ?? 0
@@ -143,6 +144,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         basalProfileNumber = 0
         refillAmount = 0
         targetBg = nil
+        autoLock = nil
         useSilentTones = false
         batteryRemaining = 0
         cannulaDate = nil
@@ -195,6 +197,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         value["cannulaVolume"] = cannulaVolume
         value["refillAmount"] = refillAmount
         value["targetBg"] = targetBg
+        value["autoLock"] = autoLock
         value["useSilentTones"] = useSilentTones
         value["batteryRemaining"] = batteryRemaining
         value["basalProfileNumber"] = basalProfileNumber
@@ -295,6 +298,8 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
     public var cannulaVolume: UInt16
     public var refillAmount: UInt16
     public var targetBg: UInt16?
+    /// Only on Dana-i2. nil when the pump does not have this setting
+    public var autoLock: Bool?
 
     public var basalDeliveryOrdinal: DanaKitBasal = .active
     public var basalDose: UnfinalizedDose

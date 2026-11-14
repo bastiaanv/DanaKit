@@ -11,6 +11,7 @@ enum DanaUIScreen {
     case insulinConfirmationScreen
     case bolusSpeedScreen
     case deviceScanningScreen
+    case autoLockScreen
     case setupComplete
     case settings
     case userOptions
@@ -19,7 +20,8 @@ enum DanaUIScreen {
     case refillCannulaOnly
     case refillFull
 
-    func next() -> DanaUIScreen? {
+    /// hasAutoLock: the paired pump has the auto lock setting (Dana-i2)
+    func next(hasAutoLock: Bool) -> DanaUIScreen? {
         switch self {
         case .firstRunScreen:
             return nil
@@ -32,6 +34,8 @@ enum DanaUIScreen {
         case .bolusSpeedScreen:
             return .deviceScanningScreen
         case .deviceScanningScreen:
+            return hasAutoLock ? .autoLockScreen : .setupComplete
+        case .autoLockScreen:
             return .setupComplete
         default:
             return nil
@@ -173,6 +177,13 @@ class DanaUICoordinator: UINavigationController, @MainActor PumpManagerOnboardin
                 title: String(localized: "Pairing", comment: "Title for DanaKitScanView")
             )
 
+        case .autoLockScreen:
+            let viewModel = DanaKitAutoLockViewModel(pumpManager, nextStep: stepFinished)
+            return hostingController(
+                rootView: DanaKitAutoLock(viewModel: viewModel),
+                title: String(localized: "Auto lock", comment: "Title for Dana-i2 auto lock")
+            )
+
         case .setupComplete:
             let nextStep: () -> Void = {
                 self.pumpManagerOnboardingDelegate?.pumpManagerOnboarding(didCreatePumpManager: self.pumpManager)
@@ -274,7 +285,7 @@ class DanaUICoordinator: UINavigationController, @MainActor PumpManagerOnboardin
     }
 
     func stepFinished() {
-        if let nextStep = currentScreen.next() {
+        if let nextStep = currentScreen.next(hasAutoLock: pumpManager.state.autoLock != nil) {
             navigateTo(nextStep)
         } else {
             pumpManager.notifyDelegateOfDeactivation {

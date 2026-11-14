@@ -967,6 +967,16 @@
         }
       }
     },
+    "%lf%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lf%2$@"
+          }
+        }
+      }
+    },
     "%lld hr %lld min" : {
       "localizations" : {
         "ar" : {
@@ -1443,6 +1453,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld 秒"
+          }
+        }
+      }
+    },
+    "%lld%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld%2$@"
           }
         }
       }
@@ -3552,6 +3572,9 @@
           }
         }
       }
+    },
+    "Auto lock" : {
+
     },
     "Backlight on time" : {
       "comment" : "backlightOnTime",
@@ -12946,6 +12969,9 @@
           }
         }
       }
+    },
+    "Failed to set auto lock. Please try again" : {
+
     },
     "Failed to set reservoir amount. Re-sync pump data and try again please" : {
       "comment" : "Label for error first step refill",
@@ -25249,6 +25275,9 @@
         }
       }
     },
+    "Select the auto lock setting of your Dana-i2" : {
+
+    },
     "Select the bolus delivery speed" : {
       "comment" : "Dana delivery speed body",
       "extractionState" : "manual",
@@ -31555,6 +31584,9 @@
         }
       }
     },
+    "The pump does not lock its buttons" : {
+
+    },
     "The pump has detected an issue with its chaft. Please remove the reservoir, check everything and try again" : {
       "comment" : "Alert body for checkShaft",
       "extractionState" : "manual",
@@ -31716,6 +31748,9 @@
           }
         }
       }
+    },
+    "The pump locks its buttons automatically" : {
+
     },
     "The pump reminds you when the amount of insulin in the pump reaches this level" : {
       "comment" : "Description for low reservoir reminder",

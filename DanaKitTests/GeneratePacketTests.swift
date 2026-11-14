@@ -466,12 +466,45 @@ import Testing
             lowReservoirRate: 20,
             cannulaVolume: 250,
             refillAmount: 7,
-            targetBg: 55
+            targetBg: 55,
+            autoLock: nil
         )
         let packet = generatePacketGeneralSetUserOption(options: options)
 
         #expect(packet.opCode == 115)
         #expect(packet.data == Data([0, 1, 0, 10, 10, 1, 1, 0, 20, 250, 0, 7, 0, 55, 0]))
+    }
+
+    @Test func generateGeneralSetUserOption_DanaI2() throws {
+        let options = PacketGeneralSetUserOption(
+            isTimeDisplay24H: true,
+            isButtonScrollOnOff: true,
+            beepAndAlarm: 0,
+            lcdOnTimeInSec: 10,
+            backlightOnTimeInSec: 10,
+            selectedLanguage: 1,
+            units: 1,
+            shutdownHour: 0,
+            lowReservoirRate: 20,
+            cannulaVolume: 250,
+            refillAmount: 7,
+            targetBg: 55,
+            autoLock: true
+        )
+        let packet = DanaGeneralSetUserOption(options: options)
+
+        #expect(try packet.generate() == Data([0, 1, 0, 10, 10, 1, 1, 0, 20, 250, 0, 7, 0, 55, 0, 1]))
+    }
+
+    @Test func parseGeneralGetUserOption_AutoLock() throws {
+        // 21 bytes of user options, the last one is AutoLock
+        var data = Data([0xB2, 0x72, 0, 1, 1, 10, 10, 1, 1, 0, 20, 250, 0, 7, 0, 1, 2, 3, 4, 5, 55, 0])
+        let packet = DanaGeneralGetUserOption()
+
+        #expect((packet.parse(data: data, usingUtc: true).data as? PacketGeneralGetUserOption)?.autoLock == nil)
+
+        data.append(0x01)
+        #expect((packet.parse(data: data, usingUtc: true).data as? PacketGeneralGetUserOption)?.autoLock == true)
     }
 
     @Test func generateHistoryAlarmFromDate() {

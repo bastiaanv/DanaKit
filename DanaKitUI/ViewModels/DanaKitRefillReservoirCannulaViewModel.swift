@@ -66,7 +66,8 @@ class DanaKitRefillReservoirCannulaViewModel: ObservableObject {
             lowReservoirRate: pumpManager.state.lowReservoirRate,
             cannulaVolume: pumpManager.state.cannulaVolume,
             refillAmount: reservoirAmount,
-            targetBg: pumpManager.state.targetBg
+            targetBg: pumpManager.state.targetBg,
+            autoLock: pumpManager.state.autoLock
         )
 
         pumpManager.setUserSettings(data: model) { success in

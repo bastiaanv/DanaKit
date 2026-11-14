@@ -130,6 +130,7 @@ extension DanaKitPumpManager {
             state.cannulaVolume = dataUserOption.cannulaVolume
             state.refillAmount = dataUserOption.refillAmount
             state.targetBg = dataUserOption.targetBg
+            state.autoLock = dataUserOption.autoLock
             state.units = dataUserOption.units
         } catch {
             log.error("Failed to sync user options: \(error.localizedDescription)")
