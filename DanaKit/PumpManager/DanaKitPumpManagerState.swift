@@ -361,6 +361,10 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
             return "Dana-i (BLE5)"
         case 0x0A:
             return "Dana-i (BLE5, Korean)"
+        case 0x0B:
+            return "Dana-i2"
+        case 0x0C:
+            return "Dana-i2 (Korean)"
         default:
             return "Unknown Dana pump"
         }
@@ -382,6 +386,12 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         case 0x0A:
             return "danai"
 
+        // TODO: Update with proper pump image once it's available.
+//        case 0x0B:
+//            return "danai2"
+//        case 0x0C:
+//            return "danai2"
+            
         default:
             return "danai"
         }

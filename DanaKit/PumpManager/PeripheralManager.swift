@@ -465,10 +465,12 @@ extension PeripheralManager {
             encryptor.setEnhancedEncryption(EncryptionType.BLE_5.rawValue)
             encryptionModeSet = true
 
-            pumpManager.state.hwModel = data[5]
+            let hwModel = data[5]
+            
+            pumpManager.state.hwModel = hwModel
             pumpManager.state.pumpProtocol = data[7]
 
-            guard pumpManager.state.hwModel == 0x09 || pumpManager.state.hwModel == 0x0A else {
+            guard isDanaI(hwModel) || isDanaI2(hwModel) else {
                 log.error("Got invalid hwModel \(pumpManager.state.hwModel)")
                 connectionFailure(NSError(domain: "Invalid hwModel", code: 0, userInfo: nil))
                 return
@@ -579,6 +581,14 @@ extension PeripheralManager {
 
     private func isBusy(_ data: Data) -> Bool {
         data[2] == busyCharCodes[0] && data[3] == busyCharCodes[1] && data[4] == busyCharCodes[2] && data[5] == busyCharCodes[3]
+    }
+    
+    private func isDanaI(_ model: UInt8) -> Bool {
+        model == 0x09 || model == 0x0A
+    }
+    
+    private func isDanaI2(_ model: UInt8) -> Bool {
+        model == 0x0B || model == 0x0C
     }
 }
 
