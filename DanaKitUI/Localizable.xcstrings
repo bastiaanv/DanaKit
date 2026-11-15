@@ -7950,6 +7950,9 @@
         }
       }
     },
+    "Dana-i/i2" : {
+
+    },
     "Dana-RS v3 found!" : {
       "comment" : "Dana-RS v3 found",
       "extractionState" : "manual",
@@ -10053,6 +10056,9 @@
           }
         }
       }
+    },
+    "During the pairing process, your Dana-i/i2 will show a pairing prompt while your iPhone will show a prompt for a pairing code. On your pump, select OK, then type the 6-digit code shown on your pump into the prompt on your iPhone. After that, %1$@ is ready to communicate with your Dana-i/i2" : {
+
     },
     "During the pairing process, your DanaRS v1 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, Loop is ready to communicate with your DanaRS v1" : {
       "comment" : "Subtext for danars v1",
@@ -26894,6 +26900,9 @@
         }
       }
     },
+    "Setting up Dana-i/i2" : {
+
+    },
     "Setting up DanaRS v3" : {
       "comment" : "Title for danars v3 explaination",
       "extractionState" : "manual",
@@ -30449,6 +30458,9 @@
           }
         }
       }
+    },
+    "The Dana-i (first released in 2020) and its successor the Dana-i2 by manufacturer Sooil are the latest in the series" : {
+
     },
     "The Dana-I insulin pump was first release in 2020 by manufacturer Sooil and is the latest in the series" : {
       "comment" : "dana-i description",
