@@ -395,12 +395,11 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         case 0x0A:
             return "danai"
 
-        // TODO: Update with proper pump image once it's available.
-//        case 0x0B:
-//            return "danai2"
-//        case 0x0C:
-//            return "danai2"
-            
+        case 0x0B:
+            return "danai2"
+        case 0x0C:
+            return "danai2"
+
         default:
             return "danai"
         }
