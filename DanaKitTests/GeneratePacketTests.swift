@@ -226,6 +226,96 @@ import Testing
         #expect(packet.data == Data([244, 1, 2]))
     }
 
+    @Test func generateBolusStart_DanaI2Normal() throws {
+        let options = PacketBolusStart(amount: 5, speed: .speed12, commandType: .normal)
+        let packet = DanaBolusStart(options: options)
+
+        #expect(try packet.generate() == Data([244, 1, 0, 0]))
+    }
+
+    @Test func generateBolusStart_DanaI2Algorithm() throws {
+        let options = PacketBolusStart(amount: 5, speed: .speed12, commandType: .algorithm)
+        let packet = DanaBolusStart(options: options)
+
+        #expect(try packet.generate() == Data([244, 1, 0, 1]))
+    }
+
+    @Test func parseBolusStart_DanaI2HighByteError() throws {
+        // Max bolus violation (0x0100) has a low byte of 0
+        let packet = DanaBolusStart(options: PacketBolusStart(amount: 5, speed: .speed12, commandType: .normal))
+        let data = Data([0xB2, 74, 0x00, 0x01])
+
+        #expect(packet.parse(data: data, usingUtc: true).success == false)
+        #expect(
+            packet.transformBolusError(data: data).localizedDescription == DanaKitPumpManagerError.bolusMaxViolation
+                .localizedDescription
+        )
+    }
+
+    @Test func parseBolusStart_DanaI2Ok() throws {
+        let packet = DanaBolusStart(options: PacketBolusStart(amount: 5, speed: .speed12, commandType: .normal))
+
+        #expect(packet.parse(data: Data([0xB2, 74, 0x00, 0x00]), usingUtc: true).success == true)
+    }
+
+    @Test func parseHistory_SingleRecord() throws {
+        // Bolus of 1.50U
+        let data = Data([0xB2, 0x0F, 0x02, 23, 12, 5, 11, 0, 0, 0x80, 0x00, 0x96])
+        let packet = DanaHistoryAll(options: PacketHistoryBase(from: nil, usingUtc: true))
+
+        let items = try #require(packet.parse(data: data, usingUtc: true).data as? [HistoryItem])
+        #expect(items.count == 1)
+        #expect(items[0].code == HistoryCode.RECORD_TYPE_BOLUS)
+        #expect(items[0].value == 1.5)
+        #expect(items[0].raw == data)
+    }
+
+    @Test func parseHistory_BulkRecords() throws {
+        // Dana-i2: bolus of 1.50U and a prime of 0.30U in one packet
+        let data = Data([
+            0xB2, 0x0F,
+            0x02, 23, 12, 5, 11, 0, 0, 0x80, 0x00, 0x96,
+            0x04, 23, 12, 5, 11, 5, 0, 0x00, 0x00, 0x1E
+        ])
+        let packet = DanaHistoryAll(options: PacketHistoryBase(from: nil, usingUtc: true))
+
+        let items = try #require(packet.parse(data: data, usingUtc: true).data as? [HistoryItem])
+        #expect(items.count == 2)
+        #expect(items[0].code == HistoryCode.RECORD_TYPE_BOLUS)
+        #expect(items[0].value == 1.5)
+        #expect(items[0].raw == Data([0xB2, 0x0F, 0x02, 23, 12, 5, 11, 0, 0, 0x80, 0x00, 0x96]))
+        #expect(items[1].code == HistoryCode.RECORD_TYPE_PRIME)
+        #expect(items[1].value == 0.3)
+        #expect(items[1].raw == Data([0xB2, 0x0F, 0x04, 23, 12, 5, 11, 5, 0, 0x00, 0x00, 0x1E]))
+    }
+
+    @Test func parseHistory_DoneUpload() throws {
+        let packet = DanaHistoryAll(options: PacketHistoryBase(from: nil, usingUtc: true))
+
+        let items = try #require(packet.parse(data: Data([0xB2, 0x0F, 0x00, 0x00, 0x00]), usingUtc: true).data as? [HistoryItem])
+        #expect(items.count == 1)
+        #expect(items[0].code == HistoryCode.RECORD_TYPE_DONE_UPLOAD)
+    }
+
+    @Test func pumpCheckErrorText() throws {
+        #expect(PeripheralManager.pumpCheckErrorText(nil) == "Pump error")
+        #expect(PeripheralManager.pumpCheckErrorText(0x02) == "Occlusion")
+        // Low battery comes first when more flags are set
+        #expect(PeripheralManager.pumpCheckErrorText(0x03) == "Low battery")
+        #expect(PeripheralManager.pumpCheckErrorText(0x80) == "Pump error (0x80)")
+    }
+
+    @Test func parseBolusStart_OldPumpError() throws {
+        let packet = DanaBolusStart(options: PacketBolusStart(amount: 5, speed: .speed12))
+        let data = Data([0xB2, 74, 0x10])
+
+        #expect(packet.parse(data: data, usingUtc: true).success == false)
+        #expect(
+            packet.transformBolusError(data: data).localizedDescription == DanaKitPumpManagerError.bolusMaxViolation
+                .localizedDescription
+        )
+    }
+
     @Test func generateBolusStop() {
         let packet = generatePacketBolusStop()
 
@@ -376,12 +466,45 @@ import Testing
             lowReservoirRate: 20,
             cannulaVolume: 250,
             refillAmount: 7,
-            targetBg: 55
+            targetBg: 55,
+            autoLock: nil
         )
         let packet = generatePacketGeneralSetUserOption(options: options)
 
         #expect(packet.opCode == 115)
         #expect(packet.data == Data([0, 1, 0, 10, 10, 1, 1, 0, 20, 250, 0, 7, 0, 55, 0]))
+    }
+
+    @Test func generateGeneralSetUserOption_DanaI2() throws {
+        let options = PacketGeneralSetUserOption(
+            isTimeDisplay24H: true,
+            isButtonScrollOnOff: true,
+            beepAndAlarm: 0,
+            lcdOnTimeInSec: 10,
+            backlightOnTimeInSec: 10,
+            selectedLanguage: 1,
+            units: 1,
+            shutdownHour: 0,
+            lowReservoirRate: 20,
+            cannulaVolume: 250,
+            refillAmount: 7,
+            targetBg: 55,
+            autoLock: true
+        )
+        let packet = DanaGeneralSetUserOption(options: options)
+
+        #expect(try packet.generate() == Data([0, 1, 0, 10, 10, 1, 1, 0, 20, 250, 0, 7, 0, 55, 0, 1]))
+    }
+
+    @Test func parseGeneralGetUserOption_AutoLock() throws {
+        // 21 bytes of user options, the last one is AutoLock
+        var data = Data([0xB2, 0x72, 0, 1, 1, 10, 10, 1, 1, 0, 20, 250, 0, 7, 0, 1, 2, 3, 4, 5, 55, 0])
+        let packet = DanaGeneralGetUserOption()
+
+        #expect((packet.parse(data: data, usingUtc: true).data as? PacketGeneralGetUserOption)?.autoLock == nil)
+
+        data.append(0x01)
+        #expect((packet.parse(data: data, usingUtc: true).data as? PacketGeneralGetUserOption)?.autoLock == true)
     }
 
     @Test func generateHistoryAlarmFromDate() {

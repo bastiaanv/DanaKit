@@ -49,6 +49,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         cannulaVolume = rawValue["cannulaVolume"] as? UInt16 ?? 0
         refillAmount = rawValue["refillAmount"] as? UInt16 ?? 0
         targetBg = rawValue["targetBg"] as? UInt16
+        autoLock = rawValue["autoLock"] as? Bool
         useSilentTones = rawValue["useSilentTones"] as? Bool ?? true
         batteryRemaining = rawValue["batteryRemaining"] as? Double ?? 0
         basalProfileNumber = rawValue["basalProfileNumber"] as? UInt8 ?? 0
@@ -143,6 +144,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         basalProfileNumber = 0
         refillAmount = 0
         targetBg = nil
+        autoLock = nil
         useSilentTones = false
         batteryRemaining = 0
         cannulaDate = nil
@@ -195,6 +197,7 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         value["cannulaVolume"] = cannulaVolume
         value["refillAmount"] = refillAmount
         value["targetBg"] = targetBg
+        value["autoLock"] = autoLock
         value["useSilentTones"] = useSilentTones
         value["batteryRemaining"] = batteryRemaining
         value["basalProfileNumber"] = basalProfileNumber
@@ -234,6 +237,10 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
         hwModel >= 7
     }
 
+    public var isDanaI2: Bool {
+        hwModel == 0x0B || hwModel == 0x0C
+    }
+    
     /// Pump protocol
     public var pumpProtocol: UInt8 = 0x00
     public var encryptionMode: UInt8 = 0x00 // 0x00 = DEFAULT, 0x01 = RS, 0x02 = BLE5
@@ -291,6 +298,8 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
     public var cannulaVolume: UInt16
     public var refillAmount: UInt16
     public var targetBg: UInt16?
+    /// Only on Dana-i2. nil when the pump does not have this setting
+    public var autoLock: Bool?
 
     public var basalDeliveryOrdinal: DanaKitBasal = .active
     public var basalDose: UnfinalizedDose
@@ -361,6 +370,10 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
             return "Dana-i (BLE5)"
         case 0x0A:
             return "Dana-i (BLE5, Korean)"
+        case 0x0B:
+            return "Dana-i2"
+        case 0x0C:
+            return "Dana-i2 (Korean)"
         default:
             return "Unknown Dana pump"
         }
@@ -381,6 +394,11 @@ public struct DanaKitPumpManagerState: RawRepresentable, Equatable {
             return "danai"
         case 0x0A:
             return "danai"
+
+        case 0x0B:
+            return "danai2"
+        case 0x0C:
+            return "danai2"
 
         default:
             return "danai"

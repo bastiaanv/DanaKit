@@ -10,6 +10,8 @@ class DanaKitUserSettingsViewModel: ObservableObject {
     @Published var lcdOnTimeInSec: UInt8
     @Published var backlightOnTimeInSec: UInt8
     @Published var refillAmount: UInt16
+    /// Only on Dana-i2. nil when the pump does not have this setting
+    @Published var autoLock: Bool?
 
     private let pumpManager: DanaKitPumpManager
 
@@ -24,6 +26,7 @@ class DanaKitUserSettingsViewModel: ObservableObject {
         lcdOnTimeInSec = pumpManager.state.lcdOnTimeInSec
         backlightOnTimeInSec = pumpManager.state.backlightOnTimInSec
         refillAmount = pumpManager.state.refillAmount
+        autoLock = pumpManager.state.autoLock
     }
 
     func storeUserOption() {
@@ -40,7 +43,8 @@ class DanaKitUserSettingsViewModel: ObservableObject {
             lowReservoirRate: lowReservoirRate,
             cannulaVolume: pumpManager.state.cannulaVolume,
             refillAmount: refillAmount,
-            targetBg: pumpManager.state.targetBg
+            targetBg: pumpManager.state.targetBg,
+            autoLock: autoLock
         )
 
         pumpManager.setUserSettings(data: model, completion: { _ in

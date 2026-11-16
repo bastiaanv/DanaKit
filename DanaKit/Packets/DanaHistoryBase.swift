@@ -53,7 +53,34 @@ class HistoryPacket {
         return data
     }
 
-    func parse(data: Data, usingUtc: Bool?) -> DanaParsePacket<HistoryItem> {
+    /// Code(1) + date and time(6) + history code(1) + value(2)
+    private static let RecordSize = 10
+
+    /**
+     * Older pumps send one record per packet. Dana-i2 sends up to 20 records in one packet (bulk transfer)
+     */
+    func parse(data: Data, usingUtc: Bool?) -> DanaParsePacket<[HistoryItem]> {
+        let recordCount = (data.count - DataStart) / HistoryPacket.RecordSize
+        guard recordCount > 1 else {
+            let record = parseRecord(data: data, usingUtc: usingUtc)
+            return DanaParsePacket(success: record.success, rawData: data, data: record.data.map { [$0] })
+        }
+
+        // Split into packets of one record, so every item gets its own raw data like on older pumps
+        let records = (0 ..< recordCount).map { index in
+            let start = DataStart + index * HistoryPacket.RecordSize
+            let recordData = data.prefix(DataStart) + data.subdata(in: start ..< start + HistoryPacket.RecordSize)
+            return parseRecord(data: recordData, usingUtc: usingUtc)
+        }
+
+        return DanaParsePacket(
+            success: records.allSatisfy(\.success),
+            rawData: data,
+            data: records.compactMap(\.data)
+        )
+    }
+
+    private func parseRecord(data: Data, usingUtc: Bool?) -> DanaParsePacket<HistoryItem> {
         let usingUtc = usingUtc ?? true
         if data.count == 3 {
             return DanaParsePacket(

@@ -465,10 +465,12 @@ extension PeripheralManager {
             encryptor.setEnhancedEncryption(EncryptionType.BLE_5.rawValue)
             encryptionModeSet = true
 
-            pumpManager.state.hwModel = data[5]
+            let hwModel = data[5]
+            
+            pumpManager.state.hwModel = hwModel
             pumpManager.state.pumpProtocol = data[7]
 
-            guard pumpManager.state.hwModel == 0x09 || pumpManager.state.hwModel == 0x0A else {
+            guard isDanaI(hwModel) || isDanaI2(hwModel) else {
                 log.error("Got invalid hwModel \(pumpManager.state.hwModel)")
                 connectionFailure(NSError(domain: "Invalid hwModel", code: 0, userInfo: nil))
                 return
@@ -498,9 +500,11 @@ extension PeripheralManager {
             encryptor.setBle5Key(ble5Key: ble5Keys)
             pumpManager.state.ble5Keys = ble5Keys
             sendBLE5PairingInformation()
-        } else if data.count == 6, isPump(data) {
-            log.error("PUMP_CHECK error. Data: \(data.hexString())")
-            connectionFailure(NSError(domain: "PUMP_CHECK error", code: 0, userInfo: nil))
+        } else if data.count == 6 || data.count == 7, isPump(data) {
+            // Dana-i2 adds 1 byte of error flags. Without it, it would end up as a wrong serial number
+            let errorText = PeripheralManager.pumpCheckErrorText(data.count == 7 ? data[6] : nil)
+            log.error("PUMP_CHECK error: \(errorText). Data: \(data.hexString())")
+            connectionFailure(NSError(domain: "PUMP_CHECK error: \(errorText)", code: 0, userInfo: nil))
         } else if data.count == 6, isBusy(data) {
             log.error("PUMP_CHECK_BUSY error. Data: \(data.hexString())")
             connectionFailure(NSError(domain: "PUMP_CHECK_BUSY error", code: 0, userInfo: nil))
@@ -579,6 +583,42 @@ extension PeripheralManager {
 
     private func isBusy(_ data: Data) -> Bool {
         data[2] == busyCharCodes[0] && data[3] == busyCharCodes[1] && data[4] == busyCharCodes[2] && data[5] == busyCharCodes[3]
+    }
+    
+    /**
+     * Error flags of the Dana-i2 PUMP reply. Older pumps send none (flags is nil).
+     * More than one flag can be set, then the first one in this list is used
+     */
+    static func pumpCheckErrorText(_ flags: UInt8?) -> String {
+        guard let flags = flags else {
+            return "Pump error"
+        }
+
+        if flags & 0x01 != 0 {
+            return "Low battery"
+        } else if flags & 0x02 != 0 {
+            return "Occlusion"
+        } else if flags & 0x04 != 0 {
+            return "System error"
+        } else if flags & 0x08 != 0 {
+            return "System error (I2C)"
+        } else if flags & 0x10 != 0 {
+            return "Pump check error"
+        } else if flags & 0x20 != 0 {
+            return "Pump shutdown"
+        } else if flags & 0x40 != 0 {
+            return "System error (internal memory)"
+        }
+
+        return "Pump error (\(String(format: "0x%02X", flags)))"
+    }
+
+    private func isDanaI(_ model: UInt8) -> Bool {
+        model == 0x09 || model == 0x0A
+    }
+    
+    private func isDanaI2(_ model: UInt8) -> Bool {
+        model == 0x0B || model == 0x0C
     }
 }
 
@@ -736,9 +776,11 @@ extension PeripheralManager {
             return
         }
 
-        if let historyItem = message.data as? HistoryItem {
-            guard historyItem.code == HistoryCode.RECORD_TYPE_DONE_UPLOAD else {
-                historyLog.append(historyItem)
+        if let historyItems = message.data as? [HistoryItem] {
+            // Dana-i2 sends up to 20 records per packet, older pumps one
+            let records = historyItems.filter { $0.code != HistoryCode.RECORD_TYPE_DONE_UPLOAD }
+            historyLog.append(contentsOf: records)
+            guard records.count < historyItems.count else {
                 return
             }
 

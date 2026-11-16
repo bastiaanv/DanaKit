@@ -11,6 +11,7 @@ struct DanaKitUserSettingsView: View {
     @State var isEdittingLcd = false
     @State var isEdittingBeeps = false
     @State var isEdittingRefill = false
+    @State var isEdittingAutoLock = false
 
     @ViewBuilder var body: some View {
         VStack {
@@ -74,6 +75,20 @@ struct DanaKitUserSettingsView: View {
                         allowedOptions: Array(0 ... 60).map({ $0 * 5 }),
                         formatter: { "\($0) \(String(localized: "U", comment: "Insulin unit")) " }
                     )
+
+                    if viewModel.autoLock != nil {
+                        valueRow(
+                            labelValue: Text("Auto lock", comment: "Text for Dana-i2 auto lock"),
+                            statePicker: $isEdittingAutoLock,
+                            valueValue: Binding(
+                                get: { viewModel.autoLock ?? false },
+                                set: { viewModel.autoLock = $0 }
+                            ),
+                            allowedOptions: [true, false],
+                            formatter: {
+                                $0 ? String(localized: "On", comment: "text on") : String(localized: "Off", comment: "text off") }
+                        )
+                    }
                 }
             }
             Spacer()

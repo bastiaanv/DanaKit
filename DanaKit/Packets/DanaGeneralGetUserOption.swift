@@ -40,6 +40,9 @@ public struct PacketGeneralGetUserOption: Codable {
 
     /** Only on hw v7+ */
     var targetBg: UInt16?
+
+    /** Only on Dana-i2 */
+    var autoLock: Bool?
 }
 
 class DanaGeneralGetUserOption: DanaKitBasePacket {
@@ -75,7 +78,8 @@ class DanaGeneralGetUserOption: DanaKitBasePacket {
                 selectableLanguage3: data[DataStart + 15],
                 selectableLanguage4: data[DataStart + 16],
                 selectableLanguage5: data[DataStart + 17],
-                targetBg: data.count >= 22 ? data.uint16(at: DataStart + 18) : nil
+                targetBg: data.count >= 22 ? data.uint16(at: DataStart + 18) : nil,
+                autoLock: data.count >= 23 ? data[DataStart + 20] == 0x01 : nil
             )
         )
     }

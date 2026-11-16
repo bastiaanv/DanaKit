@@ -17,10 +17,10 @@ struct DanaKitSetupView: View {
                     comment: "Onboarding subheader"
                 ))) {
                     CheckmarkListItem(
-                        title: Text("Dana-i", comment: "dana-i option text for DanaKitSetupView"),
+                        title: Text("Dana-i/i2", comment: "dana-i and dana-i2 option text for DanaKitSetupView"),
                         description: Text(
-                            "The Dana-I insulin pump was first release in 2020 by manufacturer Sooil and is the latest in the series",
-                            comment: "dana-i description"
+                            "The Dana-i (first released in 2020) and its successor the Dana-i2 by manufacturer Sooil are the latest in the series",
+                            comment: "dana-i and dana-i2 description"
                         ),
                         isSelected: Binding(
                             get: { self.value == 2 },

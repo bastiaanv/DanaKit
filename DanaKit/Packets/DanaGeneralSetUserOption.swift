@@ -13,6 +13,9 @@ public struct PacketGeneralSetUserOption {
 
     /** Only on hw v7+ */
     let targetBg: UInt16?
+
+    /** Only on Dana-i2 */
+    let autoLock: Bool?
 }
 
 class DanaGeneralSetUserOption: DanaKitBasePacket {
@@ -25,7 +28,8 @@ class DanaGeneralSetUserOption: DanaKitBasePacket {
     }
 
     func generate() throws -> Data {
-        var data = Data(count: options.targetBg != nil ? 15 : 13)
+        let size = options.autoLock != nil ? 16 : options.targetBg != nil ? 15 : 13
+        var data = Data(count: size)
         data[0] = options.isTimeDisplay24H ? 0x00 : 0x01
         data[1] = options.isButtonScrollOnOff ? 0x01 : 0x00
         data[2] = options.beepAndAlarm
@@ -43,6 +47,10 @@ class DanaGeneralSetUserOption: DanaKitBasePacket {
         if let targetBg = options.targetBg {
             data[13] = UInt8(targetBg & 0xFF)
             data[14] = UInt8((targetBg >> 8) & 0xFF)
+        }
+
+        if let autoLock = options.autoLock {
+            data[15] = autoLock ? 0x01 : 0x00
         }
 
         return data

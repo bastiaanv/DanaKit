@@ -967,6 +967,16 @@
         }
       }
     },
+    "%lf%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lf%2$@"
+          }
+        }
+      }
+    },
     "%lld hr %lld min" : {
       "localizations" : {
         "ar" : {
@@ -1443,6 +1453,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld 秒"
+          }
+        }
+      }
+    },
+    "%lld%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld%2$@"
           }
         }
       }
@@ -3552,6 +3572,9 @@
           }
         }
       }
+    },
+    "Auto lock" : {
+
     },
     "Backlight on time" : {
       "comment" : "backlightOnTime",
@@ -7927,6 +7950,9 @@
         }
       }
     },
+    "Dana-i/i2" : {
+
+    },
     "Dana-RS v3 found!" : {
       "comment" : "Dana-RS v3 found",
       "extractionState" : "manual",
@@ -10030,6 +10056,9 @@
           }
         }
       }
+    },
+    "During the pairing process, your Dana-i/i2 will show a pairing prompt while your iPhone will show a prompt for a pairing code. On your pump, select OK, then type the 6-digit code shown on your pump into the prompt on your iPhone. After that, %1$@ is ready to communicate with your Dana-i/i2" : {
+
     },
     "During the pairing process, your DanaRS v1 will show a pairing prompt while you iPhone will show a prompt for a pairing code. On your pump, select OK and type the code on your iPhone. After that, Loop is ready to communicate with your DanaRS v1" : {
       "comment" : "Subtext for danars v1",
@@ -12946,6 +12975,9 @@
           }
         }
       }
+    },
+    "Failed to set auto lock. Please try again" : {
+
     },
     "Failed to set reservoir amount. Re-sync pump data and try again please" : {
       "comment" : "Label for error first step refill",
@@ -25249,6 +25281,9 @@
         }
       }
     },
+    "Select the auto lock setting of your Dana-i2" : {
+
+    },
     "Select the bolus delivery speed" : {
       "comment" : "Dana delivery speed body",
       "extractionState" : "manual",
@@ -26864,6 +26899,9 @@
           }
         }
       }
+    },
+    "Setting up Dana-i/i2" : {
+
     },
     "Setting up DanaRS v3" : {
       "comment" : "Title for danars v3 explaination",
@@ -30421,6 +30459,9 @@
         }
       }
     },
+    "The Dana-i (first released in 2020) and its successor the Dana-i2 by manufacturer Sooil are the latest in the series" : {
+
+    },
     "The Dana-I insulin pump was first release in 2020 by manufacturer Sooil and is the latest in the series" : {
       "comment" : "dana-i description",
       "extractionState" : "manual",
@@ -31555,6 +31596,9 @@
         }
       }
     },
+    "The pump does not lock its buttons" : {
+
+    },
     "The pump has detected an issue with its chaft. Please remove the reservoir, check everything and try again" : {
       "comment" : "Alert body for checkShaft",
       "extractionState" : "manual",
@@ -31716,6 +31760,9 @@
           }
         }
       }
+    },
+    "The pump locks its buttons automatically" : {
+
     },
     "The pump reminds you when the amount of insulin in the pump reaches this level" : {
       "comment" : "Description for low reservoir reminder",

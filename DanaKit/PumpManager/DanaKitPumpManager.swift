@@ -384,7 +384,8 @@ extension DanaKitPumpManager: PumpManager {
                         self.lastReportedBolusStep = 0
                         let packet = DanaBolusStart(options: PacketBolusStart(
                             amount: units,
-                            speed: !self.isPriming ? self.state.bolusSpeed : .speed12
+                            speed: !self.isPriming ? self.state.bolusSpeed : .speed12,
+                            commandType: self.state.isDanaI2 ? (activationType == .automatic ? .algorithm : .normal) : nil
                         ))
                         let result = try self.bluetooth.writeMessage(packet)
 
@@ -396,7 +397,7 @@ extension DanaKitPumpManager: PumpManager {
                             self.disconnect()
 
                             self.log.error("Pump rejected command. Data: \(result.rawData.base64EncodedString())")
-                            completion(PumpManagerError.deviceState(packet.transformBolusError(code: result.rawData[DataStart])))
+                            completion(PumpManagerError.deviceState(packet.transformBolusError(data: result.rawData)))
                             return
                         }
 
