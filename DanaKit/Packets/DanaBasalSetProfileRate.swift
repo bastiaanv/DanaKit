@@ -25,7 +25,13 @@ class DanaBasalSetProfileRate: DanaKitBasePacket {
         dataArray[0] = options.profileNumber
 
         for i in 0 ..< 24 {
-            let rate = UInt16(options.profileBasalRate[i] * 100)
+            guard let rate = UInt16(exactly: (options.profileBasalRate[i] * 100).rounded()) else {
+                throw NSError(
+                    domain: "INVALID_RATE",
+                    code: 1,
+                    userInfo: [NSLocalizedDescriptionKey: "Invalid basal rate"]
+                )
+            }
             dataArray[1 + i * 2] = UInt8(rate & 0xFF)
             dataArray[2 + i * 2] = UInt8((rate >> 8) & 0xFF)
         }
