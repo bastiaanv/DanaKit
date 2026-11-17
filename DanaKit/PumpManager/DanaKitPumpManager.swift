@@ -207,9 +207,9 @@ extension DanaKitPumpManager: PumpManager {
     }
 
     public static var onboardingSupportedBasalRates: [Double] {
-        // 0.01 units for rates between 0.00-3U/hr
-        // 0 U/hr is a supported scheduled basal rate
-        (0 ... 300).map { Double($0) / 100 }
+        // Per official spec: 0.01 unit steps between 0.04-3.3 U/hr for scheduled basal.
+        // 0 U/hr is not supported. Selecting it on the pump silently defaults to 0.04 U/hr.
+        (4 ... 330).map { Double($0) / 100 }
     }
 
     public static var onboardingSupportedBolusVolumes: [Double] {
@@ -260,6 +260,18 @@ extension DanaKitPumpManager: PumpManager {
 
     public func roundToSupportedBasalRate(unitsPerHour: Double) -> Double {
         supportedBasalRates.last(where: { $0 <= unitsPerHour }) ?? 0
+    }
+
+    public func getScheduledBasalRate(date: Date = Date.now) -> Double {
+        state.getScheduledBasalRate(date: date)
+    }
+
+    /// Temp-basal ceiling for the given date: the Dana pump only accepts a temp
+    /// basal as a percentage of whatever is currently scheduled, capped at 500%.
+    /// This is distinct from `supportedBasalRates`, which describes valid *scheduled* basal rates
+    /// and is schedule-independent.
+    public func maxTempBasalRate(date: Date = Date.now) -> Double {
+        getScheduledBasalRate(date: date) * 5.0
     }
 
     public var pumpManagerDelegate: LoopKit.PumpManagerDelegate? {
