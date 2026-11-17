@@ -10,7 +10,7 @@ public enum ConnectionResult {
     case invalidBle5Keys
     case failure(any Error & Sendable)
     case timeout
-    case alreadyConnectedAndBusy
+    case busy
 }
 
 public struct DanaPumpScan {

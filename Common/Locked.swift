@@ -42,3 +42,13 @@ import Foundation
         return body(&value)
     }
 }
+
+extension Locked where Value == Bool {
+    func testAndSet() -> Bool {
+        mutate { value in
+            let previous = value
+            value = true
+            return previous
+        }
+    }
+}

@@ -9,7 +9,6 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
     // and the thread issuing a command. Hence the locks
     @Locked var autoConnectUUID: String?
     @Locked var connectionCompletion: ((ConnectionResult) -> Void)?
-    @Locked var connectionCallback: ((ConnectionResult) -> Void)?
     @Locked var devices: [DanaPumpScan] = []
     @Locked var isBusy: Bool = false
 
@@ -39,18 +38,24 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
     }
 
     func ensureConnected(_ completion: @escaping (ConnectionResult) -> Void, _: String = #function) {
+        guard !_isBusy.testAndSet() else {
+            log.error("Failed to connect: Bluetooth manager is busy")
+            pumpManager?.logDeviceCommunication("Dana - Failed to connect: Bluetooth manager is busy", type: .connection)
+            completion(.busy)
+            return
+        }
+
+        let didComplete = Locked(wrappedValue: false)
         let callback: (ConnectionResult) -> Void = { result in
-            self.isBusy = true
+            guard !didComplete.testAndSet() else { return }
             self.timoutCallback?.cancel()
             self.timoutCallback = nil
 
             if case .timeout = result {
                 self.resetConnectionCompletion()
-                self.connectionCallback = nil
 
             } else if case .success = result {
                 self.resetConnectionCompletion()
-                self.connectionCallback = nil
 
                 do {
                     self.log.info("Sending keep alive message")
@@ -66,30 +71,22 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
             self.isBusy = false
         }
 
-        connectionCallback = callback
-
         // Device still has an active connection with pump and is probably busy with something
         if isConnected {
-            if isBusy {
-                log.error("Failed to connect: Already connected")
-                pumpManager?.logDeviceCommunication("Dana - Failed to connect: Already connected", type: .connection)
-                callback(.alreadyConnectedAndBusy)
-                return
-            }
-
             // We can re-use the current connection. YEAH!!
             callback(.success)
 
             // We stored the peripheral. We can quickly reconnect
         } else if let peripheral = peripheral {
-            startTimeout(seconds: TimeInterval.seconds(15))
+            startTimeout(seconds: TimeInterval.seconds(15), completion: callback)
 
             connect(peripheral) { result in
-                guard let connectionCallback = self.connectionCallback else {
+                guard !didComplete.wrappedValue else {
                     // We've already hit the timeout function above
                     // Exit if we every hit this...
                     return
                 }
+                let connectionCallback = callback
 
                 if case .success = result {
                     self.pumpManager?.logDeviceCommunication("Dana - Connected", type: .connection)
@@ -116,14 +113,15 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
             }
             // No active connection and no stored peripheral. We have to scan for device before being able to send command
         } else if let bleId = pumpManager?.state.bleIdentifier {
-            startTimeout(seconds: TimeInterval.seconds(30))
+            startTimeout(seconds: TimeInterval.seconds(30), completion: callback)
 
             connect(bleId) { result in
-                guard let connectionCallback = self.connectionCallback else {
+                guard !didComplete.wrappedValue else {
                     // We've already hit the timeout function above
                     // Exit if we every hit this...
                     return
                 }
+                let connectionCallback = callback
 
                 if case .success = result {
                     self.pumpManager?.logDeviceCommunication("Dana - Connected", type: .connection)
@@ -157,18 +155,18 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
         }
     }
 
-    private func startTimeout(seconds: TimeInterval) {
+    private func startTimeout(seconds: TimeInterval, completion: @escaping (ConnectionResult) -> Void) {
         timoutCallback?.cancel()
 
         let workItem = DispatchWorkItem { [weak self] in
-            guard let self, let connectionCallback else {
+            guard let self else {
                 return
             }
 
             pumpManager?.logDeviceCommunication("Dana - Failed to connect: Timeout reached...", type: .connection)
             self.log.error("Failed to connect: Timeout reached...")
 
-            connectionCallback(.timeout)
+            completion(.timeout)
         }
 
         timoutCallback = workItem
@@ -211,7 +209,6 @@ class InteractiveBluetoothManager: NSObject, BluetoothManager {
     }
 
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        isBusy = false
         bleCentralManager(central, didDisconnectPeripheral: peripheral, error: error)
     }
 
